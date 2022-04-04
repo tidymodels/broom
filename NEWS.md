@@ -16,6 +16,7 @@ While broom 0.8.0 does not introduce much in terms of new functionality or break
 * Fix `glance.fixest` error when model includes only fixed effects and no regressors (`#1018` by `@arcruz0`, `#1088` by `@vincentarelbundock`).
 * Address excessive messaging from `tidy.speedlm` (`#1084` by `@cgoo4`, `#1087` by `@vincentarelbundock`).
 * Add `nobs` column to the output of `glance.svyglm` (`#1085` by `@fschaffner`, `#1086` by `@vincentarelbundock`).
+* Ensure `tidy.prcomp` description entries use consistent punctuation (`#1072` by `@PursuitOfDataScience`).
 
 # broom 0.7.12
 
