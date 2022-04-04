@@ -1,12 +1,11 @@
 # Workflow derived from https://github.com/r-lib/actions/tree/master/examples
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
-# Add Config/Needs/website: tidyverse/tidytemplate to DESCRIPTION
 on:
   push:
     branches: [main, master]
-    tags: ['*']
-  pull_request:
-    branches: [main, master]
+  release:
+    types: [published]
+  workflow_dispatch:
 
 name: pkgdown
 
@@ -29,16 +28,7 @@ jobs:
           extra-packages: pkgdown
           needs: website
 
-      - name: Install package
-        run: R CMD INSTALL .
-
-      - name: Build site
-        if: github.event_name == 'pull_request'
-        run: |
-          Rscript -e 'pkgdown::build_site()'
-
       - name: Deploy package
-        if: github.event_name == 'push'
         run: |
           git config --local user.name "$GITHUB_ACTOR"
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
