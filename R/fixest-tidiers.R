@@ -27,9 +27,8 @@
 #'
 #' @examples
 #' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("fixest", quietly = TRUE)) {
+#' # broom opts not to test these examples, though they ought to run just fine!
+#' \dontrun{
 #' 
 #' # load libraries for models and data
 #' library(fixest)
