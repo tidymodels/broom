@@ -479,7 +479,7 @@ broom_confint_terms <- function(x, ...) {
     rownames(ci) <- names(coef(x))[1]
   }
 
-  ci <- as_tibble(ci, rownames = "term")
+  ci <- as_tibble(ci, rownames = "term", .name_repair = "minimal")
   names(ci) <- c("term", "conf.low", "conf.high")
   ci
 }
