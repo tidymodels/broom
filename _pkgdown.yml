@@ -16,9 +16,6 @@ development:
 
 default_assets: false
 
-home:
-  strip_header: true
-
 reference:
 
 - title: Tidying generics
@@ -40,28 +37,3 @@ reference:
   - confint_tidy
   - finish_glance
   - fix_data_frame
-  
-navbar:
-  type: default
-  left:
-  - text: Intro
-    href: articles/broom.html
-  - text: Reference
-    href: reference/index.html
-  - text: Articles
-    menu:
-    - text: Adding new tidiers
-      href: https://www.tidymodels.org/learn/develop/broom/
-    - text: Available methods
-      href: articles/available-methods.html
-    - text: Bootstrapping
-      href: https://www.tidymodels.org/learn/statistics/bootstrap/
-    - text: Broom and dplyr
-      href: articles/broom_and_dplyr.html
-    - text: K-means
-      href: https://www.tidymodels.org/learn/statistics/k-means/
-  - text: News
-    href: news/index.html
-  right:
-  - icon: fa-github fa-lg
-    href: https://github.com/tidymodels/broom
