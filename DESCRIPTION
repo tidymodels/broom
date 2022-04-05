@@ -562,7 +562,7 @@ Suggests:
     biglm,
     binGroup,
     boot,
-    btergm,
+    btergm (>= 1.10.6),
     car,
     caret,
     cluster,
