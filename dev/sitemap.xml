@@ -1,762 +1,762 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://broom.tidymodels.org/CODE_OF_CONDUCT.html</loc>
+    <loc>https://broom.tidymodels.org/dev/CODE_OF_CONDUCT.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/CONTRIBUTING.html</loc>
+    <loc>https://broom.tidymodels.org/dev/CONTRIBUTING.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/ISSUE_TEMPLATE.html</loc>
+    <loc>https://broom.tidymodels.org/dev/ISSUE_TEMPLATE.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/LICENSE-text.html</loc>
+    <loc>https://broom.tidymodels.org/dev/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/articles/adding-tidiers.html</loc>
+    <loc>https://broom.tidymodels.org/dev/articles/adding-tidiers.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/articles/available-methods.html</loc>
+    <loc>https://broom.tidymodels.org/dev/articles/available-methods.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/articles/bootstrapping.html</loc>
+    <loc>https://broom.tidymodels.org/dev/articles/bootstrapping.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/articles/broom.html</loc>
+    <loc>https://broom.tidymodels.org/dev/articles/broom.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/articles/broom_and_dplyr.html</loc>
+    <loc>https://broom.tidymodels.org/dev/articles/broom_and_dplyr.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/articles/index.html</loc>
+    <loc>https://broom.tidymodels.org/dev/articles/index.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/articles/kmeans.html</loc>
+    <loc>https://broom.tidymodels.org/dev/articles/kmeans.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/authors.html</loc>
+    <loc>https://broom.tidymodels.org/dev/authors.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/index.html</loc>
+    <loc>https://broom.tidymodels.org/dev/index.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/news/index.html</loc>
+    <loc>https://broom.tidymodels.org/dev/news/index.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/pull_request_template.html</loc>
+    <loc>https://broom.tidymodels.org/dev/pull_request_template.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.Mclust.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.Mclust.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.betamfx.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.betamfx.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.betareg.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.betareg.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.clm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.clm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.coxph.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.coxph.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.decomposed.ts.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.decomposed.ts.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.drc.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.drc.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.factanal.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.factanal.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.felm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.felm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.fixest.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.fixest.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.gam.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.gam.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.glm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.glm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.glmRob.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.glmRob.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.htest.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.htest.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.ivreg.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.ivreg.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.kmeans.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.kmeans.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.lm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.lm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.lmRob.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.lmRob.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.loess.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.loess.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.mfx.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.mfx.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.mjoint.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.mjoint.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.mlogit.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.mlogit.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.nlrq.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.nlrq.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.nls.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.nls.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.pam.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.pam.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.plm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.plm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.poLCA.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.poLCA.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.polr.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.polr.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.prcomp.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.prcomp.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.rlm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.rlm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.rma.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.rma.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.robustbase.glmrob.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.robustbase.glmrob.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.robustbase.lmrob.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.robustbase.lmrob.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.rq.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.rq.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.rqs.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.rqs.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.sarlm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.sarlm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.smooth.spline.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.smooth.spline.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.speedlm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.speedlm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.stl.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.stl.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.survreg.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment.survreg.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment_columns.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/augment_columns.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/bootstrap.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/bootstrap.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/broom.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/broom.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/confint_tidy.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/confint_tidy.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/data.frame_tidiers.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/data.frame_tidiers.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/durbinWatsonTest_tidiers.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/durbinWatsonTest_tidiers.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/finish_glance.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/finish_glance.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/fix_data_frame.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/fix_data_frame.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.Arima.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.Arima.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.Mclust.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.Mclust.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.aareg.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.aareg.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.aov.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.aov.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.betamfx.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.betamfx.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.betareg.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.betareg.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.biglm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.biglm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.binDesign.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.binDesign.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.cch.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.cch.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.clm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.clm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.clmm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.clmm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.coeftest.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.coeftest.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.coxph.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.coxph.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.crr.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.crr.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.cv.glmnet.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.cv.glmnet.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.drc.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.drc.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.ergm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.ergm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.factanal.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.factanal.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.felm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.felm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.fitdistr.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.fitdistr.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.fixest.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.fixest.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.gam.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.gam.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.garch.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.garch.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.geeglm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.geeglm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.glm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.glm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.glmRob.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.glmRob.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.glmnet.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.glmnet.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.gmm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.gmm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.ivreg.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.ivreg.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.kmeans.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.kmeans.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.lavaan.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.lavaan.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.lm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.lm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.lmRob.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.lmRob.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.lmodel2.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.lmodel2.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.margins.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.margins.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.mfx.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.mfx.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.mjoint.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.mjoint.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.mlogit.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.mlogit.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.muhaz.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.muhaz.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.multinom.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.multinom.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.negbin.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.negbin.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.nlrq.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.nlrq.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.nls.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.nls.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.orcutt.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.orcutt.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.pam.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.pam.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.plm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.plm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.poLCA.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.poLCA.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.polr.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.polr.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.pyears.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.pyears.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.ridgelm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.ridgelm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.rlm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.rlm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.rma.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.rma.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.robustbase.lmrob.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.robustbase.lmrob.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.rq.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.rq.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.sarlm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.sarlm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.smooth.spline.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.smooth.spline.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.speedglm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.speedglm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.speedlm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.speedlm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.summary.lm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.summary.lm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.survdiff.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.survdiff.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.survexp.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.survexp.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.survfit.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.survfit.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.survreg.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.survreg.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.svyglm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.svyglm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.svyolr.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.svyolr.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.varest.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance.varest.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance_gam_hastie.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance_gam_hastie.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance_optim.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/glance_optim.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/index.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/leveneTest_tidiers.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/leveneTest_tidiers.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/list_tidiers.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/list_tidiers.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/metafor_tidiers.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/metafor_tidiers.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/null_tidiers.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/null_tidiers.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/reexports.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/reexports.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/sp_tidiers.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/sp_tidiers.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/sparse_tidiers.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/sparse_tidiers.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/summary_tidiers.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/summary_tidiers.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.Arima.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.Arima.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.Kendall.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.Kendall.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.Mclust.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.Mclust.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.TukeyHSD.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.TukeyHSD.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.aareg.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.aareg.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.acf.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.acf.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.anova.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.anova.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.aov.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.aov.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.aovlist.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.aovlist.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.betamfx.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.betamfx.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.betareg.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.betareg.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.biglm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.biglm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.binDesign.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.binDesign.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.binWidth.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.binWidth.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.boot.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.boot.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.btergm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.btergm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.cch.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.cch.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.cld.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.cld.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.clm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.clm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.clmm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.clmm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.coeftest.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.coeftest.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.confint.glht.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.confint.glht.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.confusionMatrix.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.confusionMatrix.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.coxph.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.coxph.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.crr.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.crr.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.cv.glmnet.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.cv.glmnet.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.density.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.density.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.dist.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.dist.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.drc.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.drc.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.emmGrid.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.emmGrid.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.epi.2by2.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.epi.2by2.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.ergm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.ergm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.factanal.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.factanal.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.felm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.felm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.fitdistr.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.fitdistr.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.fixest.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.fixest.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.ftable.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.ftable.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.gam.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.gam.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.garch.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.garch.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.geeglm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.geeglm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.glht.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.glht.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.glm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.glm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.glmRob.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.glmRob.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.glmnet.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.glmnet.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.gmm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.gmm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.htest.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.htest.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.ivreg.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.ivreg.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.kappa.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.kappa.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.kde.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.kde.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.kmeans.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.kmeans.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.lavaan.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.lavaan.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.lm.beta.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.lm.beta.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.lm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.lm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.lmRob.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.lmRob.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.lmodel2.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.lmodel2.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.lsmobj.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.lsmobj.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.manova.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.manova.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.map.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.map.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.margins.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.margins.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.mediate.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.mediate.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.mfx.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.mfx.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.mjoint.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.mjoint.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.mle2.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.mle2.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.mlm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.mlm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.mlogit.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.mlogit.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.muhaz.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.muhaz.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.multinom.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.multinom.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.negbin.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.negbin.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.nlrq.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.nlrq.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.nls.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.nls.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.orcutt.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.orcutt.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.pairwise.htest.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.pairwise.htest.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.pam.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.pam.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.plm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.plm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.poLCA.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.poLCA.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.polr.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.polr.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.power.htest.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.power.htest.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.prcomp.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.prcomp.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.pyears.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.pyears.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.rcorr.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.rcorr.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.ref.grid.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.ref.grid.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.regsubsets.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.regsubsets.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.ridgelm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.ridgelm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.rlm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.rlm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.robustbase.glmrob.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.robustbase.glmrob.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.robustbase.lmrob.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.robustbase.lmrob.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.roc.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.roc.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.rq.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.rq.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.rqs.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.rqs.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.sarlm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.sarlm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.spec.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.spec.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.speedglm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.speedglm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.speedlm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.speedlm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.summary.glht.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.summary.glht.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.summary.lm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.summary.lm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.summary_emm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.summary_emm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.survdiff.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.survdiff.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.survexp.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.survexp.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.survfit.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.survfit.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.survreg.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.survreg.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.svyglm.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.svyglm.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.svyolr.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.svyolr.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.systemfit.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.systemfit.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.table.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.table.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.ts.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.ts.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.varest.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.varest.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.zoo.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy.zoo.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy_gam_hastie.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy_gam_hastie.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy_irlba.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy_irlba.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy_optim.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy_optim.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy_svd.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy_svd.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy_xyz.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/tidy_xyz.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/vector_tidiers.html</loc>
+    <loc>https://broom.tidymodels.org/dev/reference/vector_tidiers.html</loc>
   </url>
 </urlset>
