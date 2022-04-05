@@ -55,7 +55,7 @@
 #' 
 tidy.btergm <- function(x, conf.level = .95, exponentiate = FALSE, ...) {
 
-  co <- btergm::confint(x, level = conf.level)
+  co <- btergm::confint(x, level = conf.level)[,-2]
 
   ret <- as_tidy_tibble(
     co, 
