@@ -31,7 +31,7 @@ test_that("fixest tidier arguments", {
 })
 
 test_that("bug #1018: fixed effects but no regressors", {
-    mod <- feols(Sepal.Length ~ 1 | Species, data = iris)
+    mod <- fixest::feols(Sepal.Length ~ 1 | Species, data = iris)
     check_tidy_output(tidy(mod))
     check_glance_outputs(glance(mod))
 })

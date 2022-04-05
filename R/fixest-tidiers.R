@@ -27,8 +27,9 @@
 #'
 #' @examples
 #' 
-#' # broom opts not to test these examples, though they ought to run just fine!
-#' \dontrun{
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the model-supplying package to be installed.
+#' if (requireNamespace("fixest", quietly = TRUE)) {
 #' 
 #' # load libraries for models and data
 #' library(fixest)
@@ -167,7 +168,9 @@ glance.fixest <- function(x, ...) {
   )
 
   if (identical(x$method, "feols")) {
-    r2_vals <- fixest::r2(x, type = c("r2", "ar2", "wr2"))
+    r2_types <- c("r2", "ar2", "wr2")
+    r2_vals <- purrr::map_dbl(r2_types, fixest::r2, x = x) %>%
+      purrr::set_names(r2_types)
     r2_names <- c("r.squared", "adj.r.squared", "within.r.squared")
     # Pull the summary objects that are specific to OLS
     res_specific <- with(
