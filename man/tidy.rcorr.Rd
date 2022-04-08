@@ -30,7 +30,7 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
@@ -42,16 +42,25 @@ output.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("Hmisc", quietly = TRUE)) {
+
+# load libraries for models and data
 library(Hmisc)
 
 mat <- replicate(52, rnorm(100))
+
 # add some NAs
 mat[sample(length(mat), 2000)] <- NA
-# also column names
+
+# also, column names
 colnames(mat) <- c(LETTERS, letters)
 
+# fit model
 rc <- rcorr(mat)
 
+# summarize model fit with tidiers  + visualization
 td <- tidy(rc)
 td
 
@@ -64,13 +73,15 @@ ggplot(td, aes(estimate, p.value)) +
   scale_y_log10()
 
 }
+
+}
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[Hmisc:rcorr]{Hmisc::rcorr()}}
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{column1}{Name or index of the first column being described}
-  \item{column2}{Name or index of the second column being described}
+  \item{column1}{Name or index of the first column being described.}
+  \item{column2}{Name or index of the second column being described.}
   \item{estimate}{The estimated value of the regression term.}
   \item{p.value}{The two-sided p-value associated with the observed statistic.}
   \item{n}{Number of observations used to compute the correlation}

@@ -9,15 +9,8 @@
 \arguments{
 \item{x}{An \code{survfit} object returned from \code{\link[survival:survfit]{survival::survfit()}}.}
 
-\item{...}{Additional arguments. Not used. Needed to match generic
-signature only. \strong{Cautionary note:} Misspelled arguments will be
-absorbed in \code{...}, where they will be ignored. If the misspelled
-argument has a default value, the default value will be used.
-For example, if you pass \code{conf.lvel = 0.9}, all computation will
-proceed using \code{conf.level = 0.95}. Additionally, if you pass
-\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
-accept a \code{newdata} argument, it will use the default value for
-the \code{data} argument.}
+\item{...}{Additional arguments passed to \code{\link[=summary.survfit]{summary.survfit()}}. Important
+arguments include \code{rmean}.}
 }
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
@@ -25,67 +18,96 @@ with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
 or model convergence information.
 
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
 
 Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an \code{NA}
+of the appropriate type.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("survival", quietly = TRUE)) {
+
+# load libraries for models and data
 library(survival)
+
+# fit model
 cfit <- coxph(Surv(time, status) ~ age + sex, lung)
 sfit <- survfit(cfit)
 
+# summarize model fit with tidiers + visualization
 tidy(sfit)
 glance(sfit)
 
 library(ggplot2)
-ggplot(tidy(sfit), aes(time, estimate)) + geom_line() +
-    geom_ribbon(aes(ymin=conf.low, ymax=conf.high), alpha=.25)
+
+ggplot(tidy(sfit), aes(time, estimate)) +
+  geom_line() +
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .25)
 
 # multi-state
 fitCI <- survfit(Surv(stop, status * as.numeric(event), type = "mstate") ~ 1,
-              data = mgus1, subset = (start == 0))
+  data = mgus1, subset = (start == 0)
+)
+
 td_multi <- tidy(fitCI)
+
 td_multi
 
 ggplot(td_multi, aes(time, estimate, group = state)) +
-    geom_line(aes(color = state)) +
-    geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .25)
-
+  geom_line(aes(color = state)) +
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .25)
+  
+}
+  
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[survival:survfit]{survival::survfit()}}
 
-Other cch tidiers: \code{\link{glance.cch}},
-  \code{\link{tidy.cch}}
+Other cch tidiers: 
+\code{\link{glance.cch}()},
+\code{\link{tidy.cch}()}
 
-Other survival tidiers: \code{\link{augment.coxph}},
-  \code{\link{augment.survreg}},
-  \code{\link{glance.aareg}}, \code{\link{glance.cch}},
-  \code{\link{glance.coxph}}, \code{\link{glance.pyears}},
-  \code{\link{glance.survdiff}},
-  \code{\link{glance.survexp}},
-  \code{\link{glance.survreg}}, \code{\link{tidy.aareg}},
-  \code{\link{tidy.cch}}, \code{\link{tidy.coxph}},
-  \code{\link{tidy.pyears}}, \code{\link{tidy.survdiff}},
-  \code{\link{tidy.survexp}}, \code{\link{tidy.survfit}},
-  \code{\link{tidy.survreg}}
+Other survival tidiers: 
+\code{\link{augment.coxph}()},
+\code{\link{augment.survreg}()},
+\code{\link{glance.aareg}()},
+\code{\link{glance.cch}()},
+\code{\link{glance.coxph}()},
+\code{\link{glance.pyears}()},
+\code{\link{glance.survdiff}()},
+\code{\link{glance.survexp}()},
+\code{\link{glance.survreg}()},
+\code{\link{tidy.aareg}()},
+\code{\link{tidy.cch}()},
+\code{\link{tidy.coxph}()},
+\code{\link{tidy.pyears}()},
+\code{\link{tidy.survdiff}()},
+\code{\link{tidy.survexp}()},
+\code{\link{tidy.survfit}()},
+\code{\link{tidy.survreg}()}
 }
 \concept{cch tidiers}
 \concept{survival tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{events}{number of events}
+  \item{events}{Number of events.}
   \item{n.max}{Maximum number of subjects at risk.}
   \item{n.start}{Initial number of subjects at risk.}
-  \item{records}{number of observations}
+  \item{nobs}{Number of observations used.}
+  \item{records}{Number of observations}
   \item{rmean}{Restricted mean (see [survival::print.survfit()]).}
-  \item{rmean.std.error}{Restricted mean standard error}
+  \item{rmean.std.error}{Restricted mean standard error.}
   \item{conf.low}{lower end of confidence interval on median}
   \item{conf.high}{upper end of confidence interval on median}
   \item{median}{median survival}

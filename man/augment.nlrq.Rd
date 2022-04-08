@@ -4,13 +4,12 @@
 \alias{augment.nlrq}
 \title{Tidy a(n) nlrq object}
 \usage{
-\method{augment}{nlrq}(x, data = NULL, newdata = NULL,
-  se_fit = FALSE, ...)
+\method{augment}{nlrq}(x, data = NULL, newdata = NULL, ...)
 }
 \arguments{
 \item{x}{A \code{nlrq} object returned from \code{\link[quantreg:nlrq]{quantreg::nlrq()}}.}
 
-\item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
+\item{data}{A \link[base:data.frame]{base::data.frame} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
 data that was used to produce the object \code{x}. Defaults to
 \code{stats::model.frame(x)} so that \code{augment(my_fit)} returns the augmented
 original data. \strong{Do not} pass new data to the \code{data} argument.
@@ -18,14 +17,10 @@ Augment will report information such as influence and cooks distance for
 data passed to the \code{data} argument. These measures are only defined for
 the original training data.}
 
-\item{newdata}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
+\item{newdata}{A \code{\link[base:data.frame]{base::data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
 the original predictors used to create \code{x}. Defaults to \code{NULL}, indicating
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
-
-\item{se_fit}{Logical indicating whether or not a \code{.se.fit} column should be
-added to the augmented output. For some models, this calculation can be
-somwhat time-consuming. Defaults to \code{FALSE}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -41,16 +36,42 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
+}
+\examples{
+
+# fit model
+n <- nls(mpg ~ k * e^wt, data = mtcars, start = list(k = 1, e = 2))
+
+# summarize model fit with tidiers + visualization
+tidy(n)
+augment(n)
+glance(n)
+
+library(ggplot2)
+
+ggplot(augment(n), aes(wt, mpg)) +
+  geom_point() +
+  geom_line(aes(y = .fitted))
+
+newdata <- head(mtcars)
+newdata$wt <- newdata$wt + 1
+
+augment(n, newdata = newdata)
+
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[quantreg:nlrq]{quantreg::nlrq()}}
 
-Other quantreg tidiers: \code{\link{augment.rqs}},
-  \code{\link{augment.rq}}, \code{\link{glance.nlrq}},
-  \code{\link{glance.rq}}, \code{\link{tidy.nlrq}},
-  \code{\link{tidy.rqs}}, \code{\link{tidy.rq}}
+Other quantreg tidiers: 
+\code{\link{augment.rqs}()},
+\code{\link{augment.rq}()},
+\code{\link{glance.nlrq}()},
+\code{\link{glance.rq}()},
+\code{\link{tidy.nlrq}()},
+\code{\link{tidy.rqs}()},
+\code{\link{tidy.rq}()}
 }
 \concept{quantreg tidiers}

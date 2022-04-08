@@ -10,7 +10,7 @@
 \arguments{
 \item{x}{A \code{smooth.spline} object returned from \code{\link[stats:smooth.spline]{stats::smooth.spline()}}.}
 
-\item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
+\item{data}{A \link[base:data.frame]{base::data.frame} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
 data that was used to produce the object \code{x}. Defaults to
 \code{stats::model.frame(x)} so that \code{augment(my_fit)} returns the augmented
 original data. \strong{Do not} pass new data to the \code{data} argument.
@@ -32,31 +32,38 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
 
+# fit model
 spl <- smooth.spline(mtcars$wt, mtcars$mpg, df = 4)
+
+# summarize model fit with tidiers
 augment(spl, mtcars)
-augment(spl)  # calls original columns x and y
+
+# calls original columns x and y
+augment(spl) 
 
 library(ggplot2)
 ggplot(augment(spl, mtcars), aes(wt, mpg)) +
-    geom_point() + geom_line(aes(y = .fitted))
-
+  geom_point() +
+  geom_line(aes(y = .fitted))
+  
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[stats:smooth.spline]{stats::smooth.spline()}},
 \code{\link[stats:predict.smooth.spline]{stats::predict.smooth.spline()}}
 
-Other smoothing spline tidiers: \code{\link{glance.smooth.spline}}
+Other smoothing spline tidiers: 
+\code{\link{glance.smooth.spline}()}
 }
 \concept{smoothing spline tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{.fitted}{Fitted or predicted value.}
-  \item{.resid}{The difference between fitted and observed values.}
+  \item{.resid}{The difference between observed and fitted values.}
 
 }

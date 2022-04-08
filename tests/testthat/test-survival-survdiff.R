@@ -1,5 +1,7 @@
 context("survival-survdiff")
 
+skip_on_cran()
+
 skip_if_not_installed("modeltests")
 library(modeltests)
 
@@ -39,10 +41,10 @@ test_that("tidy.survdiff", {
   td3 <- tidy(fit3)
   td4 <- tidy(fit4)
   td5 <- tidy(fit5)
-  
-  # The output from tidy.survdiff uses variable names as column names because 
+
+  # The output from tidy.survdiff uses variable names as column names because
   # the output contains a row for each level of the (statistical) factor.  This
-  # output meets the criteria for 'tidy' data.  Therefore, strict may be 
+  # output meets the criteria for 'tidy' data.  Therefore, strict may be
   # set to FALSE to allow these tests to pass.
   check_tidy_output(td, strict = FALSE)
   check_tidy_output(td2, strict = FALSE)
@@ -57,7 +59,6 @@ test_that("glance.survdiff", {
   gl3 <- glance(fit3)
   gl4 <- glance(fit4)
   gl5 <- glance(fit5)
-  
+
   check_glance_outputs(gl, gl2, gl3, gl4, gl5)
 })
-

@@ -25,14 +25,19 @@ with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
 or model convergence information.
 
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
 
 Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an \code{NA}
+of the appropriate type.
 }
 \details{
 This is similar to the output of \code{select.ridgelm}, but it is
@@ -40,11 +45,20 @@ returned rather than printed.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("MASS", quietly = TRUE)) {
+
+# load libraries for models and data
+library(MASS)
+
 names(longley)[1] <- "y"
-fit1 <- MASS::lm.ridge(y ~ ., longley)
+
+# fit model and summarizd results
+fit1 <- lm.ridge(y ~ ., longley)
 tidy(fit1)
 
-fit2 <- MASS::lm.ridge(y ~ ., longley, lambda = seq(0.001, .05, .001))
+fit2 <- lm.ridge(y ~ ., longley, lambda = seq(0.001, .05, .001))
 td2 <- tidy(fit2)
 g2 <- glance(fit2)
 
@@ -58,15 +72,18 @@ ggplot(td2, aes(lambda, GCV)) +
   geom_line()
 
 # add line for the GCV minimizing estimate
-ggplot(td2, aes(lambda, GCV)) + 
+ggplot(td2, aes(lambda, GCV)) +
   geom_line() +
   geom_vline(xintercept = g2$lambdaGCV, col = "red", lty = 2)
+  
+}
 
 }
 \seealso{
-\code{\link[=glance]{glance()}}, \code{\link[MASS:select.ridgelm]{MASS::select.ridgelm()}}, \code{\link[MASS:lm.ridge]{MASS::lm.ridge()}}
+\code{\link[=glance]{glance()}}, \code{\link[MASS:lm.ridge]{MASS::select.ridgelm()}}, \code{\link[MASS:lm.ridge]{MASS::lm.ridge()}}
 
-Other ridgelm tidiers: \code{\link{tidy.ridgelm}}
+Other ridgelm tidiers: 
+\code{\link{tidy.ridgelm}()}
 }
 \concept{ridgelm tidiers}
 \value{

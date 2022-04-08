@@ -23,26 +23,31 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \details{
 The \code{term} column of an ANOVA table can come with leading or
 trailing whitespace, which this tidying method trims.
+
+For documentation on the tidier for \code{\link[car:leveneTest]{car::leveneTest()}} output, see
+\code{\link[=tidy.leveneTest]{tidy.leveneTest()}}
 }
 \examples{
 
 a <- aov(mpg ~ wt + qsec + Error(disp / am), mtcars)
 tidy(a)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:aov]{stats::aov()}}
 
-Other anova tidiers: \code{\link{tidy.TukeyHSD}},
-  \code{\link{tidy.anova}}, \code{\link{tidy.aov}},
-  \code{\link{tidy.manova}}
+Other anova tidiers: 
+\code{\link{glance.aov}()},
+\code{\link{tidy.TukeyHSD}()},
+\code{\link{tidy.anova}()},
+\code{\link{tidy.aov}()},
+\code{\link{tidy.manova}()}
 }
 \concept{anova tidiers}
 \value{
@@ -51,8 +56,8 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{meansq}{Mean sum of squares. Equal to total sum of squares divided by degrees of freedom.}
   \item{p.value}{The two-sided p-value associated with the observed statistic.}
   \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{stratum}{The error stratum}
-  \item{sumsq}{Sum of squares explained by this term}
+  \item{stratum}{The error stratum.}
+  \item{sumsq}{Sum of squares explained by this term.}
   \item{term}{The name of the regression term.}
 
 }

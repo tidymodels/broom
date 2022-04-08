@@ -10,7 +10,8 @@
 \arguments{
 \item{x}{A \code{kmeans} object created by \code{\link[stats:kmeans]{stats::kmeans()}}.}
 
-\item{col.names}{Dimension names. Defaults to the names of the variables in x.  Set to NULL to get names \code{x1, x2, ...}.}
+\item{col.names}{Dimension names. Defaults to the names of the variables
+in x.  Set to NULL to get names \verb{x1, x2, ...}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -26,24 +27,49 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \details{
 For examples, see the kmeans vignette.
 }
+\examples{
+
+# feel free to ignore the following lines—they allow {broom} to supply 
+# examples without requiring the model/data-supplying package to be installed.
+if (requireNamespace("cluster", quietly = TRUE)) {
+  if (requireNamespace("modeldata", quietly = TRUE)) {
+  
+library(cluster)
+library(modeldata)
+library(dplyr)
+
+data(hpc_data)
+
+x <- hpc_data[, 2:5]
+
+fit <- pam(x, k = 4)
+
+tidy(fit)
+glance(fit)
+augment(fit, x)
+
+  }
+}
+}
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:kmeans]{stats::kmeans()}}
 
-Other kmeans tidiers: \code{\link{augment.kmeans}},
-  \code{\link{glance.kmeans}}
+Other kmeans tidiers: 
+\code{\link{augment.kmeans}()},
+\code{\link{glance.kmeans}()}
 }
 \concept{kmeans tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{cluster}{A factor describing the cluster from 1:k}
+  \item{cluster}{A factor describing the cluster from 1:k.}
   \item{size}{Number of points assigned to cluster.}
-  \item{withinss}{The within-cluster sum of squares}
+  \item{withinss}{The within-cluster sum of squares.}
 
 }

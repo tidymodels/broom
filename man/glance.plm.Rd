@@ -25,38 +25,56 @@ with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
 or model convergence information.
 
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
 
 Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an \code{NA}
+of the appropriate type.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("plm", quietly = TRUE)) {
+
+# load libraries for models and data
 library(plm)
 
+# load data
 data("Produc", package = "plm")
-zz <- plm(log(gsp) ~ log(pcap) + log(pc) + log(emp) + unemp,
-          data = Produc, index = c("state","year"))
 
+# fit model
+zz <- plm(log(gsp) ~ log(pcap) + log(pc) + log(emp) + unemp,
+  data = Produc, index = c("state", "year")
+)
+
+# summarize model fit with tidiers
 summary(zz)
 
 tidy(zz)
 tidy(zz, conf.int = TRUE)
-tidy(zz, conf.int = TRUE, conf.level = .9)
+tidy(zz, conf.int = TRUE, conf.level = 0.9)
 
 augment(zz)
 glance(zz)
 
 }
+
+}
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[plm:plm]{plm::plm()}}
 
-Other plm tidiers: \code{\link{augment.plm}},
-  \code{\link{tidy.plm}}
+Other plm tidiers: 
+\code{\link{augment.plm}()},
+\code{\link{tidy.plm}()}
 }
 \concept{plm tidiers}
 \value{
@@ -64,6 +82,7 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{adj.r.squared}{Adjusted R squared statistic, which is like the R squared statistic except taking degrees of freedom into account.}
   \item{deviance}{Deviance of the model.}
   \item{df.residual}{Residual degrees of freedom.}
+  \item{nobs}{Number of observations used.}
   \item{p.value}{P-value corresponding to the test statistic.}
   \item{r.squared}{R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.}
   \item{statistic}{F-statistic}

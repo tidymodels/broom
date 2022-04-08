@@ -25,36 +25,55 @@ with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
 or model convergence information.
 
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
 
 Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an \code{NA}
+of the appropriate type.
 }
 \examples{
 
-library(muhaz)
+# feel free to ignore the following two lines—they allow {broom} to supply 
+# examples without requiring the model/data-supplying packages to be installed.
+if (requireNamespace("muhaz", quietly = TRUE)) {
+  if (requireNamespace("survival", quietly = TRUE)) {
 
-data(ovarian, package="survival")
-x <- muhaz::muhaz(ovarian$futime, ovarian$fustat)
+# load libraries for models and data
+library(muhaz)
+library(survival)
+
+# fit model
+x <- muhaz(ovarian$futime, ovarian$fustat)
+
+# summarize model fit with tidiers
 tidy(x)
 glance(x)
+
+  }
+}
 
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[muhaz:muhaz]{muhaz::muhaz()}}
 
-Other muhaz tidiers: \code{\link{tidy.muhaz}}
+Other muhaz tidiers: 
+\code{\link{tidy.muhaz}()}
 }
 \concept{muhaz tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{max.hazard}{Maximal estimated hazard}
-  \item{max.time}{The maximum observed event or censoring time}
-  \item{min.time}{The minimum observed event or censoring time}
+  \item{max.hazard}{Maximal estimated hazard.}
+  \item{max.time}{The maximum observed event or censoring time.}
+  \item{min.hazard}{Minimal estimated hazard.}
+  \item{min.time}{The minimum observed event or censoring time.}
   \item{nobs}{Number of observations used.}
 
 }

@@ -25,31 +25,48 @@ with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
 or model convergence information.
 
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
 
 Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an \code{NA}
+of the appropriate type.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("MASS", quietly = TRUE)) {
+
+# load libraries for models and data
+library(MASS)
+
+# generate data
 set.seed(2015)
 x <- rnorm(100, 5, 2)
 
-library(MASS)
+#  fit models
 fit <- fitdistr(x, dnorm, list(mean = 3, sd = 1))
 
+# summarize model fit with tidiers
 tidy(fit)
 glance(fit)
+
+}
 
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[MASS:fitdistr]{MASS::fitdistr()}}
 
-Other fitdistr tidiers: \code{\link{tidy.fitdistr}}
+Other fitdistr tidiers: 
+\code{\link{tidy.fitdistr}()}
 }
 \concept{fitdistr tidiers}
 \value{
@@ -57,6 +74,6 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{AIC}{Akaike's Information Criterion for the model.}
   \item{BIC}{Bayesian Information Criterion for the model.}
   \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
-  \item{n}{The number of TODO.}
+  \item{nobs}{Number of observations used.}
 
 }

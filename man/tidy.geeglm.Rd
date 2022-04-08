@@ -6,8 +6,7 @@
 \alias{geepack_tidiers}
 \title{Tidy a(n) geeglm object}
 \usage{
-\method{tidy}{geeglm}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, quick = FALSE, ...)
+\method{tidy}{geeglm}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{geeglm} object returned from a call to \code{\link[geepack:geeglm]{geepack::geeglm()}}.}
@@ -24,10 +23,6 @@ the coefficient estimates. This is typical for logistic and multinomial
 regressions, but a bad idea if there is no log or logit link. Defaults
 to \code{FALSE}.}
 
-\item{quick}{Logical indiciating if the only the \code{term} and \code{estimate}
-columns should be returned. Often useful to avoid time consuming
-covariance and standard error calculations. Defaults to \code{FALSE}.}
-
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
 absorbed in \code{...}, where they will be ignored. If the misspelled
@@ -42,7 +37,7 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
@@ -56,18 +51,31 @@ missingness in the data beforehand.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("geepack", quietly = TRUE)) {
+
+# load modeling library
 library(geepack)
+
+# load data
 data(state)
-  
+
+
 ds <- data.frame(state.region, state.x77)
 
-geefit <- geeglm(Income ~ Frost + Murder, id = state.region,
-                 data = ds, family = gaussian,
-                 corstr = "exchangeable")
+# fit model
+geefit <- geeglm(Income ~ Frost + Murder,
+  id = state.region,
+  data = ds, family = gaussian,
+  corstr = "exchangeable"
+)
 
+# summarize model fit with tidiers
 tidy(geefit)
-tidy(geefit, quick = TRUE)
 tidy(geefit, conf.int = TRUE)
+
+}
 
 }
 \seealso{
@@ -75,6 +83,12 @@ tidy(geefit, conf.int = TRUE)
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{regresion}{TRUE}
+  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
+  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
+  \item{estimate}{The estimated value of the regression term.}
+  \item{p.value}{The two-sided p-value associated with the observed statistic.}
+  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
+  \item{std.error}{The standard error of the regression term.}
+  \item{term}{The name of the regression term.}
 
 }

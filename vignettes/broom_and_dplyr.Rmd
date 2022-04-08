@@ -14,14 +14,22 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 
 # broom and dplyr
 
-While broom is useful for summarizing the result of a single analysis in a consistent format, it is really designed for high-throughput applications, where you must combine results from multiple analyses. These could be subgroups of data, analyses using different models, bootstrap replicates, permutations, and so on. In particular, it plays well with the `nest/unnest` functions in `tidyr` and the `map` function in `purrr`.
-
-Let's try this on a simple dataset, the built-in `Orange`. We start by coercing `Orange` to a `tibble`. This gives a nicer print method that will especially useful later on when we start working with list-columns.
+While broom is useful for summarizing the result of a single analysis in a consistent format, it is really designed for high-throughput applications, where you must combine results from multiple analyses. These could be subgroups of data, analyses using different models, bootstrap replicates, permutations, and so on. In particular, it plays well with the `nest/unnest` functions in `tidyr` and the `map` function in `purrr`. First, loading necessary packages and setting some defaults:
 
 ```{r}
 library(broom)
 library(tibble)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(purrr)
 
+theme_set(theme_minimal())
+```
+
+Let's try this on a simple dataset, the built-in `Orange`. We start by coercing `Orange` to a `tibble`. This gives a nicer print method that will especially useful later on when we start working with list-columns.
+
+```{r}
 data(Orange)
 
 Orange <- as_tibble(Orange)
@@ -33,17 +41,13 @@ This contains 35 observations of three variables: `Tree`, `age`, and `circumfere
 ```{r}
 cor(Orange$age, Orange$circumference)
 
-library(ggplot2)
-
 ggplot(Orange, aes(age, circumference, color = Tree)) +
   geom_line()
 ```
 
 Suppose you want to test for correlations individually *within* each tree. You can do this with dplyr's `group_by`:
 
-```{r}
-library(dplyr)
-
+```{r, message = FALSE, warning = FALSE}
 Orange %>% 
   group_by(Tree) %>%
   summarize(correlation = cor(age, circumference))
@@ -67,11 +71,8 @@ tidy(ct)
 Often, we want to perform multiple tests or fit multiple models, each on a different part of the data. In this case, we recommend a `nest-map-unnest` workflow. For example, suppose we want to perform correlation tests for each different tree. We start by `nest`ing our data based on the group of interest:
 
 ```{r}
-library(tidyr)
-library(purrr)
-
 nested <- Orange %>% 
-  nest(-Tree)
+  nest(data = -Tree)
 ```
 
 Then we run a correlation test for each nested tibble using `purrr::map`:
@@ -95,17 +96,15 @@ Finally, we want to unnest the tidied data frames so we can see the results in a
 
 ```{r}
 Orange %>% 
-  nest(-Tree) %>% 
+  nest(data = -Tree) %>% 
   mutate(
     test = map(data, ~ cor.test(.x$age, .x$circumference)), # S3 list-col
     tidied = map(test, tidy)
   ) %>% 
-  unnest(tidied, .drop = TRUE)
+  unnest(tidied)
 ```
 
-Note that the `.drop` argument to `tidyr::unnest` is often useful.
-
-This workflow becomes even more useful when applied to regressions. Untidy ouput for a regression looks like:
+This workflow becomes even more useful when applied to regressions. Untidy output for a regression looks like:
 
 ```{r}
 lm_fit <- lm(age ~ circumference, data = Orange)
@@ -122,7 +121,7 @@ Now we can handle multiple regressions at once using exactly the same workflow a
 
 ```{r}
 Orange %>%
-  nest(-Tree) %>% 
+  nest(data = -Tree) %>% 
   mutate(
     fit = map(data, ~ lm(age ~ circumference, data = .x)),
     tidied = map(fit, tidy)
@@ -138,7 +137,7 @@ mtcars <- as_tibble(mtcars)  # to play nicely with list-cols
 mtcars
 
 mtcars %>%
-  nest(-am) %>% 
+  nest(data = -am) %>% 
   mutate(
     fit = map(data, ~ lm(wt ~ mpg + qsec + gear, data = .x)),  # S3 list-col
     tidied = map(fit, tidy)
@@ -150,7 +149,7 @@ What if you want not just the `tidy` output, but the `augment` and `glance` outp
 
 ```{r}
 regressions <- mtcars %>%
-  nest(-am) %>% 
+  nest(data = -am) %>% 
   mutate(
     fit = map(data, ~ lm(wt ~ mpg + qsec + gear, data = .x)),
     tidied = map(fit, tidy),
@@ -162,7 +161,7 @@ regressions %>%
   unnest(tidied)
 
 regressions %>% 
-  unnest(glanced, .drop = TRUE)
+  unnest(glanced)
 
 regressions %>% 
   unnest(augmented)

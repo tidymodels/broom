@@ -25,56 +25,70 @@ with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
 or model convergence information.
 
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
 
 Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an \code{NA}
+of the appropriate type.
 }
 \examples{
-\dontrun{
-# Fit a joint model with bivariate longitudinal outcomes
+
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("joineRML", quietly = TRUE)) {
+
+
+# load libraries for models and data
 library(joineRML)
+
+# fit a joint model with bivariate longitudinal outcomes
 data(heart.valve)
+
 hvd <- heart.valve[!is.na(heart.valve$log.grad) &
-                       !is.na(heart.valve$log.lvmi) &
-                       heart.valve$num <= 50, ]
+  !is.na(heart.valve$log.lvmi) &
+  heart.valve$num <= 50, ]
+  
 fit <- mjoint(
-    formLongFixed = list(
-        "grad" = log.grad ~ time + sex + hs,
-        "lvmi" = log.lvmi ~ time + sex
-    ),
-    formLongRandom = list(
-        "grad" = ~ 1 | num,
-        "lvmi" = ~ time | num
-    ),
-    formSurv = Surv(fuyrs, status) ~ age,
-    data = hvd,
-    inits = list("gamma" = c(0.11, 1.51, 0.80)),
-    timeVar = "time"
+  formLongFixed = list(
+    "grad" = log.grad ~ time + sex + hs,
+    "lvmi" = log.lvmi ~ time + sex
+  ),
+  formLongRandom = list(
+    "grad" = ~ 1 | num,
+    "lvmi" = ~ time | num
+  ),
+  formSurv = Surv(fuyrs, status) ~ age,
+  data = hvd,
+  inits = list("gamma" = c(0.11, 1.51, 0.80)),
+  timeVar = "time"
 )
 
-# Extract the survival fixed effects
+# extract the survival fixed effects
 tidy(fit)
 
-# Extract the longitudinal fixed effects
+# extract the longitudinal fixed effects
 tidy(fit, component = "longitudinal")
 
-# Extract the survival fixed effects with confidence intervals
+# extract the survival fixed effects with confidence intervals
 tidy(fit, ci = TRUE)
 
-# Extract the survival fixed effects with confidence intervals based
+# extract the survival fixed effects with confidence intervals based
 # on bootstrapped standard errors
 bSE <- bootSE(fit, nboot = 5, safe.boot = TRUE)
 tidy(fit, boot_se = bSE, ci = TRUE)
 
-# Augment original data with fitted longitudinal values and residuals
+# augment original data with fitted longitudinal values and residuals
 hvd2 <- augment(fit)
 
-# Extract model statistics
+# extract model statistics
 glance(fit)
 }
 
@@ -82,7 +96,8 @@ glance(fit)
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[joineRML:mjoint]{joineRML::mjoint()}}
 
-Other mjoint tidiers: \code{\link{tidy.mjoint}}
+Other mjoint tidiers: 
+\code{\link{tidy.mjoint}()}
 }
 \concept{mjoint tidiers}
 \value{

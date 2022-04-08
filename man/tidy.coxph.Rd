@@ -5,8 +5,7 @@
 \alias{coxph_tidiers}
 \title{Tidy a(n) coxph object}
 \usage{
-\method{tidy}{coxph}(x, exponentiate = FALSE, conf.int = FALSE,
-  conf.level = 0.95, ...)
+\method{tidy}{coxph}(x, exponentiate = FALSE, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{A \code{coxph} object returned from \code{\link[survival:coxph]{survival::coxph()}}.}
@@ -37,16 +36,23 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("survival", quietly = TRUE)) {
+
+# load libraries for models and data
 library(survival)
 
+# fit model
 cfit <- coxph(Surv(time, status) ~ age + sex, lung)
 
+# summarize model fit with tidiers
 tidy(cfit)
 tidy(cfit, exponentiate = TRUE)
 
@@ -61,14 +67,15 @@ resp <- levels(logan$occupation)
 n <- nrow(logan)
 indx <- rep(1:n, length(resp))
 logan2 <- data.frame(
-  logan[indx,],
+  logan[indx, ],
   id = indx,
-  tocc = factor(rep(resp, each=n))
+  tocc = factor(rep(resp, each = n))
 )
 
 logan2$case <- (logan2$occupation == logan2$tocc)
 
 cl <- clogit(case ~ tocc + tocc:education + strata(id), logan2)
+
 tidy(cl)
 glance(cl)
 
@@ -77,31 +84,40 @@ library(ggplot2)
 ggplot(lp, aes(age, .fitted, color = sex)) +
   geom_point()
 
-ggplot(risks, aes(age, .fitted, color = sex)) + 
-  geom_point()
-  
-ggplot(expected, aes(time, .fitted, color = sex)) + 
+ggplot(risks, aes(age, .fitted, color = sex)) +
   geom_point()
 
+ggplot(expected, aes(time, .fitted, color = sex)) +
+  geom_point()
+  
+}
 
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[survival:coxph]{survival::coxph()}}
 
-Other coxph tidiers: \code{\link{augment.coxph}},
-  \code{\link{glance.coxph}}
+Other coxph tidiers: 
+\code{\link{augment.coxph}()},
+\code{\link{glance.coxph}()}
 
-Other survival tidiers: \code{\link{augment.coxph}},
-  \code{\link{augment.survreg}},
-  \code{\link{glance.aareg}}, \code{\link{glance.cch}},
-  \code{\link{glance.coxph}}, \code{\link{glance.pyears}},
-  \code{\link{glance.survdiff}},
-  \code{\link{glance.survexp}},
-  \code{\link{glance.survfit}},
-  \code{\link{glance.survreg}}, \code{\link{tidy.aareg}},
-  \code{\link{tidy.cch}}, \code{\link{tidy.pyears}},
-  \code{\link{tidy.survdiff}}, \code{\link{tidy.survexp}},
-  \code{\link{tidy.survfit}}, \code{\link{tidy.survreg}}
+Other survival tidiers: 
+\code{\link{augment.coxph}()},
+\code{\link{augment.survreg}()},
+\code{\link{glance.aareg}()},
+\code{\link{glance.cch}()},
+\code{\link{glance.coxph}()},
+\code{\link{glance.pyears}()},
+\code{\link{glance.survdiff}()},
+\code{\link{glance.survexp}()},
+\code{\link{glance.survfit}()},
+\code{\link{glance.survreg}()},
+\code{\link{tidy.aareg}()},
+\code{\link{tidy.cch}()},
+\code{\link{tidy.pyears}()},
+\code{\link{tidy.survdiff}()},
+\code{\link{tidy.survexp}()},
+\code{\link{tidy.survfit}()},
+\code{\link{tidy.survreg}()}
 }
 \concept{coxph tidiers}
 \concept{survival tidiers}

@@ -3,9 +3,9 @@
 #'
 #' @param x An `Mclust` object return from [mclust::Mclust()].
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_tidy(
-#'   "size", 
+#'   "size",
 #'   "proportion",
 #'   mean = "The mean for each component. In case of 2+ dimensional models,
 #'     a column with the mean is added for each dimension. NA for noise
@@ -17,37 +17,55 @@
 #' )
 #'
 #' @examples
-#'
-#' library(dplyr) 
+#' 
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the model-supplying package to be installed.
+#' if (requireNamespace("mclust", quietly = TRUE)) {
+#' 
+#' # load library for models and data
 #' library(mclust)
+#' 
+#' # load data manipulation libraries
+#' library(dplyr)
+#' library(tibble)
+#' library(purrr)
+#' library(tidyr)
+#' 
 #' set.seed(27)
-#' 
-#' centers <- tibble::tibble(
-#'   cluster = factor(1:3), 
-#'   num_points = c(100, 150, 50),  # number points in each cluster
-#'   x1 = c(5, 0, -3),              # x1 coordinate of cluster center
-#'   x2 = c(-1, 1, -2)              # x2 coordinate of cluster center
+#'
+#' centers <- tibble(
+#'   cluster = factor(1:3),
+#'   # number points in each cluster
+#'   num_points = c(100, 150, 50),
+#'   # x1 coordinate of cluster center
+#'   x1 = c(5, 0, -3), 
+#'   # x2 coordinate of cluster center
+#'   x2 = c(-1, 1, -2) 
 #' )
-#' 
+#'
 #' points <- centers %>%
 #'   mutate(
-#'     x1 = purrr::map2(num_points, x1, rnorm),
-#'     x2 = purrr::map2(num_points, x2, rnorm)
-#'   ) %>% 
+#'     x1 = map2(num_points, x1, rnorm),
+#'     x2 = map2(num_points, x2, rnorm)
+#'   ) %>%
 #'   select(-num_points, -cluster) %>%
-#'   tidyr::unnest(x1, x2)
+#'   unnest(c(x1, x2))
 #'
-#' m <- mclust::Mclust(points)
+#' # fit model
+#' m <- Mclust(points)
 #'
+#' # summarize model fit with tidiers
 #' tidy(m)
 #' augment(m, points)
 #' glance(m)
+#' 
+#' }
 #' 
 #' @export
 #' @aliases mclust_tidiers
 #' @seealso [tidy()], [mclust::Mclust()]
 #' @family mclust tidiers
-#' 
+#'
 tidy.Mclust <- function(x, ...) {
   np <- max(x$G, length(table(x$classification)))
   ret <- data.frame(seq_len(np))
@@ -62,6 +80,8 @@ tidy.Mclust <- function(x, ...) {
   }
   if (dim(as.matrix(x$parameters$mean))[2] > 1) {
     mean <- t(x$parameters$mean)
+  } else if (is.null(dim(x$parameters$mean))) {
+    mean <- as.matrix(x$parameters$mean)
   } else {
     mean <- t(as.matrix(x$parameters$mean))
   }
@@ -72,7 +92,7 @@ tidy.Mclust <- function(x, ...) {
 
 #' @templateVar class Mclust
 #' @template title_desc_augment
-#' 
+#'
 #' @inherit tidy.Mclust params examples
 #' @template param_data
 #'
@@ -86,45 +106,47 @@ tidy.Mclust <- function(x, ...) {
 #' @export
 #' @seealso [augment()], [mclust::Mclust()]
 #' @family mclust tidiers
-#' 
+#'
 augment.Mclust <- function(x, data = NULL, ...) {
-  data <- if (is.null(data)) x$data else data
-  
-  fix_data_frame(data, newcol = ".rownames") %>% 
+  if (is.null(data)) {
+    data <- x$data
+  } else if (!(is.data.frame(data) || is.matrix(data))) {
+    stop("`data` must be a data frame or matrix.", call. = FALSE)
+  }
+
+  as_augment_tibble(data) %>%
     mutate(
-      .class = factor(x$classification),
-      .uncertainty = x$uncertainty
+      .class = as.factor(!!x$classification),
+      .uncertainty = !!x$uncertainty
     )
 }
 
 #' @templateVar class Mclust
 #' @template title_desc_glance
-#' 
+#'
 #' @inherit tidy.Mclust params examples
 #'
 #' @evalRd return_glance(
-#'   "n",
 #'   "BIC",
 #'   "logLik",
 #'   "df",
 #'   model = "A string denoting the model type with optimal BIC",
 #'   G = "Number mixture components in optimal model",
-#'   hypvol = "If the other model contains a noise component, the 
-#'     value of the hypervolume parameter. Otherwise `NA`."
+#'   hypvol = "If the other model contains a noise component, the
+#'     value of the hypervolume parameter. Otherwise `NA`.",
+#'   "nobs"
 #' )
 #'
 #' @export
 glance.Mclust <- function(x, ...) {
-  with(
-    x,
-    tibble(
-      model = modelName,
-      n,
-      G,
-      BIC = bic, 
-      logLik = loglik,
-      df,
-      hypvol
-    )
+  as_glance_tibble(
+    model = unname(x$modelName),
+    G = unname(x$G),
+    BIC = unname(x$bic),
+    logLik = unname(x$loglik),
+    df = unname(x$df),
+    hypvol = unname(x$hypvol),
+    nobs = stats::nobs(x),
+    na_types = "cirriri"
   )
 }

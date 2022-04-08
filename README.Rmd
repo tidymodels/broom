@@ -16,14 +16,16 @@ knitr::opts_chunk$set(
 
 # broom  <img src="man/figures/logo.png" align="right" width="100" />
 
-[![CRAN status](https://www.r-pkg.org/badges/version/broom)](https://cran.r-project.org/package=broom)
-[![Travis-CI Build Status](https://travis-ci.org/tidymodels/broom.svg?branch=master)](https://travis-ci.org/tidymodels/broom)
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/alexpghayes/broom?branch=master&svg=true)](https://ci.appveyor.com/project/alexpghayes/broom)
-[![Coverage Status](https://img.shields.io/codecov/c/github/tidymodels/broom/master.svg)](https://codecov.io/github/tidymodels/broom?branch=master)
+<!-- badges: start -->
+[![R build status](https://github.com/tidymodels/broom/workflows/R-CMD-check/badge.svg)](https://github.com/tidymodels/broom)
+[![Coverage status](https://codecov.io/gh/tidymodels/broom/branch/main/graph/badge.svg)](https://codecov.io/github/tidymodels/broom?branch=main)
+[![CRAN status](https://www.r-pkg.org/badges/version/broom)](https://CRAN.R-project.org/package=broom)
+[![Downloads](https://cranlogs.r-pkg.org/badges/broom)](https://CRAN.R-project.org/package=broom)
+<!-- badges: end -->
 
 ## Overview
 
-broom summarizes key information about models in tidy `tibble()`s. broom provides three verbs to make it convenient to interact with model objects:
+`broom` summarizes key information about models in tidy `tibble()`s. `broom` provides three verbs to make it convenient to interact with model objects:
 
 - `tidy()` summarizes information about model components
 - `glance()` reports information about the entire model
@@ -31,14 +33,15 @@ broom summarizes key information about models in tidy `tibble()`s. broom provide
 
 For a detailed introduction, please see `vignette("broom")`.
 
-broom tidies 100+ models from popular modelling packages and almost all of the model objects in the `stats` package that comes with base R. `vignette("available-methods")` lists method availabilty.
+`broom` tidies 100+ models from popular modelling packages and almost all of the model objects in the `stats` package that comes with base R. `vignette("available-methods")` lists method availability.
 
-If you aren't familiar with tidy data structures and want to know how they can make your life easier, we highly recommend reading Hadley Wickham's [Tidy Data](http://www.jstatsoft.org/v59/i10).
+If you aren't familiar with tidy data structures and want to know how they can make your life easier, we highly recommend reading Hadley Wickham's [Tidy Data](https://www.jstatsoft.org/v59/i10).
 
 ## Installation
 
 ```{r, eval = FALSE}
-# we recommend installing the entire tidyverse modeling set, which includes broom:
+# we recommend installing the entire tidyverse 
+# modeling set, which includes broom:
 install.packages("tidymodels")
 
 # alternatively, to install just broom:
@@ -58,7 +61,7 @@ If you find a bug, please file a minimal reproducible example in the [issues](ht
 ```{r}
 library(broom)
 
-fit <- lm(Sepal.Width ~ Petal.Length + Petal.Width, iris)
+fit <- lm(Volume ~ Girth + Height, trees)
 tidy(fit)
 ```
 
@@ -71,17 +74,20 @@ glance(fit)
 `augment` adds columns to a dataset, containing information such as fitted values, residuals or cluster assignments. All columns added to a dataset have `.` prefix to prevent existing columns from being overwritten.
 
 ```{r}
-augment(fit, data = iris)
+augment(fit, data = trees)
 ```
 
 ### Contributing
 
 We welcome contributions of all types!
 
-If you have never made a pull request to an R package before, broom is an excellent place to start. Find an [issue](https://github.com/tidymodels/broom/issues/) with the **Beginner Friendly** tag and comment that you'd like to take it on and we'll help you get started.
+For questions and discussions about tidymodels packages, modeling, and machine learning, please [post on RStudio Community](https://community.rstudio.com/new-topic?category_id=15https://rstd.io/tidymodels-communitytags=tidymodels,question). If you think you have encountered a bug, please [submit an issue](https://github.com/tidymodels/broom/issues). Either way, learn how to create and share a [reprex](https://reprex.tidyverse.org/articles/articles/learn-reprex.html) (a minimal, reproducible example), to clearly communicate about your code. Check out further details on [contributing guidelines for tidymodels packages](https://www.tidymodels.org/contribute/) and [how to get help](https://www.tidymodels.org/help/).
 
-We encourage typo corrections, bug reports, bug fixes and feature requests. Feedback on the clarity of the documentation is especially valuable.
+If you have never directly contributed to an R package before, `broom` is an excellent place to start. Find an [issue](https://github.com/tidymodels/broom/issues/) with the **Beginner Friendly** tag and comment that you'd like to take it on and we'll help you get started.
 
-If you are interested in adding new tidiers methods to broom, please read `vignette("adding-tidiers")`.
+Generally, too, we encourage typo corrections, bug reports, bug fixes and feature requests. Feedback on the clarity of the documentation is especially valuable!
 
-We have a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in broom you agree to abide by its terms.
+If you are interested in adding tidier methods for new model objects, please read [this article](https://www.tidymodels.org/learn/develop/broom/) on the tidymodels website.
+
+We have a [Contributor Code of Conduct](https://github.com/tidymodels/broom/blob/main/.github/CODE_OF_CONDUCT.md). By participating in `broom` you agree to abide by its terms.
+

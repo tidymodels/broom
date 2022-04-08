@@ -6,8 +6,14 @@
 \alias{joinerml_tidiers}
 \title{Tidy a(n) mjoint object}
 \usage{
-\method{tidy}{mjoint}(x, component = "survival", conf.int = FALSE,
-  conf.level = 0.95, boot_se = NULL, ...)
+\method{tidy}{mjoint}(
+  x,
+  component = "survival",
+  conf.int = FALSE,
+  conf.level = 0.95,
+  boot_se = NULL,
+  ...
+)
 }
 \arguments{
 \item{x}{An \code{mjoint} object returned from \code{\link[joineRML:mjoint]{joineRML::mjoint()}}.}
@@ -24,7 +30,7 @@ if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 
 \item{boot_se}{Optionally a \code{bootSE} object from \code{\link[joineRML:bootSE]{joineRML::bootSE()}}. If
-specified, calcalutes confidence intervals via the bootstrap. Defaults to
+specified, calculates confidence intervals via the bootstrap. Defaults to
 \code{NULL}, in which case standard errors are calculated from the
 empirical information matrix.}
 
@@ -42,51 +48,60 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
-\dontrun{
-# Fit a joint model with bivariate longitudinal outcomes
+
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("joineRML", quietly = TRUE)) {
+
+
+# load libraries for models and data
 library(joineRML)
+
+# fit a joint model with bivariate longitudinal outcomes
 data(heart.valve)
+
 hvd <- heart.valve[!is.na(heart.valve$log.grad) &
-                       !is.na(heart.valve$log.lvmi) &
-                       heart.valve$num <= 50, ]
+  !is.na(heart.valve$log.lvmi) &
+  heart.valve$num <= 50, ]
+  
 fit <- mjoint(
-    formLongFixed = list(
-        "grad" = log.grad ~ time + sex + hs,
-        "lvmi" = log.lvmi ~ time + sex
-    ),
-    formLongRandom = list(
-        "grad" = ~ 1 | num,
-        "lvmi" = ~ time | num
-    ),
-    formSurv = Surv(fuyrs, status) ~ age,
-    data = hvd,
-    inits = list("gamma" = c(0.11, 1.51, 0.80)),
-    timeVar = "time"
+  formLongFixed = list(
+    "grad" = log.grad ~ time + sex + hs,
+    "lvmi" = log.lvmi ~ time + sex
+  ),
+  formLongRandom = list(
+    "grad" = ~ 1 | num,
+    "lvmi" = ~ time | num
+  ),
+  formSurv = Surv(fuyrs, status) ~ age,
+  data = hvd,
+  inits = list("gamma" = c(0.11, 1.51, 0.80)),
+  timeVar = "time"
 )
 
-# Extract the survival fixed effects
+# extract the survival fixed effects
 tidy(fit)
 
-# Extract the longitudinal fixed effects
+# extract the longitudinal fixed effects
 tidy(fit, component = "longitudinal")
 
-# Extract the survival fixed effects with confidence intervals
+# extract the survival fixed effects with confidence intervals
 tidy(fit, ci = TRUE)
 
-# Extract the survival fixed effects with confidence intervals based
+# extract the survival fixed effects with confidence intervals based
 # on bootstrapped standard errors
 bSE <- bootSE(fit, nboot = 5, safe.boot = TRUE)
 tidy(fit, boot_se = bSE, ci = TRUE)
 
-# Augment original data with fitted longitudinal values and residuals
+# augment original data with fitted longitudinal values and residuals
 hvd2 <- augment(fit)
 
-# Extract model statistics
+# extract model statistics
 glance(fit)
 }
 
@@ -94,7 +109,8 @@ glance(fit)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[joineRML:mjoint]{joineRML::mjoint()}}, \code{\link[joineRML:bootSE]{joineRML::bootSE()}}
 
-Other mjoint tidiers: \code{\link{glance.mjoint}}
+Other mjoint tidiers: 
+\code{\link{glance.mjoint}()}
 }
 \concept{mjoint tidiers}
 \value{

@@ -5,8 +5,7 @@
 \alias{rqs_tidiers}
 \title{Tidy a(n) rqs object}
 \usage{
-\method{tidy}{rqs}(x, se.type = "rank", conf.int = FALSE,
-  conf.level = 0.95, ...)
+\method{tidy}{rqs}(x, se.type = "rank", conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{An \code{rqs} object returned from \code{\link[quantreg:rq]{quantreg::rq()}}.}
@@ -22,13 +21,13 @@ interval in the tidied output. Defaults to \code{FALSE}.}
 if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 
-\item{...}{Additional arguments passed to \code{\link[quantreg:summary.rqs]{quantreg::summary.rqs()}}}
+\item{...}{Additional arguments passed to \code{\link[quantreg:summary.rq]{quantreg::summary.rqs()}}}
 }
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
@@ -38,13 +37,55 @@ If \code{se.type = "rank"} confidence intervals are calculated by
 no confidence intervals are calculated and the confidence limits are
 set to NA.
 }
+\examples{
+
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("quantreg", quietly = TRUE)) {
+
+# load modeling library and data
+library(quantreg)
+
+data(stackloss)
+
+# median (l1) regression fit for the stackloss data. 
+mod1 <- rq(stack.loss ~ stack.x, .5)  
+
+# weighted sample median
+mod2 <- rq(rnorm(50) ~ 1, weights = runif(50))
+
+# summarize model fit with tidiers
+tidy(mod1)
+glance(mod1)
+augment(mod1)
+
+tidy(mod2)
+glance(mod2)
+augment(mod2)
+
+# varying tau to generate an rqs object
+mod3 <- rq(stack.loss ~ stack.x, tau = c(.25, .5))
+
+tidy(mod3)
+augment(mod3)
+
+# glance cannot handle rqs objects like `mod3`--use a purrr 
+# `map`-based workflow instead
+
+}
+
+}
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[quantreg:rq]{quantreg::rq()}}
 
-Other quantreg tidiers: \code{\link{augment.nlrq}},
-  \code{\link{augment.rqs}}, \code{\link{augment.rq}},
-  \code{\link{glance.nlrq}}, \code{\link{glance.rq}},
-  \code{\link{tidy.nlrq}}, \code{\link{tidy.rq}}
+Other quantreg tidiers: 
+\code{\link{augment.nlrq}()},
+\code{\link{augment.rqs}()},
+\code{\link{augment.rq}()},
+\code{\link{glance.nlrq}()},
+\code{\link{glance.rq}()},
+\code{\link{tidy.nlrq}()},
+\code{\link{tidy.rq}()}
 }
 \concept{quantreg tidiers}
 \value{
@@ -56,5 +97,6 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
   \item{std.error}{The standard error of the regression term.}
   \item{term}{The name of the regression term.}
+  \item{quantile}{Linear conditional quantile.}
 
 }

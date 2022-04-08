@@ -18,10 +18,14 @@ test_that("tidy.garch", {
   td <- tidy(fit)
   check_tidy_output(td)
   check_dims(td, 3)
+
+  td <- tidy(fit, conf.int = TRUE, conf.level = .99)
+  check_tidy_output(td)
+  check_dims(td, 3, 7)
 })
 
 test_that("glance.garch", {
   gl <- glance(fit)
   check_glance_outputs(gl)
-  check_dims(gl, 1, 7)
+  check_dims(gl, 1, 8)
 })

@@ -23,12 +23,12 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \details{
-\code{series} column is only present for multivairate \code{ts} objects.
+\code{series} column is only present for multivariate \code{ts} objects.
 }
 \examples{
 
@@ -38,20 +38,22 @@ tidy(ts(1:10, frequency = 4, start = c(1959, 2)))
 
 z <- ts(matrix(rnorm(300), 100, 3), start = c(1961, 1), frequency = 12)
 colnames(z) <- c("Aa", "Bb", "Cc")
-tidy(z)
 
+tidy(z)
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:ts]{stats::ts()}}
 
-Other time series tidiers: \code{\link{tidy.acf}},
-  \code{\link{tidy.spec}}, \code{\link{tidy.zoo}}
+Other time series tidiers: 
+\code{\link{tidy.acf}()},
+\code{\link{tidy.spec}()},
+\code{\link{tidy.zoo}()}
 }
 \concept{time series tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{index}{Index (i.e. date or time) for a `ts` or `zoo` object.}
   \item{series}{Name of the series (present only for multivariate time series).}
-  \item{value}{TODO. needs better documentation.}
+  \item{value}{The value/estimate of the component. Results from data reshaping.}
 
 }

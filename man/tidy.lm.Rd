@@ -3,13 +3,9 @@
 \name{tidy.lm}
 \alias{tidy.lm}
 \alias{lm_tidiers}
-\alias{tidy.summary.lm}
 \title{Tidy a(n) lm object}
 \usage{
-\method{tidy}{lm}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, quick = FALSE, ...)
-
-\method{tidy}{summary.lm}(x, ...)
+\method{tidy}{lm}(x, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{An \code{lm} object created by \code{\link[stats:lm]{stats::lm()}}.}
@@ -20,15 +16,6 @@ interval in the tidied output. Defaults to \code{FALSE}.}
 \item{conf.level}{The confidence level to use for the confidence interval
 if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
-
-\item{exponentiate}{Logical indicating whether or not to exponentiate the
-the coefficient estimates. This is typical for logistic and multinomial
-regressions, but a bad idea if there is no log or logit link. Defaults
-to \code{FALSE}.}
-
-\item{quick}{Logical indiciating if the only the \code{term} and \code{estimate}
-columns should be returned. Often useful to avoid time consuming
-covariance and standard error calculations. Defaults to \code{FALSE}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -44,16 +31,13 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \details{
 If the linear model is an \code{mlm} object (multiple linear model),
-there is an additional column \code{response}.
-
-If you have missing values in your model data, you may need to refit
-the model with \code{na.action = na.exclude}.
+there is an additional column \code{response}. See \code{\link[=tidy.mlm]{tidy.mlm()}}.
 }
 \examples{
 
@@ -66,22 +50,45 @@ tidy(mod)
 glance(mod)
 
 # coefficient plot
-d <- tidy(mod) \%>\% 
-  mutate(
-    low = estimate - std.error,
-    high = estimate + std.error
-  )
+d <- tidy(mod, conf.int = TRUE)
+
+ggplot(d, aes(estimate, term, xmin = conf.low, xmax = conf.high, height = 0)) +
+  geom_point() +
+  geom_vline(xintercept = 0, lty = 4) +
+  geom_errorbarh()
   
-ggplot(d, aes(estimate, term, xmin = low, xmax = high, height = 0)) +
-     geom_point() +
-     geom_vline(xintercept = 0) +
-     geom_errorbarh()
+# aside: There are tidy() and glance() methods for lm.summary objects too. 
+# this can be useful when you want to conserve memory by converting large lm 
+# objects into their leaner summary.lm equivalents.
+s <- summary(mod)
+tidy(s, conf.int = TRUE)
+glance(s)
 
 augment(mod)
-augment(mod, mtcars)
+augment(mod, mtcars, interval = "confidence")
 
 # predict on new data
-newdata <- mtcars \%>\% head(6) \%>\% mutate(wt = wt + 1)
+newdata <- mtcars \%>\%
+  head(6) \%>\%
+  mutate(wt = wt + 1)
+augment(mod, newdata = newdata)
+
+# ggplot2 example where we also construct 95\% prediction interval
+
+# simpler bivariate model since we're plotting in 2D
+mod2 <- lm(mpg ~ wt, data = mtcars) 
+
+au <- augment(mod2, newdata = newdata, interval = "prediction")
+
+ggplot(au, aes(wt, mpg)) + 
+  geom_point() +
+  geom_line(aes(y = .fitted)) + 
+  geom_ribbon(aes(ymin = .lower, ymax = .upper), col = NA, alpha = 0.3)
+
+# predict on new data without outcome variable. Output does not include .resid
+newdata <- newdata \%>\%
+  select(-mpg)
+  
 augment(mod, newdata = newdata)
 
 au <- augment(mod, data = mtcars)
@@ -89,9 +96,11 @@ au <- augment(mod, data = mtcars)
 ggplot(au, aes(.hat, .std.resid)) +
   geom_vline(size = 2, colour = "white", xintercept = 0) +
   geom_hline(size = 2, colour = "white", yintercept = 0) +
-  geom_point() + geom_smooth(se = FALSE)
+  geom_point() +
+  geom_smooth(se = FALSE)
 
 plot(mod, which = 6)
+
 ggplot(au, aes(.hat, .cooksd)) +
   geom_vline(xintercept = 0, colour = NA) +
   geom_abline(slope = seq(0, 3, by = 0.5), colour = "white") +
@@ -102,16 +111,24 @@ ggplot(au, aes(.hat, .cooksd)) +
 a <- matrix(rnorm(20), nrow = 10)
 b <- a + rnorm(length(a))
 result <- lm(b ~ a)
+
 tidy(result)
 
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:summary.lm]{stats::summary.lm()}}
 
-Other lm tidiers: \code{\link{augment.glm}},
-  \code{\link{augment.lm}}, \code{\link{glance.glm}},
-  \code{\link{glance.lm}}, \code{\link{tidy.glm}},
-  \code{\link{tidy.lm.beta}}
+Other lm tidiers: 
+\code{\link{augment.glm}()},
+\code{\link{augment.lm}()},
+\code{\link{glance.glm}()},
+\code{\link{glance.lm}()},
+\code{\link{glance.summary.lm}()},
+\code{\link{glance.svyglm}()},
+\code{\link{tidy.glm}()},
+\code{\link{tidy.lm.beta}()},
+\code{\link{tidy.mlm}()},
+\code{\link{tidy.summary.lm}()}
 }
 \concept{lm tidiers}
 \value{

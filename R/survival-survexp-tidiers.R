@@ -3,14 +3,21 @@
 #'
 #' @param x An `survexp` object returned from [survival::survexp()].
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_tidy("time", "n.risk",
 #'   estimate = "Estimate survival"
 #' )
 #'
 #' @examples
+#' 
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the model-supplying package to be installed.
+#' if (requireNamespace("survival", quietly = TRUE)) {
 #'
+#' # load libraries for models and data
 #' library(survival)
+#' 
+#' # fit model
 #' sexpfit <- survexp(
 #'   futime ~ 1,
 #'   rmap = list(
@@ -18,13 +25,16 @@
 #'     year = accept.dt,
 #'     age = (accept.dt - birth.dt)
 #'   ),
-#'   method = 'conditional',
+#'   method = "conditional",
 #'   data = jasa
 #' )
 #'
+#' # summarize model fit with tidiers
 #' tidy(sexpfit)
 #' glance(sexpfit)
-#'
+#' 
+#' }
+#' 
 #' @aliases sexpfit_tidiers survexp_tidiers
 #' @export
 #' @seealso [tidy()], [survival::survexp()]
@@ -38,9 +48,9 @@ tidy.survexp <- function(x, ...) {
 
 #' @templateVar class survexp
 #' @template title_desc_glance
-#' 
+#'
 #' @inherit tidy.survexp params examples
-#' 
+#'
 #' @evalRd return_glance("n.max", "n.start", "timepoints")
 #'
 #' @export
@@ -48,9 +58,10 @@ tidy.survexp <- function(x, ...) {
 #' @family survexp tidiers
 #' @family survival tidiers
 glance.survexp <- function(x, ...) {
-  tibble(
+  as_glance_tibble(
     n.max = max(x$n.risk),
     n.start = x$n.risk[1],
-    timepoints = length(x$n.risk)
+    timepoints = length(x$n.risk),
+    na_types = "iii"
   )
 }

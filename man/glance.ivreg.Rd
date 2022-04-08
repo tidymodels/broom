@@ -9,9 +9,8 @@
 \arguments{
 \item{x}{An \code{ivreg} object created by a call to \code{\link[AER:ivreg]{AER::ivreg()}}.}
 
-\item{diagnostics}{Logical indicating whether to include statistics and
-p-values for Sargan, Wu-Hausman and weak instrument tests. Defaults to
-\code{FALSE}.}
+\item{diagnostics}{Logical indicating whether or not to return the
+Wu-Hausman and Sargan diagnostic information.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -29,31 +28,55 @@ with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
 or model convergence information.
 
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
 
 Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an \code{NA}
+of the appropriate type.
+}
+\details{
+This tidier currently only supports \code{ivreg}-classed objects
+outputted by the \code{AER} package. The \code{ivreg} package also outputs
+objects of class \code{ivreg}, and will be supported in a later release.
+}
+\note{
+Beginning 0.7.0, \code{glance.ivreg} returns statistics for the
+Wu-Hausman test for endogeneity and the Sargan test of
+overidentifying restrictions. Sargan test values are returned as \code{NA}
+if the number of instruments is not greater than the number of
+endogenous regressors.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("AER", quietly = TRUE)) {
+
+# load libraries for models and data
 library(AER)
 
+# load data
 data("CigarettesSW", package = "AER")
+
+# fit model
 ivr <- ivreg(
   log(packs) ~ income | population,
   data = CigarettesSW,
   subset = year == "1995"
 )
 
-summary(ivr)
-
+# summarize model fit with tidiers
 tidy(ivr)
 tidy(ivr, conf.int = TRUE)
-tidy(ivr, conf.int = TRUE, exponentiate = TRUE)
+tidy(ivr, conf.int = TRUE, instruments = TRUE)
 
 augment(ivr)
 augment(ivr, data = CigarettesSW)
@@ -62,11 +85,14 @@ augment(ivr, newdata = CigarettesSW)
 glance(ivr)
 
 }
+
+}
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[AER:ivreg]{AER::ivreg()}}
 
-Other ivreg tidiers: \code{\link{augment.ivreg}},
-  \code{\link{tidy.ivreg}}
+Other ivreg tidiers: 
+\code{\link{augment.ivreg}()},
+\code{\link{tidy.ivreg}()}
 }
 \concept{ivreg tidiers}
 \value{
@@ -74,14 +100,9 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{adj.r.squared}{Adjusted R squared statistic, which is like the R squared statistic except taking degrees of freedom into account.}
   \item{df}{Degrees of freedom used by the model.}
   \item{df.residual}{Residual degrees of freedom.}
-  \item{p.value.Sargan}{P-value for Sargan test.}
-  \item{p.value.weakinst}{P-value for weak instruments test.}
-  \item{p.value.Wu.Hausman}{P-value for Wu-Hausman test.}
+  \item{nobs}{Number of observations used.}
   \item{r.squared}{R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.}
   \item{sigma}{Estimated standard error of the residuals.}
-  \item{statistic.Sargan}{Statistic for Sargan test.}
-  \item{statistic.weakinst}{Statistic for Wu-Hausman test.}
-  \item{statistic.Wu.Hausman}{Statistic for Wu-Hausman test.}
   \item{statistic}{Wald test statistic.}
   \item{p.value}{P-value for the Wald test.}
 

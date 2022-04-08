@@ -27,7 +27,7 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
@@ -44,13 +44,19 @@ choice of lambda.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("glmnet", quietly = TRUE)) {
+
+# load libraries for models and data
 library(glmnet)
 
 set.seed(2014)
-x <- matrix(rnorm(100*20),100,20)
+x <- matrix(rnorm(100 * 20), 100, 20)
 y <- rnorm(100)
-fit1 <- glmnet(x,y)
+fit1 <- glmnet(x, y)
 
+# summarize model fit with tidiers + visualization
 tidy(fit1)
 glance(fit1)
 
@@ -59,31 +65,39 @@ library(ggplot2)
 
 tidied <- tidy(fit1) \%>\% filter(term != "(Intercept)")
 
-ggplot(tidied, aes(step, estimate, group = term)) + geom_line()
+ggplot(tidied, aes(step, estimate, group = term)) +
+  geom_line()
+  
 ggplot(tidied, aes(lambda, estimate, group = term)) +
-    geom_line() + scale_x_log10()
+  geom_line() +
+  scale_x_log10()
 
-ggplot(tidied, aes(lambda, dev.ratio)) + geom_line()
+ggplot(tidied, aes(lambda, dev.ratio)) +
+  geom_line()
 
 # works for other types of regressions as well, such as logistic
-g2 <- sample(1:2, 100, replace=TRUE)
-fit2 <- glmnet(x, g2, family="binomial")
+g2 <- sample(1:2, 100, replace = TRUE)
+fit2 <- glmnet(x, g2, family = "binomial")
 tidy(fit2)
+
+}
 
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[glmnet:glmnet]{glmnet::glmnet()}}
 
-Other glmnet tidiers: \code{\link{glance.cv.glmnet}},
-  \code{\link{glance.glmnet}}, \code{\link{tidy.cv.glmnet}}
+Other glmnet tidiers: 
+\code{\link{glance.cv.glmnet}()},
+\code{\link{glance.glmnet}()},
+\code{\link{tidy.cv.glmnet}()}
 }
 \concept{glmnet tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{dev.ratio}{fraction of null deviance explained at each value of lambda}
+  \item{dev.ratio}{Fraction of null deviance explained at each value of lambda.}
   \item{estimate}{The estimated value of the regression term.}
   \item{lambda}{Value of penalty parameter lambda.}
-  \item{step}{which step of lambda choices was used}
+  \item{step}{Which step of lambda choices was used.}
   \item{term}{The name of the regression term.}
 
 }

@@ -7,8 +7,8 @@
 \method{tidy}{anova}(x, ...)
 }
 \arguments{
-\item{x}{An \code{anova} objects, such as those created by \code{\link[stats:anova]{stats::anova()}} or
-\code{\link[car:Anova]{car::Anova()}}.}
+\item{x}{An \code{anova} object, such as those created by \code{\link[stats:anova]{stats::anova()}},
+\code{\link[car:Anova]{car::Anova()}}, or \code{\link[car:leveneTest]{car::leveneTest()}}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -24,26 +24,38 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \details{
 The \code{term} column of an ANOVA table can come with leading or
 trailing whitespace, which this tidying method trims.
+
+For documentation on the tidier for \code{\link[car:leveneTest]{car::leveneTest()}} output, see
+\code{\link[=tidy.leveneTest]{tidy.leveneTest()}}
 }
 \examples{
 
-a <- anova(lm(mpg ~ wt + qsec + disp, mtcars))
-tidy(a)
+# fit models
+a <- lm(mpg ~ wt + qsec + disp, mtcars)
+b <- lm(mpg ~ wt + qsec, mtcars)
+
+mod <- anova(a, b)
+
+# summarize model fit with tidiers
+tidy(mod)
 
 }
 \seealso{
-\code{\link[=tidy]{tidy()}}, \code{\link[stats:anova]{stats::anova()}}, \code{\link[car:Anova]{car::Anova()}}
+\code{\link[=tidy]{tidy()}}, \code{\link[stats:anova]{stats::anova()}}, \code{\link[car:Anova]{car::Anova()}}, \code{\link[car:leveneTest]{car::leveneTest()}}
 
-Other anova tidiers: \code{\link{tidy.TukeyHSD}},
-  \code{\link{tidy.aovlist}}, \code{\link{tidy.aov}},
-  \code{\link{tidy.manova}}
+Other anova tidiers: 
+\code{\link{glance.aov}()},
+\code{\link{tidy.TukeyHSD}()},
+\code{\link{tidy.aovlist}()},
+\code{\link{tidy.aov}()},
+\code{\link{tidy.manova}()}
 }
 \concept{anova tidiers}
 \value{
@@ -52,7 +64,7 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{meansq}{Mean sum of squares. Equal to total sum of squares divided by degrees of freedom.}
   \item{p.value}{The two-sided p-value associated with the observed statistic.}
   \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{sumsq}{Sum of squares explained by this term}
+  \item{sumsq}{Sum of squares explained by this term.}
   \item{term}{The name of the regression term.}
 
 }

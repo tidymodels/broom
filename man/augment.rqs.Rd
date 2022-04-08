@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{An \code{rqs} object returned from \code{\link[quantreg:rq]{quantreg::rq()}}.}
 
-\item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
+\item{data}{A \link[base:data.frame]{base::data.frame} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
 data that was used to produce the object \code{x}. Defaults to
 \code{stats::model.frame(x)} so that \code{augment(my_fit)} returns the augmented
 original data. \strong{Do not} pass new data to the \code{data} argument.
@@ -17,17 +17,20 @@ Augment will report information such as influence and cooks distance for
 data passed to the \code{data} argument. These measures are only defined for
 the original training data.}
 
-\item{newdata}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
+\item{newdata}{A \code{\link[base:data.frame]{base::data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
 the original predictors used to create \code{x}. Defaults to \code{NULL}, indicating
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
 
-\item{...}{Arguments passed on to \code{quantreg::predict.rqs}
-\describe{
-  \item{object}{ object of class rq or rqs or rq.process produced by \code{rq} }
-  \item{newdata}{An optional data frame in which to look for variables with
-    which to predict.  If omitted, the fitted values are used.}
-  \item{type}{For \code{predict.rq}, the  method for 'confidence' intervals, if desired. 
+\item{...}{
+  Arguments passed on to \code{\link[quantreg:predict.rq]{quantreg::predict.rq}}
+  \describe{
+    \item{\code{object}}{ object of class rq or rqs or rq.process produced by \code{rq} }
+    \item{\code{interval}}{type of interval desired:  default is  'none', when set to
+    'confidence' the function returns a matrix predictions with point predictions
+    for each of the 'newdata' points as well as lower and upper confidence limits.}
+    \item{\code{level}}{converage probability for the 'confidence' intervals.}
+    \item{\code{type}}{For \code{predict.rq}, the  method for 'confidence' intervals, if desired. 
     If 'percentile' then one of the bootstrap methods is used to generate percentile 
     intervals for each prediction, if 'direct' then a version of the Portnoy and Zhou 
     (1998) method is used, and otherwise an estimated covariance matrix for the parameter
@@ -40,14 +43,9 @@ the \code{data} argument will be ignored.}
     function \code{rearrange}.  When the "fhat" option is invoked, a list of conditional
     density functions is returned based on Silverman's adaptive kernel method as
     implemented in \code{akj} and \code{approxfun}.}
-  \item{stepfun}{If 'TRUE' return stepfunctions otherwise return matrix of predictions.
-    these functions can be estimates of either the conditional quantile or distribution
-    functions depending upon the \code{type} argument.  When \code{stepfun = FALSE}
-    a matrix of point estimates of the conditional quantile function at the points
-    specified by the \code{newdata} argument. }
-  \item{na.action}{ function determining what should be done with missing values
+    \item{\code{na.action}}{ function determining what should be done with missing values
     in 'newdata'.  The default is to predict 'NA'.}
-}}
+  }}
 }
 \description{
 Augment accepts a model object and a dataset and adds
@@ -61,18 +59,20 @@ Users may pass data to augment via either the \code{data} argument or the
 \code{newdata} argument. If the user passes data to the \code{data} argument,
 it \strong{must} be exactly the data that was used to fit the model
 object. Pass datasets to \code{newdata} to augment data that was not used
-during model fitting. This still requires that all columns used to fit
-the model are present.
+during model fitting. This still requires that at least all predictor
+variable columns used to fit the model are present. If the original outcome
+variable used to fit the model is not included in \code{newdata}, then no
+\code{.resid} column will be included in the output.
 
-Augment will often behavior different depending on whether \code{data} or
-\code{newdata} is specified. This is because there is often information
+Augment will often behave differently depending on whether \code{data} or
+\code{newdata} is given. This is because there is often information
 associated with training observations (such as influences or related)
 measures that is not meaningfully defined for new observations.
 
 For convenience, many augment methods provide default \code{data} arguments,
 so that \code{augment(fit)} will return the augmented training data. In these
-cases augment tries to reconstruct the original data based on the model
-object, with some varying degrees of success.
+cases, augment tries to reconstruct the original data based on the model
+object with varying degrees of success.
 
 The augmented dataset is always returned as a \link[tibble:tibble]{tibble::tibble} with the
 \strong{same number of rows} as the passed dataset. This means that the
@@ -85,21 +85,63 @@ encounter errors, try explicitly passing a tibble, or fitting the original
 model on data in a tibble.
 
 We are in the process of defining behaviors for models fit with various
-\link{na.action} arguments, but make no guarantees about behavior when data is
+\code{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
 \details{
 Depending on the arguments passed on to \code{predict.rq} via \code{...},
 a confidence interval is also calculated on the fitted values resulting in
-columns \code{.conf.low} and \code{.conf.high}. Does not provide confidence
+columns \code{.lower} and \code{.upper}. Does not provide confidence
 intervals when data is specified via the \code{newdata} argument.
 }
-\seealso{
-\link{augment}, \code{\link[quantreg:rq]{quantreg::rq()}}, \code{\link[quantreg:predict.rqs]{quantreg::predict.rqs()}}
+\examples{
 
-Other quantreg tidiers: \code{\link{augment.nlrq}},
-  \code{\link{augment.rq}}, \code{\link{glance.nlrq}},
-  \code{\link{glance.rq}}, \code{\link{tidy.nlrq}},
-  \code{\link{tidy.rqs}}, \code{\link{tidy.rq}}
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("quantreg", quietly = TRUE)) {
+
+# load modeling library and data
+library(quantreg)
+
+data(stackloss)
+
+# median (l1) regression fit for the stackloss data. 
+mod1 <- rq(stack.loss ~ stack.x, .5)  
+
+# weighted sample median
+mod2 <- rq(rnorm(50) ~ 1, weights = runif(50))
+
+# summarize model fit with tidiers
+tidy(mod1)
+glance(mod1)
+augment(mod1)
+
+tidy(mod2)
+glance(mod2)
+augment(mod2)
+
+# varying tau to generate an rqs object
+mod3 <- rq(stack.loss ~ stack.x, tau = c(.25, .5))
+
+tidy(mod3)
+augment(mod3)
+
+# glance cannot handle rqs objects like `mod3`--use a purrr 
+# `map`-based workflow instead
+
+}
+
+}
+\seealso{
+\link{augment}, \code{\link[quantreg:rq]{quantreg::rq()}}, \code{\link[quantreg:predict.rq]{quantreg::predict.rqs()}}
+
+Other quantreg tidiers: 
+\code{\link{augment.nlrq}()},
+\code{\link{augment.rq}()},
+\code{\link{glance.nlrq}()},
+\code{\link{glance.rq}()},
+\code{\link{tidy.nlrq}()},
+\code{\link{tidy.rqs}()},
+\code{\link{tidy.rq}()}
 }
 \concept{quantreg tidiers}

@@ -18,28 +18,34 @@ if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 
 \item{...}{Additional arguments passed to \code{\link[emmeans:summary.emmGrid]{emmeans::summary.emmGrid()}} or
-\code{\link[lsmeans:summary.ref.grid]{lsmeans::summary.ref.grid()}}. \strong{Cautionary note}: misspecified arguments
+\code{\link[lsmeans:ref.grid]{lsmeans::summary.ref.grid()}}. \strong{Cautionary note}: misspecified arguments
 may be silently ignored!}
 }
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \details{
-Returns a data frame with one observation for each estimated
+Returns a data frame with one observation for each estimated marginal
 mean, and one column for each combination of factors. When the input is a
 contrast, each row will contain one estimated contrast.
 
 There are a large number of arguments that can be
-passed on to \code{\link[emmeans:summary.emmGrid]{emmeans::summary.emmGrid()}} or \code{\link[lsmeans:summary.ref.grid]{lsmeans::summary.ref.grid()}}.
+passed on to \code{\link[emmeans:summary.emmGrid]{emmeans::summary.emmGrid()}} or \code{\link[lsmeans:ref.grid]{lsmeans::summary.ref.grid()}}.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("emmeans", quietly = TRUE)) {
+
+# load libraries for models and data
 library(emmeans)
+
 # linear model for sales of oranges per day
 oranges_lm1 <- lm(sales1 ~ price1 + price2 + day + store, data = oranges)
 
@@ -58,28 +64,42 @@ tidy(contrast(marginal, method = "pairwise"))
 
 # plot confidence intervals
 library(ggplot2)
-ggplot(tidy(marginal), aes(day, estimate)) +
+
+ggplot(tidy(marginal, conf.int = TRUE), aes(day, estimate)) +
   geom_point() +
   geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
 
 # by multiple prices
-by_price <- emmeans(oranges_lm1, "day", by = "price2",
-                    at = list(price1 = 50, price2 = c(40, 60, 80),
-                    day = c("2", "3", "4")) )
+by_price <- emmeans(oranges_lm1, "day",
+  by = "price2",
+  at = list(
+    price1 = 50, price2 = c(40, 60, 80),
+    day = c("2", "3", "4")
+  )
+)
+
 by_price
+
 tidy(by_price)
 
-ggplot(tidy(by_price), aes(price2, estimate, color = day)) +
+ggplot(tidy(by_price, conf.int = TRUE), aes(price2, estimate, color = day)) +
   geom_line() +
   geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
+
+# joint_tests
+tidy(joint_tests(oranges_lm1))
+
+}
 
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[emmeans:ref_grid]{emmeans::ref_grid()}}, \code{\link[emmeans:emmeans]{emmeans::emmeans()}},
 \code{\link[emmeans:contrast]{emmeans::contrast()}}
 
-Other emmeans tidiers: \code{\link{tidy.emmGrid}},
-  \code{\link{tidy.ref.grid}}
+Other emmeans tidiers: 
+\code{\link{tidy.emmGrid}()},
+\code{\link{tidy.ref.grid}()},
+\code{\link{tidy.summary_emm}()}
 }
 \concept{emmeans tidiers}
 \value{
@@ -88,11 +108,10 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{conf.low}{Lower bound on the confidence interval for the estimate.}
   \item{contrast}{Levels being compared.}
   \item{df}{Degrees of freedom used by this term in the model.}
+  \item{null.value}{Value to which the estimate is compared.}
   \item{p.value}{The two-sided p-value associated with the observed statistic.}
   \item{std.error}{The standard error of the regression term.}
-  \item{level1}{One level of the factor being contrasted}
-  \item{level2}{The other level of the factor being contrasted}
+  \item{estimate}{Expected marginal mean}
   \item{statistic}{T-ratio statistic}
-  \item{estimate}{Estimated least-squares mean.}
 
 }

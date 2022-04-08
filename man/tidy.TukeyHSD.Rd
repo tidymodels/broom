@@ -23,7 +23,7 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
@@ -36,22 +36,26 @@ tidy(thsd)
 # may include comparisons on multiple terms
 fm2 <- aov(mpg ~ as.factor(gear) * as.factor(cyl), data = mtcars)
 tidy(TukeyHSD(fm2))
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:TukeyHSD]{stats::TukeyHSD()}}
 
-Other anova tidiers: \code{\link{tidy.anova}},
-  \code{\link{tidy.aovlist}}, \code{\link{tidy.aov}},
-  \code{\link{tidy.manova}}
+Other anova tidiers: 
+\code{\link{glance.aov}()},
+\code{\link{tidy.anova}()},
+\code{\link{tidy.aovlist}()},
+\code{\link{tidy.aov}()},
+\code{\link{tidy.manova}()}
 }
 \concept{anova tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{adj.p.value}{P-value adjusted for multiple comparisons.}
-  \item{comparison}{Levels being compared.}
   \item{conf.high}{Upper bound on the confidence interval for the estimate.}
   \item{conf.low}{Lower bound on the confidence interval for the estimate.}
+  \item{contrast}{Levels being compared.}
   \item{estimate}{The estimated value of the regression term.}
+  \item{null.value}{Value to which the estimate is compared.}
+  \item{term}{The name of the regression term.}
 
 }

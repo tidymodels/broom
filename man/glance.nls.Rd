@@ -25,38 +25,48 @@ with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
 or model convergence information.
 
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
 
 Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an \code{NA}
+of the appropriate type.
 }
 \examples{
 
-n <- nls(mpg ~ k * e ^ wt, data = mtcars, start = list(k = 1, e = 2))
+# fit model
+n <- nls(mpg ~ k * e^wt, data = mtcars, start = list(k = 1, e = 2))
 
+# summarize model fit with tidiers + visualization
 tidy(n)
 augment(n)
 glance(n)
 
 library(ggplot2)
+
 ggplot(augment(n), aes(wt, mpg)) +
   geom_point() +
   geom_line(aes(y = .fitted))
 
 newdata <- head(mtcars)
 newdata$wt <- newdata$wt + 1
+
 augment(n, newdata = newdata)
 
 }
 \seealso{
 \link{tidy}, \code{\link[stats:nls]{stats::nls()}}
 
-Other nls tidiers: \code{\link{augment.nls}},
-  \code{\link{tidy.nls}}
+Other nls tidiers: 
+\code{\link{augment.nls}()},
+\code{\link{tidy.nls}()}
 }
 \concept{nls tidiers}
 \value{
@@ -65,9 +75,10 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{BIC}{Bayesian Information Criterion for the model.}
   \item{deviance}{Deviance of the model.}
   \item{df.residual}{Residual degrees of freedom.}
-  \item{finTol}{the achieved convergence tolerance}
-  \item{isConv}{whether the fit successfully converged}
+  \item{finTol}{The achieved convergence tolerance.}
+  \item{isConv}{Whether the fit successfully converged.}
   \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
+  \item{nobs}{Number of observations used.}
   \item{sigma}{Estimated standard error of the residuals.}
 
 }

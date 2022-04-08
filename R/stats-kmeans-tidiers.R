@@ -2,11 +2,35 @@
 #' @template title_desc_tidy
 #'
 #' @param x A `kmeans` object created by [stats::kmeans()].
-#' @param col.names Dimension names. Defaults to the names of the variables in x.  Set to NULL to get names `x1, x2, ...`.
+#' @param col.names Dimension names. Defaults to the names of the variables 
+#'   in x.  Set to NULL to get names `x1, x2, ...`.
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy("size", "withinss", "cluster")
+#'
+#' @examples
+#'
+#' # feel free to ignore the following lines—they allow {broom} to supply 
+#' # examples without requiring the model/data-supplying package to be installed.
+#' if (requireNamespace("cluster", quietly = TRUE)) {
+#'   if (requireNamespace("modeldata", quietly = TRUE)) {
+#'   
+#' library(cluster)
+#' library(modeldata)
+#' library(dplyr)
 #' 
+#' data(hpc_data)
+#' 
+#' x <- hpc_data[, 2:5]
+#'
+#' fit <- pam(x, k = 4)
+#'
+#' tidy(fit)
+#' glance(fit)
+#' augment(fit, x)
+#' 
+#'   }
+#' }
 #' @details For examples, see the kmeans vignette.
 #'
 #' @aliases kmeans_tidiers
@@ -14,8 +38,7 @@
 #' @seealso [tidy()], [stats::kmeans()]
 #' @family kmeans tidiers
 tidy.kmeans <- function(x, col.names = colnames(x$centers), ...) {
-  
-  if(is.null(col.names)){
+  if (is.null(col.names)) {
     col.names <- paste0("x", 1:ncol(x$centers))
   }
   ret <- as.data.frame(x$centers)
@@ -29,7 +52,7 @@ tidy.kmeans <- function(x, col.names = colnames(x$centers), ...) {
 
 #' @templateVar class kmeans
 #' @template title_desc_augment
-#' 
+#'
 #' @inherit tidy.kmeans params examples
 #' @template param_data
 #'
@@ -46,17 +69,24 @@ augment.kmeans <- function(x, data = NULL, ...) {
   if (is.null(data)) {
     stop("Must specify `data` argument for augment.kmeans.", call. = FALSE)
   }
-  fix_data_frame(data, newcol = ".rownames") %>% 
-    mutate(.cluster = factor(x$cluster))
+
+  # kmeans allows for input matrices without column names,
+  # so add them in the same way that fix_data_frame() would have
+  if (inherits(data, "matrix") & is.null(colnames(data))) {
+    colnames(data) <- paste0("X", 1:ncol(data))
+  }
+  
+  as_augment_tibble(data) %>%
+    mutate(.cluster = as.factor(!!x$cluster))
 }
 
 
 #' @templateVar class kmeans
 #' @template title_desc_glance
-#' 
+#'
 #' @inherit tidy.kmeans params examples
 #'
-#' @evalRd return_glance("totss", "tot.withinss", "betweenss", "iter")
+#' @evalRd return_glance("totss","tot.withinss", "betweenss", "iter")
 #'
 #' @export
 #' @seealso [glance()], [stats::kmeans()]

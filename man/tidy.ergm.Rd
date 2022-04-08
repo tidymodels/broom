@@ -5,8 +5,7 @@
 \alias{ergm_tidiers}
 \title{Tidy a(n) ergm object}
 \usage{
-\method{tidy}{ergm}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, quick = FALSE, ...)
+\method{tidy}{ergm}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
 }
 \arguments{
 \item{x}{An \code{ergm} object returned from a call to \code{\link[ergm:ergm]{ergm::ergm()}}.}
@@ -23,18 +22,23 @@ the coefficient estimates. This is typical for logistic and multinomial
 regressions, but a bad idea if there is no log or logit link. Defaults
 to \code{FALSE}.}
 
-\item{quick}{Logical indiciating if the only the \code{term} and \code{estimate}
-columns should be returned. Often useful to avoid time consuming
-covariance and standard error calculations. Defaults to \code{FALSE}.}
-
-\item{...}{Additional arguments to pass to \code{\link[ergm:summary.ergm]{ergm::summary.ergm()}}.
-\strong{Cautionary note}: Mispecified arguments may be silently ignored.}
+\item{...}{Additional arguments to pass to \code{\link[ergm:summary.formula]{ergm::summary()}}.
+\strong{Cautionary note}: Misspecified arguments may be silently ignored.}
+}
+\value{
+A \link[tibble:tibble]{tibble::tibble} with one row for each coefficient in the
+exponential random graph model, with columns:
+\item{term}{The term in the model being estimated and tested}
+\item{estimate}{The estimated coefficient}
+\item{std.error}{The standard error}
+\item{mcmc.error}{The MCMC error}
+\item{p.value}{The two-sided p-value}
 }
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 
@@ -44,49 +48,46 @@ the \pkg{ergm} class, such as those produced from weighted networks by the
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("ergm", quietly = TRUE)) {
+
+# load libraries for models and data
 library(ergm)
-# Using the same example as the ergm package
-# Load the Florentine marriage network data
+
+# load the Florentine marriage network data
 data(florentine)
 
-# Fit a model where the propensity to form ties between
+# fit a model where the propensity to form ties between
 # families depends on the absolute difference in wealth
 gest <- ergm(flomarriage ~ edges + absdiff("wealth"))
 
-# Show terms, coefficient estimates and errors
+# show terms, coefficient estimates and errors
 tidy(gest)
 
-# Show coefficients as odds ratios with a 99\% CI
+# show coefficients as odds ratios with a 99\% CI
 tidy(gest, exponentiate = TRUE, conf.int = TRUE, conf.level = 0.99)
 
-# Take a look at likelihood measures and other
+# take a look at likelihood measures and other
 # control parameters used during MCMC estimation
 glance(gest)
 glance(gest, deviance = TRUE)
 glance(gest, mcmc = TRUE)
 
 }
+
+}
 \references{
 Hunter DR, Handcock MS, Butts CT, Goodreau SM, Morris M (2008b).
 \pkg{ergm}: A Package to Fit, Simulate and Diagnose Exponential-Family
 Models for Networks. \emph{Journal of Statistical Software}, 24(3).
-\url{http://www.jstatsoft.org/v24/i03/}.
+\url{https://www.jstatsoft.org/v24/i03/}.
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[ergm:ergm]{ergm::ergm()}}, \code{\link[ergm:control.ergm]{ergm::control.ergm()}},
-\code{\link[ergm:summary.ergm]{ergm::summary.ergm()}}
+\code{\link[ergm:summary.formula]{ergm::summary()}}
 
-Other ergm tidiers: \code{\link{glance.ergm}}
+Other ergm tidiers: 
+\code{\link{glance.ergm}()}
 }
 \concept{ergm tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{mcmc.error}{The MCMC error}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{term}{The name of the regression term.}
-
-}

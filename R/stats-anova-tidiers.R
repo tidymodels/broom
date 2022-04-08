@@ -1,10 +1,10 @@
 #' @templateVar class anova
 #' @template title_desc_tidy
-#' 
-#' @param x An `anova` objects, such as those created by [stats::anova()] or
-#'   [car::Anova()].
+#'
+#' @param x An `anova` object, such as those created by [stats::anova()],
+#'   [car::Anova()], or [car::leveneTest()].
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_tidy(
 #'   "term",
 #'   "df",
@@ -13,25 +13,42 @@
 #'   "statistic",
 #'   "p.value"
 #' )
+#'
+#' @details 
+#' The `term` column of an ANOVA table can come with leading or
+#' trailing whitespace, which this tidying method trims.
 #'   
-#' @details The `term` column of an ANOVA table can come with leading or
-#'   trailing whitespace, which this tidying method trims.
-#'   
+#' For documentation on the tidier for [car::leveneTest()] output, see
+#' [tidy.leveneTest()]
+#'
 #' @examples
 #'
-#' a <- anova(lm(mpg ~ wt + qsec + disp, mtcars))
-#' tidy(a)
-#'
+#' # fit models
+#' a <- lm(mpg ~ wt + qsec + disp, mtcars)
+#' b <- lm(mpg ~ wt + qsec, mtcars)
+#' 
+#' mod <- anova(a, b)
+#' 
+#' # summarize model fit with tidiers
+#' tidy(mod)
+#' 
 #' @export
 #' @family anova tidiers
-#' @seealso [tidy()], [stats::anova()], [car::Anova()]
+#' @seealso [tidy()], [stats::anova()], [car::Anova()], [car::leveneTest()]
 tidy.anova <- function(x, ...) {
+
+  # car::leveneTest returns an object of class `anova`
+  if (!is.null(attr(x, "heading")) && 
+      isTRUE(grepl("Levene's Test for Homogeneity of Variance", attr(x, "heading")))) {
+    return(tidy(structure(x, class = c("leveneTest", class(x))), ...))
+  }
+
   # there are many possible column names that need to be transformed
   renamers <- c(
-    "AIC" = "AIC",              # merMod
-    "BIC" = "BIC",              # merMod
-    "deviance" = "deviance",    # merMod
-    "logLik" = "logLik",        # merMod
+    "AIC" = "AIC", # merMod
+    "BIC" = "BIC", # merMod
+    "deviance" = "deviance", # merMod
+    "logLik" = "logLik", # merMod
     "Df" = "df",
     "Chi.Df" = "df",
     "Sum Sq" = "sumsq",
@@ -44,6 +61,7 @@ tidy.anova <- function(x, ...) {
     "F" = "statistic",
     "Chisq" = "statistic",
     "P(>|Chi|)" = "p.value",
+    "Pr(>|Chi|)" = "p.value",
     "Pr(>Chi)" = "p.value",
     "Pr..Chisq." = "p.value",
     "Pr..Chi." = "p.value",
@@ -52,12 +70,16 @@ tidy.anova <- function(x, ...) {
     "LR.Chisq" = "statistic",
     "LR Chisq" = "statistic",
     "edf" = "edf",
-    "Ref.df" = "ref.df"
+    "Ref.df" = "ref.df",
+    "loglik" = "logLik",
+    ".rownames" = "term"
   )
 
   names(renamers) <- make.names(names(renamers))
 
-  ret <- fix_data_frame(x)
+  ret <- as_augment_tibble(x)
+  colnames(ret) <- make.names(names(ret))
+
   unknown_cols <- setdiff(colnames(ret), c("term", names(renamers)))
   if (length(unknown_cols) > 0) {
     warning(
@@ -66,8 +88,10 @@ tidy.anova <- function(x, ...) {
       paste(unknown_cols, collapse = ", ")
     )
   }
-  colnames(ret) <- dplyr::recode(colnames(ret), rlang::UQS(renamers))
-  if (!is.null(ret$term)) {
+
+  colnames(ret) <- dplyr::recode(colnames(ret), !!!renamers)
+
+  if ("term" %in% names(ret)) {
     # if rows had names, strip whitespace in them
     ret <- mutate(ret, term = stringr::str_trim(term))
   }
@@ -77,32 +101,75 @@ tidy.anova <- function(x, ...) {
 
 #' @templateVar class aov
 #' @template title_desc_tidy
-#' 
-#' @param x An `aov` objects, such as those created by [stats::aov()].
+#'
+#' @param x An `aov` object, such as those created by [stats::aov()].
 #' @template param_unused_dots
-#' 
+#'
 #' @inherit tidy.anova return details
-#'   
+#'
 #' @examples
 #'
 #' a <- aov(mpg ~ wt + qsec + disp, mtcars)
 #' tidy(a)
-#'
 #' @export
 #' @family anova tidiers
 #' @seealso [tidy()], [stats::aov()]
 tidy.aov <- function(x, ...) {
-  s <- summary(x)
-  tidy.anova(s[[1]])
+  summary(x)[[1]] %>%
+    tibble::as_tibble(rownames = "term") %>%
+    dplyr::mutate("term" = stringr::str_trim(term)) %>%
+    rename2(
+      "df" = "Df",
+      "sumsq" = "Sum Sq",
+      "meansq" = "Mean Sq",
+      "statistic" = "F value",
+      "p.value" = "Pr(>F)"
+    )
 }
 
 
+#' @templateVar class lm
+#' @template title_desc_glance
+#'
+#' @inherit tidy.aov params examples
+#'
+#' @note
+#' Note that `tidy.aov()` now contains the numerator and denominator degrees of 
+#' freedom, which were included in the output of `glance.aov()` in some
+#' previous versions of the package.
+#'
+#' @evalRd return_glance(
+#'   "logLik",
+#'   "AIC",
+#'   "BIC",
+#'   "deviance",
+#'   "nobs"
+#' )
+#'
+#' @export
+#' @seealso [glance()]
+#' @family anova tidiers
+glance.aov <- function(x, ...) {
+  lm_sum <- summary(lm(x))
+  
+  as_glance_tibble(
+    logLik = as.numeric(stats::logLik(x)),
+    AIC = stats::AIC(x),
+    BIC = stats::BIC(x),
+    deviance = stats::deviance(x),
+    nobs = stats::nobs(x),
+    r.squared = lm_sum$r.squared,
+    na_types = "rrrrir"
+  )
+  
+}
+
 #' @templateVar class aovlist
 #' @template title_desc_tidy
-#' 
+#'
 #' @param x An `aovlist` objects, such as those created by [stats::aov()].
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_tidy(
 #'   "term",
 #'   "df",
@@ -112,33 +179,32 @@ tidy.aov <- function(x, ...) {
 #'   "p.value",
 #'   "stratum"
 #' )
-#'   
+#'
 #' @inherit tidy.anova details
-#'   
+#'
 #' @examples
 #'
 #' a <- aov(mpg ~ wt + qsec + Error(disp / am), mtcars)
 #' tidy(a)
-#'
 #' @export
 #' @family anova tidiers
 #' @seealso [tidy()], [stats::aov()]
 tidy.aovlist <- function(x, ...) {
-  
+
   # must filter out Intercept stratum since it has no dimensions
   if (names(x)[1L] == "(Intercept)") {
     x <- x[-1L]
   }
 
   ret <- map_df(x, tidy, .id = "stratum")
-  
+
   # get rid of leading and trailing whitespace in term and stratum columns
-  ret <- ret %>% 
+  ret <- ret %>%
     mutate(
       term = stringr::str_trim(term),
       stratum = stringr::str_trim(stratum)
     )
-  
+
   as_tibble(ret)
 }
 
@@ -163,7 +229,7 @@ tidy.aovlist <- function(x, ...) {
 #'   hl = "Hotelling-Lawley trace.",
 #'   roy = "Roy's greatest root."
 #' )
-#' 
+#'
 #'
 #' @details Depending on which test statistic is specified only one of `pillai`,
 #'   `wilks`, `hl` or `roy` is included.
@@ -172,21 +238,21 @@ tidy.aovlist <- function(x, ...) {
 #'
 #' npk2 <- within(npk, foo <- rnorm(24))
 #' m <- manova(cbind(yield, foo) ~ block + N * P * K, npk2)
-#' tidy(m) 
-#'
+#' tidy(m)
 #' @export
 #' @seealso [tidy()], [stats::summary.manova()]
 #' @family anova tidiers
 tidy.manova <- function(x, test = "Pillai", ...) {
-  
   test.pos <- pmatch(test, c(
     "Pillai", "Wilks",
     "Hotelling-Lawley", "Roy"
   ))
   test.name <- c("pillai", "wilks", "hl", "roy")[test.pos]
-  
-  nn <- c("df", test.name, "statistic", "num.df", "den.df", "p.value")
-  fix_data_frame(summary(x, test = test, ...)$stats, nn)
+
+  as_tidy_tibble(
+    summary(x, test = test, ...)$stats, 
+    new_names = c("df", test.name, "statistic", "num.df", "den.df", "p.value")
+  )
 }
 
 #' @templateVar class TukeyHSD
@@ -196,8 +262,9 @@ tidy.manova <- function(x, test = "Pillai", ...) {
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy(
-#'   "tidy",
-#'   "comparison",
+#'   "term",
+#'   "contrast",
+#'   "null.value",
 #'   "estimate",
 #'   "conf.low",
 #'   "conf.high",
@@ -213,15 +280,21 @@ tidy.manova <- function(x, test = "Pillai", ...) {
 #' # may include comparisons on multiple terms
 #' fm2 <- aov(mpg ~ as.factor(gear) * as.factor(cyl), data = mtcars)
 #' tidy(TukeyHSD(fm2))
-#'
 #' @export
 #' @seealso [tidy()], [stats::TukeyHSD()]
 #' @family anova tidiers
 tidy.TukeyHSD <- function(x, ...) {
   purrr::map_df(x,
     function(e) {
-      nn <- c("estimate", "conf.low", "conf.high", "adj.p.value")
-      fix_data_frame(e, nn, "comparison")
-    }, .id = "term"
+      null.value <- rep(0, nrow(e))
+      e <- cbind(null.value, e)
+      as_tidy_tibble(
+        e, 
+        new_names = c("null.value", "estimate", "conf.low", 
+                      "conf.high", "adj.p.value"), 
+        new_column = "contrast"
+      )
+    },
+    .id = "term"
   )
 }

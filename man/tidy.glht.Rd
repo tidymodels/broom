@@ -5,10 +5,17 @@
 \alias{multcomp_tidiers}
 \title{Tidy a(n) glht object}
 \usage{
-\method{tidy}{glht}(x, ...)
+\method{tidy}{glht}(x, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{A \code{glht} object returned by \code{\link[multcomp:glht]{multcomp::glht()}}.}
+
+\item{conf.int}{Logical indicating whether or not to include a confidence
+interval in the tidied output. Defaults to \code{FALSE}.}
+
+\item{conf.level}{The confidence level to use for the confidence interval
+if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
+Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -24,12 +31,17 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("multcomp", quietly = TRUE)) {
+
+# load libraries for models and data
 library(multcomp)
 library(ggplot2)
 
@@ -37,35 +49,42 @@ amod <- aov(breaks ~ wool + tension, data = warpbreaks)
 wht <- glht(amod, linfct = mcp(tension = "Tukey"))
 
 tidy(wht)
-ggplot(wht, aes(lhs, estimate)) + geom_point()
+
+ggplot(wht, aes(lhs, estimate)) +
+  geom_point()
 
 CI <- confint(wht)
+
 tidy(CI)
+
 ggplot(CI, aes(lhs, estimate, ymin = lwr, ymax = upr)) +
-   geom_pointrange()
+  geom_pointrange()
 
 tidy(summary(wht))
 ggplot(mapping = aes(lhs, estimate)) +
-   geom_linerange(aes(ymin = lwr, ymax = upr), data = CI) +
-   geom_point(aes(size = p), data = summary(wht)) +
-   scale_size(trans = "reverse")
+  geom_linerange(aes(ymin = lwr, ymax = upr), data = CI) +
+  geom_point(aes(size = p), data = summary(wht)) +
+  scale_size(trans = "reverse")
 
 cld <- cld(wht)
 tidy(cld)
 
 }
+
+}
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[multcomp:glht]{multcomp::glht()}}
 
-Other multcomp tidiers: \code{\link{tidy.cld}},
-  \code{\link{tidy.confint.glht}},
-  \code{\link{tidy.summary.glht}}
+Other multcomp tidiers: 
+\code{\link{tidy.cld}()},
+\code{\link{tidy.confint.glht}()},
+\code{\link{tidy.summary.glht}()}
 }
 \concept{multcomp tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{contrast}{Levels being compared.}
   \item{estimate}{The estimated value of the regression term.}
-  \item{lhs}{Left hand side.}
-  \item{rhs}{Right hand side.}
+  \item{null.value}{Value to which the estimate is compared.}
 
 }

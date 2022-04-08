@@ -7,8 +7,8 @@
 \method{tidy}{acf}(x, ...)
 }
 \arguments{
-\item{x}{An \code{acf} object created by \code{\link[stats:acf]{stats::acf()}}, \code{\link[stats:pacf]{stats::pacf()}} or
-\code{\link[stats:ccf]{stats::ccf()}}.}
+\item{x}{An \code{acf} object created by \code{\link[stats:acf]{stats::acf()}}, \code{\link[stats:acf]{stats::pacf()}} or
+\code{\link[stats:acf]{stats::ccf()}}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -24,7 +24,7 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
@@ -33,18 +33,19 @@ specify which components to return.
 tidy(acf(lh, plot = FALSE))
 tidy(ccf(mdeaths, fdeaths, plot = FALSE))
 tidy(pacf(lh, plot = FALSE))
-
 }
 \seealso{
-\code{\link[=tidy]{tidy()}}, \code{\link[stats:acf]{stats::acf()}}, \code{\link[stats:pacf]{stats::pacf()}}, \code{\link[stats:ccf]{stats::ccf()}}
+\code{\link[=tidy]{tidy()}}, \code{\link[stats:acf]{stats::acf()}}, \code{\link[stats:acf]{stats::pacf()}}, \code{\link[stats:acf]{stats::ccf()}}
 
-Other time series tidiers: \code{\link{tidy.spec}},
-  \code{\link{tidy.ts}}, \code{\link{tidy.zoo}}
+Other time series tidiers: 
+\code{\link{tidy.spec}()},
+\code{\link{tidy.ts}()},
+\code{\link{tidy.zoo}()}
 }
 \concept{time series tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{acf}{Autocorrelation.}
-  \item{lag}{lag values}
+  \item{lag}{Lag values.}
 
 }

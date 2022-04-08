@@ -25,57 +25,82 @@ with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
 or model convergence information.
 
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
 
 Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an \code{NA}
+of the appropriate type.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("survival", quietly = TRUE)) {
+
+# load libraries for models and data
 library(survival)
 
-temp.yr  <- tcut(mgus$dxyr, 55:92, labels=as.character(55:91))
-temp.age <- tcut(mgus$age, 34:101, labels=as.character(34:100))
+# generate and format data
+temp.yr <- tcut(mgus$dxyr, 55:92, labels = as.character(55:91))
+temp.age <- tcut(mgus$age, 34:101, labels = as.character(34:100))
 ptime <- ifelse(is.na(mgus$pctime), mgus$futime, mgus$pctime)
 pstat <- ifelse(is.na(mgus$pctime), 0, 1)
-pfit <- pyears(Surv(ptime/365.25, pstat) ~ temp.yr + temp.age + sex,  mgus,
-               data.frame=TRUE)
+pfit <- pyears(Surv(ptime / 365.25, pstat) ~ temp.yr + temp.age + sex, mgus,
+  data.frame = TRUE
+)
+
+# summarize model fit with tidiers
 tidy(pfit)
 glance(pfit)
 
 # if data.frame argument is not given, different information is present in
 # output
-pfit2 <- pyears(Surv(ptime/365.25, pstat) ~ temp.yr + temp.age + sex,  mgus)
+pfit2 <- pyears(Surv(ptime / 365.25, pstat) ~ temp.yr + temp.age + sex, mgus)
+
 tidy(pfit2)
 glance(pfit2)
+
+}
 
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[survival:pyears]{survival::pyears()}}
 
-Other pyears tidiers: \code{\link{tidy.pyears}}
+Other pyears tidiers: 
+\code{\link{tidy.pyears}()}
 
-Other survival tidiers: \code{\link{augment.coxph}},
-  \code{\link{augment.survreg}},
-  \code{\link{glance.aareg}}, \code{\link{glance.cch}},
-  \code{\link{glance.coxph}},
-  \code{\link{glance.survdiff}},
-  \code{\link{glance.survexp}},
-  \code{\link{glance.survfit}},
-  \code{\link{glance.survreg}}, \code{\link{tidy.aareg}},
-  \code{\link{tidy.cch}}, \code{\link{tidy.coxph}},
-  \code{\link{tidy.pyears}}, \code{\link{tidy.survdiff}},
-  \code{\link{tidy.survexp}}, \code{\link{tidy.survfit}},
-  \code{\link{tidy.survreg}}
+Other survival tidiers: 
+\code{\link{augment.coxph}()},
+\code{\link{augment.survreg}()},
+\code{\link{glance.aareg}()},
+\code{\link{glance.cch}()},
+\code{\link{glance.coxph}()},
+\code{\link{glance.survdiff}()},
+\code{\link{glance.survexp}()},
+\code{\link{glance.survfit}()},
+\code{\link{glance.survreg}()},
+\code{\link{tidy.aareg}()},
+\code{\link{tidy.cch}()},
+\code{\link{tidy.coxph}()},
+\code{\link{tidy.pyears}()},
+\code{\link{tidy.survdiff}()},
+\code{\link{tidy.survexp}()},
+\code{\link{tidy.survfit}()},
+\code{\link{tidy.survreg}()}
 }
 \concept{pyears tidiers}
 \concept{survival tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{nobs}{Number of observations used.}
   \item{total}{total number of person-years tabulated}
   \item{offtable}{total number of person-years off table}
 

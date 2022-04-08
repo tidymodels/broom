@@ -1,76 +1,102 @@
 #' @templateVar class ergm
 #' @template title_desc_tidy
 #'
-#' @description The methods should work with any model that conforms to 
-#' the \pkg{ergm} class, such as those produced from weighted networks by the 
+#' @description The methods should work with any model that conforms to
+#' the \pkg{ergm} class, such as those produced from weighted networks by the
 #' \pkg{ergm.count} package.
 #'
 #' @param x An `ergm` object returned from a call to [ergm::ergm()].
 #' @template param_confint
 #' @template param_exponentiate
-#' @template param_quick
-#' @param ... Additional arguments to pass to [ergm::summary.ergm()].
-#'   **Cautionary note**: Mispecified arguments may be silently ignored.
-#' 
-#' @evalRd return_tidy(
-#'   "term", 
-#'   "estimate", 
-#'   "std.error", 
-#'   "mcmc.error", 
-#'   "p.value",
-#'   "conf.low",
-#'   "conf.high"
-#' )
+#' @param ... Additional arguments to pass to [ergm::summary()].
+#'   **Cautionary note**: Misspecified arguments may be silently ignored.
 #'
+#'
+#' @return A [tibble::tibble] with one row for each coefficient in the
+#'   exponential random graph model, with columns:
+#'   \item{term}{The term in the model being estimated and tested}
+#'   \item{estimate}{The estimated coefficient}
+#'   \item{std.error}{The standard error}
+#'   \item{mcmc.error}{The MCMC error}
+#'   \item{p.value}{The two-sided p-value}
+#' 
 #' @examples
 #' 
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the model-supplying package to be installed.
+#' if (requireNamespace("ergm", quietly = TRUE)) {
+#'
+#' # load libraries for models and data
 #' library(ergm)
-#' # Using the same example as the ergm package
-#' # Load the Florentine marriage network data
+#' 
+#' # load the Florentine marriage network data
 #' data(florentine)
 #'
-#' # Fit a model where the propensity to form ties between
+#' # fit a model where the propensity to form ties between
 #' # families depends on the absolute difference in wealth
 #' gest <- ergm(flomarriage ~ edges + absdiff("wealth"))
 #'
-#' # Show terms, coefficient estimates and errors
+#' # show terms, coefficient estimates and errors
 #' tidy(gest)
 #'
-#' # Show coefficients as odds ratios with a 99% CI
+#' # show coefficients as odds ratios with a 99% CI
 #' tidy(gest, exponentiate = TRUE, conf.int = TRUE, conf.level = 0.99)
 #'
-#' # Take a look at likelihood measures and other
+#' # take a look at likelihood measures and other
 #' # control parameters used during MCMC estimation
 #' glance(gest)
 #' glance(gest, deviance = TRUE)
 #' glance(gest, mcmc = TRUE)
 #' 
+#' }
+#' 
 #' @references Hunter DR, Handcock MS, Butts CT, Goodreau SM, Morris M (2008b).
 #'   \pkg{ergm}: A Package to Fit, Simulate and Diagnose Exponential-Family
 #'   Models for Networks. *Journal of Statistical Software*, 24(3).
-#'   <http://www.jstatsoft.org/v24/i03/>. 
+#'   <https://www.jstatsoft.org/v24/i03/>.
 #'
-#' @export 
+#' @export
 #' @aliases ergm_tidiers
-#' @seealso [tidy()], [ergm::ergm()], [ergm::control.ergm()], 
-#'   [ergm::summary.ergm()]
+#' @seealso [tidy()], [ergm::ergm()], [ergm::control.ergm()],
+#'   [ergm::summary()]
 #' @family ergm tidiers
-tidy.ergm <- function(x, conf.int = FALSE, conf.level = .95,
-                      exponentiate = FALSE, quick = FALSE, ...) {
-  if (quick) {
-    co <- x$coef
-    ret <- tibble(term = names(co), estimate = unname(co))
-    return(process_ergm(ret, conf.int = FALSE, exponentiate = exponentiate))
-  }
-  co <- ergm::summary.ergm(x, ...)$coefs
+tidy.ergm <- function(x, conf.int = FALSE, conf.level = 0.95,
+                      exponentiate = FALSE, ...) {
 
-  nn <- c("estimate", "std.error", "mcmc.error", "p.value")
-  ret <- fix_data_frame(co, nn[1:ncol(co)])
-  
-  process_ergm(ret, x,
-    conf.int = conf.int, conf.level = conf.level,
-    exponentiate = exponentiate
-  )
+  # in ergm 3.9 summary(x, ...)$coefs has columns:
+  #   Estimate, Std. Error, MCMC %, Pr(>|Z|)
+
+  # in ergm 3.10 summary(x, ...)$coefs has columns:
+  #   Estimate, Std. Error, MCMC %, z value, Pr(>|Z|)
+
+  ret <- summary(x, ...)$coefficients %>%
+    tibble::as_tibble(rownames = "term") %>%
+    rename2(
+      term = "term",
+      estimate = "Estimate",
+      std.error = "Std. Error",
+      mcmc.error = "MCMC %",
+      statistic = "z value",
+      p.value = "Pr(>|z|)"
+    )
+
+  if (conf.int) {
+    z <- stats::qnorm(1 - (1 - conf.level) / 2)
+    ret$conf.low <- ret$estimate - z * ret$std.error
+    ret$conf.high <- ret$estimate + z * ret$std.error
+  }
+
+  if (exponentiate) {
+    if (is.null(x$glm) ||
+      (x$glm$family$link != "logit" && x$glm$family$link != "log")) {
+      warning("Exponentiating but model didn't use log or logit link.")
+    }
+
+    ret <- exponentiate(ret)
+
+  }
+
+  as_tibble(ret)
 }
 
 #' @templateVar class ergm
@@ -80,89 +106,71 @@ tidy.ergm <- function(x, conf.int = FALSE, conf.level = .95,
 #' @param deviance Logical indicating whether or not to report null and
 #'   residual deviance for the model, as well as degrees of freedom. Defaults
 #'   to `FALSE`.
-#' @param mcmc Logical indicating whether or not to report MCMC interval, 
+#' @param mcmc Logical indicating whether or not to report MCMC interval,
 #'   burn-in and sample size used to estimate the model. Defaults to `FALSE`.
 #'
-#' @evalRd return_glance(
-#'   independence = "Whether the model assumed dyadic independence",
-#'   "iterations",
-#'   "logLik",
-#'   "AIC",
-#'   "BIC",
-#'   "null.deviance",
-#'   "df.null",
-#'   "residual.deviance",
-#'   "df.residual",
-#'   "MCMC.interval",
-#'   "MCMC.burnin",
-#'   "MCMC.samplesize"
-#' )
+#' @return `glance.ergm` returns a one-row tibble with the columns
+#'   \item{independence}{Whether the model assumed dyadic independence}
+#'   \item{iterations}{The number of MCMLE iterations performed before convergence}
+#'   \item{logLik}{If applicable, the log-likelihood associated with the model}
+#'   \item{AIC}{The Akaike Information Criterion}
+#'   \item{BIC}{The Bayesian Information Criterion}
+#'
+#' If `deviance = TRUE`, and if the model supports it, the
+#' tibble will also contain the columns
+#'   \item{null.deviance}{The null deviance of the model}
+#'   \item{df.null}{The degrees of freedom of the null deviance}
+#'   \item{residual.deviance}{The residual deviance of the model}
+#'   \item{df.residual}{The degrees of freedom of the residual deviance}
 #'
 #' @export
 #' @seealso [glance()], [ergm::ergm()], [ergm::summary.ergm()]
 #' @family ergm tidiers
 glance.ergm <- function(x, deviance = FALSE, mcmc = FALSE, ...) {
-  # will show appropriate warnings about standard errors, pseudolikelihood etc.
-  s <- ergm::summary.ergm(x, ...)
-  # dyadic (in)dependence and number of MCMLE iterations
-  ret <- tibble(independence = s$independence, iterations = x$iterations)
-  # log-likelihood
-  ret$logLik <- tryCatch(as.numeric(ergm::logLik.ergm(x)), error = function(e) NULL)
-  # null and residual deviance
-  if (deviance & !is.null(ret$logLik)) {
-    dyads <- ergm::get.miss.dyads(x$constrained, x$constrained.obs)
-    dyads <- statnet.common::NVL(dyads, network::network.initialize(1))
-    dyads <- network::network.edgecount(dyads)
-    dyads <- network::network.dyadcount(x$network, FALSE) - dyads
+  s <- summary(x, ...) # produces lots of messages
 
-    ret$null.deviance <- ergm::logLikNull(x)
-    ret$null.deviance <- ifelse(is.na(ret$null.deviance), 0, -2 * ret$null.deviance)
+  ret <- as_glance_tibble(
+    independence = s$independence,
+    iterations = x$iterations,
+    logLik = as.numeric(logLik(x)),
+    na_types = "lir"
+  )
+
+  if (deviance & !is.null(ret$logLik)) {
+
+    # see #567 for details on the following
+
+    if (utils::packageVersion("ergm") < "3.10") {
+      dyads <- sum(
+        ergm::as.rlebdm(x$constrained, x$constrained.obs, which = "informative")
+      )
+    } else {
+      dyads <- stats::nobs(x)
+    }
+
+    lln <- ergm::logLikNull(x)
+    ret$null.deviance <- if (is.na(lln)) 0 else -2 * lln
     ret$df.null <- dyads
 
     ret$residual.deviance <- -2 * ret$logLik
-    ret$df.residual <- dyads - length(x$coef)
+    ret$df.residual <- dyads - length(x$coefs)
   }
 
-  ret$AIC <- tryCatch(stats::AIC(x), error = function(e) NULL)
-  ret$BIC <- tryCatch(stats::BIC(x), error = function(e) NULL)
+  ret$AIC <- stats::AIC(x)
+  ret$BIC <- stats::BIC(x)
 
   if (mcmc) {
-    ret <- cbind(ret, data.frame(
-      MCMC.interval = x$control$MCMC.interval,
-      MCMC.burnin = x$control$MCMC.burnin,
-      MCMC.samplesize = x$control$MCMC.samplesize
-    ))
-  }
-  
-  as_tibble(ret)
-}
-
-# helper function
-process_ergm <- function(ret, x, conf.int = FALSE, conf.level = .95,
-                         exponentiate = FALSE) {
-  if (exponentiate) {
-    # save transformation function for use on confidence interval
-    if (is.null(x$glm) ||
-      (x$glm$family$link != "logit" && x$glm$family$link != "log")) {
-      warning(paste(
-        "Exponentiating coefficients, but model did not use",
-        "a log or logit link function"
-      ))
+    if (isTRUE(x$MPLE_is_MLE)) {
+      message(
+        "Though `glance` was supplied `mcmc = TRUE`, the model was not fitted",
+        "using MCMC, so the corresponding columns will be omitted."
+      )
     }
-    trans <- exp
-  } else {
-    trans <- identity
+    
+    ret$MCMC.interval <- x$control$MCMC.interval
+    ret$MCMC.burnin <- x$control$MCMC.burnin
+    ret$MCMC.samplesize <- x$control$MCMC.samplesize
   }
 
-  if (conf.int) {
-    z <- stats::qnorm(1 - (1 - conf.level) / 2)
-    CI <- cbind(
-      conf.low = ret$estimate - z * ret$std.error,
-      conf.high = ret$estimate + z * ret$std.error
-    )
-    ret <- cbind(ret, trans(unrowname(CI)))
-  }
-  ret$estimate <- trans(ret$estimate)
-
-  as_tibble(ret)
+  ret
 }

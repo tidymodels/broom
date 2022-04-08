@@ -25,16 +25,26 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
 
-library(AUC)
-data(churn)
-r <- roc(churn$predictions,churn$labels)
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("AUC", quietly = TRUE)) {
 
+# load libraries for models and data
+library(AUC)
+
+# load data
+data(churn)
+
+# fit model
+r <- roc(churn$predictions, churn$labels)
+
+# summarize with tidiers + visualization
 td <- tidy(r)
 td
 
@@ -44,18 +54,22 @@ ggplot(td, aes(fpr, tpr)) +
   geom_line()
 
 # compare the ROC curves for two prediction algorithms
-
 library(dplyr)
 library(tidyr)
 
 rocs <- churn \%>\%
-  gather(algorithm, value, -labels) \%>\%
-  nest(-algorithm) \%>\% 
-  mutate(tidy_roc = purrr::map(data, ~tidy(roc(.x$value, .x$labels)))) \%>\% 
+  pivot_longer(contains("predictions"),
+    names_to = "algorithm",
+    values_to = "value"
+  ) \%>\%
+  nest(data = -algorithm) \%>\%
+  mutate(tidy_roc = purrr::map(data, ~ tidy(roc(.x$value, .x$labels)))) \%>\%
   unnest(tidy_roc)
 
 ggplot(rocs, aes(fpr, tpr, color = algorithm)) +
   geom_line()
+  
+}
 
 }
 \seealso{

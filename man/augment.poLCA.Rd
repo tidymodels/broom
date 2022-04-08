@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{A \code{poLCA} object returned from \code{\link[poLCA:poLCA]{poLCA::poLCA()}}.}
 
-\item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
+\item{data}{A \link[base:data.frame]{base::data.frame} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
 data that was used to produce the object \code{x}. Defaults to
 \code{stats::model.frame(x)} so that \code{augment(my_fit)} returns the augmented
 original data. \strong{Do not} pass new data to the \code{data} argument.
@@ -39,18 +39,20 @@ Users may pass data to augment via either the \code{data} argument or the
 \code{newdata} argument. If the user passes data to the \code{data} argument,
 it \strong{must} be exactly the data that was used to fit the model
 object. Pass datasets to \code{newdata} to augment data that was not used
-during model fitting. This still requires that all columns used to fit
-the model are present.
+during model fitting. This still requires that at least all predictor
+variable columns used to fit the model are present. If the original outcome
+variable used to fit the model is not included in \code{newdata}, then no
+\code{.resid} column will be included in the output.
 
-Augment will often behavior different depending on whether \code{data} or
-\code{newdata} is specified. This is because there is often information
+Augment will often behave differently depending on whether \code{data} or
+\code{newdata} is given. This is because there is often information
 associated with training observations (such as influences or related)
 measures that is not meaningfully defined for new observations.
 
 For convenience, many augment methods provide default \code{data} arguments,
 so that \code{augment(fit)} will return the augmented training data. In these
-cases augment tries to reconstruct the original data based on the model
-object, with some varying degrees of success.
+cases, augment tries to reconstruct the original data based on the model
+object with varying degrees of success.
 
 The augmented dataset is always returned as a \link[tibble:tibble]{tibble::tibble} with the
 \strong{same number of rows} as the passed dataset. This means that the
@@ -63,7 +65,7 @@ encounter errors, try explicitly passing a tibble, or fitting the original
 model on data in a tibble.
 
 We are in the process of defining behaviors for models fit with various
-\link{na.action} arguments, but make no guarantees about behavior when data is
+\code{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
 \details{
@@ -79,14 +81,25 @@ included in the augmented output.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("poLCA", quietly = TRUE)) {
+
+# load libraries for models and data
 library(poLCA)
 library(dplyr)
 
+# generate data
 data(values)
-f <- cbind(A, B, C, D)~1
+
+f <- cbind(A, B, C, D) ~ 1
+
+# fit model
 M1 <- poLCA(f, values, nclass = 2, verbose = FALSE)
 
 M1
+
+# summarize model fit with tidiers + visualization
 tidy(M1)
 augment(M1)
 glance(M1)
@@ -95,40 +108,49 @@ library(ggplot2)
 
 ggplot(tidy(M1), aes(factor(class), estimate, fill = factor(outcome))) +
   geom_bar(stat = "identity", width = 1) +
-  facet_wrap(~ variable)
-## Three-class model with a single covariate.
-
+  facet_wrap(~variable)
+  
+# three-class model with a single covariate.
 data(election)
-f2a <- cbind(MORALG,CARESG,KNOWG,LEADG,DISHONG,INTELG,
-             MORALB,CARESB,KNOWB,LEADB,DISHONB,INTELB)~PARTY
+
+f2a <- cbind(
+  MORALG, CARESG, KNOWG, LEADG, DISHONG, INTELG,
+  MORALB, CARESB, KNOWB, LEADB, DISHONB, INTELB
+) ~ PARTY
+
 nes2a <- poLCA(f2a, election, nclass = 3, nrep = 5, verbose = FALSE)
 
 td <- tidy(nes2a)
 td
 
-# show
-
 ggplot(td, aes(outcome, estimate, color = factor(class), group = class)) +
   geom_line() +
-  facet_wrap(~ variable, nrow = 2) +
+  facet_wrap(~variable, nrow = 2) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 au <- augment(nes2a)
+
 au
+
 count(au, .class)
 
 # if the original data is provided, it leads to NAs in new columns
 # for rows that weren't predicted
 au2 <- augment(nes2a, data = election)
+
 au2
+
 dim(au2)
+
+}
 
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[poLCA:poLCA]{poLCA::poLCA()}}
 
-Other poLCA tidiers: \code{\link{glance.poLCA}},
-  \code{\link{tidy.poLCA}}
+Other poLCA tidiers: 
+\code{\link{glance.poLCA}()},
+\code{\link{tidy.poLCA}()}
 }
 \concept{poLCA tidiers}
 \value{

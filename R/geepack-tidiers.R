@@ -3,7 +3,6 @@
 #'
 #' @param x A `geeglm` object returned from a call to [geepack::geeglm()].
 #' @template param_confint
-#' @template param_quick
 #' @template param_exponentiate
 #' @template param_unused_dots
 #'
@@ -15,69 +14,66 @@
 #'   missingness in the data beforehand.
 #'
 #' @examples
+#' 
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the model-supplying package to be installed.
+#' if (requireNamespace("geepack", quietly = TRUE)) {
 #'
+#' # load modeling library
 #' library(geepack)
+#' 
+#' # load data
 #' data(state)
-#'   
+#'
+#'
 #' ds <- data.frame(state.region, state.x77)
 #'
-#' geefit <- geeglm(Income ~ Frost + Murder, id = state.region,
-#'                  data = ds, family = gaussian,
-#'                  corstr = "exchangeable")
+#' # fit model
+#' geefit <- geeglm(Income ~ Frost + Murder,
+#'   id = state.region,
+#'   data = ds, family = gaussian,
+#'   corstr = "exchangeable"
+#' )
 #'
+#' # summarize model fit with tidiers
 #' tidy(geefit)
-#' tidy(geefit, quick = TRUE)
 #' tidy(geefit, conf.int = TRUE)
-#'
-#' @evalRd return_tidy(regresion = TRUE)
+#' 
+#' }
+#' 
+#' @evalRd return_tidy(regression = TRUE)
 #'
 #' @export
 #' @aliases geeglm_tidiers geepack_tidiers
 #' @seealso [tidy()], [geepack::geeglm()]
-#' 
+#'
 tidy.geeglm <- function(x, conf.int = FALSE, conf.level = .95,
-                        exponentiate = FALSE, quick = FALSE, ...) {
-  if (quick) {
-    co <- stats::coef(x)
-    ret <- tibble(term = names(co), estimate = unname(co))
-    return(ret)
-  }
+                        exponentiate = FALSE, ...) {
   co <- stats::coef(summary(x))
 
-  nn <- c("estimate", "std.error", "statistic", "p.value")
-  ret <- fix_data_frame(co, nn[1:ncol(co)])
-
-  process_geeglm(ret, x,
-    conf.int = conf.int, conf.level = conf.level,
-    exponentiate = exponentiate
+  ret <- as_tidy_tibble(
+    co, 
+    c("estimate", "std.error", "statistic", "p.value")[1:ncol(co)]
   )
-}
-
-process_geeglm <- function(ret, x, conf.int = FALSE, conf.level = .95,
-                           exponentiate = FALSE) {
+  
+  if (conf.int) {
+    ci <- broom_confint_terms(x, level = conf.level)
+    ret <- dplyr::left_join(ret, ci, by = "term")
+  }
+  
   if (exponentiate) {
-    # save transformation function for use on confidence interval
     if (is.null(x$family) ||
-      (x$family$link != "logit" && x$family$link != "log")) {
+        (x$family$link != "logit" && x$family$link != "log")) {
       warning(paste(
         "Exponentiating coefficients, but model did not use",
         "a log or logit link function"
       ))
     }
-    trans <- exp
-  } else {
-    trans <- identity
+    
+    ret <- exponentiate(ret)
   }
-
-  if (conf.int) {
-    # avoid "Waiting for profiling to be done..." message
-    CI <- suppressMessages(stats::confint(x, level = conf.level))
-    colnames(CI) <- c("conf.low", "conf.high")
-    ret <- cbind(ret, trans(unrowname(CI)))
-  }
-  ret$estimate <- trans(ret$estimate)
-
-  as_tibble(ret)
+  
+  ret
 }
 
 #' Generate confidence intervals for geeglm objects
@@ -88,11 +84,11 @@ process_geeglm <- function(ret, x, conf.int = FALSE, conf.level = .95,
 #' interval on all parameters (all variables in the model).
 #' @param level Confidence level of the interval.
 #' @param ... Additional parameters (ignored).
-#' 
-#' @details From http://stackoverflow.com/a/21221995/2632184.
-#' 
+#'
+#' @details From https://stackoverflow.com/a/21221995/2632184.
+#'
 #' @return Lower and upper confidence bounds in a data.frame(?).
-#' 
+#'
 #' @noRd
 confint.geeglm <- function(object, parm, level = 0.95, ...) {
   cc <- stats::coef(summary(object))
@@ -106,4 +102,26 @@ confint.geeglm <- function(object, parm, level = 0.95, ...) {
   )
   rownames(citab) <- rownames(cc)
   citab[parm, ]
+}
+
+#' @templateVar class geeglm
+#' @template title_desc_glance
+#'
+#' @inherit tidy.geeglm params examples
+#'
+#' @evalRd return_glance("df.residual", "n.clusters", "max.cluster.size", "alpha", "gamma")
+#'
+#' @export
+#' @seealso [glance()], [geepack::geeglm()]
+#' @family geepack tidiers
+glance.geeglm <- function(x, ...) {
+  s <- summary(x)
+  as_glance_tibble(
+    df.residual = x$df.residual,
+    n.clusters = length(s$clusz),
+    max.cluster.size = max(s$clusz),
+    alpha = x$geese$alpha,
+    gamma = x$geese$gamma,
+    na_types = "iiirr"
+  )
 }

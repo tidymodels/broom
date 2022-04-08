@@ -3,21 +3,28 @@
 #'
 #' @param x A [binGroup::binWidth()] object.
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_tidy("ci.width", "alternative", "p",
 #'   n = "Total sample size"
 #' )
 #'
 #' @examples
 #' 
-#' library(binGroup)
-#' library(dplyr)
-#' library(ggplot2)
-#' 
-#' bw <- binWidth(100, .1)
-#' bw
-#' tidy(bw)
+#' if (requireNamespace("binGroup", quietly = TRUE)) {
 #'
+#' # load libraries
+#' library(binGroup)
+#'
+#' # fit model
+#' bw <- binWidth(100, .1)
+#' 
+#' bw
+#'
+#' # summarize model fit with tidiers
+#' tidy(bw)
+#' 
+#' }
+#' 
 #' @export
 #' @family bingroup tidiers
 #' @aliases binwidth_tidiers
@@ -40,10 +47,14 @@ tidy.binWidth <- function(x, ...) {
 #' )
 #'
 #' @examples
+#' 
+#' if (requireNamespace("binGroup", quietly = TRUE)) {
 #'
 #' library(binGroup)
-#' des <- binDesign(nmax = 300, delta = 0.06,
-#'                  p.hyp = 0.1, power = .8)
+#' des <- binDesign(
+#'   nmax = 300, delta = 0.06,
+#'   p.hyp = 0.1, power = .8
+#' )
 #'
 #' glance(des)
 #' tidy(des)
@@ -51,9 +62,10 @@ tidy.binWidth <- function(x, ...) {
 #' # the ggplot2 equivalent of plot(des)
 #' library(ggplot2)
 #' ggplot(tidy(des), aes(n, power)) +
-#'     geom_line()
+#'   geom_line()
+#'   
+#' }
 #' 
-#'
 #' @export
 #' @family bingroup tidiers
 #' @aliases bindesign_tidiers
@@ -69,36 +81,50 @@ tidy.binDesign <- function(x, ...) {
 #'
 #' @param x A [binGroup::binDesign] object.
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_glance(
 #'   power = "Power achieved by the analysis.",
-#'   n = "Sample size uzed to achieve this power.",
+#'   n = "Sample size used to achieve this power.",
 #'   power.reached = "Whether the desired power was reached.",
 #'   maxit = "Number of iterations performed."
 #' )
 #'
 #' @examples
-#'
+#' 
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the model-supplying package to be installed.
+#' if (requireNamespace("binGroup", quietly = TRUE)) {
+#' 
+#' # load libraries for models and data
 #' library(binGroup)
-#' des <- binDesign(nmax = 300, delta = 0.06,
-#'                  p.hyp = 0.1, power = .8)
+#' 
+#' des <- binDesign(
+#'   nmax = 300, delta = 0.06,
+#'   p.hyp = 0.1, power = .8
+#' )
 #'
 #' glance(des)
 #' tidy(des)
 #'
 #' library(ggplot2)
-#' ggplot(tidy(des), aes(n, power)) +
-#'     geom_line()
 #' 
-#'
+#' ggplot(tidy(des), aes(n, power)) +
+#'   geom_line()
+#'   
+#' }
+#' 
 #' @export
 #' @family bingroup tidiers
 #' @seealso [glance()], [binGroup::binDesign()]
 glance.binDesign <- function(x, ...) {
-  with(unclass(x), tibble(
-    power = powerout,
-    n = nout,
-    power.reached,
-    maxit = maxit
-  ))
+  
+  ux <- unclass(x)
+  
+  as_glance_tibble(
+    power = ux$powerout,
+    n = ux$nout,
+    power.reached = ux$power.reached,
+    maxit = ux$maxit,
+    na_types = "riri"
+  )
 }

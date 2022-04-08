@@ -1,18 +1,18 @@
 #' @templateVar class SpatialPolygonsDataFrame
 #' @template title_desc_tidy
-#' 
+#'
 #' @description Note that the `sf` package now defines tidy spatial objects
-#'   and is the recommend approach to spatial data. `sp` tidiers are likely
+#'   and is the recommended approach to spatial data. `sp` tidiers are likely
 #'   to be deprecated in the near future in favor of `sf::st_as_sf()`.
 #'   Development of `sp` tidiers has halted in `broom`.
-#' 
+#'
 #' @param x A `SpatialPolygonsDataFrame`, `SpatialPolygons`, `Polygons`,
 #'   `Polygon`, `SpatialLinesDataFrame`, `Lines` or `Line` object.
 #' @param region name of variable used to split up regions
 #' @param ... not used by this method
 #'
 #' @name sp_tidiers
-#' 
+#'
 NULL
 
 #' @rdname sp_tidiers
@@ -66,8 +66,8 @@ tidy.Polygons <- function(x, ...) {
 #' @export
 #' @method tidy Polygon
 tidy.Polygon <- function(x, ...) {
+  sp::coordnames(x) <- c("long", "lat")
   df <- as_tibble(x@coords)
-  names(df) <- c("long", "lat")
   df$order <- 1:nrow(df)
   df$hole <- x@hole
   df
@@ -103,8 +103,8 @@ tidy.Lines <- function(x, ...) {
 #' @export
 #' @method tidy Line
 tidy.Line <- function(x, ...) {
+  sp::coordnames(x) <- c("long", "lat")
   df <- as_tibble(x@coords)
-  names(df) <- c("long", "lat")
   df$order <- 1:nrow(df)
   unrowname(df)
 }

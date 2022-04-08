@@ -23,13 +23,19 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("glmnet", quietly = TRUE)) {
+
+# load libraries for models and data
 library(glmnet)
+
 set.seed(27)
 
 nobs <- 100
@@ -40,12 +46,13 @@ x <- matrix(rnorm(nobs * nvar), nobs, nvar)
 beta <- c(rnorm(real, 0, 1), rep(0, nvar - real))
 y <- c(t(beta) \%*\% t(x)) + rnorm(nvar, sd = 3)
 
-cvfit1 <- cv.glmnet(x,y)
+cvfit1 <- cv.glmnet(x, y)
 
 tidy(cvfit1)
 glance(cvfit1)
 
 library(ggplot2)
+
 tidied_cv <- tidy(cvfit1)
 glance_cv <- glance(cvfit1)
 
@@ -61,37 +68,41 @@ g
 
 # plot of MSE as a function of lambda with confidence ribbon and choices
 # of minimum lambda marked
-g <- g + 
+g <- g +
   geom_vline(xintercept = glance_cv$lambda.min) +
   geom_vline(xintercept = glance_cv$lambda.1se, lty = 2)
 g
 
 # plot of number of zeros for each choice of lambda
-ggplot(tidied_cv, aes(lambda, nzero)) + 
-  geom_line() + 
+ggplot(tidied_cv, aes(lambda, nzero)) +
+  geom_line() +
   scale_x_log10()
 
 # coefficient plot with min lambda shown
 tidied <- tidy(cvfit1$glmnet.fit)
 
-ggplot(tidied, aes(lambda, estimate, group = term)) + 
+ggplot(tidied, aes(lambda, estimate, group = term)) +
   scale_x_log10() +
   geom_line() +
   geom_vline(xintercept = glance_cv$lambda.min) +
   geom_vline(xintercept = glance_cv$lambda.1se, lty = 2)
-
+  
+ }
+  
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[glmnet:cv.glmnet]{glmnet::cv.glmnet()}}
 
-Other glmnet tidiers: \code{\link{glance.cv.glmnet}},
-  \code{\link{glance.glmnet}}, \code{\link{tidy.glmnet}}
+Other glmnet tidiers: 
+\code{\link{glance.cv.glmnet}()},
+\code{\link{glance.glmnet}()},
+\code{\link{tidy.glmnet}()}
 }
 \concept{glmnet tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{lambda}{Value of penalty parameter lambda.}
-  \item{nzero}{Number of coefficients that are exactly zero for given lambda.}
+  \item{nzero}{Number of non-zero coefficients for the given lambda.}
   \item{std.error}{The standard error of the regression term.}
   \item{conf.low}{lower bound on confidence interval for cross-validation
     estimated loss.}

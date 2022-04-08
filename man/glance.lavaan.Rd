@@ -41,7 +41,10 @@ A one-row \link[tibble:tibble]{tibble::tibble} with columns:
 \item{estimator}{Estimator used}
 \item{missing_method}{Method for eliminating missing data}
 
-For further recommendations on reporting SEM and CFA models see Schreiber, J. B. (2017). Update to core reporting practices in structural equation modeling. Research in Social and Administrative Pharmacy, 13(3), 634-643. https://doi.org/10.1016/j.sapharm.2016.06.006
+For further recommendations on reporting SEM and CFA models see
+Schreiber, J. B. (2017). Update to core reporting practices in
+structural equation modeling. Research in Social and Administrative
+Pharmacy, 13(3), 634-643. https://doi.org/10.1016/j.sapharm.2016.06.006
 }
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
@@ -49,30 +52,45 @@ with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
 or model convergence information.
 
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
 
 Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an \code{NA}
+of the appropriate type.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("lavaan", quietly = TRUE)) {
+
 library(lavaan)
 
+# fit model
 cfa.fit <- cfa(
-  'F =~ x1 + x2 + x3 + x4 + x5',
+  "F =~ x1 + x2 + x3 + x4 + x5",
   data = HolzingerSwineford1939, group = "school"
 )
+
+# summarize model fit with tidiers
 glance(cfa.fit)
+
+}
 
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[lavaan:cfa]{lavaan::cfa()}}, \code{\link[lavaan:sem]{lavaan::sem()}},
-\code{\link[lavaan:fitmeasures]{lavaan::fitmeasures()}}
+\code{\link[lavaan:fitMeasures]{lavaan::fitmeasures()}}
 
-Other lavaan tidiers: \code{\link{tidy.lavaan}}
+Other lavaan tidiers: 
+\code{\link{tidy.lavaan}()}
 }
 \concept{lavaan tidiers}

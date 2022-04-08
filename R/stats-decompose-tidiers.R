@@ -3,8 +3,8 @@
 #'
 #' @param x A `decomposed.ts` object returned from [stats::decompose()].
 #' @template param_unused_dots
-#' 
-#' @return A [tibble::tibble] with one row for each observation in the 
+#'
+#' @return A [tibble::tibble] with one row for each observation in the
 #'   original times series:
 #'
 #'   \item{`.seasonal`}{The seasonal component of the decomposition.}
@@ -17,20 +17,22 @@
 #'
 #' @examples
 #'
-#' # Time series of temperatures in Nottingham, 1920-1939:
+#' # time series of temperatures in Nottingham, 1920-1939:
 #' nottem
 #'
-#' # Perform seasonal decomposition on the data with both decompose
+#' # perform seasonal decomposition on the data with both decompose
 #' # and stl:
-#' d1 <- stats::decompose(nottem)
-#' d2 <- stats::stl(nottem, s.window = "periodic", robust = TRUE)
+#' d1 <- decompose(nottem)
+#' d2 <- stl(nottem, s.window = "periodic", robust = TRUE)
 #'
-#' # Compare the original series to its decompositions.
+#' # compare the original series to its decompositions.
 #'
-#' cbind(broom::tidy(nottem), broom::augment(d1),
-#'       broom::augment(d2))
+#' cbind(
+#'   tidy(nottem), augment(d1),
+#'   augment(d2)
+#' )
 #'
-#' # Visually compare seasonal decompositions in tidy data frames.
+#' # visually compare seasonal decompositions in tidy data frames.
 #'
 #' library(tibble)
 #' library(dplyr)
@@ -38,30 +40,32 @@
 #' library(ggplot2)
 #'
 #' decomps <- tibble(
-#'     # Turn the ts objects into data frames.
-#'     series = list(as.data.frame(nottem), as.data.frame(nottem)),
-#'     # Add the models in, one for each row.
-#'     decomp = c("decompose", "stl"),
-#'     model = list(d1, d2)
+#'   # turn the ts objects into data frames.
+#'   series = list(as.data.frame(nottem), as.data.frame(nottem)),
+#'   # add the models in, one for each row.
+#'   decomp = c("decompose", "stl"),
+#'   model = list(d1, d2)
 #' ) %>%
-#'     rowwise() %>%
-#'     # Pull out the fitted data using broom::augment.
-#'     mutate(augment = list(broom::augment(model))) %>%
-#'     ungroup() %>%
-#'     # Unnest the data frames into a tidy arrangement of
-#'     # the series next to its seasonal decomposition, grouped
-#'     # by the method (stl or decompose).
-#'     group_by(decomp) %>%
-#'     unnest(series, augment) %>%
-#'     mutate(index = 1:n()) %>%
-#'     ungroup() %>%
-#'     select(decomp, index, x, adjusted = .seasadj)
+#'   rowwise() %>%
+#'   # pull out the fitted data using broom::augment.
+#'   mutate(augment = list(broom::augment(model))) %>%
+#'   ungroup() %>%
+#'   # unnest the data frames into a tidy arrangement of
+#'   # the series next to its seasonal decomposition, grouped
+#'   # by the method (stl or decompose).
+#'   group_by(decomp) %>%
+#'   unnest(c(series, augment)) %>%
+#'   mutate(index = 1:n()) %>%
+#'   ungroup() %>%
+#'   select(decomp, index, x, adjusted = .seasadj)
 #'
 #' ggplot(decomps) +
-#'     geom_line(aes(x = index, y = x), colour = "black") +
-#'     geom_line(aes(x = index, y = adjusted, colour = decomp,
-#'                   group = decomp))
-#'
+#'   geom_line(aes(x = index, y = x), colour = "black") +
+#'   geom_line(aes(
+#'     x = index, y = adjusted, colour = decomp,
+#'     group = decomp
+#'   ))
+#'   
 #' @aliases decompose_tidiers
 #' @export
 #' @family decompose tidiers
@@ -90,8 +94,8 @@ augment.decomposed.ts <- function(x, ...) {
 #' @param weights Logical indicating whether or not to include the robust
 #'   weights in the output.
 #' @template param_unused_dots
-#' 
-#' @return A [tibble::tibble] with one row for each observation in the 
+#'
+#' @return A [tibble::tibble] with one row for each observation in the
 #'   original times series:
 #'
 #'   \item{`.seasonal`}{The seasonal component of the decomposition.}

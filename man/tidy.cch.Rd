@@ -26,55 +26,77 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("survival", quietly = TRUE)) {
+
+# load libraries for models and data
 library(survival)
 
 # examples come from cch documentation
 subcoh <- nwtco$in.subcohort
-selccoh <- with(nwtco, rel==1|subcoh==1)
-ccoh.data <- nwtco[selccoh,]
+selccoh <- with(nwtco, rel == 1 | subcoh == 1)
+ccoh.data <- nwtco[selccoh, ]
 ccoh.data$subcohort <- subcoh[selccoh]
-## central-lab histology
-ccoh.data$histol <- factor(ccoh.data$histol,labels=c("FH","UH"))
-## tumour stage
-ccoh.data$stage <- factor(ccoh.data$stage,labels=c("I","II","III" ,"IV"))
-ccoh.data$age <- ccoh.data$age/12 # Age in years
 
-fit.ccP <- cch(Surv(edrel, rel) ~ stage + histol + age, data = ccoh.data,
-               subcoh = ~subcohort, id= ~seqno, cohort.size = 4028)
+# central-lab histology
+ccoh.data$histol <- factor(ccoh.data$histol, labels = c("FH", "UH"))
 
+# tumour stage
+ccoh.data$stage <- factor(ccoh.data$stage, labels = c("I", "II", "III", "IV"))
+ccoh.data$age <- ccoh.data$age / 12 # age in years
+
+# fit model
+fit.ccP <- cch(Surv(edrel, rel) ~ stage + histol + age,
+  data = ccoh.data,
+  subcoh = ~subcohort, id = ~seqno, cohort.size = 4028
+)
+
+# summarize model fit with tidiers + visualization
 tidy(fit.ccP)
 
 # coefficient plot
 library(ggplot2)
+
 ggplot(tidy(fit.ccP), aes(x = estimate, y = term)) +
   geom_point() +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0) +
   geom_vline(xintercept = 0)
-
+  
+}
+  
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[survival:cch]{survival::cch()}}
 
-Other cch tidiers: \code{\link{glance.cch}},
-  \code{\link{glance.survfit}}
+Other cch tidiers: 
+\code{\link{glance.cch}()},
+\code{\link{glance.survfit}()}
 
-Other survival tidiers: \code{\link{augment.coxph}},
-  \code{\link{augment.survreg}},
-  \code{\link{glance.aareg}}, \code{\link{glance.cch}},
-  \code{\link{glance.coxph}}, \code{\link{glance.pyears}},
-  \code{\link{glance.survdiff}},
-  \code{\link{glance.survexp}},
-  \code{\link{glance.survfit}},
-  \code{\link{glance.survreg}}, \code{\link{tidy.aareg}},
-  \code{\link{tidy.coxph}}, \code{\link{tidy.pyears}},
-  \code{\link{tidy.survdiff}}, \code{\link{tidy.survexp}},
-  \code{\link{tidy.survfit}}, \code{\link{tidy.survreg}}
+Other survival tidiers: 
+\code{\link{augment.coxph}()},
+\code{\link{augment.survreg}()},
+\code{\link{glance.aareg}()},
+\code{\link{glance.cch}()},
+\code{\link{glance.coxph}()},
+\code{\link{glance.pyears}()},
+\code{\link{glance.survdiff}()},
+\code{\link{glance.survexp}()},
+\code{\link{glance.survfit}()},
+\code{\link{glance.survreg}()},
+\code{\link{tidy.aareg}()},
+\code{\link{tidy.coxph}()},
+\code{\link{tidy.pyears}()},
+\code{\link{tidy.survdiff}()},
+\code{\link{tidy.survexp}()},
+\code{\link{tidy.survfit}()},
+\code{\link{tidy.survreg}()}
 }
 \concept{cch tidiers}
 \concept{survival tidiers}

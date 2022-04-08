@@ -32,19 +32,26 @@ of those methods.
 \examples{
 
 tt <- t.test(rnorm(10))
+
 tidy(tt)
-glance(tt)  # same output for all htests
+
+# the glance output will be the same for each of the below tests
+glance(tt)
 
 tt <- t.test(mpg ~ am, data = mtcars)
+
 tidy(tt)
 
 wt <- wilcox.test(mpg ~ am, data = mtcars, conf.int = TRUE, exact = FALSE)
+
 tidy(wt)
 
 ct <- cor.test(mtcars$wt, mtcars$mpg)
+
 tidy(ct)
 
 chit <- chisq.test(xtabs(Freq ~ Sex + Class, data = as.data.frame(Titanic)))
+
 tidy(chit)
 augment(chit)
 
@@ -53,9 +60,10 @@ augment(chit)
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:cor.test]{stats::cor.test()}}, \code{\link[stats:t.test]{stats::t.test()}},
 \code{\link[stats:wilcox.test]{stats::wilcox.test()}}, \code{\link[stats:chisq.test]{stats::chisq.test()}}
 
-Other htest tidiers: \code{\link{augment.htest}},
-  \code{\link{tidy.pairwise.htest}},
-  \code{\link{tidy.power.htest}}
+Other htest tidiers: 
+\code{\link{augment.htest}()},
+\code{\link{tidy.pairwise.htest}()},
+\code{\link{tidy.power.htest}()}
 }
 \concept{htest tidiers}
 \value{
@@ -64,8 +72,8 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{conf.high}{Upper bound on the confidence interval for the estimate.}
   \item{conf.low}{Lower bound on the confidence interval for the estimate.}
   \item{estimate}{The estimated value of the regression term.}
-  \item{estimate1}{Sometimes two estimates are computed, such as in a two-sample t-test}
-  \item{estimate2}{Sometimes two estimates are computed, such as in a two-sample t-test}
+  \item{estimate1}{Sometimes two estimates are computed, such as in a two-sample t-test.}
+  \item{estimate2}{Sometimes two estimates are computed, such as in a two-sample t-test.}
   \item{method}{Method used.}
   \item{p.value}{The two-sided p-value associated with the observed statistic.}
   \item{parameter}{The parameter being modeled.}

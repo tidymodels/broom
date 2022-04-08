@@ -24,20 +24,31 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("poLCA", quietly = TRUE)) {
+
+# load libraries for models and data
 library(poLCA)
 library(dplyr)
 
+# generate data
 data(values)
-f <- cbind(A, B, C, D)~1
+
+f <- cbind(A, B, C, D) ~ 1
+
+# fit model
 M1 <- poLCA(f, values, nclass = 2, verbose = FALSE)
 
 M1
+
+# summarize model fit with tidiers + visualization
 tidy(M1)
 augment(M1)
 glance(M1)
@@ -46,46 +57,55 @@ library(ggplot2)
 
 ggplot(tidy(M1), aes(factor(class), estimate, fill = factor(outcome))) +
   geom_bar(stat = "identity", width = 1) +
-  facet_wrap(~ variable)
-## Three-class model with a single covariate.
-
+  facet_wrap(~variable)
+  
+# three-class model with a single covariate.
 data(election)
-f2a <- cbind(MORALG,CARESG,KNOWG,LEADG,DISHONG,INTELG,
-             MORALB,CARESB,KNOWB,LEADB,DISHONB,INTELB)~PARTY
+
+f2a <- cbind(
+  MORALG, CARESG, KNOWG, LEADG, DISHONG, INTELG,
+  MORALB, CARESB, KNOWB, LEADB, DISHONB, INTELB
+) ~ PARTY
+
 nes2a <- poLCA(f2a, election, nclass = 3, nrep = 5, verbose = FALSE)
 
 td <- tidy(nes2a)
 td
 
-# show
-
 ggplot(td, aes(outcome, estimate, color = factor(class), group = class)) +
   geom_line() +
-  facet_wrap(~ variable, nrow = 2) +
+  facet_wrap(~variable, nrow = 2) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 au <- augment(nes2a)
+
 au
+
 count(au, .class)
 
 # if the original data is provided, it leads to NAs in new columns
 # for rows that weren't predicted
 au2 <- augment(nes2a, data = election)
+
 au2
+
 dim(au2)
+
+}
 
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[poLCA:poLCA]{poLCA::poLCA()}}
 
-Other poLCA tidiers: \code{\link{augment.poLCA}},
-  \code{\link{glance.poLCA}}
+Other poLCA tidiers: 
+\code{\link{augment.poLCA}()},
+\code{\link{glance.poLCA}()}
 }
 \concept{poLCA tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{class}{The class under consideration.}
-  \item{outcome}{Outcome of manifest variable}
+  \item{outcome}{Outcome of manifest variable.}
   \item{std.error}{The standard error of the regression term.}
   \item{variable}{Manifest variable}
   \item{estimate}{Estimated class-conditional response probability}

@@ -25,22 +25,58 @@ with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
 or model convergence information.
 
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
 
 Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an \code{NA}
+of the appropriate type.
+}
+\examples{
+
+#' # feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("quantreg", quietly = TRUE)) {
+
+# load modeling library
+library(quantreg)
+
+# build artificial data with multiplicative error
+set.seed(1)
+dat <- NULL 
+dat$x <- rep(1:25, 20)
+dat$y <- SSlogis(dat$x, 10, 12, 2) * rnorm(500, 1, 0.1)
+
+# fit the median using nlrq
+mod <- nlrq(y ~ SSlogis(x, Asym, mid, scal), 
+            data = dat, tau = 0.5, trace = TRUE)
+
+# summarize model fit with tidiers
+tidy(mod)
+glance(mod)
+augment(mod)
+
+}
+
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[quantreg:nlrq]{quantreg::nlrq()}}
 
-Other quantreg tidiers: \code{\link{augment.nlrq}},
-  \code{\link{augment.rqs}}, \code{\link{augment.rq}},
-  \code{\link{glance.rq}}, \code{\link{tidy.nlrq}},
-  \code{\link{tidy.rqs}}, \code{\link{tidy.rq}}
+Other quantreg tidiers: 
+\code{\link{augment.nlrq}()},
+\code{\link{augment.rqs}()},
+\code{\link{augment.rq}()},
+\code{\link{glance.rq}()},
+\code{\link{tidy.nlrq}()},
+\code{\link{tidy.rqs}()},
+\code{\link{tidy.rq}()}
 }
 \concept{quantreg tidiers}
 \value{

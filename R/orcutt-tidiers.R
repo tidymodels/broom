@@ -1,7 +1,8 @@
 #' @templateVar class orcutt
-#' @template title_desc_tidy_lm_wrapper
-#' 
+#' @template title_desc_tidy
+#'
 #' @param x An `orcutt` object returned from [orcutt::cochrane.orcutt()].
+#' @template param_unused_dots
 #'
 #' @evalRd return_tidy(
 #'   "term",
@@ -13,30 +14,39 @@
 #'
 #' @examples
 #' 
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the model-supplying package to be installed.
+#' if (requireNamespace("orcutt", quietly = TRUE)) {
+#'
+#' # load libraries for models and data
 #' library(orcutt)
 #'
+#' # fit model and summarize results
 #' reg <- lm(mpg ~ wt + qsec + disp, mtcars)
 #' tidy(reg)
 #'
-#' co <- cochrane.orcutt(reg)
-#' co
 #'
+#' co <- cochrane.orcutt(reg)
 #' tidy(co)
 #' glance(co)
+#' 
+#' }
 #' 
 #' @aliases orcutt_tidiers
 #' @export
 #' @family orcutt tidiers
 #' @seealso [orcutt::cochrane.orcutt()]
 tidy.orcutt <- function(x, ...) {
-  warning("deal with tidy.orcutt conf.int nonsense")
-  tidy.lm(x, ...)
+  s <- summary(x)
+  co <- stats::coef(s)
+  ret <- as_tibble(co, rownames = "term")
+  names(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
+  ret
 }
-
 
 #' @templateVar class orcutt
 #' @template title_desc_glance
-#' 
+#'
 #' @inherit tidy.orcutt params examples
 #' @template param_unused_dots
 #'
@@ -48,21 +58,24 @@ tidy.orcutt <- function(x, ...) {
 #'   "dw.original",
 #'   "p.value.original",
 #'   "dw.transformed",
-#'   "p.value.transformed"
+#'   "p.value.transformed",
+#'   "nobs"
 #' )
 #'
 #' @export
 #' @family orcutt tidiers
 #' @seealso [glance()], [orcutt::cochrane.orcutt()]
 glance.orcutt <- function(x, ...) {
-  tibble(
-    r.squared = x$r.squared,
-    adj.r.squared = x$adj.r.squared,
-    rho = x$rho,
-    number.interaction = x$number.interaction,
-    dw.original = x$DW[1],
-    p.value.original = x$DW[2],
-    dw.transformed = x$DW[3],
-    p.value.transformed = x$DW[4]
+  as_glance_tibble(
+    r.squared = unname(x$r.squared),
+    adj.r.squared = unname(x$adj.r.squared),
+    rho = unname(x$rho),
+    number.interaction = unname(x$number.interaction),
+    dw.original = unname(x$DW[1]),
+    p.value.original = unname(x$DW[2]),
+    dw.transformed = unname(x$DW[3]),
+    p.value.transformed = unname(x$DW[4]),
+    nobs = stats::nobs(x),
+    na_types = "rrrirrrri"
   )
 }

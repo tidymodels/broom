@@ -25,22 +25,29 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \details{
 Returns a data frame in long format with four columns. Use
-\code{tidyr::spread(..., variable, value)} on the output to return to a
-wide format.
+\code{tidyr::pivot_wider(..., names_from = variable, values_from = value)}
+on the output to return to a wide format.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("ks", quietly = TRUE)) {
+
+# load libraries for models and data
 library(ks)
 
+# generate data
 dat <- replicate(2, rnorm(100))
 k <- kde(dat)
 
+# summarize model fit with tidiers + visualization
 td <- tidy(k)
 td
 
@@ -48,8 +55,11 @@ library(ggplot2)
 library(dplyr)
 library(tidyr)
 
-td \%>\% 
-  spread(variable, value) \%>\% 
+td \%>\%
+  pivot_wider(c(obs, estimate),
+    names_from = variable,
+    values_from = value
+  ) \%>\%
   ggplot(aes(x1, x2, fill = estimate)) +
   geom_tile() +
   theme_void()
@@ -62,14 +72,16 @@ td3 <- tidy(k3)
 td3
 
 }
+
+}
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[ks:kde]{ks::kde()}}
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{estimate}{The estimated value of the regression term.}
-  \item{obs}{weighted observed number of events in each group}
-  \item{value}{TODO. needs better documentation.}
+  \item{obs}{weighted observed number of events in each group.}
+  \item{value}{The value/estimate of the component. Results from data reshaping.}
   \item{variable}{Variable under consideration.}
 
 }

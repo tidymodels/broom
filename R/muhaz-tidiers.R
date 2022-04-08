@@ -11,20 +11,33 @@
 #'
 #' @examples
 #' 
-#' library(muhaz)
+#' # feel free to ignore the following two lines—they allow {broom} to supply 
+#' # examples without requiring the model/data-supplying packages to be installed.
+#' if (requireNamespace("muhaz", quietly = TRUE)) {
+#'   if (requireNamespace("survival", quietly = TRUE)) {
 #' 
-#' data(ovarian, package="survival")
-#' x <- muhaz::muhaz(ovarian$futime, ovarian$fustat)
+#' # load libraries for models and data
+#' library(muhaz)
+#' library(survival)
+#'
+#' # fit model
+#' x <- muhaz(ovarian$futime, ovarian$fustat)
+#'
+#' # summarize model fit with tidiers
 #' tidy(x)
 #' glance(x)
-#'
+#' 
+#'   }
+#' }
+#' 
 #' @aliases muhaz_tidiers
 #' @export
 #' @seealso [tidy()], [muhaz::muhaz()]
 #' @family muhaz tidiers
 tidy.muhaz <- function(x, ...) {
   bind_cols(x[c("est.grid", "haz.est")]) %>%
-    rename("time" = "est.grid", "estimate" = "haz.est")
+    rename("time" = "est.grid", "estimate" = "haz.est") %>%
+    as_tibble()
 }
 
 #' @templateVar class muhaz
@@ -33,13 +46,13 @@ tidy.muhaz <- function(x, ...) {
 #' @inherit tidy.muhaz params examples
 #'
 #' @evalRd return_glance(
-#'   "nobs", 
-#'   "min.time", 
-#'   "max.time", 
+#'   "nobs",
+#'   "min.time",
+#'   "max.time",
 #'   "min.hazard",
 #'   "max.hazard"
 #' )
-#' 
+#'
 #' @export
 #' @seealso [glance()], [muhaz::muhaz()]
 #' @family muhaz tidiers
@@ -48,6 +61,6 @@ glance.muhaz <- function(x, ...) {
     mutate(
       min.hazard = min(x$haz.est),
       max.hazard = max(x$haz.est)
-    )
+    ) %>%
+    as_tibble()
 }
-

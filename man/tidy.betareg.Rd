@@ -31,7 +31,7 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
@@ -44,12 +44,22 @@ At least one term will have been used to model the precision \code{phi}.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("betareg", quietly = TRUE)) {
+
+# load libraries for models and data
 library(betareg)
+
+# load dats
 data("GasolineYield", package = "betareg")
 
+# fit model
 mod <- betareg(yield ~ batch + temp, data = GasolineYield)
 
 mod
+
+# summarize model fit with tidiers
 tidy(mod)
 tidy(mod, conf.int = TRUE)
 tidy(mod, conf.int = TRUE, conf.level = .99)
@@ -57,6 +67,8 @@ tidy(mod, conf.int = TRUE, conf.level = .99)
 augment(mod)
 
 glance(mod)
+
+}
 
 }
 \seealso{

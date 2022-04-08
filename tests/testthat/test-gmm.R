@@ -1,5 +1,7 @@
 context("gmm")
 
+skip_on_cran()
+
 skip_if_not_installed("modeltests")
 library(modeltests)
 
@@ -27,11 +29,9 @@ test_that("gmm tidier arguments", {
 test_that("tidy.gmm", {
   td <- tidy(fit)
   td2 <- tidy(fit, conf.int = TRUE)
-  tdq <- tidy(fit, quick = TRUE)
-  
+
   check_tidy_output(td)
   check_tidy_output(td2)
-  check_tidy_output(tdq)
 })
 
 test_that("glance.gmm", {

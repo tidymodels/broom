@@ -2,11 +2,18 @@
 #' @template title_desc_tidy_list
 #'
 #' @inherit tidy.prcomp return details params
-#' @param x A list with components `u`, `d`, `v` returned by [svd()].
+#' @param x A list with components `u`, `d`, `v` returned by [base::svd()].
 #'
 #' @examples
+#' 
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the data-supplying package to be installed.
+#' if (requireNamespace("modeldata", quietly = TRUE)) {
 #'
-#' mat <- scale(as.matrix(iris[, 1:4]))
+#' library(modeldata)
+#' data(hpc_data)
+#'
+#' mat <- scale(as.matrix(hpc_data[, 2:5]))
 #' s <- svd(mat)
 #'
 #' tidy_u <- tidy(s, matrix = "u")
@@ -22,17 +29,18 @@
 #' library(dplyr)
 #'
 #' ggplot(tidy_d, aes(PC, percent)) +
-#'     geom_point() +
-#'     ylab("% of variance explained")
+#'   geom_point() +
+#'   ylab("% of variance explained")
 #'
 #' tidy_u %>%
-#'     mutate(Species = iris$Species[row]) %>%
-#'     ggplot(aes(Species, value)) +
-#'     geom_boxplot() +
-#'     facet_wrap(~ PC, scale = "free_y")
-#' 
-#' 
-#' @seealso [svd()]
+#'   mutate(class = hpc_data$class[row]) %>%
+#'   ggplot(aes(class, value)) +
+#'   geom_boxplot() +
+#'   facet_wrap(~PC, scale = "free_y")
+#'   
+#' }
+#'  
+#' @seealso [base::svd()]
 #' @aliases svd_tidiers
 #' @family svd tidiers
 #' @family list tidiers
@@ -42,10 +50,20 @@ tidy_svd <- function(x, matrix = "u", ...) {
   }
 
   if (matrix == "u") {
-    ret <- reshape2::melt(x$u,
-      varnames = c("row", "PC"),
-      value.name = "value"
-    )
+    ret <- x$u %>%
+      as_tibble(.name_repair = "unique") %>%
+      tibble::rowid_to_column("row") %>%
+      pivot_longer(
+        cols = c(dplyr::everything(), -row),
+        names_to = "PC",
+        values_to = "value"
+      ) %>%
+      dplyr::mutate(
+        PC = stringr::str_remove(PC, "...") %>% 
+          as.numeric()
+      ) %>%
+      arrange(PC, row) %>%
+      as.data.frame()
   } else if (matrix == "d") {
     ret <- tibble(PC = seq_along(x$d), std.dev = x$d) %>%
       mutate(
@@ -53,10 +71,20 @@ tidy_svd <- function(x, matrix = "u", ...) {
         cumulative = cumsum(percent)
       )
   } else if (matrix == "v") {
-    ret <- reshape2::melt(x$v,
-      varnames = c("column", "PC"),
-      value.name = "value"
-    )
+    ret <- x$v %>%
+      as_tibble(.name_repair = "unique") %>%
+      tibble::rowid_to_column("column") %>%
+      pivot_longer(
+        cols = c(dplyr::everything(), -column),
+        names_to = "PC",
+        values_to = "value"
+      ) %>%
+      dplyr::mutate(
+        PC = stringr::str_remove(PC, "...") %>% 
+          as.numeric()
+      ) %>%
+      arrange(PC, column) %>%
+      as.data.frame()
   }
   as_tibble(ret)
 }

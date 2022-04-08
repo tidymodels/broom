@@ -3,76 +3,85 @@
 #'
 #' @param x An object of class `confusionMatrix` created by a call to
 #' [caret::confusionMatrix()].
-#' @param by_class Logical indicating whether or not to show performance 
+#' @param by_class Logical indicating whether or not to show performance
 #' measures broken down by class. Defaults to `TRUE`. When `by_class = FALSE`
-#' only returns a tibble with accuracy and kappa statistics.
+#' only returns a tibble with accuracy, kappa, and McNemar statistics.
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_tidy(
-#'   "term", 
-#'   "estimate", 
-#'   "conf.low", 
-#'   "conf.high", 
+#'   "term",
+#'   "estimate",
+#'   "conf.low",
+#'   "conf.high",
 #'   "class",
 #'   p.value = "P-value for accuracy and kappa statistics."
 #' )
 #'
 #' @examples
+#' 
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the model-supplying package to be installed.
+#' if (requireNamespace("caret", quietly = TRUE)) {
 #'
+#' # load libraries for models and data
 #' library(caret)
-#' 
+#'
 #' set.seed(27)
-#' 
+#'
+#' # generate data
 #' two_class_sample1 <- as.factor(sample(letters[1:2], 100, TRUE))
 #' two_class_sample2 <- as.factor(sample(letters[1:2], 100, TRUE))
-#' 
-#' two_class_cm <- caret::confusionMatrix(
+#'
+#' two_class_cm <- confusionMatrix(
 #'   two_class_sample1,
 #'   two_class_sample2
 #' )
-#' 
+#'
+#' # summarize model fit with tidiers
 #' tidy(two_class_cm)
 #' tidy(two_class_cm, by_class = FALSE)
-#' 
+#'
 #' # multiclass example
-#' 
 #' six_class_sample1 <- as.factor(sample(letters[1:6], 100, TRUE))
 #' six_class_sample2 <- as.factor(sample(letters[1:6], 100, TRUE))
-#' 
-#' six_class_cm <- caret::confusionMatrix(
+#'
+#' six_class_cm <- confusionMatrix(
 #'   six_class_sample1,
 #'   six_class_sample2
 #' )
-#' 
+#'
+#' # summarize model fit with tidiers
 #' tidy(six_class_cm)
 #' tidy(six_class_cm, by_class = FALSE)
+#' 
+#' }
 #' 
 #' @aliases caret_tidiers confusionMatrix_tidiers
 #' @export
 #' @seealso [tidy()], [caret::confusionMatrix()]
 tidy.confusionMatrix <- function(x, by_class = TRUE, ...) {
   cm <- as.list(x$overall)
-  nms_cm <- stringr::str_to_lower(names(cm)[1:2])
+  nms_cm <- stringr::str_to_lower(c(names(cm)[1:2], "McNemar"))
 
 
   if (by_class) {
     # case when only 2 classes
-    if (class(x$byClass) != "matrix") {
+    if (!inherits(x$byClass, "matrix")) {
       classes <-
         x$byClass %>%
         as.data.frame() %>%
-        rename_at(1, ~ "value") %>%
+        rename_at(1, ~"value") %>%
         tibble::rownames_to_column("var") %>%
         mutate(var = stringr::str_to_lower(gsub(" ", "_", var)))
 
       terms <- c(nms_cm, classes$var)
-      class <- c(rep(NA_character_, 2), rep(x$positive, length(terms) - 2))
-      estimates <- c(cm$Accuracy, cm$Kappa, classes$value)
+      class <- c(rep(NA_character_, 3), rep(x$positive, length(terms) - 3))
+      estimates <- c(cm$Accuracy, cm$Kappa, NA, classes$value)
       conf.low <- c(cm$AccuracyLower, rep(NA, length(terms) - 1))
       conf.high <- c(cm$AccuracyUpper, rep(NA, length(terms) - 1))
       p.value <- c(
-        cm$AccuracyPValue, cm$McnemarPValue,
-        rep(NA, length(terms) - 2)
+        cm$AccuracyPValue, NA, cm$McnemarPValue,
+        rep(NA, length(terms) - 3)
       )
     }
     else {
@@ -81,20 +90,24 @@ tidy.confusionMatrix <- function(x, by_class = TRUE, ...) {
         x$byClass %>%
         as.data.frame() %>%
         tibble::rownames_to_column("class") %>%
-        gather(var, value, -class) %>%
+        pivot_longer(
+          cols = c(dplyr::everything(), -class),
+          names_to = "var",
+          values_to = "value"
+        ) %>%
         mutate(
           var = stringr::str_to_lower(gsub(" ", "_", var)),
           class = gsub("Class: ", "", class)
         )
 
       terms <- c(nms_cm, classes$var)
-      class <- c(rep(NA_character_, 2), classes$class)
-      estimates <- c(cm$Accuracy, cm$Kappa, classes$value)
+      class <- c(rep(NA_character_, 3), classes$class)
+      estimates <- c(cm$Accuracy, cm$Kappa, NA, classes$value)
       conf.low <- c(cm$AccuracyLower, rep(NA, length(terms) - 1))
       conf.high <- c(cm$AccuracyUpper, rep(NA, length(terms) - 1))
       p.value <- c(
-        cm$AccuracyPValue, cm$McnemarPValue,
-        rep(NA, length(terms) - 2)
+        cm$AccuracyPValue, NA, cm$McnemarPValue,
+        rep(NA, length(terms) - 3)
       )
     }
     df <- tibble(
@@ -106,12 +119,12 @@ tidy.confusionMatrix <- function(x, by_class = TRUE, ...) {
       p.value = p.value
     )
   } else {
-    # only show alpha and kappa when show_class = FALSE
+    # only show alpha, kappa, and mcnamara, when show_class = FALSE
     terms <- c(nms_cm)
-    estimates <- c(cm$Accuracy, cm$Kappa)
-    conf.low <- c(cm$AccuracyLower, NA)
-    conf.high <- c(cm$AccuracyUpper, NA)
-    p.value <- c(cm$AccuracyPValue, cm$McnemarPValue)
+    estimates <- c(cm$Accuracy, cm$Kappa, NA)
+    conf.low <- c(cm$AccuracyLower, NA, NA)
+    conf.high <- c(cm$AccuracyUpper, NA, NA)
+    p.value <- c(cm$AccuracyPValue, NA, cm$McnemarPValue)
 
     df <- tibble(
       term = terms,
@@ -122,5 +135,5 @@ tidy.confusionMatrix <- function(x, by_class = TRUE, ...) {
     )
   }
 
-  fix_data_frame(df)
+  as_tidy_tibble(df)
 }

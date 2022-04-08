@@ -25,27 +25,57 @@ with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
 or model convergence information.
 
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
 
 Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an \code{NA}
+of the appropriate type.
+}
+\examples{
+
+# feel free to ignore the following lines—they allow {broom} to supply 
+# examples without requiring the model/data-supplying package to be installed.
+if (requireNamespace("cluster", quietly = TRUE)) {
+  if (requireNamespace("modeldata", quietly = TRUE)) {
+  
+library(cluster)
+library(modeldata)
+library(dplyr)
+
+data(hpc_data)
+
+x <- hpc_data[, 2:5]
+
+fit <- pam(x, k = 4)
+
+tidy(fit)
+glance(fit)
+augment(fit, x)
+
+  }
+}
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[stats:kmeans]{stats::kmeans()}}
 
-Other kmeans tidiers: \code{\link{augment.kmeans}},
-  \code{\link{tidy.kmeans}}
+Other kmeans tidiers: 
+\code{\link{augment.kmeans}()},
+\code{\link{tidy.kmeans}()}
 }
 \concept{kmeans tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{betweenss}{The total between-cluster sum of squares.}
   \item{iter}{Iterations of algorithm/fitting procedure completed.}
-  \item{tot.withinss}{The total within-cluster sum of squares}
-  \item{totss}{The total sum of squares}
+  \item{tot.withinss}{The total within-cluster sum of squares.}
+  \item{totss}{The total sum of squares.}
 
 }

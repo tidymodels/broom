@@ -3,21 +3,31 @@
 #'
 #' @param x An `survdiff` object returned from [survival::survdiff()].
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_tidy("obs", "exp", "N")
 #'
 #' @examples
 #' 
-#' library(survival)
 #' 
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the model-supplying package to be installed.
+#' if (requireNamespace("survival", quietly = TRUE)) {
+#'
+#' # load libraries for models and data
+#' library(survival)
+#'
+#' # fit model
 #' s <- survdiff(
 #'   Surv(time, status) ~ pat.karno + strata(inst),
 #'   data = lung
 #' )
-#' 
+#'
+#' # summarize model fit with tidiers
 #' tidy(s)
 #' glance(s)
-#'
+#' 
+#' }
+#' 
 #' @aliases survdiff_tidiers
 #' @export
 #' @seealso [tidy()], [survival::survdiff()]
@@ -36,11 +46,12 @@ tidy.survdiff <- function(x, ...) {
   }
   # grouping variables (unless one-sample test)
   l <- lapply(strsplit(rownames(x$n), ", "), strsplit, "=")
-  row_list <- lapply(l, function(x)
+  row_list <- lapply(l, function(x) {
     structure(
       as.data.frame(lapply(x, "[", 2), stringsAsFactors = FALSE),
       names = sapply(x, "[", 1)
-    ))
+    )
+  })
   gvars <- do.call("rbind", row_list)
   has_strata <- "strata" %in% names(x)
   rval <- data.frame(
@@ -54,9 +65,9 @@ tidy.survdiff <- function(x, ...) {
 
 #' @templateVar class survdiff
 #' @template title_desc_glance
-#' 
+#'
 #' @inherit tidy.survdiff params examples
-#' 
+#'
 #' @evalRd return_glance("statistic", "df", "p.value")
 #'
 #' @export

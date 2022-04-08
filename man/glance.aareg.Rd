@@ -25,50 +25,73 @@ with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
 or model convergence information.
 
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
 
 Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an \code{NA}
+of the appropriate type.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("survival", quietly = TRUE)) {
+
+# load libraries for models and data
 library(survival)
 
+# fit model
 afit <- aareg(
   Surv(time, status) ~ age + sex + ph.ecog,
   data = lung,
   dfbeta = TRUE
 )
 
-tidy(afit) 
+# summarize model fit with tidiers
+tidy(afit)
+
+}
 
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[survival:aareg]{survival::aareg()}}
 
-Other aareg tidiers: \code{\link{tidy.aareg}}
+Other aareg tidiers: 
+\code{\link{tidy.aareg}()}
 
-Other survival tidiers: \code{\link{augment.coxph}},
-  \code{\link{augment.survreg}}, \code{\link{glance.cch}},
-  \code{\link{glance.coxph}}, \code{\link{glance.pyears}},
-  \code{\link{glance.survdiff}},
-  \code{\link{glance.survexp}},
-  \code{\link{glance.survfit}},
-  \code{\link{glance.survreg}}, \code{\link{tidy.aareg}},
-  \code{\link{tidy.cch}}, \code{\link{tidy.coxph}},
-  \code{\link{tidy.pyears}}, \code{\link{tidy.survdiff}},
-  \code{\link{tidy.survexp}}, \code{\link{tidy.survfit}},
-  \code{\link{tidy.survreg}}
+Other survival tidiers: 
+\code{\link{augment.coxph}()},
+\code{\link{augment.survreg}()},
+\code{\link{glance.cch}()},
+\code{\link{glance.coxph}()},
+\code{\link{glance.pyears}()},
+\code{\link{glance.survdiff}()},
+\code{\link{glance.survexp}()},
+\code{\link{glance.survfit}()},
+\code{\link{glance.survreg}()},
+\code{\link{tidy.aareg}()},
+\code{\link{tidy.cch}()},
+\code{\link{tidy.coxph}()},
+\code{\link{tidy.pyears}()},
+\code{\link{tidy.survdiff}()},
+\code{\link{tidy.survexp}()},
+\code{\link{tidy.survfit}()},
+\code{\link{tidy.survreg}()}
 }
 \concept{aareg tidiers}
 \concept{survival tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{df}{Degrees of freedom used by the model.}
+  \item{nobs}{Number of observations used.}
   \item{p.value}{P-value corresponding to the test statistic.}
   \item{statistic}{Test statistic.}
 

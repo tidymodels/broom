@@ -1,27 +1,27 @@
 context("geepack")
 
+skip_on_cran()
+
 skip_if_not_installed("modeltests")
 library(modeltests)
 
 skip_if_not_installed("geepack")
 library(geepack)
 
-df <- data.frame(state.region, state.x77)
+dat <- data.frame(state.region, state.x77)
 
 fit <- geeglm(
   Income ~ Frost + Murder,
   id = state.region,
-  data = df,
-  family = gaussian,
+  data = dat,
   corstr = "exchangeable"
 )
 
 test_that("tidy.geeglm", {
   check_arguments(tidy.geeglm)
-  
+
   td <- tidy(fit, conf.int = TRUE)
-  tdq <- tidy(fit, quick = TRUE)
-  
+
   expect_warning(
     td2 <- tidy(fit, conf.int = FALSE, exponentiate = TRUE),
     regexp = paste(
@@ -29,8 +29,12 @@ test_that("tidy.geeglm", {
       "or logit link function"
     )
   )
-  
+
   check_tidy_output(td)
-  check_tidy_output(tdq)
   check_tidy_output(td2)
+})
+
+test_that("glance.geeglm", {
+  gl <- glance(fit)
+  check_glance_outputs(gl)
 })

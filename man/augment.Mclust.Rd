@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{An \code{Mclust} object return from \code{\link[mclust:Mclust]{mclust::Mclust()}}.}
 
-\item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
+\item{data}{A \link[base:data.frame]{base::data.frame} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
 data that was used to produce the object \code{x}. Defaults to
 \code{stats::model.frame(x)} so that \code{augment(my_fit)} returns the augmented
 original data. \strong{Do not} pass new data to the \code{data} argument.
@@ -39,18 +39,20 @@ Users may pass data to augment via either the \code{data} argument or the
 \code{newdata} argument. If the user passes data to the \code{data} argument,
 it \strong{must} be exactly the data that was used to fit the model
 object. Pass datasets to \code{newdata} to augment data that was not used
-during model fitting. This still requires that all columns used to fit
-the model are present.
+during model fitting. This still requires that at least all predictor
+variable columns used to fit the model are present. If the original outcome
+variable used to fit the model is not included in \code{newdata}, then no
+\code{.resid} column will be included in the output.
 
-Augment will often behavior different depending on whether \code{data} or
-\code{newdata} is specified. This is because there is often information
+Augment will often behave differently depending on whether \code{data} or
+\code{newdata} is given. This is because there is often information
 associated with training observations (such as influences or related)
 measures that is not meaningfully defined for new observations.
 
 For convenience, many augment methods provide default \code{data} arguments,
 so that \code{augment(fit)} will return the augmented training data. In these
-cases augment tries to reconstruct the original data based on the model
-object, with some varying degrees of success.
+cases, augment tries to reconstruct the original data based on the model
+object with varying degrees of success.
 
 The augmented dataset is always returned as a \link[tibble:tibble]{tibble::tibble} with the
 \strong{same number of rows} as the passed dataset. This means that the
@@ -63,41 +65,60 @@ encounter errors, try explicitly passing a tibble, or fitting the original
 model on data in a tibble.
 
 We are in the process of defining behaviors for models fit with various
-\link{na.action} arguments, but make no guarantees about behavior when data is
+\code{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
 \examples{
 
-library(dplyr) 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("mclust", quietly = TRUE)) {
+
+# load library for models and data
 library(mclust)
+
+# load data manipulation libraries
+library(dplyr)
+library(tibble)
+library(purrr)
+library(tidyr)
+
 set.seed(27)
 
-centers <- tibble::tibble(
-  cluster = factor(1:3), 
-  num_points = c(100, 150, 50),  # number points in each cluster
-  x1 = c(5, 0, -3),              # x1 coordinate of cluster center
-  x2 = c(-1, 1, -2)              # x2 coordinate of cluster center
+centers <- tibble(
+  cluster = factor(1:3),
+  # number points in each cluster
+  num_points = c(100, 150, 50),
+  # x1 coordinate of cluster center
+  x1 = c(5, 0, -3), 
+  # x2 coordinate of cluster center
+  x2 = c(-1, 1, -2) 
 )
 
 points <- centers \%>\%
   mutate(
-    x1 = purrr::map2(num_points, x1, rnorm),
-    x2 = purrr::map2(num_points, x2, rnorm)
-  ) \%>\% 
+    x1 = map2(num_points, x1, rnorm),
+    x2 = map2(num_points, x2, rnorm)
+  ) \%>\%
   select(-num_points, -cluster) \%>\%
-  tidyr::unnest(x1, x2)
+  unnest(c(x1, x2))
 
-m <- mclust::Mclust(points)
+# fit model
+m <- Mclust(points)
 
+# summarize model fit with tidiers
 tidy(m)
 augment(m, points)
 glance(m)
 
 }
+
+}
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[mclust:Mclust]{mclust::Mclust()}}
 
-Other mclust tidiers: \code{\link{tidy.Mclust}}
+Other mclust tidiers: 
+\code{\link{tidy.Mclust}()}
 }
 \concept{mclust tidiers}
 \value{

@@ -1,20 +1,15 @@
 #' @templateVar class lm
 #' @template title_desc_tidy
-#' 
+#'
 #' @param x An `lm` object created by [stats::lm()].
-#' @template param_confint 
-#' @template param_quick
-#' @template param_exponentiate
+#' @template param_confint
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_tidy(regression = TRUE)
-#' 
+#'
 #' @details If the linear model is an `mlm` object (multiple linear model),
-#'   there is an additional column `response`.
-#' 
-#'   If you have missing values in your model data, you may need to refit
-#'   the model with `na.action = na.exclude`.
-#' 
+#'   there is an additional column `response`. See [tidy.mlm()].
+#'
 #' @examples
 #'
 #' library(ggplot2)
@@ -26,22 +21,45 @@
 #' glance(mod)
 #'
 #' # coefficient plot
-#' d <- tidy(mod) %>% 
-#'   mutate(
-#'     low = estimate - std.error,
-#'     high = estimate + std.error
-#'   )
+#' d <- tidy(mod, conf.int = TRUE)
+#'
+#' ggplot(d, aes(estimate, term, xmin = conf.low, xmax = conf.high, height = 0)) +
+#'   geom_point() +
+#'   geom_vline(xintercept = 0, lty = 4) +
+#'   geom_errorbarh()
 #'   
-#' ggplot(d, aes(estimate, term, xmin = low, xmax = high, height = 0)) +
-#'      geom_point() +
-#'      geom_vline(xintercept = 0) +
-#'      geom_errorbarh()
+#' # aside: There are tidy() and glance() methods for lm.summary objects too. 
+#' # this can be useful when you want to conserve memory by converting large lm 
+#' # objects into their leaner summary.lm equivalents.
+#' s <- summary(mod)
+#' tidy(s, conf.int = TRUE)
+#' glance(s)
 #'
 #' augment(mod)
-#' augment(mod, mtcars)
+#' augment(mod, mtcars, interval = "confidence")
 #'
 #' # predict on new data
-#' newdata <- mtcars %>% head(6) %>% mutate(wt = wt + 1)
+#' newdata <- mtcars %>%
+#'   head(6) %>%
+#'   mutate(wt = wt + 1)
+#' augment(mod, newdata = newdata)
+#' 
+#' # ggplot2 example where we also construct 95% prediction interval
+#' 
+#' # simpler bivariate model since we're plotting in 2D
+#' mod2 <- lm(mpg ~ wt, data = mtcars) 
+#' 
+#' au <- augment(mod2, newdata = newdata, interval = "prediction")
+#' 
+#' ggplot(au, aes(wt, mpg)) + 
+#'   geom_point() +
+#'   geom_line(aes(y = .fitted)) + 
+#'   geom_ribbon(aes(ymin = .lower, ymax = .upper), col = NA, alpha = 0.3)
+#' 
+#' # predict on new data without outcome variable. Output does not include .resid
+#' newdata <- newdata %>%
+#'   select(-mpg)
+#'   
 #' augment(mod, newdata = newdata)
 #'
 #' au <- augment(mod, data = mtcars)
@@ -49,79 +67,64 @@
 #' ggplot(au, aes(.hat, .std.resid)) +
 #'   geom_vline(size = 2, colour = "white", xintercept = 0) +
 #'   geom_hline(size = 2, colour = "white", yintercept = 0) +
-#'   geom_point() + geom_smooth(se = FALSE)
+#'   geom_point() +
+#'   geom_smooth(se = FALSE)
 #'
 #' plot(mod, which = 6)
+#' 
 #' ggplot(au, aes(.hat, .cooksd)) +
 #'   geom_vline(xintercept = 0, colour = NA) +
 #'   geom_abline(slope = seq(0, 3, by = 0.5), colour = "white") +
 #'   geom_smooth(se = FALSE) +
 #'   geom_point()
-#' 
+#'
 #' # column-wise models
 #' a <- matrix(rnorm(20), nrow = 10)
 #' b <- a + rnorm(length(a))
 #' result <- lm(b ~ a)
+#' 
 #' tidy(result)
-#'
+#' 
 #' @aliases lm_tidiers
 #' @export
 #' @seealso [tidy()], [stats::summary.lm()]
 #' @family lm tidiers
-tidy.lm <- function(x, conf.int = FALSE, conf.level = .95,
-                    exponentiate = FALSE, quick = FALSE, ...) {
-  if (quick) {
-    co <- stats::coef(x)
-    if (inherits(x,'mlm')) {
-      ret <- data.frame(response = rep(colnames(co), each = nrow(co)),
-                        term = rep(rownames(co), times = ncol(co)),
-                        estimate = as.numeric(co), stringsAsFactors = FALSE)
-    } else {
-      ret <- data.frame(term = names(co), estimate = unname(co),
-                        stringsAsFactors = FALSE)
-    }
-    return(process_lm(ret, x, conf.int = FALSE, exponentiate = exponentiate))
-  }
-  s <- summary(x)
-  ret <- tidy.summary.lm(s)
+tidy.lm <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 
-  process_lm(ret, x,
-    conf.int = conf.int, conf.level = conf.level,
-    exponentiate = exponentiate
-  )
-}
+  warn_on_subclass(x)
 
+  ret <- as_tibble(summary(x)$coefficients, rownames = "term")
+  colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
 
-#' @rdname tidy.lm
-#' @export
-tidy.summary.lm <- function(x, ...) {
-  co <- stats::coef(x)
-  nn <- c("estimate", "std.error", "statistic", "p.value")
-  if (inherits(co, "listof")) {
-    # multiple response variables
-    ret <- map_df(co, fix_data_frame, nn[1:ncol(co[[1]])],
-      .id = "response"
-    )
-    ret$response <- stringr::str_replace(ret$response, "Response ", "")
-  } else {
-    ret <- fix_data_frame(co, nn[1:ncol(co)])
+  # summary(x)$coefficients misses rank deficient rows (i.e. coefs that
+  # summary.lm() sets to NA), catch them here and add them back
+  coefs <- tibble::enframe(stats::coef(x), name = "term", value = "estimate")
+  ret <- left_join(coefs, ret, by = c("term", "estimate"))
+
+  if (conf.int) {
+    ci <- broom_confint_terms(x, level = conf.level)
+    ret <- dplyr::left_join(ret, ci, by = "term")
   }
 
-  as_tibble(ret)
+  ret
 }
+
 
 #' @templateVar class lm
 #' @template title_desc_augment
-#' 
+#'
 #' @template augment_NAs
-#' 
+#'
 #' @inherit tidy.lm params examples
 #' @template param_data
 #' @template param_newdata
 #' @template param_se_fit
+#' @template param_interval
 #'
 #' @evalRd return_augment(
 #'   ".hat",
+#'   ".lower",
+#'   ".upper", 
 #'   ".sigma",
 #'   ".cooksd",
 #'   ".se.fit",
@@ -130,31 +133,32 @@ tidy.summary.lm <- function(x, ...) {
 #'
 #' @details Some unusual `lm` objects, such as `rlm` from MASS, may omit
 #'   `.cooksd` and `.std.resid`. `gam` from mgcv omits `.sigma`.
-#'   
-#'   When `newdata` is supplied, only returns `.fitted`, `.resid` and 
+#'
+#'   When `newdata` is supplied, only returns `.fitted`, `.resid` and
 #'   `.se.fit` columns.
 #'
 #' @export
 #' @seealso [augment()], [stats::predict.lm()]
 #' @family lm tidiers
 augment.lm <- function(x, data = model.frame(x), newdata = NULL,
-                       se_fit = FALSE, ...) {
- 
-  df <- augment_newdata(x, data, newdata, se_fit)
+                       se_fit = FALSE, interval =  c("none", "confidence", "prediction"), ...) {
   
+  warn_on_subclass(x)
+  
+  interval <- match.arg(interval)
+  df <- augment_newdata(x, data, newdata, se_fit, interval)
+
   if (is.null(newdata)) {
-    
     tryCatch({
-      infl <- influence(x, do.coef = FALSE)
-      df$.std.resid <- rstandard(x, infl = infl)
-      df <- add_hat_sigma_cols(df, x, infl)
-      df$.cooksd <- cooks.distance(x, infl = infl)
-    }, error = data_error)
+        infl <- influence(x, do.coef = FALSE)
+        df <- add_hat_sigma_cols(df, x, infl)
+      },
+      error = data_error
+    )
   }
-  
+
   df
 }
-
 
 
 #' @templateVar class lm
@@ -168,135 +172,52 @@ augment.lm <- function(x, data = model.frame(x), newdata = NULL,
 #'   "sigma",
 #'   "statistic",
 #'   "p.value",
-#'   "df",
+#'   df = "The degrees for freedom from the numerator of the overall 
+#'     F-statistic. This is new in broom 0.7.0. Previously, this reported 
+#'     the rank of the design matrix, which is one more than the numerator 
+#'     degrees of freedom of the overall F-statistic.",
 #'   "logLik",
 #'   "AIC",
 #'   "BIC",
 #'   "deviance",
-#'   "df.residual"
+#'   "df.residual",
+#'   "nobs"
 #' )
 #'
+#'
 #' @export
-#' @seealso [glance()]
+#' @seealso [glance()], [glance.summary.lm()]
 #' @family lm tidiers
 glance.lm <- function(x, ...) {
-  # use summary.lm explicity, so that c("aov", "lm") objects can be
-  # summarized and glanced at
-  s <- stats::summary.lm(x)
-  ret <- glance.summary.lm(s, ...)
-  ret <- finish_glance(ret, x)
-  as_tibble(ret)
-}
-
-
-#' @rdname glance.lm
-#' @export
-glance.summary.lm <- function(x, ...) {
-  ret <- with(x, cbind(
-    data.frame(
+  
+  warn_on_subclass(x)
+  
+  # check whether the model was fitted with only an intercept, in which
+  # case drop the fstatistic related columns
+  int_only <- nrow(summary(x)$coefficients) == 1
+  
+  with(
+    summary(x),
+    tibble(
       r.squared = r.squared,
       adj.r.squared = adj.r.squared,
-      sigma = sigma
-    ),
-    if (exists("fstatistic")) {
-      data.frame(
-        statistic = fstatistic[1],
-        p.value = pf(fstatistic[1], fstatistic[2],
-          fstatistic[3],
+      sigma = sigma,
+      statistic = if (!int_only) {fstatistic["value"]} else {NA_real_},
+      p.value = if (!int_only) {
+        pf(
+          fstatistic["value"],
+          fstatistic["numdf"],
+          fstatistic["dendf"],
           lower.tail = FALSE
-        )
-      )
-    }
-    else {
-      data.frame(
-        statistic = NA_real_,
-        p.value = NA_real_
-      )
-    },
-    data.frame(
-      df = df[1]
+          )
+        } else {NA_real_},
+      df = if (!int_only) {fstatistic["numdf"]} else {NA_real_},
+      logLik = as.numeric(stats::logLik(x)),
+      AIC = stats::AIC(x),
+      BIC = stats::BIC(x),
+      deviance = stats::deviance(x),
+      df.residual = df.residual(x),
+      nobs = stats::nobs(x)
     )
-  ))
-
-  as_tibble(ret)
-}
-
-# getAnywhere('format.perc')
-.format.perc <- function (probs, digits) {
-  paste(
-    format(
-      100 * probs,
-      trim = TRUE,
-      scientific = FALSE,
-      digits = digits
-    ),
-    "%"
   )
 }
-
-# compute confidence intervals for mlm object. 
-confint.mlm <- function (object, level = 0.95, ...) {
-  cf <- coef(object)
-  ncfs <- as.numeric(cf)
-  a <- (1 - level)/2
-  a <- c(a, 1 - a)
-  fac <- qt(a, object$df.residual)
-  pct <- .format.perc(a, 3)
-  ses <- sqrt(diag(stats::vcov(object)))
-  ci <- ncfs + ses %o% fac
-  setNames(data.frame(ci),pct)
-}
-
-#' @export
-augment.mlm <- function(x, ...) {
-  stop(
-    "Augment does not support linear models with multiple responses.",
-    call. = FALSE
-  )
-}
-
-
-#' @export
-glance.mlm <- function(x, ...) {
-  stop(
-    "Glance does not support linear models with multiple responses.",
-    call. = FALSE
-  )
-}
-
-process_lm <- function(ret, x, conf.int = FALSE, conf.level = .95,
-                       exponentiate = FALSE) {
-  if (exponentiate) {
-    # save transformation function for use on confidence interval
-    if (is.null(x$family) ||
-      (x$family$link != "logit" && x$family$link != "log")) {
-      warning(paste(
-        "Exponentiating coefficients, but model did not use",
-        "a log or logit link function."
-      ))
-    }
-    trans <- exp
-  } else {
-    trans <- identity
-  }
-
-  if (conf.int) {
-    # avoid "Waiting for profiling to be done..." message
-    CI <- suppressMessages(stats::confint(x, level = conf.level))
-    # Handle case if regression is rank deficient
-    p <- x$rank
-    if (!is.null(p) && !is.null(x$qr)) {
-      piv <- x$qr$pivot[seq_len(p)]
-      CI <- CI[piv, , drop = FALSE]
-    }
-    colnames(CI) <- c("conf.low", "conf.high")
-    ret <- cbind(ret, trans(unrowname(CI)))
-  }
-  ret$estimate <- trans(ret$estimate)
-
-  as_tibble(ret)
-}
-
-
-
-

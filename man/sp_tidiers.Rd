@@ -37,12 +37,12 @@
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 
 Note that the \code{sf} package now defines tidy spatial objects
-and is the recommend approach to spatial data. \code{sp} tidiers are likely
+and is the recommended approach to spatial data. \code{sp} tidiers are likely
 to be deprecated in the near future in favor of \code{sf::st_as_sf()}.
 Development of \code{sp} tidiers has halted in \code{broom}.
 }

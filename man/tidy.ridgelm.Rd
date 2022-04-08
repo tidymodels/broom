@@ -24,17 +24,26 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("MASS", quietly = TRUE)) {
+
+# load libraries for models and data
+library(MASS)
+
 names(longley)[1] <- "y"
-fit1 <- MASS::lm.ridge(y ~ ., longley)
+
+# fit model and summarizd results
+fit1 <- lm.ridge(y ~ ., longley)
 tidy(fit1)
 
-fit2 <- MASS::lm.ridge(y ~ ., longley, lambda = seq(0.001, .05, .001))
+fit2 <- lm.ridge(y ~ ., longley, lambda = seq(0.001, .05, .001))
 td2 <- tidy(fit2)
 g2 <- glance(fit2)
 
@@ -48,15 +57,18 @@ ggplot(td2, aes(lambda, GCV)) +
   geom_line()
 
 # add line for the GCV minimizing estimate
-ggplot(td2, aes(lambda, GCV)) + 
+ggplot(td2, aes(lambda, GCV)) +
   geom_line() +
   geom_vline(xintercept = g2$lambdaGCV, col = "red", lty = 2)
+  
+}
 
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[MASS:lm.ridge]{MASS::lm.ridge()}}
 
-Other ridgelm tidiers: \code{\link{glance.ridgelm}}
+Other ridgelm tidiers: 
+\code{\link{glance.ridgelm}()}
 }
 \concept{ridgelm tidiers}
 \value{

@@ -25,14 +25,19 @@ with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
 or model convergence information.
 
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
 
 Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an \code{NA}
+of the appropriate type.
 }
 \details{
 Only models with a single \code{tau} value may be passed.
@@ -41,19 +46,62 @@ For multiple values, please use a \code{\link[purrr:map]{purrr::map()}} workflow
   map_dfr(glance)
 }
 }
+\examples{
+
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("quantreg", quietly = TRUE)) {
+
+# load modeling library and data
+library(quantreg)
+
+data(stackloss)
+
+# median (l1) regression fit for the stackloss data. 
+mod1 <- rq(stack.loss ~ stack.x, .5)  
+
+# weighted sample median
+mod2 <- rq(rnorm(50) ~ 1, weights = runif(50))
+
+# summarize model fit with tidiers
+tidy(mod1)
+glance(mod1)
+augment(mod1)
+
+tidy(mod2)
+glance(mod2)
+augment(mod2)
+
+# varying tau to generate an rqs object
+mod3 <- rq(stack.loss ~ stack.x, tau = c(.25, .5))
+
+tidy(mod3)
+augment(mod3)
+
+# glance cannot handle rqs objects like `mod3`--use a purrr 
+# `map`-based workflow instead
+
+}
+
+}
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[quantreg:rq]{quantreg::rq()}}
 
-Other quantreg tidiers: \code{\link{augment.nlrq}},
-  \code{\link{augment.rqs}}, \code{\link{augment.rq}},
-  \code{\link{glance.nlrq}}, \code{\link{tidy.nlrq}},
-  \code{\link{tidy.rqs}}, \code{\link{tidy.rq}}
+Other quantreg tidiers: 
+\code{\link{augment.nlrq}()},
+\code{\link{augment.rqs}()},
+\code{\link{augment.rq}()},
+\code{\link{glance.nlrq}()},
+\code{\link{tidy.nlrq}()},
+\code{\link{tidy.rqs}()},
+\code{\link{tidy.rq}()}
 }
 \concept{quantreg tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{AIC}{Akaike's Information Criterion for the model.}
   \item{BIC}{Bayesian Information Criterion for the model.}
+  \item{df.residual}{Residual degrees of freedom.}
   \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
   \item{tau}{Quantile.}
 

@@ -24,7 +24,7 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
@@ -42,28 +42,31 @@ Month <- factor(Month, labels = month.abb[5:9])
 ptt <- pairwise.t.test(Ozone, Month)
 tidy(ptt)
 
-attach(iris)
-ptt2 <- pairwise.t.test(Petal.Length, Species)
+library(modeldata)
+data(hpc_data)
+attach(hpc_data)
+ptt2 <- pairwise.t.test(compounds, class)
 tidy(ptt2)
 
-tidy(pairwise.t.test(Petal.Length, Species, alternative = "greater"))
-tidy(pairwise.t.test(Petal.Length, Species, alternative = "less"))
+tidy(pairwise.t.test(compounds, class, alternative = "greater"))
+tidy(pairwise.t.test(compounds, class, alternative = "less"))
 
-tidy(pairwise.wilcox.test(Petal.Length, Species))
-
+tidy(pairwise.wilcox.test(compounds, class))
 }
 \seealso{
 \code{\link[stats:pairwise.t.test]{stats::pairwise.t.test()}}, \code{\link[stats:pairwise.wilcox.test]{stats::pairwise.wilcox.test()}},
 \code{\link[=tidy]{tidy()}}
 
-Other htest tidiers: \code{\link{augment.htest}},
-  \code{\link{tidy.htest}}, \code{\link{tidy.power.htest}}
+Other htest tidiers: 
+\code{\link{augment.htest}()},
+\code{\link{tidy.htest}()},
+\code{\link{tidy.power.htest}()}
 }
 \concept{htest tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{group1}{First group being compared}
-  \item{group2}{Second group being compared}
+  \item{group1}{First group being compared.}
+  \item{group2}{Second group being compared.}
   \item{p.value}{The two-sided p-value associated with the observed statistic.}
 
 }

@@ -7,7 +7,7 @@
 \method{tidy}{aov}(x, ...)
 }
 \arguments{
-\item{x}{An \code{aov} objects, such as those created by \code{\link[stats:aov]{stats::aov()}}.}
+\item{x}{An \code{aov} object, such as those created by \code{\link[stats:aov]{stats::aov()}}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -23,25 +23,30 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \details{
 The \code{term} column of an ANOVA table can come with leading or
 trailing whitespace, which this tidying method trims.
+
+For documentation on the tidier for \code{\link[car:leveneTest]{car::leveneTest()}} output, see
+\code{\link[=tidy.leveneTest]{tidy.leveneTest()}}
 }
 \examples{
 
 a <- aov(mpg ~ wt + qsec + disp, mtcars)
 tidy(a)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:aov]{stats::aov()}}
 
-Other anova tidiers: \code{\link{tidy.TukeyHSD}},
-  \code{\link{tidy.anova}}, \code{\link{tidy.aovlist}},
-  \code{\link{tidy.manova}}
+Other anova tidiers: 
+\code{\link{glance.aov}()},
+\code{\link{tidy.TukeyHSD}()},
+\code{\link{tidy.anova}()},
+\code{\link{tidy.aovlist}()},
+\code{\link{tidy.manova}()}
 }
 \concept{anova tidiers}

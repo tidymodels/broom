@@ -5,8 +5,7 @@
 \alias{btergm_tidiers}
 \title{Tidy a(n) btergm object}
 \usage{
-\method{tidy}{btergm}(x, conf.level = 0.95, exponentiate = FALSE,
-  quick = FALSE, ...)
+\method{tidy}{btergm}(x, conf.level = 0.95, exponentiate = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{\link[btergm:btergm]{btergm::btergm()}} object.}
@@ -18,10 +17,6 @@
 the coefficient estimates. This is typical for logistic and multinomial
 regressions, but a bad idea if there is no log or logit link. Defaults
 to \code{FALSE}.}
-
-\item{quick}{Logical indiciating if the only the \code{term} and \code{estimate}
-columns should be returned. Often useful to avoid time consuming
-covariance and standard error calculations. Defaults to \code{FALSE}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -37,7 +32,7 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 
@@ -47,35 +42,40 @@ It simply returns the coefficients and their confidence intervals.
 }
 \examples{
 
-library(xergm)
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("bbmle", quietly = TRUE)) {
+  if (requireNamespace("network", quietly = TRUE)) {
 
-set.seed(1)
-# Using the same simulated example as the xergm package
-# Create 10 random networks with 10 actors
+library(btergm)
+library(network)
+
+set.seed(5)
+
+# create 10 random networks with 10 actors
 networks <- list()
-for(i in 1:10){
-    mat <- matrix(rbinom(100, 1, .25), nrow = 10, ncol = 10)
-    diag(mat) <- 0
-    nw <- network::network(mat)
-    networks[[i]] <- nw
+for (i in 1:10) {              
+  mat <- matrix(rbinom(100, 1, .25), nrow = 10, ncol = 10)
+  diag(mat) <- 0              
+  nw <- network(mat)  
+  networks[[i]] <- nw         
 }
-# Create 10 matrices as covariates
+
+# create 10 matrices as covariates
 covariates <- list()
-for (i in 1:10) {
-    mat <- matrix(rnorm(100), nrow = 10, ncol = 10)
-    covariates[[i]] <- mat
+for (i in 1:10) {              
+  mat <- matrix(rnorm(100), nrow = 10, ncol = 10)
+  covariates[[i]] <- mat
 }
-# Fit a model where the propensity to form ties depends
-# on the edge covariates, controlling for the number of
-# in-stars
-suppressWarnings(btfit <- btergm(networks ~ edges + istar(2) +
-                   edgecov(covariates), R = 100))
 
-# Show terms, coefficient estimates and errors
-tidy(btfit)
+# fit the model
+mod <- btergm(networks ~ edges + istar(2) + edgecov(covariates), R = 100)
 
-# Show coefficients as odds ratios with a 99\% CI
-tidy(btfit, exponentiate = TRUE, conf.level = 0.99)
+# summarize model fit with tidiers
+tidy(mod)
+
+  }
+}
 
 }
 \seealso{

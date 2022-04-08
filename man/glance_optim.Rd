@@ -23,38 +23,39 @@ the \code{data} argument.}
 \description{
 Broom tidies a number of lists that are effectively S3
 objects without a class attribute. For example, \code{\link[stats:optim]{stats::optim()}},
-\code{\link[=svd]{svd()}} and \code{\link[akima:interp]{akima::interp()}} produce consistent output, but because
-they do not have a class attribute, they cannot be handled by S3 dispatch.
+\link[base:svd]{svd()} and \code{\link[akima:interp]{akima::interp()}} produce consistent output, but
+because they do not have a class attribute, they cannot be handled by S3
+dispatch.
 
 These functions look at the elements of a list and determine if there is
 an appropriate tidying method to apply to the list. Those tidiers are
-themselves are implemented as functions of the form \code{tidy_<function>}
-or \code{glance_<function>} and are not exported (but they are documented!).
+implemented as functions of the form \verb{tidy_<function>} or
+\verb{glance_<function>} and are not exported (but they are documented!).
 
-If no appropriate tidying method is found, throws an error.
+If no appropriate tidying method is found, they throw an error.
 }
 \examples{
 
 f <- function(x) (x[1] - 2)^2 + (x[2] - 3)^2 + (x[3] - 8)^2
 o <- optim(c(1, 1, 1), f)
 
-tidy(o)
-glance(o)
-
 }
 \seealso{
-\code{\link[=glance]{glance()}}, \code{\link[=optim]{optim()}}
+\code{\link[=glance]{glance()}}, \code{\link[stats:optim]{stats::optim()}}
 
-Other list tidiers: \code{\link{list_tidiers}},
-  \code{\link{tidy_irlba}}, \code{\link{tidy_optim}},
-  \code{\link{tidy_svd}}, \code{\link{tidy_xyz}}
+Other list tidiers: 
+\code{\link{list_tidiers}},
+\code{\link{tidy_irlba}()},
+\code{\link{tidy_optim}()},
+\code{\link{tidy_svd}()},
+\code{\link{tidy_xyz}()}
 }
 \concept{list tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{convergence}{Convergence code.}
-  \item{function.count}{number of calls to `fn`}
-  \item{gradient.count}{number of calls to `gr`}
-  \item{value}{minimized or maximized output value}
+  \item{function.count}{Number of calls to `fn`.}
+  \item{gradient.count}{Number of calls to `gr`.}
+  \item{value}{Minimized or maximized output value.}
 
 }

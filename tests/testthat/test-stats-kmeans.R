@@ -11,13 +11,16 @@ x <- rbind(
 
 fit <- kmeans(x, 2)
 
+d <- data.frame(x = runif(100), y = runif(100))
+fit2 <- kmeans(x = d, centers = 5)
+
 test_that("kmeans tidier arguments", {
   check_arguments(tidy.kmeans)
   check_arguments(glance.kmeans)
   check_arguments(augment.kmeans)
 })
 
-# tidy.kmeans uses the orginal column names to name columns in output.  
+# tidy.kmeans uses the orginal column names to name columns in output.
 # Therefore, strict must be set to FALSE for this test to pass.
 test_that("tidy.kmeans", {
   td <- tidy(fit)
@@ -30,13 +33,13 @@ test_that("tidy.kmeans", {
 })
 
 test_that("augment.kmeans", {
-  
+
   # data argument cannot be empty
   expect_error(
     augment(fit),
     regexp = "Must specify `data` argument for augment.kmeans."
   )
-  
+
   check_augment_function(
     aug = augment.kmeans,
     model = fit,

@@ -25,45 +25,64 @@ with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
 or model convergence information.
 
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
 
 Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an \code{NA}
+of the appropriate type.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("lfe", quietly = TRUE)) {
+
+# load libraries for models and data
 library(lfe)
 
-N=1e2
-DT <- data.frame(
-  id = sample(5, N, TRUE),
-  v1 =  sample(5, N, TRUE),
-  v2 =  sample(1e6, N, TRUE),
-  v3 =  sample(round(runif(100,max=100),4), N, TRUE),
-  v4 =  sample(round(runif(100,max=100),4), N, TRUE)
-)
+# use built-in `airquality` dataset
+head(airquality)
 
-result_felm <- felm(v2~v3, DT)
-tidy(result_felm)
-augment(result_felm)
+# no FEs; same as lm()
+est0 <- felm(Ozone ~ Temp + Wind + Solar.R, airquality)
 
-result_felm <- felm(v2~v3|id+v1, DT)
-tidy(result_felm, fe = TRUE)
-augment(result_felm)
+# summarize model fit with tidiers
+tidy(est0)
+augment(est0)
 
-v1<-DT$v1
-v2 <- DT$v2
-v3 <- DT$v3
-id <- DT$id
-result_felm <- felm(v2~v3|id+v1)
+# add month fixed effects
+est1 <- felm(Ozone ~ Temp + Wind + Solar.R  | Month, airquality)
 
-tidy(result_felm)
-augment(result_felm)
-glance(result_felm)
+# summarize model fit with tidiers
+tidy(est1)
+tidy(est1, fe = TRUE)
+augment(est1)
+glance(est1)
+
+# the "se.type" argument can be used to switch out different standard errors 
+# types on the fly. In turn, this can be useful exploring the effect of 
+# different error structures on model inference.
+tidy(est1, se.type = "iid")
+tidy(est1, se.type = "robust")
+
+# add clustered SEs (also by month)
+est2 <- felm(Ozone ~ Temp + Wind + Solar.R  | Month | 0 | Month, airquality)
+
+# summarize model fit with tidiers
+tidy(est2, conf.int = TRUE) 
+tidy(est2, conf.int = TRUE, se.type = "cluster")
+tidy(est2, conf.int = TRUE, se.type = "robust")
+tidy(est2, conf.int = TRUE, se.type = "iid")
+
+}
 
 }
 \value{
@@ -71,6 +90,7 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{adj.r.squared}{Adjusted R squared statistic, which is like the R squared statistic except taking degrees of freedom into account.}
   \item{df}{Degrees of freedom used by the model.}
   \item{df.residual}{Residual degrees of freedom.}
+  \item{nobs}{Number of observations used.}
   \item{p.value}{P-value corresponding to the test statistic.}
   \item{r.squared}{R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.}
   \item{sigma}{Estimated standard error of the residuals.}

@@ -1,5 +1,7 @@
 context("kendall")
 
+skip_on_cran()
+
 skip_if_not_installed("modeltests")
 library(modeltests)
 
@@ -15,13 +17,12 @@ smkfit <- SeasonalMannKendall(ts(b))
 
 
 test_that("tidy.Kendall", {
-  
   check_arguments(tidy.Kendall)
-  
+
   ktd <- tidy(kfit)
   mktd <- tidy(mkfit)
   smkfit <- tidy(smkfit)
-  
+
   check_tidy_output(ktd)
   check_tidy_output(mktd)
   check_tidy_output(smkfit)

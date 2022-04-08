@@ -6,8 +6,7 @@
 \alias{quantreg_tidiers}
 \title{Tidy a(n) rq object}
 \usage{
-\method{tidy}{rq}(x, se.type = NULL, conf.int = FALSE,
-  conf.level = 0.95, ...)
+\method{tidy}{rq}(x, se.type = NULL, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{An \code{rq} object returned from \code{\link[quantreg:rq]{quantreg::rq()}}.}
@@ -30,23 +29,66 @@ Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \details{
 If \code{se.type = "rank"} confidence intervals are calculated by
-\code{summary.rq} and \code{statistic} and \code{p.value} values are not returned. When only a single predictor is included in the model,
+\code{summary.rq} and \code{statistic} and \code{p.value} values are not returned.
+When only a single predictor is included in the model,
 no confidence intervals are calculated and the confidence limits are
 set to NA.
+}
+\examples{
+
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("quantreg", quietly = TRUE)) {
+
+# load modeling library and data
+library(quantreg)
+
+data(stackloss)
+
+# median (l1) regression fit for the stackloss data. 
+mod1 <- rq(stack.loss ~ stack.x, .5)  
+
+# weighted sample median
+mod2 <- rq(rnorm(50) ~ 1, weights = runif(50))
+
+# summarize model fit with tidiers
+tidy(mod1)
+glance(mod1)
+augment(mod1)
+
+tidy(mod2)
+glance(mod2)
+augment(mod2)
+
+# varying tau to generate an rqs object
+mod3 <- rq(stack.loss ~ stack.x, tau = c(.25, .5))
+
+tidy(mod3)
+augment(mod3)
+
+# glance cannot handle rqs objects like `mod3`--use a purrr 
+# `map`-based workflow instead
+
+}
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[quantreg:rq]{quantreg::rq()}}
 
-Other quantreg tidiers: \code{\link{augment.nlrq}},
-  \code{\link{augment.rqs}}, \code{\link{augment.rq}},
-  \code{\link{glance.nlrq}}, \code{\link{glance.rq}},
-  \code{\link{tidy.nlrq}}, \code{\link{tidy.rqs}}
+Other quantreg tidiers: 
+\code{\link{augment.nlrq}()},
+\code{\link{augment.rqs}()},
+\code{\link{augment.rq}()},
+\code{\link{glance.nlrq}()},
+\code{\link{glance.rq}()},
+\code{\link{tidy.nlrq}()},
+\code{\link{tidy.rqs}()}
 }
 \concept{quantreg tidiers}
 \value{

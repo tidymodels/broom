@@ -44,18 +44,20 @@ Users may pass data to augment via either the \code{data} argument or the
 \code{newdata} argument. If the user passes data to the \code{data} argument,
 it \strong{must} be exactly the data that was used to fit the model
 object. Pass datasets to \code{newdata} to augment data that was not used
-during model fitting. This still requires that all columns used to fit
-the model are present.
+during model fitting. This still requires that at least all predictor
+variable columns used to fit the model are present. If the original outcome
+variable used to fit the model is not included in \code{newdata}, then no
+\code{.resid} column will be included in the output.
 
-Augment will often behavior different depending on whether \code{data} or
-\code{newdata} is specified. This is because there is often information
+Augment will often behave differently depending on whether \code{data} or
+\code{newdata} is given. This is because there is often information
 associated with training observations (such as influences or related)
 measures that is not meaningfully defined for new observations.
 
 For convenience, many augment methods provide default \code{data} arguments,
 so that \code{augment(fit)} will return the augmented training data. In these
-cases augment tries to reconstruct the original data based on the model
-object, with some varying degrees of success.
+cases, augment tries to reconstruct the original data based on the model
+object with varying degrees of success.
 
 The augmented dataset is always returned as a \link[tibble:tibble]{tibble::tibble} with the
 \strong{same number of rows} as the passed dataset. This means that the
@@ -68,25 +70,27 @@ encounter errors, try explicitly passing a tibble, or fitting the original
 model on data in a tibble.
 
 We are in the process of defining behaviors for models fit with various
-\link{na.action} arguments, but make no guarantees about behavior when data is
+\code{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
 \examples{
 
-# Time series of temperatures in Nottingham, 1920-1939:
+# time series of temperatures in Nottingham, 1920-1939:
 nottem
 
-# Perform seasonal decomposition on the data with both decompose
+# perform seasonal decomposition on the data with both decompose
 # and stl:
-d1 <- stats::decompose(nottem)
-d2 <- stats::stl(nottem, s.window = "periodic", robust = TRUE)
+d1 <- decompose(nottem)
+d2 <- stl(nottem, s.window = "periodic", robust = TRUE)
 
-# Compare the original series to its decompositions.
+# compare the original series to its decompositions.
 
-cbind(broom::tidy(nottem), broom::augment(d1),
-      broom::augment(d2))
+cbind(
+  tidy(nottem), augment(d1),
+  augment(d2)
+)
 
-# Visually compare seasonal decompositions in tidy data frames.
+# visually compare seasonal decompositions in tidy data frames.
 
 library(tibble)
 library(dplyr)
@@ -94,34 +98,37 @@ library(tidyr)
 library(ggplot2)
 
 decomps <- tibble(
-    # Turn the ts objects into data frames.
-    series = list(as.data.frame(nottem), as.data.frame(nottem)),
-    # Add the models in, one for each row.
-    decomp = c("decompose", "stl"),
-    model = list(d1, d2)
+  # turn the ts objects into data frames.
+  series = list(as.data.frame(nottem), as.data.frame(nottem)),
+  # add the models in, one for each row.
+  decomp = c("decompose", "stl"),
+  model = list(d1, d2)
 ) \%>\%
-    rowwise() \%>\%
-    # Pull out the fitted data using broom::augment.
-    mutate(augment = list(broom::augment(model))) \%>\%
-    ungroup() \%>\%
-    # Unnest the data frames into a tidy arrangement of
-    # the series next to its seasonal decomposition, grouped
-    # by the method (stl or decompose).
-    group_by(decomp) \%>\%
-    unnest(series, augment) \%>\%
-    mutate(index = 1:n()) \%>\%
-    ungroup() \%>\%
-    select(decomp, index, x, adjusted = .seasadj)
+  rowwise() \%>\%
+  # pull out the fitted data using broom::augment.
+  mutate(augment = list(broom::augment(model))) \%>\%
+  ungroup() \%>\%
+  # unnest the data frames into a tidy arrangement of
+  # the series next to its seasonal decomposition, grouped
+  # by the method (stl or decompose).
+  group_by(decomp) \%>\%
+  unnest(c(series, augment)) \%>\%
+  mutate(index = 1:n()) \%>\%
+  ungroup() \%>\%
+  select(decomp, index, x, adjusted = .seasadj)
 
 ggplot(decomps) +
-    geom_line(aes(x = index, y = x), colour = "black") +
-    geom_line(aes(x = index, y = adjusted, colour = decomp,
-                  group = decomp))
-
+  geom_line(aes(x = index, y = x), colour = "black") +
+  geom_line(aes(
+    x = index, y = adjusted, colour = decomp,
+    group = decomp
+  ))
+  
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[stats:decompose]{stats::decompose()}}
 
-Other decompose tidiers: \code{\link{augment.stl}}
+Other decompose tidiers: 
+\code{\link{augment.stl}()}
 }
 \concept{decompose tidiers}

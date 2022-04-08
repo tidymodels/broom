@@ -4,8 +4,7 @@
 \alias{glance.garch}
 \title{Tidy a(n) garch object}
 \usage{
-\method{glance}{garch}(x, test = c("box-ljung-test", "jarque-bera-test"),
-  ...)
+\method{glance}{garch}(x, test = c("box-ljung-test", "jarque-bera-test"), ...)
 }
 \arguments{
 \item{x}{A \code{garch} object returned by \code{\link[tseries:garch]{tseries::garch()}}.}
@@ -28,14 +27,15 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[tseries:garch]{tseries::garch()}}, []
 
-Other garch tidiers: \code{\link{tidy.garch}}
+Other garch tidiers: 
+\code{\link{tidy.garch}()}
 }
 \concept{garch tidiers}
 \value{
@@ -44,6 +44,7 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{BIC}{Bayesian Information Criterion for the model.}
   \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
   \item{method}{Which method was used.}
+  \item{nobs}{Number of observations used.}
   \item{p.value}{P-value corresponding to the test statistic.}
   \item{statistic}{Test statistic.}
   \item{parameter}{Parameter field in the htest, typically degrees of

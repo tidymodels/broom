@@ -24,46 +24,64 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
 
+
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("survival", quietly = TRUE)) {
+
+# load libraries for models and data
 library(survival)
 
+# fit model
 s <- survdiff(
   Surv(time, status) ~ pat.karno + strata(inst),
   data = lung
 )
 
+# summarize model fit with tidiers
 tidy(s)
 glance(s)
+
+}
 
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[survival:survdiff]{survival::survdiff()}}
 
-Other survdiff tidiers: \code{\link{glance.survdiff}}
+Other survdiff tidiers: 
+\code{\link{glance.survdiff}()}
 
-Other survival tidiers: \code{\link{augment.coxph}},
-  \code{\link{augment.survreg}},
-  \code{\link{glance.aareg}}, \code{\link{glance.cch}},
-  \code{\link{glance.coxph}}, \code{\link{glance.pyears}},
-  \code{\link{glance.survdiff}},
-  \code{\link{glance.survexp}},
-  \code{\link{glance.survfit}},
-  \code{\link{glance.survreg}}, \code{\link{tidy.aareg}},
-  \code{\link{tidy.cch}}, \code{\link{tidy.coxph}},
-  \code{\link{tidy.pyears}}, \code{\link{tidy.survexp}},
-  \code{\link{tidy.survfit}}, \code{\link{tidy.survreg}}
+Other survival tidiers: 
+\code{\link{augment.coxph}()},
+\code{\link{augment.survreg}()},
+\code{\link{glance.aareg}()},
+\code{\link{glance.cch}()},
+\code{\link{glance.coxph}()},
+\code{\link{glance.pyears}()},
+\code{\link{glance.survdiff}()},
+\code{\link{glance.survexp}()},
+\code{\link{glance.survfit}()},
+\code{\link{glance.survreg}()},
+\code{\link{tidy.aareg}()},
+\code{\link{tidy.cch}()},
+\code{\link{tidy.coxph}()},
+\code{\link{tidy.pyears}()},
+\code{\link{tidy.survexp}()},
+\code{\link{tidy.survfit}()},
+\code{\link{tidy.survreg}()}
 }
 \concept{survdiff tidiers}
 \concept{survival tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{exp}{weighted expected number of events in each group}
-  \item{N}{number of subjects in each group}
-  \item{obs}{weighted observed number of events in each group}
+  \item{exp}{Weighted expected number of events in each group.}
+  \item{N}{Number of subjects in each group.}
+  \item{obs}{weighted observed number of events in each group.}
 
 }

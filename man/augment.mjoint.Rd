@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{An \code{mjoint} object returned from \code{\link[joineRML:mjoint]{joineRML::mjoint()}}.}
 
-\item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
+\item{data}{A \link[base:data.frame]{base::data.frame} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
 data that was used to produce the object \code{x}. Defaults to
 \code{stats::model.frame(x)} so that \code{augment(my_fit)} returns the augmented
 original data. \strong{Do not} pass new data to the \code{data} argument.
@@ -51,18 +51,20 @@ Users may pass data to augment via either the \code{data} argument or the
 \code{newdata} argument. If the user passes data to the \code{data} argument,
 it \strong{must} be exactly the data that was used to fit the model
 object. Pass datasets to \code{newdata} to augment data that was not used
-during model fitting. This still requires that all columns used to fit
-the model are present.
+during model fitting. This still requires that at least all predictor
+variable columns used to fit the model are present. If the original outcome
+variable used to fit the model is not included in \code{newdata}, then no
+\code{.resid} column will be included in the output.
 
-Augment will often behavior different depending on whether \code{data} or
-\code{newdata} is specified. This is because there is often information
+Augment will often behave differently depending on whether \code{data} or
+\code{newdata} is given. This is because there is often information
 associated with training observations (such as influences or related)
 measures that is not meaningfully defined for new observations.
 
 For convenience, many augment methods provide default \code{data} arguments,
 so that \code{augment(fit)} will return the augmented training data. In these
-cases augment tries to reconstruct the original data based on the model
-object, with some varying degrees of success.
+cases, augment tries to reconstruct the original data based on the model
+object with varying degrees of success.
 
 The augmented dataset is always returned as a \link[tibble:tibble]{tibble::tibble} with the
 \strong{same number of rows} as the passed dataset. This means that the
@@ -75,7 +77,7 @@ encounter errors, try explicitly passing a tibble, or fitting the original
 model on data in a tibble.
 
 We are in the process of defining behaviors for models fit with various
-\link{na.action} arguments, but make no guarantees about behavior when data is
+\code{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
 \details{
@@ -88,46 +90,55 @@ make sure you are using a named \code{list} to define the formula
 for the fixed and random effects of the longitudinal submodel.
 }
 \examples{
-\dontrun{
-# Fit a joint model with bivariate longitudinal outcomes
+
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("joineRML", quietly = TRUE)) {
+
+
+# load libraries for models and data
 library(joineRML)
+
+# fit a joint model with bivariate longitudinal outcomes
 data(heart.valve)
+
 hvd <- heart.valve[!is.na(heart.valve$log.grad) &
-                       !is.na(heart.valve$log.lvmi) &
-                       heart.valve$num <= 50, ]
+  !is.na(heart.valve$log.lvmi) &
+  heart.valve$num <= 50, ]
+  
 fit <- mjoint(
-    formLongFixed = list(
-        "grad" = log.grad ~ time + sex + hs,
-        "lvmi" = log.lvmi ~ time + sex
-    ),
-    formLongRandom = list(
-        "grad" = ~ 1 | num,
-        "lvmi" = ~ time | num
-    ),
-    formSurv = Surv(fuyrs, status) ~ age,
-    data = hvd,
-    inits = list("gamma" = c(0.11, 1.51, 0.80)),
-    timeVar = "time"
+  formLongFixed = list(
+    "grad" = log.grad ~ time + sex + hs,
+    "lvmi" = log.lvmi ~ time + sex
+  ),
+  formLongRandom = list(
+    "grad" = ~ 1 | num,
+    "lvmi" = ~ time | num
+  ),
+  formSurv = Surv(fuyrs, status) ~ age,
+  data = hvd,
+  inits = list("gamma" = c(0.11, 1.51, 0.80)),
+  timeVar = "time"
 )
 
-# Extract the survival fixed effects
+# extract the survival fixed effects
 tidy(fit)
 
-# Extract the longitudinal fixed effects
+# extract the longitudinal fixed effects
 tidy(fit, component = "longitudinal")
 
-# Extract the survival fixed effects with confidence intervals
+# extract the survival fixed effects with confidence intervals
 tidy(fit, ci = TRUE)
 
-# Extract the survival fixed effects with confidence intervals based
+# extract the survival fixed effects with confidence intervals based
 # on bootstrapped standard errors
 bSE <- bootSE(fit, nboot = 5, safe.boot = TRUE)
 tidy(fit, boot_se = bSE, ci = TRUE)
 
-# Augment original data with fitted longitudinal values and residuals
+# augment original data with fitted longitudinal values and residuals
 hvd2 <- augment(fit)
 
-# Extract model statistics
+# extract model statistics
 glance(fit)
 }
 

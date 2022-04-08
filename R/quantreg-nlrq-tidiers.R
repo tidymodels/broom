@@ -1,20 +1,49 @@
 #' @templateVar class nlrq
 #' @template title_desc_tidy
-#' 
+#'
 #' @param x A `nlrq` object returned from [quantreg::nlrq()].
 #' @template param_confint
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy(regression = TRUE)
 #'
-#' @aliases nlrq_tidiers 
+#' @aliases nlrq_tidiers
 #' @export
 #' @seealso [tidy()], [quantreg::nlrq()]
 #' @family quantreg tidiers
+#' @examples 
+#' 
+#' #' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the model-supplying package to be installed.
+#' if (requireNamespace("quantreg", quietly = TRUE)) {
+#' 
+#' # load modeling library
+#' library(quantreg)
+#' 
+#' # build artificial data with multiplicative error
+#' set.seed(1)
+#' dat <- NULL 
+#' dat$x <- rep(1:25, 20)
+#' dat$y <- SSlogis(dat$x, 10, 12, 2) * rnorm(500, 1, 0.1)
+#' 
+#' # fit the median using nlrq
+#' mod <- nlrq(y ~ SSlogis(x, Asym, mid, scal), 
+#'             data = dat, tau = 0.5, trace = TRUE)
+#' 
+#' # summarize model fit with tidiers
+#' tidy(mod)
+#' glance(mod)
+#' augment(mod)
+#' 
+#' }
+#' 
 tidy.nlrq <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
-  nn <- c("estimate", "std.error", "statistic", "p.value")
-  ret <- fix_data_frame(coef(summary(x)), nn)
   
+  ret <- as_tidy_tibble(
+    coef(summary(x)), 
+    new_names = c("estimate", "std.error", "statistic", "p.value")
+  )
+
   if (conf.int) {
     x_summary <- summary(x)
     a <- (1 - conf.level) / 2
@@ -27,7 +56,7 @@ tidy.nlrq <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 
 #' @templateVar class nlrq
 #' @template title_desc_glance
-#' 
+#'
 #' @inherit tidy.nlrq params examples
 #'
 #' @evalRd return_glance(
@@ -37,34 +66,35 @@ tidy.nlrq <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #'   "BIC",
 #'   "df.residual"
 #' )
-#'  
+#'
 #' @export
 #' @seealso [glance()], [quantreg::nlrq()]
 #' @family quantreg tidiers
+#' @inherit tidy.nlrq examples
 glance.nlrq <- function(x, ...) {
-  
-  warning("can glance.nlrq return multiple rows?")
-  
+
   n <- length(x[["m"]]$fitted())
   s <- summary(x)
-  tibble(
+  
+  as_glance_tibble(
     tau = x[["m"]]$tau(),
     logLik = logLik(x),
     AIC = AIC(x),
     BIC = AIC(x, k = log(n)),
-    df.residual = s[["rdf"]]
+    df.residual = s[["rdf"]],
+    na_types = "rrrri"
   )
 }
 
 #' @templateVar class nlrq
 #' @template title_desc_tidy
-#' 
+#'
 #' @param x A `nlrq` object returned from [quantreg::nlrq()].
 #' @inherit augment.nls params examples return
-#'  
+#'
 #' @export
 #' @seealso [augment()], [quantreg::nlrq()]
 #' @family quantreg tidiers
 #' @include stats-nls-tidiers.R
-#' 
+#'
 augment.nlrq <- augment.nls

@@ -25,25 +25,41 @@ with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
 or model convergence information.
 
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
 
 Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an \code{NA}
+of the appropriate type.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("poLCA", quietly = TRUE)) {
+
+# load libraries for models and data
 library(poLCA)
 library(dplyr)
 
+# generate data
 data(values)
-f <- cbind(A, B, C, D)~1
+
+f <- cbind(A, B, C, D) ~ 1
+
+# fit model
 M1 <- poLCA(f, values, nclass = 2, verbose = FALSE)
 
 M1
+
+# summarize model fit with tidiers + visualization
 tidy(M1)
 augment(M1)
 glance(M1)
@@ -52,40 +68,49 @@ library(ggplot2)
 
 ggplot(tidy(M1), aes(factor(class), estimate, fill = factor(outcome))) +
   geom_bar(stat = "identity", width = 1) +
-  facet_wrap(~ variable)
-## Three-class model with a single covariate.
-
+  facet_wrap(~variable)
+  
+# three-class model with a single covariate.
 data(election)
-f2a <- cbind(MORALG,CARESG,KNOWG,LEADG,DISHONG,INTELG,
-             MORALB,CARESB,KNOWB,LEADB,DISHONB,INTELB)~PARTY
+
+f2a <- cbind(
+  MORALG, CARESG, KNOWG, LEADG, DISHONG, INTELG,
+  MORALB, CARESB, KNOWB, LEADB, DISHONB, INTELB
+) ~ PARTY
+
 nes2a <- poLCA(f2a, election, nclass = 3, nrep = 5, verbose = FALSE)
 
 td <- tidy(nes2a)
 td
 
-# show
-
 ggplot(td, aes(outcome, estimate, color = factor(class), group = class)) +
   geom_line() +
-  facet_wrap(~ variable, nrow = 2) +
+  facet_wrap(~variable, nrow = 2) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 au <- augment(nes2a)
+
 au
+
 count(au, .class)
 
 # if the original data is provided, it leads to NAs in new columns
 # for rows that weren't predicted
 au2 <- augment(nes2a, data = election)
+
 au2
+
 dim(au2)
+
+}
 
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[poLCA:poLCA]{poLCA::poLCA()}}
 
-Other poLCA tidiers: \code{\link{augment.poLCA}},
-  \code{\link{tidy.poLCA}}
+Other poLCA tidiers: 
+\code{\link{augment.poLCA}()},
+\code{\link{tidy.poLCA}()}
 }
 \concept{poLCA tidiers}
 \value{
@@ -96,6 +121,7 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{df}{Degrees of freedom used by the model.}
   \item{df.residual}{Residual degrees of freedom.}
   \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
+  \item{nobs}{Number of observations used.}
   \item{g.squared}{The likelihood ratio/deviance statistic}
 
 }

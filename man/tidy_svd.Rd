@@ -8,17 +8,18 @@
 tidy_svd(x, matrix = "u", ...)
 }
 \arguments{
-\item{x}{A list with components \code{u}, \code{d}, \code{v} returned by \code{\link[=svd]{svd()}}.}
+\item{x}{A list with components \code{u}, \code{d}, \code{v} returned by \code{\link[base:svd]{base::svd()}}.}
 
 \item{matrix}{Character specifying which component of the PCA should be
 tidied.
 \itemize{
-\item \code{"u"}, \code{"samples"}, or \code{"x"}: returns information about the map from
-the original space into principle components space.
-\item \code{"v"}, \code{"rotation"}, or \code{"variables"}: returns information about the
-map from principle components space back into the original space.
-\item \code{"d"} or \code{"pcs"}: returns information about the eigenvalues
-will return information about
+\item \code{"u"}, \code{"samples"}, \code{"scores"}, or \code{"x"}: returns information about
+the map from the original space into principle components space.
+\item \code{"v"}, \code{"rotation"}, \code{"loadings"} or \code{"variables"}: returns information
+about the map from principle components space back into the original
+space.
+\item \code{"d"}, \code{"eigenvalues"} or \code{"pcs"}: returns information about the
+eigenvalues.
 }}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
@@ -35,44 +36,49 @@ the \code{data} argument.}
 A \link[tibble:tibble]{tibble::tibble} with columns depending on the component of
 PCA being tidied.
 
-If \code{matrix} is \code{"u"}, \code{"samples"}, or \code{"x"} each row in the tidied
-output corresponds to the original data in PCA space. The columns are:
+If \code{matrix} is \code{"u"}, \code{"samples"}, \code{"scores"}, or \code{"x"} each row in the
+tidied output corresponds to the original data in PCA space. The columns
+are:
 
 \item{\code{row}}{ID of the original observation (i.e. rowname from original
 data).}
-\item{\code{PC}}{Integer indicating a principle component.}
-\item{\code{value}}{The score of the observation for that particular principle
+\item{\code{PC}}{Integer indicating a principal component.}
+\item{\code{value}}{The score of the observation for that particular principal
 component. That is, the location of the observation in PCA space.}
 
-If \code{matrix} is \code{"v"}, \code{"rotation"}, or \code{"variables"}, each row in the
-tidied ouput corresponds to information about the principle components
-in the original space. The columns are:
+If \code{matrix} is \code{"v"}, \code{"rotation"}, \code{"loadings"} or \code{"variables"}, each
+row in the tidied output corresponds to information about the principle
+components in the original space. The columns are:
 
 \item{\code{row}}{The variable labels (colnames) of the data set on
-which PCA was performed}
-\item{\code{PC}}{An integer vector indicating the principal component}
+which PCA was performed.}
+\item{\code{PC}}{An integer vector indicating the principal component.}
 \item{\code{value}}{The value of the eigenvector (axis score) on the
-indicated principal component}
+indicated principal component.}
 
-If \code{matrix} is \code{"d"} or \code{"pcs"}, the columns are:
+If \code{matrix} is \code{"d"}, \code{"eigenvalues"} or \code{"pcs"}, the columns are:
 
-\item{\code{PC}}{An integer vector indicating the principal component}
-\item{\code{std.dev}}{Standard deviation explained by this PC}
-\item{\code{percent}}{Percentage of variation explained}
-\item{\code{cumulative}}{Cumulative percentage of variation explained}
+\item{\code{PC}}{An integer vector indicating the principal component.}
+\item{\code{std.dev}}{Standard deviation explained by this PC.}
+\item{\code{percent}}{Fraction of variation explained by this component
+(a numeric value between 0 and 1).}
+\item{\code{cumulative}}{Cumulative fraction of variation explained by
+principle components up to this component (a numeric value between 0 and
+1).}
 }
 \description{
 Broom tidies a number of lists that are effectively S3
 objects without a class attribute. For example, \code{\link[stats:optim]{stats::optim()}},
-\code{\link[=svd]{svd()}} and \code{\link[akima:interp]{akima::interp()}} produce consistent output, but because
-they do not have a class attribute, they cannot be handled by S3 dispatch.
+\link[base:svd]{svd()} and \code{\link[akima:interp]{akima::interp()}} produce consistent output, but
+because they do not have a class attribute, they cannot be handled by S3
+dispatch.
 
 These functions look at the elements of a list and determine if there is
 an appropriate tidying method to apply to the list. Those tidiers are
-themselves are implemented as functions of the form \code{tidy_<function>}
-or \code{glance_<function>} and are not exported (but they are documented!).
+implemented as functions of the form \verb{tidy_<function>} or
+\verb{glance_<function>} and are not exported (but they are documented!).
 
-If no appropriate tidying method is found, throws an error.
+If no appropriate tidying method is found, they throw an error.
 }
 \details{
 See https://stats.stackexchange.com/questions/134282/relationship-between-svd-and-pca-how-to-use-svd-to-perform-pca
@@ -81,7 +87,14 @@ that SVD is only equivalent to PCA on centered data.
 }
 \examples{
 
-mat <- scale(as.matrix(iris[, 1:4]))
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the data-supplying package to be installed.
+if (requireNamespace("modeldata", quietly = TRUE)) {
+
+library(modeldata)
+data(hpc_data)
+
+mat <- scale(as.matrix(hpc_data[, 2:5]))
 s <- svd(mat)
 
 tidy_u <- tidy(s, matrix = "u")
@@ -97,26 +110,32 @@ library(ggplot2)
 library(dplyr)
 
 ggplot(tidy_d, aes(PC, percent)) +
-    geom_point() +
-    ylab("\% of variance explained")
+  geom_point() +
+  ylab("\% of variance explained")
 
 tidy_u \%>\%
-    mutate(Species = iris$Species[row]) \%>\%
-    ggplot(aes(Species, value)) +
-    geom_boxplot() +
-    facet_wrap(~ PC, scale = "free_y")
-
-
+  mutate(class = hpc_data$class[row]) \%>\%
+  ggplot(aes(class, value)) +
+  geom_boxplot() +
+  facet_wrap(~PC, scale = "free_y")
+  
+}
+ 
 }
 \seealso{
-\code{\link[=svd]{svd()}}
+\code{\link[base:svd]{base::svd()}}
 
-Other svd tidiers: \code{\link{augment.prcomp}},
-  \code{\link{tidy.prcomp}}, \code{\link{tidy_irlba}}
+Other svd tidiers: 
+\code{\link{augment.prcomp}()},
+\code{\link{tidy.prcomp}()},
+\code{\link{tidy_irlba}()}
 
-Other list tidiers: \code{\link{glance_optim}},
-  \code{\link{list_tidiers}}, \code{\link{tidy_irlba}},
-  \code{\link{tidy_optim}}, \code{\link{tidy_xyz}}
+Other list tidiers: 
+\code{\link{glance_optim}()},
+\code{\link{list_tidiers}},
+\code{\link{tidy_irlba}()},
+\code{\link{tidy_optim}()},
+\code{\link{tidy_xyz}()}
 }
 \concept{list tidiers}
 \concept{svd tidiers}

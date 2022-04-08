@@ -1,10 +1,12 @@
 context("muhaz")
 
+skip_on_cran()
+
 skip_if_not_installed("modeltests")
 library(modeltests)
 
 skip_if_not_installed("muhaz")
-skip_if_not_installed("survival")  # does this skip with base R?
+skip_if_not_installed("survival") # does this skip with base R?
 
 library(muhaz)
 data(ovarian, package = "survival")
@@ -27,4 +29,3 @@ test_that("glance.muhaz", {
   check_glance_outputs(gl, strict = FALSE)
   check_dims(gl, expected_cols = 5)
 })
-

@@ -24,11 +24,11 @@ Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 \strong{Cautionary note}: Misspecified arguments may be silently ignored.}
 }
 \value{
-A \link[tibble:tibble]{tibble::tibble} with one row for each estimated parameter and
+A \code{\link[tibble:tibble]{tibble::tibble()}} with one row for each estimated parameter and
 columns:
 
 \item{term}{The result of paste(lhs, op, rhs)}
-\item{op}{The operator in the model syntax (e.g. \code{~~} for covariances, or
+\item{op}{The operator in the model syntax (e.g. \verb{~~} for covariances, or
 \code{~} for regression parameters)}
 \item{group}{The group (if specified) in the lavaan model}
 \item{estimate}{The parameter estimate (may be standardized)}
@@ -49,23 +49,33 @@ variances of exogenous covariates.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("lavaan", quietly = TRUE)) {
+
+# load libraries for models and data
 library(lavaan)
- 
-cfa.fit <- cfa('F =~ x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9',
-               data = HolzingerSwineford1939, group = "school")
+
+cfa.fit <- cfa("F =~ x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9",
+  data = HolzingerSwineford1939, group = "school"
+)
+
 tidy(cfa.fit)
+
+}
 
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[lavaan:cfa]{lavaan::cfa()}}, \code{\link[lavaan:sem]{lavaan::sem()}},
 \code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}}
 
-Other lavaan tidiers: \code{\link{glance.lavaan}}
+Other lavaan tidiers: 
+\code{\link{glance.lavaan}()}
 }
 \concept{lavaan tidiers}

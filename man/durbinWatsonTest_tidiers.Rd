@@ -31,13 +31,28 @@ of those methods.
 }
 \examples{
 
-dw <- car::durbinWatsonTest(lm(mpg ~ wt, data = mtcars))
+if (requireNamespace("car", quietly = TRUE)) {
+
+# load modeling library
+library(car)
+
+# fit model
+dw <- durbinWatsonTest(lm(mpg ~ wt, data = mtcars))
+
+# summarize model fit with tidiers
 tidy(dw)
-glance(dw)  # same output for all durbinWatsonTests
+
+# same output for all durbinWatsonTests
+glance(dw) 
+
+}
 
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[=glance]{glance()}}, \code{\link[car:durbinWatsonTest]{car::durbinWatsonTest()}}
+
+Other car tidiers: 
+\code{\link{leveneTest_tidiers}}
 }
 \concept{car tidiers}
 \value{

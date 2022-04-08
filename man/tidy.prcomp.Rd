@@ -13,12 +13,13 @@
 \item{matrix}{Character specifying which component of the PCA should be
 tidied.
 \itemize{
-\item \code{"u"}, \code{"samples"}, or \code{"x"}: returns information about the map from
-the original space into principle components space.
-\item \code{"v"}, \code{"rotation"}, or \code{"variables"}: returns information about the
-map from principle components space back into the original space.
-\item \code{"d"} or \code{"pcs"}: returns information about the eigenvalues
-will return information about
+\item \code{"u"}, \code{"samples"}, \code{"scores"}, or \code{"x"}: returns information about
+the map from the original space into principle components space.
+\item \code{"v"}, \code{"rotation"}, \code{"loadings"} or \code{"variables"}: returns information
+about the map from principle components space back into the original
+space.
+\item \code{"d"}, \code{"eigenvalues"} or \code{"pcs"}: returns information about the
+eigenvalues.
 }}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
@@ -35,37 +36,41 @@ the \code{data} argument.}
 A \link[tibble:tibble]{tibble::tibble} with columns depending on the component of
 PCA being tidied.
 
-If \code{matrix} is \code{"u"}, \code{"samples"}, or \code{"x"} each row in the tidied
-output corresponds to the original data in PCA space. The columns are:
+If \code{matrix} is \code{"u"}, \code{"samples"}, \code{"scores"}, or \code{"x"} each row in the
+tidied output corresponds to the original data in PCA space. The columns
+are:
 
 \item{\code{row}}{ID of the original observation (i.e. rowname from original
 data).}
-\item{\code{PC}}{Integer indicating a principle component.}
-\item{\code{value}}{The score of the observation for that particular principle
+\item{\code{PC}}{Integer indicating a principal component.}
+\item{\code{value}}{The score of the observation for that particular principal
 component. That is, the location of the observation in PCA space.}
 
-If \code{matrix} is \code{"v"}, \code{"rotation"}, or \code{"variables"}, each row in the
-tidied ouput corresponds to information about the principle components
-in the original space. The columns are:
+If \code{matrix} is \code{"v"}, \code{"rotation"}, \code{"loadings"} or \code{"variables"}, each
+row in the tidied output corresponds to information about the principle
+components in the original space. The columns are:
 
 \item{\code{row}}{The variable labels (colnames) of the data set on
-which PCA was performed}
-\item{\code{PC}}{An integer vector indicating the principal component}
+which PCA was performed.}
+\item{\code{PC}}{An integer vector indicating the principal component.}
 \item{\code{value}}{The value of the eigenvector (axis score) on the
-indicated principal component}
+indicated principal component.}
 
-If \code{matrix} is \code{"d"} or \code{"pcs"}, the columns are:
+If \code{matrix} is \code{"d"}, \code{"eigenvalues"} or \code{"pcs"}, the columns are:
 
-\item{\code{PC}}{An integer vector indicating the principal component}
-\item{\code{std.dev}}{Standard deviation explained by this PC}
-\item{\code{percent}}{Percentage of variation explained}
-\item{\code{cumulative}}{Cumulative percentage of variation explained}
+\item{\code{PC}}{An integer vector indicating the principal component.}
+\item{\code{std.dev}}{Standard deviation explained by this PC.}
+\item{\code{percent}}{Fraction of variation explained by this component
+(a numeric value between 0 and 1).}
+\item{\code{cumulative}}{Cumulative fraction of variation explained by
+principle components up to this component (a numeric value between 0 and
+1).}
 }
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
@@ -97,22 +102,25 @@ pc \%>\%
   inner_join(map_data("state"), by = "region") \%>\%
   ggplot(aes(long, lat, group = group, fill = value)) +
   geom_polygon() +
-  facet_wrap(~ PC) +
+  facet_wrap(~PC) +
   theme_void() +
   ggtitle("Principal components of arrest data")
 
 au <- augment(pc, data = USArrests)
+
 au
 
 ggplot(au, aes(.fittedPC1, .fittedPC2)) +
   geom_point() +
   geom_text(aes(label = .rownames), vjust = 1, hjust = 1)
-
+  
 }
 \seealso{
 \code{\link[stats:prcomp]{stats::prcomp()}}, \link{svd_tidiers}
 
-Other svd tidiers: \code{\link{augment.prcomp}},
-  \code{\link{tidy_irlba}}, \code{\link{tidy_svd}}
+Other svd tidiers: 
+\code{\link{augment.prcomp}()},
+\code{\link{tidy_irlba}()},
+\code{\link{tidy_svd}()}
 }
 \concept{svd tidiers}

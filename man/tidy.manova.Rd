@@ -13,23 +13,22 @@
 "Hotelling-Lawley" (Hotelling-Lawley trace) or "Roy" (Roy's greatest root)
 indicating which test statistic should be used. Defaults to "Pillai".}
 
-\item{...}{Arguments passed on to \code{stats::summary.manova}
-\describe{
-  \item{object}{An object of class \code{"manova"} or an \code{aov}
+\item{...}{
+  Arguments passed on to \code{\link[stats:summary.manova]{stats::summary.manova}}
+  \describe{
+    \item{\code{object}}{An object of class \code{"manova"} or an \code{aov}
     object with multiple responses.}
-  \item{test}{The name of the test statistic to be used.  Partial
-    matching is used so the name can be abbreviated.}
-  \item{intercept}{logical.  If \code{TRUE}, the intercept term is
+    \item{\code{intercept}}{logical.  If \code{TRUE}, the intercept term is
     included in the table.}
-  \item{tol}{tolerance to be used in deciding if the residuals are
+    \item{\code{tol}}{tolerance to be used in deciding if the residuals are
     rank-deficient: see \code{\link{qr}}.}
-}}
+  }}
 }
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
@@ -41,21 +40,23 @@ Depending on which test statistic is specified only one of \code{pillai},
 
 npk2 <- within(npk, foo <- rnorm(24))
 m <- manova(cbind(yield, foo) ~ block + N * P * K, npk2)
-tidy(m) 
-
+tidy(m)
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:summary.manova]{stats::summary.manova()}}
 
-Other anova tidiers: \code{\link{tidy.TukeyHSD}},
-  \code{\link{tidy.anova}}, \code{\link{tidy.aovlist}},
-  \code{\link{tidy.aov}}
+Other anova tidiers: 
+\code{\link{glance.aov}()},
+\code{\link{tidy.TukeyHSD}()},
+\code{\link{tidy.anova}()},
+\code{\link{tidy.aovlist}()},
+\code{\link{tidy.aov}()}
 }
 \concept{anova tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{den.df}{Degrees of freedom of the denominator}
-  \item{num.df}{Degrees of freedom}
+  \item{den.df}{Degrees of freedom of the denominator.}
+  \item{num.df}{Degrees of freedom.}
   \item{p.value}{The two-sided p-value associated with the observed statistic.}
   \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
   \item{term}{The name of the regression term.}

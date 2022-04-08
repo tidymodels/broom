@@ -5,8 +5,7 @@
 \alias{gmm_tidiers}
 \title{Tidy a(n) gmm object}
 \usage{
-\method{tidy}{gmm}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, quick = FALSE, ...)
+\method{tidy}{gmm}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{gmm} object returned from \code{\link[gmm:gmm]{gmm::gmm()}}.}
@@ -23,10 +22,6 @@ the coefficient estimates. This is typical for logistic and multinomial
 regressions, but a bad idea if there is no log or logit link. Defaults
 to \code{FALSE}.}
 
-\item{quick}{Logical indiciating if the only the \code{term} and \code{estimate}
-columns should be returned. Often useful to avoid time consuming
-covariance and standard error calculations. Defaults to \code{FALSE}.}
-
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
 absorbed in \code{...}, where they will be ignored. If the misspelled
@@ -41,24 +36,29 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("gmm", quietly = TRUE)) {
+
+# load libraries for models and data
 library(gmm)
 
 # examples come from the "gmm" package
-## CAPM test with GMM
+# CAPM test with GMM
 data(Finance)
 r <- Finance[1:300, 1:10]
 rm <- Finance[1:300, "rm"]
 rf <- Finance[1:300, "rf"]
 
-z <- as.matrix(r-rf)
+z <- as.matrix(r - rf)
 t <- nrow(z)
-zm <- rm-rf
+zm <- rm - rf
 h <- matrix(zm, t, 1)
 res <- gmm(z ~ zm, x = h)
 
@@ -70,19 +70,20 @@ tidy(res, conf.int = TRUE, conf.level = .99)
 # coefficient plot
 library(ggplot2)
 library(dplyr)
+
 tidy(res, conf.int = TRUE) \%>\%
-  mutate(variable = reorder(variable, estimate)) \%>\%
+  mutate(variable = reorder(term, estimate)) \%>\%
   ggplot(aes(estimate, variable)) +
   geom_point() +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
-  facet_wrap(~ term) +
   geom_vline(xintercept = 0, color = "red", lty = 2)
 
 # from a function instead of a matrix
 g <- function(theta, x) {
-	e <- x[,2:11] - theta[1] - (x[,1] - theta[1]) \%*\% matrix(theta[2:11], 1, 10)
-	gmat <- cbind(e, e*c(x[,1]))
-	return(gmat) }
+  e <- x[, 2:11] - theta[1] - (x[, 1] - theta[1]) \%*\% matrix(theta[2:11], 1, 10)
+  gmat <- cbind(e, e * c(x[, 1]))
+  return(gmat)
+}
 
 x <- as.matrix(cbind(rm, r))
 res_black <- gmm(g, x = x, t0 = rep(0, 11))
@@ -90,7 +91,7 @@ res_black <- gmm(g, x = x, t0 = rep(0, 11))
 tidy(res_black)
 tidy(res_black, conf.int = TRUE)
 
-## APT test with Fama-French factors and GMM
+# APT test with Fama-French factors and GMM
 
 f1 <- zm
 f2 <- Finance[1:300, "hml"] - rf
@@ -103,18 +104,20 @@ td2
 
 # coefficient plot
 td2 \%>\%
-  mutate(variable = reorder(variable, estimate)) \%>\%
+  mutate(variable = reorder(term, estimate)) \%>\%
   ggplot(aes(estimate, variable)) +
   geom_point() +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
-  facet_wrap(~ term) +
   geom_vline(xintercept = 0, color = "red", lty = 2)
+  
+}
 
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[gmm:gmm]{gmm::gmm()}}
 
-Other gmm tidiers: \code{\link{glance.gmm}}
+Other gmm tidiers: 
+\code{\link{glance.gmm}()}
 }
 \concept{gmm tidiers}
 \value{

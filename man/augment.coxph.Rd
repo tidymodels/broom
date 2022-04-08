@@ -4,13 +4,19 @@
 \alias{augment.coxph}
 \title{Augment data with information from a(n) coxph object}
 \usage{
-\method{augment}{coxph}(x, data = NULL, newdata = NULL,
-  type.predict = "lp", type.residuals = "martingale", ...)
+\method{augment}{coxph}(
+  x,
+  data = NULL,
+  newdata = NULL,
+  type.predict = "lp",
+  type.residuals = "martingale",
+  ...
+)
 }
 \arguments{
 \item{x}{A \code{coxph} object returned from \code{\link[survival:coxph]{survival::coxph()}}.}
 
-\item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
+\item{data}{A \link[base:data.frame]{base::data.frame} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
 data that was used to produce the object \code{x}. Defaults to
 \code{stats::model.frame(x)} so that \code{augment(my_fit)} returns the augmented
 original data. \strong{Do not} pass new data to the \code{data} argument.
@@ -18,7 +24,7 @@ Augment will report information such as influence and cooks distance for
 data passed to the \code{data} argument. These measures are only defined for
 the original training data.}
 
-\item{newdata}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
+\item{newdata}{A \code{\link[base:data.frame]{base::data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
 the original predictors used to create \code{x}. Defaults to \code{NULL}, indicating
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
@@ -55,18 +61,20 @@ Users may pass data to augment via either the \code{data} argument or the
 \code{newdata} argument. If the user passes data to the \code{data} argument,
 it \strong{must} be exactly the data that was used to fit the model
 object. Pass datasets to \code{newdata} to augment data that was not used
-during model fitting. This still requires that all columns used to fit
-the model are present.
+during model fitting. This still requires that at least all predictor
+variable columns used to fit the model are present. If the original outcome
+variable used to fit the model is not included in \code{newdata}, then no
+\code{.resid} column will be included in the output.
 
-Augment will often behavior different depending on whether \code{data} or
-\code{newdata} is specified. This is because there is often information
+Augment will often behave differently depending on whether \code{data} or
+\code{newdata} is given. This is because there is often information
 associated with training observations (such as influences or related)
 measures that is not meaningfully defined for new observations.
 
 For convenience, many augment methods provide default \code{data} arguments,
 so that \code{augment(fit)} will return the augmented training data. In these
-cases augment tries to reconstruct the original data based on the model
-object, with some varying degrees of success.
+cases, augment tries to reconstruct the original data based on the model
+object with varying degrees of success.
 
 The augmented dataset is always returned as a \link[tibble:tibble]{tibble::tibble} with the
 \strong{same number of rows} as the passed dataset. This means that the
@@ -79,7 +87,7 @@ encounter errors, try explicitly passing a tibble, or fitting the original
 model on data in a tibble.
 
 We are in the process of defining behaviors for models fit with various
-\link{na.action} arguments, but make no guarantees about behavior when data is
+\code{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
 \details{
@@ -94,10 +102,17 @@ warning is raised and the incomplete rows are dropped.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("survival", quietly = TRUE)) {
+
+# load libraries for models and data
 library(survival)
 
+# fit model
 cfit <- coxph(Surv(time, status) ~ age + sex, lung)
 
+# summarize model fit with tidiers
 tidy(cfit)
 tidy(cfit, exponentiate = TRUE)
 
@@ -112,14 +127,15 @@ resp <- levels(logan$occupation)
 n <- nrow(logan)
 indx <- rep(1:n, length(resp))
 logan2 <- data.frame(
-  logan[indx,],
+  logan[indx, ],
   id = indx,
-  tocc = factor(rep(resp, each=n))
+  tocc = factor(rep(resp, each = n))
 )
 
 logan2$case <- (logan2$occupation == logan2$tocc)
 
 cl <- clogit(case ~ tocc + tocc:education + strata(id), logan2)
+
 tidy(cl)
 glance(cl)
 
@@ -128,40 +144,49 @@ library(ggplot2)
 ggplot(lp, aes(age, .fitted, color = sex)) +
   geom_point()
 
-ggplot(risks, aes(age, .fitted, color = sex)) + 
-  geom_point()
-  
-ggplot(expected, aes(time, .fitted, color = sex)) + 
+ggplot(risks, aes(age, .fitted, color = sex)) +
   geom_point()
 
+ggplot(expected, aes(time, .fitted, color = sex)) +
+  geom_point()
+  
+}
 
 }
 \seealso{
-\link{na.action}
+\link[stats:na.action]{stats::na.action}
 
 \code{\link[=augment]{augment()}}, \code{\link[survival:coxph]{survival::coxph()}}
 
-Other coxph tidiers: \code{\link{glance.coxph}},
-  \code{\link{tidy.coxph}}
+Other coxph tidiers: 
+\code{\link{glance.coxph}()},
+\code{\link{tidy.coxph}()}
 
-Other survival tidiers: \code{\link{augment.survreg}},
-  \code{\link{glance.aareg}}, \code{\link{glance.cch}},
-  \code{\link{glance.coxph}}, \code{\link{glance.pyears}},
-  \code{\link{glance.survdiff}},
-  \code{\link{glance.survexp}},
-  \code{\link{glance.survfit}},
-  \code{\link{glance.survreg}}, \code{\link{tidy.aareg}},
-  \code{\link{tidy.cch}}, \code{\link{tidy.coxph}},
-  \code{\link{tidy.pyears}}, \code{\link{tidy.survdiff}},
-  \code{\link{tidy.survexp}}, \code{\link{tidy.survfit}},
-  \code{\link{tidy.survreg}}
+Other survival tidiers: 
+\code{\link{augment.survreg}()},
+\code{\link{glance.aareg}()},
+\code{\link{glance.cch}()},
+\code{\link{glance.coxph}()},
+\code{\link{glance.pyears}()},
+\code{\link{glance.survdiff}()},
+\code{\link{glance.survexp}()},
+\code{\link{glance.survfit}()},
+\code{\link{glance.survreg}()},
+\code{\link{tidy.aareg}()},
+\code{\link{tidy.cch}()},
+\code{\link{tidy.coxph}()},
+\code{\link{tidy.pyears}()},
+\code{\link{tidy.survdiff}()},
+\code{\link{tidy.survexp}()},
+\code{\link{tidy.survfit}()},
+\code{\link{tidy.survreg}()}
 }
 \concept{coxph tidiers}
 \concept{survival tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{.fitted}{Fitted or predicted value.}
-  \item{.resid}{The difference between fitted and observed values.}
+  \item{.resid}{The difference between observed and fitted values.}
   \item{.se.fit}{Standard errors of fitted values.}
 
 }

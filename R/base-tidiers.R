@@ -1,22 +1,20 @@
 #' @templateVar class table
 #' @template title_desc_tidy
-#' 
+#'
 #' @description Deprecated. Please use [tibble::as_tibble()] instead.
 #'
-#' @param x A [table] object.
+#' @param x A [base::table] object.
 #' @template param_unused_dots
-#' 
+#'
 #' @return A [tibble::tibble] in long-form containing frequency information
 #'   for the table in a `Freq` column. The result is much like what you get
-#'   from [tidyr::gather()].
-#'   
-#' @details Directly calls [tibble::as_tibble()] on a [table] object, which
-#'   does the same things as [as.data.frame.table()] but also gives the
-#'   returned object [tibble::tibble] class.
+#'   from [tidyr::pivot_longer()].
 #'
-#' @seealso [as_tibble.table()]
+#' @details Directly calls [tibble::as_tibble()] on a [base::table] object.
+#'
+#' @seealso [tibble::as_tibble.table()]
 #' @export
 tidy.table <- function(x, ...) {
-  .Deprecated()
+  .Deprecated(new = "tibble::as_tibble()")
   as_tibble(x)
 }

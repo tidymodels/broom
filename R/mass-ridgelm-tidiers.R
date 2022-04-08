@@ -1,21 +1,30 @@
 #' @templateVar class ridgelm
 #' @template title_desc_tidy
-#' 
+#'
 #' @param x A `ridgelm` object returned from [MASS::lm.ridge()].
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_tidy("lambda", "GCV", "term",
 #'   estimate = "estimate of scaled coefficient using this lambda",
 #'   scale = "Scaling factor of estimated coefficient"
 #' )
 #'
 #' @examples
+#' 
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the model-supplying package to be installed.
+#' if (requireNamespace("MASS", quietly = TRUE)) {
+#' 
+#' # load libraries for models and data
+#' library(MASS)
 #'
 #' names(longley)[1] <- "y"
-#' fit1 <- MASS::lm.ridge(y ~ ., longley)
+#' 
+#' # fit model and summarizd results
+#' fit1 <- lm.ridge(y ~ ., longley)
 #' tidy(fit1)
 #'
-#' fit2 <- MASS::lm.ridge(y ~ ., longley, lambda = seq(0.001, .05, .001))
+#' fit2 <- lm.ridge(y ~ ., longley, lambda = seq(0.001, .05, .001))
 #' td2 <- tidy(fit2)
 #' g2 <- glance(fit2)
 #'
@@ -29,10 +38,12 @@
 #'   geom_line()
 #'
 #' # add line for the GCV minimizing estimate
-#' ggplot(td2, aes(lambda, GCV)) + 
+#' ggplot(td2, aes(lambda, GCV)) +
 #'   geom_line() +
 #'   geom_vline(xintercept = g2$lambdaGCV, col = "red", lty = 2)
-#'
+#'   
+#' }
+#' 
 #' @export
 #' @aliases ridgelm_tidiers
 #' @family ridgelm tidiers
@@ -55,7 +66,12 @@ tidy.ridgelm <- function(x, ...) {
     lambda = x$lambda,
     GCV = unname(x$GCV)
   ) %>%
-    tidyr::gather(term, estimate, -lambda, -GCV) %>%
+    pivot_longer(
+      cols = c(dplyr::everything(), -lambda, -GCV),
+      names_to = "term",
+      values_to = "estimate"
+    ) %>%
+    as.data.frame() %>%
     mutate(term = as.character(term)) %>%
     mutate(scale = x$scales[term])
 
@@ -65,7 +81,7 @@ tidy.ridgelm <- function(x, ...) {
 
 #' @templateVar class ridgelm
 #' @template title_desc_glance
-#' 
+#'
 #' @inherit tidy.ridgelm params examples
 #'
 #' @evalRd return_glance(
@@ -81,9 +97,10 @@ tidy.ridgelm <- function(x, ...) {
 #' @family ridgelm tidiers
 #' @seealso [glance()], [MASS::select.ridgelm()], [MASS::lm.ridge()]
 glance.ridgelm <- function(x, ...) {
-  tibble(
-    kHKB = x$kHKB, 
+  as_glance_tibble(
+    kHKB = x$kHKB,
     kLW = x$kLW,
-    lambdaGCV = x$lambda[which.min(x$GCV)]
+    lambdaGCV = x$lambda[which.min(x$GCV)],
+    na_types = "rrr"
   )
 }

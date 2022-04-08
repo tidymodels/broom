@@ -7,7 +7,7 @@
 \method{tidy}{table}(x, ...)
 }
 \arguments{
-\item{x}{A \link{table} object.}
+\item{x}{A \link[base:table]{base::table} object.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -22,23 +22,21 @@ the \code{data} argument.}
 \value{
 A \link[tibble:tibble]{tibble::tibble} in long-form containing frequency information
 for the table in a \code{Freq} column. The result is much like what you get
-from \code{\link[tidyr:gather]{tidyr::gather()}}.
+from \code{\link[tidyr:pivot_longer]{tidyr::pivot_longer()}}.
 }
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 
 Deprecated. Please use \code{\link[tibble:as_tibble]{tibble::as_tibble()}} instead.
 }
 \details{
-Directly calls \code{\link[tibble:as_tibble]{tibble::as_tibble()}} on a \link{table} object, which
-does the same things as \code{\link[=as.data.frame.table]{as.data.frame.table()}} but also gives the
-returned object \link[tibble:tibble]{tibble::tibble} class.
+Directly calls \code{\link[tibble:as_tibble]{tibble::as_tibble()}} on a \link[base:table]{base::table} object.
 }
 \seealso{
-\code{\link[=as_tibble.table]{as_tibble.table()}}
+\code{\link[tibble:as_tibble]{tibble::as_tibble.table()}}
 }

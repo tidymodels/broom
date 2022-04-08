@@ -1,5 +1,7 @@
 context("lmbeta-lm-beta")
 
+skip_on_cran()
+
 skip_if_not_installed("modeltests")
 library(modeltests)
 
@@ -22,45 +24,25 @@ rd_data <- data.frame(y = rnorm(10), x = letters[seq_len(10)])
 fit_rd <- lm(y ~ x - 1, data = rd_data)
 
 test_that("tidy.lm.beta works", {
-  
   td <- tidy(fit)
   td2 <- tidy(fit2)
-  
-  tdq <- tidy(fit, quick = TRUE)
-  tdq2 <- tidy(fit2, quick = TRUE)
-  
+
   # conf.int = TRUE works for rank deficient fits
   # should get a "NaNs produced" warning
   expect_warning(td_rd <- tidy(fit_rd, conf.int = TRUE))
-  
+
   check_tidy_output(td)
   check_tidy_output(td2)
-  check_tidy_output(tdq)
-  check_tidy_output(tdq2)
-  
+
   check_tidy_output(td_rd)
-  
+
   check_dims(td, expected_rows = 2)
   check_dims(td2, expected_rows = 3)
-  check_dims(tdq, expected_cols = 2)
-  check_dims(tdq2, expected_cols = 2)
-  
+
   expect_equal(td$term, c("(Intercept)", "wt"))
   expect_equal(td2$term, c("(Intercept)", "wt", "log(disp)"))
-  
-  expect_warning(
-    tidy(fit2, exponentiate = TRUE),
-    regexp = paste(
-      "Exponentiating coefficients, but model did not use a log or logit", 
-      "link function"
-    )
-  )
-  
+
   # shouldn't error. regression test for issues 166, 241
   # rows for confidence intervals of undefined terms should be dropped
   expect_error(tidy(fit_na_row, conf.int = TRUE), NA)
-  
-  # should drop the NA row
-  td_ci <- confint_tidy(fit_na_row)
-  expect_false(anyNA(td_ci))
 })

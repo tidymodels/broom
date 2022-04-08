@@ -1,11 +1,20 @@
-url: http://broom.tidyverse.org
+url: https://broom.tidymodels.org
 
 template:
   package: tidytemplate
-default_assets: false
+  bootstrap: 5
+  bslib:
+    danger: "#CA225E"
+    primary: "#CA225E"
 
-home:
-  strip_header: true
+  includes:
+      in_header: |
+        <script defer data-domain="broom.tidymodels.org,all.tidymodels.org" src="https://plausible.io/js/plausible.js"></script>
+
+development:
+  mode: auto
+
+default_assets: false
 
 reference:
 
@@ -24,34 +33,7 @@ reference:
 - title: Miscellaneous
   contents:
   - broom
-  - starts_with("confint")
+  - bootstrap
+  - confint_tidy
   - finish_glance
-  - starts_with("process")
-  
-navbar:
-  type: default
-  left:
-  - text: Intro
-    href: articles/broom.html
-  - text: Reference
-    href: reference/index.html
-  - text: Articles
-    menu:
-    - text: Adding new tidiers
-      href: articles/adding-tidiers.html
-    - text: Available methods
-      href: articles/available-methods.html
-    - text: Bootstrapping
-      href: articles/bootstrapping.html
-    - text: Broom and dplyr
-      href: articles/broom_and_dplyr.html
-    - text: Tidiers in external packages
-      href: articles/external-tidiers.html
-    - text: K-means
-      href: articles/kmeans.html
-  - text: News
-    href: news/index.html
-  right:
-  - icon: fa-github fa-lg
-    href: https://github.com/tidymodels/broom
- 
+  - fix_data_frame

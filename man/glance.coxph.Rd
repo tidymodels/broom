@@ -19,30 +19,39 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A one-row \link[tibble:tibble]{tibble::tibble} with columns: TODO.
-}
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
 with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
 or model convergence information.
 
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
 
 Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an \code{NA}
+of the appropriate type.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("survival", quietly = TRUE)) {
+
+# load libraries for models and data
 library(survival)
 
+# fit model
 cfit <- coxph(Surv(time, status) ~ age + sex, lung)
 
+# summarize model fit with tidiers
 tidy(cfit)
 tidy(cfit, exponentiate = TRUE)
 
@@ -57,14 +66,15 @@ resp <- levels(logan$occupation)
 n <- nrow(logan)
 indx <- rep(1:n, length(resp))
 logan2 <- data.frame(
-  logan[indx,],
+  logan[indx, ],
   id = indx,
-  tocc = factor(rep(resp, each=n))
+  tocc = factor(rep(resp, each = n))
 )
 
 logan2$case <- (logan2$occupation == logan2$tocc)
 
 cl <- clogit(case ~ tocc + tocc:education + strata(id), logan2)
+
 tidy(cl)
 glance(cl)
 
@@ -73,32 +83,50 @@ library(ggplot2)
 ggplot(lp, aes(age, .fitted, color = sex)) +
   geom_point()
 
-ggplot(risks, aes(age, .fitted, color = sex)) + 
-  geom_point()
-  
-ggplot(expected, aes(time, .fitted, color = sex)) + 
+ggplot(risks, aes(age, .fitted, color = sex)) +
   geom_point()
 
+ggplot(expected, aes(time, .fitted, color = sex)) +
+  geom_point()
+  
+}
 
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[survival:coxph]{survival::coxph()}}
 
-Other coxph tidiers: \code{\link{augment.coxph}},
-  \code{\link{tidy.coxph}}
+Other coxph tidiers: 
+\code{\link{augment.coxph}()},
+\code{\link{tidy.coxph}()}
 
-Other survival tidiers: \code{\link{augment.coxph}},
-  \code{\link{augment.survreg}},
-  \code{\link{glance.aareg}}, \code{\link{glance.cch}},
-  \code{\link{glance.pyears}},
-  \code{\link{glance.survdiff}},
-  \code{\link{glance.survexp}},
-  \code{\link{glance.survfit}},
-  \code{\link{glance.survreg}}, \code{\link{tidy.aareg}},
-  \code{\link{tidy.cch}}, \code{\link{tidy.coxph}},
-  \code{\link{tidy.pyears}}, \code{\link{tidy.survdiff}},
-  \code{\link{tidy.survexp}}, \code{\link{tidy.survfit}},
-  \code{\link{tidy.survreg}}
+Other survival tidiers: 
+\code{\link{augment.coxph}()},
+\code{\link{augment.survreg}()},
+\code{\link{glance.aareg}()},
+\code{\link{glance.cch}()},
+\code{\link{glance.pyears}()},
+\code{\link{glance.survdiff}()},
+\code{\link{glance.survexp}()},
+\code{\link{glance.survfit}()},
+\code{\link{glance.survreg}()},
+\code{\link{tidy.aareg}()},
+\code{\link{tidy.cch}()},
+\code{\link{tidy.coxph}()},
+\code{\link{tidy.pyears}()},
+\code{\link{tidy.survdiff}()},
+\code{\link{tidy.survexp}()},
+\code{\link{tidy.survfit}()},
+\code{\link{tidy.survreg}()}
 }
 \concept{coxph tidiers}
 \concept{survival tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{AIC}{Akaike's Information Criterion for the model.}
+  \item{BIC}{Bayesian Information Criterion for the model.}
+  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
+  \item{n}{The total number of observations.}
+  \item{nevent}{Number of events.}
+  \item{nobs}{Number of observations used.}
+See survival::coxph.object for additional column descriptions.
+}

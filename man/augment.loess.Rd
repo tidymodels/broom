@@ -5,13 +5,12 @@
 \alias{loess_tidiers}
 \title{Tidy a(n) loess object}
 \usage{
-\method{augment}{loess}(x, data = model.frame(x), newdata = NULL,
-  se_fit = FALSE, ...)
+\method{augment}{loess}(x, data = model.frame(x), newdata = NULL, se_fit = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{loess} objects returned by \code{\link[stats:loess]{stats::loess()}}.}
 
-\item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
+\item{data}{A \link[base:data.frame]{base::data.frame} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
 data that was used to produce the object \code{x}. Defaults to
 \code{stats::model.frame(x)} so that \code{augment(my_fit)} returns the augmented
 original data. \strong{Do not} pass new data to the \code{data} argument.
@@ -19,14 +18,14 @@ Augment will report information such as influence and cooks distance for
 data passed to the \code{data} argument. These measures are only defined for
 the original training data.}
 
-\item{newdata}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
+\item{newdata}{A \code{\link[base:data.frame]{base::data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
 the original predictors used to create \code{x}. Defaults to \code{NULL}, indicating
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
 
 \item{se_fit}{Logical indicating whether or not a \code{.se.fit} column should be
 added to the augmented output. For some models, this calculation can be
-somwhat time-consuming. Defaults to \code{FALSE}.}
+somewhat time-consuming. Defaults to \code{FALSE}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -42,7 +41,7 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
@@ -59,14 +58,14 @@ warning is raised and the incomplete rows are dropped.
 Note that \code{loess} objects by default will not predict on data
 outside of a bounding hypercube defined by the training data unless the
 original \code{loess} object was fit with
-\code{control = loess.control(surface = \"direct\"))}. See
+\verb{control = loess.control(surface = \\"direct\\"))}. See
 \code{\link[stats:predict.loess]{stats::predict.loess()}} for details.
 }
 \examples{
 
 lo <- loess(
-  mpg ~ hp + wt, 
-  mtcars, 
+  mpg ~ hp + wt,
+  mtcars,
   control = loess.control(surface = "direct")
 )
 
@@ -80,14 +79,14 @@ augment(lo, newdata = head(mtcars))
 
 }
 \seealso{
-\link{na.action}
+\link[stats:na.action]{stats::na.action}
 
 \code{\link[=augment]{augment()}}, \code{\link[stats:loess]{stats::loess()}}, \code{\link[stats:predict.loess]{stats::predict.loess()}}
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{.fitted}{Fitted or predicted value.}
-  \item{.resid}{The difference between fitted and observed values.}
+  \item{.resid}{The difference between observed and fitted values.}
   \item{.se.fit}{Standard errors of fitted values.}
 
 }

@@ -1,6 +1,6 @@
 #' @templateVar class poLCA
 #' @template title_desc_tidy
-#' 
+#'
 #' @param x A `poLCA` object returned from [poLCA::poLCA()].
 #' @template param_unused_dots
 #'
@@ -11,17 +11,28 @@
 #'   estimate = "Estimated class-conditional response probability",
 #'   "std.error"
 #' )
-#' 
-#' @examples
 #'
+#' @examples
+#' 
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the model-supplying package to be installed.
+#' if (requireNamespace("poLCA", quietly = TRUE)) {
+#'
+#' # load libraries for models and data
 #' library(poLCA)
 #' library(dplyr)
 #'
+#' # generate data
 #' data(values)
-#' f <- cbind(A, B, C, D)~1
+#' 
+#' f <- cbind(A, B, C, D) ~ 1
+#' 
+#' # fit model
 #' M1 <- poLCA(f, values, nclass = 2, verbose = FALSE)
 #'
 #' M1
+#' 
+#' # summarize model fit with tidiers + visualization
 #' tidy(M1)
 #' augment(M1)
 #' glance(M1)
@@ -30,46 +41,56 @@
 #'
 #' ggplot(tidy(M1), aes(factor(class), estimate, fill = factor(outcome))) +
 #'   geom_bar(stat = "identity", width = 1) +
-#'   facet_wrap(~ variable)
-#' ## Three-class model with a single covariate.
-#'
+#'   facet_wrap(~variable)
+#'   
+#' # three-class model with a single covariate.
 #' data(election)
-#' f2a <- cbind(MORALG,CARESG,KNOWG,LEADG,DISHONG,INTELG,
-#'              MORALB,CARESB,KNOWB,LEADB,DISHONB,INTELB)~PARTY
+#' 
+#' f2a <- cbind(
+#'   MORALG, CARESG, KNOWG, LEADG, DISHONG, INTELG,
+#'   MORALB, CARESB, KNOWB, LEADB, DISHONB, INTELB
+#' ) ~ PARTY
+#' 
 #' nes2a <- poLCA(f2a, election, nclass = 3, nrep = 5, verbose = FALSE)
 #'
 #' td <- tidy(nes2a)
 #' td
 #'
-#' # show
-#'
 #' ggplot(td, aes(outcome, estimate, color = factor(class), group = class)) +
 #'   geom_line() +
-#'   facet_wrap(~ variable, nrow = 2) +
+#'   facet_wrap(~variable, nrow = 2) +
 #'   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 #'
 #' au <- augment(nes2a)
+#' 
 #' au
+#' 
 #' count(au, .class)
 #'
 #' # if the original data is provided, it leads to NAs in new columns
 #' # for rows that weren't predicted
 #' au2 <- augment(nes2a, data = election)
+#' 
 #' au2
+#' 
 #' dim(au2)
-#'
+#' 
+#' }
+#' 
 #' @aliases poLCA_tidiers
 #' @export
 #' @seealso [tidy()], [poLCA::poLCA()]
-#' @family poLCA tidiers 
+#' @family poLCA tidiers
 #'
 tidy.poLCA <- function(x, ...) {
-  probs <- purrr::map_df(x$probs, reshape2::melt, .id = "variable") %>%
+  probs <- purrr::map2_df(x$probs, names(x$probs), reshape_probs) %>%
+    mutate(variable = as.character(variable)) %>%
     transmute(variable,
       class = stringr::str_match(Var1, "class (.*):")[, 2],
       outcome = Var2,
       estimate = value
     )
+
   if (all(stringr::str_detect(probs$outcome, "^Pr\\(\\d*\\)$"))) {
     probs$outcome <- as.numeric(stringr::str_match(
       probs$outcome,
@@ -80,7 +101,10 @@ tidy.poLCA <- function(x, ...) {
   probs <- probs %>%
     mutate(class = utils::type.convert(class))
 
-  probs_se <- purrr::map_df(x$probs.se, reshape2::melt, .id = "variable")
+  probs_se <- purrr::map2_df(x$probs.se, names(x$probs.se), reshape_probs) %>%
+    mutate(variable = as.character(variable)) %>%
+    mutate_if(is.factor, as.integer)
+  
   probs$std.error <- probs_se$value
 
   as_tibble(probs)
@@ -88,17 +112,17 @@ tidy.poLCA <- function(x, ...) {
 
 #' @templateVar class poLCA
 #' @template title_desc_augment
-#' 
+#'
 #' @inherit tidy.poLCA params examples
 #' @template param_data
-#' 
+#'
 #' @evalRd return_augment(
 #'   .fitted = FALSE,
 #'   .resid = FALSE,
 #'   ".class",
 #'   ".probability"
 #' )
-#' 
+#'
 #' @details If the `data` argument is given, those columns are included in
 #'   the output (only rows for which predictions could be made).
 #'   Otherwise, the `y` element of the poLCA object, which contains the
@@ -114,12 +138,12 @@ tidy.poLCA <- function(x, ...) {
 #' @family poLCA tidiers
 augment.poLCA <- function(x, data = NULL, ...) {
   indices <- cbind(seq_len(nrow(x$posterior)), x$predclass)
-  
+
   ret <- tibble(
     .class = x$predclass,
     .probability = x$posterior[indices]
   )
-  
+
   if (is.null(data)) {
     data <- bind_cols(x$y, x$x)
   } else {
@@ -129,13 +153,13 @@ augment.poLCA <- function(x, data = NULL, ...) {
       ret <- ret[rownames(data), ]
     }
   }
-  
+
   as_tibble(bind_cols(data, ret))
 }
 
 #' @templateVar class poLCA
 #' @template title_desc_glance
-#' 
+#'
 #' @inherit tidy.poLCA params examples
 #'
 #' @evalRd return_glance(
@@ -145,23 +169,31 @@ augment.poLCA <- function(x, data = NULL, ...) {
 #'   "chi.squared",
 #'   "df",
 #'   "df.residual",
-#'   g.squared = "The likelihood ratio/deviance statistic"
+#'   g.squared = "The likelihood ratio/deviance statistic",
+#'   "nobs"
 #' )
 #'
 #' @export
 #' @seealso [glance()], [poLCA::poLCA()]
 #' @family poLCA tidiers
 glance.poLCA <- function(x, ...) {
-  with(
-    x,
-    tibble(
-      logLik = llik,
-      AIC = aic,
-      BIC = bic,
-      g.squared = Gsq,
-      chi.squared = Chisq,
-      df = npar,
-      df.residual = resid.df
-    )
+  as_glance_tibble(
+    logLik = x$llik,
+    AIC = x$aic,
+    BIC = x$bic,
+    g.squared = x$Gsq,
+    chi.squared = x$Chisq,
+    df = x$npar,
+    df.residual = x$resid.df,
+    nobs = stats::nobs(x),
+    na_types = "rrrrriii"
   )
+}
+
+
+# a function to reshape each element of the probs and probs.se lists
+reshape_probs <- function(x_, x_name) {
+  x_ %>%
+    as.data.frame.table(responseName = "value") %>%
+    cbind(variable = x_name, .)
 }

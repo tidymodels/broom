@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{A \code{felm} object returned from \code{\link[lfe:felm]{lfe::felm()}}.}
 
-\item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
+\item{data}{A \link[base:data.frame]{base::data.frame} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
 data that was used to produce the object \code{x}. Defaults to
 \code{stats::model.frame(x)} so that \code{augment(my_fit)} returns the augmented
 original data. \strong{Do not} pass new data to the \code{data} argument.
@@ -39,18 +39,20 @@ Users may pass data to augment via either the \code{data} argument or the
 \code{newdata} argument. If the user passes data to the \code{data} argument,
 it \strong{must} be exactly the data that was used to fit the model
 object. Pass datasets to \code{newdata} to augment data that was not used
-during model fitting. This still requires that all columns used to fit
-the model are present.
+during model fitting. This still requires that at least all predictor
+variable columns used to fit the model are present. If the original outcome
+variable used to fit the model is not included in \code{newdata}, then no
+\code{.resid} column will be included in the output.
 
-Augment will often behavior different depending on whether \code{data} or
-\code{newdata} is specified. This is because there is often information
+Augment will often behave differently depending on whether \code{data} or
+\code{newdata} is given. This is because there is often information
 associated with training observations (such as influences or related)
 measures that is not meaningfully defined for new observations.
 
 For convenience, many augment methods provide default \code{data} arguments,
 so that \code{augment(fit)} will return the augmented training data. In these
-cases augment tries to reconstruct the original data based on the model
-object, with some varying degrees of success.
+cases, augment tries to reconstruct the original data based on the model
+object with varying degrees of success.
 
 The augmented dataset is always returned as a \link[tibble:tibble]{tibble::tibble} with the
 \strong{same number of rows} as the passed dataset. This means that the
@@ -63,50 +65,65 @@ encounter errors, try explicitly passing a tibble, or fitting the original
 model on data in a tibble.
 
 We are in the process of defining behaviors for models fit with various
-\link{na.action} arguments, but make no guarantees about behavior when data is
+\code{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("lfe", quietly = TRUE)) {
+
+# load libraries for models and data
 library(lfe)
 
-N=1e2
-DT <- data.frame(
-  id = sample(5, N, TRUE),
-  v1 =  sample(5, N, TRUE),
-  v2 =  sample(1e6, N, TRUE),
-  v3 =  sample(round(runif(100,max=100),4), N, TRUE),
-  v4 =  sample(round(runif(100,max=100),4), N, TRUE)
-)
+# use built-in `airquality` dataset
+head(airquality)
 
-result_felm <- felm(v2~v3, DT)
-tidy(result_felm)
-augment(result_felm)
+# no FEs; same as lm()
+est0 <- felm(Ozone ~ Temp + Wind + Solar.R, airquality)
 
-result_felm <- felm(v2~v3|id+v1, DT)
-tidy(result_felm, fe = TRUE)
-augment(result_felm)
+# summarize model fit with tidiers
+tidy(est0)
+augment(est0)
 
-v1<-DT$v1
-v2 <- DT$v2
-v3 <- DT$v3
-id <- DT$id
-result_felm <- felm(v2~v3|id+v1)
+# add month fixed effects
+est1 <- felm(Ozone ~ Temp + Wind + Solar.R  | Month, airquality)
 
-tidy(result_felm)
-augment(result_felm)
-glance(result_felm)
+# summarize model fit with tidiers
+tidy(est1)
+tidy(est1, fe = TRUE)
+augment(est1)
+glance(est1)
+
+# the "se.type" argument can be used to switch out different standard errors 
+# types on the fly. In turn, this can be useful exploring the effect of 
+# different error structures on model inference.
+tidy(est1, se.type = "iid")
+tidy(est1, se.type = "robust")
+
+# add clustered SEs (also by month)
+est2 <- felm(Ozone ~ Temp + Wind + Solar.R  | Month | 0 | Month, airquality)
+
+# summarize model fit with tidiers
+tidy(est2, conf.int = TRUE) 
+tidy(est2, conf.int = TRUE, se.type = "cluster")
+tidy(est2, conf.int = TRUE, se.type = "robust")
+tidy(est2, conf.int = TRUE, se.type = "iid")
+
+}
 
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[lfe:felm]{lfe::felm()}}
 
-Other felm tidiers: \code{\link{tidy.felm}}
+Other felm tidiers: 
+\code{\link{tidy.felm}()}
 }
 \concept{felm tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{.fitted}{Fitted or predicted value.}
-  \item{.resid}{The difference between fitted and observed values.}
+  \item{.resid}{The difference between observed and fitted values.}
 
 }

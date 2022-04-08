@@ -4,7 +4,7 @@
 #' @param x An `htest` objected, such as those created by [stats::cor.test()],
 #'   [stats::t.test()], [stats::wilcox.test()], [stats::chisq.test()], etc.
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd  return_tidy(
 #'   "estimate",
 #'   "statistic",
@@ -21,22 +21,29 @@
 #' @examples
 #'
 #' tt <- t.test(rnorm(10))
+#' 
 #' tidy(tt)
-#' glance(tt)  # same output for all htests
+#' 
+#' # the glance output will be the same for each of the below tests
+#' glance(tt)
 #'
 #' tt <- t.test(mpg ~ am, data = mtcars)
+#' 
 #' tidy(tt)
 #'
 #' wt <- wilcox.test(mpg ~ am, data = mtcars, conf.int = TRUE, exact = FALSE)
+#' 
 #' tidy(wt)
 #'
 #' ct <- cor.test(mtcars$wt, mtcars$mpg)
+#' 
 #' tidy(ct)
 #'
 #' chit <- chisq.test(xtabs(Freq ~ Sex + Class, data = as.data.frame(Titanic)))
+#' 
 #' tidy(chit)
 #' augment(chit)
-#'
+#' 
 #' @aliases htest_tidiers
 #' @export
 #' @family htest tidiers
@@ -52,7 +59,7 @@ tidy.htest <- function(x, ...) {
     ret$estimate <- NULL
 
     # special case: in a t-test, estimate = estimate1 - estimate2
-    if (x$method == "Welch Two Sample t-test") {
+    if (x$method %in% c("Welch Two Sample t-test", " Two Sample t-test")) {
       ret <- c(estimate = ret$estimate1 - ret$estimate2, ret)
     }
   }
@@ -63,22 +70,27 @@ tidy.htest <- function(x, ...) {
     if (is.null(names(x$parameter))) {
       warning("Multiple unnamed parameters in hypothesis test; dropping them")
     } else {
+      # rename num df to num.df and denom df to denom.df
+      np <- names(x$parameter)
+      np <- stringr::str_replace(np, "num df", "num.df")
+      np <- stringr::str_replace(np, "denom df", "den.df")
+      names(x$parameter) <- np
+      
       message(
         "Multiple parameters; naming those columns ",
-        paste(make.names(names(x$parameter)), collapse = ", ")
+        paste(np, collapse = ", ")
       )
-      # rename num df to num.df and denom df to denom.df
-      names(x$parameter) <- make.names(names(x$parameter))
+      
       ret <- append(ret, x$parameter, after = 1)
     }
   }
 
-  ret <- compact(ret)
+  ret <- purrr::compact(ret)
   if (!is.null(x$conf.int)) {
     ret <- c(ret, conf.low = x$conf.int[1], conf.high = x$conf.int[2])
   }
   if (!is.null(x$method)) {
-    ret <- c(ret, method = as.character(x$method))
+    ret <- c(ret, method = trimws(as.character(x$method)))
   }
   if (!is.null(x$alternative)) {
     ret <- c(ret, alternative = as.character(x$alternative))
@@ -93,9 +105,9 @@ glance.htest <- function(x, ...) tidy(x)
 
 #' @templateVar class htest
 #' @template title_desc_augment
-#' 
+#'
 #' @inherit tidy.htest params examples
-#' 
+#'
 #' @evalRd return_glance(
 #'   .observed = "Observed count.",
 #'   .prop = "Proportion of the total.",
@@ -115,8 +127,8 @@ glance.htest <- function(x, ...) tidy(x)
 augment.htest <- function(x, ...) {
   if (all(c("observed", "expected", "residuals", "stdres") %in% names(x))) {
     return(augment_chisq_test(x, ...))
-  } 
-  
+  }
+
   stop(
     "Augment is only defined for chi squared hypothesis tests.",
     call. = FALSE
@@ -159,7 +171,7 @@ augment_chisq_test <- function(x, ...) {
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy("group1", "group2", "p.value")
-#' 
+#'
 #' @details Note that in one-sided tests, the alternative hypothesis of each
 #'   test can be stated as "group1 is greater/less than group2".
 #'
@@ -173,25 +185,30 @@ augment_chisq_test <- function(x, ...) {
 #' ptt <- pairwise.t.test(Ozone, Month)
 #' tidy(ptt)
 #'
-#' attach(iris)
-#' ptt2 <- pairwise.t.test(Petal.Length, Species)
+#' library(modeldata)
+#' data(hpc_data)
+#' attach(hpc_data)
+#' ptt2 <- pairwise.t.test(compounds, class)
 #' tidy(ptt2)
 #'
-#' tidy(pairwise.t.test(Petal.Length, Species, alternative = "greater"))
-#' tidy(pairwise.t.test(Petal.Length, Species, alternative = "less"))
+#' tidy(pairwise.t.test(compounds, class, alternative = "greater"))
+#' tidy(pairwise.t.test(compounds, class, alternative = "less"))
 #'
-#' tidy(pairwise.wilcox.test(Petal.Length, Species))
-#'
+#' tidy(pairwise.wilcox.test(compounds, class))
 #' @export
 #' @seealso [stats::pairwise.t.test()], [stats::pairwise.wilcox.test()],
 #'   [tidy()]
 #' @family htest tidiers
-#' 
+#'
 tidy.pairwise.htest <- function(x, ...) {
   tibble(group1 = rownames(x$p.value)) %>%
     cbind(x$p.value) %>%
-    tidyr::gather(group2, p.value, -group1) %>%
-    stats::na.omit() %>% 
+    pivot_longer(
+      cols = c(dplyr::everything(), -group1),
+      names_to = "group2",
+      values_to = "p.value"
+    ) %>%
+    stats::na.omit() %>%
     as_tibble()
 }
 
@@ -203,21 +220,20 @@ tidy.pairwise.htest <- function(x, ...) {
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy("n", "delta", "sd", "sig.level", "power")
-#' 
+#'
 #' @examples
 #'
 #' ptt <- power.t.test(n = 2:30, delta = 1)
 #' tidy(ptt)
 #'
 #' library(ggplot2)
-#' 
+#'
 #' ggplot(tidy(ptt), aes(n, power)) +
 #'   geom_line()
-#'
 #' @export
 #' @family htest tidiers
 #' @seealso [stats::power.t.test()]
 tidy.power.htest <- function(x, ...) {
-  cols <- compact(x[c("n", "delta", "sd", "sig.level", "power", "p1", "p2")])
+  cols <- purrr::compact(x[c("n", "delta", "sd", "sig.level", "power", "p1", "p2")])
   as_tibble(cols)
 }

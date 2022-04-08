@@ -25,44 +25,59 @@ with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
 or model convergence information.
 
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
 
 Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an \code{NA}
+of the appropriate type.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("nnet", quietly = TRUE)) {
+  if (requireNamespace("MASS", quietly = TRUE)) {
+
+# load libraries for models and data
 library(nnet)
 library(MASS)
 
 example(birthwt)
+
 bwt.mu <- multinom(low ~ ., bwt)
+
 tidy(bwt.mu)
 glance(bwt.mu)
 
-#* This model is a truly terrible model
-#* but it should show you what the output looks
-#* like in a multinomial logistic regression
-
+# or, for output from a multinomial logistic regression
 fit.gear <- multinom(gear ~ mpg + factor(am), data = mtcars)
 tidy(fit.gear)
 glance(fit.gear)
+
+  }
+}
 
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[nnet:multinom]{nnet::multinom()}}
 
-Other multinom tidiers: \code{\link{tidy.multinom}}
+Other multinom tidiers: 
+\code{\link{tidy.multinom}()}
 }
 \concept{multinom tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{AIC}{Akaike's Information Criterion for the model.}
   \item{deviance}{Deviance of the model.}
-  \item{edf}{The effective degrees of freedom}
+  \item{edf}{The effective degrees of freedom.}
+  \item{nobs}{Number of observations used.}
 
 }

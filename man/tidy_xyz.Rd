@@ -28,17 +28,18 @@ A \link[tibble:tibble]{tibble::tibble} with vector columns \code{x}, \code{y} an
 \description{
 Broom tidies a number of lists that are effectively S3
 objects without a class attribute. For example, \code{\link[stats:optim]{stats::optim()}},
-\code{\link[=svd]{svd()}} and \code{\link[akima:interp]{akima::interp()}} produce consistent output, but because
-they do not have a class attribute, they cannot be handled by S3 dispatch.
+\link[base:svd]{svd()} and \code{\link[akima:interp]{akima::interp()}} produce consistent output, but
+because they do not have a class attribute, they cannot be handled by S3
+dispatch.
 
 These functions look at the elements of a list and determine if there is
 an appropriate tidying method to apply to the list. Those tidiers are
-themselves are implemented as functions of the form \code{tidy_<function>}
-or \code{glance_<function>} and are not exported (but they are documented!).
+implemented as functions of the form \verb{tidy_<function>} or
+\verb{glance_<function>} and are not exported (but they are documented!).
 
-If no appropriate tidying method is found, throws an error.
+If no appropriate tidying method is found, they throw an error.
 
-xyz lists (lists where \code{x} and \code{y} are vector of coordinates
+xyz lists (lists where \code{x} and \code{y} are vectors of coordinates
 and \code{z} is a matrix of values) are typically used by functions such as
 \code{\link[graphics:persp]{graphics::persp()}} or \code{\link[graphics:image]{graphics::image()}} and returned
 by interpolation functions such as \code{\link[akima:interp]{akima::interp()}}.
@@ -48,14 +49,16 @@ by interpolation functions such as \code{\link[akima:interp]{akima::interp()}}.
 A <- list(x = 1:5, y = 1:3, z = matrix(runif(5 * 3), nrow = 5))
 image(A)
 tidy(A)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[graphics:persp]{graphics::persp()}}, \code{\link[graphics:image]{graphics::image()}},
 \code{\link[akima:interp]{akima::interp()}}
 
-Other list tidiers: \code{\link{glance_optim}},
-  \code{\link{list_tidiers}}, \code{\link{tidy_irlba}},
-  \code{\link{tidy_optim}}, \code{\link{tidy_svd}}
+Other list tidiers: 
+\code{\link{glance_optim}()},
+\code{\link{list_tidiers}},
+\code{\link{tidy_irlba}()},
+\code{\link{tidy_optim}()},
+\code{\link{tidy_svd}()}
 }
 \concept{list tidiers}

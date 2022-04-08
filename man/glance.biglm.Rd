@@ -26,28 +26,43 @@ with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
 or model convergence information.
 
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
 
 Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an \code{NA}
+of the appropriate type.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("biglm", quietly = TRUE)) {
+
+# load modeling library
 library(biglm)
 
+# fit model -- linear regression
 bfit <- biglm(mpg ~ wt + disp, mtcars)
+
+# summarize model fit with tidiers
 tidy(bfit)
 tidy(bfit, conf.int = TRUE)
 tidy(bfit, conf.int = TRUE, conf.level = .9)
 
 glance(bfit)
 
-# bigglm: logistic regression
+# fit model -- logistic regression
 bgfit <- bigglm(am ~ mpg, mtcars, family = binomial())
+
+# summarize model fit with tidiers
 tidy(bgfit)
 tidy(bgfit, exponentiate = TRUE)
 tidy(bgfit, conf.int = TRUE)
@@ -57,10 +72,13 @@ tidy(bgfit, conf.int = TRUE, conf.level = .9, exponentiate = TRUE)
 glance(bgfit)
 
 }
+
+}
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[biglm:biglm]{biglm::biglm()}}, \code{\link[biglm:bigglm]{biglm::bigglm()}}
 
-Other biglm tidiers: \code{\link{tidy.biglm}}
+Other biglm tidiers: 
+\code{\link{tidy.biglm}()}
 }
 \concept{biglm tidiers}
 \value{
@@ -68,6 +86,7 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{AIC}{Akaike's Information Criterion for the model.}
   \item{deviance}{Deviance of the model.}
   \item{df.residual}{Residual degrees of freedom.}
+  \item{nobs}{Number of observations used.}
   \item{r.squared}{R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.}
 
 }

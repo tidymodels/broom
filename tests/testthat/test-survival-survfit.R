@@ -1,5 +1,7 @@
 context("survival-survfit")
 
+skip_on_cran()
+
 skip_if_not_installed("modeltests")
 library(modeltests)
 
@@ -26,24 +28,22 @@ test_that("survfit tidier arguments", {
 test_that("tidy.survfit", {
   td <- tidy(sfit)
   td2 <- tidy(fit2)
-  
+
   check_tidy_output(td)
   check_tidy_output(td2)
 })
 
 test_that("glance.survfit", {
-  
   expect_error(
     glance(sfit),
     regexp = "Cannot construct a glance of a multi-strata survfit object."
   )
-  
+
   expect_error(
     glance(fit2),
     regexp = "Cannot construct a glance of a multi-state survfit object."
   )
-  
+
   gl <- glance(sfit2)
   check_glance_outputs(gl)
 })
-
