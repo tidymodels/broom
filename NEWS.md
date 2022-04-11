@@ -8,7 +8,7 @@ While broom 0.8.0 does not introduce much in terms of new functionality or break
      - All tidiers now have example code demonstrating usage in their documentation. Tidiers for base packages as well as selected others also include sample code for visualization of results with ggplot2.
      - Code examples in the documentation largely now follow consistent style---these changes were made largely to reflect the tidyverse style guide, addressing spacing, object naming, and commenting, among other things.
      - Examples previously marked with `\dontrun` or `\donttest` have been workshopped to run reliably.
-* Clarify errors and warnings for deprecated tidiers.
+* Clarify errors and warnings for deprecated and un-maintained tidiers.
 * Ensure that tidiers are placed in files named according to the model-supplying package rather than the model object class for easier navigability of the source code.
 
 ### Bug fixes and other improvements
