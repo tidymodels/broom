@@ -48,8 +48,9 @@ fixed effects, see \url{https://github.com/lrberge/fixest/issues/6} and
 }
 \examples{
 
-# broom opts not to test these examples, though they ought to run just fine!
-\dontrun{
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("fixest", quietly = TRUE)) {
 
 # load libraries for models and data
 library(fixest)

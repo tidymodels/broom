@@ -42,8 +42,9 @@ depending on the type of model estimated. \code{sigma}, \code{r.squared},
 }
 \examples{
 
-# broom opts not to test these examples, though they ought to run just fine!
-\dontrun{
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("fixest", quietly = TRUE)) {
 
 # load libraries for models and data
 library(fixest)
