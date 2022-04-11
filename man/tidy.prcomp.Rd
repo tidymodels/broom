@@ -81,6 +81,10 @@ that SVD is only equivalent to PCA on centered data.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the data-supplying package to be installed.
+if (requireNamespace("maps", quietly = TRUE)) {
+
 pc <- prcomp(USArrests, scale = TRUE)
 
 # information about rotation
@@ -95,6 +99,7 @@ tidy(pc, "pcs")
 # state map
 library(dplyr)
 library(ggplot2)
+library(maps)
 
 pc \%>\%
   tidy(matrix = "samples") \%>\%
@@ -113,6 +118,8 @@ au
 ggplot(au, aes(.fittedPC1, .fittedPC2)) +
   geom_point() +
   geom_text(aes(label = .rownames), vjust = 1, hjust = 1)
+  
+}   
   
 }
 \seealso{
