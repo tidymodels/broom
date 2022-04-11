@@ -485,15 +485,15 @@ broom_confint_terms <- function(x, ...) {
 }
 
 # warn when models subclasses glm/lm and do not have their own dedicated tidiers.
-warn_on_subclass <- function(x) {
+warn_on_subclass <- function(x, tidier) {
   if (length(class(x)) > 1 && class(x)[1] != "glm") {
     subclass <- class(x)[1]
     dispatched_method <- class(x)[class(x) %in% c("glm", "lm")][1]
     
     warning(
-      "Tidiers for objects of class ", 
+      "The `", tidier, "()` method for objects of class ", 
       subclass, 
-      " are not maintained by the broom team, and are only supported through ",
+      " is not maintained by the broom team, and is only supported through ",
       "the ", 
       dispatched_method, 
       " tidier method. Please be cautious in interpreting and reporting ",

@@ -93,14 +93,14 @@ test_that("appropriate warning on (g)lm-subclassed models", {
   class(x) <- c("gee", "glm")
   
   expect_warning(
-    warn_on_subclass(x),
+    warn_on_subclass(x, "tidy"),
     "only supported through the glm tidier method."
   )
   
   class(x) <- c("gee", "glm", "lm")
   
   expect_warning(
-    warn_on_subclass(x),
+    warn_on_subclass(x, "tidy"),
     "only supported through the glm tidier method."
   )
 })
