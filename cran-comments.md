@@ -1,4 +1,4 @@
-# broom 0.7.12.9000
+# broom 0.8.0
 
 ## R CMD check results
 
