@@ -282,7 +282,7 @@ augment_columns <- function(x, data, newdata = NULL, type, type.predict = type,
 
     original <- data
 
-    if (class(na_action) == "exclude") {
+    if (inherits(na_action, "exclude")) {
       # check if values are missing
       if (length(stats::residuals(x)) > nrow(data)) {
         warning(
@@ -300,7 +300,7 @@ augment_columns <- function(x, data, newdata = NULL, type, type.predict = type,
     # no NAs were left out; we can simply recombine
     original <- as_augment_tibble(original)
     return(as_tibble(cbind(original, ret)))
-  } else if (class(na_action) == "omit") {
+  } else if (inherits(na_action, "omit")) {
     # if the option is "omit", drop those rows from the data
     original <- as_augment_tibble(original)
     original <- original[-na_action, ]
