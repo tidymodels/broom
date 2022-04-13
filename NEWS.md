@@ -1,15 +1,29 @@
-# broom 0.7.12.9000
+# broom 0.8.0.9000 (development version)
 
-To be released as broom 0.8.0.
+To be released as 0.8.1.
 
-While broom 0.8.0 does not introduce much in terms of new functionality or breaking changes, this update makes significant improvements to documentation and usability of the package and marks a new stage in the package's lifecycle.
+# broom 0.8.0
 
-* Many improvements to documentation: 
+This update makes significant improvements to documentation, fixes a number of bugs, and brings the development flow of the package up to date with other packages in the tidymodels.
+
+In the big picture, this release:
+
+* Makes many improvements to documentation: 
      - All tidiers now have example code demonstrating usage in their documentation. Tidiers for base packages as well as selected others also include sample code for visualization of results with ggplot2.
      - Code examples in the documentation largely now follow consistent style---these changes were made largely to reflect the tidyverse style guide, addressing spacing, object naming, and commenting, among other things.
      - Examples previously marked with `\dontrun` or `\donttest` have been workshopped to run reliably.
-* Clarify errors and warnings for deprecated tidiers.
-* Ensure that tidiers are placed in files named according to the model-supplying package rather than the model object class for easier navigability of the source code.
+* Clarifies errors and warnings for deprecated and un-maintained tidiers.
+* Ensures that tidiers are placed in files named according to the model-supplying package rather than the model object class for easier navigability of the source code.
+
+### Bug fixes and other improvements
+
+* Fix `glance.fixest` error when model includes only fixed effects and no regressors (`#1018` by `@arcruz0`, `#1088` by `@vincentarelbundock`).
+* Address excessive messaging from `tidy.speedlm` (`#1084` by `@cgoo4`, `#1087` by `@vincentarelbundock`).
+* Add `nobs` column to the output of `glance.svyglm` (`#1085` by `@fschaffner`, `#1086` by `@vincentarelbundock`).
+* Ensure `tidy.prcomp` description entries use consistent punctuation (`#1072` by `@PursuitOfDataScience`).
+* Address breaking changes in `glance.fixest` and `tidy.btergm`.
+* Simplify handling of `MASS::polr` output in the corresponding `tidy` and `augment` methods.
+* Align continuous integration with current standards in tidymodels packages.
 
 * Update in `tidy.htest()` converting matrix-columns to vector-columns. (#1081)
 

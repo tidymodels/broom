@@ -1,7 +1,7 @@
 Type: Package
 Package: broom
 Title: Convert Statistical Objects into Tidy Tibbles
-Version: 0.7.12.9000
+Version: 0.8.0.9000
 Authors@R:
     c(person(given = "David",
              family = "Robinson",
@@ -17,6 +17,7 @@ Authors@R:
              role = c("aut", "cre"),
              email = "simonpatrickcouch@gmail.com",
              comment = c(ORCID = "0000-0001-5676-5107")),
+      person("RStudio", role = c("cph", "fnd")),
       person(given = "Indrajeet",
              family = "Patil",
              role = "ctb",
@@ -534,7 +535,8 @@ Description: Summarizes key information about statistical
     observations to a dataset, such as fitted values or influence
     measures.
 License: MIT + file LICENSE
-URL: https://broom.tidymodels.org/, https://github.com/tidymodels/broom
+URL: https://broom.tidymodels.org/,
+    https://github.com/tidymodels/broom
 BugReports: https://github.com/tidymodels/broom/issues
 Depends:
     R (>= 3.1)
@@ -560,7 +562,7 @@ Suggests:
     biglm,
     binGroup,
     boot,
-    btergm,
+    btergm (>= 1.10.6),
     car,
     caret,
     cluster,

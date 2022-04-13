@@ -168,13 +168,16 @@ glance.fixest <- function(x, ...) {
   )
 
   if (identical(x$method, "feols")) {
-    r2_vals <- fixest::r2(x, type = c("r2", "ar2", "wr2"))
+    r2_types <- c("r2", "ar2", "wr2")
+    r2_vals <- purrr::map_dbl(r2_types, fixest::r2, x = x) %>%
+      purrr::set_names(r2_types)
     r2_names <- c("r.squared", "adj.r.squared", "within.r.squared")
     # Pull the summary objects that are specific to OLS
     res_specific <- with(
       summary(x, ...),
       tibble(
-        sigma = sqrt(sigma2),
+        # catch error in models with only fixed effects and no regressors
+        sigma = tryCatch(sqrt(sigma2), error = function(e) NA_real_),
         pseudo.r.squared = NA_real_, # always NA for OLS
       )
     )

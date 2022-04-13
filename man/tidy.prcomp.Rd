@@ -51,15 +51,15 @@ row in the tidied output corresponds to information about the principle
 components in the original space. The columns are:
 
 \item{\code{row}}{The variable labels (colnames) of the data set on
-which PCA was performed}
-\item{\code{PC}}{An integer vector indicating the principal component}
+which PCA was performed.}
+\item{\code{PC}}{An integer vector indicating the principal component.}
 \item{\code{value}}{The value of the eigenvector (axis score) on the
-indicated principal component}
+indicated principal component.}
 
 If \code{matrix} is \code{"d"}, \code{"eigenvalues"} or \code{"pcs"}, the columns are:
 
-\item{\code{PC}}{An integer vector indicating the principal component}
-\item{\code{std.dev}}{Standard deviation explained by this PC}
+\item{\code{PC}}{An integer vector indicating the principal component.}
+\item{\code{std.dev}}{Standard deviation explained by this PC.}
 \item{\code{percent}}{Fraction of variation explained by this component
 (a numeric value between 0 and 1).}
 \item{\code{cumulative}}{Cumulative fraction of variation explained by
@@ -81,6 +81,10 @@ that SVD is only equivalent to PCA on centered data.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the data-supplying package to be installed.
+if (requireNamespace("maps", quietly = TRUE)) {
+
 pc <- prcomp(USArrests, scale = TRUE)
 
 # information about rotation
@@ -95,6 +99,7 @@ tidy(pc, "pcs")
 # state map
 library(dplyr)
 library(ggplot2)
+library(maps)
 
 pc \%>\%
   tidy(matrix = "samples") \%>\%
@@ -113,6 +118,8 @@ au
 ggplot(au, aes(.fittedPC1, .fittedPC2)) +
   geom_point() +
   geom_text(aes(label = .rownames), vjust = 1, hjust = 1)
+  
+}   
   
 }
 \seealso{

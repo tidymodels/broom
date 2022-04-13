@@ -182,6 +182,10 @@ augment_chisq_test <- function(x, ...) {
 #'
 #' @examples
 #'
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the data-supplying package to be installed.
+#' if (requireNamespace("modeldata", quietly = TRUE)) {
+#'
 #' attach(airquality)
 #' Month <- factor(Month, labels = month.abb[5:9])
 #' ptt <- pairwise.t.test(Ozone, Month)
@@ -197,6 +201,9 @@ augment_chisq_test <- function(x, ...) {
 #' tidy(pairwise.t.test(compounds, class, alternative = "less"))
 #'
 #' tidy(pairwise.wilcox.test(compounds, class))
+#' 
+#' }
+#' 
 #' @export
 #' @seealso [stats::pairwise.t.test()], [stats::pairwise.wilcox.test()],
 #'   [tidy()]

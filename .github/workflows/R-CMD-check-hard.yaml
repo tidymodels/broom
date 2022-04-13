@@ -1,10 +1,18 @@
+# Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
+# Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
+#
+# NOTE: This workflow only directly installs "hard" dependencies, i.e. Depends,
+# Imports, and LinkingTo dependencies. Notably, Suggests dependencies are never
+# installed, with the exception of testthat, knitr, and rmarkdown. The cache is
+# never used to avoid accidentally restoring a cache containing a suggested
+# dependency.
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
 
-name: R-CMD-check
+name: R-CMD-check-hard
 
 jobs:
   R-CMD-check:
@@ -16,13 +24,7 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: macOS-latest,   r: 'release'}
-
-          - {os: windows-latest, r: 'release'}
-
-          - {os: ubuntu-18.04,   r: 'devel', http-user-agent: 'release'}
           - {os: ubuntu-18.04,   r: 'release'}
-          - {os: ubuntu-18.04,   r: 'oldrel-1'}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -41,7 +43,13 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::rcmdcheck
+          dependencies: '"hard"'
+          cache: false
+          extra-packages: |
+            any::rcmdcheck
+            any::testthat
+            any::knitr
+            any::rmarkdown
           needs: check
 
       - uses: r-lib/actions/check-r-package@v2

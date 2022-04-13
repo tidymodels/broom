@@ -91,7 +91,7 @@
 #' @family lm tidiers
 tidy.lm <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 
-  warn_on_subclass(x)
+  warn_on_subclass(x, "tidy")
 
   ret <- as_tibble(summary(x)$coefficients, rownames = "term")
   colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
@@ -143,7 +143,7 @@ tidy.lm <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 augment.lm <- function(x, data = model.frame(x), newdata = NULL,
                        se_fit = FALSE, interval =  c("none", "confidence", "prediction"), ...) {
   
-  warn_on_subclass(x)
+  warn_on_subclass(x, "augment")
   
   interval <- match.arg(interval)
   df <- augment_newdata(x, data, newdata, se_fit, interval)
@@ -190,7 +190,7 @@ augment.lm <- function(x, data = model.frame(x), newdata = NULL,
 #' @family lm tidiers
 glance.lm <- function(x, ...) {
   
-  warn_on_subclass(x)
+  warn_on_subclass(x, "glance")
   
   # check whether the model was fitted with only an intercept, in which
   # case drop the fstatistic related columns

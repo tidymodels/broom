@@ -47,7 +47,8 @@ test_that("augment.polr", {
     aug = augment.polr,
     model = fit,
     data = housing,
-    newdata = housing
+    newdata = housing,
+    strict = FALSE
   )
 
   au <- augment(fit, type.predict = "class")
