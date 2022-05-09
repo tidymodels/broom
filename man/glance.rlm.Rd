@@ -41,10 +41,7 @@ that no longer have a well-defined value are filled in with an \code{NA}
 of the appropriate type.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("MASS", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("MASS")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(MASS)
@@ -56,8 +53,7 @@ r <- rlm(stack.loss ~ ., stackloss)
 tidy(r)
 augment(r)
 glance(r)
-
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[MASS:rlm]{MASS::rlm()}}

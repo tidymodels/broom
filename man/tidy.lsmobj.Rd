@@ -38,10 +38,7 @@ There are a large number of arguments that can be
 passed on to \code{\link[emmeans:summary.emmGrid]{emmeans::summary.emmGrid()}} or \code{\link[lsmeans:ref.grid]{lsmeans::summary.ref.grid()}}.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("emmeans", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("emmeans")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(emmeans)
@@ -88,9 +85,7 @@ ggplot(tidy(by_price, conf.int = TRUE), aes(price2, estimate, color = day)) +
 
 # joint_tests
 tidy(joint_tests(oranges_lm1))
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[emmeans:ref_grid]{emmeans::ref_grid()}}, \code{\link[emmeans:emmeans]{emmeans::emmeans()}},

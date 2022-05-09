@@ -64,10 +64,7 @@ condition is not met, a message is shown and NA is returned instead of
 p-values.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("MASS", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("MASS")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(MASS)
@@ -84,9 +81,7 @@ augment(fit, type.predict = "class")
 fit2 <- polr(factor(gear) ~ am + mpg + qsec, data = mtcars)
 
 tidy(fit, p.values = TRUE)
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \link{tidy}, \code{\link[MASS:polr]{MASS::polr()}}

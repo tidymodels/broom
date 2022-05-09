@@ -67,10 +67,7 @@ that no longer have a well-defined value are filled in with an \code{NA}
 of the appropriate type.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("lavaan", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("lavaan")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 library(lavaan)
 
@@ -82,9 +79,7 @@ cfa.fit <- cfa(
 
 # summarize model fit with tidiers
 glance(cfa.fit)
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[lavaan:cfa]{lavaan::cfa()}}, \code{\link[lavaan:sem]{lavaan::sem()}},

@@ -30,8 +30,7 @@ For models that have only a single component, the \code{\link[=tidy]{tidy()}} an
 of those methods.
 }
 \examples{
-
-if (requireNamespace("car", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("car")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load modeling library
 library(car)
@@ -44,9 +43,7 @@ tidy(dw)
 
 # same output for all durbinWatsonTests
 glance(dw) 
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[=glance]{glance()}}, \code{\link[car:durbinWatsonTest]{car::durbinWatsonTest()}}

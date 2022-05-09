@@ -30,10 +30,7 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("multcomp", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("multcomp")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(multcomp)
@@ -62,9 +59,7 @@ ggplot(mapping = aes(lhs, estimate)) +
 
 cld <- cld(wht)
 tidy(cld)
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[multcomp:methods]{multcomp::confint.glht()}}, \code{\link[multcomp:glht]{multcomp::glht()}}

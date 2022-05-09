@@ -54,10 +54,7 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("lfe", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("lfe")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(lfe)
@@ -95,9 +92,7 @@ tidy(est2, conf.int = TRUE)
 tidy(est2, conf.int = TRUE, se.type = "cluster")
 tidy(est2, conf.int = TRUE, se.type = "robust")
 tidy(est2, conf.int = TRUE, se.type = "iid")
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[lfe:felm]{lfe::felm()}}

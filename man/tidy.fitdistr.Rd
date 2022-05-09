@@ -29,10 +29,7 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("MASS", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("MASS")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(MASS)
@@ -47,9 +44,7 @@ fit <- fitdistr(x, dnorm, list(mean = 3, sd = 1))
 # summarize model fit with tidiers
 tidy(fit)
 glance(fit)
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[MASS:fitdistr]{MASS::fitdistr()}}

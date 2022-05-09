@@ -55,10 +55,7 @@ if the number of instruments is not greater than the number of
 endogenous regressors.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("AER", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("AER")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(AER)
@@ -83,9 +80,7 @@ augment(ivr, data = CigarettesSW)
 augment(ivr, newdata = CigarettesSW)
 
 glance(ivr)
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[AER:ivreg]{AER::ivreg()}}

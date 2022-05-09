@@ -41,10 +41,7 @@ effect in the control and treatment groups, respectively. And the last
 two the direct effect in each group.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("mediation", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("mediation")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(mediation)
@@ -60,9 +57,7 @@ mod <- mediate(b, c, sims = 50, treat = "treat", mediator = "job_seek")
 tidy(mod)
 tidy(mod, conf.int = TRUE)
 tidy(mod, conf.int = TRUE, conf.level = .99)
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[mediation:mediate]{mediation::mediate()}}

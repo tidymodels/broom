@@ -40,10 +40,7 @@ The tibble has one row for each curve and term in the regression.
 The \code{curveid} column indicates the curve.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("drc", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("drc")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(drc)
@@ -60,9 +57,7 @@ tidy(mod, conf.int = TRUE)
 glance(mod)
 
 augment(mod, selenium)
-
-} 
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[drc:drm]{drc::drm()}}

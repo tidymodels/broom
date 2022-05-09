@@ -52,10 +52,7 @@ presence of heteroskedasticity. For further discussion see, e.g. chapter 8.1
 of Wooldridge (2016).
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("lmtest", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("lmtest")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(lmtest)
@@ -86,9 +83,7 @@ tidy(coeftest(m, vcov = NeweyWest))
 # Users can control this with the "save = TRUE" argument of coeftest().
 glance(coeftest(m))
 glance(coeftest(m, save = TRUE))
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \references{
 Wooldridge, Jeffrey M. (2016) \cite{Introductory econometrics: A

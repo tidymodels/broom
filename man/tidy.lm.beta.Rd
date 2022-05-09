@@ -42,10 +42,7 @@ If you have missing values in your model data, you may need to refit
 the model with \code{na.action = na.exclude}.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("lm.beta", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("lm.beta")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(lm.beta)
@@ -69,9 +66,7 @@ std2 <- lm.beta(mod2)
 
 # summarize model fit with tidiers
 tidy(std2, conf.int = TRUE)
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other lm tidiers: 

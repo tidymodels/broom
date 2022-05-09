@@ -33,10 +33,7 @@ specify which components to return.
 \code{dfbeta = TRUE}.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("survival", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("survival")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(survival)
@@ -50,9 +47,7 @@ afit <- aareg(
 
 # summarize model fit with tidiers
 tidy(afit)
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[survival:aareg]{survival::aareg()}}

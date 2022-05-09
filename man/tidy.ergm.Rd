@@ -47,10 +47,7 @@ the \pkg{ergm} class, such as those produced from weighted networks by the
 \pkg{ergm.count} package.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("ergm", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("ergm")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(ergm)
@@ -73,9 +70,7 @@ tidy(gest, exponentiate = TRUE, conf.int = TRUE, conf.level = 0.99)
 glance(gest)
 glance(gest, deviance = TRUE)
 glance(gest, mcmc = TRUE)
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \references{
 Hunter DR, Handcock MS, Butts CT, Goodreau SM, Morris M (2008b).

@@ -35,10 +35,7 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("caret", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("caret")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(caret)
@@ -70,9 +67,7 @@ six_class_cm <- confusionMatrix(
 # summarize model fit with tidiers
 tidy(six_class_cm)
 tidy(six_class_cm, by_class = FALSE)
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[caret:confusionMatrix]{caret::confusionMatrix()}}

@@ -69,10 +69,7 @@ We are in the process of defining behaviors for models fit with various
 missing at this time.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("lfe", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("lfe")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(lfe)
@@ -110,9 +107,7 @@ tidy(est2, conf.int = TRUE)
 tidy(est2, conf.int = TRUE, se.type = "cluster")
 tidy(est2, conf.int = TRUE, se.type = "robust")
 tidy(est2, conf.int = TRUE, se.type = "iid")
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[lfe:felm]{lfe::felm()}}

@@ -53,14 +53,11 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
+\dontshow{if (rlang::is_installed("joineRML")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # broom only skips running these examples because the example models take a
 # while to generate—they should run just fine, though!
 \dontrun{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("joineRML", quietly = TRUE)) {
 
 
 # load libraries for models and data
@@ -107,10 +104,9 @@ hvd2 <- augment(fit)
 
 # extract model statistics
 glance(fit)
-}
 
 }
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[joineRML:mjoint]{joineRML::mjoint()}}, \code{\link[joineRML:bootSE]{joineRML::bootSE()}}

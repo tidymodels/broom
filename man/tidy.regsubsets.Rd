@@ -29,10 +29,7 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("leaps", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("leaps")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(leaps)
@@ -42,9 +39,7 @@ all_fits <- regsubsets(hp ~ ., mtcars)
 
 # summarize model fit with tidiers
 tidy(all_fits)
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[leaps:regsubsets]{leaps::regsubsets()}}

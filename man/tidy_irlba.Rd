@@ -73,10 +73,7 @@ If no appropriate tidying method is found, they throw an error.
 A very thin wrapper around \code{\link[=tidy_svd]{tidy_svd()}}.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the data-supplying package to be installed.
-if (requireNamespace("modeldata", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("modeldata")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 library(modeldata)
 data(hpc_data)
@@ -105,9 +102,8 @@ tidy_u \%>\%
   ggplot(aes(class, value)) +
   geom_boxplot() +
   facet_wrap(~PC, scale = "free_y")
-  
-}
  
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[irlba:irlba]{irlba::irlba()}}

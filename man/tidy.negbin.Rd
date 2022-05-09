@@ -40,10 +40,7 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("MASS", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("MASS")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
  
 # load libraries for models and data
 library(MASS)
@@ -54,9 +51,7 @@ r <- glm.nb(Days ~ Sex/(Age + Eth*Lrn), data = quine)
 # summarize model fit with tidiers
 tidy(r)
 glance(r)
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[MASS:glm.nb]{MASS::glm.nb()}}

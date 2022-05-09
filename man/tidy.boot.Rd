@@ -56,10 +56,7 @@ and \code{statistic} columns are omitted, and only \code{estimate} and
 \code{std.error} columns shown.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("boot", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("boot")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load modeling library
 library(boot)
@@ -82,9 +79,7 @@ bootres <- boot(clotting, bootfun, R = 999)
 # summarize model fits with tidiers
 tidy(g1, conf.int = TRUE)
 tidy(bootres, conf.int = TRUE)
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[boot:boot]{boot::boot()}}, \code{\link[boot:tsboot]{boot::tsboot()}}, \code{\link[boot:boot.ci]{boot::boot.ci()}},

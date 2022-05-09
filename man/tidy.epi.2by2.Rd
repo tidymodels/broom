@@ -36,10 +36,7 @@ The tibble has a column for each of the measures of association
 or tests contained in \code{massoc} or \code{massoc.detail} when \code{\link[epiR:epi.2by2]{epiR::epi.2by2()}} is called.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("epiR", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("epiR")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(epiR)
@@ -59,9 +56,7 @@ fit <- epi.2by2(
 # summarize model fit with tidiers
 tidy(fit, parameters = "moa")
 tidy(fit, parameters = "stat")
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[epiR:epi.2by2]{epiR::epi.2by2()}}

@@ -40,10 +40,7 @@ that no longer have a well-defined value are filled in with an \code{NA}
 of the appropriate type.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("survival", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("survival")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(survival)
@@ -88,9 +85,7 @@ ggplot(risks, aes(age, .fitted, color = sex)) +
 
 ggplot(expected, aes(time, .fitted, color = sex)) +
   geom_point()
-  
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[survival:coxph]{survival::coxph()}}

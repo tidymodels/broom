@@ -47,10 +47,7 @@ confidence intervals for \code{varest} objects. Setting the \code{tidy} argument
 \code{conf.int = TRUE} will return a warning.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("vars", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("vars")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(vars)
@@ -64,9 +61,7 @@ mod <- VAR(Canada, p = 1, type = "both")
 # summarize model fit with tidiers
 tidy(mod)
 glance(mod)
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[vars:VAR]{vars::VAR()}}

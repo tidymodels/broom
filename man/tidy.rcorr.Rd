@@ -41,10 +41,7 @@ matrix from \code{rcorr} there may be entries for both the \code{cor(A, B)} and
 output.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("Hmisc", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("Hmisc")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(Hmisc)
@@ -71,9 +68,7 @@ ggplot(td, aes(p.value)) +
 ggplot(td, aes(estimate, p.value)) +
   geom_point() +
   scale_y_log10()
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[Hmisc:rcorr]{Hmisc::rcorr()}}
