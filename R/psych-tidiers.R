@@ -15,11 +15,7 @@
 #'   cannot be set in `tidy`. Instead you must set the `alpha` argument
 #'   to [psych::cohen.kappa()] when creating the `kappa` object.
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("psych", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("psych")
 #'
 #' # load libraries for models and data
 #' library(psych)
@@ -40,8 +36,6 @@
 #' ggplot(tidy(ck), aes(estimate, type)) +
 #'   geom_point() +
 #'   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high))
-#'   
-#' }
 #' 
 #' @aliases kappa_tidiers psych_tidiers
 #' @export

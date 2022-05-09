@@ -9,12 +9,8 @@
 #' @details Returns a data frame in long format with four columns. Use
 #'   \code{tidyr::pivot_wider(..., names_from = variable, values_from = value)}
 #'   on the output to return to a wide format.
-#'
-#' @examples
 #' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("ks", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("ks")
 #'
 #' # load libraries for models and data
 #' library(ks)
@@ -46,8 +42,6 @@
 #'
 #' td3 <- tidy(k3)
 #' td3
-#' 
-#' }
 #' 
 #' @export
 #' @aliases kde_tidiers ks_tidiers

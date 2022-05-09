@@ -13,11 +13,7 @@
 #' @details The tibble has one row for each curve and term in the regression.
 #'   The `curveid` column indicates the curve.
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("drc", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("drc")
 #'
 #' # load libraries for models and data
 #' library(drc)
@@ -34,8 +30,6 @@
 #' glance(mod)
 #'
 #' augment(mod, selenium)
-#' 
-#' } 
 #' 
 #' @export
 #' @seealso [tidy()], [drc::drm()]

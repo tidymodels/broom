@@ -10,11 +10,8 @@
 #' @details The tibble has four rows. The first two indicate the mediated 
 #'   effect in the control and treatment groups, respectively. And the last 
 #'   two the direct effect in each group.
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("mediation", quietly = TRUE)) {
+#'   
+#' @examplesIf rlang::is_installed("mediation")
 #' 
 #' # load libraries for models and data
 #' library(mediation)
@@ -30,8 +27,6 @@
 #' tidy(mod)
 #' tidy(mod, conf.int = TRUE)
 #' tidy(mod, conf.int = TRUE, conf.level = .99)
-#' 
-#' }
 #' 
 #' @export
 #' @seealso [tidy()], [mediation::mediate()]

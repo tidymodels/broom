@@ -8,12 +8,7 @@
 #'
 #' @evalRd return_tidy("size", "withinss", "cluster")
 #'
-#' @examples
-#'
-#' # feel free to ignore the following lines—they allow {broom} to supply 
-#' # examples without requiring the model/data-supplying package to be installed.
-#' if (requireNamespace("cluster", quietly = TRUE)) {
-#'   if (requireNamespace("modeldata", quietly = TRUE)) {
+#' @examplesIf (rlang::is_installed("cluster") & rlang::is_installed("modeldata"))
 #'   
 #' library(cluster)
 #' library(modeldata)
@@ -29,8 +24,6 @@
 #' glance(fit)
 #' augment(fit, x)
 #' 
-#'   }
-#' }
 #' @details For examples, see the kmeans vignette.
 #'
 #' @aliases kmeans_tidiers

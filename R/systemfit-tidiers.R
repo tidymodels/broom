@@ -17,11 +17,7 @@
 #' @details This tidy method works with any model objects of class `systemfit`.
 #'          Default returns a tibble of six columns.
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("systemfit", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("systemfit")
 #'
 #' set.seed(27)
 #'
@@ -42,8 +38,6 @@
 #' # summarize model fit with tidiers
 #' tidy(fit)
 #' tidy(fit, conf.int = TRUE)
-#' 
-#' }
 #' 
 #' @export
 #' @seealso [tidy()], [systemfit::systemfit()]

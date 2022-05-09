@@ -12,11 +12,7 @@
 #'     and depend on the inputted map object. See ?maps::map for more information."
 #' )
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("maps", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("maps")
 #'
 #' # load libraries for models and data
 #' library(maps)
@@ -34,8 +30,6 @@
 #'   data = tx, geom = "polygon", group = group,
 #'   colour = I("white")
 #' )
-#' 
-#' }
 #' 
 #' @export
 #' @seealso [tidy()], [maps::map()]

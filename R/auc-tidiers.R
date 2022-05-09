@@ -6,11 +6,7 @@
 #'
 #' @evalRd return_tidy("cutoff", "tpr", "fpr")
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("AUC", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("AUC")
 #'
 #' # load libraries for models and data
 #' library(AUC)
@@ -45,8 +41,6 @@
 #'
 #' ggplot(rocs, aes(fpr, tpr, color = algorithm)) +
 #'   geom_line()
-#'   
-#' }
 #' 
 #' @export
 #' @aliases auc_tidiers roc_tidiers

@@ -10,12 +10,7 @@
 #'
 #' @evalRd return_tidy("y.value", regression = TRUE)
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("nnet", quietly = TRUE)) {
-#'   if (requireNamespace("MASS", quietly = TRUE)) {
+#' @examplesIf (rlang::is_installed("nnet") & rlang::is_installed("MASS"))
 #'
 #' # load libraries for models and data
 #' library(nnet)
@@ -32,9 +27,6 @@
 #' fit.gear <- multinom(gear ~ mpg + factor(am), data = mtcars)
 #' tidy(fit.gear)
 #' glance(fit.gear)
-#' 
-#'   }
-#' }
 #' 
 #' @aliases multinom_tidiers nnet_tidiers
 #' @export

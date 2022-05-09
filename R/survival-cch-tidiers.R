@@ -7,11 +7,7 @@
 #'
 #' @evalRd return_tidy(regression = TRUE)
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("survival", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("survival")
 #'
 #' # load libraries for models and data
 #' library(survival)
@@ -45,8 +41,6 @@
 #'   geom_point() +
 #'   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0) +
 #'   geom_vline(xintercept = 0)
-#'   
-#' }
 #'   
 #' @aliases cch_tidiers
 #' @export

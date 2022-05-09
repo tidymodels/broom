@@ -16,12 +16,7 @@
 #' @export
 #' @aliases btergm_tidiers
 #' @seealso [tidy()], [btergm::btergm()]
-#' @examples 
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("bbmle", quietly = TRUE)) {
-#'   if (requireNamespace("network", quietly = TRUE)) {
+#' @examplesIf (rlang::is_installed("bbmle") & rlang::is_installed("network"))
 #' 
 #' library(btergm)
 #' library(network)
@@ -49,9 +44,6 @@
 #' 
 #' # summarize model fit with tidiers
 #' tidy(mod)
-#' 
-#'   }
-#' }
 #' 
 tidy.btergm <- function(x, conf.level = .95, exponentiate = FALSE, ...) {
 

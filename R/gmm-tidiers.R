@@ -7,12 +7,8 @@
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy(regression = TRUE)
-#'
-#' @examples
 #' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("gmm", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("gmm")
 #'
 #' # load libraries for models and data
 #' library(gmm)
@@ -77,8 +73,6 @@
 #'   geom_point() +
 #'   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
 #'   geom_vline(xintercept = 0, color = "red", lty = 2)
-#'   
-#' }
 #' 
 #' @export
 #' @aliases gmm_tidiers

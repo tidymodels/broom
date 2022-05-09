@@ -7,11 +7,7 @@
 #'
 #' @evalRd return_tidy(regression = TRUE)
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("lmtest", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("lmtest")
 #'
 #' # load libraries for models and data
 #' library(lmtest)
@@ -42,8 +38,6 @@
 #' # Users can control this with the "save = TRUE" argument of coeftest().
 #' glance(coeftest(m))
 #' glance(coeftest(m, save = TRUE))
-#' 
-#' }
 #' 
 #' @export
 #' @seealso [tidy()], [lmtest::coeftest()]

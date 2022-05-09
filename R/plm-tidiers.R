@@ -7,11 +7,7 @@
 #'
 #' @evalRd return_tidy(regression = TRUE)
 #'
-#' @examples
-#'
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("plm", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("plm")
 #' 
 #' # load libraries for models and data
 #' library(plm)
@@ -33,8 +29,6 @@
 #'
 #' augment(zz)
 #' glance(zz)
-#' 
-#' }
 #' 
 #' @aliases plm_tidiers
 #' @export

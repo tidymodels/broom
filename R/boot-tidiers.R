@@ -21,11 +21,7 @@
 #' and `statistic` columns are omitted, and only `estimate` and
 #' `std.error` columns shown.
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("boot", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("boot")
 #'
 #' # load modeling library
 #' library(boot)
@@ -48,8 +44,6 @@
 #' # summarize model fits with tidiers
 #' tidy(g1, conf.int = TRUE)
 #' tidy(bootres, conf.int = TRUE)
-#' 
-#' }
 #' 
 #' @export
 #' @aliases boot_tidiers

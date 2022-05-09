@@ -10,12 +10,7 @@
 #' 
 #' @evalRd return_tidy(regression = TRUE)
 #' 
-#' @examples 
-#' 
-#' # feel free to ignore the following two lines—they allow {broom} to supply 
-#' # examples without requiring the model-supplying packages to be installed.
-#' if (requireNamespace("spdep", quietly = TRUE)) {
-#'   if (requireNamespace("spatialreg", quietly = TRUE)) {
+#' @examplesIf (rlang::is_installed("spdep") & rlang::is_installed("spatialreg"))
 #' 
 #'       
 #' # load libraries for models and data      
@@ -57,9 +52,6 @@
 #' tidy(crime_sac, conf.int = TRUE)
 #' glance(crime_sac)
 #' augment(crime_sac)
-#' 
-#'   }
-#' }
 #' 
 #' @aliases spatialreg_tidiers
 #' @export

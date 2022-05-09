@@ -14,11 +14,7 @@
 #'   Similarly, an `augment.margins()` method is not currently supported, but
 #'   users can simply run the underlying model to obtain the same information.
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("margins", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("margins")
 #' 
 #' # load libraries for models and data
 #' library(margins)
@@ -70,8 +66,6 @@
 #' 
 #' # summarize model fit with tidiers
 #' tidy(marg_ie2)
-#' 
-#' }
 #' 
 #' @export
 #' @aliases margins_tidiers

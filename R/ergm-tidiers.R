@@ -20,11 +20,7 @@
 #'   \item{mcmc.error}{The MCMC error}
 #'   \item{p.value}{The two-sided p-value}
 #' 
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("ergm", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("ergm")
 #'
 #' # load libraries for models and data
 #' library(ergm)
@@ -47,8 +43,6 @@
 #' glance(gest)
 #' glance(gest, deviance = TRUE)
 #' glance(gest, mcmc = TRUE)
-#' 
-#' }
 #' 
 #' @references Hunter DR, Handcock MS, Butts CT, Goodreau SM, Morris M (2008b).
 #'   \pkg{ergm}: A Package to Fit, Simulate and Diagnose Exponential-Family

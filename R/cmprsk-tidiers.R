@@ -15,11 +15,7 @@
 #'   "conf.high"
 #' )
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("cmprsk", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("cmprsk")
 #'
 #' library(cmprsk)
 #' 
@@ -35,8 +31,6 @@
 #' # summarize model fit with tidiers
 #' tidy(x, conf.int = TRUE)
 #' glance(x)
-#' 
-#' }
 #'
 #' @aliases cmprsk_tidiers
 #' @export

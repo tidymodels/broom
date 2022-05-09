@@ -7,11 +7,7 @@
 #'
 #' @evalRd return_tidy(regression = TRUE)
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("bbmle", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("bbmle")
 #'
 #' # load libraries for models and data
 #' library(bbmle)
@@ -28,8 +24,6 @@
 #'
 #' # summarize model fit with tidiers
 #' tidy(fit)
-#' 
-#' }
 #' 
 #' @export
 #' @seealso [tidy()], [bbmle::mle2()], [tidy_optim()]

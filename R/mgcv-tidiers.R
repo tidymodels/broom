@@ -25,11 +25,7 @@
 #'   than `estimate` and `std.error`.
 #'
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("mgcv", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("mgcv")
 #'
 #' # load libraries for models and data
 #' library(mgcv)
@@ -42,8 +38,6 @@
 #' tidy(g, parametric = TRUE)
 #' glance(g)
 #' augment(g)
-#' 
-#' }
 #' 
 #' @export
 #' @aliases mgcv_tidiers gam_tidiers tidy.gam
