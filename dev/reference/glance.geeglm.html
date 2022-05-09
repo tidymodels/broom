@@ -147,10 +147,6 @@ the <code>data</code> argument.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="co"># feel free to ignore the following line—it allows {broom} to supply </span></span>
-<span class="r-in"><span class="co"># examples without requiring the model-supplying package to be installed.</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"geepack"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"></span>
 <span class="r-in"><span class="co"># load modeling library</span></span>
 <span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">geepack</span><span class="op">)</span></span>
 <span class="r-in"></span>
@@ -166,12 +162,6 @@ the <code>data</code> argument.</p></dd>
 <span class="r-in">  data <span class="op">=</span> <span class="va">ds</span>, family <span class="op">=</span> <span class="va">gaussian</span>,</span>
 <span class="r-in">  corstr <span class="op">=</span> <span class="st">"exchangeable"</span></span>
 <span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># summarize model fit with tidiers</span></span>
-<span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">geefit</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">geefit</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="op">}</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $fct</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> function (dose, parm) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> {</span>
@@ -180,8 +170,8 @@ the <code>data</code> argument.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     fd(dose, parmMat[, 1], parmMat[, 2], parmMat[, 3], parmMat[, </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         4], parmMat[, 5])</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x555b856a92d0&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x555b92a5bb88&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x56240c52ad90&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x5624105f38d8&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ssfct</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> function (dframe) </span>
@@ -200,8 +190,8 @@ the <code>data</code> argument.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     befVal &lt;- c(bVal, x[which.max(y)], 1)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     return(c(befVal[1], cdVal, befVal[2:3])[is.na(fixed)])</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x555b92a5aa68&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x555b92a56aa0&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5624105f2a58&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x5624105f09e8&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $names</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "b" "c" "d" "e" "f"</span>
@@ -214,8 +204,8 @@ the <code>data</code> argument.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     attr(fd(dose, parmMat[, 1], parmMat[, 2], parmMat[, 3], parmMat[, </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         4], parmMat[, 5]), "gradient")[, notFixed]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x555b856a8000&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x555b92a5bb88&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x56240adc0700&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x5624105f38d8&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $deriv2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
@@ -241,8 +231,8 @@ the <code>data</code> argument.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     attr(dFct(dose, parmMat[, 1], parmMat[, 2], parmMat[, 3], </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         parmMat[, 4], parmMat[, 5]), "gradient")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x555b856b6b88&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x555b92a5bb88&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x56240adbf388&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x5624105f38d8&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $edfct</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> function (parm, respl, reference, type, ...) </span>
@@ -277,8 +267,8 @@ the <code>data</code> argument.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         parmVec[5]), "gradient")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     return(list(EDp, EDder[notFixed]))</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x555b856bc648&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x555b92a5bb88&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x56240adc4e48&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x5624105f38d8&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $name</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "family"</span>
@@ -295,8 +285,8 @@ the <code>data</code> argument.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     parmVec[indexVec] &lt;- parm</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     parmVec[parmNo]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x555b858254f8&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x555b92a540c8&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5624047dc378&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x5624105ee080&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upperAs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> function (parm) </span>
@@ -304,8 +294,8 @@ the <code>data</code> argument.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     parmVec[indexVec] &lt;- parm</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     parmVec[parmNo]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x555b858254f8&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x555b92a54330&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5624047dc378&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x5624105ee2e8&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $monoton</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
@@ -317,6 +307,11 @@ the <code>data</code> argument.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "gaussian"</span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in glm(formula = Income ~ Frost + Murder, family = gaussian, data = ds):</span> 'family' not recognized</span>
 <span class="r-in"></span>
+<span class="r-in"><span class="co"># summarize model fit with tidiers</span></span>
+<span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">geefit</span><span class="op">)</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in tidy(geefit):</span> object 'geefit' not found</span>
+<span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">geefit</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in tidy(geefit, conf.int = TRUE):</span> object 'geefit' not found</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -330,7 +325,7 @@ the <code>data</code> argument.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
   </div></footer></body></html>

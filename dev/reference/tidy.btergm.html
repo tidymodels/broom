@@ -135,13 +135,27 @@ the <code>data</code> argument.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="co"># feel free to ignore the following line—it allows {broom} to supply </span></span>
-<span class="r-in"><span class="co"># examples without requiring the model-supplying package to be installed.</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"bbmle"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"network"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"></span>
 <span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/leifeld/btergm" class="external-link">btergm</a></span><span class="op">)</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Registered S3 methods overwritten by 'ergm':</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   method               from</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   simulate.formula     lme4</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   simulate.formula_lhs lme4</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Registered S3 methods overwritten by 'btergm':</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   method    from</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   plot.gof  ergm</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   print.gof ergm</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Package:  btergm</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Version:  1.10.6</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Date:     2022-04-01</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Authors:  Philip Leifeld (University of Essex)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>           Skyler J. Cranmer (The Ohio State University)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>           Bruce A. Desmarais (Pennsylvania State University)</span>
 <span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://statnet.org/" class="external-link">network</a></span><span class="op">)</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ‘network’ 1.17.1 (2021-06-12), part of the Statnet Project</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> * ‘news(package="network")’ for changes since last version</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> * ‘citation("network")’ for citation information</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> * ‘https://statnet.org’ for help, support, and other information</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
 <span class="r-in"></span>
@@ -163,31 +177,6 @@ the <code>data</code> argument.</p></dd>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># fit the model</span></span>
 <span class="r-in"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/btergm/man/btergm.html" class="external-link">btergm</a></span><span class="op">(</span><span class="va">networks</span> <span class="op">~</span> <span class="va">edges</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/btergm/man/gof-statistics.html" class="external-link">istar</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="fu">edgecov</span><span class="op">(</span><span class="va">covariates</span><span class="op">)</span>, R <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># summarize model fit with tidiers</span></span>
-<span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="op">}</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Registered S3 methods overwritten by 'ergm':</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   method               from</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   simulate.formula     lme4</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   simulate.formula_lhs lme4</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Registered S3 methods overwritten by 'btergm':</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   method    from</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   plot.gof  ergm</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   print.gof ergm</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Package:  btergm</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Version:  1.10.6</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Date:     2022-04-01</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Authors:  Philip Leifeld (University of Essex)</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>           Skyler J. Cranmer (The Ohio State University)</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>           Bruce A. Desmarais (Pennsylvania State University)</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ‘network’ 1.17.1 (2021-06-12), part of the Statnet Project</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> * ‘news(package="network")’ for changes since last version</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> * ‘citation("network")’ for citation information</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> * ‘https://statnet.org’ for help, support, and other information</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Initial dimensions of the network and covariates:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  t=1 t=2 t=3 t=4 t=5 t=6 t=7 t=8 t=9 t=10</span>
@@ -207,13 +196,15 @@ the <code>data</code> argument.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Starting pseudolikelihood estimation with 100 bootstrapping replications on a single computing core...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Done.</span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># summarize model fit with tidiers</span></span>
+<span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   term                    estimate conf.low conf.high</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> edges                    -<span style="color: #BB0000;">1.23</span>    -<span style="color: #BB0000;">1.37</span>      -<span style="color: #BB0000;">1.01</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> istar2                    0.083<span style="text-decoration: underline;">7</span>  -<span style="color: #BB0000;">0.057</span><span style="color: #BB0000; text-decoration: underline;">1</span>     0.165</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> edgecov.covariates[[i]]  -<span style="color: #BB0000;">0.034</span><span style="color: #BB0000; text-decoration: underline;">5</span>  -<span style="color: #BB0000;">0.177</span>      0.112</span>
-<span class="r-in"></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -227,7 +218,7 @@ the <code>data</code> argument.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
   </div></footer></body></html>

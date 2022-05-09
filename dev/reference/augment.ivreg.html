@@ -220,12 +220,18 @@ objects of class <code>ivreg</code>, and will be supported in a later release.</
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="co"># feel free to ignore the following line—it allows {broom} to supply </span></span>
-<span class="r-in"><span class="co"># examples without requiring the model-supplying package to be installed.</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"AER"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"></span>
 <span class="r-in"><span class="co"># load libraries for models and data</span></span>
 <span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">AER</span><span class="op">)</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: car</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: carData</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Attaching package: ‘car’</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The following object is masked from ‘package:purrr’:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     some</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The following object is masked from ‘package:dplyr’:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     recode</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># load data</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"CigarettesSW"</span>, package <span class="op">=</span> <span class="st">"AER"</span><span class="op">)</span></span>
@@ -239,31 +245,74 @@ objects of class <code>ivreg</code>, and will be supported in a later release.</
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># summarize model fit with tidiers</span></span>
 <span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">ivr</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   term         estimate std.error statistic  p.value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> (Intercept)  4.61<span style="color: #949494;">e</span>+ 0  4.45<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span>    104.   3.74<span style="color: #949494;">e</span><span style="color: #BB0000;">-56</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> income      -<span style="color: #BB0000;">5.71</span><span style="color: #949494;">e</span><span style="color: #BB0000;">-10</span>  2.33<span style="color: #949494;">e</span><span style="color: #BB0000;">-10</span>     -<span style="color: #BB0000;">2.44</span> 1.84<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span></span>
 <span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">ivr</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   term         estimate std.error statistic  p.value conf.low conf.high</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> (Intercept)  4.61<span style="color: #949494;">e</span>+ 0  4.45<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span>    104.   3.74<span style="color: #949494;">e</span><span style="color: #BB0000;">-56</span>  4.52<span style="color: #949494;">e</span>+0  4.70<span style="color: #949494;">e</span>+ 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> income      -<span style="color: #BB0000;">5.71</span><span style="color: #949494;">e</span><span style="color: #BB0000;">-10</span>  2.33<span style="color: #949494;">e</span><span style="color: #BB0000;">-10</span>     -<span style="color: #BB0000;">2.44</span> 1.84<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span> -<span style="color: #BB0000;">1.03</span><span style="color: #949494;">e</span><span style="color: #BB0000;">-9</span> -<span style="color: #BB0000;">1.13</span><span style="color: #949494;">e</span><span style="color: #BB0000;">-10</span></span>
 <span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">ivr</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span>, instruments <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   term   num.df den.df statistic  p.value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> income      1     46     <span style="text-decoration: underline;">3</span>329. 1.46<span style="color: #949494;">e</span><span style="color: #BB0000;">-44</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment</a></span><span class="op">(</span><span class="va">ivr</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 48 × 6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    .rownames `log(packs)`    income population .fitted  .resid</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 49                4.62  83<span style="text-decoration: underline;">903</span>280    4<span style="text-decoration: underline;">262</span>731    4.56  0.052<span style="text-decoration: underline;">2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 50                4.71  45<span style="text-decoration: underline;">995</span>496    2<span style="text-decoration: underline;">480</span>121    4.59  0.124 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 51                4.28  88<span style="text-decoration: underline;">870</span>496    4<span style="text-decoration: underline;">306</span>908    4.56 -<span style="color: #BB0000;">0.285</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 52                4.04 771<span style="text-decoration: underline;">470</span>144   31<span style="text-decoration: underline;">493</span>524    4.17 -<span style="color: #BB0000;">0.131</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 53                4.41  92<span style="text-decoration: underline;">946</span>544    3<span style="text-decoration: underline;">738</span>061    4.56 -<span style="color: #BB0000;">0.145</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 54                4.38 104<span style="text-decoration: underline;">315</span>120    3<span style="text-decoration: underline;">265</span>293    4.55 -<span style="color: #BB0000;">0.177</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 55                4.82  18<span style="text-decoration: underline;">237</span>436     <span style="text-decoration: underline;">718</span>265    4.60  0.223 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 56                4.53 333<span style="text-decoration: underline;">525</span>344   14<span style="text-decoration: underline;">185</span>403    4.42  0.112 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 57                4.58 159<span style="text-decoration: underline;">800</span>448    7<span style="text-decoration: underline;">188</span>538    4.52  0.059<span style="text-decoration: underline;">1</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 58                4.53  60<span style="text-decoration: underline;">170</span>928    2<span style="text-decoration: underline;">840</span>860    4.58 -<span style="color: #BB0000;">0.051</span><span style="color: #BB0000; text-decoration: underline;">2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 38 more rows</span></span>
 <span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment</a></span><span class="op">(</span><span class="va">ivr</span>, data <span class="op">=</span> <span class="va">CigarettesSW</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 96 × 11</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    state year    cpi population packs    income   tax price  taxs .fitted</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> AL    1985   1.08    3<span style="text-decoration: underline;">973</span>000  116.  46<span style="text-decoration: underline;">014</span>968  32.5 102.   33.3    4.56</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> AR    1985   1.08    2<span style="text-decoration: underline;">327</span>000  129.  26<span style="text-decoration: underline;">210</span>736  37   101.   37      4.59</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> AZ    1985   1.08    3<span style="text-decoration: underline;">184</span>000  105.  43<span style="text-decoration: underline;">956</span>936  31   109.   36.2    4.56</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> CA    1985   1.08   26<span style="text-decoration: underline;">444</span>000  100. 447<span style="text-decoration: underline;">102</span>816  26   108.   32.1    4.17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> CO    1985   1.08    3<span style="text-decoration: underline;">209</span>000  113.  49<span style="text-decoration: underline;">466</span>672  31    94.3  31      4.56</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> CT    1985   1.08    3<span style="text-decoration: underline;">201</span>000  109.  60<span style="text-decoration: underline;">063</span>368  42   128.   51.5    4.55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> DE    1985   1.08     <span style="text-decoration: underline;">618</span>000  144.   9<span style="text-decoration: underline;">927</span>301  30   102.   30      4.60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> FL    1985   1.08   11<span style="text-decoration: underline;">352</span>000  122. 166<span style="text-decoration: underline;">919</span>248  37   115.   42.5    4.42</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> GA    1985   1.08    5<span style="text-decoration: underline;">963</span>000  127.  78<span style="text-decoration: underline;">364</span>336  28    97.0  28.8    4.52</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> IA    1985   1.08    2<span style="text-decoration: underline;">830</span>000  114.  37<span style="text-decoration: underline;">902</span>896  34   102.   37.9    4.58</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 86 more rows, and 1 more variable: .resid &lt;dbl&gt;</span></span>
 <span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment</a></span><span class="op">(</span><span class="va">ivr</span>, newdata <span class="op">=</span> <span class="va">CigarettesSW</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 96 × 10</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    state year    cpi population packs    income   tax price  taxs .fitted</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> AL    1985   1.08    3<span style="text-decoration: underline;">973</span>000  116.  46<span style="text-decoration: underline;">014</span>968  32.5 102.   33.3    4.59</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> AR    1985   1.08    2<span style="text-decoration: underline;">327</span>000  129.  26<span style="text-decoration: underline;">210</span>736  37   101.   37      4.60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> AZ    1985   1.08    3<span style="text-decoration: underline;">184</span>000  105.  43<span style="text-decoration: underline;">956</span>936  31   109.   36.2    4.59</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> CA    1985   1.08   26<span style="text-decoration: underline;">444</span>000  100. 447<span style="text-decoration: underline;">102</span>816  26   108.   32.1    4.36</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> CO    1985   1.08    3<span style="text-decoration: underline;">209</span>000  113.  49<span style="text-decoration: underline;">466</span>672  31    94.3  31      4.58</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> CT    1985   1.08    3<span style="text-decoration: underline;">201</span>000  109.  60<span style="text-decoration: underline;">063</span>368  42   128.   51.5    4.58</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> DE    1985   1.08     <span style="text-decoration: underline;">618</span>000  144.   9<span style="text-decoration: underline;">927</span>301  30   102.   30      4.61</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> FL    1985   1.08   11<span style="text-decoration: underline;">352</span>000  122. 166<span style="text-decoration: underline;">919</span>248  37   115.   42.5    4.52</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> GA    1985   1.08    5<span style="text-decoration: underline;">963</span>000  127.  78<span style="text-decoration: underline;">364</span>336  28    97.0  28.8    4.57</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> IA    1985   1.08    2<span style="text-decoration: underline;">830</span>000  114.  37<span style="text-decoration: underline;">902</span>896  34   102.   37.9    4.59</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 86 more rows</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">ivr</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: car</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: carData</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Attaching package: ‘car’</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The following object is masked from ‘package:purrr’:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>     some</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The following object is masked from ‘package:dplyr’:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>     recode</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 8</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   r.squared adj.r.squared sigma statistic p.value    df df.residual  nobs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>     0.131         0.112 0.229      5.98  0.018<span style="text-decoration: underline;">4</span>     2          46    48</span>
-<span class="r-in"></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -277,7 +326,7 @@ objects of class <code>ivreg</code>, and will be supported in a later release.</
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
   </div></footer></body></html>
