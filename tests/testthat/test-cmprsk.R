@@ -42,7 +42,7 @@ test_that("tidy.cmprsk", {
       log() %>%
       unname() %>%
       as.data.frame() %>% 
-      dplyr::select(dplyr::last_col(1:0)) %>%
+      dplyr::select(., tail(names(.), 2)) %>%
       unclass() %>%
       unname(),
     td3 %>% 
