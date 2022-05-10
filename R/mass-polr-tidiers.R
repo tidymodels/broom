@@ -8,11 +8,7 @@
 #' based on chi-squared tests from [MASS::dropterm()]. Defaults to FALSE.
 #' @template param_unused_dots
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("MASS", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("MASS")
 #'
 #' # load libraries for models and data
 #' library(MASS)
@@ -29,8 +25,6 @@
 #' fit2 <- polr(factor(gear) ~ am + mpg + qsec, data = mtcars)
 #' 
 #' tidy(fit, p.values = TRUE)
-#' 
-#' }
 #' 
 #' @evalRd return_tidy(regression = TRUE)
 #'

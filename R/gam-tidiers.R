@@ -16,11 +16,7 @@
 #' @details Tidy `gam` objects created by calls to [mgcv::gam()] with
 #'   [tidy.gam()].
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("gam", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("gam")
 #'
 #' # load libraries for models and data
 #' library(gam)
@@ -31,8 +27,6 @@
 #' # summarize model fit with tidiers
 #' tidy(g)
 #' glance(g)
-#' 
-#' }
 #' 
 #' @export
 #' @family gam tidiers

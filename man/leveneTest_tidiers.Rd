@@ -27,10 +27,7 @@ For models that have only a single component, the \code{\link[=tidy]{tidy()}} an
 of those methods.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("car", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("car")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(car)
@@ -41,8 +38,7 @@ lt <- with(Moore, leveneTest(conformity, fcategory))
 
 tidy(lt)
 glance(lt)
-
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[=glance]{glance()}}, \code{\link[car:leveneTest]{car::leveneTest()}}

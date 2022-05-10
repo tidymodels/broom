@@ -90,14 +90,11 @@ make sure you are using a named \code{list} to define the formula
 for the fixed and random effects of the longitudinal submodel.
 }
 \examples{
+\dontshow{if (rlang::is_installed("joineRML")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # broom only skips running these examples because the example models take a
 # while to generate—they should run just fine, though!
 \dontrun{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("joineRML", quietly = TRUE)) {
 
 
 # load libraries for models and data
@@ -144,8 +141,7 @@ hvd2 <- augment(fit)
 
 # extract model statistics
 glance(fit)
-}
 
 }
-
+\dontshow{\}) # examplesIf}
 }

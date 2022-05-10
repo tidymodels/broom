@@ -41,11 +41,7 @@ that no longer have a well-defined value are filled in with an \code{NA}
 of the appropriate type.
 }
 \examples{
-
-# feel free to ignore the following two lines—they allow {broom} to supply 
-# examples without requiring the model-supplying packages to be installed.
-if (requireNamespace("spdep", quietly = TRUE)) {
-  if (requireNamespace("spatialreg", quietly = TRUE)) {
+\dontshow{if ((rlang::is_installed("spdep") & rlang::is_installed("spatialreg"))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
       
 # load libraries for models and data      
@@ -87,10 +83,7 @@ tidy(crime_sac)
 tidy(crime_sac, conf.int = TRUE)
 glance(crime_sac)
 augment(crime_sac)
-
-  }
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[spatialreg:ML_models]{spatialreg::lagsarlm()}}, \code{\link[spatialreg:ML_models]{spatialreg::errorsarlm()}},

@@ -74,10 +74,7 @@ We are in the process of defining behaviors for models fit with various
 missing at this time.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("speedglm", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("speedglm")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load modeling library
 library(speedglm)
@@ -89,9 +86,7 @@ mod <- speedlm(mpg ~ wt + qsec, data = mtcars, fitted = TRUE)
 tidy(mod)
 glance(mod)
 augment(mod)
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[speedglm:speedlm]{speedglm::speedlm()}}

@@ -80,10 +80,7 @@ modal class) can be found in the \code{posterior} element, these are not
 included in the augmented output.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("poLCA", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("poLCA")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(poLCA)
@@ -141,9 +138,7 @@ au2 <- augment(nes2a, data = election)
 au2
 
 dim(au2)
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[poLCA:poLCA]{poLCA::poLCA()}}

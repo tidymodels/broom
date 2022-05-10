@@ -101,10 +101,7 @@ is not provided to \code{\link[=augment]{augment()}} and \code{na.action = "na.e
 warning is raised and the incomplete rows are dropped.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("survival", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("survival")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(survival)
@@ -149,9 +146,7 @@ ggplot(risks, aes(age, .fitted, color = sex)) +
 
 ggplot(expected, aes(time, .fitted, color = sex)) +
   geom_point()
-  
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \link[stats:na.action]{stats::na.action}

@@ -23,11 +23,7 @@
 #' )
 #' @export
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("metafor", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("metafor")
 #'
 #' # load libraries for models and data
 #' library(metafor)
@@ -46,7 +42,6 @@
 #'
 #' tidy(meta_analysis)
 #' 
-#' }
 #' 
 #' @rdname metafor_tidiers
 #'
@@ -149,11 +144,7 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95,
 #' )
 #' @export
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("metafor", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("metafor")
 #'
 #' library(metafor)
 #'
@@ -170,7 +161,6 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95,
 #' meta_analysis <- rma(yi, vi, data = df, method = "EB")
 #'
 #' glance(meta_analysis)
-#' }
 #' 
 glance.rma <- function(x, ...) {
   # reshape model fit statistics and clean names
@@ -233,11 +223,7 @@ glance.rma <- function(x, ...) {
 #'
 #' @export
 #'
-#' @examples
-#'
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("metafor", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("metafor")
 #' 
 #' # load modeling library
 #' library(metafor)
@@ -257,7 +243,6 @@ glance.rma <- function(x, ...) {
 #'
 #' # summarize model fit with tidiers
 #' augment(meta_analysis)
-#' }
 #' 
 augment.rma <- function(x, interval = c("prediction", "confidence"), ...) {
   # metafor generally handles these for different models through the monolith

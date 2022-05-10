@@ -26,12 +26,8 @@
 #'   There are a large number of arguments that can be
 #'   passed on to [emmeans::summary.emmGrid()] or [lsmeans::summary.ref.grid()].
 #'
-#' @examples
+#' @examplesIf rlang::is_installed("emmeans")
 #' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("emmeans", quietly = TRUE)) {
-#'
 #' # load libraries for models and data
 #' library(emmeans)
 #' 
@@ -77,8 +73,6 @@
 #'
 #' # joint_tests
 #' tidy(joint_tests(oranges_lm1))
-#' 
-#' }
 #' 
 #' @aliases emmeans_tidiers
 #' @export

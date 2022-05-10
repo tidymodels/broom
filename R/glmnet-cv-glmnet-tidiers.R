@@ -16,11 +16,7 @@
 #'     lamdba"
 #' )
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("glmnet", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("glmnet")
 #' 
 #' # load libraries for models and data
 #' library(glmnet)
@@ -75,8 +71,6 @@
 #'   geom_line() +
 #'   geom_vline(xintercept = glance_cv$lambda.min) +
 #'   geom_vline(xintercept = glance_cv$lambda.1se, lty = 2)
-#'   
-#'  }
 #'   
 #' @export
 #' @family glmnet tidiers

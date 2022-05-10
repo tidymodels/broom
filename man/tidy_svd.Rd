@@ -86,10 +86,7 @@ for information on how to interpret the various tidied matrices. Note
 that SVD is only equivalent to PCA on centered data.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the data-supplying package to be installed.
-if (requireNamespace("modeldata", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("modeldata")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 library(modeldata)
 data(hpc_data)
@@ -118,9 +115,8 @@ tidy_u \%>\%
   ggplot(aes(class, value)) +
   geom_boxplot() +
   facet_wrap(~PC, scale = "free_y")
-  
-}
  
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[base:svd]{base::svd()}}

@@ -44,10 +44,7 @@ Similarly, an \code{augment.margins()} method is not currently supported, but
 users can simply run the underlying model to obtain the same information.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("margins", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("margins")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(margins)
@@ -98,9 +95,7 @@ marg_ie2 <- margins(mod_ie,
 
 # summarize model fit with tidiers
 tidy(marg_ie2)
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[margins:margins]{margins::margins()}}

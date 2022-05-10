@@ -17,11 +17,7 @@
 #' If the `data.frame = TRUE` argument is supplied to `pyears`,
 #' this is simply the contents of `x$data`.
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("survival", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("survival")
 #'
 #' # load libraries for models and data
 #' library(survival)
@@ -45,8 +41,6 @@
 #' 
 #' tidy(pfit2)
 #' glance(pfit2)
-#' 
-#' }
 #' 
 #' @aliases pyears_tidiers
 #' @export

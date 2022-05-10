@@ -47,10 +47,7 @@ fixed effects, see \url{https://github.com/lrberge/fixest/issues/6} and
 \url{https://github.com/sgaure/lfe/issues/1#issuecomment-530646990})
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("fixest", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("fixest")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(fixest)
@@ -80,9 +77,7 @@ gravity_summ <- summary(gravity, cluster = c("Product", "Year"))
 tidy(gravity_summ, conf.int = TRUE)
 
 # approach (1) is preferred.
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[fixest:feglm]{fixest::feglm()}}, \code{\link[fixest:femlm]{fixest::fenegbin()}},

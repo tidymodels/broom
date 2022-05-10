@@ -24,12 +24,7 @@
 #' @export
 #' @seealso [tidy()], [cluster::pam()]
 #' @family pam tidiers
-#' @examples
-#'
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("cluster", quietly = TRUE)) {
-#'   if (requireNamespace("modeldata", quietly = TRUE)) {
+#' @examplesIf (rlang::is_installed("cluster") & rlang::is_installed("modeldata"))
 #'
 #' # load libraries for models and data
 #' library(dplyr)
@@ -50,9 +45,6 @@
 #'   ggplot(aes(compounds, input_fields)) +
 #'   geom_point(aes(color = .cluster)) +
 #'   geom_text(aes(label = cluster), data = tidy(p), size = 10)
-#' 
-#'   }
-#' }  
 #'   
 tidy.pam <- function(x, col.names = paste0("x", 1:ncol(x$medoids)), ...) {
   as_tibble(x$clusinfo) %>%

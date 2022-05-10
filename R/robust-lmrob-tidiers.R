@@ -7,11 +7,7 @@
 #' @details For tidiers for robust models from the \pkg{MASS} package see
 #'   [tidy.rlm()].
 #'
-#' @examples
-#'
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("robust", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("robust")
 #' 
 #'  # load modeling library
 #'  library(robust)
@@ -23,7 +19,6 @@
 #'  tidy(m)
 #'  augment(m)
 #'  glance(m)
-#' }
 #'
 #' @aliases robust_tidiers
 #' @export

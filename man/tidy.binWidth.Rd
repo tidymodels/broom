@@ -29,8 +29,7 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
-
-if (requireNamespace("binGroup", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("binGroup")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries
 library(binGroup)
@@ -42,9 +41,7 @@ bw
 
 # summarize model fit with tidiers
 tidy(bw)
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[binGroup:binWidth]{binGroup::binWidth()}}

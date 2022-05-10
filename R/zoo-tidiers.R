@@ -6,11 +6,7 @@
 #'
 #' @evalRd return_tidy("index", "series", "value")
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("zoo", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("zoo")
 #'
 #' # load libraries for models and data
 #' library(zoo)
@@ -37,8 +33,6 @@
 #' Zrolled <- rollmean(Z, 5)
 #' ggplot(tidy(Zrolled), aes(index, value, color = series)) +
 #'   geom_line()
-#'   
-#' }
 #'   
 #' @aliases zoo_tidiers
 #' @export

@@ -40,10 +40,7 @@ that no longer have a well-defined value are filled in with an \code{NA}
 of the appropriate type.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("gmm", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("gmm")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(gmm)
@@ -108,9 +105,7 @@ td2 \%>\%
   geom_point() +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
   geom_vline(xintercept = 0, color = "red", lty = 2)
-  
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[gmm:gmm]{gmm::gmm()}}

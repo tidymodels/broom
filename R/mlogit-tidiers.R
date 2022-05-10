@@ -9,11 +9,7 @@
 #' 
 #' @evalRd return_tidy(regression = TRUE)
 #' 
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("mlogit", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("mlogit")
 #' 
 #' # load libraries for models and data
 #' library(mlogit)
@@ -28,8 +24,6 @@
 #' tidy(m)
 #' augment(m)
 #' glance(m)
-#' 
-#' }
 #' 
 #' @aliases mlogit_tidiers
 #' @export

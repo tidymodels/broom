@@ -14,15 +14,11 @@
 #'
 #' @evalRd return_tidy(regression = TRUE)
 #'
-#' @examples
+#' @examplesIf rlang::is_installed("joineRML")
 #' 
 #' # broom only skips running these examples because the example models take a
 #' # while to generate—they should run just fine, though!
 #' \dontrun{
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("joineRML", quietly = TRUE)) {
 #' 
 #' 
 #' # load libraries for models and data
@@ -69,7 +65,6 @@
 #'
 #' # extract model statistics
 #' glance(fit)
-#' }
 #' 
 #' }
 #'

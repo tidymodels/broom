@@ -15,12 +15,8 @@
 #'
 #' @evalRd return_tidy(regression = TRUE)
 #'
-#' @examples
-#'
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("lfe", quietly = TRUE)) {
-#'
+#' @examplesIf rlang::is_installed("lfe")
+#' 
 #' # load libraries for models and data
 #' library(lfe)
 #'
@@ -57,8 +53,6 @@
 #' tidy(est2, conf.int = TRUE, se.type = "cluster")
 #' tidy(est2, conf.int = TRUE, se.type = "robust")
 #' tidy(est2, conf.int = TRUE, se.type = "iid")
-#' 
-#' }
 #' 
 #' @export
 #' @aliases felm_tidiers lfe_tidiers

@@ -13,11 +13,7 @@
 #'   denominator = "The denominator, which is tau=kendall_score/denominator."
 #' )
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("Kendall", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("Kendall")
 #' 
 #' # load libraries for models and data
 #' library(Kendall)
@@ -34,8 +30,6 @@
 #'
 #' t_res <- SeasonalMannKendall(ts(A))
 #' tidy(t_res)
-#' 
-#' }
 #' 
 #' @export
 #' @seealso [tidy()], [Kendall::Kendall()], [Kendall::MannKendall()],

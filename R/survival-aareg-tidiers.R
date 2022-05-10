@@ -17,11 +17,7 @@
 #' @details `robust.se` is only present when `x` was created with
 #'   `dfbeta = TRUE`.
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("survival", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("survival")
 #'
 #' # load libraries for models and data
 #' library(survival)
@@ -35,8 +31,6 @@
 #'
 #' # summarize model fit with tidiers
 #' tidy(afit)
-#' 
-#' }
 #' 
 #' @aliases aareg_tidiers
 #' @export

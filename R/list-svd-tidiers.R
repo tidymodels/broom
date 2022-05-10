@@ -4,11 +4,7 @@
 #' @inherit tidy.prcomp return details params
 #' @param x A list with components `u`, `d`, `v` returned by [base::svd()].
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the data-supplying package to be installed.
-#' if (requireNamespace("modeldata", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("modeldata")
 #'
 #' library(modeldata)
 #' data(hpc_data)
@@ -37,8 +33,6 @@
 #'   ggplot(aes(class, value)) +
 #'   geom_boxplot() +
 #'   facet_wrap(~PC, scale = "free_y")
-#'   
-#' }
 #'  
 #' @seealso [base::svd()]
 #' @aliases svd_tidiers

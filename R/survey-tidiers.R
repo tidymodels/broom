@@ -103,11 +103,7 @@ tidy.svyglm <- function(x, conf.int = FALSE, conf.level = 0.95,
 #'   "df.residual"
 #' )
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("survey", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("survey")
 #' 
 #' # load libraries for models and data
 #' library(survey)
@@ -133,8 +129,6 @@ tidy.svyglm <- function(x, conf.int = FALSE, conf.level = 0.95,
 #' )
 #'
 #' glance(m)
-#' 
-#' }
 #' 
 #' @references Lumley T, Scott A (2015). AIC and BIC for modelling with complex
 #'   survey data. *Journal of Survey Statistics and Methodology*, 3(1).

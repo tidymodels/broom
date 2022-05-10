@@ -12,11 +12,7 @@
 #'   "p.value"
 #' )
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("orcutt", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("orcutt")
 #'
 #' # load libraries for models and data
 #' library(orcutt)
@@ -29,8 +25,6 @@
 #' co <- cochrane.orcutt(reg)
 #' tidy(co)
 #' glance(co)
-#' 
-#' }
 #' 
 #' @aliases orcutt_tidiers
 #' @export

@@ -69,10 +69,7 @@ We are in the process of defining behaviors for models fit with various
 missing at this time.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("mclust", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("mclust")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load library for models and data
 library(mclust)
@@ -111,8 +108,7 @@ tidy(m)
 augment(m, points)
 glance(m)
 
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[mclust:Mclust]{mclust::Mclust()}}

@@ -32,12 +32,8 @@
 #'   must typically choose whether they want to use i) the average observation 
 #'   in the data, or ii) the average of the sample marginal effects. See 
 #'   `vignette("mfxarticle")` from the `mfx` package for more details.
-#' @examples
 #' 
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("mfx", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("mfx")
 #' 
 #' # load libraries for models and data
 #' library(mfx)
@@ -61,8 +57,6 @@
 #' tidy(mod_probmfx, conf.int = TRUE)
 #' augment(mod_probmfx)
 #' glance(mod_probmfx)
-#' 
-#' }
 #' 
 #' @family mfx tidiers
 #' @seealso [tidy()], [mfx::logitmfx()], [mfx::negbinmfx()], [mfx::poissonmfx()], [mfx::probitmfx()]
@@ -240,10 +234,8 @@ glance.probitmfx <- glance.mfx
 #'   "conf.low",
 #'   "conf.high"
 #' )
-#' @examples
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("mfx", quietly = TRUE)) {
+#' 
+#' @examplesIf rlang::is_installed("mfx")
 #'  
 #' library(mfx)
 #' 
@@ -267,7 +259,7 @@ glance.probitmfx <- glance.mfx
 #' 
 #' augment(mod_betamfx)
 #' glance(mod_betamfx)
-#' }
+#' 
 #' @family mfx tidiers
 #' @seealso [tidy.betareg()], [mfx::betamfx()]
 #' @export

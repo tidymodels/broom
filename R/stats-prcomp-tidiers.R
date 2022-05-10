@@ -54,11 +54,7 @@
 #'   for information on how to interpret the various tidied matrices. Note
 #'   that SVD is only equivalent to PCA on centered data.
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the data-supplying package to be installed.
-#' if (requireNamespace("maps", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("maps")
 #' 
 #' pc <- prcomp(USArrests, scale = TRUE)
 #'
@@ -93,9 +89,7 @@
 #' ggplot(au, aes(.fittedPC1, .fittedPC2)) +
 #'   geom_point() +
 #'   geom_text(aes(label = .rownames), vjust = 1, hjust = 1)
-#'   
-#' }   
-#'   
+#'
 #' @aliases prcomp_tidiers
 #' @export
 #' @seealso [stats::prcomp()], [svd_tidiers]
