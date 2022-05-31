@@ -41,10 +41,12 @@ of the appropriate type.
 }
 \details{
 Only models with a single \code{tau} value may be passed.
-For multiple values, please use a \code{\link[purrr:map]{purrr::map()}} workflow instead, e.g.\preformatted{taus \%>\%
+For multiple values, please use a \code{\link[purrr:map]{purrr::map()}} workflow instead, e.g.
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{taus \%>\%
   map(function(tau_val) rq(y ~ x, tau = tau_val)) \%>\%
   map_dfr(glance)
-}
+}\if{html}{\out{</div>}}
 }
 \examples{
 \dontshow{if (rlang::is_installed("quantreg")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
