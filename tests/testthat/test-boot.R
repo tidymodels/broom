@@ -37,7 +37,7 @@ test_that("tidy.boot for glms", {
 
   check_tidy_output(td)
   check_tidy_output(tdw)
-  check_tidy_output(tde)
+  check_tidy_output(tdwe)
 
   check_dims(td, 2, 6)
   check_dims(tdw,  2, 7)
