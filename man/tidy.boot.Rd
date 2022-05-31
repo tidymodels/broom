@@ -10,6 +10,7 @@
   conf.int = FALSE,
   conf.level = 0.95,
   conf.method = c("perc", "bca", "basic", "norm"),
+  exponentiate = FALSE,
   ...
 )
 }
@@ -26,6 +27,11 @@ Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 \item{conf.method}{Passed to the \code{type} argument of \code{\link[boot:boot.ci]{boot::boot.ci()}}.
 Defaults to \code{"perc"}. The allowed types are \code{"perc"}, \code{"basic"},
 \code{"bca"}, and \code{"norm"}. Does not support \code{"stud"} or \code{"all"}.}
+
+\item{exponentiate}{Logical indicating whether or not to exponentiate the
+the coefficient estimates. This is typical for logistic and multinomial
+regressions, but a bad idea if there is no log or logit link. Defaults
+to \code{FALSE}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
