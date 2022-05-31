@@ -128,10 +128,8 @@ the <code>data</code> argument.</p></dd>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>Only models with a single <code>tau</code> value may be passed.
-For multiple values, please use a <code><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">purrr::map()</a></code> workflow instead, e.g.</p><div class="sourceCode"><pre><code><span class="va">taus</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">tau_val</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/pkg/quantreg/man/rq.html" class="external-link">rq</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">x</span>, tau <span class="op">=</span> <span class="va">tau_val</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">glance</span><span class="op">)</span></code></pre></div>
-
+For multiple values, please use a <code><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">purrr::map()</a></code> workflow instead, e.g.</p>
+<p></p><div class="sourceCode"><pre><code></code></pre><p></p></div>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
