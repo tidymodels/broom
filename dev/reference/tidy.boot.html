@@ -85,6 +85,7 @@ specify which components to return.</p>
   conf.int <span class="op">=</span> <span class="cn">FALSE</span>,
   conf.level <span class="op">=</span> <span class="fl">0.95</span>,
   conf.method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"perc"</span>, <span class="st">"bca"</span>, <span class="st">"basic"</span>, <span class="st">"norm"</span><span class="op">)</span>,
+  exponentiate <span class="op">=</span> <span class="cn">FALSE</span>,
   <span class="va">...</span>
 <span class="op">)</span></code></pre></div>
     </div>
@@ -104,6 +105,11 @@ Defaults to 0.95, which corresponds to a 95 percent confidence interval.</p></dd
 <dd><p>Passed to the <code>type</code> argument of <code><a href="https://rdrr.io/pkg/boot/man/boot.ci.html" class="external-link">boot::boot.ci()</a></code>.
 Defaults to <code>"perc"</code>. The allowed types are <code>"perc"</code>, <code>"basic"</code>,
 <code>"bca"</code>, and <code>"norm"</code>. Does not support <code>"stud"</code> or <code>"all"</code>.</p></dd>
+<dt>exponentiate</dt>
+<dd><p>Logical indicating whether or not to exponentiate the
+the coefficient estimates. This is typical for logistic and multinomial
+regressions, but a bad idea if there is no log or logit link. Defaults
+to <code>FALSE</code>.</p></dd>
 <dt>...</dt>
 <dd><p>Additional arguments. Not used. Needed to match generic
 signature only. <strong>Cautionary note:</strong> Misspelled arguments will be
