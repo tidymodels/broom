@@ -609,7 +609,7 @@ globalVariables(
 
 # a gentler version of dots checking that, given a dots entry to 
 # look for, will warn if that entry is in the dots.
-# in broom, this is usually used for exponentiate, confint, or newdata
+# in broom, this is used for exponentiate (in tidy) and newdata (in augment).
 check_ellipses <- function(arg, fn, cls, ...) {
   dots <- rlang::enquos(...)
 

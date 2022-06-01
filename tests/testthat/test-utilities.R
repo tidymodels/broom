@@ -17,6 +17,24 @@ test_that("ellipsis checking works", {
   expect_silent(check_ellipses("exponentiate", "tidy", "boop", hi = "pal"))
 })
 
+test_that("ellipsis checking works (whole game, tidy)", {
+  mod <- lm(mpg ~ ., data = mtcars)
+  
+  expect_warning(
+    tidy(mod, exponentiate = TRUE),
+    "\\`exponentiate\\` argument is not supported in the \\`tidy\\(\\)\\` method for \\`lm\\` objects"
+  )
+})
+
+test_that("ellipsis checking works (whole game, augment)", {
+  mod <- kmeans(mtcars, centers = 4)
+  
+  expect_warning(
+    augment(mod, data = mtcars, newdata = mtcars),
+    "\\`newdata\\` argument is not supported in the \\`augment\\(\\)\\` method for \\`kmeans\\` objects"
+  )
+})
+
 skip("specification not yet complete")
 
 skip_if_not_installed("betareg")
