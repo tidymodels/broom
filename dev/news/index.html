@@ -60,7 +60,13 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.8.0.9000" id="broom-0809000-development-version">broom 0.8.0.9000 (development version)<a class="anchor" aria-label="anchor" href="#broom-0809000-development-version"></a></h2>
 <p>To be released as 1.0.0.</p>
-<ul><li>Add <code>exponentiate</code> argument to <code>tidy.boot</code> (<a href="https://github.com/tidymodels/broom/issues/1039" class="external-link">#1039</a>).</li></ul></div>
+<ul><li>Add <code>exponentiate</code> argument to <code><a href="../reference/tidy.boot.html">tidy.boot()</a></code> (<a href="https://github.com/tidymodels/broom/issues/1039" class="external-link">#1039</a>).</li>
+<li>Adds minimal ellipsis checking to warn on commonly misspecified arguments passed through ellipses. Notably:<ul><li>
+<code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy()</a></code> methods will now warn when supplied an <code>exponentiate</code> argument if it will be ignored.</li>
+<li>
+<code><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment()</a></code> methods will now warn when supplied a <code>newdata</code> argument if it will be ignored.</li>
+</ul></li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.8.0" id="broom-080">broom 0.8.0<a class="anchor" aria-label="anchor" href="#broom-080"></a></h2><p class="text-muted">CRAN release: 2022-04-13</p>
 <p>This update makes significant improvements to documentation, fixes a number of bugs, and brings the development flow of the package up to date with other packages in the tidymodels.</p>
