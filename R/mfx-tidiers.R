@@ -63,6 +63,7 @@
 #' @export
 tidy.mfx <-
   function(x, conf.int = FALSE, conf.level = 0.95, ...) {
+    check_ellipses("exponentiate", "tidy", "mfx", ...)
     
     x_tidy <- as_tibble(x$mfxest, rownames = "term")
     colnames(x_tidy) <- c("term", "estimate", "std.error", "statistic", "p.value")

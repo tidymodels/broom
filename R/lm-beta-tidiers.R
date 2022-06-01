@@ -41,6 +41,8 @@
 #' @export
 #' @family lm tidiers
 tidy.lm.beta <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
+  check_ellipses("exponentiate", "tidy", "lm.beta", ...)
+  
   ret <- as_tibble(summary(x)$coefficients, rownames = "term")
   colnames(ret) <- c(
     "term", "estimate", "std_estimate",

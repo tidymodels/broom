@@ -33,6 +33,8 @@
 #' @family mediate tidiers
 #' @aliases mediate_tidiers
 tidy.mediate <- function(x, conf.int = FALSE, conf.level = .95, ...) {
+  check_ellipses("exponentiate", "tidy", "mediate", ...)
+  
   if (inherits(x, "psych")) {
     stop(
       "No tidy method for objects of class `mediate` from the `psych` package. ",

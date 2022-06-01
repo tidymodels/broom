@@ -59,6 +59,8 @@
 #' @seealso [tidy()], [spatialreg::lagsarlm()], [spatialreg::errorsarlm()], 
 #' [spatialreg::sacsarlm()]
 tidy.sarlm <- function(x, conf.int = FALSE, conf.level = .95, ...) {
+  check_ellipses("exponentiate", "tidy", "sarlm", ...)
+  
   # construct parameter table
   s <- summary(x)
   ret <- as_tidy_tibble(

@@ -80,6 +80,8 @@
 #' @seealso [tidy()], [emmeans::ref_grid()], [emmeans::emmeans()],
 #'   [emmeans::contrast()]
 tidy.lsmobj <- function(x, conf.int = FALSE, conf.level = .95, ...) {
+  check_ellipses("exponentiate", "tidy", "lsmobj", ...)
+  
   tidy_emmeans(x, infer = c(conf.int, TRUE), level = conf.level, ...)
 }
 
@@ -104,6 +106,8 @@ tidy.lsmobj <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #' @seealso [tidy()], [emmeans::ref_grid()], [emmeans::emmeans()],
 #'   [emmeans::contrast()]
 tidy.ref.grid <- function(x, conf.int = FALSE, conf.level = .95, ...) {
+  check_ellipses("exponentiate", "tidy", "ref.grid", ...)
+  
   tidy_emmeans(x, infer = c(conf.int, TRUE), level = conf.level, ...)
 }
 
@@ -128,6 +132,8 @@ tidy.ref.grid <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #' @seealso [tidy()], [emmeans::ref_grid()], [emmeans::emmeans()],
 #'   [emmeans::contrast()]
 tidy.emmGrid <- function(x, conf.int = FALSE, conf.level = .95, ...) {
+  check_ellipses("exponentiate", "tidy", "emmGrid", ...)
+  
   tidy_emmeans(x, infer = c(conf.int, TRUE), level = conf.level, ...)
 }
 
@@ -161,6 +167,8 @@ tidy.emmGrid <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #'   [emmeans::contrast()]
 
 tidy.summary_emm <- function(x, null.value = NULL, ...) {
+  check_ellipses("exponentiate", "tidy", "summary_emm", ...)
+  
   tidy_emmeans_summary(x, null.value = null.value)
 }
 

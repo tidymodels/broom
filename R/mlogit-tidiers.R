@@ -31,6 +31,7 @@
 #' @seealso [tidy()], [mlogit::mlogit()]
 #' 
 tidy.mlogit <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
+  check_ellipses("exponentiate", "tidy", "mlogit", ...)
   
   # construct parameter table
   s <- summary(x)

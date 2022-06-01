@@ -44,6 +44,8 @@
 #' @aliases lmtest_tidiers coeftest_tidiers
 #' @family coeftest tidiers
 tidy.coeftest <- function(x, conf.int = FALSE, conf.level = .95, ...) {
+  check_ellipses("exponentiate", "tidy", "coeftest", ...)
+  
   co <- as.data.frame(unclass(x))
   ret <- as_tidy_tibble(
     co, 

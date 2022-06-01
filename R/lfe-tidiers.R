@@ -59,6 +59,8 @@
 #' @family felm tidiers
 #' @seealso [tidy()], [lfe::felm()]
 tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, se.type = c("default", "iid", "robust", "cluster"), ...) {
+  check_ellipses("exponentiate", "tidy", "felm", ...)
+  
   has_multi_response <- length(x$lhs) > 1
   
   # warn users about deprecated "robust" argument

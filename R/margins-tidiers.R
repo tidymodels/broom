@@ -72,6 +72,7 @@
 #' @family margins tidiers
 #' @seealso [tidy()], [margins::margins()]
 tidy.margins <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
+    check_ellipses("exponentiate", "tidy", "margins", ...)
   
     ret <- as_tibble(summary(x, level = conf.level))
     

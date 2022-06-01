@@ -61,6 +61,8 @@
 #' @seealso [tidy()], [fixest::feglm()], [fixest::fenegbin()],
 #' [fixest::feNmlm()], [fixest::femlm()], [fixest::feols()], [fixest::fepois()]
 tidy.fixest <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
+  check_ellipses("exponentiate", "tidy", "fixest", ...)
+  
   coeftable <- summary(x, ...)$coeftable
   ret <- as_tibble(coeftable, rownames = "term")
   colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")

@@ -32,6 +32,7 @@
 #' augment(mod)
 #' 
 tidy.nlrq <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
+  check_ellipses("exponentiate", "tidy", "nlrq", ...)
   
   ret <- as_tidy_tibble(
     coef(summary(x)), 

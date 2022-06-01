@@ -43,6 +43,8 @@
 #' @seealso [tidy()], [multcomp::glht()]
 #'
 tidy.glht <- function(x, conf.int = FALSE, conf.level = .95, ...) {
+  check_ellipses("exponentiate", "tidy", "glht", ...)
+  
   glht_summary <- summary(x, ...)
 
   tidy_glht_summary <- tidy.summary.glht(glht_summary, ...)
