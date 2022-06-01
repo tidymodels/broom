@@ -117,3 +117,14 @@ test_that("augment.htest (chi squared test)", {
     regexp = "Augment is only defined for chi squared hypothesis tests."
   )
 })
+
+test_that("tidy.htest does not return matrix columns", {
+  data(api, package = "survey")
+  dclus1 <- survey::svydesign(id = ~dnum, weights = ~pw, data = apiclus1, fpc = ~fpc)
+  
+  expect_true(
+    survey::svychisq(~sch.wide + stype, design = dclus1, statistic = "Wald") %>%
+      tidy() %>%
+      purrr::none(~inherits(., "matrix"))
+  )
+})

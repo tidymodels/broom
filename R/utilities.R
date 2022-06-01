@@ -602,6 +602,7 @@ globalVariables(
     "variable",
     "wald.test",
     "weight",
+    "where",
     "y",
     "z"
   )

@@ -3,6 +3,7 @@
 To be released as 1.0.0.
 
 * Add `exponentiate` argument to `tidy.boot` (#1039).
+* Update in `tidy.htest()` converting matrix-columns to vector-columns (#1081).
 
 # broom 0.8.0
 
