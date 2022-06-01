@@ -4,6 +4,12 @@ To be released as 1.0.0.
 
 * Add `exponentiate` argument to `tidy.boot` (#1039).
 * Update in `tidy.htest()` converting matrix-columns to vector-columns (#1081).
+* The warning regarding tidiers only maintained via dispatch to `lm` and `glm`
+  is now displayed only once per session, per unique dispatch. That is, 
+  if a `class_a` object is tidied using a `(g)lm` method, broom will not
+  warn when tidying `class_a` objects for the rest of the session, but if a
+  `class_b` object is tidied using a `(g)lm` method in the same session, broom
+  will warn again (#1101).
 
 # broom 0.8.0
 
