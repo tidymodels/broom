@@ -3,6 +3,20 @@ context("utilities")
 skip_if_not_installed("modeltests")
 library(modeltests)
 
+test_that("ellipsis checking works", {
+  expect_warning(
+    check_ellipses("exponentiate", "tidy", "boop", exponentiate = TRUE),
+    "\\`exponentiate\\` argument is not supported in the \\`tidy\\(\\)\\` method for \\`boop\\` objects"
+  )
+  
+  expect_warning(
+    check_ellipses("exponentiate", "tidy", "boop", exponentiate = TRUE, quick = FALSE),
+    "\\`exponentiate\\` argument is not supported in the \\`tidy\\(\\)\\` method for \\`boop\\` objects"
+  )
+  
+  expect_silent(check_ellipses("exponentiate", "tidy", "boop", hi = "pal"))
+})
+
 skip("specification not yet complete")
 
 skip_if_not_installed("betareg")

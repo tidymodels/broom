@@ -606,3 +606,19 @@ globalVariables(
     "z"
   )
 )
+
+# a gentler version of dots checking that, given a dots entry to 
+# look for, will warn if that entry is in the dots.
+# in broom, this is usually used for exponentiate, confint, or newdata
+check_ellipses <- function(arg, fn, cls, ...) {
+  dots <- rlang::enquos(...)
+
+  if (arg %in% names(dots)) {
+    rlang::warn(paste0(
+      "The `", arg, "` argument is not supported in the `", fn, 
+      "()` method for `", cls, "` objects and will be ignored."
+    ))
+  }
+
+  invisible(NULL)
+}
