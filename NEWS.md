@@ -3,6 +3,7 @@
 To be released as 1.0.0.
 
 * Add `exponentiate` argument to `tidy.boot` (#1039).
+* Update in `tidy.htest()` converting matrix-columns to vector-columns (#1081).
 
 # broom 0.8.0
 
@@ -26,8 +27,6 @@ In the big picture, this release:
 * Address breaking changes in `glance.fixest` and `tidy.btergm`.
 * Simplify handling of `MASS::polr` output in the corresponding `tidy` and `augment` methods.
 * Align continuous integration with current standards in tidymodels packages.
-
-* Update in `tidy.htest()` converting matrix-columns to vector-columns. (#1081)
 
 # broom 0.7.12
 
