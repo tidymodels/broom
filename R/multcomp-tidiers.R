@@ -52,8 +52,8 @@ tidy.glht <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 
     tidy_glht_summary <- dplyr::select(tidy_glht_summary, -std.error) %>%
       dplyr::left_join(tidy_glht_confint) %>%
-      select(
-        term, contrast, null.value, estimate,
+      dplyr::select(
+        dplyr::contains("term"), contrast, null.value, estimate,
         conf.low, conf.high, dplyr::everything()
       )
 

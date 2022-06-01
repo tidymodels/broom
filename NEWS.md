@@ -10,6 +10,7 @@ To be released as 1.0.0.
   warn when tidying `class_a` objects for the rest of the session, but if a
   `class_b` object is tidied using a `(g)lm` method in the same session, broom
   will warn again (#1101).
+* Address failures in `tidy.glht()` with `conf.int = TRUE` (#1103).
 
 # broom 0.8.0
 
