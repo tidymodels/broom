@@ -2,7 +2,10 @@
 
 To be released as 1.0.0.
 
-* Add `exponentiate` argument to `tidy.boot` (#1039).
+* Add `exponentiate` argument to `tidy.boot()` (#1039).
+* Adds minimal ellipsis checking to warn on commonly misspecified arguments passed through ellipses. Notably:
+    + `tidy()` methods will now warn when supplied an `exponentiate` argument if it will be ignored.
+    + `augment()` methods will now warn when supplied a `newdata` argument if it will be ignored.
 
 # broom 0.8.0
 
