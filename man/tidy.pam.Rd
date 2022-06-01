@@ -35,11 +35,7 @@ specify which components to return.
 For examples, see the pam vignette.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("cluster", quietly = TRUE)) {
-  if (requireNamespace("modeldata", quietly = TRUE)) {
+\dontshow{if ((rlang::is_installed("cluster") & rlang::is_installed("modeldata"))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(dplyr)
@@ -60,10 +56,8 @@ augment(p, x) \%>\%
   ggplot(aes(compounds, input_fields)) +
   geom_point(aes(color = .cluster)) +
   geom_text(aes(label = cluster), data = tidy(p), size = 10)
-
-  }
-}  
   
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[cluster:pam]{cluster::pam()}}

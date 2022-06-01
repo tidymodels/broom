@@ -10,9 +10,7 @@
 #'   method = "Always `Durbin-Watson Test`."
 #' )
 #'
-#' @examples
-#' 
-#' if (requireNamespace("car", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("car")
 #'
 #' # load modeling library
 #' library(car)
@@ -25,8 +23,6 @@
 #' 
 #' # same output for all durbinWatsonTests
 #' glance(dw) 
-#' 
-#' }
 #' 
 #' @name durbinWatsonTest_tidiers
 #' @family car tidiers
@@ -61,11 +57,7 @@ glance.durbinWatsonTest <- function(x, ...) tidy(x)
 #'   "df.residual" = "Residual degrees of freedom."
 #' )
 #'
-#' @examples
-#'
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("car", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("car")
 #' 
 #' # load libraries for models and data
 #' library(car)
@@ -77,7 +69,6 @@ glance.durbinWatsonTest <- function(x, ...) tidy(x)
 #' tidy(lt)
 #' glance(lt)
 #' 
-#' }
 #' @name leveneTest_tidiers
 #' @family car tidiers
 #' @export

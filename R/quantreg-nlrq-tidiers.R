@@ -11,11 +11,7 @@
 #' @export
 #' @seealso [tidy()], [quantreg::nlrq()]
 #' @family quantreg tidiers
-#' @examples 
-#' 
-#' #' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("quantreg", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("quantreg")
 #' 
 #' # load modeling library
 #' library(quantreg)
@@ -34,8 +30,6 @@
 #' tidy(mod)
 #' glance(mod)
 #' augment(mod)
-#' 
-#' }
 #' 
 tidy.nlrq <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
   

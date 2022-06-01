@@ -16,11 +16,7 @@
 #'   precision is the inverse of the variance, often referred to as `phi`.
 #'   At least one term will have been used to model the precision `phi`.
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("betareg", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("betareg")
 #'
 #' # load libraries for models and data
 #' library(betareg)
@@ -41,8 +37,6 @@
 #' augment(mod)
 #'
 #' glance(mod)
-#' 
-#' }
 #' 
 #' @export
 #' @seealso [tidy()], [betareg::betareg()]

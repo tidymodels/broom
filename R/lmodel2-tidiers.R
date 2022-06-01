@@ -23,11 +23,7 @@
 #'   be valid. More information can be found in
 #'   `vignette("mod2user", package = "lmodel2")`.
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("lmodel2", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("lmodel2")
 #'
 #' # load libraries for models and data
 #' library(lmodel2)
@@ -47,8 +43,6 @@
 #'   geom_point() +
 #'   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
 #'   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high))
-#'   
-#' }
 #' 
 #' @export
 #' @seealso [tidy()], [lmodel2::lmodel2()]

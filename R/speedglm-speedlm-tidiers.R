@@ -7,11 +7,7 @@
 #'
 #' @evalRd return_tidy(regression = TRUE)
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("speedglm", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("speedglm")
 #'
 #' # load modeling library
 #' library(speedglm)
@@ -23,8 +19,6 @@
 #' tidy(mod)
 #' glance(mod)
 #' augment(mod)
-#' 
-#' }
 #' 
 #' @aliases speedlm_tidiers
 #' @export

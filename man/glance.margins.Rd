@@ -40,10 +40,7 @@ that no longer have a well-defined value are filled in with an \code{NA}
 of the appropriate type.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("margins", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("margins")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(margins)
@@ -94,9 +91,7 @@ marg_ie2 <- margins(mod_ie,
 
 # summarize model fit with tidiers
 tidy(marg_ie2)
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:

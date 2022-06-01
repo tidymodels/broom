@@ -7,11 +7,7 @@
 #'
 #' @evalRd return_tidy("contrast", "null.value", "estimate")
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("multcomp", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("multcomp")
 #'
 #' # load libraries for models and data
 #' library(multcomp)
@@ -40,8 +36,6 @@
 #'
 #' cld <- cld(wht)
 #' tidy(cld)
-#' 
-#' }
 #' 
 #' @aliases multcomp_tidiers
 #' @export

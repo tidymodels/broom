@@ -17,11 +17,7 @@
 #'   p.value = "P-value for accuracy and kappa statistics."
 #' )
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("caret", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("caret")
 #'
 #' # load libraries for models and data
 #' library(caret)
@@ -53,8 +49,6 @@
 #' # summarize model fit with tidiers
 #' tidy(six_class_cm)
 #' tidy(six_class_cm, by_class = FALSE)
-#' 
-#' }
 #' 
 #' @aliases caret_tidiers confusionMatrix_tidiers
 #' @export

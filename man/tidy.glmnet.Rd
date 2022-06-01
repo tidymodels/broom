@@ -43,10 +43,7 @@ logical. Furthermore, predictions make sense only with a specific
 choice of lambda.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("glmnet", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("glmnet")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(glmnet)
@@ -79,9 +76,7 @@ ggplot(tidied, aes(lambda, dev.ratio)) +
 g2 <- sample(1:2, 100, replace = TRUE)
 fit2 <- glmnet(x, g2, family = "binomial")
 tidy(fit2)
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[glmnet:glmnet]{glmnet::glmnet()}}

@@ -6,11 +6,7 @@
 #' @template param_exponentiate
 #' @template param_unused_dots
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("ordinal", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("ordinal")
 #'
 #' # load libraries for models and data
 #' library(ordinal)
@@ -30,8 +26,6 @@
 #' 
 #' tidy(fit2)
 #' glance(fit2)
-#' 
-#' }
 #' 
 #' @evalRd return_tidy(regression = TRUE)
 #'

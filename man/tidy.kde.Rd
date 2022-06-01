@@ -35,10 +35,7 @@ Returns a data frame in long format with four columns. Use
 on the output to return to a wide format.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("ks", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("ks")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(ks)
@@ -70,9 +67,7 @@ k3 <- kde(dat3)
 
 td3 <- tidy(k3)
 td3
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[ks:kde]{ks::kde()}}

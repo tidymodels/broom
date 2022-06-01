@@ -9,12 +9,7 @@
 #'   estimate = "Estimated hazard rate."
 #' )
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following two lines—they allow {broom} to supply 
-#' # examples without requiring the model/data-supplying packages to be installed.
-#' if (requireNamespace("muhaz", quietly = TRUE)) {
-#'   if (requireNamespace("survival", quietly = TRUE)) {
+#' @examplesIf (rlang::is_installed("muhaz") & rlang::is_installed("survival"))
 #' 
 #' # load libraries for models and data
 #' library(muhaz)
@@ -26,9 +21,6 @@
 #' # summarize model fit with tidiers
 #' tidy(x)
 #' glance(x)
-#' 
-#'   }
-#' }
 #' 
 #' @aliases muhaz_tidiers
 #' @export

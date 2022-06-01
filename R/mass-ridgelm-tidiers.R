@@ -9,11 +9,7 @@
 #'   scale = "Scaling factor of estimated coefficient"
 #' )
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("MASS", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("MASS")
 #' 
 #' # load libraries for models and data
 #' library(MASS)
@@ -41,8 +37,6 @@
 #' ggplot(td2, aes(lambda, GCV)) +
 #'   geom_line() +
 #'   geom_vline(xintercept = g2$lambdaGCV, col = "red", lty = 2)
-#'   
-#' }
 #' 
 #' @export
 #' @aliases ridgelm_tidiers

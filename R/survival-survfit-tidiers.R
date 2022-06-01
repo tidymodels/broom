@@ -18,11 +18,7 @@
 #'   strata = "strata if stratified survfit object input"
 #' )
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("survival", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("survival")
 #'
 #' # load libraries for models and data
 #' library(survival)
@@ -53,8 +49,6 @@
 #' ggplot(td_multi, aes(time, estimate, group = state)) +
 #'   geom_line(aes(color = state)) +
 #'   geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .25)
-#'   
-#' }
 #'   
 #' @aliases survfit_tidiers
 #' @export

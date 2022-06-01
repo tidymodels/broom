@@ -69,10 +69,7 @@ We are in the process of defining behaviors for models fit with various
 missing at this time.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("metafor", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("metafor")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load modeling library
 library(metafor)
@@ -92,8 +89,7 @@ meta_analysis <- rma(yi, vi, data = df, method = "EB")
 
 # summarize model fit with tidiers
 augment(meta_analysis)
-}
-
+\dontshow{\}) # examplesIf}
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:

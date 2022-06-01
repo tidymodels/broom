@@ -40,10 +40,7 @@ that no longer have a well-defined value are filled in with an \code{NA}
 of the appropriate type.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("mclust", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("mclust")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load library for models and data
 library(mclust)
@@ -82,8 +79,7 @@ tidy(m)
 augment(m, points)
 glance(m)
 
-}
-
+\dontshow{\}) # examplesIf}
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:

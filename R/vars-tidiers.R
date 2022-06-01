@@ -20,11 +20,7 @@
 #'   confidence intervals for `varest` objects. Setting the `tidy` argument
 #'   `conf.int = TRUE` will return a warning.
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("vars", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("vars")
 #' 
 #' # load libraries for models and data
 #' library(vars)
@@ -38,8 +34,6 @@
 #' # summarize model fit with tidiers
 #' tidy(mod)
 #' glance(mod)
-#' 
-#' }
 #' 
 #' @export
 #' @seealso [tidy()], [vars::VAR()]

@@ -78,10 +78,7 @@ For tidiers for robust models from the \pkg{MASS} package see
 \code{\link[=tidy.rlm]{tidy.rlm()}}.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("robust", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("robust")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
  # load modeling library
  library(robust)
@@ -93,8 +90,7 @@ if (requireNamespace("robust", quietly = TRUE)) {
  tidy(m)
  augment(m)
  glance(m)
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[robust:lmRob]{robust::lmRob()}}

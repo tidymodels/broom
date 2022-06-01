@@ -12,11 +12,7 @@
 #'   "std.error"
 #' )
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("poLCA", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("poLCA")
 #'
 #' # load libraries for models and data
 #' library(poLCA)
@@ -74,8 +70,6 @@
 #' au2
 #' 
 #' dim(au2)
-#' 
-#' }
 #' 
 #' @aliases poLCA_tidiers
 #' @export

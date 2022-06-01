@@ -36,10 +36,7 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("speedglm", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("speedglm")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load modeling library
 library(speedglm)
@@ -51,9 +48,7 @@ mod <- speedlm(mpg ~ wt + qsec, data = mtcars, fitted = TRUE)
 tidy(mod)
 glance(mod)
 augment(mod)
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[speedglm:speedlm]{speedglm::speedlm()}}, \code{\link[=tidy.lm]{tidy.lm()}}

@@ -12,8 +12,8 @@ rename2 <- function(.data, ...) {
   rename(.data, !!!present)
 }
 
-exponentiate <- function(data) {
-  data <- mutate_at(data, vars(estimate), exp)
+exponentiate <- function(data, col = "estimate") {
+  data <- mutate_at(data, vars(col), exp)
 
   if ("conf.low" %in% colnames(data)) {
     data <- mutate_at(data, vars(conf.low, conf.high), exp)

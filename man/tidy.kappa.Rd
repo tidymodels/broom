@@ -35,10 +35,7 @@ cannot be set in \code{tidy}. Instead you must set the \code{alpha} argument
 to \code{\link[psych:kappa]{psych::cohen.kappa()}} when creating the \code{kappa} object.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("psych", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("psych")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(psych)
@@ -59,9 +56,7 @@ library(ggplot2)
 ggplot(tidy(ck), aes(estimate, type)) +
   geom_point() +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high))
-  
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[psych:kappa]{psych::cohen.kappa()}}

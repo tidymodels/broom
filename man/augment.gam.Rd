@@ -95,10 +95,7 @@ For additional details on Cook's distance, see
 \code{\link[stats:influence.measures]{stats::cooks.distance()}}.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("mgcv", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("mgcv")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(mgcv)
@@ -111,9 +108,7 @@ tidy(g)
 tidy(g, parametric = TRUE)
 glance(g)
 augment(g)
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[mgcv:gam]{mgcv::gam()}}

@@ -19,11 +19,7 @@
 #' @details The tibble has a column for each of the measures of association 
 #'   or tests contained in `massoc` or `massoc.detail` when [epiR::epi.2by2()] is called.
 #'
-#' @examples
-#' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("epiR", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("epiR")
 #' 
 #' # load libraries for models and data
 #' library(epiR)
@@ -43,8 +39,6 @@
 #' # summarize model fit with tidiers
 #' tidy(fit, parameters = "moa")
 #' tidy(fit, parameters = "stat")
-#' 
-#' }
 #' 
 #' @export
 #' @seealso [tidy()], [epiR::epi.2by2()]

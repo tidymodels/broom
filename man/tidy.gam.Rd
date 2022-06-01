@@ -57,10 +57,7 @@ When \code{parametric = FALSE} return columns \code{edf} and \code{ref.df} rathe
 than \code{estimate} and \code{std.error}.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("mgcv", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("mgcv")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(mgcv)
@@ -73,9 +70,7 @@ tidy(g)
 tidy(g, parametric = TRUE)
 glance(g)
 augment(g)
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[mgcv:gam]{mgcv::gam()}}

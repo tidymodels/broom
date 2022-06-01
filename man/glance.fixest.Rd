@@ -41,10 +41,7 @@ depending on the type of model estimated. \code{sigma}, \code{r.squared},
 \code{feols}. \code{pseudo.r.squared} will be NA for \code{feols}.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("fixest", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("fixest")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(fixest)
@@ -74,9 +71,7 @@ gravity_summ <- summary(gravity, cluster = c("Product", "Year"))
 tidy(gravity_summ, conf.int = TRUE)
 
 # approach (1) is preferred.
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:

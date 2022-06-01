@@ -40,10 +40,7 @@ This tidy method works with any model objects of class \code{systemfit}.
 Default returns a tibble of six columns.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("systemfit", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("systemfit")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 set.seed(27)
 
@@ -64,9 +61,7 @@ fit <- systemfit(formula = list(Y ~ Z, W ~ X), data = df, method = "SUR")
 # summarize model fit with tidiers
 tidy(fit)
 tidy(fit, conf.int = TRUE)
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[systemfit:systemfit]{systemfit::systemfit()}}

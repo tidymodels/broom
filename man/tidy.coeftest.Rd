@@ -37,10 +37,7 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("lmtest", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("lmtest")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(lmtest)
@@ -71,9 +68,7 @@ tidy(coeftest(m, vcov = NeweyWest))
 # Users can control this with the "save = TRUE" argument of coeftest().
 glance(coeftest(m))
 glance(coeftest(m, save = TRUE))
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[lmtest:coeftest]{lmtest::coeftest()}}

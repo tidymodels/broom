@@ -33,10 +33,7 @@ Tidy \code{gam} objects created by calls to \code{\link[mgcv:gam]{mgcv::gam()}} 
 \code{\link[=tidy.gam]{tidy.gam()}}.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("gam", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("gam")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(gam)
@@ -47,9 +44,7 @@ g <- gam(mpg ~ s(hp, 4) + am + qsec, data = mtcars)
 # summarize model fit with tidiers
 tidy(g)
 glance(g)
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[gam:gam]{gam::gam()}}, \code{\link[=tidy.anova]{tidy.anova()}}, \code{\link[=tidy.gam]{tidy.gam()}}

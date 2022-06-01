@@ -20,12 +20,8 @@
 #'   matrix from `rcorr` there may be entries for both the `cor(A, B)` and
 #'   `cor(B, A)`. Only one of these pairs will ever be present in the tidy
 #'   output.
-#'
-#' @examples
 #' 
-#' # feel free to ignore the following line—it allows {broom} to supply 
-#' # examples without requiring the model-supplying package to be installed.
-#' if (requireNamespace("Hmisc", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed("Hmisc")
 #'
 #' # load libraries for models and data
 #' library(Hmisc)
@@ -52,8 +48,6 @@
 #' ggplot(td, aes(estimate, p.value)) +
 #'   geom_point() +
 #'   scale_y_log10()
-#'
-#' }
 #' 
 #' @export
 #' @aliases rcorr_tidiers Hmisc_tidiers

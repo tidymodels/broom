@@ -36,10 +36,7 @@ Note also that the columns of group1 and group2 will always be a factor,
 even if the original input is (e.g.) numeric.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the data-supplying package to be installed.
-if (requireNamespace("modeldata", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("modeldata")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 attach(airquality)
 Month <- factor(Month, labels = month.abb[5:9])
@@ -56,9 +53,7 @@ tidy(pairwise.t.test(compounds, class, alternative = "greater"))
 tidy(pairwise.t.test(compounds, class, alternative = "less"))
 
 tidy(pairwise.wilcox.test(compounds, class))
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[stats:pairwise.t.test]{stats::pairwise.t.test()}}, \code{\link[stats:pairwise.wilcox.test]{stats::pairwise.wilcox.test()}},

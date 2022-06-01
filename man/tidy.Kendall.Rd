@@ -31,10 +31,7 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("Kendall", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("Kendall")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(Kendall)
@@ -51,9 +48,7 @@ tidy(s_res)
 
 t_res <- SeasonalMannKendall(ts(A))
 tidy(t_res)
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[Kendall:Kendall]{Kendall::Kendall()}}, \code{\link[Kendall:MannKendall]{Kendall::MannKendall()}},

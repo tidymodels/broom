@@ -40,10 +40,7 @@ be valid. More information can be found in
 \code{vignette("mod2user", package = "lmodel2")}.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("lmodel2", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("lmodel2")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(lmodel2)
@@ -63,9 +60,7 @@ ggplot(tidy(Ex2.res), aes(estimate, term, color = method)) +
   geom_point() +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high))
-  
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[lmodel2:lmodel2]{lmodel2::lmodel2()}}

@@ -50,10 +50,7 @@ refit the model with \code{na.action = na.exclude} or deal with the
 missingness in the data beforehand.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("geepack", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("geepack")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load modeling library
 library(geepack)
@@ -74,9 +71,7 @@ geefit <- geeglm(Income ~ Frost + Murder,
 # summarize model fit with tidiers
 tidy(geefit)
 tidy(geefit, conf.int = TRUE)
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[geepack:geeglm]{geepack::geeglm()}}

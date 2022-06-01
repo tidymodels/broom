@@ -95,10 +95,7 @@ For additional details on Cook's distance, see
 \code{\link[stats:influence.measures]{stats::cooks.distance()}}.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("betareg", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("betareg")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(betareg)
@@ -119,9 +116,7 @@ tidy(mod, conf.int = TRUE, conf.level = .99)
 augment(mod)
 
 glance(mod)
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[betareg:betareg]{betareg::betareg()}}

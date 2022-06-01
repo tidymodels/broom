@@ -29,10 +29,7 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("maps", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("maps")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(maps)
@@ -50,9 +47,7 @@ qplot(long, lat,
   data = tx, geom = "polygon", group = group,
   colour = I("white")
 )
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[maps:map]{maps::map()}}

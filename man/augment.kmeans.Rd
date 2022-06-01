@@ -69,11 +69,7 @@ We are in the process of defining behaviors for models fit with various
 missing at this time.
 }
 \examples{
-
-# feel free to ignore the following lines—they allow {broom} to supply 
-# examples without requiring the model/data-supplying package to be installed.
-if (requireNamespace("cluster", quietly = TRUE)) {
-  if (requireNamespace("modeldata", quietly = TRUE)) {
+\dontshow{if ((rlang::is_installed("cluster") & rlang::is_installed("modeldata"))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
   
 library(cluster)
 library(modeldata)
@@ -88,9 +84,7 @@ fit <- pam(x, k = 4)
 tidy(fit)
 glance(fit)
 augment(fit, x)
-
-  }
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[stats:kmeans]{stats::kmeans()}}

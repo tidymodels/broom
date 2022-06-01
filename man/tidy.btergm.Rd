@@ -41,11 +41,7 @@ temporal exponential random graph model estimated with the \pkg{xergm}.
 It simply returns the coefficients and their confidence intervals.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("bbmle", quietly = TRUE)) {
-  if (requireNamespace("network", quietly = TRUE)) {
+\dontshow{if ((rlang::is_installed("bbmle") & rlang::is_installed("network"))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 library(btergm)
 library(network)
@@ -73,10 +69,7 @@ mod <- btergm(networks ~ edges + istar(2) + edgecov(covariates), R = 100)
 
 # summarize model fit with tidiers
 tidy(mod)
-
-  }
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[btergm:btergm]{btergm::btergm()}}

@@ -41,16 +41,15 @@ of the appropriate type.
 }
 \details{
 Only models with a single \code{tau} value may be passed.
-For multiple values, please use a \code{\link[purrr:map]{purrr::map()}} workflow instead, e.g.\preformatted{taus \%>\%
+For multiple values, please use a \code{\link[purrr:map]{purrr::map()}} workflow instead, e.g.
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{taus \%>\%
   map(function(tau_val) rq(y ~ x, tau = tau_val)) \%>\%
   map_dfr(glance)
-}
+}\if{html}{\out{</div>}}
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("quantreg", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("quantreg")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load modeling library and data
 library(quantreg)
@@ -80,9 +79,7 @@ augment(mod3)
 
 # glance cannot handle rqs objects like `mod3`--use a purrr 
 # `map`-based workflow instead
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[quantreg:rq]{quantreg::rq()}}

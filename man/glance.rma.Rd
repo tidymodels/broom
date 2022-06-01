@@ -42,10 +42,7 @@ that no longer have a well-defined value are filled in with an \code{NA}
 of the appropriate type.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("metafor", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("metafor")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 library(metafor)
 
@@ -62,8 +59,7 @@ df <-
 meta_analysis <- rma(yi, vi, data = df, method = "EB")
 
 glance(meta_analysis)
-}
-
+\dontshow{\}) # examplesIf}
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:

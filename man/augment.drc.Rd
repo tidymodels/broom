@@ -93,10 +93,7 @@ We are in the process of defining behaviors for models fit with various
 missing at this time.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("drc", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("drc")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(drc)
@@ -113,9 +110,7 @@ tidy(mod, conf.int = TRUE)
 glance(mod)
 
 augment(mod, selenium)
-
-} 
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[drc:drm]{drc::drm()}}

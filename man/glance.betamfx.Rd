@@ -43,9 +43,7 @@ of the appropriate type.
 This glance method wraps \code{\link[=glance.betareg]{glance.betareg()}} for \code{\link[mfx:betamfx]{mfx::betamfx()}} objects.
 }
 \examples{
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("mfx", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("mfx")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
  
 library(mfx)
 
@@ -69,7 +67,7 @@ tidy(mod_betamfx, conf.int = TRUE)
 
 augment(mod_betamfx)
 glance(mod_betamfx)
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=glance.betareg]{glance.betareg()}}, \code{\link[mfx:betamfx]{mfx::betamfx()}}

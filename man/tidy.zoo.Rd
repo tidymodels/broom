@@ -29,10 +29,7 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("zoo", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("zoo")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(zoo)
@@ -60,8 +57,7 @@ Zrolled <- rollmean(Z, 5)
 ggplot(tidy(Zrolled), aes(index, value, color = series)) +
   geom_line()
   
-}
-  
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[zoo:zoo]{zoo::zoo()}}

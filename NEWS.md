@@ -1,6 +1,8 @@
 # broom 0.8.0.9000 (development version)
 
-To be released as 0.8.1.
+To be released as 1.0.0.
+
+* Add `exponentiate` argument to `tidy.boot` (#1039).
 
 # broom 0.8.0
 

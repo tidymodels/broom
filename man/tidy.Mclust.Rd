@@ -29,10 +29,7 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
-
-# feel free to ignore the following line—it allows {broom} to supply 
-# examples without requiring the model-supplying package to be installed.
-if (requireNamespace("mclust", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed("mclust")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load library for models and data
 library(mclust)
@@ -71,8 +68,7 @@ tidy(m)
 augment(m, points)
 glance(m)
 
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[mclust:Mclust]{mclust::Mclust()}}
