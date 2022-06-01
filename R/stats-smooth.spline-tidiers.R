@@ -29,6 +29,8 @@
 #' @seealso [augment()], [stats::smooth.spline()],
 #'   [stats::predict.smooth.spline()]
 augment.smooth.spline <- function(x, data = x$data, ...) {
+  check_ellipses("newdata", "augment", "smooth.spline", ...)
+  
   data <- as_tibble(data)
   data$.fitted <- stats::fitted(x)
   data$.resid <- stats::resid(x)

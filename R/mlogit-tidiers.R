@@ -65,6 +65,7 @@ tidy.mlogit <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #' 
 #' 
 augment.mlogit <- function(x, data = x$model, ...) {
+  check_ellipses("newdata", "augment", "mlogit", ...)
   
   # the ID variables are really messed up, so we're going to do some 
   # retrofitting because this ends up being a pretty important element of

@@ -131,6 +131,8 @@ tidy.poLCA <- function(x, ...) {
 #' @seealso [augment()], [poLCA::poLCA()]
 #' @family poLCA tidiers
 augment.poLCA <- function(x, data = NULL, ...) {
+  check_ellipses("newdata", "augment", "poLCA", ...)
+  
   indices <- cbind(seq_len(nrow(x$posterior)), x$predclass)
 
   ret <- tibble(

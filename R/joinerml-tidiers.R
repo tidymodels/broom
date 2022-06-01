@@ -137,6 +137,8 @@ tidy.mjoint <- function(x, component = "survival", conf.int = FALSE,
 #'
 #' @export
 augment.mjoint <- function(x, data = x$data, ...) {
+  check_ellipses("newdata", "augment", "mjoint", ...)
+  
   if (is.null(data)) {
     stop(
       "`data` argument is NULL. Try specifying `data` manually.",

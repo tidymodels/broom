@@ -72,6 +72,8 @@ tidy.pam <- function(x, col.names = paste0("x", 1:ncol(x$medoids)), ...) {
 #' @family pam tidiers
 #'
 augment.pam <- function(x, data = NULL, ...) {
+  check_ellipses("newdata", "augment", "pam", ...)
+  
   if (is.null(data)) {
     data <- x$data
   }

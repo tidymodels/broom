@@ -103,6 +103,8 @@ tidy.Mclust <- function(x, ...) {
 #' @family mclust tidiers
 #'
 augment.Mclust <- function(x, data = NULL, ...) {
+  check_ellipses("newdata", "augment", "Mclust", ...)
+  
   if (is.null(data)) {
     data <- x$data
   } else if (!(is.data.frame(data) || is.matrix(data))) {
