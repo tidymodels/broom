@@ -3,6 +3,7 @@
 #'
 #' @param x An `lm` object created by [stats::lm()].
 #' @template param_confint
+#' @template param_exponentiate
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy(regression = TRUE)
@@ -89,9 +90,8 @@
 #' @export
 #' @seealso [tidy()], [stats::summary.lm()]
 #' @family lm tidiers
-tidy.lm <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
-  check_ellipses("exponentiate", "tidy", "lm", ...)
-
+tidy.lm <- function(x, conf.int = FALSE, conf.level = 0.95, 
+                    exponentiate = FALSE, ...) {
   warn_on_subclass(x, "tidy")
 
   ret <- as_tibble(summary(x)$coefficients, rownames = "term")
@@ -105,6 +105,10 @@ tidy.lm <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
   if (conf.int) {
     ci <- broom_confint_terms(x, level = conf.level)
     ret <- dplyr::left_join(ret, ci, by = "term")
+  }
+  
+  if (exponentiate) {
+    ret <- exponentiate(ret)
   }
 
   ret
