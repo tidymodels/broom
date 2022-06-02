@@ -18,11 +18,11 @@ test_that("ellipsis checking works", {
 })
 
 test_that("ellipsis checking works (whole game, tidy)", {
-  mod <- lm(mpg ~ ., data = mtcars)
+  mod <- nls(mpg ~ k * e^wt, data = mtcars, start = list(k = 1, e = 2))
   
   expect_warning(
     tidy(mod, exponentiate = TRUE),
-    "\\`exponentiate\\` argument is not supported in the \\`tidy\\(\\)\\` method for \\`lm\\` objects"
+    "\\`exponentiate\\` argument is not supported in the \\`tidy\\(\\)\\` method for \\`nls\\` objects"
   )
 })
 
