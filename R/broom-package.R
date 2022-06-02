@@ -15,7 +15,6 @@
 #' @importFrom purrr map_df set_names possibly
 #' @importFrom tibble tibble as_tibble
 #' @importFrom tidyr pivot_longer pivot_wider
-#' @importFrom ggplot2 ggplot
 #'
 #' @importFrom utils head
 #' @importFrom glue glue
@@ -27,3 +26,7 @@
 #' @keywords internal
 "_PACKAGE"
 
+# address unused Imports warning from R CMD check
+import_ggplot <- function() {
+  ggplot2::aes()
+}
