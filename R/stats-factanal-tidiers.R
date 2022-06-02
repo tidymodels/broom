@@ -91,6 +91,8 @@ tidy.factanal <- function(x, ...) {
 #' @seealso [augment()], [stats::factanal()]
 #' @family factanal tidiers
 augment.factanal <- function(x, data, ...) {
+  check_ellipses("newdata", "augment", "factanal", ...)
+  
   scores <- x$scores
 
   # Check scores were computed

@@ -29,6 +29,8 @@
 #' @seealso [tidy()], [bbmle::mle2()], [tidy_optim()]
 #' @aliases mle2_tidiers bbmle_tidiers
 tidy.mle2 <- function(x, conf.int = FALSE, conf.level = .95, ...) {
+  check_ellipses("exponentiate", "tidy", "mle2", ...)
+  
   co <- bbmle::coef(bbmle::summary(x))
   ret <- ret <- as_tidy_tibble(
     co,

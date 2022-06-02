@@ -46,6 +46,8 @@
 #' @aliases systemfit_tidiers
 #'
 tidy.systemfit <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
+  check_ellipses("exponentiate", "tidy", "systemfit", ...)
+  
   ret <- as_tibble(summary(x)$coefficients, rownames = "term")
   colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
 

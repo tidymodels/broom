@@ -59,6 +59,8 @@ confint.rlm <- confint.default
 #' @export
 #' @include stats-lm-tidiers.R
 tidy.rlm <- function(x, conf.int = FALSE, conf.level = .95, ...) {
+  check_ellipses("exponentiate", "tidy", "rlm", ...)
+  
   ret <- as_tibble(summary(x)$coefficients, rownames = "term")
   colnames(ret) <- c("term", "estimate", "std.error", "statistic")
 

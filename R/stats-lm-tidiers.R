@@ -90,6 +90,7 @@
 #' @seealso [tidy()], [stats::summary.lm()]
 #' @family lm tidiers
 tidy.lm <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
+  check_ellipses("exponentiate", "tidy", "lm", ...)
 
   warn_on_subclass(x, "tidy")
 

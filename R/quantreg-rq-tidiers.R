@@ -55,6 +55,7 @@
 #' 
 tidy.rq <- function(x, se.type = NULL, conf.int = FALSE,
                     conf.level = 0.95, ...) {
+  check_ellipses("exponentiate", "tidy", "rq", ...)
 
   # specification for confidence level inverted for summary.rq
   alpha <- 1 - conf.level

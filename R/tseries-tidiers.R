@@ -37,6 +37,8 @@
 #' @family garch tidiers
 #' @seealso [tidy()], [tseries::garch()]
 tidy.garch <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
+  check_ellipses("exponentiate", "tidy", "garch", ...)
+  
   s <- summary(x)
   co <- s$coef
   nn <- c("estimate", "std.error", "statistic", "p.value")

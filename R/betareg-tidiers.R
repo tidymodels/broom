@@ -43,6 +43,7 @@
 #' @family betareg tidiers
 #' @aliases betareg_tidiers
 tidy.betareg <- function(x, conf.int = FALSE, conf.level = .95, ...) {
+  check_ellipses("exponentiate", "tidy", "betareg", ...)
   
   ret <- map_as_tidy_tibble(
     purrr::map(coef(summary(x)), as.matrix),

@@ -75,6 +75,8 @@
 #'
 tidy.mjoint <- function(x, component = "survival", conf.int = FALSE,
                         conf.level = 0.95, boot_se = NULL, ...) {
+  check_ellipses("exponentiate", "tidy", "mjoint", ...)
+  
   component <- rlang::arg_match(component, c("survival", "longitudinal"))
   if (!is.null(boot_se)) {
     if (!inherits(x = boot_se, "bootSE")) {
@@ -137,6 +139,8 @@ tidy.mjoint <- function(x, component = "survival", conf.int = FALSE,
 #'
 #' @export
 augment.mjoint <- function(x, data = x$data, ...) {
+  check_ellipses("newdata", "augment", "mjoint", ...)
+  
   if (is.null(data)) {
     stop(
       "`data` argument is NULL. Try specifying `data` manually.",

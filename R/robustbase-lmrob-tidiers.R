@@ -40,6 +40,8 @@
 #' @rdname tidy.robustbase.lmrob
 #' @seealso [robustbase::lmrob()]
 tidy.lmrob <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
+  check_ellipses("exponentiate", "tidy", "lmrob", ...)
+  
   ret <- coef(summary(x)) %>%
     as_tibble(rownames = "term")
   names(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")

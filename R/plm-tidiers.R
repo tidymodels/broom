@@ -35,6 +35,8 @@
 #' @seealso [tidy()], [plm::plm()], [tidy.lm()]
 #' @family plm tidiers
 tidy.plm <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
+  check_ellipses("exponentiate", "tidy", "plm", ...)
+  
   s <- summary(x)
 
   ret <- as_tibble(s$coefficients, rownames = "term")

@@ -127,6 +127,8 @@ glance.htest <- function(x, ...) tidy(x)
 #' @seealso [augment()], [stats::chisq.test()]
 #' @family htest tidiers
 augment.htest <- function(x, ...) {
+  check_ellipses("newdata", "augment", "htest", ...)
+  
   if (all(c("observed", "expected", "residuals", "stdres") %in% names(x))) {
     return(augment_chisq_test(x, ...))
   }

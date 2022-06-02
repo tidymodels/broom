@@ -47,6 +47,8 @@
 #' @seealso [tidy()], [lavaan::cfa()], [lavaan::sem()],
 #'   [lavaan::parameterEstimates()]
 tidy.lavaan <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
+  check_ellipses("exponentiate", "tidy", "lavaan", ...)
+  
   lavaan::parameterEstimates(x,
     ci = conf.int,
     level = conf.level,

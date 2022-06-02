@@ -60,6 +60,8 @@ tidy.kmeans <- function(x, col.names = colnames(x$centers), ...) {
 #' @family kmeans tidiers
 augment.kmeans <- function(x, data, ...) {
   
+  check_ellipses("newdata", "augment", "kmeans", ...)
+  
   # kmeans allows for input matrices without column names,
   # so add them in the same way that fix_data_frame() would have
   if (inherits(data, "matrix") & is.null(colnames(data))) {

@@ -245,6 +245,8 @@ glance.rma <- function(x, ...) {
 #' augment(meta_analysis)
 #' 
 augment.rma <- function(x, interval = c("prediction", "confidence"), ...) {
+  check_ellipses("newdata", "augment", "rma", ...)
+  
   # metafor generally handles these for different models through the monolith
   # `rma` class; using `purrr::possibly` primarily helps discard unused
   # components but also helps get the right component for each model

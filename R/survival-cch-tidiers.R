@@ -48,6 +48,8 @@
 #' @family cch tidiers
 #' @family survival tidiers
 tidy.cch <- function(x, conf.level = .95, ...) {
+  check_ellipses("exponentiate", "tidy", "cch", ...)
+  
   s <- summary(x)
   co <- stats::coefficients(s)
 

@@ -24,6 +24,8 @@
 #'
 tidy.rqs <- function(x, se.type = "rank", conf.int = FALSE,
                      conf.level = 0.95, ...) {
+  check_ellipses("exponentiate", "tidy", "rqs", ...)
+  
   rq_summary <- suppressWarnings(
     quantreg::summary.rqs(x, se = se.type, alpha = 1 - conf.level, ...)
   )

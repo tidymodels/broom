@@ -40,6 +40,7 @@
 #' @family vars tidiers
 #' @aliases vars_tidiers
 tidy.varest <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
+  check_ellipses("exponentiate", "tidy", "varest", ...)
 
   # `vars` does not define a `confint` method and does not calculate CIs
   if (isTRUE(conf.int)) {

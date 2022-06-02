@@ -57,6 +57,7 @@ tidy.ivreg <- function(x,
                        conf.level = 0.95,
                        instruments = FALSE,
                        ...) {
+  check_ellipses("exponentiate", "tidy", "ivreg", ...)
 
   # TODO: documentation on when you get what needs to be updated !!!
 
