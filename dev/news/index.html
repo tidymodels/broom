@@ -60,9 +60,16 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.8.0.9000" id="broom-0809000-development-version">broom 0.8.0.9000 (development version)<a class="anchor" aria-label="anchor" href="#broom-0809000-development-version"></a></h2>
 <p>To be released as 1.0.0.</p>
-<ul><li>Add <code>exponentiate</code> argument to <code>tidy.boot</code> (<a href="https://github.com/tidymodels/broom/issues/1039" class="external-link">#1039</a>).</li>
-<li>Update in <code><a href="../reference/tidy.htest.html">tidy.htest()</a></code> converting matrix-columns to vector-columns (<a href="https://github.com/tidymodels/broom/issues/1081" class="external-link">#1081</a>).</li>
+<p>We’ve made notable changes to error handling in the package:</p>
+<ul><li>Adds minimal ellipsis checking to warn on commonly misspecified arguments passed through ellipses. Notably:<ul><li>
+<code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy()</a></code> methods will now warn when supplied an <code>exponentiate</code> argument if it will be ignored.</li>
+<li>
+<code><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment()</a></code> methods will now warn when supplied a <code>newdata</code> argument if it will be ignored.</li>
+</ul></li>
 <li>The warning regarding tidiers only maintained via dispatch to <code>lm</code> and <code>glm</code> is now displayed only once per session, per unique dispatch. That is, if a <code>class_a</code> object is tidied using a <code>(g)lm</code> method, broom will not warn when tidying <code>class_a</code> objects for the rest of the session, but if a <code>class_b</code> object is tidied using a <code>(g)lm</code> method in the same session, broom will warn again (<a href="https://github.com/tidymodels/broom/issues/1101" class="external-link">#1101</a>).</li>
+</ul><p>Other fixes and improvements:</p>
+<ul><li>Add <code>exponentiate</code> argument to <code><a href="../reference/tidy.boot.html">tidy.boot()</a></code> (<a href="https://github.com/tidymodels/broom/issues/1039" class="external-link">#1039</a>).</li>
+<li>Update in <code><a href="../reference/tidy.htest.html">tidy.htest()</a></code> converting matrix-columns to vector-columns (<a href="https://github.com/tidymodels/broom/issues/1081" class="external-link">#1081</a>).</li>
 <li>Address failures in <code><a href="../reference/tidy.glht.html">tidy.glht()</a></code> with <code>conf.int = TRUE</code> (<a href="https://github.com/tidymodels/broom/issues/1103" class="external-link">#1103</a>).</li>
 <li>Address failures in <code><a href="../reference/tidy.zoo.html">tidy.zoo()</a></code> when input data does not have <code>colnames</code> (<a href="https://github.com/tidymodels/broom/issues/1080" class="external-link">#1080</a>).</li>
 </ul></div>

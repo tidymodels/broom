@@ -105,10 +105,11 @@ signature only. <strong>Cautionary note:</strong> Misspelled arguments will be
 absorbed in <code>...</code>, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
 For example, if you pass <code>conf.lvel = 0.9</code>, all computation will
-proceed using <code>conf.level = 0.95</code>. Additionally, if you pass
-<code>newdata = my_tibble</code> to an <code><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment()</a></code> method that does not
-accept a <code>newdata</code> argument, it will use the default value for
-the <code>data</code> argument.</p></dd>
+proceed using <code>conf.level = 0.95</code>. Two exceptions here are:</p><ul><li><p><code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy()</a></code> methods will warn when supplied an <code>exponentiate</code> argument if
+it will be ignored.</p></li>
+<li><p><code><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment()</a></code> methods will warn when supplied a <code>newdata</code> argument if it
+will be ignored.</p></li>
+</ul></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -167,8 +168,8 @@ missingness in the data beforehand.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     fd(dose, parmMat[, 1], parmMat[, 2], parmMat[, 3], parmMat[, </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         4], parmMat[, 5])</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x562a64ed1690&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x562a59b3c140&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5616fe746f30&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x56170e3b92c0&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ssfct</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> function (dframe) </span>
@@ -187,8 +188,8 @@ missingness in the data beforehand.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     befVal &lt;- c(bVal, x[which.max(y)], 1)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     return(c(befVal[1], cdVal, befVal[2:3])[is.na(fixed)])</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x562a6bed93d0&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x562a59b39ca8&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5616f9957a08&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x5616fc1f32c0&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $names</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "b" "c" "d" "e" "f"</span>
@@ -201,8 +202,8 @@ missingness in the data beforehand.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     attr(fd(dose, parmMat[, 1], parmMat[, 2], parmMat[, 3], parmMat[, </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         4], parmMat[, 5]), "gradient")[, notFixed]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x562a64ed41f0&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x562a59b3c140&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5616fe74a330&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x56170e3b92c0&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $deriv2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
@@ -228,8 +229,8 @@ missingness in the data beforehand.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     attr(dFct(dose, parmMat[, 1], parmMat[, 2], parmMat[, 3], </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         parmMat[, 4], parmMat[, 5]), "gradient")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x562a64ed2e78&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x562a59b3c140&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5616fe748f80&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x56170e3b92c0&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $edfct</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> function (parm, respl, reference, type, ...) </span>
@@ -264,8 +265,8 @@ missingness in the data beforehand.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         parmVec[5]), "gradient")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     return(list(EDp, EDder[notFixed]))</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x562a64ee2d68&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x562a59b3c140&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5616fe750960&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x56170e3b92c0&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $name</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "family"</span>
@@ -282,8 +283,8 @@ missingness in the data beforehand.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     parmVec[indexVec] &lt;- parm</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     parmVec[parmNo]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x562a6500f1b8&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x562a59b29ed8&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5616fe884a20&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x5617163d4010&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upperAs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> function (parm) </span>
@@ -291,8 +292,8 @@ missingness in the data beforehand.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     parmVec[indexVec] &lt;- parm</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     parmVec[parmNo]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x562a6500f1b8&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x562a59b2a178&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5616fe884a20&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x5617163d4278&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $monoton</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
