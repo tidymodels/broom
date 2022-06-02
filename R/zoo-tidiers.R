@@ -43,7 +43,10 @@ tidy.zoo <- function(x, ...) {
   if (length(dim(x)) > 0) {
     ret <- data.frame(as.matrix(x), index = zoo::index(x))
     ret <- tibble::as_tibble(ret)
-    colnames(ret)[1:ncol(x)] <- colnames(x)
+    if (!is.null(colnames(x))) {
+      colnames(ret)[1:ncol(x)] <- colnames(x)
+    }
+    
     out <- pivot_longer(ret,
                         cols = c(dplyr::everything(), -index),
                         names_to = "series",

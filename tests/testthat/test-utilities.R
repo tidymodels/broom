@@ -122,17 +122,27 @@ test_that("as_glance_tibble", {
 
 test_that("appropriate warning on (g)lm-subclassed models", {
   x <- 1
-  class(x) <- c("gee", "glm")
+  class(x) <- c("boop", "glm")
   
   expect_warning(
     warn_on_subclass(x, "tidy"),
-    "only supported through the glm tidier method."
+    "class \\`boop\\`.*only supported through the \\`glm\\` tidier method."
   )
   
-  class(x) <- c("gee", "glm", "lm")
+  # only displayed once per session, per unique dispatch
+  expect_silent(
+    warn_on_subclass(x, "tidy")
+  )
+  
+  class(x) <- c("bop", "glm", "lm")
   
   expect_warning(
     warn_on_subclass(x, "tidy"),
-    "only supported through the glm tidier method."
+    "class \\`bop\\`.*only supported through the `glm` tidier method."
+  )
+  
+  # only displayed once per session, per unique dispatch
+  expect_silent(
+    warn_on_subclass(x, "tidy")
   )
 })
