@@ -8,7 +8,7 @@
 }
 \arguments{
 \item{x}{An \code{anova} object, such as those created by \code{\link[stats:anova]{stats::anova()}},
-\code{\link[car:Anova]{car::Anova()}}, or \code{\link[car:leveneTest]{car::leveneTest()}}.}
+\code{\link[car:Anova]{car::Anova()}}, \code{\link[car:leveneTest]{car::leveneTest()}}, or \code{\link[car:linearHypothesis]{car::linearHypothesis()}}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -48,6 +48,11 @@ mod <- anova(a, b)
 
 # summarize model fit with tidiers
 tidy(mod)
+
+# car::linearHypothesis() example
+library(car)
+mod_lht <- linearHypothesis(a, "wt - disp")
+tidy(mod_lht)
 
 }
 \seealso{

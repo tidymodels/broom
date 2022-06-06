@@ -2,7 +2,7 @@
 #' @template title_desc_tidy
 #'
 #' @param x An `anova` object, such as those created by [stats::anova()],
-#'   [car::Anova()], or [car::leveneTest()].
+#'   [car::Anova()], [car::leveneTest()], or [car::linearHypothesis()].
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy(
@@ -32,6 +32,11 @@
 #' # summarize model fit with tidiers
 #' tidy(mod)
 #' 
+#' # car::linearHypothesis() example
+#' library(car)
+#' mod_lht <- linearHypothesis(a, "wt - disp")
+#' tidy(mod_lht)
+#' 
 #' @export
 #' @family anova tidiers
 #' @seealso [tidy()], [stats::anova()], [car::Anova()], [car::leveneTest()]
@@ -55,7 +60,7 @@ tidy.anova <- function(x, ...) {
     "Mean Sq" = "meansq",
     "F value" = "statistic",
     "Pr(>F)" = "p.value",
-    "Res.Df" = "res.df",
+    "Res.Df" = "df.residual",
     "RSS" = "rss",
     "Sum of Sq" = "sumsq",
     "F" = "statistic",
@@ -91,10 +96,48 @@ tidy.anova <- function(x, ...) {
 
   colnames(ret) <- dplyr::recode(colnames(ret), !!!renamers)
 
+  # Special catch for car::linearHypothesis
+  x_attr <- attributes(x)
+  if (!is.null(x_attr$value)) {
+    if (isTRUE(grepl("^Linear hypothesis", x_attr$heading[[1]]))) {
+      # Drop unrestricted model (not interesting in linear hypothesis tests)
+      # Use formula to subset if available (e.g. with car::linearHypothesis)
+      if (length(grep("Model", x_attr$heading)) != 0) {
+        idx <- sub(".*: ", "", strsplit(x_attr$heading[grep("Model", x_attr$heading)], "\n")[[1]])
+        idx <- idx != "restricted model"
+        ret <- ret[idx, , drop = FALSE]
+      }
+      hypothesis <- x_attr$heading[grep("=", x_attr$heading)]
+      ret_xtra <- data.frame(term = gsub(" =.*", "", hypothesis),
+                             null.value = as.numeric(gsub(".*= ", "", hypothesis)),
+                             estimate = x_attr$value, 
+                             std.error = sqrt(as.numeric(diag(x_attr$vcov))))
+      row.names(ret_xtra) <- row.names(ret) <- NULL
+      ret_xtra$term = gsub("  ", " ", ret_xtra$term) ## Occasional, annoying extra space
+      ret <- cbind(ret_xtra, ret) %>% 
+        dplyr::select(term, null.value, estimate, std.error, statistic, 
+                      p.value, dplyr::everything())
+    } else {
+      ## If model formulas (e.g. from car::linearHypothesis) weren't available,
+      ## just add the term and response columns
+      response <- sub(".*: ", "", strsplit(x_attr$heading[grep("Response", x_attr$heading)], "\n")[[1]])
+      term <- row.names(ret)
+      ret < cbind(cbind(term, ret), response)
+      row.names(ret) <- NULL
+    }
+  } else if (length(grep("Model", x_attr$heading)) != 0) {
+    mods <- sub(".*: ", "", strsplit(x_attr$heading[grep("Model", x_attr$heading)], "\n")[[1]])
+    ret <- cbind(term = mods, ret)
+  } else if (is.null(ret$term) & !is.null(row.names(ret))) {
+    ret <- cbind(term = row.names(ret), ret)
+    row.names(ret) <- NULL
+  }
+
   if ("term" %in% names(ret)) {
     # if rows had names, strip whitespace in them
     ret <- mutate(ret, term = stringr::str_trim(term))
   }
+
   as_tibble(ret)
 }
 

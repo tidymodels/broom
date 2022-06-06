@@ -79,3 +79,24 @@ test_that("tidy.TukeyHSD", {
   check_tidy_output(td, strict = FALSE)
   check_dims(td, 3, 7)
 })
+
+test_that("tidy.linearHypothesis", {
+  skip_if_not_installed("car")
+
+  fit <- stats::lm(mpg ~ disp + hp, mtcars)
+  fit_lht <- car::linearHypothesis(fit, "disp = hp")
+
+  td_lht <- tidy(fit_lht)
+
+  check_tidy_output(td_lht, strict = FALSE)
+  check_dims(td_lht, 1, 10)
+
+  expect_true("null.value" %in% colnames(td_lht))
+  
+  expect_equal(td_lht$term, 'disp - hp')
+  expect_equal(td_lht$null.value, 0)
+  expect_equal(td_lht$estimate, -0.00551, tolerance = .00001)
+
+})
+
+
