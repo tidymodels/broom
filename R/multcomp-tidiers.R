@@ -52,8 +52,13 @@ tidy.glht <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   if (conf.int) {
     tidy_glht_confint <- tidy.confint.glht(confint(x, level = conf.level, ...))
 
+    by_cols <- c("contrast", "estimate")
+    if ("term" %in% colnames(tidy_glht_summary)) {
+      by_cols <- c("term", by_cols)
+    }
+    
     tidy_glht_summary <- dplyr::select(tidy_glht_summary, -std.error) %>%
-      dplyr::left_join(tidy_glht_confint) %>%
+      dplyr::left_join(tidy_glht_confint, by = by_cols) %>%
       dplyr::select(
         dplyr::contains("term"), contrast, null.value, estimate,
         conf.low, conf.high, dplyr::everything()
