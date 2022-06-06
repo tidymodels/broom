@@ -31,7 +31,7 @@ A \link[tibble:tibble]{tibble::tibble} with vector columns \code{x}, \code{y} an
 \description{
 Broom tidies a number of lists that are effectively S3
 objects without a class attribute. For example, \code{\link[stats:optim]{stats::optim()}},
-\link[base:svd]{svd()} and \code{\link[akima:interp]{akima::interp()}} produce consistent output, but
+\link[base:svd]{svd()} and \code{\link[interp:interp]{interp::interp()}} produce consistent output, but
 because they do not have a class attribute, they cannot be handled by S3
 dispatch.
 
@@ -45,7 +45,7 @@ If no appropriate tidying method is found, they throw an error.
 xyz lists (lists where \code{x} and \code{y} are vectors of coordinates
 and \code{z} is a matrix of values) are typically used by functions such as
 \code{\link[graphics:persp]{graphics::persp()}} or \code{\link[graphics:image]{graphics::image()}} and returned
-by interpolation functions such as \code{\link[akima:interp]{akima::interp()}}.
+by interpolation functions such as \code{\link[interp:interp]{interp::interp()}}.
 }
 \examples{
 
@@ -55,7 +55,7 @@ tidy(A)
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[graphics:persp]{graphics::persp()}}, \code{\link[graphics:image]{graphics::image()}},
-\code{\link[akima:interp]{akima::interp()}}
+\code{\link[interp:interp]{interp::interp()}}
 
 Other list tidiers: 
 \code{\link{glance_optim}()},

@@ -21,6 +21,9 @@ Other fixes and improvements:
 * Address failures in `tidy.glht()` with `conf.int = TRUE` (#1103).
 * Address failures in `tidy.zoo()` when input data does not have `colnames` 
   (#1080).
+* Transition tidiers for bivariate linear or spline-based interpolation---using
+  list tidiers to interface with objects from the akima package is now 
+  considered off-label. See the interp package for a FOSS alternative.
 
 # broom 0.8.0
 
