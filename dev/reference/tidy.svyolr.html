@@ -80,14 +80,7 @@ specify which components to return.</p>
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for svyolr</span>
-<span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span>
-  <span class="va">x</span>,
-  conf.int <span class="op">=</span> <span class="cn">FALSE</span>,
-  conf.level <span class="op">=</span> <span class="fl">0.95</span>,
-  exponentiate <span class="op">=</span> <span class="cn">FALSE</span>,
-  p.values <span class="op">=</span> <span class="cn">FALSE</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">x</span>, conf.int <span class="op">=</span> <span class="cn">FALSE</span>, conf.level <span class="op">=</span> <span class="fl">0.95</span>, exponentiate <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -106,9 +99,6 @@ Defaults to 0.95, which corresponds to a 95 percent confidence interval.</p></dd
 the coefficient estimates. This is typical for logistic and multinomial
 regressions, but a bad idea if there is no log or logit link. Defaults
 to <code>FALSE</code>.</p></dd>
-<dt>p.values</dt>
-<dd><p>Logical. Should p-values be returned,
-based on chi-squared tests from <code><a href="https://rdrr.io/pkg/MASS/man/dropterm.html" class="external-link">MASS::dropterm()</a></code>. Defaults to FALSE.</p></dd>
 <dt>...</dt>
 <dd><p>Additional arguments. Not used. Needed to match generic
 signature only. <strong>Cautionary note:</strong> Misspelled arguments will be
@@ -123,16 +113,11 @@ will be ignored.</p></li>
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>In <code>broom 0.7.0</code> the <code>coefficient_type</code> column was renamed to
-<code>coef.type</code>, and the contents were changed as well. Now the contents
-are <code>coefficient</code> and <code>scale</code>, rather than <code>coefficient</code> and <code>zeta</code>.</p>
-<p>Calculating p.values with the <code><a href="https://rdrr.io/pkg/MASS/man/dropterm.html" class="external-link">dropterm()</a></code> function is the approach
-suggested by the MASS package author. This
-approach is computationally intensive so that p.values are only
-returned if requested explicitly. Additionally, it only works for
-models containing no variables with more than two categories. If this
-condition is not met, a message is shown and NA is returned instead of
-p-values.</p>
+    <p>The <code>tidy.svyolr()</code> tidier is a light wrapper around
+<code><a href="tidy.polr.html">tidy.polr()</a></code>. However, the implementation for p-value calculation
+in <code><a href="tidy.polr.html">tidy.polr()</a></code> is both computationally intensive and specific to that
+model, so the <code>p.values</code> argument to <code>tidy.svyolr()</code> is currently ignored,
+and will raise a warning when passed.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -169,24 +154,38 @@ p-values.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"MASS"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://broom.tidymodels.org/">broom</a></span><span class="op">)</span></span>
+<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://r-survey.r-forge.r-project.org/survey/" class="external-link">survey</a></span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.ox.ac.uk/pub/MASS4/" class="external-link">MASS</a></span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">api</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">dclus1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survey/man/svydesign.html" class="external-link">svydesign</a></span><span class="op">(</span>id <span class="op">=</span> <span class="op">~</span><span class="va">dnum</span>, weights <span class="op">=</span> <span class="op">~</span><span class="va">pw</span>, data <span class="op">=</span> <span class="va">apiclus1</span>, fpc <span class="op">=</span> <span class="op">~</span><span class="va">fpc</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">dclus1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">dclus1</span>, mealcat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html" class="external-link">cut</a></span><span class="op">(</span><span class="va">meals</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">25</span>, <span class="fl">50</span>, <span class="fl">75</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MASS/man/polr.html" class="external-link">polr</a></span><span class="op">(</span><span class="va">Sat</span> <span class="op">~</span> <span class="va">Infl</span> <span class="op">+</span> <span class="va">Type</span> <span class="op">+</span> <span class="va">Cont</span>, weights <span class="op">=</span> <span class="va">Freq</span>, data <span class="op">=</span> <span class="va">housing</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survey/man/svyolr.html" class="external-link">svyolr</a></span><span class="op">(</span><span class="va">mealcat</span> <span class="op">~</span> <span class="va">avg.ed</span> <span class="op">+</span> <span class="va">mobility</span> <span class="op">+</span> <span class="va">stype</span>, design <span class="op">=</span> <span class="va">dclus1</span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">fit</span>, exponentiate <span class="op">=</span> <span class="cn">TRUE</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">m</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> svyolr(mealcat ~ avg.ed + mobility + stype, design = dclus1)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     avg.ed   mobility     stypeH     stypeM </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -2.6999217  0.0325042 -1.7574715 -0.6191463 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Intercepts:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   (0,25]|(25,50]  (25,50]|(50,75] (50,75]|(75,100] </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        -8.857919        -6.586464        -4.924938 </span>
 <span class="r-in"></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Re-fitting to get Hessian</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 7</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     edf logLik   AIC   BIC deviance df.residual  nobs</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>     8 -<span style="color: #BB0000; text-decoration: underline;">1</span><span style="color: #BB0000;">740.</span> <span style="text-decoration: underline;">3</span>495. <span style="text-decoration: underline;">3</span>539.    <span style="text-decoration: underline;">3</span>479.        <span style="text-decoration: underline;">1</span>673  <span style="text-decoration: underline;">1</span>681</span>
-<span class="r-in"></span>
+<span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">m</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 7 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   term           estimate std.error statistic conf.low conf.high coef.type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> avg.ed          -<span style="color: #BB0000;">2.70</span>      1.13       -<span style="color: #BB0000;">2.38</span> -<span style="color: #BB0000;">4.92</span><span style="color: #949494;">e</span>+0   -<span style="color: #BB0000;">0.477</span>  coeffici…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> mobility         0.032<span style="text-decoration: underline;">5</span>    0.020<span style="text-decoration: underline;">7</span>      1.57 -<span style="color: #BB0000;">7.98</span><span style="color: #949494;">e</span><span style="color: #BB0000;">-3</span>    0.073<span style="text-decoration: underline;">0</span> coeffici…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> stypeH          -<span style="color: #BB0000;">1.76</span>      0.700      -<span style="color: #BB0000;">2.51</span> -<span style="color: #BB0000;">3.13</span><span style="color: #949494;">e</span>+0   -<span style="color: #BB0000;">0.386</span>  coeffici…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> stypeM          -<span style="color: #BB0000;">0.619</span>     0.310      -<span style="color: #BB0000;">2.00</span> -<span style="color: #BB0000;">1.23</span><span style="color: #949494;">e</span>+0   -<span style="color: #BB0000;">0.012</span><span style="color: #BB0000; text-decoration: underline;">3</span> coeffici…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> (0,25]|(25,50]  -<span style="color: #BB0000;">8.86</span>      3.69       -<span style="color: #BB0000;">2.40</span> -<span style="color: #BB0000;">1.61</span><span style="color: #949494;">e</span>+1   -<span style="color: #BB0000;">1.63</span>   scale    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> (25,50]|(50,7…  -<span style="color: #BB0000;">6.59</span>      3.11       -<span style="color: #BB0000;">2.12</span> -<span style="color: #BB0000;">1.27</span><span style="color: #949494;">e</span>+1   -<span style="color: #BB0000;">0.493</span>  scale    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> (50,75]|(75,1…  -<span style="color: #BB0000;">4.92</span>      2.86       -<span style="color: #BB0000;">1.72</span> -<span style="color: #BB0000;">1.05</span><span style="color: #949494;">e</span>+1    0.687  scale    </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
