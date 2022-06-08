@@ -43,18 +43,20 @@ that no longer have a well-defined value are filled in with an \code{NA}
 of the appropriate type.
 }
 \examples{
+\dontshow{if (rlang::is_installed("survey") && rlang::is_installed("MASS")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+library(broom)
+library(survey)
 
-if (requireNamespace("MASS", quietly = TRUE)) {
+data(api)
+dclus1 <- svydesign(id = ~dnum, weights = ~pw, data = apiclus1, fpc = ~fpc)
+dclus1 <- update(dclus1, mealcat = cut(meals, c(0, 25, 50, 75, 100)))
 
-library(MASS)
+m <- svyolr(mealcat ~ avg.ed + mobility + stype, design = dclus1)
 
-fit <- polr(Sat ~ Infl + Type + Cont, weights = Freq, data = housing)
+m
 
-tidy(fit, exponentiate = TRUE, conf.int = TRUE)
-glance(fit)
-
-}
-
+tidy(m, conf.int = TRUE)
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \link{tidy}, \code{\link[survey:svyolr]{survey::svyolr()}}

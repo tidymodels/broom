@@ -24,6 +24,9 @@ Other fixes and improvements:
 * Transition tidiers for bivariate linear or spline-based interpolation---using
   list tidiers to interface with objects from the akima package is now 
   considered off-label. See the interp package for a FOSS alternative.
+* Address failures in `tidy.svyolr()` when `p.values = TRUE`. Instead of aliasing
+  `tidy.polr()` directly, `tidy.svyolr()` lightly wraps that method and
+  warns if `p.values` is supplied (#1107).
 
 # broom 0.8.0
 
