@@ -31,11 +31,13 @@
 #' 
 #' # summarize model fit with tidiers
 #' tidy(mod)
+#' glance(mod)
 #' 
 #' # car::linearHypothesis() example
 #' library(car)
 #' mod_lht <- linearHypothesis(a, "wt - disp")
 #' tidy(mod_lht)
+#' glance(mod_lht)
 #' 
 #' @export
 #' @family anova tidiers
@@ -138,6 +140,61 @@ tidy.anova <- function(x, ...) {
     ret <- mutate(ret, term = stringr::str_trim(term))
   }
 
+  as_tibble(ret)
+}
+
+
+#' @templateVar class anova
+#' @template title_desc_glance
+#'
+#' @inherit tidy.anova params examples
+#'
+#' @note
+#' Note that the output of `glance.anova()` will vary depending on the initializing 
+#' anova call. In some cases, it will just return an empty data frame. In other 
+#' cases, `glance.anova()` may return columns that are also common to
+#' `tidy.anova()`. This is partly to preserve backwards compatibility with early
+#' versions of `broom`, but also because the underlying anova model yields 
+#' components that could reasonably be interpreted as goodness-of-fit summaries
+#' too.
+#'
+#' @evalRd return_glance(
+#'   "deviance",
+#'   "df.residual"
+#' )
+#'
+#' @export
+#' @seealso [glance()]
+#' @family anova tidiers
+glance.anova <- function(x, ...) {
+  
+  # we'll only grab a subset of columns (and the "statistic" cols are just for
+  # subsetting rows)
+  renamers <- c(
+    "F" = "statistic",
+    "Chisq" = "statistic",
+    "F value" = "statistic",
+    "Chi.sq" = "statistic",
+    "LR.Chisq" = "statistic",
+    "LR Chisq" = "statistic",
+    "Res.Df" = "df.residual",
+    "RSS" = "deviance" ## Note: note "rss"
+  )
+  
+  names(renamers) <- make.names(names(renamers))
+  
+  ret <- as_augment_tibble(x)
+  colnames(ret) <- make.names(names(ret))
+  
+  colnames(ret) <- dplyr::recode(colnames(ret), !!!renamers)
+  
+  if (any(c("deviance", "df.residual") %in% colnames(ret))) {
+    ret <- ret[!is.na(ret$statistic),]
+    ret <- ret[, c("deviance", "df.residual")]
+  } else {
+    ret = data.frame()
+  }
+  
   as_tibble(ret)
 }
 
