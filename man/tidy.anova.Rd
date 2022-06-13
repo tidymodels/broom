@@ -49,17 +49,20 @@ mod <- anova(a, b)
 
 # summarize model fit with tidiers
 tidy(mod)
+glance(mod)
 
 # car::linearHypothesis() example
 library(car)
 mod_lht <- linearHypothesis(a, "wt - disp")
 tidy(mod_lht)
+glance(mod_lht)
 \dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:anova]{stats::anova()}}, \code{\link[car:Anova]{car::Anova()}}, \code{\link[car:leveneTest]{car::leveneTest()}}
 
 Other anova tidiers: 
+\code{\link{glance.anova}()},
 \code{\link{glance.aov}()},
 \code{\link{tidy.TukeyHSD}()},
 \code{\link{tidy.aovlist}()},

@@ -39,10 +39,10 @@ test_that("glance.anova", {
   
   a <- lm(mpg ~ wt + qsec + disp, mtcars)
   b <- lm(mpg ~ wt + qsec, mtcars)
-  gl <- anova(a, b)
+  gl <- glance(anova(a, b))
   
-  check_glance_output(gl)
-  check_dims(gl, 2, 2)
+  check_glance_outputs(gl)
+  check_dims(gl, 1, 2)
   
   gl_a <- glance(anova(a))
   check_dims(gl_a, 0, 0)
