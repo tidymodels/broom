@@ -39,6 +39,7 @@ For documentation on the tidier for \code{\link[car:leveneTest]{car::leveneTest(
 \code{\link[=tidy.leveneTest]{tidy.leveneTest()}}
 }
 \examples{
+\dontshow{if (rlang::is_installed("car")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # fit models
 a <- lm(mpg ~ wt + qsec + disp, mtcars)
@@ -53,7 +54,7 @@ tidy(mod)
 library(car)
 mod_lht <- linearHypothesis(a, "wt - disp")
 tidy(mod_lht)
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:anova]{stats::anova()}}, \code{\link[car:Anova]{car::Anova()}}, \code{\link[car:leveneTest]{car::leveneTest()}}

@@ -21,7 +21,7 @@
 #' For documentation on the tidier for [car::leveneTest()] output, see
 #' [tidy.leveneTest()]
 #'
-#' @examples
+#' @examplesIf rlang::is_installed("car")
 #'
 #' # fit models
 #' a <- lm(mpg ~ wt + qsec + disp, mtcars)
