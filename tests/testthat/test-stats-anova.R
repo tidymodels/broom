@@ -34,6 +34,19 @@ test_that("tidy.anova", {
   expect_warning(tidy(loess_anova))
 })
 
+test_that("glance.anova", {
+  check_arguments(glance.anova)
+  
+  a <- lm(mpg ~ wt + qsec + disp, mtcars)
+  b <- lm(mpg ~ wt + qsec, mtcars)
+  gl <- anova(a, b)
+  
+  check_glance_output(gl)
+  check_dims(gl, 2, 2)
+  
+  gl_a <- glance(anova(a))
+  check_dims(gl_a, 0, 0)
+})
 
 test_that("tidy.aovlist", {
   check_arguments(tidy.aovlist)
