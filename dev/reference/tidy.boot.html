@@ -94,22 +94,32 @@ specify which components to return.</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>x</dt>
 <dd><p>A <code><a href="https://rdrr.io/pkg/boot/man/boot.html" class="external-link">boot::boot()</a></code> object.</p></dd>
+
+
 <dt>conf.int</dt>
 <dd><p>Logical indicating whether or not to include a confidence
 interval in the tidied output. Defaults to <code>FALSE</code>.</p></dd>
+
+
 <dt>conf.level</dt>
 <dd><p>The confidence level to use for the confidence interval
 if <code>conf.int = TRUE</code>. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.</p></dd>
+
+
 <dt>conf.method</dt>
 <dd><p>Passed to the <code>type</code> argument of <code><a href="https://rdrr.io/pkg/boot/man/boot.ci.html" class="external-link">boot::boot.ci()</a></code>.
 Defaults to <code>"perc"</code>. The allowed types are <code>"perc"</code>, <code>"basic"</code>,
 <code>"bca"</code>, and <code>"norm"</code>. Does not support <code>"stud"</code> or <code>"all"</code>.</p></dd>
+
+
 <dt>exponentiate</dt>
 <dd><p>Logical indicating whether or not to exponentiate the
 the coefficient estimates. This is typical for logistic and multinomial
 regressions, but a bad idea if there is no log or logit link. Defaults
 to <code>FALSE</code>.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional arguments. Not used. Needed to match generic
 signature only. <strong>Cautionary note:</strong> Misspelled arguments will be
@@ -121,6 +131,7 @@ it will be ignored.</p></li>
 <li><p><code><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment()</a></code> methods will warn when supplied a <code>newdata</code> argument if it
 will be ignored.</p></li>
 </ul></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -139,15 +150,22 @@ and <code>statistic</code> columns are omitted, and only <code>estimate</code> a
     </div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble()</a></code> with columns:</p>
+    
+
+<p>A <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble()</a></code> with columns:</p>
 <dl><dt>bias</dt>
 <dd><p>Bias of the statistic.</p></dd>
-<dt>std.error</dt>
+
+  <dt>std.error</dt>
 <dd><p>The standard error of the regression term.</p></dd>
-<dt>term</dt>
+
+  <dt>term</dt>
 <dd><p>The name of the regression term.</p></dd>
-<dt>statistic</dt>
+
+  <dt>statistic</dt>
 <dd><p>Original value of the statistic.</p></dd>
+
+
 </dl></div>
 
     <div class="section level2">
@@ -211,7 +229,7 @@ and <code>statistic</code> columns are omitted, and only <code>estimate</code> a
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
   </div></footer></body></html>

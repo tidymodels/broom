@@ -173,12 +173,16 @@ missing at this time.</p>
 <dd><p>An <code>rma</code> object such as those created by <code><a href="https://wviechtb.github.io/metafor/reference/rma.uni.html" class="external-link">metafor::rma()</a></code>,
 <code><a href="https://wviechtb.github.io/metafor/reference/rma.uni.html" class="external-link">metafor::rma.uni()</a></code>, <code><a href="https://wviechtb.github.io/metafor/reference/rma.glmm.html" class="external-link">metafor::rma.glmm()</a></code>, <code><a href="https://wviechtb.github.io/metafor/reference/rma.mh.html" class="external-link">metafor::rma.mh()</a></code>,
 <code><a href="https://wviechtb.github.io/metafor/reference/rma.mv.html" class="external-link">metafor::rma.mv()</a></code>, or <code><a href="https://wviechtb.github.io/metafor/reference/rma.peto.html" class="external-link">metafor::rma.peto()</a></code>.</p></dd>
+
+
 <dt>interval</dt>
 <dd><p>For <code>rma.mv</code> models, should prediction intervals
 (<code>"prediction"</code>, default) or confidence intervals (<code>"confidence"</code>)
 intervals be returned? For <code>rma.uni</code> models, prediction intervals are
 always returned. For <code>rma.mh</code> and <code>rma.peto</code> models, confidence intervals
 are always returned.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional arguments. Not used. Needed to match generic
 signature only. <strong>Cautionary note:</strong> Misspelled arguments will be
@@ -190,26 +194,38 @@ it will be ignored.</p></li>
 <li><p><code><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment()</a></code> methods will warn when supplied a <code>newdata</code> argument if it
 will be ignored.</p></li>
 </ul></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble()</a></code> with columns:</p>
+    
+
+<p>A <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble()</a></code> with columns:</p>
 <dl><dt>.fitted</dt>
 <dd><p>Fitted or predicted value.</p></dd>
-<dt>.lower</dt>
+
+  <dt>.lower</dt>
 <dd><p>Lower bound on interval for fitted values.</p></dd>
-<dt>.moderator</dt>
+
+  <dt>.moderator</dt>
 <dd><p>In meta-analysis, the moderators used to calculate the predicted values.</p></dd>
-<dt>.moderator.level</dt>
+
+  <dt>.moderator.level</dt>
 <dd><p>In meta-analysis, the level of the moderators used to calculate the predicted values.</p></dd>
-<dt>.resid</dt>
+
+  <dt>.resid</dt>
 <dd><p>The difference between observed and fitted values.</p></dd>
-<dt>.se.fit</dt>
+
+  <dt>.se.fit</dt>
 <dd><p>Standard errors of fitted values.</p></dd>
-<dt>.upper</dt>
+
+  <dt>.upper</dt>
 <dd><p>Upper bound on interval for fitted values.</p></dd>
-<dt>.observed</dt>
+
+  <dt>.observed</dt>
 <dd><p>The observed values for the individual studies</p></dd>
+
+
 </dl></div>
 
     <div class="section level2">
@@ -277,7 +293,7 @@ will be ignored.</p></li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
   </div></footer></body></html>

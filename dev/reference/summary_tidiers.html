@@ -79,6 +79,8 @@ broom 0.7.0 in favor of <code>skimr::skim()</code>.</p>
     <dl><dt>x</dt>
 <dd><p>A <code>summaryDefault</code> object, created by calling <code><a href="https://wviechtb.github.io/metafor/reference/print.rma.html" class="external-link">summary()</a></code> on a
 vector.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional arguments. Not used. Needed to match generic
 signature only. <strong>Cautionary note:</strong> Misspelled arguments will be
@@ -90,25 +92,35 @@ it will be ignored.</p></li>
 <li><p><code><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment()</a></code> methods will warn when supplied a <code>newdata</code> argument if it
 will be ignored.</p></li>
 </ul></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A one-row <a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble</a> with columns:</p>
+    
+
+<p>A one-row <a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble</a> with columns:</p>
 <dl><dt>minimum</dt>
 <dd><p>Minimum value in original vector.</p></dd>
+
 <dt>q1</dt>
 <dd><p>First quartile of original vector.</p></dd>
+
 <dt>median</dt>
 <dd><p>Median of original vector.</p></dd>
+
 <dt>mean</dt>
 <dd><p>Mean of original vector.</p></dd>
+
 <dt>q3</dt>
 <dd><p>Third quartile of original vector.</p></dd>
+
 <dt>maximum</dt>
 <dd><p>Maximum value in original vector.</p></dd>
+
 <dt>na</dt>
 <dd><p>Number of <code>NA</code> values in original vector. Column present only
 when original vector had at least one <code>NA</code> entry.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -177,7 +189,7 @@ when original vector had at least one <code>NA</code> entry.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
   </div></footer></body></html>

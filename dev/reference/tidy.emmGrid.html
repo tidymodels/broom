@@ -87,17 +87,24 @@ specify which components to return.</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>x</dt>
 <dd><p>An <code>emmGrid</code> object.</p></dd>
+
+
 <dt>conf.int</dt>
 <dd><p>Logical indicating whether or not to include a confidence
 interval in the tidied output. Defaults to <code>FALSE</code>.</p></dd>
+
+
 <dt>conf.level</dt>
 <dd><p>The confidence level to use for the confidence interval
 if <code>conf.int = TRUE</code>. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional arguments passed to <code><a href="https://rdrr.io/pkg/emmeans/man/summary.emmGrid.html" class="external-link">emmeans::summary.emmGrid()</a></code> or
 <code><a href="https://rdrr.io/pkg/lsmeans/man/ref.grid.html" class="external-link">lsmeans::summary.ref.grid()</a></code>. <strong>Cautionary note</strong>: misspecified arguments
 may be silently ignored!</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -118,21 +125,31 @@ passed on to <code><a href="https://rdrr.io/pkg/emmeans/man/summary.emmGrid.html
     </div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble()</a></code> with columns:</p>
+    
+
+<p>A <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble()</a></code> with columns:</p>
 <dl><dt>conf.high</dt>
 <dd><p>Upper bound on the confidence interval for the estimate.</p></dd>
-<dt>conf.low</dt>
+
+  <dt>conf.low</dt>
 <dd><p>Lower bound on the confidence interval for the estimate.</p></dd>
-<dt>df</dt>
+
+  <dt>df</dt>
 <dd><p>Degrees of freedom used by this term in the model.</p></dd>
-<dt>p.value</dt>
+
+  <dt>p.value</dt>
 <dd><p>The two-sided p-value associated with the observed statistic.</p></dd>
-<dt>std.error</dt>
+
+  <dt>std.error</dt>
 <dd><p>The standard error of the regression term.</p></dd>
-<dt>estimate</dt>
+
+  <dt>estimate</dt>
 <dd><p>Expected marginal mean</p></dd>
-<dt>statistic</dt>
+
+  <dt>statistic</dt>
 <dd><p>T-ratio statistic</p></dd>
+
+
 </dl></div>
 
     <div class="section level2">
@@ -288,7 +305,7 @@ passed on to <code><a href="https://rdrr.io/pkg/emmeans/man/summary.emmGrid.html
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
   </div></footer></body></html>

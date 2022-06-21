@@ -87,6 +87,8 @@ specify which components to return.</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>x</dt>
 <dd><p>A <code>prcomp</code> object returned by <code><a href="https://rdrr.io/r/stats/prcomp.html" class="external-link">stats::prcomp()</a></code>.</p></dd>
+
+
 <dt>matrix</dt>
 <dd><p>Character specifying which component of the PCA should be
 tidied.</p><ul><li><p><code>"u"</code>, <code>"samples"</code>, <code>"scores"</code>, or <code>"x"</code>: returns information about
@@ -97,6 +99,8 @@ space.</p></li>
 <li><p><code>"d"</code>, <code>"eigenvalues"</code> or <code>"pcs"</code>: returns information about the
 eigenvalues.</p></li>
 </ul></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional arguments. Not used. Needed to match generic
 signature only. <strong>Cautionary note:</strong> Misspelled arguments will be
@@ -108,45 +112,62 @@ it will be ignored.</p></li>
 <li><p><code><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment()</a></code> methods will warn when supplied a <code>newdata</code> argument if it
 will be ignored.</p></li>
 </ul></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A <a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble</a> with columns depending on the component of
-PCA being tidied.
-If <code>matrix</code> is <code>"u"</code>, <code>"samples"</code>, <code>"scores"</code>, or <code>"x"</code> each row in the
+    
+
+<p>A <a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble</a> with columns depending on the component of
+PCA being tidied.</p>
+
+
+<p>If <code>matrix</code> is <code>"u"</code>, <code>"samples"</code>, <code>"scores"</code>, or <code>"x"</code> each row in the
 tidied output corresponds to the original data in PCA space. The columns
 are:</p>
 <dl><dt><code>row</code></dt>
 <dd><p>ID of the original observation (i.e. rowname from original
 data).</p></dd>
+
 <dt><code>PC</code></dt>
 <dd><p>Integer indicating a principal component.</p></dd>
+
 <dt><code>value</code></dt>
 <dd><p>The score of the observation for that particular principal
 component. That is, the location of the observation in PCA space.</p></dd>
+
+
 </dl><p>If <code>matrix</code> is <code>"v"</code>, <code>"rotation"</code>, <code>"loadings"</code> or <code>"variables"</code>, each
 row in the tidied output corresponds to information about the principle
 components in the original space. The columns are:</p>
 <dl><dt><code>row</code></dt>
 <dd><p>The variable labels (colnames) of the data set on
 which PCA was performed.</p></dd>
+
 <dt><code>PC</code></dt>
 <dd><p>An integer vector indicating the principal component.</p></dd>
+
 <dt><code>value</code></dt>
 <dd><p>The value of the eigenvector (axis score) on the
 indicated principal component.</p></dd>
+
+
 </dl><p>If <code>matrix</code> is <code>"d"</code>, <code>"eigenvalues"</code> or <code>"pcs"</code>, the columns are:</p>
 <dl><dt><code>PC</code></dt>
 <dd><p>An integer vector indicating the principal component.</p></dd>
+
 <dt><code>std.dev</code></dt>
 <dd><p>Standard deviation explained by this PC.</p></dd>
+
 <dt><code>percent</code></dt>
 <dd><p>Fraction of variation explained by this component
 (a numeric value between 0 and 1).</p></dd>
+
 <dt><code>cumulative</code></dt>
 <dd><p>Cumulative fraction of variation explained by
 principle components up to this component (a numeric value between 0 and
 1).</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -264,7 +285,7 @@ that SVD is only equivalent to PCA on centered data.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
   </div></footer></body></html>

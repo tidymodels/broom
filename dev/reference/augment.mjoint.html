@@ -171,6 +171,8 @@ missing at this time.</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>x</dt>
 <dd><p>An <code>mjoint</code> object returned from <code><a href="https://rdrr.io/pkg/joineRML/man/mjoint.html" class="external-link">joineRML::mjoint()</a></code>.</p></dd>
+
+
 <dt>data</dt>
 <dd><p>A <a href="https://rdrr.io/r/base/data.frame.html" class="external-link">base::data.frame</a> or <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble()</a></code> containing the original
 data that was used to produce the object <code>x</code>. Defaults to
@@ -179,6 +181,8 @@ original data. <strong>Do not</strong> pass new data to the <code>data</code> ar
 Augment will report information such as influence and cooks distance for
 data passed to the <code>data</code> argument. These measures are only defined for
 the original training data.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional arguments. Not used. Needed to match generic
 signature only. <strong>Cautionary note:</strong> Misspelled arguments will be
@@ -190,23 +194,30 @@ it will be ignored.</p></li>
 <li><p><code><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment()</a></code> methods will warn when supplied a <code>newdata</code> argument if it
 will be ignored.</p></li>
 </ul></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble()</a></code> with one row for each original observation
+    
+
+<p>A <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble()</a></code> with one row for each original observation
 with addition columns:</p>
 <dl><dt>.fitted_j_0</dt>
 <dd><p>population-level fitted values for the
 j-th longitudinal process</p></dd>
+
 <dt>.fitted_j_1</dt>
 <dd><p>individuals-level fitted values for the j-th
 longitudinal process</p></dd>
+
 <dt>.resid_j_0</dt>
 <dd><p>population-level residuals for the j-th
 longitudinal process</p></dd>
+
 <dt>.resid_j_1</dt>
 <dd><p>individual-level residuals for the j-th
 longitudinal process</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -285,7 +296,7 @@ for the fixed and random effects of the longitudinal submodel.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
   </div></footer></body></html>

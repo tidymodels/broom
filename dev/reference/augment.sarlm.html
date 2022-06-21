@@ -172,9 +172,13 @@ missing at this time.</p>
     <dl><dt>x</dt>
 <dd><p>An object returned from <code><a href="https://r-spatial.github.io/spatialreg/reference/ML_models.html" class="external-link">spatialreg::lagsarlm()</a></code>
 or <code><a href="https://r-spatial.github.io/spatialreg/reference/ML_models.html" class="external-link">spatialreg::errorsarlm()</a></code>.</p></dd>
+
+
 <dt>data</dt>
 <dd><p>Ignored, but included for internal consistency. See the details
 below.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional arguments. Not used. Needed to match generic
 signature only. <strong>Cautionary note:</strong> Misspelled arguments will be
@@ -186,6 +190,7 @@ it will be ignored.</p></li>
 <li><p><code><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment()</a></code> methods will warn when supplied a <code>newdata</code> argument if it
 will be ignored.</p></li>
 </ul></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -203,11 +208,16 @@ currently does not take in <code>data</code> or <code>newdata</code> arguments.<
     </div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble()</a></code> with columns:</p>
+    
+
+<p>A <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble()</a></code> with columns:</p>
 <dl><dt>.fitted</dt>
 <dd><p>Fitted or predicted value.</p></dd>
-<dt>.resid</dt>
+
+  <dt>.resid</dt>
 <dd><p>The difference between observed and fitted values.</p></dd>
+
+
 </dl></div>
 
     <div class="section level2">
@@ -379,7 +389,7 @@ currently does not take in <code>data</code> or <code>newdata</code> arguments.<
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
   </div></footer></body></html>

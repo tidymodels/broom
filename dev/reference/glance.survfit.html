@@ -114,9 +114,12 @@ of the appropriate type.</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>x</dt>
 <dd><p>An <code>survfit</code> object returned from <code><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survival::survfit()</a></code>.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional arguments passed to <code><a href="https://rdrr.io/pkg/survival/man/summary.survfit.html" class="external-link">summary.survfit()</a></code>. Important
 arguments include <code>rmean</code>.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -145,27 +148,40 @@ arguments include <code>rmean</code>.</p></dd>
     </div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble()</a></code> with exactly one row and columns:</p>
+    
+
+<p>A <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble()</a></code> with exactly one row and columns:</p>
 <dl><dt>events</dt>
 <dd><p>Number of events.</p></dd>
-<dt>n.max</dt>
+
+  <dt>n.max</dt>
 <dd><p>Maximum number of subjects at risk.</p></dd>
-<dt>n.start</dt>
+
+  <dt>n.start</dt>
 <dd><p>Initial number of subjects at risk.</p></dd>
-<dt>nobs</dt>
+
+  <dt>nobs</dt>
 <dd><p>Number of observations used.</p></dd>
-<dt>records</dt>
+
+  <dt>records</dt>
 <dd><p>Number of observations</p></dd>
-<dt>rmean</dt>
+
+  <dt>rmean</dt>
 <dd><p>Restricted mean (see [survival::print.survfit()]).</p></dd>
-<dt>rmean.std.error</dt>
+
+  <dt>rmean.std.error</dt>
 <dd><p>Restricted mean standard error.</p></dd>
-<dt>conf.low</dt>
+
+  <dt>conf.low</dt>
 <dd><p>lower end of confidence interval on median</p></dd>
-<dt>conf.high</dt>
+
+  <dt>conf.high</dt>
 <dd><p>upper end of confidence interval on median</p></dd>
-<dt>median</dt>
+
+  <dt>median</dt>
 <dd><p>median survival</p></dd>
+
+
 </dl></div>
 
     <div class="section level2">
@@ -249,7 +265,7 @@ arguments include <code>rmean</code>.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
   </div></footer></body></html>

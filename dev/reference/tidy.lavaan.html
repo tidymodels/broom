@@ -88,50 +88,71 @@ specify which components to return.</p>
     <dl><dt>x</dt>
 <dd><p>A <code>lavaan</code> object, such as those returned from <code><a href="https://rdrr.io/pkg/lavaan/man/cfa.html" class="external-link">lavaan::cfa()</a></code>,
 and <code><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">lavaan::sem()</a></code>.</p></dd>
+
+
 <dt>conf.int</dt>
 <dd><p>Logical indicating whether or not to include a confidence
 interval in the tidied output. Defaults to <code>FALSE</code>.</p></dd>
+
+
 <dt>conf.level</dt>
 <dd><p>The confidence level to use for the confidence interval
 if <code>conf.int = TRUE</code>. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional arguments passed to <code><a href="https://rdrr.io/pkg/lavaan/man/parameterEstimates.html" class="external-link">lavaan::parameterEstimates()</a></code>.
 <strong>Cautionary note</strong>: Misspecified arguments may be silently ignored.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble()</a></code> with one row for each estimated parameter and
+    
+
+<p>A <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble()</a></code> with one row for each estimated parameter and
 columns:</p>
 <dl><dt>term</dt>
 <dd><p>The result of paste(lhs, op, rhs)</p></dd>
+
 <dt>op</dt>
 <dd><p>The operator in the model syntax (e.g. <code>~~</code> for covariances, or
 <code>~</code> for regression parameters)</p></dd>
+
 <dt>group</dt>
 <dd><p>The group (if specified) in the lavaan model</p></dd>
+
 <dt>estimate</dt>
 <dd><p>The parameter estimate (may be standardized)</p></dd>
+
 <dt>std.error</dt>
 <dd></dd>
+
 <dt>statistic</dt>
 <dd><p>The z value returned by <code><a href="https://rdrr.io/pkg/lavaan/man/parameterEstimates.html" class="external-link">lavaan::parameterEstimates()</a></code></p></dd>
+
 <dt>p.value</dt>
 <dd></dd>
+
 <dt>conf.low</dt>
 <dd></dd>
+
 <dt>conf.high</dt>
 <dd></dd>
+
 <dt>std.lv</dt>
 <dd><p>Standardized estimates based on the variances of the
 (continuous) latent variables only</p></dd>
+
 <dt>std.all</dt>
 <dd><p>Standardized estimates based on both the variances
 of both (continuous) observed and latent variables.</p></dd>
+
 <dt>std.nox</dt>
 <dd><p>Standardized estimates based on both the variances
 of both (continuous) observed and latent variables, but not the
 variances of exogenous covariates.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -179,7 +200,7 @@ variances of exogenous covariates.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
   </div></footer></body></html>

@@ -96,14 +96,20 @@ It simply returns the coefficients and their confidence intervals.</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>x</dt>
 <dd><p>A <code><a href="https://rdrr.io/pkg/btergm/man/btergm.html" class="external-link">btergm::btergm()</a></code> object.</p></dd>
+
+
 <dt>conf.level</dt>
 <dd><p>Confidence level for confidence intervals. Defaults to
 0.95.</p></dd>
+
+
 <dt>exponentiate</dt>
 <dd><p>Logical indicating whether or not to exponentiate the
 the coefficient estimates. This is typical for logistic and multinomial
 regressions, but a bad idea if there is no log or logit link. Defaults
 to <code>FALSE</code>.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional arguments. Not used. Needed to match generic
 signature only. <strong>Cautionary note:</strong> Misspelled arguments will be
@@ -115,6 +121,7 @@ it will be ignored.</p></li>
 <li><p><code><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment()</a></code> methods will warn when supplied a <code>newdata</code> argument if it
 will be ignored.</p></li>
 </ul></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -122,15 +129,22 @@ will be ignored.</p></li>
     </div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble()</a></code> with columns:</p>
+    
+
+<p>A <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble()</a></code> with columns:</p>
 <dl><dt>conf.high</dt>
 <dd><p>Upper bound on the confidence interval for the estimate.</p></dd>
-<dt>conf.low</dt>
+
+  <dt>conf.low</dt>
 <dd><p>Lower bound on the confidence interval for the estimate.</p></dd>
-<dt>estimate</dt>
+
+  <dt>estimate</dt>
 <dd><p>The estimated value of the regression term.</p></dd>
-<dt>term</dt>
+
+  <dt>term</dt>
 <dd><p>The name of the regression term.</p></dd>
+
+
 </dl></div>
 
     <div class="section level2">
@@ -219,7 +233,7 @@ will be ignored.</p></li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
   </div></footer></body></html>
