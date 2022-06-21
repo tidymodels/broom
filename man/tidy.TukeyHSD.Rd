@@ -44,6 +44,7 @@ tidy(TukeyHSD(fm2))
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:TukeyHSD]{stats::TukeyHSD()}}
 
 Other anova tidiers: 
+\code{\link{glance.anova}()},
 \code{\link{glance.aov}()},
 \code{\link{tidy.anova}()},
 \code{\link{tidy.aovlist}()},

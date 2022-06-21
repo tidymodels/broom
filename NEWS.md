@@ -21,6 +21,10 @@ Other fixes and improvements:
 * Address failures in `tidy.glht()` with `conf.int = TRUE` (#1103).
 * Address failures in `tidy.zoo()` when input data does not have `colnames` 
   (#1080).
+* Adds a `term` column and introduces support for `car::lht()` output in
+  `tidy.anova()` (#1106 by `@grantmcdermott`).
+* Adds a dedicated `glance.anova` method (which previously dispatched to the    
+  deprecated `glance.data.frame()` tidier, #1106 by `@grantmcdermott`).
 
 # broom 0.8.0
 
