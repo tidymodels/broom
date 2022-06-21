@@ -5,14 +5,7 @@
 \alias{svyolr_tidiers}
 \title{Tidy a(n) svyolr object}
 \usage{
-\method{tidy}{svyolr}(
-  x,
-  conf.int = FALSE,
-  conf.level = 0.95,
-  exponentiate = FALSE,
-  p.values = FALSE,
-  ...
-)
+\method{tidy}{svyolr}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{svyolr} object returned from \code{\link[survey:svyolr]{survey::svyolr()}}.}
@@ -28,9 +21,6 @@ Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 the coefficient estimates. This is typical for logistic and multinomial
 regressions, but a bad idea if there is no log or logit link. Defaults
 to \code{FALSE}.}
-
-\item{p.values}{Logical. Should p-values be returned,
-based on chi-squared tests from \code{\link[MASS:dropterm]{MASS::dropterm()}}. Defaults to FALSE.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -54,31 +44,27 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \details{
-In \verb{broom 0.7.0} the \code{coefficient_type} column was renamed to
-\code{coef.type}, and the contents were changed as well. Now the contents
-are \code{coefficient} and \code{scale}, rather than \code{coefficient} and \code{zeta}.
-
-Calculating p.values with the \code{dropterm()} function is the approach
-suggested by the MASS package author. This
-approach is computationally intensive so that p.values are only
-returned if requested explicitly. Additionally, it only works for
-models containing no variables with more than two categories. If this
-condition is not met, a message is shown and NA is returned instead of
-p-values.
+The \code{tidy.svyolr()} tidier is a light wrapper around
+\code{\link[=tidy.polr]{tidy.polr()}}. However, the implementation for p-value calculation
+in \code{\link[=tidy.polr]{tidy.polr()}} is both computationally intensive and specific to that
+model, so the \code{p.values} argument to \code{tidy.svyolr()} is currently ignored,
+and will raise a warning when passed.
 }
 \examples{
+\dontshow{if (rlang::is_installed("survey") && rlang::is_installed("MASS")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+library(broom)
+library(survey)
 
-if (requireNamespace("MASS", quietly = TRUE)) {
+data(api)
+dclus1 <- svydesign(id = ~dnum, weights = ~pw, data = apiclus1, fpc = ~fpc)
+dclus1 <- update(dclus1, mealcat = cut(meals, c(0, 25, 50, 75, 100)))
 
-library(MASS)
+m <- svyolr(mealcat ~ avg.ed + mobility + stype, design = dclus1)
 
-fit <- polr(Sat ~ Infl + Type + Cont, weights = Freq, data = housing)
+m
 
-tidy(fit, exponentiate = TRUE, conf.int = TRUE)
-glance(fit)
-
-}
-
+tidy(m, conf.int = TRUE)
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \link{tidy}, \code{\link[survey:svyolr]{survey::svyolr()}}

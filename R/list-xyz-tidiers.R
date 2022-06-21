@@ -4,7 +4,7 @@
 #' @description xyz lists (lists where `x` and `y` are vectors of coordinates
 #'   and `z` is a matrix of values) are typically used by functions such as
 #'   [graphics::persp()] or [graphics::image()] and returned
-#'   by interpolation functions such as [akima::interp()].
+#'   by interpolation functions such as [interp::interp()].
 #'
 #' @param x A list with component `x`, `y` and `z`, where `x` and `y` are
 #'   vectors and `z` is a matrix. The length of `x` must equal the number of
@@ -21,7 +21,7 @@
 #' @aliases xyz_tidiers
 #' @family list tidiers
 #' @seealso [tidy()], [graphics::persp()], [graphics::image()],
-#'   [akima::interp()]
+#'   [interp::interp()]
 #'
 tidy_xyz <- function(x, ...) {
   if (!is.matrix(x$z)) {

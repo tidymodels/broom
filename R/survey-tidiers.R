@@ -2,22 +2,33 @@
 #' @template title_desc_tidy
 #'
 #' @param x A `svyolr` object returned from [survey::svyolr()].
-#' @inherit tidy.polr params details
+#' @template param_confint
+#' @template param_exponentiate
+#' @template param_unused_dots
+#' 
+#' @details
+#' 
+#' The `tidy.svyolr()` tidier is a light wrapper around
+#' [tidy.polr()]. However, the implementation for p-value calculation
+#' in [tidy.polr()] is both computationally intensive and specific to that 
+#' model, so the `p.values` argument to `tidy.svyolr()` is currently ignored,
+#' and will raise a warning when passed.
+#'
+#' @examplesIf rlang::is_installed("survey") && rlang::is_installed("MASS")
+#' library(broom)
+#' library(survey)
+#'
+#' data(api)
+#' dclus1 <- svydesign(id = ~dnum, weights = ~pw, data = apiclus1, fpc = ~fpc)
+#' dclus1 <- update(dclus1, mealcat = cut(meals, c(0, 25, 50, 75, 100)))
+#' 
+#' m <- svyolr(mealcat ~ avg.ed + mobility + stype, design = dclus1)
+#' 
+#' m
+#' 
+#' tidy(m, conf.int = TRUE)
 #'
 #' @export
-#'
-#' @examples
-#' 
-#' if (requireNamespace("MASS", quietly = TRUE)) {
-#'
-#' library(MASS)
-#'
-#' fit <- polr(Sat ~ Infl + Type + Cont, weights = Freq, data = housing)
-#'
-#' tidy(fit, exponentiate = TRUE, conf.int = TRUE)
-#' glance(fit)
-#' 
-#' }
 #' 
 #' @evalRd return_tidy(regression = TRUE)
 #'
@@ -25,7 +36,19 @@
 #' @export
 #' @seealso [tidy], [survey::svyolr()]
 #' @family ordinal tidiers
-tidy.svyolr <- tidy.polr
+tidy.svyolr <- function(x, conf.int = FALSE, conf.level = 0.95,
+                        exponentiate = FALSE, ...) {
+  check_ellipses("p.values", "tidy", "svyolr", ...)
+  
+  return(
+    tidy.polr(
+      x,
+      conf.int = conf.int,
+      conf.level = conf.level,
+      exponentiate = exponentiate
+    )
+  )
+}
 
 #' @templateVar class svyolr
 #' @template title_desc_glance

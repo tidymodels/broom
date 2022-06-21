@@ -555,7 +555,6 @@ Imports:
     ggplot2
 Suggests:
     AER,
-    akima,
     AUC,
     bbmle,
     betareg,
@@ -583,6 +582,7 @@ Suggests:
     gmm,
     Hmisc,
     irlba,
+    interp,
     joineRML,
     Kendall,
     knitr,

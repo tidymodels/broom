@@ -2,7 +2,7 @@
 #'
 #' Broom tidies a number of lists that are effectively S3 objects without
 #' a class attribute. For example, [stats::optim()], [base::svd()] and
-#' [akima::interp()] produce consistent output, but because they do not
+#' [interp::interp()] produce consistent output, but because they do not
 #' have a class attribute, they cannot be handled by S3 dispatch.
 #'
 #' These functions look at the elements of a list and determine if there is

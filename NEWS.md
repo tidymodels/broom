@@ -21,6 +21,12 @@ Other fixes and improvements:
 * Address failures in `tidy.glht()` with `conf.int = TRUE` (#1103).
 * Address failures in `tidy.zoo()` when input data does not have `colnames` 
   (#1080).
+* Transition tidiers for bivariate linear or spline-based interpolation---using
+  list tidiers to interface with objects from the akima package is now 
+  considered off-label. See the interp package for a FOSS alternative.
+* Address failures in `tidy.svyolr()` when `p.values = TRUE`. Instead of aliasing
+  `tidy.polr()` directly, `tidy.svyolr()` lightly wraps that method and
+  warns if `p.values` is supplied (#1107).
 * Adds a `term` column and introduces support for `car::lht()` output in
   `tidy.anova()` (#1106 by `@grantmcdermott`).
 * Adds a dedicated `glance.anova` method (which previously dispatched to the    
