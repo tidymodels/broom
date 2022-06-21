@@ -27,6 +27,10 @@ Other fixes and improvements:
 * Address failures in `tidy.svyolr()` when `p.values = TRUE`. Instead of aliasing
   `tidy.polr()` directly, `tidy.svyolr()` lightly wraps that method and
   warns if `p.values` is supplied (#1107).
+* Adds a `term` column and introduces support for `car::lht()` output in
+  `tidy.anova()` (#1106 by `@grantmcdermott`).
+* Adds a dedicated `glance.anova` method (which previously dispatched to the    
+  deprecated `glance.data.frame()` tidier, #1106 by `@grantmcdermott`).
 
 # broom 0.8.0
 

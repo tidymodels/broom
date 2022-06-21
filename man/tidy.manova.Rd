@@ -46,6 +46,7 @@ tidy(m)
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:summary.manova]{stats::summary.manova()}}
 
 Other anova tidiers: 
+\code{\link{glance.anova}()},
 \code{\link{glance.aov}()},
 \code{\link{tidy.TukeyHSD}()},
 \code{\link{tidy.anova}()},

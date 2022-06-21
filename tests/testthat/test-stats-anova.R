@@ -34,6 +34,19 @@ test_that("tidy.anova", {
   expect_warning(tidy(loess_anova))
 })
 
+test_that("glance.anova", {
+  check_arguments(glance.anova)
+  
+  a <- lm(mpg ~ wt + qsec + disp, mtcars)
+  b <- lm(mpg ~ wt + qsec, mtcars)
+  gl <- glance(anova(a, b))
+  
+  check_glance_outputs(gl)
+  check_dims(gl, 1, 2)
+  
+  gl_a <- glance(anova(a))
+  check_dims(gl_a, 0, 0)
+})
 
 test_that("tidy.aovlist", {
   check_arguments(tidy.aovlist)
@@ -79,3 +92,24 @@ test_that("tidy.TukeyHSD", {
   check_tidy_output(td, strict = FALSE)
   check_dims(td, 3, 7)
 })
+
+test_that("tidy.linearHypothesis", {
+  skip_if_not_installed("car")
+
+  fit <- stats::lm(mpg ~ disp + hp, mtcars)
+  fit_lht <- car::linearHypothesis(fit, "disp = hp")
+
+  td_lht <- tidy(fit_lht)
+
+  check_tidy_output(td_lht, strict = FALSE)
+  check_dims(td_lht, 1, 10)
+
+  expect_true("null.value" %in% colnames(td_lht))
+  
+  expect_equal(td_lht$term, 'disp - hp')
+  expect_equal(td_lht$null.value, 0)
+  expect_equal(td_lht$estimate, -0.00551, tolerance = .00001)
+
+})
+
+
