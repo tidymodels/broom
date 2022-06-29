@@ -1,17 +1,15 @@
 ---
-title: "Adding tidiers to broom"
+title: "Writing new tidier methods"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Adding tidiers to broom}
+  %\VignetteIndexEntry{Writing new tidier methods}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-# Adding tidiers to broom
-
-Generally, after this release, the broom dev team will first ask that
-attempts to add tidier methods supporting a model object are first
+After the release of broom version 1.0.0, the broom dev team now asks that
+attempts to add tidier methods supporting a model object are 
 directed to the model-owning package. An article describing best practices 
 in doing so can be found on the {tidymodels} website at 
 https://www.tidymodels.org/learn/develop/broom/, and we will continue
@@ -27,6 +25,3 @@ To aid in the process of writing new tidiers, we have provided
 [learning resources](https://www.tidymodels.org/learn/develop/broom) as well 
 as lightweight dependencies to re-export tidier generics on the {tidymodels} 
 website.
-
-In the case that the maintainer is uninterested in taking on the tidier 
-methods, please note this in your issue or PR.

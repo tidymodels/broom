@@ -1,8 +1,10 @@
-# broom 0.8.0.9000 (development version)
+# broom 1.0.0
 
-To be released as 1.0.0.
+broom 1.0.0 is the first "production" release of the broom package, and includes a number of notable changes to both functionality and governance.
 
-We've made notable changes to error handling in the package:
+As of this release, the broom team will be following a set of guidelines that clarify the scope of further development on the package. Given the package's wide use and long history, these guidelines _prioritize backward compatibility_ over internal consistency and completeness. You can read those guidelines [here](https://broom.tidymodels.org/articles/)!
+
+We've also made notable changes to error handling in this release:
 
 * Adds minimal ellipsis checking to warn on commonly misspecified arguments passed through ellipses. Notably:
     + `tidy()` methods will now warn when supplied an `exponentiate` argument if it will be ignored.

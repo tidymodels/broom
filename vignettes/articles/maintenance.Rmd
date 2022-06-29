@@ -1,0 +1,42 @@
+---
+title: "Maintenance guidelines"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Maintenance guidelines}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+As of the 1.0.0 release, the broom team will be following a set of guidelines that clarify the scope of further development on the package. Given the package's wide use and long history, these guidelines prioritize backward compatibility over internal consistency and completeness.
+
+## Motivation
+
+Of the packages in the tidymodels, broom is the oldest, has one of the largest codebases, and is likely the most widely used. As of the writing of this tidyup, the package has been downloaded over 30 million times, and is directly depended on by over 200 CRAN packages and who-knows-how-many research analyses. The package grew organically over the course of many years---thanks to contributions from hundreds of community members---and now supplies hundreds of methods for summarizing model objects:
+
+```{r}
+library(broom)
+
+length(methods("tidy"))
+length(methods("glance"))
+length(methods("augment"))
+```
+
+Each of these factors we mention are cause for celebration, and at the same time, mean that maintaining broom with the same approach as other tidymodels packages would lead to significant breaking changes and further scope creep.
+
+## Guidelines
+
+In light of these challenges, the broom team will look to the following guidelines in determining the scope of new development on the package:
+
+* **New methods**: broom will no longer accept new tidier methods to the package, instead asking that they are maintained in the model-supplying package. You can read more about our tooling to help you make this happen in the ["Writing new tidier methods"](https://cran.r-project.org/web/packages/broom/vignettes/adding-tidiers.html) vignette!
+* **Internal consistency**: We do not feel that the improvement in interface that could be gained by enforcing internal consistency (e.g. argument order, column names) is worth the potential breaking change for our dependencies, and will not merge such changes.
+* **Ellipsis handling**: Some tidier methods pass ellipses to modeling functions and others take in ellipses that are documented as unused. In the first setting, there is wide variety in how the modeling functions we wrap handle ellipses, and we thus feel there is not a principled way to "vet" ellipses before passing them along. As for the second case, we do not feel that the improvement in interface from failing with unused dots is worth the breaking change for our dependencies.
+
+Note that **these guidelines largely reflect our maintenance practice in the years preceding the 1.0.0 version.** The introduction of these guidelines isn't a change as much as it is a reflection on our approach to maintaining broom in 2017-2022. Communicating our approach clearly also allows us to more clearly define when an issue _is_ within the scope of the package's development. Some examples of those cases:
+
+* **Visible failures**: If a tidier visibly fails (e.g. raises an error) for currently unsupported use cases of a modeling function, we will accept/implement changes to accommodate that usage. This doesn't apply to prompts raised by broom itself.
+* **Silent failures**: If a tidier silently fails (e.g. is not sensitive to a documented argument or dispatches to a method that will return incorrect results), we will accept/implement changes to address those failures.
+* **Breaking changes from dependencies**: We will accept/implement changes to address new errors, warnings, and messages introduced by dependencies.
+
+If you're not sure whether a change you'd like to see is within the scope of the package's development, please feel free to [open up an issue](https://github.com/tidymodels/broom/issues) on the broom GitHub repository for further discussion!
+
