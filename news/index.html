@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">broom</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.8.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,7 +27,8 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/adding-tidiers.html">Adding tidiers to broom</a>
+    <a class="dropdown-item" href="../articles/adding-tidiers.html">Writing new tidier methods</a>
+    <a class="dropdown-item" href="../articles/maintenance.html">Maintenance guidelines</a>
     <a class="dropdown-item" href="../articles/available-methods.html">Available methods</a>
     <a class="dropdown-item" href="../articles/bootstrapping.html">Tidy bootstrapping</a>
     <a class="dropdown-item" href="../articles/broom_and_dplyr.html">broom and dplyr</a>
@@ -58,15 +59,36 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.8.0" id="broom-080">broom 0.8.0<a class="anchor" aria-label="anchor" href="#broom-080"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.0.0" id="broom-100">broom 1.0.0<a class="anchor" aria-label="anchor" href="#broom-100"></a></h2>
+<p>broom 1.0.0 is the first “production” release of the broom package, and includes a number of notable changes to both functionality and governance.</p>
+<p>As of this release, the broom team will be following a set of guidelines that clarify the scope of further development on the package. Given the package’s wide use and long history, these guidelines <em>prioritize backward compatibility</em> over internal consistency and completeness. You can read those guidelines <a href="https://broom.tidymodels.org/articles/">here</a>!</p>
+<p>We’ve also made notable changes to error handling in this release:</p>
+<ul><li>Adds minimal ellipsis checking to warn on commonly misspecified arguments passed through ellipses. Notably:<ul><li>
+<code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy()</a></code> methods will now warn when supplied an <code>exponentiate</code> argument if it will be ignored.</li>
+<li>
+<code><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment()</a></code> methods will now warn when supplied a <code>newdata</code> argument if it will be ignored.</li>
+</ul></li>
+<li>The warning regarding tidiers only maintained via dispatch to <code>lm</code> and <code>glm</code> is now displayed only once per session, per unique dispatch. That is, if a <code>class_a</code> object is tidied using a <code>(g)lm</code> method, broom will not warn when tidying <code>class_a</code> objects for the rest of the session, but if a <code>class_b</code> object is tidied using a <code>(g)lm</code> method in the same session, broom will warn again (<a href="https://github.com/tidymodels/broom/issues/1101" class="external-link">#1101</a>).</li>
+</ul><p>Other fixes and improvements:</p>
+<ul><li>Add <code>exponentiate</code> argument to <code><a href="../reference/tidy.boot.html">tidy.boot()</a></code> (<a href="https://github.com/tidymodels/broom/issues/1039" class="external-link">#1039</a>).</li>
+<li>Update in <code><a href="../reference/tidy.htest.html">tidy.htest()</a></code> converting matrix-columns to vector-columns (<a href="https://github.com/tidymodels/broom/issues/1081" class="external-link">#1081</a>).</li>
+<li>Address failures in <code><a href="../reference/tidy.glht.html">tidy.glht()</a></code> with <code>conf.int = TRUE</code> (<a href="https://github.com/tidymodels/broom/issues/1103" class="external-link">#1103</a>).</li>
+<li>Address failures in <code><a href="../reference/tidy.zoo.html">tidy.zoo()</a></code> when input data does not have <code>colnames</code> (<a href="https://github.com/tidymodels/broom/issues/1080" class="external-link">#1080</a>).</li>
+<li>Transition tidiers for bivariate linear or spline-based interpolation—using list tidiers to interface with objects from the akima package is now considered off-label. See the interp package for a FOSS alternative.</li>
+<li>Address failures in <code><a href="../reference/tidy.svyolr.html">tidy.svyolr()</a></code> when <code>p.values = TRUE</code>. Instead of aliasing <code><a href="../reference/tidy.polr.html">tidy.polr()</a></code> directly, <code><a href="../reference/tidy.svyolr.html">tidy.svyolr()</a></code> lightly wraps that method and warns if <code>p.values</code> is supplied (<a href="https://github.com/tidymodels/broom/issues/1107" class="external-link">#1107</a>).</li>
+<li>Adds a <code>term</code> column and introduces support for <code><a href="https://rdrr.io/pkg/car/man/linearHypothesis.html" class="external-link">car::lht()</a></code> output in <code><a href="../reference/tidy.anova.html">tidy.anova()</a></code> (<a href="https://github.com/tidymodels/broom/issues/1106" class="external-link">#1106</a> by <code>@grantmcdermott</code>).</li>
+<li>Adds a dedicated <code>glance.anova</code> method (which previously dispatched to the<br>
+deprecated <code><a href="../reference/data.frame_tidiers.html">glance.data.frame()</a></code> tidier, <a href="https://github.com/tidymodels/broom/issues/1106" class="external-link">#1106</a> by <code>@grantmcdermott</code>).</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.8.0" id="broom-080">broom 0.8.0<a class="anchor" aria-label="anchor" href="#broom-080"></a></h2><p class="text-muted">CRAN release: 2022-04-13</p>
 <p>This update makes significant improvements to documentation, fixes a number of bugs, and brings the development flow of the package up to date with other packages in the tidymodels.</p>
 <p>In the big picture, this release:</p>
-<ul><li>Makes many improvements to documentation:
-<ul><li>All tidiers now have example code demonstrating usage in their documentation. Tidiers for base packages as well as selected others also include sample code for visualization of results with ggplot2.</li>
+<ul><li>Makes many improvements to documentation:<ul><li>All tidiers now have example code demonstrating usage in their documentation. Tidiers for base packages as well as selected others also include sample code for visualization of results with ggplot2.</li>
 <li>Code examples in the documentation largely now follow consistent style—these changes were made largely to reflect the tidyverse style guide, addressing spacing, object naming, and commenting, among other things.</li>
 <li>Examples previously marked with <code>\dontrun</code> or <code>\donttest</code> have been workshopped to run reliably.</li>
 </ul></li>
-<li>Clarifies errors and warnings for deprecated and un-maintained tidiers.</li>
+<li>Clarifies errors and warnings for deprecated and unmaintained tidiers.</li>
 <li>Ensures that tidiers are placed in files named according to the model-supplying package rather than the model object class for easier navigability of the source code.</li>
 </ul><div class="section level4">
 <h4 id="bug-fixes-and-other-improvements-0-8-0">Bug fixes and other improvements<a class="anchor" aria-label="anchor" href="#bug-fixes-and-other-improvements-0-8-0"></a></h4>
@@ -168,9 +190,7 @@
 <h2 class="pkg-version" data-toc-text="0.7.3" id="broom-073">broom 0.7.3<a class="anchor" aria-label="anchor" href="#broom-073"></a></h2><p class="text-muted">CRAN release: 2020-12-16</p>
 <p>In broom <code>0.7.0</code>, we introduced an error for model objects that subclassed <code>lm</code> and relied on <code><a href="../reference/tidy.lm.html">tidy.lm()</a></code>, or similarly for <code><a href="../reference/tidy.glm.html">tidy.glm()</a></code>. Tidiers for these objects were supported unintentionally, and we worried that tidiers for these objects would silently report inaccurate results.</p>
 <p>In hindsight, this change was unnecessarily abrupt. We’ve decided to roll back this change, instead providing the following warning before allowing such objects to fall back to the <code>lm</code>/<code>glm</code> tidier methods:</p>
-<blockquote>
-<p>Tidiers for objects of class {subclass} are not maintained by the broom team, and are only supported through the {dispatched_method} tidier method. Please be cautious in interpreting and reporting broom output.”</p>
-</blockquote>
+<blockquote><p>Tidiers for objects of class {subclass} are not maintained by the broom team, and are only supported through the {dispatched_method} tidier method. Please be cautious in interpreting and reporting broom output.”</p></blockquote>
 <p>In addition,</p>
 <ul><li>Restores tidiers for <code>summary.lm</code> objects (<code>#953</code> by <code>@grantmcdermott</code>)</li>
 <li>Deprecate tidiers for the <code>lfe</code> package, which was archived from CRAN.</li>
@@ -178,8 +198,7 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.7.2" id="broom-072">broom 0.7.2<a class="anchor" aria-label="anchor" href="#broom-072"></a></h2><p class="text-muted">CRAN release: 2020-10-20</p>
-<ul><li>Various bug fixes and improvements to documentation and errors.</li>
-</ul></div>
+<ul><li>Various bug fixes and improvements to documentation and errors.</li></ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.7.1" id="broom-071">broom 0.7.1<a class="anchor" aria-label="anchor" href="#broom-071"></a></h2><p class="text-muted">CRAN release: 2020-10-01</p>
 <p>While broom 0.7.1 is a minor release, it includes a number of exciting new features and bug fixes!</p>
@@ -195,7 +214,7 @@
 <p>In addition…</p>
 <ul><li>Extended the <code><a href="../reference/glance.aov.html">glance.aov()</a></code> method to include an <code>r.squared</code> column!</li>
 <li>
-<code><a href="../reference/glance.survfit.html">glance.survfit()</a></code> now passes <code>...</code> to <code><a href="https://rdrr.io/pkg/survival/man/summary.survfit.html" class="external-link">summary.survfit()</a></code> to allow for adjustment of RMST and other measures (<code>#880</code> by <code>@vincentarelbundock</code>)</li>
+<code><a href="../reference/glance.survfit.html">glance.survfit()</a></code> now passes <code>...</code> to <code>summary.survfit()</code> to allow for adjustment of RMST and other measures (<code>#880</code> by <code>@vincentarelbundock</code>)</li>
 <li>Several unsupported model objects that subclass <code>glm</code> and <code>lm</code> now error more informatively.</li>
 <li>A number of improvements to documentation throughout the package.</li>
 </ul></div>
@@ -224,7 +243,7 @@
 <li><p>We are moving away from supporting <code>summary.*()</code> objects. In particular, we have removed <code><a href="../reference/tidy.summary.lm.html">tidy.summary.lm()</a></code> as part of a major overhaul of internals. Instead of calling <code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy()</a></code> on <code>summary</code>-like objects, please call <code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy()</a></code> directly on model objects moving forward.</p></li>
 <li><p>We have removed all support for the <code>quick</code> argument in <code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy()</a></code> methods. This is to simplify internals and is for maintainability purposes. We anticipate this will not influence many users as few people seemed to use it. If this majorly cramps your style, let us know, as we are considering a new verb to return only model parameters. In the meantime, <code><a href="https://rdrr.io/r/stats/coef.html" class="external-link">stats::coef()</a></code> together with <code><a href="https://tibble.tidyverse.org/reference/enframe.html" class="external-link">tibble::enframe()</a></code> provides most of the functionality of <code>tidy(..., quick = TRUE)</code>.</p></li>
 <li><p>All <code>conf.int</code> arguments now default to <code>FALSE</code>, and all <code>conf.level</code> arguments now default to <code>0.95</code>. This should primarily affect <code><a href="../reference/tidy.survreg.html">tidy.survreg()</a></code>, which previously always returned confidence intervals, although there are some others.</p></li>
-<li><p>Tidiers for <code>emmeans</code>-objects use the arguments <code>conf.int</code> and <code>conf.level</code> instead of relying on the argument names native to the <code>emmeans::summary()</code>-methods (i.e., <code>infer</code> and <code>level</code>). Similarly, <code>multcomp</code>-tidiers now include a call to <code><a href="https://rdrr.io/pkg/vars/man/summary.html" class="external-link">summary()</a></code> as previous behavior was akin to setting the now removed argument <code>quick = TRUE</code>. Both families of tidiers now use the <code>adj.p.value</code> column name when appropriate. Finally, <code>emmeans</code>-, <code>multcomp</code>-, and <code>TukeyHSD</code>-tidiers now consistently use the column names <code>contrast</code> and <code>null.value</code> instead of <code>comparison</code>, <code>level1</code> and <code>level2</code>, or <code>lhs</code> and <code>rhs</code> (see <a href="https://github.com/tidymodels/broom/issues/692" class="external-link">#692</a>).</p></li>
+<li><p>Tidiers for <code>emmeans</code>-objects use the arguments <code>conf.int</code> and <code>conf.level</code> instead of relying on the argument names native to the <code>emmeans::summary()</code>-methods (i.e., <code>infer</code> and <code>level</code>). Similarly, <code>multcomp</code>-tidiers now include a call to <code><a href="https://rdrr.io/pkg/urca/man/summary-methods.html" class="external-link">summary()</a></code> as previous behavior was akin to setting the now removed argument <code>quick = TRUE</code>. Both families of tidiers now use the <code>adj.p.value</code> column name when appropriate. Finally, <code>emmeans</code>-, <code>multcomp</code>-, and <code>TukeyHSD</code>-tidiers now consistently use the column names <code>contrast</code> and <code>null.value</code> instead of <code>comparison</code>, <code>level1</code> and <code>level2</code>, or <code>lhs</code> and <code>rhs</code> (see <a href="https://github.com/tidymodels/broom/issues/692" class="external-link">#692</a>).</p></li>
 </ul></div>
 <div class="section level4">
 <h4 id="deprecations-0-7-0">Deprecations<a class="anchor" aria-label="anchor" href="#deprecations-0-7-0"></a></h4>
@@ -359,20 +378,16 @@
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.6" id="broom-056">broom 0.5.6<a class="anchor" aria-label="anchor" href="#broom-056"></a></h2><p class="text-muted">CRAN release: 2020-04-20</p>
-<ul><li>Fix failing CRAN checks to due <code>tibble 3.0.0</code> release. Removed <code>xergm</code> dependency.</li>
-</ul></div>
+<ul><li>Fix failing CRAN checks to due <code>tibble 3.0.0</code> release. Removed <code>xergm</code> dependency.</li></ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.5" id="broom-055">broom 0.5.5<a class="anchor" aria-label="anchor" href="#broom-055"></a></h2><p class="text-muted">CRAN release: 2020-02-29</p>
-<ul><li>Remove tidiers for robust package and drop robust dependency (temporarily)</li>
-</ul></div>
+<ul><li>Remove tidiers for robust package and drop robust dependency (temporarily)</li></ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.4" id="broom-054">broom 0.5.4<a class="anchor" aria-label="anchor" href="#broom-054"></a></h2><p class="text-muted">CRAN release: 2020-01-27</p>
-<ul><li>Fixes failing CRAN checks as the joineRML package has been removed from CRAN</li>
-</ul></div>
+<ul><li>Fixes failing CRAN checks as the joineRML package has been removed from CRAN</li></ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.3" id="broom-053">broom 0.5.3<a class="anchor" aria-label="anchor" href="#broom-053"></a></h2><p class="text-muted">CRAN release: 2019-12-14</p>
-<ul><li>Fixes failing CRAN checks due to new matrix classing in R 4.0.0</li>
-</ul></div>
+<ul><li>Fixes failing CRAN checks due to new matrix classing in R 4.0.0</li></ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.2" id="broom-052">broom 0.5.2<a class="anchor" aria-label="anchor" href="#broom-052"></a></h2><p class="text-muted">CRAN release: 2019-04-07</p>
 <ul><li><p>Fixes failing CRAN checks</p></li>
@@ -381,8 +396,7 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.1" id="broom-051">broom 0.5.1<a class="anchor" aria-label="anchor" href="#broom-051"></a></h2><p class="text-muted">CRAN release: 2018-12-05</p>
 <ul><li>
-<code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy()</a></code>, <code><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance()</a></code> and <code><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment()</a></code> are now re-exported from the <a href="https://github.com/r-lib/generics" class="external-link">generics</a> package.</li>
-</ul></div>
+<code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy()</a></code>, <code><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance()</a></code> and <code><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment()</a></code> are now re-exported from the <a href="https://github.com/r-lib/generics" class="external-link">generics</a> package.</li></ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.0" id="broom-050">broom 0.5.0<a class="anchor" aria-label="anchor" href="#broom-050"></a></h2><p class="text-muted">CRAN release: 2018-07-17</p>
 <p>Tidiers now return <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble()</a></code>s. This release also includes several new tidiers, new vignettes and a large number of bug fixes. We’ve also begun to more rigorously define tidier specifications: we’ve laid part of the groundwork for stricter and more consistent tidying, but the new tidier specifications are not yet complete. These will appear in the next release.</p>
@@ -392,13 +406,13 @@
 <p>Almost all tidiers should now return <code>tibble</code>s rather than <code>data.frame</code>s. Deprecated tidying methods, Bayesian and mixed model tidiers still return <code>data.frame</code>s.</p>
 <p><strong>Users</strong> are mostly to experience issues when using <code>augment</code> in situations where tibbles are stricter than data frames. For example, specifying model covariates as a matrix object will now error:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://broom.tidymodels.org/">broom</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.r-project.org" class="external-link">quantreg</a></span><span class="op">)</span>
-
-<span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quantreg/man/rq.html" class="external-link">rq</a></span><span class="op">(</span><span class="va">stack.loss</span> <span class="op">~</span> <span class="va">stack.x</span>, tau <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span>
-<span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span>
-<span class="co">#&gt; Error: Column `stack.x` must be a 1d atomic vector or a list</span></code></pre></div>
+<code class="sourceCode R"><span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://broom.tidymodels.org/">broom</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.r-project.org" class="external-link">quantreg</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quantreg/man/rq.html" class="external-link">rq</a></span><span class="op">(</span><span class="va">stack.loss</span> <span class="op">~</span> <span class="va">stack.x</span>, tau <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span></span>
+<span><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error: Column `stack.x` must be a 1d atomic vector or a list</span></span></code></pre></div>
 <p>This is because the default <code>data</code> argument <code>data = model.frame(fit)</code> cannot be coerced to <code>tibble</code>.</p>
 <p>Another consequence of this is that <code>augment.survreg</code> and <code>augment.coxph</code> from the <code>survival</code> package now require that the user explicitly passes data to either the <code>data</code> or <code>newdata</code> arguments.</p>
 <p>These restrictions will be relaxed in an upcoming release of <code>broom</code> pending support for matrix-columns in tibbles.</p>
@@ -417,8 +431,7 @@
 <li><p><code>vignette("glossary", package = "broom")</code> contains tables describing acceptable argument names and column names for the <em>in-progress</em> new specification.</p></li>
 </ul><p>Several old vignettes have also been updated:</p>
 <ul><li>
-<code><a href="../articles/bootstrapping.html">vignette("bootstrapping", package = "broom")</a></code> now relies on the <code>rsample</code> package and a <code><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">tidyr::nest</a></code>-<code><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">purrr::map</a></code>-<code><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">tidyr::unnest</a></code> workflow. This is now the recommended workflow for working with multiple models, as opposed to the old <code><a href="https://dplyr.tidyverse.org/reference/rowwise.html" class="external-link">dplyr::rowwise</a></code>-<code><a href="https://dplyr.tidyverse.org/reference/do.html" class="external-link">dplyr::do</a></code> based workflow.</li>
-</ul></div>
+<code><a href="../articles/bootstrapping.html">vignette("bootstrapping", package = "broom")</a></code> now relies on the <code>rsample</code> package and a <code><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">tidyr::nest</a></code>-<code><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">purrr::map</a></code>-<code><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">tidyr::unnest</a></code> workflow. This is now the recommended workflow for working with multiple models, as opposed to the old <code><a href="https://dplyr.tidyverse.org/reference/rowwise.html" class="external-link">dplyr::rowwise</a></code>-<code><a href="https://dplyr.tidyverse.org/reference/do.html" class="external-link">dplyr::do</a></code> based workflow.</li></ul></div>
 <div class="section level3">
 <h3 id="deprecations-0-5-0">Deprecations<a class="anchor" aria-label="anchor" href="#deprecations-0-5-0"></a></h3>
 <ul><li><p>Matrix and vector tidiers have been deprecated in favor of <code><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">tibble::as_tibble</a></code> and <code><a href="https://tibble.tidyverse.org/reference/enframe.html" class="external-link">tibble::enframe</a></code></p></li>
@@ -566,11 +579,9 @@
 <li><p><code>merMod</code> (<code>lme4</code>)</p></li>
 <li><p><code>survreg</code> (<code>survival</code>)</p></li>
 <li><p><code>coxph</code> (<code>survival</code>)</p></li>
-</ul></li>
-</ul><p>Unit tests in <code>tests/testthat/test-augment.R</code> were added to ensure consistency across these models.</p>
+</ul></li></ul><p>Unit tests in <code>tests/testthat/test-augment.R</code> were added to ensure consistency across these models.</p>
 <ul><li>
-<code>tidy</code>, <code>augment</code> and <code>glance</code> methods were added for <code>rowwise_df</code> objects, and are set up to apply across their rows. This allows for simple patterns such as:</li>
-</ul><p>regressions &lt;- mtcars %&gt;% group_by(cyl) %&gt;% do(mod = lm(mpg ~ wt, .)) regressions %&gt;% tidy(mod) regressions %&gt;% augment(mod)</p>
+<code>tidy</code>, <code>augment</code> and <code>glance</code> methods were added for <code>rowwise_df</code> objects, and are set up to apply across their rows. This allows for simple patterns such as:</li></ul><p>regressions &lt;- mtcars %&gt;% group_by(cyl) %&gt;% do(mod = lm(mpg ~ wt, .)) regressions %&gt;% tidy(mod) regressions %&gt;% augment(mod)</p>
 <p>See <code>?rowwise_df_tidiers</code> for more.</p>
 <ul><li><p>Added <code>tidy</code> and <code>glance</code> methods for <code>Arima</code> objects, and <code>tidy</code> for <code>pairwise.htest</code> objects.</p></li>
 <li><p>Fixes for CRAN: change package description to title case, removed NOTES, mostly by adding <code>globals.R</code> to declare global variables.</p></li>
@@ -611,7 +622,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
   </div></footer></body></html>

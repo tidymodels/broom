@@ -20,7 +20,7 @@ specify which components to return."><meta property="og:image" content="https://
     
     <a class="navbar-brand me-2" href="../index.html">broom</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.8.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,7 +37,8 @@ specify which components to return."><meta property="og:image" content="https://
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/adding-tidiers.html">Adding tidiers to broom</a>
+    <a class="dropdown-item" href="../articles/adding-tidiers.html">Writing new tidier methods</a>
+    <a class="dropdown-item" href="../articles/maintenance.html">Maintenance guidelines</a>
     <a class="dropdown-item" href="../articles/available-methods.html">Available methods</a>
     <a class="dropdown-item" href="../articles/bootstrapping.html">Tidy bootstrapping</a>
     <a class="dropdown-item" href="../articles/broom_and_dplyr.html">broom and dplyr</a>
@@ -79,26 +80,32 @@ specify which components to return.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for cch</span>
-<span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">x</span>, conf.level <span class="op">=</span> <span class="fl">0.95</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for cch</span></span>
+<span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">x</span>, conf.level <span class="op">=</span> <span class="fl">0.95</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>x</dt>
 <dd><p>An <code>cch</code> object returned from <code><a href="https://rdrr.io/pkg/survival/man/cch.html" class="external-link">survival::cch()</a></code>.</p></dd>
+
+
 <dt>conf.level</dt>
 <dd><p>confidence level for CI</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional arguments. Not used. Needed to match generic
 signature only. <strong>Cautionary note:</strong> Misspelled arguments will be
 absorbed in <code>...</code>, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
 For example, if you pass <code>conf.lvel = 0.9</code>, all computation will
-proceed using <code>conf.level = 0.95</code>. Additionally, if you pass
-<code>newdata = my_tibble</code> to an <code><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment()</a></code> method that does not
-accept a <code>newdata</code> argument, it will use the default value for
-the <code>data</code> argument.</p></dd>
+proceed using <code>conf.level = 0.95</code>. Two exceptions here are:</p><ul><li><p><code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy()</a></code> methods will warn when supplied an <code>exponentiate</code> argument if
+it will be ignored.</p></li>
+<li><p><code><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment()</a></code> methods will warn when supplied a <code>newdata</code> argument if it
+will be ignored.</p></li>
+</ul></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -127,66 +134,78 @@ the <code>data</code> argument.</p></dd>
     </div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble()</a></code> with columns:</p>
+    
+
+<p>A <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble()</a></code> with columns:</p>
 <dl><dt>conf.high</dt>
 <dd><p>Upper bound on the confidence interval for the estimate.</p></dd>
-<dt>conf.low</dt>
+
+  <dt>conf.low</dt>
 <dd><p>Lower bound on the confidence interval for the estimate.</p></dd>
-<dt>estimate</dt>
+
+  <dt>estimate</dt>
 <dd><p>The estimated value of the regression term.</p></dd>
-<dt>p.value</dt>
+
+  <dt>p.value</dt>
 <dd><p>The two-sided p-value associated with the observed statistic.</p></dd>
-<dt>statistic</dt>
+
+  <dt>statistic</dt>
 <dd><p>The value of a T-statistic to use in a hypothesis that the regression term is non-zero.</p></dd>
-<dt>std.error</dt>
+
+  <dt>std.error</dt>
 <dd><p>The standard error of the regression term.</p></dd>
-<dt>term</dt>
+
+  <dt>term</dt>
 <dd><p>The name of the regression term.</p></dd>
+
+
 </dl></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="co"># feel free to ignore the following line—it allows {broom} to supply </span></span>
-<span class="r-in"><span class="co"># examples without requiring the model-supplying package to be installed.</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"survival"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># load libraries for models and data</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/therneau/survival" class="external-link">survival</a></span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># examples come from cch documentation</span></span>
-<span class="r-in"><span class="va">subcoh</span> <span class="op">&lt;-</span> <span class="va">nwtco</span><span class="op">$</span><span class="va">in.subcohort</span></span>
-<span class="r-in"><span class="va">selccoh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">nwtco</span>, <span class="va">rel</span> <span class="op">==</span> <span class="fl">1</span> <span class="op">|</span> <span class="va">subcoh</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">ccoh.data</span> <span class="op">&lt;-</span> <span class="va">nwtco</span><span class="op">[</span><span class="va">selccoh</span>, <span class="op">]</span></span>
-<span class="r-in"><span class="va">ccoh.data</span><span class="op">$</span><span class="va">subcohort</span> <span class="op">&lt;-</span> <span class="va">subcoh</span><span class="op">[</span><span class="va">selccoh</span><span class="op">]</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># central-lab histology</span></span>
-<span class="r-in"><span class="va">ccoh.data</span><span class="op">$</span><span class="va">histol</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">ccoh.data</span><span class="op">$</span><span class="va">histol</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"FH"</span>, <span class="st">"UH"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># tumour stage</span></span>
-<span class="r-in"><span class="va">ccoh.data</span><span class="op">$</span><span class="va">stage</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">ccoh.data</span><span class="op">$</span><span class="va">stage</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"I"</span>, <span class="st">"II"</span>, <span class="st">"III"</span>, <span class="st">"IV"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">ccoh.data</span><span class="op">$</span><span class="va">age</span> <span class="op">&lt;-</span> <span class="va">ccoh.data</span><span class="op">$</span><span class="va">age</span> <span class="op">/</span> <span class="fl">12</span> <span class="co"># age in years</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># fit model</span></span>
-<span class="r-in"><span class="va">fit.ccP</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/cch.html" class="external-link">cch</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">edrel</span>, <span class="va">rel</span><span class="op">)</span> <span class="op">~</span> <span class="va">stage</span> <span class="op">+</span> <span class="va">histol</span> <span class="op">+</span> <span class="va">age</span>,</span>
-<span class="r-in">  data <span class="op">=</span> <span class="va">ccoh.data</span>,</span>
-<span class="r-in">  subcoh <span class="op">=</span> <span class="op">~</span><span class="va">subcohort</span>, id <span class="op">=</span> <span class="op">~</span><span class="va">seqno</span>, cohort.size <span class="op">=</span> <span class="fl">4028</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># summarize model fit with tidiers + visualization</span></span>
-<span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">fit.ccP</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># coefficient plot</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">fit.ccP</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">estimate</span>, y <span class="op">=</span> <span class="va">term</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_errorbarh.html" class="external-link">geom_errorbarh</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>xmin <span class="op">=</span> <span class="va">conf.low</span>, xmax <span class="op">=</span> <span class="va">conf.high</span><span class="op">)</span>, height <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
-<span class="r-in">  </span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># load libraries for models and data</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/therneau/survival" class="external-link">survival</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># examples come from cch documentation</span></span></span>
+<span class="r-in"><span><span class="va">subcoh</span> <span class="op">&lt;-</span> <span class="va">nwtco</span><span class="op">$</span><span class="va">in.subcohort</span></span></span>
+<span class="r-in"><span><span class="va">selccoh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">nwtco</span>, <span class="va">rel</span> <span class="op">==</span> <span class="fl">1</span> <span class="op">|</span> <span class="va">subcoh</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ccoh.data</span> <span class="op">&lt;-</span> <span class="va">nwtco</span><span class="op">[</span><span class="va">selccoh</span>, <span class="op">]</span></span></span>
+<span class="r-in"><span><span class="va">ccoh.data</span><span class="op">$</span><span class="va">subcohort</span> <span class="op">&lt;-</span> <span class="va">subcoh</span><span class="op">[</span><span class="va">selccoh</span><span class="op">]</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># central-lab histology</span></span></span>
+<span class="r-in"><span><span class="va">ccoh.data</span><span class="op">$</span><span class="va">histol</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">ccoh.data</span><span class="op">$</span><span class="va">histol</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"FH"</span>, <span class="st">"UH"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># tumour stage</span></span></span>
+<span class="r-in"><span><span class="va">ccoh.data</span><span class="op">$</span><span class="va">stage</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">ccoh.data</span><span class="op">$</span><span class="va">stage</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"I"</span>, <span class="st">"II"</span>, <span class="st">"III"</span>, <span class="st">"IV"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ccoh.data</span><span class="op">$</span><span class="va">age</span> <span class="op">&lt;-</span> <span class="va">ccoh.data</span><span class="op">$</span><span class="va">age</span> <span class="op">/</span> <span class="fl">12</span> <span class="co"># age in years</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># fit model</span></span></span>
+<span class="r-in"><span><span class="va">fit.ccP</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/cch.html" class="external-link">cch</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">edrel</span>, <span class="va">rel</span><span class="op">)</span> <span class="op">~</span> <span class="va">stage</span> <span class="op">+</span> <span class="va">histol</span> <span class="op">+</span> <span class="va">age</span>,</span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">ccoh.data</span>,</span></span>
+<span class="r-in"><span>  subcoh <span class="op">=</span> <span class="op">~</span><span class="va">subcohort</span>, id <span class="op">=</span> <span class="op">~</span><span class="va">seqno</span>, cohort.size <span class="op">=</span> <span class="fl">4028</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># summarize model fit with tidiers + visualization</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">fit.ccP</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   term     estimate std.error statistic  p.value conf.low conf.high</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> stageII    0.735     0.168       4.36 1.30<span style="color: #949494;">e</span><span style="color: #BB0000;">- 5</span>  0.404      1.06  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> stageIII   0.597     0.173       3.44 5.77<span style="color: #949494;">e</span><span style="color: #BB0000;">- 4</span>  0.257      0.937 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> stageIV    1.38      0.205       6.76 1.40<span style="color: #949494;">e</span><span style="color: #BB0000;">-11</span>  0.983      1.79  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> histolUH   1.50      0.160       9.38 0   <span style="color: #949494;"> </span>     1.19       1.81  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> age        0.043<span style="text-decoration: underline;">3</span>    0.023<span style="text-decoration: underline;">7</span>      1.82 6.83<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span> -<span style="color: #BB0000;">0.003</span><span style="color: #BB0000; text-decoration: underline;">24</span>    0.089<span style="text-decoration: underline;">8</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># coefficient plot</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">fit.ccP</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">estimate</span>, y <span class="op">=</span> <span class="va">term</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_errorbarh.html" class="external-link">geom_errorbarh</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>xmin <span class="op">=</span> <span class="va">conf.low</span>, xmax <span class="op">=</span> <span class="va">conf.high</span><span class="op">)</span>, height <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="tidy.cch-1.png" alt="" width="700" height="433"></span>
-<span class="r-in">  </span>
+<span class="r-in"><span>  </span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -200,7 +219,7 @@ the <code>data</code> argument.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
   </div></footer></body></html>

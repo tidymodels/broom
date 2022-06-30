@@ -37,6 +37,9 @@
     <loc>https://broom.tidymodels.org/articles/kmeans.html</loc>
   </url>
   <url>
+    <loc>https://broom.tidymodels.org/articles/maintenance.html</loc>
+  </url>
+  <url>
     <loc>https://broom.tidymodels.org/authors.html</loc>
   </url>
   <url>
@@ -200,6 +203,9 @@
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/glance.aareg.html</loc>
+  </url>
+  <url>
+    <loc>https://broom.tidymodels.org/reference/glance.anova.html</loc>
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/glance.aov.html</loc>
