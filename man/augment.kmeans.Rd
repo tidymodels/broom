@@ -72,7 +72,7 @@ We are in the process of defining behaviors for models fit with various
 missing at this time.
 }
 \examples{
-\dontshow{if ((rlang::is_installed("cluster") & rlang::is_installed("modeldata") & identical(Sys.getenv("NOT_CRAN"), "true"))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if ((rlang::is_installed("cluster") & rlang::is_installed("modeldata") & FALSE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
   
 library(cluster)
 library(modeldata)
