@@ -9,7 +9,7 @@
 #' @evalRd return_tidy("size", "withinss", "cluster")
 #'
 # skip running examples - occasionally over CRAN check time limit
-#' @examplesIf (rlang::is_installed("cluster") & rlang::is_installed("modeldata") & FALSE)
+#' @examplesIf (rlang::is_installed("cluster") & rlang::is_installed("modeldata"))
 #'   
 #' library(cluster)
 #' library(modeldata)
