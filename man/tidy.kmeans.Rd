@@ -34,9 +34,6 @@ model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
-\details{
-For examples, see the kmeans vignette.
-}
 \examples{
 \dontshow{if ((rlang::is_installed("cluster") & rlang::is_installed("modeldata"))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
   

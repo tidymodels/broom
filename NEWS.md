@@ -685,7 +685,6 @@ supportive and insightful and I look forward to working you all again!
 [@ellessenne](https://github.com/ellessenne),
 [@erleholgersen](https://github.com/erleholgersen),
 [@ethchr](https://github.com/ethchr),
-[@Hong-Revo](https://github.com/Hong-Revo),
 [@huftis](https://github.com/huftis),
 [@IndrajeetPatil](https://github.com/IndrajeetPatil),
 [@jacob-long](https://github.com/jacob-long),

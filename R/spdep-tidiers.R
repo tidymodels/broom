@@ -10,6 +10,7 @@
 #' 
 #' @evalRd return_tidy(regression = TRUE)
 #' 
+# skip running examples - occasionally over CRAN check time limit
 #' @examplesIf (rlang::is_installed("spdep") & rlang::is_installed("spatialreg"))
 #' 
 #'       

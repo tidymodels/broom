@@ -8,6 +8,7 @@
 #'
 #' @evalRd return_tidy("size", "withinss", "cluster")
 #'
+# skip running examples - occasionally over CRAN check time limit
 #' @examplesIf (rlang::is_installed("cluster") & rlang::is_installed("modeldata"))
 #'   
 #' library(cluster)
@@ -23,8 +24,6 @@
 #' tidy(fit)
 #' glance(fit)
 #' augment(fit, x)
-#' 
-#' @details For examples, see the kmeans vignette.
 #'
 #' @aliases kmeans_tidiers
 #' @export
