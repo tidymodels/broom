@@ -1,3 +1,7 @@
+# broom 1.0.0.9000 (developmental version)
+
+To be released as broom 1.0.1.
+
 # broom 1.0.0
 
 broom 1.0.0 is the first "production" release of the broom package, and includes a number of notable changes to both functionality and governance.
