@@ -18,11 +18,15 @@ tidy.glm <- function(x, conf.int = FALSE, conf.level = .95,
   ret <- as_tibble(summary(x)$coefficients, rownames = "term")
   colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
 
-  # summary(x)$coefficients misses rank deficient rows (i.e. coefs that
-  # summary.lm() sets to NA), catch them here and add them back
+  coefs <- stats::coef(x)
 
-  coefs <- tibble::enframe(stats::coef(x), name = "term", value = "estimate")
-  ret <- left_join(coefs, ret, by = c("term", "estimate"))
+  if (length(coefs) != nrow(ret)) {
+    # summary(x)$coefficients misses rank deficient rows (i.e. coefs that
+    # summary.lm() sets to NA), catch them here and add them back. This join is
+    # costly, so only do it when necessary.
+    coefs <- tibble::enframe(coefs, name = "term", value = "estimate")
+    ret <- left_join(coefs, ret, by = c("term", "estimate"))
+  }
 
   if (conf.int) {
     ci <- broom_confint_terms(x, level = conf.level)

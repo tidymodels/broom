@@ -523,7 +523,12 @@ Authors@R:
              family = "Sjoberg",
              role = "ctb",
              email = "danield.sjoberg@gmail.com",
-             comment = c(ORCID = "0000-0003-0862-2018")))
+             comment = c(ORCID = "0000-0003-0862-2018")),
+      person(given = "Alex",
+             family = "Reinhart",
+             role = "ctb",
+             email = "areinhar@stat.cmu.edu",
+             comment = c(ORCID = "0000-0002-6658-514X")))
 Description: Summarizes key information about statistical
     objects in tidy tibbles. This makes it easy to report results, create
     plots and consistently work with large numbers of models at once.
