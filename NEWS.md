@@ -2,6 +2,8 @@
 
 To be released as broom 1.0.1.
 
+* Improves performance of `tidy.lm()` and `tidy.glm()` for full-rank fits (#1112 by `@capnrefsmmat`).
+
 # broom 1.0.0
 
 broom 1.0.0 is the first "production" release of the broom package, and includes a number of notable changes to both functionality and governance.
