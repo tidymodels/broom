@@ -223,7 +223,7 @@ augment_columns <- function(x, data, newdata = NULL, type, type.predict = type,
   if ("panelmodel" %in% class(x)) {
     # work around for panel models (plm)
     # stat::predict() returns wrong fitted values when applied to random or
-    # fixed effect panel models [plm(..., model="random"), plm(, ..., model="pooling")]
+    # fixed effect panel models [plm(..., model="random"), plm(, ..., model="within")]
     # It works only for pooled OLS models (plm( ..., model="pooling"))
     pred <- model.frame(x)[, 1] - residuals(x)
   } else {
