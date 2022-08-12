@@ -168,6 +168,7 @@ Other contributors:
   \item Taren Sanders \email{taren.sanders@acu.edu.au} (\href{https://orcid.org/0000-0002-4504-6008}{ORCID}) [contributor]
   \item Ilaria Prosdocimi \email{prosdocimi.ilaria@gmail.com} (\href{https://orcid.org/0000-0001-8565-094X}{ORCID}) [contributor]
   \item Daniel D. Sjoberg \email{danield.sjoberg@gmail.com} (\href{https://orcid.org/0000-0003-0862-2018}{ORCID}) [contributor]
+  \item Alex Reinhart \email{areinhar@stat.cmu.edu} (\href{https://orcid.org/0000-0002-6658-514X}{ORCID}) [contributor]
 }
 
 }
