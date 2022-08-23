@@ -24,8 +24,8 @@ test_that("tidy.durbinWatsonTest", {
 })
 
 test_that("tidy.leveneTest", {
-  mod1 <- with(Moore, leveneTest(conformity, fcategory))
-  mod2 <- with(Moore, leveneTest(conformity, interaction(fcategory, partner.status)))
+  mod1 <- with(carData::Moore, leveneTest(conformity, fcategory))
+  mod2 <- with(carData::Moore, leveneTest(conformity, interaction(fcategory, partner.status)))
   mod3 <- leveneTest(conformity ~ fcategory * partner.status, data = Moore)
   mod4 <- leveneTest(lm(conformity ~ fcategory * partner.status, data = Moore))
   mod5 <- leveneTest(conformity ~ fcategory * partner.status, data = Moore, center = mean)
