@@ -18,12 +18,17 @@ test_that("tidy.aov", {
 test_that("tidy.anova", {
   check_arguments(tidy.anova)
 
-  anovafit <- stats::anova(lm(mpg ~ wt + disp, mtcars))
+  m1 <- lm(mpg ~ wt + disp, mtcars)
+  m2 <- update(m1, . ~ . - disp)
+  anovafit <- stats::anova(m1)
   td <- tidy(anovafit)
 
   check_tidy_output(td)
   check_dims(td, 3, 6)
-
+  
+  anovacomp <- stats::anova(m2, m1)
+  td2 <- tidy(anovacomp)
+  
   expect_true("Residuals" %in% td$term)
 
   loess_anova <- stats::anova(
@@ -32,6 +37,8 @@ test_that("tidy.anova", {
   )
 
   expect_warning(tidy(loess_anova))
+  
+  
 })
 
 test_that("glance.anova", {
@@ -112,4 +119,13 @@ test_that("tidy.linearHypothesis", {
 
 })
 
-
+skip_if_not_installed("lme4")
+test_that("tidy.anova for merMod objects", {
+  m1_mer <- lme4::lmer(mpg ~ wt + (1|cyl), data = mtcars)
+  m2_mer <- update(m1_mer, . ~ . + disp)
+  aa_mer <- anova(m1_mer, m2_mer, refit = FALSE)
+  td <- tidy(aa_mer)
+  check_tidy_output(td, strict = FALSE)
+  check_dims(td, 2, 9)
+}
+)
