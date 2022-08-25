@@ -91,7 +91,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>broom and dplyr</h1>
             
-            <h4 data-toc-skip class="date">2022-08-12</h4>
+            <h4 data-toc-skip class="date">2022-08-25</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/tidymodels/broom/blob/HEAD/vignettes/broom_and_dplyr.Rmd" class="external-link"><code>vignettes/broom_and_dplyr.Rmd</code></a></small>
       <div class="d-none name"><code>broom_and_dplyr.Rmd</code></div>
@@ -131,8 +131,7 @@
 <span><span class="co">## <span style="color: #BCBCBC;"> 8</span> 2       118            33</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 9</span> 2       484            69</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">10</span> 2       664           111</span></span>
-<span><span class="co">## <span style="color: #949494;"># … with 25 more rows</span></span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;"># … with 25 more rows</span></span></span></code></pre>
 <p>This contains 35 observations of three variables: <code>Tree</code>, <code>age</code>, and <code>circumference</code>. <code>Tree</code> is a factor with five levels describing five trees. As might be expected, age and circumference are correlated:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="va">Orange</span><span class="op">$</span><span class="va">age</span>, <span class="va">Orange</span><span class="op">$</span><span class="va">circumference</span><span class="op">)</span></span></code></pre></div>
@@ -228,8 +227,7 @@
 <span><span class="co">## <span style="color: #BCBCBC;">5</span> 5     &lt;tibble&gt; <span style="color: #949494;">&lt;htest&gt;</span>    0.988     14.1 3.18<span style="color: #949494;">e</span><span style="color: #BB0000;">-5</span>       5   0.916   0.998</span></span>
 <span><span class="co">## <span style="color: #949494;"># … with 2 more variables: method &lt;chr&gt;, alternative &lt;chr&gt;, and</span></span></span>
 <span><span class="co">## <span style="color: #949494;">#   abbreviated variable names ¹​statistic, ²​parameter, ³​conf.low,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   ⁴​conf.high</span></span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ Use `colnames()` to see all variable names</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;">#   ⁴​conf.high</span></span></span></code></pre>
 <p>This workflow becomes even more useful when applied to regressions. Untidy output for a regression looks like:</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lm_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">age</span> <span class="op">~</span> <span class="va">circumference</span>, data <span class="op">=</span> <span class="va">Orange</span><span class="op">)</span></span>
@@ -301,8 +299,7 @@
 <span><span class="co">## <span style="color: #BCBCBC;"> 8</span>  24.4     4  147.    62  3.69  3.19  20       1     0     4     2</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 9</span>  22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">10</span>  19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4</span></span>
-<span><span class="co">## <span style="color: #949494;"># … with 22 more rows</span></span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;"># … with 22 more rows</span></span></span></code></pre>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">nest</a></span><span class="op">(</span>data <span class="op">=</span> <span class="op">-</span><span class="va">am</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -348,8 +345,7 @@
 <span><span class="co">## <span style="color: #BCBCBC;">7</span>     0 &lt;tibble&gt; <span style="color: #949494;">&lt;lm&gt;</span>   qsec       0.091<span style="text-decoration: underline;">9</span>  0.098<span style="text-decoration: underline;">3</span>  0.935  3.65<span style="color: #949494;">e</span><span style="color: #BB0000;">-1</span> &lt;tibble&gt;</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">8</span>     0 &lt;tibble&gt; <span style="color: #949494;">&lt;lm&gt;</span>   gear       0.147   0.368   0.398  6.96<span style="color: #949494;">e</span><span style="color: #BB0000;">-1</span> &lt;tibble&gt;</span></span>
 <span><span class="co">## <span style="color: #949494;"># … with 1 more variable: augmented &lt;list&gt;, and abbreviated variable</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   names ¹​estimate, ²​std.error, ³​statistic</span></span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ Use `colnames()` to see all variable names</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;">#   names ¹​estimate, ²​std.error, ³​statistic</span></span></span></code></pre>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">regressions</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">glanced</span><span class="op">)</span></span></code></pre></div>
@@ -360,8 +356,7 @@
 <span><span class="co">## <span style="color: #BCBCBC;">2</span>     0 &lt;tibble&gt; <span style="color: #949494;">&lt;lm&gt;</span>   &lt;tibble&gt;     0.625     0.550 0.522    8.32 1.70<span style="color: #949494;">e</span><span style="color: #BB0000;">-3</span></span></span>
 <span><span class="co">## <span style="color: #949494;"># … with 8 more variables: df &lt;dbl&gt;, logLik &lt;dbl&gt;, AIC &lt;dbl&gt;, BIC &lt;dbl&gt;,</span></span></span>
 <span><span class="co">## <span style="color: #949494;">#   deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;, augmented &lt;list&gt;, and</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   abbreviated variable names ¹​adj.r.squared, ²​statistic</span></span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ Use `colnames()` to see all variable names</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;">#   abbreviated variable names ¹​adj.r.squared, ²​statistic</span></span></span></code></pre>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">regressions</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">augmented</span><span class="op">)</span></span></code></pre></div>
@@ -379,8 +374,7 @@
 <span><span class="co">## <span style="color: #BCBCBC;"> 9</span>     1 &lt;tibble&gt; <span style="color: #949494;">&lt;lm&gt;</span>   &lt;tibble&gt; &lt;tibble&gt;  1.51  30.4  16.9     5    1.77</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">10</span>     1 &lt;tibble&gt; <span style="color: #949494;">&lt;lm&gt;</span>   &lt;tibble&gt; &lt;tibble&gt;  3.17  15.8  14.5     5    3.15</span></span>
 <span><span class="co">## <span style="color: #949494;"># … with 22 more rows, and 5 more variables: .resid &lt;dbl&gt;, .hat &lt;dbl&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   .sigma &lt;dbl&gt;, .cooksd &lt;dbl&gt;, .std.resid &lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;">#   .sigma &lt;dbl&gt;, .cooksd &lt;dbl&gt;, .std.resid &lt;dbl&gt;</span></span></span></code></pre>
 <p>By combining the estimates and p-values across all groups into the same tidy data frame (instead of a list of output model objects), a new class of analyses and visualizations becomes straightforward. This includes</p>
 <ul>
 <li>Sorting by p-value or estimate to find the most significant terms across all tests</li>

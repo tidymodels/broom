@@ -217,7 +217,6 @@ For multiple values, please use a <code><a href="https://purrr.tidyverse.org/ref
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>         14                   58      18      80 -<span style="color: #BB0000;">2.03</span><span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span>    14.0   0.5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 11 more rows, and abbreviated variable names ¹​[,"Water.Temp"],</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ²​[,"Acid.Conc."]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">mod2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 5</span></span>
@@ -244,7 +243,6 @@ For multiple values, please use a <code><a href="https://purrr.tidyverse.org/ref
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>     0.805       0.693    0.681   0.124   0.5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>     0.007<span style="text-decoration: underline;">54</span>     0.020<span style="text-decoration: underline;">9</span>  -<span style="color: #BB0000;">0.116</span>   0.124   0.5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 40 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># varying tau to generate an rqs object</span></span></span>
 <span class="r-in"><span><span class="va">mod3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quantreg/man/rq.html" class="external-link">rq</a></span><span class="op">(</span><span class="va">stack.loss</span> <span class="op">~</span> <span class="va">stack.x</span>, tau <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.25</span>, <span class="fl">.5</span><span class="op">)</span><span class="op">)</span></span></span>
@@ -277,7 +275,6 @@ For multiple values, please use a <code><a href="https://purrr.tidyverse.org/ref
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>         18                   62      22      87 0.5   -<span style="color: #BB0000;">1.22</span><span style="color: #949494;">e</span>+ 0    19.2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 32 more rows, and abbreviated variable names ¹​[,"Water.Temp"],</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ²​[,"Acid.Conc."]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># glance cannot handle rqs objects like `mod3`--use a purrr </span></span></span>
 <span class="r-in"><span><span class="co"># `map`-based workflow instead</span></span></span>
