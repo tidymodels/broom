@@ -567,6 +567,7 @@ Suggests:
     boot,
     btergm (>= 1.10.6),
     car,
+    carData,
     caret,
     cluster,
     cmprsk,

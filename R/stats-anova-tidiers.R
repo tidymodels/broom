@@ -67,6 +67,7 @@ tidy.anova <- function(x, ...) {
     "Sum of Sq" = "sumsq",
     "F" = "statistic",
     "Chisq" = "statistic",
+    "npar" = "npar",
     "P(>|Chi|)" = "p.value",
     "Pr(>|Chi|)" = "p.value",
     "Pr(>Chi)" = "p.value",
@@ -100,12 +101,17 @@ tidy.anova <- function(x, ...) {
 
   # Special catch for car::linearHypothesis
   x_attr <- attributes(x)
+  ## include "Model 1:", "Model 2:" (stats::anova()) and "mod1:", "mod2:" 
+  ## (lme4::anova()), but *exclude* "Models:" (found in lme4::anova() header).
+  ## alternatively, could drop the first line of the header?
+  modstr <- "[Mm]od.*[0-9]+:"
+  mod_lines <- grep(modstr, x_attr$heading, value = TRUE)
   if (!is.null(x_attr$value)) {
     if (isTRUE(grepl("^Linear hypothesis", x_attr$heading[[1]]))) {
       # Drop unrestricted model (not interesting in linear hypothesis tests)
       # Use formula to subset if available (e.g. with car::linearHypothesis)
-      if (length(grep("Model", x_attr$heading)) != 0) {
-        idx <- sub(".*: ", "", strsplit(x_attr$heading[grep("Model", x_attr$heading)], "\n")[[1]])
+      if (length(mod_lines) != 0) {
+        idx <- sub(".*: ", "", strsplit(mod_lines, "\n")[[1]])
         idx <- idx != "restricted model"
         ret <- ret[idx, , drop = FALSE]
       }
@@ -127,8 +133,8 @@ tidy.anova <- function(x, ...) {
       ret < cbind(cbind(term, ret), response)
       row.names(ret) <- NULL
     }
-  } else if (length(grep("Model", x_attr$heading)) != 0) {
-    mods <- sub(".*: ", "", strsplit(x_attr$heading[grep("Model", x_attr$heading)], "\n")[[1]])
+  } else if (is.null(ret$term) & length(mod_lines) != 0) {
+    mods <- sub(".*: ", "", strsplit(mod_lines, "\n")[[1]])
     ret <- cbind(term = mods, ret)
   } else if (is.null(ret$term) & !is.null(row.names(ret))) {
     ret <- cbind(term = row.names(ret), ret)
