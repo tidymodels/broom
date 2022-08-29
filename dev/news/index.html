@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">broom</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.1.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,10 +59,15 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.0.0.9000" id="broom-1009000-developmental-version">broom 1.0.0.9000 (developmental version)<a class="anchor" aria-label="anchor" href="#broom-1009000-developmental-version"></a></h2>
-<p>To be released as broom 1.0.1.</p>
+<h2 class="pkg-version" data-toc-text="1.0.1.9000" id="broom-1019000">broom 1.0.1.9000<a class="anchor" aria-label="anchor" href="#broom-1019000"></a></h2>
+<p>To be released as broom 1.0.2.</p>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.0.1" id="broom-101">broom 1.0.1<a class="anchor" aria-label="anchor" href="#broom-101"></a></h2>
 <ul><li>Improves performance of <code><a href="../reference/tidy.lm.html">tidy.lm()</a></code> and <code><a href="../reference/tidy.glm.html">tidy.glm()</a></code> for full-rank fits (<a href="https://github.com/tidymodels/broom/issues/1112" class="external-link">#1112</a> by <code>@capnrefsmmat</code>).</li>
 <li>Moves forward with deprecation of tidiers for sparse matrices outputted from the Matrix package, initially soft-deprecated in broom 0.5.0. The Matrix tidiers were light wrappers around coercion methods that will now be deprecated from Matrix itself in the upcoming 1.4-2 release. The affected methods are <code>tidy.sparseMatrix()</code>, <code>tidy.dgCMatrix()</code>, and <code>tidy.dgTMatrix()</code>. Note that <code><a href="../reference/tidy.confusionMatrix.html">tidy.confusionMatrix()</a></code>, for relevant objects outputted from the caret package, is unaffected (<a href="https://github.com/tidymodels/broom/issues/1113" class="external-link">#1113</a>).</li>
+<li>
+<code><a href="../reference/tidy.anova.html">tidy.anova()</a></code> works again with <code>anova</code> objects from the <code>lme4</code> package (broken by addition of the <code>terms</code> column in the previous release)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.0" id="broom-100">broom 1.0.0<a class="anchor" aria-label="anchor" href="#broom-100"></a></h2><p class="text-muted">CRAN release: 2022-07-01</p>
