@@ -122,7 +122,6 @@ Other contributors:
   \item Sergio Oller \email{sergioller@gmail.com} [contributor]
   \item Luke Sonnet \email{luke.sonnet@gmail.com} [contributor]
   \item Jim Hester \email{jim.hester@rstudio.com} [contributor]
-  \item Cory Brunson \email{cornelioid@gmail.com} [contributor]
   \item Ben Schneider \email{benjamin.julius.schneider@gmail.com} [contributor]
   \item Bernie Gray \email{bfgray3@gmail.com} (\href{https://orcid.org/0000-0001-9190-6032}{ORCID}) [contributor]
   \item Mara Averick \email{mara@rstudio.com} [contributor]
