@@ -63,7 +63,7 @@
 <p>To be released as broom 1.0.2.</p>
 </div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.0.1" id="broom-101">broom 1.0.1<a class="anchor" aria-label="anchor" href="#broom-101"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.0.1" id="broom-101">broom 1.0.1<a class="anchor" aria-label="anchor" href="#broom-101"></a></h2><p class="text-muted">CRAN release: 2022-08-29</p>
 <ul><li>Improves performance of <code><a href="../reference/tidy.lm.html">tidy.lm()</a></code> and <code><a href="../reference/tidy.glm.html">tidy.glm()</a></code> for full-rank fits (<a href="https://github.com/tidymodels/broom/issues/1112" class="external-link">#1112</a> by <code>@capnrefsmmat</code>).</li>
 <li>Moves forward with deprecation of tidiers for sparse matrices outputted from the Matrix package, initially soft-deprecated in broom 0.5.0. The Matrix tidiers were light wrappers around coercion methods that will now be deprecated from Matrix itself in the upcoming 1.4-2 release. The affected methods are <code>tidy.sparseMatrix()</code>, <code>tidy.dgCMatrix()</code>, and <code>tidy.dgTMatrix()</code>. Note that <code><a href="../reference/tidy.confusionMatrix.html">tidy.confusionMatrix()</a></code>, for relevant objects outputted from the caret package, is unaffected (<a href="https://github.com/tidymodels/broom/issues/1113" class="external-link">#1113</a>).</li>
 <li>
