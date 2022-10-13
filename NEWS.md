@@ -1,6 +1,7 @@
 # broom 1.0.1.9000
 
 * Migrated 'ggplot2' from strong to weak dependency, i.e. moved from `Imports` to `Suggests`.
+* Fixed a bug where `augment()` results would not include residuals when the response term included a function call (#1121, #946, #937, #124).
 
 To be released as broom 1.0.2.
 

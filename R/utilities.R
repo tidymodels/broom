@@ -324,8 +324,22 @@ augment_columns <- function(x, data, newdata = NULL, type, type.predict = type,
   as_tibble(ret)
 }
 
-response <- function(object, newdata = NULL) {
-  model.response(model.frame(terms(object), data = newdata, na.action = na.pass))
+response <- function(object, newdata = NULL, has_response) {
+  if (!has_response) {
+    return(NULL)
+  }
+  
+  res <- 
+    tryCatch(
+      model.response(model.frame(terms(object), data = newdata, na.action = na.pass)),
+      error = function(e) NULL
+    )
+  
+  if (is.null(res)) {
+    res <- model.response(model.frame(object))
+  }
+  
+  res
 }
 
 data_error <- function(cnd) {
@@ -371,11 +385,18 @@ augment_newdata <- function(x, data, newdata, .se_fit, interval = NULL, ...) {
   df <- if (passed_newdata) newdata else data
   df <- as_augment_tibble(df)
   # interval <- match.arg(interval)
-  # Check if response variable is in newdata:
-  response_var_in_newdata <- x$call %>%
-    all.vars() %>%
-    .[[1]] %>%
-    is.element(names(df))
+  # check if response variable is in newdata, if relevant:
+  if (!is.null(x$terms) & inherits(x$terms, "formula")) {
+    has_response <- 
+      # TRUE if response includes a function call and is in column names, 
+      # usually with no `data` or `newdata` supplied, 
+      # and `data` defaults to `model_frame(x)`
+      rlang::as_label(rlang::f_lhs(x$terms)) %in% names(df) ||
+      # TRUE if the response variable itself is in column names
+      all.vars(x$terms)[1] %in% names(df)
+  } else {
+    has_response <- FALSE
+  }
 
   # NOTE: It is important use predict(x, newdata = newdata) rather than
   # predict(x, newdata = df). This is to avoid an edge case breakage
@@ -435,7 +456,7 @@ augment_newdata <- function(x, data, newdata, .se_fit, interval = NULL, ...) {
     }
   }
 
-  resp <- safe_response(x, df)
+  resp <- safe_response(x, df, has_response)
 
   if (!is.null(resp) && is.numeric(resp)) {
     df$.resid <- (resp - df$.fitted) %>% unname() 
