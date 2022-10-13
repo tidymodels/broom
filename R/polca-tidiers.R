@@ -93,7 +93,7 @@ tidy.poLCA <- function(x, ...) {
   }
 
   probs <- probs %>%
-    mutate(class = utils::type.convert(class))
+    mutate(class = utils::type.convert(class, as.is = TRUE))
 
   probs_se <- purrr::map2_df(x$probs.se, names(x$probs.se), reshape_probs) %>%
     mutate(variable = as.character(variable)) %>%

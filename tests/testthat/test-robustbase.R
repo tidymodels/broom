@@ -46,7 +46,10 @@ test_that("glance.lmrob", {
   gl <- glance(fit)
   check_glance_outputs(gl)
   
-  gl_rd <- glance(fit_rd)
+  suppressWarnings(
+    gl_rd <- glance(fit_rd)
+  )
+  
   check_glance_outputs(gl_rd)
 })
 
