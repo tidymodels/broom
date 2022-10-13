@@ -81,6 +81,7 @@ augment.nls does not currently support confidence intervals due to
 a lack of support in stats::predict.nls().
 }
 \examples{
+\dontshow{if (rlang::is_installed("ggplot2")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # fit model
 n <- nls(mpg ~ k * e^wt, data = mtcars, start = list(k = 1, e = 2))
@@ -100,7 +101,7 @@ newdata <- head(mtcars)
 newdata$wt <- newdata$wt + 1
 
 augment(n, newdata = newdata)
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \link{tidy}, \code{\link[stats:nls]{stats::nls()}}, \code{\link[stats:predict.nls]{stats::predict.nls()}}

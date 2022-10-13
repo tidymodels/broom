@@ -6,7 +6,7 @@
 #'
 #' @evalRd return_tidy("index", "series", "value")
 #'
-#' @examplesIf rlang::is_installed("zoo")
+#' @examplesIf rlang::is_installed(c("zoo", "ggplot2"))
 #'
 #' # load libraries for models and data
 #' library(zoo)

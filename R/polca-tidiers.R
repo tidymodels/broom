@@ -12,7 +12,7 @@
 #'   "std.error"
 #' )
 #'
-#' @examplesIf rlang::is_installed("poLCA")
+#' @examplesIf rlang::is_installed(c("poLCA", "ggplot2"))
 #'
 #' # load libraries for models and data
 #' library(poLCA)

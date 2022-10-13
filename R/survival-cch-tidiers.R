@@ -7,7 +7,7 @@
 #'
 #' @evalRd return_tidy(regression = TRUE)
 #'
-#' @examplesIf rlang::is_installed("survival")
+#' @examplesIf rlang::is_installed(c("survival", "ggplot2"))
 #'
 #' # load libraries for models and data
 #' library(survival)

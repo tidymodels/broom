@@ -9,7 +9,7 @@
 #'   scale = "Scaling factor of estimated coefficient"
 #' )
 #'
-#' @examplesIf rlang::is_installed("MASS")
+#' @examplesIf rlang::is_installed(c("MASS", "ggplot2"))
 #' 
 #' # load libraries for models and data
 #' library(MASS)

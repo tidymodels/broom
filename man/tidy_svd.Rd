@@ -89,7 +89,7 @@ for information on how to interpret the various tidied matrices. Note
 that SVD is only equivalent to PCA on centered data.
 }
 \examples{
-\dontshow{if (rlang::is_installed("modeldata")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed(c("modeldata", "ggplot2"))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 library(modeldata)
 data(hpc_data)

@@ -7,7 +7,7 @@
 #'
 #' @evalRd return_tidy(regression = TRUE)
 #'
-#' @examples
+#' @examplesIf rlang::is_installed("ggplot2")
 #'
 #' # fit model
 #' n <- nls(mpg ~ k * e^wt, data = mtcars, start = list(k = 1, e = 2))

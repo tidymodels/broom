@@ -43,6 +43,7 @@ that no longer have a well-defined value are filled in with an \code{NA}
 of the appropriate type.
 }
 \examples{
+\dontshow{if (rlang::is_installed("ggplot2")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 library(ggplot2)
 library(dplyr)
@@ -116,7 +117,7 @@ b <- a + rnorm(length(a))
 result <- lm(b ~ a)
 
 tidy(result)
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[=glance.summary.lm]{glance.summary.lm()}}

@@ -15,7 +15,7 @@
 #'   cannot be set in `tidy`. Instead you must set the `alpha` argument
 #'   to [psych::cohen.kappa()] when creating the `kappa` object.
 #'
-#' @examplesIf rlang::is_installed("psych")
+#' @examplesIf rlang::is_installed(c("psych", "ggplot2"))
 #'
 #' # load libraries for models and data
 #' library(psych)

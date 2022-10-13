@@ -50,6 +50,7 @@ however, that this method does not return all of the columns of the
 non-summary method (e.g. AIC and BIC will be missing.)
 }
 \examples{
+\dontshow{if (rlang::is_installed("ggplot2")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 library(ggplot2)
 library(dplyr)
@@ -123,7 +124,7 @@ b <- a + rnorm(length(a))
 result <- lm(b ~ a)
 
 tidy(result)
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[=glance.summary.lm]{glance.summary.lm()}}

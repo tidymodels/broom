@@ -31,6 +31,7 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
+\dontshow{if (rlang::is_installed("ggplot2")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 spc <- spectrum(lh)
 tidy(spc)
@@ -38,6 +39,7 @@ tidy(spc)
 library(ggplot2)
 ggplot(tidy(spc), aes(freq, spec)) +
   geom_line()
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:spectrum]{stats::spectrum()}}

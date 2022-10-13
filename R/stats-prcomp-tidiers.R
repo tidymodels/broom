@@ -54,7 +54,7 @@
 #'   for information on how to interpret the various tidied matrices. Note
 #'   that SVD is only equivalent to PCA on centered data.
 #'
-#' @examplesIf rlang::is_installed("maps")
+#' @examplesIf rlang::is_installed(c("maps", "ggplot2"))
 #' 
 #' pc <- prcomp(USArrests, scale = TRUE)
 #'

@@ -43,7 +43,7 @@ be valid. More information can be found in
 \code{vignette("mod2user", package = "lmodel2")}.
 }
 \examples{
-\dontshow{if (rlang::is_installed("lmodel2")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed(c("lmodel2", "ggplot2"))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(lmodel2)

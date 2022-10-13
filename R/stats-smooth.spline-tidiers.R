@@ -5,7 +5,7 @@
 #' @template param_data
 #' @template param_unused_dots
 #'
-#' @examples
+#' @examplesIf rlang::is_installed("ggplot2")
 #'
 #' # fit model
 #' spl <- smooth.spline(mtcars$wt, mtcars$mpg, df = 4)

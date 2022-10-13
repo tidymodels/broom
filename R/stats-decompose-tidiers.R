@@ -15,7 +15,7 @@
 #'   \item{`.seasadj`}{The seasonally adjusted (or "deseasonalised")
 #'     series.}
 #'
-#' @examples
+#' @examplesIf rlang::is_installed("ggplot2")
 #'
 #' # time series of temperatures in Nottingham, 1920-1939:
 #' nottem

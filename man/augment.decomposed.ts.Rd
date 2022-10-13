@@ -77,6 +77,7 @@ We are in the process of defining behaviors for models fit with various
 missing at this time.
 }
 \examples{
+\dontshow{if (rlang::is_installed("ggplot2")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # time series of temperatures in Nottingham, 1920-1939:
 nottem
@@ -127,6 +128,7 @@ ggplot(decomps) +
     group = decomp
   ))
   
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[stats:decompose]{stats::decompose()}}

@@ -108,6 +108,7 @@ When \code{newdata} is supplied, only returns \code{.fitted}, \code{.resid} and
 \code{.se.fit} columns.
 }
 \examples{
+\dontshow{if (rlang::is_installed("ggplot2")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 library(ggplot2)
 library(dplyr)
@@ -181,7 +182,7 @@ b <- a + rnorm(length(a))
 result <- lm(b ~ a)
 
 tidy(result)
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \link[stats:na.action]{stats::na.action}

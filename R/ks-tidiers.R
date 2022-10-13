@@ -10,7 +10,7 @@
 #'   \code{tidyr::pivot_wider(..., names_from = variable, values_from = value)}
 #'   on the output to return to a wide format.
 #' 
-#' @examplesIf rlang::is_installed("ks")
+#' @examplesIf rlang::is_installed(c("ks", "ggplot2"))
 #'
 #' # load libraries for models and data
 #' library(ks)

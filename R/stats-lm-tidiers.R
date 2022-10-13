@@ -11,7 +11,7 @@
 #' @details If the linear model is an `mlm` object (multiple linear model),
 #'   there is an additional column `response`. See [tidy.mlm()].
 #'
-#' @examples
+#' @examplesIf rlang::is_installed("ggplot2")
 #'
 #' library(ggplot2)
 #' library(dplyr)
