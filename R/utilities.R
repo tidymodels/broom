@@ -13,10 +13,10 @@ rename2 <- function(.data, ...) {
 }
 
 exponentiate <- function(data, col = "estimate") {
-  data <- mutate_at(data, vars(col), exp)
+  data <- data %>% mutate(across(all_of(col), exp))
 
   if ("conf.low" %in% colnames(data)) {
-    data <- mutate_at(data, vars(conf.low, conf.high), exp)
+    data <- data %>% mutate(across(c(conf.low, conf.high), exp))
   }
 
   data
