@@ -42,9 +42,7 @@ tidy.binWidth <- function(x, ...) {
 #'   power = "Power achieved for given value of n."
 #' )
 #'
-#' @examples
-#' 
-#' if (requireNamespace("binGroup", quietly = TRUE)) {
+#' @examplesIf rlang::is_installed(c("binGroup", "ggplot2"))
 #'
 #' library(binGroup)
 #' des <- binDesign(
@@ -60,7 +58,6 @@ tidy.binWidth <- function(x, ...) {
 #' ggplot(tidy(des), aes(n, power)) +
 #'   geom_line()
 #'   
-#' }
 #' 
 #' @export
 #' @family bingroup tidiers
@@ -85,7 +82,7 @@ tidy.binDesign <- function(x, ...) {
 #'   maxit = "Number of iterations performed."
 #' )
 #'
-#' @examplesIf rlang::is_installed("binGroup")
+#' @examplesIf rlang::is_installed(c("binGroup", "ggplot2"))
 #' 
 #' # load libraries for models and data
 #' library(binGroup)

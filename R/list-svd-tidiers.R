@@ -4,7 +4,7 @@
 #' @inherit tidy.prcomp return details params
 #' @param x A list with components `u`, `d`, `v` returned by [base::svd()].
 #'
-#' @examplesIf rlang::is_installed("modeldata")
+#' @examplesIf rlang::is_installed(c("modeldata", "ggplot2"))
 #'
 #' library(modeldata)
 #' data(hpc_data)

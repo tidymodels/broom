@@ -6,7 +6,7 @@
 #'
 #' @evalRd return_tidy("cutoff", "tpr", "fpr")
 #'
-#' @examplesIf rlang::is_installed("AUC")
+#' @examplesIf rlang::is_installed(c("AUC", "ggplot2"))
 #'
 #' # load libraries for models and data
 #' library(AUC)

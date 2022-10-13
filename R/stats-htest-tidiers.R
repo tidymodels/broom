@@ -226,7 +226,7 @@ tidy.pairwise.htest <- function(x, ...) {
 #'
 #' @evalRd return_tidy("n", "delta", "sd", "sig.level", "power")
 #'
-#' @examples
+#' @examplesIf rlang::is_installed("ggplot2")
 #'
 #' ptt <- power.t.test(n = 2:30, delta = 1)
 #' tidy(ptt)

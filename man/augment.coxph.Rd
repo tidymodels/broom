@@ -104,7 +104,7 @@ is not provided to \code{\link[=augment]{augment()}} and \code{na.action = "na.e
 warning is raised and the incomplete rows are dropped.
 }
 \examples{
-\dontshow{if (rlang::is_installed("survival")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed(c("survival", "ggplot2"))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(survival)

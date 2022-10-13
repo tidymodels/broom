@@ -31,6 +31,7 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
+\dontshow{if (rlang::is_installed("ggplot2")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # fit model
 spl <- smooth.spline(mtcars$wt, mtcars$mpg, df = 4)
@@ -46,6 +47,7 @@ ggplot(augment(spl, mtcars), aes(wt, mpg)) +
   geom_point() +
   geom_line(aes(y = .fitted))
   
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[stats:smooth.spline]{stats::smooth.spline()}}

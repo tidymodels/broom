@@ -72,7 +72,7 @@ tidy.acf <- function(x, ...) {
 #'
 #' @evalRd return_tidy("freq", "spec")
 #'
-#' @examples
+#' @examplesIf rlang::is_installed("ggplot2")
 #'
 #' spc <- spectrum(lh)
 #' tidy(spc)

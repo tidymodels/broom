@@ -16,7 +16,7 @@
 #'     lamdba"
 #' )
 #'
-#' @examplesIf rlang::is_installed("glmnet")
+#' @examplesIf rlang::is_installed(c("glmnet", "ggplot2"))
 #' 
 #' # load libraries for models and data
 #' library(glmnet)

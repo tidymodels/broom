@@ -26,7 +26,7 @@
 #'   There are a large number of arguments that can be
 #'   passed on to [emmeans::summary.emmGrid()] or [lsmeans::summary.ref.grid()].
 #'
-#' @examplesIf rlang::is_installed("emmeans")
+#' @examplesIf rlang::is_installed(c("emmeans", "ggplot2"))
 #' 
 #' # load libraries for models and data
 #' library(emmeans)

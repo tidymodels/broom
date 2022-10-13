@@ -26,7 +26,3 @@
 #' @keywords internal
 "_PACKAGE"
 
-# address unused Imports warning from R CMD check
-import_ggplot <- function() {
-  ggplot2::aes()
-}

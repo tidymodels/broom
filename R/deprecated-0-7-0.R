@@ -32,7 +32,7 @@
 #' kurtosis and related tests. R package version 0.14. \cr
 #' https://CRAN.R-project.org/package=moments
 #'
-#' @examples
+#' @examplesIf rlang::is_installed("ggplot2")
 #'
 #' td <- tidy(mtcars)
 #' td

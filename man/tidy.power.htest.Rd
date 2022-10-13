@@ -32,6 +32,7 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
+\dontshow{if (rlang::is_installed("ggplot2")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 ptt <- power.t.test(n = 2:30, delta = 1)
 tidy(ptt)
@@ -40,6 +41,7 @@ library(ggplot2)
 
 ggplot(tidy(ptt), aes(n, power)) +
   geom_line()
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[stats:power.t.test]{stats::power.t.test()}}

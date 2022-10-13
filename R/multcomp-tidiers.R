@@ -7,7 +7,7 @@
 #'
 #' @evalRd return_tidy("contrast", "null.value", "estimate")
 #'
-#' @examplesIf rlang::is_installed("multcomp")
+#' @examplesIf rlang::is_installed(c("multcomp", "ggplot2"))
 #'
 #' # load libraries for models and data
 #' library(multcomp)

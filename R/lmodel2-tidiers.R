@@ -23,7 +23,7 @@
 #'   be valid. More information can be found in
 #'   `vignette("mod2user", package = "lmodel2")`.
 #'
-#' @examplesIf rlang::is_installed("lmodel2")
+#' @examplesIf rlang::is_installed(c("lmodel2", "ggplot2"))
 #'
 #' # load libraries for models and data
 #' library(lmodel2)

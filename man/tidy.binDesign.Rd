@@ -32,8 +32,7 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
-
-if (requireNamespace("binGroup", quietly = TRUE)) {
+\dontshow{if (rlang::is_installed(c("binGroup", "ggplot2"))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 library(binGroup)
 des <- binDesign(
@@ -49,8 +48,7 @@ library(ggplot2)
 ggplot(tidy(des), aes(n, power)) +
   geom_line()
   
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[binGroup:binDesign]{binGroup::binDesign()}}

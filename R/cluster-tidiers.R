@@ -25,7 +25,7 @@
 #' @seealso [tidy()], [cluster::pam()]
 #' @family pam tidiers
 # skip running examples - occasionally over CRAN check time limit
-#' @examplesIf (rlang::is_installed("cluster") & rlang::is_installed("modeldata") && identical(Sys.getenv("NOT_CRAN"), "true"))
+#' @examplesIf (rlang::is_installed(c("cluster", "modeldata", "ggplot2")) && identical(Sys.getenv("NOT_CRAN"), "true"))
 #'
 #' # load libraries for models and data
 #' library(dplyr)

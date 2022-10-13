@@ -38,7 +38,7 @@ cannot be set in \code{tidy}. Instead you must set the \code{alpha} argument
 to \code{\link[psych:kappa]{psych::cohen.kappa()}} when creating the \code{kappa} object.
 }
 \examples{
-\dontshow{if (rlang::is_installed("psych")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed(c("psych", "ggplot2"))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(psych)

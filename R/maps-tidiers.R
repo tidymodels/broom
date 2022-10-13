@@ -12,7 +12,7 @@
 #'     and depend on the inputted map object. See ?maps::map for more information."
 #' )
 #'
-#' @examplesIf rlang::is_installed("maps")
+#' @examplesIf rlang::is_installed(c("maps", "ggplot2"))
 #'
 #' # load libraries for models and data
 #' library(maps)

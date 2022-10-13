@@ -43,6 +43,7 @@ that no longer have a well-defined value are filled in with an \code{NA}
 of the appropriate type.
 }
 \examples{
+\dontshow{if (rlang::is_installed("ggplot2")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # fit model
 n <- nls(mpg ~ k * e^wt, data = mtcars, start = list(k = 1, e = 2))
@@ -62,7 +63,7 @@ newdata <- head(mtcars)
 newdata$wt <- newdata$wt + 1
 
 augment(n, newdata = newdata)
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \link{tidy}, \code{\link[stats:nls]{stats::nls()}}

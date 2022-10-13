@@ -8,7 +8,7 @@
 #'
 #' @evalRd return_tidy(regression = TRUE)
 #' 
-#' @examplesIf rlang::is_installed("gmm")
+#' @examplesIf rlang::is_installed(c("gmm", "ggplot2"))
 #'
 #' # load libraries for models and data
 #' library(gmm)
