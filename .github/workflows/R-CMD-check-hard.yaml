@@ -50,6 +50,7 @@ jobs:
             any::testthat
             any::knitr
             any::rmarkdown
+            any::ggplot2
           needs: check
 
       - uses: r-lib/actions/check-r-package@v2
