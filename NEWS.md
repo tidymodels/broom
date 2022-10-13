@@ -1,5 +1,7 @@
 # broom 1.0.1.9000
 
+* Migrated 'ggplot2' from strong to weak dependency, i.e. moved from `Imports` to `Suggests`.
+
 To be released as broom 1.0.2.
 
 # broom 1.0.1
