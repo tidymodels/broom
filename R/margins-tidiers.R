@@ -102,14 +102,14 @@ tidy.margins <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
     ret <-
       ret %>%
       dplyr::select(
-        term = .data$factor, 
+        term = factor, 
         dplyr::contains("at."), 
-        estimate = .data$AME, 
-        std.error = .data$SE, 
-        statistic = .data$z, 
-        p.value = .data$p, 
-        conf.low = .data$lower, 
-        conf.high = .data$upper
+        estimate = AME, 
+        std.error = SE, 
+        statistic = z, 
+        p.value = p, 
+        conf.low = lower, 
+        conf.high = upper
         )
     
     # Remove confidence interval if not specified
