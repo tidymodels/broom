@@ -50,8 +50,6 @@ test_that("glance.glm works", {
 
 
 test_that("augment.glm", {
-  skip("come back to glm augment checks")
-
   check_augment_function(
     aug = augment.glm,
     model = gfit,
@@ -62,13 +60,6 @@ test_that("augment.glm", {
   check_augment_function(
     aug = augment.glm,
     model = gfit2,
-    data = mtcars,
-    newdata = mtcars
-  )
-
-  check_augment_function(
-    aug = augment.glm,
-    model = gfit3,
     data = mtcars,
     newdata = mtcars
   )
