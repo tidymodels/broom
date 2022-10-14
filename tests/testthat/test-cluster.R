@@ -36,10 +36,12 @@ test_that("glance.pam", {
 })
 
 test_that("augment.pam", {
-  check_augment_function(
-    aug = augment.pam,
-    model = fit,
-    data = x,
-    newdata = x
+  suppressWarnings(
+    check_augment_function(
+      aug = augment.pam,
+      model = fit,
+      data = x,
+      newdata = x
+    )
   )
 })

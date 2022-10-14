@@ -9,7 +9,9 @@ skip_if_not_installed("muhaz")
 skip_if_not_installed("survival") # does this skip with base R?
 
 library(muhaz)
-data(ovarian, package = "survival")
+
+# load the ovarian data
+data(cancer, package = "survival")
 
 fit <- muhaz(ovarian$futime, ovarian$fustat)
 

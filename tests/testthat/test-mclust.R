@@ -57,18 +57,22 @@ test_that("glance.Mclust", {
 })
 
 test_that("augment.Mclust", {
-  check_augment_function(
-    aug = augment.Mclust,
-    model = fit,
-    data = dat,
-    newdata = dat
+  suppressWarnings(
+    check_augment_function(
+      aug = augment.Mclust,
+      model = fit,
+      data = dat,
+      newdata = dat
+    )
   )
 
-  check_augment_function(
-    aug = augment.Mclust,
-    model = fit2,
-    data = dat,
-    newdata = dat
+  suppressWarnings(
+    check_augment_function(
+      aug = augment.Mclust,
+      model = fit2,
+      data = dat,
+      newdata = dat
+    )
   )
 
   check_augment_function(
