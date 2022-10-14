@@ -102,23 +102,30 @@ test_that("glance.felm", {
 })
 
 test_that("augment.felm", {
-  check_augment_function(
-    aug = augment.felm,
-    model = fit,
-    data = df
+  suppressWarnings(
+    check_augment_function(
+      aug = augment.felm,
+      model = fit,
+      data = df
+    )
   )
 
-  check_augment_function(
-    aug = augment.felm,
-    model = fit2,
-    data = df
+  suppressWarnings(
+    check_augment_function(
+      aug = augment.felm,
+      model = fit2,
+      data = df
+    )
   )
 
-  check_augment_function(
-    aug = augment.felm,
-    model = fit_form,
-    data = df
+  suppressWarnings(
+    check_augment_function(
+      aug = augment.felm,
+      model = fit_form,
+      data = df
+    )
   )
+  
   expect_error(augment(fit_multi), 
                "Augment does not support linear models with multiple responses.")
 

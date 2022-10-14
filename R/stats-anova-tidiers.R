@@ -133,10 +133,10 @@ tidy.anova <- function(x, ...) {
       ret < cbind(cbind(term, ret), response)
       row.names(ret) <- NULL
     }
-  } else if (is.null(ret$term) & length(mod_lines) != 0) {
+  } else if ((!"term" %in% colnames(ret)) & length(mod_lines) != 0) {
     mods <- sub(".*: ", "", strsplit(mod_lines, "\n")[[1]])
     ret <- cbind(term = mods, ret)
-  } else if (is.null(ret$term) & !is.null(row.names(ret))) {
+  } else if ((!"term" %in% colnames(ret)) & !is.null(row.names(ret))) {
     ret <- cbind(term = row.names(ret), ret)
     row.names(ret) <- NULL
   }

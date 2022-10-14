@@ -202,6 +202,6 @@ glance.fixest <- function(x, ...) {
   col_order <- c("r.squared", "adj.r.squared", "within.r.squared",
     "pseudo.r.squared", "sigma", "nobs", "AIC", "BIC", "logLik")
   res <- bind_cols(res_common, res_r2, res_specific) %>%
-    select(col_order)
+    select(dplyr::any_of(col_order))
   res
 }

@@ -36,10 +36,12 @@ test_that("glance.gam", {
 })
 
 test_that("augment.gam", {
-  check_augment_function(
-    augment.gam,
-    fit,
-    data = ChickWeight,
-    newdata = ChickWeight
+  suppressWarnings(
+    check_augment_function(
+      augment.gam,
+      fit,
+      data = ChickWeight,
+      newdata = ChickWeight
+    )
   )
 })

@@ -69,7 +69,9 @@ test_that("glance.mfx", {
   gl_logitmfx <- glance(fit_logitmfx)
   check_glance_outputs(gl_logitmfx)
   # negbin
-  gl_negbinmfx <- glance(fit_negbinmfx)
+  suppressWarnings(
+    gl_negbinmfx <- glance(fit_negbinmfx)
+  )
   check_glance_outputs(gl_negbinmfx)
   # poisson
   gl_poissonmfx <- glance(fit_poissonmfx)
