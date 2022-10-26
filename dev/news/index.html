@@ -76,7 +76,8 @@
 <p>broom 1.0.0 is the first “production” release of the broom package, and includes a number of notable changes to both functionality and governance.</p>
 <p>As of this release, the broom team will be following a set of guidelines that clarify the scope of further development on the package. Given the package’s wide use and long history, these guidelines <em>prioritize backward compatibility</em> over internal consistency and completeness. You can read those guidelines <a href="https://broom.tidymodels.org/articles/">here</a>!</p>
 <p>We’ve also made notable changes to error handling in this release:</p>
-<ul><li>Adds minimal ellipsis checking to warn on commonly misspecified arguments passed through ellipses. Notably:<ul><li>
+<ul><li>Adds minimal ellipsis checking to warn on commonly misspecified arguments passed through ellipses. Notably:
+<ul><li>
 <code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy()</a></code> methods will now warn when supplied an <code>exponentiate</code> argument if it will be ignored.</li>
 <li>
 <code><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment()</a></code> methods will now warn when supplied a <code>newdata</code> argument if it will be ignored.</li>
@@ -97,7 +98,8 @@ deprecated <code><a href="../reference/data.frame_tidiers.html">glance.data.fram
 <h2 class="pkg-version" data-toc-text="0.8.0" id="broom-080">broom 0.8.0<a class="anchor" aria-label="anchor" href="#broom-080"></a></h2><p class="text-muted">CRAN release: 2022-04-13</p>
 <p>This update makes significant improvements to documentation, fixes a number of bugs, and brings the development flow of the package up to date with other packages in the tidymodels.</p>
 <p>In the big picture, this release:</p>
-<ul><li>Makes many improvements to documentation:<ul><li>All tidiers now have example code demonstrating usage in their documentation. Tidiers for base packages as well as selected others also include sample code for visualization of results with ggplot2.</li>
+<ul><li>Makes many improvements to documentation:
+<ul><li>All tidiers now have example code demonstrating usage in their documentation. Tidiers for base packages as well as selected others also include sample code for visualization of results with ggplot2.</li>
 <li>Code examples in the documentation largely now follow consistent style—these changes were made largely to reflect the tidyverse style guide, addressing spacing, object naming, and commenting, among other things.</li>
 <li>Examples previously marked with <code>\dontrun</code> or <code>\donttest</code> have been workshopped to run reliably.</li>
 </ul></li>
@@ -203,7 +205,9 @@ deprecated <code><a href="../reference/data.frame_tidiers.html">glance.data.fram
 <h2 class="pkg-version" data-toc-text="0.7.3" id="broom-073">broom 0.7.3<a class="anchor" aria-label="anchor" href="#broom-073"></a></h2><p class="text-muted">CRAN release: 2020-12-16</p>
 <p>In broom <code>0.7.0</code>, we introduced an error for model objects that subclassed <code>lm</code> and relied on <code><a href="../reference/tidy.lm.html">tidy.lm()</a></code>, or similarly for <code><a href="../reference/tidy.glm.html">tidy.glm()</a></code>. Tidiers for these objects were supported unintentionally, and we worried that tidiers for these objects would silently report inaccurate results.</p>
 <p>In hindsight, this change was unnecessarily abrupt. We’ve decided to roll back this change, instead providing the following warning before allowing such objects to fall back to the <code>lm</code>/<code>glm</code> tidier methods:</p>
-<blockquote><p>Tidiers for objects of class {subclass} are not maintained by the broom team, and are only supported through the {dispatched_method} tidier method. Please be cautious in interpreting and reporting broom output.”</p></blockquote>
+<blockquote>
+<p>Tidiers for objects of class {subclass} are not maintained by the broom team, and are only supported through the {dispatched_method} tidier method. Please be cautious in interpreting and reporting broom output.”</p>
+</blockquote>
 <p>In addition,</p>
 <ul><li>Restores tidiers for <code>summary.lm</code> objects (<code>#953</code> by <code>@grantmcdermott</code>)</li>
 <li>Deprecate tidiers for the <code>lfe</code> package, which was archived from CRAN.</li>
@@ -211,7 +215,8 @@ deprecated <code><a href="../reference/data.frame_tidiers.html">glance.data.fram
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.7.2" id="broom-072">broom 0.7.2<a class="anchor" aria-label="anchor" href="#broom-072"></a></h2><p class="text-muted">CRAN release: 2020-10-20</p>
-<ul><li>Various bug fixes and improvements to documentation and errors.</li></ul></div>
+<ul><li>Various bug fixes and improvements to documentation and errors.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.7.1" id="broom-071">broom 0.7.1<a class="anchor" aria-label="anchor" href="#broom-071"></a></h2><p class="text-muted">CRAN release: 2020-10-01</p>
 <p>While broom 0.7.1 is a minor release, it includes a number of exciting new features and bug fixes!</p>
@@ -391,16 +396,20 @@ deprecated <code><a href="../reference/data.frame_tidiers.html">glance.data.fram
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.6" id="broom-056">broom 0.5.6<a class="anchor" aria-label="anchor" href="#broom-056"></a></h2><p class="text-muted">CRAN release: 2020-04-20</p>
-<ul><li>Fix failing CRAN checks to due <code>tibble 3.0.0</code> release. Removed <code>xergm</code> dependency.</li></ul></div>
+<ul><li>Fix failing CRAN checks to due <code>tibble 3.0.0</code> release. Removed <code>xergm</code> dependency.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.5" id="broom-055">broom 0.5.5<a class="anchor" aria-label="anchor" href="#broom-055"></a></h2><p class="text-muted">CRAN release: 2020-02-29</p>
-<ul><li>Remove tidiers for robust package and drop robust dependency (temporarily)</li></ul></div>
+<ul><li>Remove tidiers for robust package and drop robust dependency (temporarily)</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.4" id="broom-054">broom 0.5.4<a class="anchor" aria-label="anchor" href="#broom-054"></a></h2><p class="text-muted">CRAN release: 2020-01-27</p>
-<ul><li>Fixes failing CRAN checks as the joineRML package has been removed from CRAN</li></ul></div>
+<ul><li>Fixes failing CRAN checks as the joineRML package has been removed from CRAN</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.3" id="broom-053">broom 0.5.3<a class="anchor" aria-label="anchor" href="#broom-053"></a></h2><p class="text-muted">CRAN release: 2019-12-14</p>
-<ul><li>Fixes failing CRAN checks due to new matrix classing in R 4.0.0</li></ul></div>
+<ul><li>Fixes failing CRAN checks due to new matrix classing in R 4.0.0</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.2" id="broom-052">broom 0.5.2<a class="anchor" aria-label="anchor" href="#broom-052"></a></h2><p class="text-muted">CRAN release: 2019-04-07</p>
 <ul><li><p>Fixes failing CRAN checks</p></li>
@@ -409,7 +418,8 @@ deprecated <code><a href="../reference/data.frame_tidiers.html">glance.data.fram
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.1" id="broom-051">broom 0.5.1<a class="anchor" aria-label="anchor" href="#broom-051"></a></h2><p class="text-muted">CRAN release: 2018-12-05</p>
 <ul><li>
-<code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy()</a></code>, <code><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance()</a></code> and <code><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment()</a></code> are now re-exported from the <a href="https://github.com/r-lib/generics" class="external-link">generics</a> package.</li></ul></div>
+<code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy()</a></code>, <code><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance()</a></code> and <code><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment()</a></code> are now re-exported from the <a href="https://github.com/r-lib/generics" class="external-link">generics</a> package.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.0" id="broom-050">broom 0.5.0<a class="anchor" aria-label="anchor" href="#broom-050"></a></h2><p class="text-muted">CRAN release: 2018-07-17</p>
 <p>Tidiers now return <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble()</a></code>s. This release also includes several new tidiers, new vignettes and a large number of bug fixes. We’ve also begun to more rigorously define tidier specifications: we’ve laid part of the groundwork for stricter and more consistent tidying, but the new tidier specifications are not yet complete. These will appear in the next release.</p>
@@ -444,7 +454,8 @@ deprecated <code><a href="../reference/data.frame_tidiers.html">glance.data.fram
 <li><p><code>vignette("glossary", package = "broom")</code> contains tables describing acceptable argument names and column names for the <em>in-progress</em> new specification.</p></li>
 </ul><p>Several old vignettes have also been updated:</p>
 <ul><li>
-<code><a href="../articles/bootstrapping.html">vignette("bootstrapping", package = "broom")</a></code> now relies on the <code>rsample</code> package and a <code><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">tidyr::nest</a></code>-<code><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">purrr::map</a></code>-<code><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">tidyr::unnest</a></code> workflow. This is now the recommended workflow for working with multiple models, as opposed to the old <code><a href="https://dplyr.tidyverse.org/reference/rowwise.html" class="external-link">dplyr::rowwise</a></code>-<code><a href="https://dplyr.tidyverse.org/reference/do.html" class="external-link">dplyr::do</a></code> based workflow.</li></ul></div>
+<code><a href="../articles/bootstrapping.html">vignette("bootstrapping", package = "broom")</a></code> now relies on the <code>rsample</code> package and a <code><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">tidyr::nest</a></code>-<code><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">purrr::map</a></code>-<code><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">tidyr::unnest</a></code> workflow. This is now the recommended workflow for working with multiple models, as opposed to the old <code><a href="https://dplyr.tidyverse.org/reference/rowwise.html" class="external-link">dplyr::rowwise</a></code>-<code><a href="https://dplyr.tidyverse.org/reference/do.html" class="external-link">dplyr::do</a></code> based workflow.</li>
+</ul></div>
 <div class="section level3">
 <h3 id="deprecations-0-5-0">Deprecations<a class="anchor" aria-label="anchor" href="#deprecations-0-5-0"></a></h3>
 <ul><li><p>Matrix and vector tidiers have been deprecated in favor of <code><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">tibble::as_tibble</a></code> and <code><a href="https://tibble.tidyverse.org/reference/enframe.html" class="external-link">tibble::enframe</a></code></p></li>
@@ -592,9 +603,11 @@ deprecated <code><a href="../reference/data.frame_tidiers.html">glance.data.fram
 <li><p><code>merMod</code> (<code>lme4</code>)</p></li>
 <li><p><code>survreg</code> (<code>survival</code>)</p></li>
 <li><p><code>coxph</code> (<code>survival</code>)</p></li>
-</ul></li></ul><p>Unit tests in <code>tests/testthat/test-augment.R</code> were added to ensure consistency across these models.</p>
+</ul></li>
+</ul><p>Unit tests in <code>tests/testthat/test-augment.R</code> were added to ensure consistency across these models.</p>
 <ul><li>
-<code>tidy</code>, <code>augment</code> and <code>glance</code> methods were added for <code>rowwise_df</code> objects, and are set up to apply across their rows. This allows for simple patterns such as:</li></ul><p>regressions &lt;- mtcars %&gt;% group_by(cyl) %&gt;% do(mod = lm(mpg ~ wt, .)) regressions %&gt;% tidy(mod) regressions %&gt;% augment(mod)</p>
+<code>tidy</code>, <code>augment</code> and <code>glance</code> methods were added for <code>rowwise_df</code> objects, and are set up to apply across their rows. This allows for simple patterns such as:</li>
+</ul><p>regressions &lt;- mtcars %&gt;% group_by(cyl) %&gt;% do(mod = lm(mpg ~ wt, .)) regressions %&gt;% tidy(mod) regressions %&gt;% augment(mod)</p>
 <p>See <code>?rowwise_df_tidiers</code> for more.</p>
 <ul><li><p>Added <code>tidy</code> and <code>glance</code> methods for <code>Arima</code> objects, and <code>tidy</code> for <code>pairwise.htest</code> objects.</p></li>
 <li><p>Fixes for CRAN: change package description to title case, removed NOTES, mostly by adding <code>globals.R</code> to declare global variables.</p></li>
