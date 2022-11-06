@@ -27,14 +27,11 @@
 #'   object with varying degrees of success.
 #'   
 #'   The augmented dataset is always returned as a [tibble::tibble] with the
-#'   **same number of rows** as the passed dataset. This means that the
-#'   passed data must be coercible to a tibble. At this time, tibbles do not
-#'   support matrix-columns. This means you should not specify a matrix
-#'   of covariates in a model formula during the original model fitting
-#'   process, and that [splines::ns()], [stats::poly()] and
-#'   [survival::Surv()] objects are not supported in input data. If you
-#'   encounter errors, try explicitly passing a tibble, or fitting the original
-#'   model on data in a tibble.
+#'   **same number of rows** as the passed dataset. This means that the passed
+#'   data must be coercible to a tibble. If a predictor enters the model as part
+#'   of a matrix of covariates, such as when the model formula uses
+#'   [splines::ns()], [stats::poly()], or [survival::Surv()], it is represented
+#'   as a matrix column.
 #'   
 #'   We are in the process of defining behaviors for models fit with various 
 #'   `na.action` arguments, but make no guarantees about behavior when data is
