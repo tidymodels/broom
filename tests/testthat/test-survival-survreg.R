@@ -38,11 +38,6 @@ test_that("glance.survreg", {
 })
 
 test_that("augment.survreg", {
-  expect_error(
-    augment(sr),
-    regexp = "Must specify either `data` or `newdata` argument."
-  )
-
   check_augment_function(
     aug = augment.survreg,
     model = sr,
