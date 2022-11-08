@@ -60,7 +60,8 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.1.9000" id="broom-1019000">broom 1.0.1.9000<a class="anchor" aria-label="anchor" href="#broom-1019000"></a></h2>
-<ul><li>Migrated ‘ggplot2’ from strong to weak dependency, i.e. moved from <code>Imports</code> to <code>Suggests</code>.</li>
+<ul><li>The default <code>data</code> argument for <code><a href="../reference/augment.coxph.html">augment.coxph()</a></code> and <code><a href="../reference/augment.survreg.html">augment.survreg()</a></code> has been transitioned from <code>NULL</code> to <code>model.frame(x)</code> (<a href="https://github.com/tidymodels/broom/issues/1126" class="external-link">#1126</a> by <code>@capnrefsmmat</code>).</li>
+<li>Migrated ‘ggplot2’ from strong to weak dependency, i.e. moved from <code>Imports</code> to <code>Suggests</code>.</li>
 <li>Fixed a bug where <code><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment()</a></code> results would not include residuals when the response term included a function call (<a href="https://github.com/tidymodels/broom/issues/1121" class="external-link">#1121</a>, <a href="https://github.com/tidymodels/broom/issues/946" class="external-link">#946</a>, <a href="https://github.com/tidymodels/broom/issues/937" class="external-link">#937</a>, <a href="https://github.com/tidymodels/broom/issues/124" class="external-link">#124</a>).</li>
 </ul><p>To be released as broom 1.0.2.</p>
 </div>
