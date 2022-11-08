@@ -1,5 +1,6 @@
 # broom 1.0.1.9000
 
+* The default `data` argument for `augment.coxph()` and `augment.survreg()` has been transitioned from `NULL` to `model.frame(x)` (#1126 by `@capnrefsmmat`).
 * Migrated 'ggplot2' from strong to weak dependency, i.e. moved from `Imports` to `Suggests`.
 * Fixed a bug where `augment()` results would not include residuals when the response term included a function call (#1121, #946, #937, #124).
 

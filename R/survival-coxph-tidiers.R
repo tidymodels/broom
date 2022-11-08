@@ -115,13 +115,9 @@ tidy.coxph <- function(x, exponentiate = FALSE, conf.int = FALSE,
 #' @seealso [augment()], [survival::coxph()]
 #' @family coxph tidiers
 #' @family survival tidiers
-augment.coxph <- function(x, data = NULL, newdata = NULL,
+augment.coxph <- function(x, data = model.frame(x), newdata = NULL,
                           type.predict = "lp", type.residuals = "martingale",
                           ...) {
-  if (is.null(data) && is.null(newdata)) {
-    stop("Must specify either `data` or `newdata` argument.", call. = FALSE)
-  }
-
   augment_columns(x, data, newdata,
     type.predict = type.predict,
     type.residuals = type.residuals
