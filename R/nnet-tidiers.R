@@ -93,7 +93,7 @@ tidy.multinom <- function(x, conf.int = FALSE, conf.level = .95,
   ret$p.value <- stats::pnorm(abs(ret$statistic), 0, 1, lower.tail = FALSE) * 2
 
   if (conf.int) {
-    ci <- apply(stats::confint(x), 2, function(a) unlist(as.data.frame(a)))
+    ci <- apply(stats::confint(x, level = conf.level), 2, function(a) unlist(as.data.frame(a)))
     ci <- as.data.frame(ci)
     names(ci) <- c("conf.low", "conf.high")
     ret <- cbind(ret, ci)
