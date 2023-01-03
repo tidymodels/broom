@@ -617,6 +617,7 @@ Suggests:
     ordinal,
     plm,
     poLCA,
+    pscl,
     psych,
     quantreg,
     rgeos,
