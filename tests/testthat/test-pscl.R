@@ -1,8 +1,8 @@
+skip_if_not_installed("pscl")
 
 test_that("hurdle", {
-  library(pscl)
   data("bioChemists", package = "pscl")
-  hurd <- hurdle(art ~ fem | ment, data = bioChemists)
+  hurd <- pscl::hurdle(art ~ fem | ment, data = bioChemists)
   summ <- summary(hurd)
 
   expect_error(counts <- tidy(hurd), regexp = NA)
