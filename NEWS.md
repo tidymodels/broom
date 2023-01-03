@@ -1,6 +1,6 @@
 # broom (development version)
 
-* The tidiers for `hurdle` and `zeroinf` models from the `pscl` package were moved here from the poissonreg package.
+* The tidiers for `hurdle` and `zeroinf` models from the `pscl` package were moved here from the poissonreg package (#1133).
 
 # broom 1.0.2
 
