@@ -713,6 +713,7 @@ Collate:
     'ordinal-clmm-tidiers.R'
     'plm-tidiers.R'
     'polca-tidiers.R'
+    'pscl-tidiers.R'
     'psych-tidiers.R'
     'stats-nls-tidiers.R'
     'quantreg-nlrq-tidiers.R'

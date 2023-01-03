@@ -1,5 +1,7 @@
 # broom (development version)
 
+* The tidiers for `hurdle` and `zeroinf` models from the `pscl` package were moved here from the poissonreg package.
+
 # broom 1.0.2
 
 * The default `data` argument for `augment.coxph()` and `augment.survreg()` has been transitioned from `NULL` to `model.frame(x)` (#1126 by `@capnrefsmmat`).
