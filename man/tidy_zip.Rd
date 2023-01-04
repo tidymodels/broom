@@ -2,13 +2,13 @@
 % Please edit documentation in R/pscl-tidiers.R
 \name{tidy_zip}
 \alias{tidy_zip}
-\alias{tidy.zeroinfl}
-\alias{tidy.hurdle}
+\alias{tidy_zeroinfl}
+\alias{tidy_hurdle}
 \title{Turn zero-inflated model results into a tidy tibble}
 \usage{
-\method{tidy}{zeroinfl}(x, type = "count", ...)
+tidy_zeroinfl(x, type = "count", ...)
 
-\method{tidy}{hurdle}(x, type = "count", ...)
+tidy_hurdle(x, type = "count", ...)
 }
 \arguments{
 \item{x}{A \code{hurdle} or \code{zeroinfl} model object.}

@@ -551,7 +551,8 @@ Imports:
     rlang,
     stringr,
     tibble (>= 3.0.0),
-    tidyr (>= 1.0.0)
+    tidyr (>= 1.0.0),
+    vctrs
 Suggests:
     AER,
     AUC,

@@ -33,9 +33,7 @@ tidy_mat <- function(x, type) {
 #' @return A tibble
 #'
 #' @name tidy_zip
-#' @export
-tidy.zeroinfl <- .tidy
+tidy_zeroinfl <- .tidy
 
-#' @export
 #' @rdname tidy_zip
-tidy.hurdle <- .tidy
+tidy_hurdle <- .tidy
