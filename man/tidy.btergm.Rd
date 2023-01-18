@@ -44,7 +44,7 @@ temporal exponential random graph model estimated with the \pkg{xergm}.
 It simply returns the coefficients and their confidence intervals.
 }
 \examples{
-\dontshow{if ((rlang::is_installed("bbmle") & rlang::is_installed("network"))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if ((rlang::is_installed("btergm") & rlang::is_installed("network"))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 library(btergm)
 library(network)
