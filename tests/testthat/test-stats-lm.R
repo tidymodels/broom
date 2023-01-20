@@ -86,15 +86,17 @@ test_that("augment.lm", {
     newdata = mtcars
   )
 
-  expect_warning(
-    check_augment_function(
-      aug = augment.lm,
-      model = fit_na_row,
-      data = na_row_data,
-      newdata = na_row_data
-    ),
-    "prediction from a rank-deficient fit may be misleading"
-  )
+  if (paste(R.version$major, R.version$minor, sep = ".") <= "4.2.2") {
+    expect_warning(
+      check_augment_function(
+        aug = augment.lm,
+        model = fit_na_row,
+        data = na_row_data,
+        newdata = na_row_data
+      ),
+      "prediction from a rank-deficient fit may be misleading"
+    )
+  }
 
   check_augment_function(
     aug = augment.lm,
