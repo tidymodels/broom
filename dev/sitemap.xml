@@ -7,9 +7,6 @@
     <loc>https://broom.tidymodels.org/dev/CONTRIBUTING.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/dev/ISSUE_TEMPLATE.html</loc>
-  </url>
-  <url>
     <loc>https://broom.tidymodels.org/dev/LICENSE-text.html</loc>
   </url>
   <url>
@@ -44,9 +41,6 @@
   </url>
   <url>
     <loc>https://broom.tidymodels.org/dev/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://broom.tidymodels.org/dev/pull_request_template.html</loc>
   </url>
   <url>
     <loc>https://broom.tidymodels.org/dev/reference/augment.Mclust.html</loc>
