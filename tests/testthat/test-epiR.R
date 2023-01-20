@@ -30,7 +30,7 @@ fit2 <- epi.2by2(
   conf.level = 0.95, units = 100, outcome = "as.columns"
 )
 fit3 <- epi.2by2(
-  dat = tab2, method = "case.control",
+  dat = tab2, method = "cohort.count",
   conf.level = 0.95, units = 100, outcome = "as.columns"
 )
 
