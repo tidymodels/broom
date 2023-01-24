@@ -1,4 +1,7 @@
-# broom (development version)
+# broom 1.0.3
+
+* Addressed test failures on R-devel.
+* Fixed bug in `tidy.multinom()` where the `conf.level` argument would be ignored.
 
 # broom 1.0.2
 
