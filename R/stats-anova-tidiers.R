@@ -219,6 +219,7 @@ glance.anova <- function(x, ...) {
 #' tidy(a)
 #' @export
 #' @family anova tidiers
+#' @param intercept Includes intercept information, passed to [stats::summary.aov()].
 #' @seealso [tidy()], [stats::aov()]
 tidy.aov <- function(x, intercept = F, ...) {
   summary(x, intercept = intercept)[[1]] %>%
