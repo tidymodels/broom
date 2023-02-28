@@ -220,8 +220,8 @@ glance.anova <- function(x, ...) {
 #' @export
 #' @family anova tidiers
 #' @seealso [tidy()], [stats::aov()]
-tidy.aov <- function(x, ...) {
-  summary(x)[[1]] %>%
+tidy.aov <- function(x, intercept = F, ...) {
+  summary(x, intercept = intercept)[[1]] %>%
     tibble::as_tibble(rownames = "term") %>%
     dplyr::mutate("term" = stringr::str_trim(term)) %>%
     rename2(
