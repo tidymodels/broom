@@ -219,9 +219,10 @@ glance.anova <- function(x, ...) {
 #' tidy(a)
 #' @export
 #' @family anova tidiers
-#' @param intercept Includes intercept information, passed to [stats::summary.aov()].
+#' @param intercept A logical indicating whether information on the intercept
+#' ought to be included. Passed to [stats::summary.aov()].
 #' @seealso [tidy()], [stats::aov()]
-tidy.aov <- function(x, intercept = F, ...) {
+tidy.aov <- function(x, intercept = FALSE, ...) {
   summary(x, intercept = intercept)[[1]] %>%
     tibble::as_tibble(rownames = "term") %>%
     dplyr::mutate("term" = stringr::str_trim(term)) %>%
