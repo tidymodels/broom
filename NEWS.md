@@ -1,6 +1,6 @@
 # broom (development version)
 
-* Added an `intercept` argument to `tidy.aov()`, a logical indicating whether to include information on the intercept as the first row of results (#1144 by `@souza-victor`).
+* Added an `intercept` argument to `tidy.aov()`, a logical indicating whether to include information on the intercept as the first row of results (#1144 by `@victor-vscn`).
 
 # broom 1.0.3
 
