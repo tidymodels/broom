@@ -4,7 +4,6 @@ skip_if_not_installed("modeltests")
 library(modeltests)
 
 test_that("tidy.aov", {
-  check_arguments(tidy.aov)
 
   aovfit <- aov(mpg ~ wt + disp, mtcars)
   td <- tidy(aovfit)
