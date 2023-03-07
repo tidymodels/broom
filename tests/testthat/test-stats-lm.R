@@ -78,7 +78,7 @@ test_that("augment.lm", {
     data = mtcars,
     newdata = mtcars
   )
-  
+
   check_augment_function(
     aug = augment.lm,
     model = fit3,

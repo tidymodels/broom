@@ -1,4 +1,3 @@
-
 # TODO:
 #  - catch errors and throw a warning visible to the user
 #  - warn when custom arg is taking precedence over something well-defined
@@ -134,8 +133,7 @@ return_tidy <- function(..., .pre = NULL, .post = NULL, regression = FALSE) {
   do.call("return_evalrd", args)
 }
 
-return_augment <- function(
-                           ...,
+return_augment <- function(...,
                            .pre = NULL,
                            .post = NULL,
                            .fitted = TRUE,

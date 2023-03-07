@@ -16,8 +16,8 @@
 #' f <- function(x) (x[1] - 2)^2 + (x[2] - 3)^2 + (x[3] - 8)^2
 #' o <- optim(c(1, 1, 1), f)
 #'
-#' @note 
-#' This function assumes that the provided objective function is a negative 
+#' @note
+#' This function assumes that the provided objective function is a negative
 #' log-likelihood function. Results will be invalid if an incorrect
 #' function is supplied.
 #'

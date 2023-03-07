@@ -1,7 +1,7 @@
-# `stats::nobs` is a standard function to retrieve the number of 
-# observations used to fit a model. Unfortunately, Some packages do 
-# not define a `stats::nobs.MODEL` method. This file fills-in those missing 
-# methods. Ideally, we should offload these methods by submitting them for 
+# `stats::nobs` is a standard function to retrieve the number of
+# observations used to fit a model. Unfortunately, Some packages do
+# not define a `stats::nobs.MODEL` method. This file fills-in those missing
+# methods. Ideally, we should offload these methods by submitting them for
 # adoption in the upstream packages.
 
 # These packages still need to be checked:

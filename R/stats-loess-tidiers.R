@@ -32,7 +32,7 @@
 #'
 #' # with a new dataset
 #' augment(lo, newdata = head(mtcars))
-#' 
+#'
 #' @aliases loess_tidiers
 #' @export
 #' @seealso [augment()], [stats::loess()], [stats::predict.loess()]

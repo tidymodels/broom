@@ -25,7 +25,7 @@
 #' # summarize model fit with tidiers
 #' tidy(fit)
 #' glance(fit)
-#' 
+#'
 #' @aliases speedglm_tidiers
 #' @export
 #' @family speedlm tidiers
@@ -40,7 +40,7 @@ tidy.speedglm <- function(x, conf.int = FALSE, conf.level = 0.95,
   } else {
     ret$p.value <- as.numeric(ret$p.value)
   }
-  
+
   if (conf.int) {
     ci <- broom_confint_terms(x, level = conf.level)
     ret <- dplyr::left_join(ret, ci, by = "term")

@@ -8,7 +8,7 @@
 #'   [tidy.rlm()].
 #'
 #' @examplesIf rlang::is_installed("robust")
-#' 
+#'
 #' # load libraries for models and data
 #' library(robust)
 #'
@@ -18,7 +18,7 @@
 #' # summarize model fit with tidiers
 #' tidy(gm)
 #' glance(gm)
-#' 
+#'
 #' @export
 #' @family robust tidiers
 #' @seealso [robust::glmRob()]
@@ -38,10 +38,12 @@ tidy.glmRob <- function(x, ...) {
 #' @export
 augment.glmRob <- function(x, ...) {
   stop(
-    paste0("`augment.glmRob` has been deprecated as the robust package",
-           "doesn't provide the functionality necessary to implement ",
-           "an augment method. Please see the augment method for ",
-           "glmrob objects from robustbase."),
+    paste0(
+      "`augment.glmRob` has been deprecated as the robust package",
+      "doesn't provide the functionality necessary to implement ",
+      "an augment method. Please see the augment method for ",
+      "glmrob objects from robustbase."
+    ),
     call. = FALSE
   )
   invisible(TRUE)
@@ -66,7 +68,6 @@ augment.glmRob <- function(x, ...) {
 #' @seealso [robust::glmRob()]
 #'
 glance.glmRob <- function(x, ...) {
-  
   as_glance_tibble(
     deviance = x$deviance,
     sigma = stats::sigma(x),

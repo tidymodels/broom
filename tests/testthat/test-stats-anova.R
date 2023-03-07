@@ -25,10 +25,10 @@ test_that("tidy.anova", {
 
   check_tidy_output(td)
   check_dims(td, 3, 6)
-  
+
   anovacomp <- stats::anova(m2, m1)
   td2 <- tidy(anovacomp)
-  
+
   expect_true("Residuals" %in% td$term)
 
   loess_anova <- stats::anova(
@@ -37,20 +37,18 @@ test_that("tidy.anova", {
   )
 
   expect_warning(tidy(loess_anova))
-  
-  
 })
 
 test_that("glance.anova", {
   check_arguments(glance.anova)
-  
+
   a <- lm(mpg ~ wt + qsec + disp, mtcars)
   b <- lm(mpg ~ wt + qsec, mtcars)
   gl <- glance(anova(a, b))
-  
+
   check_glance_outputs(gl)
   check_dims(gl, 1, 2)
-  
+
   gl_a <- glance(anova(a))
   check_dims(gl_a, 0, 0)
 })
@@ -112,20 +110,18 @@ test_that("tidy.linearHypothesis", {
   check_dims(td_lht, 1, 10)
 
   expect_true("null.value" %in% colnames(td_lht))
-  
-  expect_equal(td_lht$term, 'disp - hp')
+
+  expect_equal(td_lht$term, "disp - hp")
   expect_equal(td_lht$null.value, 0)
   expect_equal(td_lht$estimate, -0.00551, tolerance = .00001)
-
 })
 
 skip_if_not_installed("lme4")
 test_that("tidy.anova for merMod objects", {
-  m1_mer <- lme4::lmer(mpg ~ wt + (1|cyl), data = mtcars)
+  m1_mer <- lme4::lmer(mpg ~ wt + (1 | cyl), data = mtcars)
   m2_mer <- update(m1_mer, . ~ . + disp)
   aa_mer <- anova(m1_mer, m2_mer, refit = FALSE)
   td <- tidy(aa_mer)
   check_tidy_output(td, strict = FALSE)
   check_dims(td, 2, 9)
-}
-)
+})

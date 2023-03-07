@@ -27,10 +27,10 @@
 #'   passed on to [emmeans::summary.emmGrid()] or [lsmeans::summary.ref.grid()].
 #'
 #' @examplesIf rlang::is_installed(c("emmeans", "ggplot2"))
-#' 
+#'
 #' # load libraries for models and data
 #' library(emmeans)
-#' 
+#'
 #' # linear model for sales of oranges per day
 #' oranges_lm1 <- lm(sales1 ~ price1 + price2 + day + store, data = oranges)
 #'
@@ -49,7 +49,7 @@
 #'
 #' # plot confidence intervals
 #' library(ggplot2)
-#' 
+#'
 #' ggplot(tidy(marginal, conf.int = TRUE), aes(day, estimate)) +
 #'   geom_point() +
 #'   geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
@@ -62,9 +62,9 @@
 #'     day = c("2", "3", "4")
 #'   )
 #' )
-#' 
+#'
 #' by_price
-#' 
+#'
 #' tidy(by_price)
 #'
 #' ggplot(tidy(by_price, conf.int = TRUE), aes(price2, estimate, color = day)) +
@@ -73,7 +73,7 @@
 #'
 #' # joint_tests
 #' tidy(joint_tests(oranges_lm1))
-#' 
+#'
 #' @aliases emmeans_tidiers
 #' @export
 #' @family emmeans tidiers
@@ -81,7 +81,7 @@
 #'   [emmeans::contrast()]
 tidy.lsmobj <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   check_ellipses("exponentiate", "tidy", "lsmobj", ...)
-  
+
   tidy_emmeans(x, infer = c(conf.int, TRUE), level = conf.level, ...)
 }
 
@@ -107,7 +107,7 @@ tidy.lsmobj <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #'   [emmeans::contrast()]
 tidy.ref.grid <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   check_ellipses("exponentiate", "tidy", "ref.grid", ...)
-  
+
   tidy_emmeans(x, infer = c(conf.int, TRUE), level = conf.level, ...)
 }
 
@@ -133,7 +133,7 @@ tidy.ref.grid <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #'   [emmeans::contrast()]
 tidy.emmGrid <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   check_ellipses("exponentiate", "tidy", "emmGrid", ...)
-  
+
   tidy_emmeans(x, infer = c(conf.int, TRUE), level = conf.level, ...)
 }
 
@@ -168,7 +168,7 @@ tidy.emmGrid <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 
 tidy.summary_emm <- function(x, null.value = NULL, ...) {
   check_ellipses("exponentiate", "tidy", "summary_emm", ...)
-  
+
   tidy_emmeans_summary(x, null.value = null.value)
 }
 
@@ -245,9 +245,10 @@ tidy_emmeans_summary <- function(x, null.value = NULL, term_names = NULL) {
       term <- apply(ret, 1, function(x) colnames(ret)[which(x == ".")])
     }
 
-    ret <- bind_cols(ret[, colnames(ret) %in% term_names, drop = FALSE], 
-                     term = term, 
-                     ret[, !colnames(ret) %in% term_names, drop = FALSE])
+    ret <- bind_cols(ret[, colnames(ret) %in% term_names, drop = FALSE],
+      term = term,
+      ret[, !colnames(ret) %in% term_names, drop = FALSE]
+    )
   }
 
   as_tibble(ret) %>%

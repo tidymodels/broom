@@ -8,7 +8,7 @@
 #' @param se.type Character indicating the type of standard errors. Defaults to
 #'   using those of the underlying felm() model object, e.g. clustered errors
 #'   for models that were provided a cluster specification. Users can override
-#'   these defaults by specifying an appropriate alternative: "iid" (for 
+#'   these defaults by specifying an appropriate alternative: "iid" (for
 #'   homoskedastic errors), "robust" (for Eicker-Huber-White robust errors), or
 #'   "cluster" (for clustered standard errors; if the model object supports it).
 #' @template param_unused_dots
@@ -16,7 +16,7 @@
 #' @evalRd return_tidy(regression = TRUE)
 #'
 #' @examplesIf rlang::is_installed("lfe")
-#' 
+#'
 #' # load libraries for models and data
 #' library(lfe)
 #'
@@ -25,71 +25,71 @@
 #'
 #' # no FEs; same as lm()
 #' est0 <- felm(Ozone ~ Temp + Wind + Solar.R, airquality)
-#' 
+#'
 #' # summarize model fit with tidiers
 #' tidy(est0)
 #' augment(est0)
-#' 
+#'
 #' # add month fixed effects
-#' est1 <- felm(Ozone ~ Temp + Wind + Solar.R  | Month, airquality)
-#' 
+#' est1 <- felm(Ozone ~ Temp + Wind + Solar.R | Month, airquality)
+#'
 #' # summarize model fit with tidiers
 #' tidy(est1)
 #' tidy(est1, fe = TRUE)
 #' augment(est1)
 #' glance(est1)
 #'
-#' # the "se.type" argument can be used to switch out different standard errors 
-#' # types on the fly. In turn, this can be useful exploring the effect of 
+#' # the "se.type" argument can be used to switch out different standard errors
+#' # types on the fly. In turn, this can be useful exploring the effect of
 #' # different error structures on model inference.
 #' tidy(est1, se.type = "iid")
 #' tidy(est1, se.type = "robust")
-#' 
+#'
 #' # add clustered SEs (also by month)
-#' est2 <- felm(Ozone ~ Temp + Wind + Solar.R  | Month | 0 | Month, airquality)
-#' 
+#' est2 <- felm(Ozone ~ Temp + Wind + Solar.R | Month | 0 | Month, airquality)
+#'
 #' # summarize model fit with tidiers
-#' tidy(est2, conf.int = TRUE) 
+#' tidy(est2, conf.int = TRUE)
 #' tidy(est2, conf.int = TRUE, se.type = "cluster")
 #' tidy(est2, conf.int = TRUE, se.type = "robust")
 #' tidy(est2, conf.int = TRUE, se.type = "iid")
-#' 
+#'
 #' @export
 #' @aliases felm_tidiers lfe_tidiers
 #' @family felm tidiers
 #' @seealso [tidy()], [lfe::felm()]
 tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, se.type = c("default", "iid", "robust", "cluster"), ...) {
   check_ellipses("exponentiate", "tidy", "felm", ...)
-  
+
   has_multi_response <- length(x$lhs) > 1
-  
+
   # warn users about deprecated "robust" argument
   dots <- list(...)
   if (!is.null(dots$robust)) {
     warning('\nThe "robust" argument has been deprecated in tidy.felm and will be ignored. Please use the "se.type" argument instead.\n')
   }
-  
+
   # match SE args
   se.type <- match.arg(se.type)
   if (se.type == "default") {
     se.type <- NULL
   }
-  
+
   # get "robust" logical to pass on to summary.lfe
   if (is.null(se.type)) {
-    robust <- !is.null(x$clustervar) 
-  } else if (se.type == 'iid') {
+    robust <- !is.null(x$clustervar)
+  } else if (se.type == "iid") {
     robust <- FALSE
   } else {
     # catch potential user error, asking for clusters where none exist
     if (se.type == "cluster" && is.null(x$clustervar)) {
-       warning("Clustered SEs requested, but weren't calculated in underlying model object. Reverting to default SEs.\n")
-       se.type <- NULL
+      warning("Clustered SEs requested, but weren't calculated in underlying model object. Reverting to default SEs.\n")
+      se.type <- NULL
     }
-    
+
     robust <- TRUE
   }
-  
+
   nn <- c("estimate", "std.error", "statistic", "p.value")
   if (has_multi_response) {
     ret <- map_df(x$lhs, function(y) {
@@ -104,9 +104,9 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, se.type
       new_names = nn
     )
   }
-  
+
   # Catch edge case where users specify "robust" SEs on felm() object that
-  # contains clusters. Reason: Somewhat confusingly, summary.felm(robust = TRUE) 
+  # contains clusters. Reason: Somewhat confusingly, summary.felm(robust = TRUE)
   # reports clustered SEs even though robust SEs are available. In contrast,
   # confint.felm distinguishes between robust and clustered SEs regardless
   # of the underlying model. See also: https://github.com/sgaure/lfe/pull/17/files
@@ -117,13 +117,13 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, se.type
       ret$p.value <- x$rpval
     }
   }
-  
-  
+
+
   if (conf.int) {
     if (has_multi_response) {
       ci <- map_df(x$lhs, function(y) {
-        broom_confint_terms(x, level = conf.level, type = NULL, lhs = y) %>% 
-          mutate(response=y)
+        broom_confint_terms(x, level = conf.level, type = NULL, lhs = y) %>%
+          mutate(response = y)
       })
       ret <- dplyr::left_join(ret, ci, by = c("response", "term"))
     } else {
@@ -131,17 +131,17 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, se.type
       ret <- dplyr::left_join(ret, ci, by = "term")
     }
   }
-  
+
   if (fe) {
     ret <- mutate(ret, N = NA, comp = NA)
-    
+
     nn <- c("estimate", "std.error", "N", "comp")
     ret_fe_prep <- lfe::getfe(x, se = TRUE, bN = 100) %>%
       tibble::rownames_to_column(var = "term") %>%
       # effect and se are multiple if multiple y
       select(term, contains("effect"), contains("se"), obs, comp) %>%
       rename(N = obs)
-    
+
     if (has_multi_response) {
       ret_fe_prep <- ret_fe_prep %>%
         tidyr::pivot_longer(
@@ -170,11 +170,11 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, se.type
       select(contains("response"), dplyr::everything()) %>%
       mutate(statistic = estimate / std.error) %>%
       mutate(p.value = 2 * (1 - stats::pt(statistic, df = N)))
-    
+
     if (conf.int) {
       crit_val_low <- stats::qnorm(1 - (1 - conf.level) / 2)
       crit_val_high <- stats::qnorm(1 - (1 - conf.level) / 2)
-      
+
       ret_fe <- ret_fe %>%
         mutate(
           conf.low = estimate - crit_val_low * std.error,
@@ -199,7 +199,7 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, se.type
 #' @seealso [augment()], [lfe::felm()]
 augment.felm <- function(x, data = model.frame(x), ...) {
   check_ellipses("newdata", "augment", "felm", ...)
-  
+
   has_multi_response <- length(x$lhs) > 1
 
   if (has_multi_response) {
@@ -238,9 +238,9 @@ glance.felm <- function(x, ...) {
       call. = FALSE
     )
   }
-  
+
   s <- summary(x)
-  
+
   as_glance_tibble(
     r.squared = s$r2,
     adj.r.squared = s$r2adj,

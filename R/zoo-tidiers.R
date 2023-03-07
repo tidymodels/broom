@@ -33,7 +33,7 @@
 #' Zrolled <- rollmean(Z, 5)
 #' ggplot(tidy(Zrolled), aes(index, value, color = series)) +
 #'   geom_line()
-#'   
+#'
 #' @aliases zoo_tidiers
 #' @export
 #' @seealso [tidy()], [zoo::zoo()]
@@ -46,15 +46,17 @@ tidy.zoo <- function(x, ...) {
     if (!is.null(colnames(x))) {
       colnames(ret)[1:ncol(x)] <- colnames(x)
     }
-    
+
     out <- pivot_longer(ret,
-                        cols = c(dplyr::everything(), -index),
-                        names_to = "series",
-                        values_to = "value"
+      cols = c(dplyr::everything(), -index),
+      names_to = "series",
+      values_to = "value"
     )
   } else {
-    out <- tibble::tibble(index = zoo::index(x),
-                          value = zoo::coredata(x))
+    out <- tibble::tibble(
+      index = zoo::index(x),
+      value = zoo::coredata(x)
+    )
   }
   return(out)
 }

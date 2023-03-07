@@ -16,12 +16,14 @@ fit3 <- survdiff(
 )
 
 expect <- survexp(futime ~ 1,
-                  rmap = list(age = (accept.dt - birth.dt),
-                              sex = 1,
-                              year = accept.dt,
-                              race = "white"),
-                  jasa,
-                  cohort = FALSE, ratetable = survexp.usr
+  rmap = list(
+    age = (accept.dt - birth.dt),
+    sex = 1,
+    year = accept.dt,
+    race = "white"
+  ),
+  jasa,
+  cohort = FALSE, ratetable = survexp.usr
 )
 
 fit4 <- survdiff(Surv(jasa$futime, jasa$fustat) ~ offset(expect))

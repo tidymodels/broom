@@ -17,14 +17,14 @@
 #' wht <- glht(amod, linfct = mcp(tension = "Tukey"))
 #'
 #' tidy(wht)
-#' 
+#'
 #' ggplot(wht, aes(lhs, estimate)) +
 #'   geom_point()
 #'
 #' CI <- confint(wht)
-#' 
+#'
 #' tidy(CI)
-#' 
+#'
 #' ggplot(CI, aes(lhs, estimate, ymin = lwr, ymax = upr)) +
 #'   geom_pointrange()
 #'
@@ -36,7 +36,7 @@
 #'
 #' cld <- cld(wht)
 #' tidy(cld)
-#' 
+#'
 #' @aliases multcomp_tidiers
 #' @export
 #' @family multcomp tidiers
@@ -44,7 +44,7 @@
 #'
 tidy.glht <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   check_ellipses("exponentiate", "tidy", "glht", ...)
-  
+
   glht_summary <- summary(x, ...)
 
   tidy_glht_summary <- tidy.summary.glht(glht_summary, ...)
@@ -56,7 +56,7 @@ tidy.glht <- function(x, conf.int = FALSE, conf.level = .95, ...) {
     if ("term" %in% colnames(tidy_glht_summary)) {
       by_cols <- c("term", by_cols)
     }
-    
+
     tidy_glht_summary <- dplyr::select(tidy_glht_summary, -std.error) %>%
       dplyr::left_join(tidy_glht_confint, by = by_cols) %>%
       dplyr::select(

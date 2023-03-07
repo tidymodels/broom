@@ -45,11 +45,11 @@ test_that("tidy.lmrob", {
 test_that("glance.lmrob", {
   gl <- glance(fit)
   check_glance_outputs(gl)
-  
+
   suppressWarnings(
     gl_rd <- glance(fit_rd)
   )
-  
+
   check_glance_outputs(gl_rd)
 })
 

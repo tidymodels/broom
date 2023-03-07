@@ -10,10 +10,10 @@
 #'
 #' # load libraries for models and data
 #' library(AUC)
-#' 
+#'
 #' # load data
 #' data(churn)
-#' 
+#'
 #' # fit model
 #' r <- roc(churn$predictions, churn$labels)
 #'
@@ -41,7 +41,7 @@
 #'
 #' ggplot(rocs, aes(fpr, tpr, color = algorithm)) +
 #'   geom_line()
-#' 
+#'
 #' @export
 #' @aliases auc_tidiers roc_tidiers
 #' @seealso [tidy()], [AUC::roc()]

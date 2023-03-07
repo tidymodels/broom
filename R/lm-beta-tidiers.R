@@ -21,7 +21,7 @@
 #' # fit models
 #' mod <- stats::lm(speed ~ ., data = cars)
 #' std <- lm.beta(mod)
-#' 
+#'
 #' # summarize model fit with tidiers
 #' tidy(std, conf.int = TRUE)
 #'
@@ -34,15 +34,15 @@
 #' # fit models
 #' mod2 <- lm(weight ~ group)
 #' std2 <- lm.beta(mod2)
-#' 
+#'
 #' # summarize model fit with tidiers
 #' tidy(std2, conf.int = TRUE)
-#' 
+#'
 #' @export
 #' @family lm tidiers
 tidy.lm.beta <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
   check_ellipses("exponentiate", "tidy", "lm.beta", ...)
-  
+
   ret <- as_tibble(summary(x)$coefficients, rownames = "term")
   colnames(ret) <- c(
     "term", "estimate", "std_estimate",

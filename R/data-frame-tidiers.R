@@ -1,4 +1,3 @@
-
 #' @export
 glance.data.frame <- function(x, ...) {
   stop(

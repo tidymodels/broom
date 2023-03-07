@@ -58,7 +58,7 @@ ggplot(Orange, aes(age, circumference, color = Tree)) +
 Suppose you want to test for correlations individually *within* each tree. You can do this with dplyr's `group_by`:
 
 ```{r, message = FALSE, warning = FALSE}
-Orange %>% 
+Orange %>%
   group_by(Tree) %>%
   summarize(correlation = cor(age, circumference))
 ```
@@ -81,36 +81,36 @@ tidy(ct)
 Often, we want to perform multiple tests or fit multiple models, each on a different part of the data. In this case, we recommend a `nest-map-unnest` workflow. For example, suppose we want to perform correlation tests for each different tree. We start by `nest`ing our data based on the group of interest:
 
 ```{r}
-nested <- Orange %>% 
+nested <- Orange %>%
   nest(data = -Tree)
 ```
 
 Then we run a correlation test for each nested tibble using `purrr::map`:
 
 ```{r}
-nested %>% 
+nested %>%
   mutate(test = map(data, ~ cor.test(.x$age, .x$circumference)))
 ```
 
 This results in a list-column of S3 objects. We want to tidy each of the objects, which we can also do with `map`.
 
 ```{r}
-nested %>% 
+nested %>%
   mutate(
     test = map(data, ~ cor.test(.x$age, .x$circumference)), # S3 list-col
     tidied = map(test, tidy)
-  ) 
+  )
 ```
 
 Finally, we want to unnest the tidied data frames so we can see the results in a flat tibble. All together, this looks like:
 
 ```{r}
-Orange %>% 
-  nest(data = -Tree) %>% 
+Orange %>%
+  nest(data = -Tree) %>%
   mutate(
     test = map(data, ~ cor.test(.x$age, .x$circumference)), # S3 list-col
     tidied = map(test, tidy)
-  ) %>% 
+  ) %>%
   unnest(tidied)
 ```
 
@@ -131,11 +131,11 @@ Now we can handle multiple regressions at once using exactly the same workflow a
 
 ```{r}
 Orange %>%
-  nest(data = -Tree) %>% 
+  nest(data = -Tree) %>%
   mutate(
     fit = map(data, ~ lm(age ~ circumference, data = .x)),
     tidied = map(fit, tidy)
-  ) %>% 
+  ) %>%
   unnest(tidied)
 ```
 
@@ -143,15 +143,15 @@ You can just as easily use multiple predictors in the regressions, as shown here
 
 ```{r}
 data(mtcars)
-mtcars <- as_tibble(mtcars)  # to play nicely with list-cols
+mtcars <- as_tibble(mtcars) # to play nicely with list-cols
 mtcars
 
 mtcars %>%
-  nest(data = -am) %>% 
+  nest(data = -am) %>%
   mutate(
-    fit = map(data, ~ lm(wt ~ mpg + qsec + gear, data = .x)),  # S3 list-col
+    fit = map(data, ~ lm(wt ~ mpg + qsec + gear, data = .x)), # S3 list-col
     tidied = map(fit, tidy)
-  ) %>% 
+  ) %>%
   unnest(tidied)
 ```
 
@@ -159,7 +159,7 @@ What if you want not just the `tidy` output, but the `augment` and `glance` outp
 
 ```{r}
 regressions <- mtcars %>%
-  nest(data = -am) %>% 
+  nest(data = -am) %>%
   mutate(
     fit = map(data, ~ lm(wt ~ mpg + qsec + gear, data = .x)),
     tidied = map(fit, tidy),
@@ -167,13 +167,13 @@ regressions <- mtcars %>%
     augmented = map(fit, augment)
   )
 
-regressions %>% 
+regressions %>%
   unnest(tidied)
 
-regressions %>% 
+regressions %>%
   unnest(glanced)
 
-regressions %>% 
+regressions %>%
   unnest(augmented)
 ```
 

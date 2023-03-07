@@ -21,7 +21,7 @@
 #' # summarize model fit with tidiers
 #' tidy(fit)
 #' glance(fit)
-#' 
+#'
 #' @export
 #' @family fitdistr tidiers
 #' @aliases fitdistr_tidiers
@@ -53,5 +53,4 @@ glance.fitdistr <- function(x, ...) {
     nobs = stats::nobs(x),
     na_types = "rrri"
   )
-  
 }

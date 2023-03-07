@@ -49,7 +49,7 @@
 #' # summarize model fit with tidiers
 #' tidy(six_class_cm)
 #' tidy(six_class_cm, by_class = FALSE)
-#' 
+#'
 #' @aliases caret_tidiers confusionMatrix_tidiers
 #' @export
 #' @seealso [tidy()], [caret::confusionMatrix()]
@@ -77,8 +77,7 @@ tidy.confusionMatrix <- function(x, by_class = TRUE, ...) {
         cm$AccuracyPValue, NA, cm$McnemarPValue,
         rep(NA, length(terms) - 3)
       )
-    }
-    else {
+    } else {
       # case when there are more than 2 classes
       classes <-
         x$byClass %>%

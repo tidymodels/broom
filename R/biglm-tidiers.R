@@ -16,7 +16,7 @@
 #'
 #' # fit model -- linear regression
 #' bfit <- biglm(mpg ~ wt + disp, mtcars)
-#' 
+#'
 #' # summarize model fit with tidiers
 #' tidy(bfit)
 #' tidy(bfit, conf.int = TRUE)
@@ -26,7 +26,7 @@
 #'
 #' # fit model -- logistic regression
 #' bgfit <- bigglm(am ~ mpg, mtcars, family = binomial())
-#' 
+#'
 #' # summarize model fit with tidiers
 #' tidy(bgfit)
 #' tidy(bgfit, exponentiate = TRUE)
@@ -35,13 +35,12 @@
 #' tidy(bgfit, conf.int = TRUE, conf.level = .9, exponentiate = TRUE)
 #'
 #' glance(bgfit)
-#' 
+#'
 #' @export
 #' @family biglm tidiers
 #' @seealso [tidy()], [biglm::biglm()], [biglm::bigglm()]
 tidy.biglm <- function(x, conf.int = FALSE, conf.level = .95,
                        exponentiate = FALSE, ...) {
-
   # TODO: separate in biglm and bigglm tidiers
 
   ret <- as_tibble(summary(x)$mat, rownames = "term")

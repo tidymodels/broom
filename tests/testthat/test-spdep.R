@@ -14,17 +14,20 @@ library(spatialreg)
 data(oldcol, package = "spdep")
 listw <- spdep::nb2listw(COL.nb, style = "W")
 
-fit_lag <- lagsarlm(CRIME ~ INC + HOVAL, 
-                    data = COL.OLD,  
-                    listw = listw, 
-                    method = "eigen")
-fit_error <- errorsarlm(CRIME ~ INC + HOVAL, 
-                        data = COL.OLD, 
-                        listw)
+fit_lag <- lagsarlm(CRIME ~ INC + HOVAL,
+  data = COL.OLD,
+  listw = listw,
+  method = "eigen"
+)
+fit_error <- errorsarlm(CRIME ~ INC + HOVAL,
+  data = COL.OLD,
+  listw
+)
 
-fit_sac <- sacsarlm(CRIME ~ INC + HOVAL, 
-                    data = COL.OLD, 
-                    listw)
+fit_sac <- sacsarlm(CRIME ~ INC + HOVAL,
+  data = COL.OLD,
+  listw
+)
 
 test_that("spdep tidier arguments", {
   check_arguments(tidy.sarlm)
@@ -37,12 +40,12 @@ test_that("tidy.sarlm", {
   td2 <- tidy(fit_error)
   td3 <- tidy(fit_sac)
   td4 <- tidy(fit_sac, conf.int = TRUE)
-  
+
   check_tidy_output(td1)
   check_tidy_output(td2)
   check_tidy_output(td3)
   check_tidy_output(td4)
-  
+
   check_dims(td1, 4, 5)
   check_dims(td2, 4, 5)
   check_dims(td3, 5, 5)
@@ -54,9 +57,9 @@ test_that("glance.sarlm", {
   gl1 <- glance(fit_lag)
   gl2 <- glance(fit_error)
   gl3 <- glance(fit_sac)
-  
+
   check_glance_outputs(gl1, gl2, gl3)
-  
+
   check_dims(gl1, 1, 6)
   check_dims(gl2, 1, 6)
   check_dims(gl3, 1, 6)

@@ -12,7 +12,7 @@
 #'
 #' # load libraries for models and data
 #' library(survival)
-#' 
+#'
 #' # fit model
 #' sexpfit <- survexp(
 #'   futime ~ 1,
@@ -28,7 +28,7 @@
 #' # summarize model fit with tidiers
 #' tidy(sexpfit)
 #' glance(sexpfit)
-#' 
+#'
 #' @aliases sexpfit_tidiers survexp_tidiers
 #' @export
 #' @seealso [tidy()], [survival::survexp()]

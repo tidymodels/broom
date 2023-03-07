@@ -17,10 +17,10 @@
 #' selccoh <- with(nwtco, rel == 1 | subcoh == 1)
 #' ccoh.data <- nwtco[selccoh, ]
 #' ccoh.data$subcohort <- subcoh[selccoh]
-#' 
+#'
 #' # central-lab histology
 #' ccoh.data$histol <- factor(ccoh.data$histol, labels = c("FH", "UH"))
-#' 
+#'
 #' # tumour stage
 #' ccoh.data$stage <- factor(ccoh.data$stage, labels = c("I", "II", "III", "IV"))
 #' ccoh.data$age <- ccoh.data$age / 12 # age in years
@@ -36,12 +36,12 @@
 #'
 #' # coefficient plot
 #' library(ggplot2)
-#' 
+#'
 #' ggplot(tidy(fit.ccP), aes(x = estimate, y = term)) +
 #'   geom_point() +
 #'   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0) +
 #'   geom_vline(xintercept = 0)
-#'   
+#'
 #' @aliases cch_tidiers
 #' @export
 #' @seealso [tidy()], [survival::cch()]
@@ -49,12 +49,12 @@
 #' @family survival tidiers
 tidy.cch <- function(x, conf.level = .95, ...) {
   check_ellipses("exponentiate", "tidy", "cch", ...)
-  
+
   s <- summary(x)
   co <- stats::coefficients(s)
 
   ret <- as_tidy_tibble(
-    co, 
+    co,
     new_names = c("estimate", "std.error", "statistic", "p.value")
   )
 

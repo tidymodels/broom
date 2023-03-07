@@ -40,9 +40,9 @@ test_that("tidy.boot for glms", {
   check_tidy_output(tdwe)
 
   check_dims(td, 2, 6)
-  check_dims(tdw,  2, 7)
+  check_dims(tdw, 2, 7)
   check_dims(tdwe, 2, 7)
-  
+
   expect_equal(exp(tdw$statistic), tdwe$statistic)
   expect_equal(exp(tdw$conf.low), tdwe$conf.low)
 })

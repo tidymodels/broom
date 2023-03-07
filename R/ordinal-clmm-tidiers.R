@@ -23,10 +23,10 @@
 #'
 #' # ...and again with another model specification
 #' fit2 <- clmm(rating ~ temp + (1 | judge), nominal = ~contact, data = wine)
-#' 
+#'
 #' tidy(fit2)
 #' glance(fit2)
-#' 
+#'
 #' @evalRd return_tidy(regression = TRUE)
 #'
 #' @note In `broom 0.7.0` the `coefficient_type` column was renamed to
@@ -42,7 +42,6 @@
 #' @family ordinal tidiers
 tidy.clmm <- function(x, conf.int = FALSE, conf.level = 0.95,
                       exponentiate = FALSE, ...) {
-
   # NOTE: pretty much the same as tidy.clm() except there is no
   # `type` argument to confint.clmm()
 

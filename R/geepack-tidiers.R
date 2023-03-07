@@ -17,7 +17,7 @@
 #'
 #' # load modeling library
 #' library(geepack)
-#' 
+#'
 #' # load data
 #' data(state)
 #'
@@ -34,7 +34,7 @@
 #' # summarize model fit with tidiers
 #' tidy(geefit)
 #' tidy(geefit, conf.int = TRUE)
-#' 
+#'
 #' @evalRd return_tidy(regression = TRUE)
 #'
 #' @export
@@ -46,27 +46,27 @@ tidy.geeglm <- function(x, conf.int = FALSE, conf.level = .95,
   co <- stats::coef(summary(x))
 
   ret <- as_tidy_tibble(
-    co, 
+    co,
     c("estimate", "std.error", "statistic", "p.value")[1:ncol(co)]
   )
-  
+
   if (conf.int) {
     ci <- broom_confint_terms(x, level = conf.level)
     ret <- dplyr::left_join(ret, ci, by = "term")
   }
-  
+
   if (exponentiate) {
     if (is.null(x$family) ||
-        (x$family$link != "logit" && x$family$link != "log")) {
+      (x$family$link != "logit" && x$family$link != "log")) {
       warning(paste(
         "Exponentiating coefficients, but model did not use",
         "a log or logit link function"
       ))
     }
-    
+
     ret <- exponentiate(ret)
   }
-  
+
   ret
 }
 

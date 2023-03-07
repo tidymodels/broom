@@ -24,11 +24,11 @@ test_that("tidy.coeftest", {
   td <- tidy(ct)
   td2 <- tidy(ct2)
   td3 <- tidy(ct3)
-  
+
   check_tidy_output(td)
   check_tidy_output(td2)
   check_tidy_output(td3)
-  
+
   check_dims(td, 2, 5)
 
   # conf int
@@ -47,7 +47,7 @@ test_that("glance.coeftest", {
   gl <- glance(ct)
   gl2 <- glance(ct2)
   gl3 <- glance(ct3)
-  
-  check_glance_outputs(gl, gl3) 
+
+  check_glance_outputs(gl, gl3)
   check_glance_outputs(gl2) # separately because save = TRUE adds cols
 })

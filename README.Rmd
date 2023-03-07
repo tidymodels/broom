@@ -41,7 +41,7 @@ If you aren't familiar with tidy data structures and want to know how they can m
 ## Installation
 
 ```{r, eval = FALSE}
-# we recommend installing the entire tidyverse 
+# we recommend installing the entire tidyverse
 # modeling set, which includes broom:
 install.packages("tidymodels")
 

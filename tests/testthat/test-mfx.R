@@ -25,7 +25,7 @@ df <- data.frame(y_beta, y_bin, y_negbin, x)
 fit_betamfx <- betamfx(y_beta ~ x | x, data = df)
 fit_logitmfx <- logitmfx(y_bin ~ x, data = df)
 fit_negbinmfx <- negbinmfx(y_negbin ~ x, data = df)
-fit_poissonmfx <- poissonmfx(y_negbin ~ x,data = df)
+fit_poissonmfx <- poissonmfx(y_negbin ~ x, data = df)
 fit_probitmfx <- logitmfx(y_bin ~ x, data = df)
 
 

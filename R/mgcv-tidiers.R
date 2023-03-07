@@ -38,7 +38,7 @@
 #' tidy(g, parametric = TRUE)
 #' glance(g)
 #' augment(g)
-#' 
+#'
 #' @export
 #' @aliases mgcv_tidiers gam_tidiers tidy.gam
 #' @family mgcv tidiers
@@ -54,7 +54,7 @@ tidy.gam <- function(x, parametric = FALSE, conf.int = FALSE,
   if (parametric) {
     px <- summary(x)$p.table
     ret <- as_tidy_tibble(
-      px, 
+      px,
       new_names = c("estimate", "std.error", "statistic", "p.value")
     )
     if (conf.int) {
@@ -74,11 +74,11 @@ tidy.gam <- function(x, parametric = FALSE, conf.int = FALSE,
     class(sx) <- c("anova", "data.frame")
     ret <- tidy(sx)
   }
-  
+
   if (exponentiate && parametric) {
-    ret <- exponentiate(ret)  
+    ret <- exponentiate(ret)
   }
-  
+
   ret
 }
 

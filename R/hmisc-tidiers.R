@@ -20,17 +20,17 @@
 #'   matrix from `rcorr` there may be entries for both the `cor(A, B)` and
 #'   `cor(B, A)`. Only one of these pairs will ever be present in the tidy
 #'   output.
-#' 
+#'
 #' @examplesIf rlang::is_installed(c("Hmisc", "ggplot2"))
 #'
 #' # load libraries for models and data
 #' library(Hmisc)
 #'
 #' mat <- replicate(52, rnorm(100))
-#' 
+#'
 #' # add some NAs
 #' mat[sample(length(mat), 2000)] <- NA
-#' 
+#'
 #' # also, column names
 #' colnames(mat) <- c(LETTERS, letters)
 #'
@@ -48,7 +48,7 @@
 #' ggplot(td, aes(estimate, p.value)) +
 #'   geom_point() +
 #'   scale_y_log10()
-#' 
+#'
 #' @export
 #' @aliases rcorr_tidiers Hmisc_tidiers
 #' @seealso [tidy()], [Hmisc::rcorr()]

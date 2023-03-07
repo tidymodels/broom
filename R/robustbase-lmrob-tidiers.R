@@ -9,30 +9,28 @@
 #'   [tidy.rlm()].
 #'
 #' @examples
-#' 
+#'
 #' if (requireNamespace("robustbase", quietly = TRUE)) {
-#' 
-#' # load libraries for models and data
-#' library(robustbase)
-#' 
-#' data(coleman)
-#' set.seed(0)
+#'   # load libraries for models and data
+#'   library(robustbase)
 #'
-#' m <- lmrob(Y ~ ., data = coleman)
-#' tidy(m)
-#' augment(m)
-#' glance(m)
+#'   data(coleman)
+#'   set.seed(0)
 #'
-#' data(carrots)
-#' 
-#' Rfit <- glmrob(cbind(success, total - success) ~ logdose + block,
-#'   family = binomial, data = carrots, method = "Mqle",
-#'   control = glmrobMqle.control(tcc = 1.2)
-#' )
-#' 
-#' tidy(Rfit)
-#' augment(Rfit)
-#' 
+#'   m <- lmrob(Y ~ ., data = coleman)
+#'   tidy(m)
+#'   augment(m)
+#'   glance(m)
+#'
+#'   data(carrots)
+#'
+#'   Rfit <- glmrob(cbind(success, total - success) ~ logdose + block,
+#'     family = binomial, data = carrots, method = "Mqle",
+#'     control = glmrobMqle.control(tcc = 1.2)
+#'   )
+#'
+#'   tidy(Rfit)
+#'   augment(Rfit)
 #' }
 #' @aliases robustbase_tidiers
 #' @export
@@ -41,7 +39,7 @@
 #' @seealso [robustbase::lmrob()]
 tidy.lmrob <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
   check_ellipses("exponentiate", "tidy", "lmrob", ...)
-  
+
   ret <- coef(summary(x)) %>%
     as_tibble(rownames = "term")
   names(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
@@ -104,7 +102,7 @@ augment.lmrob <- function(x, data = model.frame(x), newdata = NULL, se_fit = FAL
 #' @seealso [robustbase::lmrob()]
 glance.lmrob <- function(x, ...) {
   s <- summary(x)
-  
+
   as_glance_tibble(
     r.squared = s$r.squared,
     sigma = s$sigma,

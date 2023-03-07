@@ -7,7 +7,7 @@
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy(regression = TRUE)
-#' 
+#'
 #' @examplesIf rlang::is_installed(c("gmm", "ggplot2"))
 #'
 #' # load libraries for models and data
@@ -73,7 +73,7 @@
 #'   geom_point() +
 #'   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
 #'   geom_vline(xintercept = 0, color = "red", lty = 2)
-#' 
+#'
 #' @export
 #' @aliases gmm_tidiers
 #' @family gmm tidiers
@@ -120,7 +120,7 @@ glance.gmm <- function(x, ...) {
 
   # TODO: why do we suppress warnings here?
   st <- suppressWarnings(as.numeric(s$stest$test))
-  
+
   as_glance_tibble(
     df = x$df,
     statistic = st[1],

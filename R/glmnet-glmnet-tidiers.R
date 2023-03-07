@@ -45,7 +45,7 @@
 #'
 #' ggplot(tidied, aes(step, estimate, group = term)) +
 #'   geom_line()
-#'   
+#'
 #' ggplot(tidied, aes(lambda, estimate, group = term)) +
 #'   geom_line() +
 #'   scale_x_log10()
@@ -57,7 +57,7 @@
 #' g2 <- sample(1:2, 100, replace = TRUE)
 #' fit2 <- glmnet(x, g2, family = "binomial")
 #' tidy(fit2)
-#' 
+#'
 #' @export
 #' @aliases glmnet_tidiers
 #' @family glmnet tidiers
@@ -67,8 +67,9 @@ tidy.glmnet <- function(x, return_zeros = FALSE, ...) {
 
   if (inherits(x, "multnet")) {
     beta_d <- purrr::map_df(beta, function(b) {
-      as_tidy_tibble(as.matrix(b), 
-                           new_names = 1:ncol(b))
+      as_tidy_tibble(as.matrix(b),
+        new_names = 1:ncol(b)
+      )
     }, .id = "class")
     ret <- beta_d %>%
       pivot_longer(
@@ -81,7 +82,7 @@ tidy.glmnet <- function(x, return_zeros = FALSE, ...) {
       as.matrix(beta),
       new_names = 1:ncol(beta)
     )
-  
+
     ret <- pivot_longer(beta_d,
       cols = c(dplyr::everything(), -term),
       names_to = "step",

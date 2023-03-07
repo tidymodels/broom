@@ -14,7 +14,7 @@
 #' )
 #'
 #' @examplesIf rlang::is_installed("Kendall")
-#' 
+#'
 #' # load libraries for models and data
 #' library(Kendall)
 #'
@@ -30,7 +30,7 @@
 #'
 #' t_res <- SeasonalMannKendall(ts(A))
 #' tidy(t_res)
-#' 
+#'
 #' @export
 #' @seealso [tidy()], [Kendall::Kendall()], [Kendall::MannKendall()],
 #'   [Kendall::SeasonalMannKendall()]

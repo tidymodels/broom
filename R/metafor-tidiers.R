@@ -41,8 +41,7 @@
 #' meta_analysis <- rma(yi, vi, data = df, method = "EB")
 #'
 #' tidy(meta_analysis)
-#' 
-#' 
+#'
 #' @rdname metafor_tidiers
 #'
 tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95,
@@ -60,14 +59,14 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95,
     study <- "overall"
     betas <- betas[1]
   }
-  
-  if (x$level != 1-conf.level) {
-    level <- 1-conf.level
-    if (is.element(x$test, c("knha","adhoc","t"))) {
-      crit <- if (all(x$ddf > 0)) qt(level/2, df=x$ddf, lower.tail=FALSE) else NA
-   } else {
-      crit <- qnorm(level/2, lower.tail=FALSE)
-     }
+
+  if (x$level != 1 - conf.level) {
+    level <- 1 - conf.level
+    if (is.element(x$test, c("knha", "adhoc", "t"))) {
+      crit <- if (all(x$ddf > 0)) qt(level / 2, df = x$ddf, lower.tail = FALSE) else NA
+    } else {
+      crit <- qnorm(level / 2, lower.tail = FALSE)
+    }
     conf.low <- c(betas - crit * x$se)
     conf.high <- c(betas + crit * x$se)
   } else {
@@ -161,7 +160,7 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95,
 #' meta_analysis <- rma(yi, vi, data = df, method = "EB")
 #'
 #' glance(meta_analysis)
-#' 
+#'
 glance.rma <- function(x, ...) {
   # reshape model fit statistics and clean names
   fit_stats <- metafor::fitstats(x)
@@ -204,11 +203,11 @@ glance.rma <- function(x, ...) {
 #' @template title_desc_augment
 #'
 #' @inheritParams tidy.rma
-#' @param interval For `rma.mv` models, should prediction intervals 
-#'    (`"prediction"`, default) or confidence intervals (`"confidence"`) 
-#'    intervals be returned? For `rma.uni` models, prediction intervals are 
+#' @param interval For `rma.mv` models, should prediction intervals
+#'    (`"prediction"`, default) or confidence intervals (`"confidence"`)
+#'    intervals be returned? For `rma.uni` models, prediction intervals are
 #'    always returned. For `rma.mh` and `rma.peto` models, confidence intervals
-#'    are always returned. 
+#'    are always returned.
 #'
 #' @evalRd return_augment(
 #'   .observed = "The observed values for the individual studies",
@@ -224,7 +223,7 @@ glance.rma <- function(x, ...) {
 #' @export
 #'
 #' @examplesIf rlang::is_installed("metafor")
-#' 
+#'
 #' # load modeling library
 #' library(metafor)
 #'
@@ -243,10 +242,10 @@ glance.rma <- function(x, ...) {
 #'
 #' # summarize model fit with tidiers
 #' augment(meta_analysis)
-#' 
+#'
 augment.rma <- function(x, interval = c("prediction", "confidence"), ...) {
   check_ellipses("newdata", "augment", "rma", ...)
-  
+
   # metafor generally handles these for different models through the monolith
   # `rma` class; using `purrr::possibly` primarily helps discard unused
   # components but also helps get the right component for each model
@@ -320,7 +319,7 @@ augment.rma <- function(x, interval = c("prediction", "confidence"), ...) {
   # don't return rownames if they are just row numbers
   no_study_names <- all(x$slab == as.character(seq_along(x$slab)))
   if (no_study_names) ret$.rownames <- NULL
-  
+
   ret <- ret %>% dplyr::select(-dplyr::contains("cr."))
 
   tibble::as_tibble(ret)

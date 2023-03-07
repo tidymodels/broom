@@ -26,11 +26,11 @@
 #'   \url{https://github.com/sgaure/lfe/issues/1#issuecomment-530646990})
 #'
 #' @examplesIf rlang::is_installed("fixest")
-#' 
+#'
 #' # load libraries for models and data
 #' library(fixest)
-#' 
-#' gravity <- 
+#'
+#' gravity <-
 #'   feols(
 #'     log(Euros) ~ log(dist_km) | Origin + Destination + Product + Year, trade
 #'   )
@@ -40,20 +40,20 @@
 #' augment(gravity, trade)
 #'
 #' # to get robust or clustered SEs, users can either:
-#' 
+#'
 #' # 1) specify the arguments directly in the `tidy()` call
-#' 
+#'
 #' tidy(gravity, conf.int = TRUE, cluster = c("Product", "Year"))
-#' 
+#'
 #' tidy(gravity, conf.int = TRUE, se = "threeway")
-#' 
-#' # 2) or, feed tidy() a summary.fixest object that has already accepted 
+#'
+#' # 2) or, feed tidy() a summary.fixest object that has already accepted
 #' # these arguments
-#' 
+#'
 #' gravity_summ <- summary(gravity, cluster = c("Product", "Year"))
-#' 
+#'
 #' tidy(gravity_summ, conf.int = TRUE)
-#' 
+#'
 #' # approach (1) is preferred.
 #'
 #' @export
@@ -62,7 +62,7 @@
 #' [fixest::feNmlm()], [fixest::femlm()], [fixest::feols()], [fixest::fepois()]
 tidy.fixest <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
   check_ellipses("exponentiate", "tidy", "fixest", ...)
-  
+
   coeftable <- summary(x, ...)$coeftable
   ret <- as_tibble(coeftable, rownames = "term")
   colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
@@ -98,12 +98,14 @@ tidy.fixest <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #' @export
 #' @family fixest tidiers
 #' @seealso [augment()], [fixest::feglm()], [fixest::femlm()], [fixest::feols()]
-augment.fixest <- function(x, data = NULL, newdata = NULL,
+augment.fixest <- function(
+    x, data = NULL, newdata = NULL,
     type.predict = c("link", "response"),
     type.residuals = c("response", "deviance", "pearson", "working"),
     ...) {
   if (!x$method %in% c("feols", "feglm", "femlm")) {
-    stop("augment is only supported for fixest models estimated with ",
+    stop(
+      "augment is only supported for fixest models estimated with ",
       "feols, feglm, or femlm\n",
       "  (supplied model used ", x$method, ")"
     )
@@ -199,8 +201,10 @@ glance.fixest <- function(x, ...) {
   # always return all four R2 values.
   names(r2_vals) <- r2_names
   res_r2 <- tibble(!!!r2_vals)
-  col_order <- c("r.squared", "adj.r.squared", "within.r.squared",
-    "pseudo.r.squared", "sigma", "nobs", "AIC", "BIC", "logLik")
+  col_order <- c(
+    "r.squared", "adj.r.squared", "within.r.squared",
+    "pseudo.r.squared", "sigma", "nobs", "AIC", "BIC", "logLik"
+  )
   res <- bind_cols(res_common, res_r2, res_specific) %>%
     select(dplyr::any_of(col_order))
   res

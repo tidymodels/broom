@@ -47,10 +47,9 @@ test_that("glance.ergm", {
   expect_message(
     gl3 <- glance(gest, deviance = TRUE, mcmc = TRUE)
   )
-  
+
   check_glance_outputs(gl)
   check_dims(gl, expected_cols = 9)
   check_dims(gl2, expected_cols = 12)
   check_dims(gl, expected_cols = 9)
-  
 })
