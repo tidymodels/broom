@@ -43,7 +43,7 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item Posit, PBC [copyright holder, funder]
+  \item Posit Software, PBC [copyright holder, funder]
   \item Indrajeet Patil \email{patilindrajeet.science@gmail.com} (\href{https://orcid.org/0000-0003-1995-6531}{ORCID}) [contributor]
   \item Derek Chiu \email{dchiu@bccrc.ca} [contributor]
   \item Matthieu Gomez \email{mattg@princeton.edu} [contributor]

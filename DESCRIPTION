@@ -17,7 +17,7 @@ Authors@R:
              role = c("aut", "cre"),
              email = "simon.couch@posit.co",
              comment = c(ORCID = "0000-0001-5676-5107")),
-      person(given = "Posit, PBC", role = c("cph", "fnd")),
+      person(given = "Posit Software, PBC", role = c("cph", "fnd")),
       person(given = "Indrajeet",
              family = "Patil",
              role = "ctb",
