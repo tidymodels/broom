@@ -45,8 +45,8 @@ install.packages("tidymodels")
 install.packages("broom")
 
 # to get the development version from GitHub:
-install.packages("devtools")
-devtools::install_github("tidymodels/broom")
+install.packages("pak")
+pak::pak("tidymodels/broom")
 ```
 
 If you find a bug, please file a minimal reproducible example in the
