@@ -42,7 +42,7 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 
 Note that the \code{sf} package now defines tidy spatial objects
-and is the recommended approach to spatial data. \code{sp} tidiers are likely
-to be deprecated in the near future in favor of \code{sf::st_as_sf()}.
-Development of \code{sp} tidiers has halted in \code{broom}.
+and is the recommended approach to spatial data. \code{sp} tidiers are now
+soft-deprecated in favor of \code{sf::st_as_sf()}, and will soon be removed
+from the package. Development of \code{sp} tidiers has halted in \code{broom}.
 }

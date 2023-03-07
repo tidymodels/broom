@@ -57,7 +57,10 @@ test_that("polygon tidiers work", {
   check_tidy_output(td, strict = FALSE)
   check_dims(td, 500, 7)
 
-  td <- tidy(SpPDF, region = "x")
+  expect_warning(
+    {td <- tidy(SpPDF, region = "x")},
+    "deprecated"
+  )
   check_tidy_output(td, strict = FALSE)
   check_dims(td, 230, 7)
 })

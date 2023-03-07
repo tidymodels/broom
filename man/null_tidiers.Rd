@@ -25,7 +25,7 @@ An empty \link[tibble:tibble]{tibble::tibble}.
 \code{tidy(NULL)}, \code{glance(NULL)} and \code{augment(NULL)} all return an empty
 \link[tibble:tibble]{tibble::tibble}. This empty tibble can be treated a tibble with zero
 rows, making it convenient to combine with other tibbles using
-functions like \code{\link[purrr:map]{purrr::map_df()}} on lists of potentially \code{NULL} objects.
+functions like \code{\link[purrr:map_dfr]{purrr::map_df()}} on lists of potentially \code{NULL} objects.
 }
 \seealso{
 \link[tibble:tibble]{tibble::tibble}

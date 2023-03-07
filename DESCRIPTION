@@ -547,6 +547,7 @@ Imports:
     ellipsis,
     generics (>= 0.0.2),
     glue,
+    lifecycle,
     purrr,
     rlang,
     stringr,
