@@ -214,7 +214,7 @@ glance.lm <- function(x, ...) {
       sigma = sigma,
       statistic = if (!int_only) {fstatistic["value"]} else {NA_real_},
       p.value = if (!int_only) {
-        pf(
+        stats::pf(
           fstatistic["value"],
           fstatistic["numdf"],
           fstatistic["dendf"],
