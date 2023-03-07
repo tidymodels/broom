@@ -25,7 +25,7 @@
 #' co <- cochrane.orcutt(reg)
 #' tidy(co)
 #' glance(co)
-#' 
+#'
 #' @aliases orcutt_tidiers
 #' @export
 #' @family orcutt tidiers

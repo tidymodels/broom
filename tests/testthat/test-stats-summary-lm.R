@@ -19,10 +19,10 @@ test_that("tidy.summary.lm works", {
   std <- tidy(fit_summ)
   td2 <- tidy(fit2, conf.int = TRUE)
   std2 <- tidy(fit2_summ, conf.int = TRUE)
-  
+
   check_tidy_output(std)
   check_tidy_output(std2)
-  
+
   expect_equal(td, std)
   expect_equal(td2, std2)
 })
@@ -32,11 +32,15 @@ test_that("glance.summary.lm", {
   gl2 <- glance(fit2)
   sgl <- glance(fit_summ)
   sgl2 <- glance(fit2_summ)
-  
+
   check_glance_outputs(sgl, sgl2)
-  
-  expect_equal(dplyr::select(gl, -c('logLik', 'AIC', 'BIC', 'deviance')),
-               sgl)
-  expect_equal(dplyr::select(gl2, -c('logLik', 'AIC', 'BIC', 'deviance')),
-               sgl2)
+
+  expect_equal(
+    dplyr::select(gl, -c("logLik", "AIC", "BIC", "deviance")),
+    sgl
+  )
+  expect_equal(
+    dplyr::select(gl2, -c("logLik", "AIC", "BIC", "deviance")),
+    sgl2
+  )
 })

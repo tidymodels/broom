@@ -14,16 +14,16 @@
 #'
 #' # load modeling library
 #' library(car)
-#' 
+#'
 #' # fit model
 #' dw <- durbinWatsonTest(lm(mpg ~ wt, data = mtcars))
-#' 
+#'
 #' # summarize model fit with tidiers
 #' tidy(dw)
-#' 
+#'
 #' # same output for all durbinWatsonTests
-#' glance(dw) 
-#' 
+#' glance(dw)
+#'
 #' @name durbinWatsonTest_tidiers
 #' @family car tidiers
 #' @export
@@ -58,17 +58,17 @@ glance.durbinWatsonTest <- function(x, ...) tidy(x)
 #' )
 #'
 #' @examplesIf rlang::is_installed("car")
-#' 
+#'
 #' # load libraries for models and data
 #' library(car)
-#' 
+#'
 #' data(Moore)
-#' 
+#'
 #' lt <- with(Moore, leveneTest(conformity, fcategory))
-#' 
+#'
 #' tidy(lt)
 #' glance(lt)
-#' 
+#'
 #' @name leveneTest_tidiers
 #' @family car tidiers
 #' @export

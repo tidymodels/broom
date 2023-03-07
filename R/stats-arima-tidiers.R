@@ -21,14 +21,14 @@
 #' # summarize model fit with tidiers
 #' tidy(fit)
 #' glance(fit)
-#' 
+#'
 #' @aliases Arima_tidiers
 #' @seealso [stats::arima()]
 #' @export
 #' @family Arima tidiers
 tidy.Arima <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
   check_ellipses("exponentiate", "tidy", "Arima", ...)
-  
+
   coefs <- stats::coef(x)
   # standard errors are computed as in stats:::print.Arima
   ses <- rep.int(0, length(coefs))

@@ -31,7 +31,7 @@
 #'     variances of exogenous covariates.}
 #'
 #' @examplesIf rlang::is_installed("lavaan")
-#' 
+#'
 #' # load libraries for models and data
 #' library(lavaan)
 #'
@@ -40,7 +40,7 @@
 #' )
 #'
 #' tidy(cfa.fit)
-#' 
+#'
 #' @export
 #' @aliases lavaan_tidiers sem_tidiers cfa_tidiers
 #' @family lavaan tidiers
@@ -48,7 +48,7 @@
 #'   [lavaan::parameterEstimates()]
 tidy.lavaan <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
   check_ellipses("exponentiate", "tidy", "lavaan", ...)
-  
+
   lavaan::parameterEstimates(x,
     ci = conf.int,
     level = conf.level,
@@ -97,13 +97,13 @@ tidy.lavaan <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #'   \item{estimator}{Estimator used}
 #'   \item{missing_method}{Method for eliminating missing data}
 #'
-#' For further recommendations on reporting SEM and CFA models see 
-#' Schreiber, J. B. (2017). Update to core reporting practices in 
-#' structural equation modeling. Research in Social and Administrative 
+#' For further recommendations on reporting SEM and CFA models see
+#' Schreiber, J. B. (2017). Update to core reporting practices in
+#' structural equation modeling. Research in Social and Administrative
 #' Pharmacy, 13(3), 634-643. https://doi.org/10.1016/j.sapharm.2016.06.006
 #'
 #' @examplesIf rlang::is_installed("lavaan")
-#' 
+#'
 #' library(lavaan)
 #'
 #' # fit model
@@ -114,7 +114,7 @@ tidy.lavaan <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #'
 #' # summarize model fit with tidiers
 #' glance(cfa.fit)
-#' 
+#'
 #' @export
 #' @family lavaan tidiers
 #' @seealso [glance()], [lavaan::cfa()], [lavaan::sem()],

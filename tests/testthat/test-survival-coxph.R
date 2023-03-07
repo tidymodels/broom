@@ -10,9 +10,9 @@ fit <- coxph(Surv(time, status) ~ age + sex, lung)
 fit2 <- coxph(Surv(time, status) ~ age + sex, lung, robust = TRUE)
 fit3 <- coxph(Surv(time, status) ~ age + sex + frailty(inst), lung)
 
-bladder1 <- bladder[bladder$enum < 5, ] 
-fit4 <- coxph(Surv(stop, event) ~ (rx + size + number) * strata(enum) + 
-                cluster(id), bladder1)
+bladder1 <- bladder[bladder$enum < 5, ]
+fit4 <- coxph(Surv(stop, event) ~ (rx + size + number) * strata(enum) +
+  cluster(id), bladder1)
 
 # this model does not have summary(x)$used.robust
 fit5 <- coxph(Surv(time, status) ~ age + pspline(nodes), data = colon)

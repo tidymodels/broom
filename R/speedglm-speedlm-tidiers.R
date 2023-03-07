@@ -19,7 +19,7 @@
 #' tidy(mod)
 #' glance(mod)
 #' augment(mod)
-#' 
+#'
 #' @aliases speedlm_tidiers
 #' @export
 #' @family speedlm tidiers
@@ -27,7 +27,7 @@
 #' @include stats-lm-tidiers.R
 tidy.speedlm <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
   check_ellipses("exponentiate", "tidy", "speedlm", ...)
-  
+
   ret <- as_tibble(summary(x)$coefficients, rownames = "term")
   colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
 
@@ -100,7 +100,6 @@ glance.speedlm <- function(x, ...) {
 #' @family speedlm tidiers
 #' @seealso [speedglm::speedlm()]
 augment.speedlm <- function(x, data = model.frame(x), newdata = NULL, ...) {
-
   # this is a hacky way to prevent the following bug:
   #    speedglm::speedglm(hp ~ log(mpg), mtcars, fitted = TRUE)
   # this also protects against the fact that speedlm doesn't save fitted

@@ -21,6 +21,7 @@ knitr::opts_chunk$set(
 [![Coverage status](https://codecov.io/gh/tidymodels/broom/branch/main/graph/badge.svg)](https://codecov.io/github/tidymodels/broom?branch=main)
 [![CRAN status](https://www.r-pkg.org/badges/version/broom)](https://CRAN.R-project.org/package=broom)
 [![Downloads](https://cranlogs.r-pkg.org/badges/broom)](https://CRAN.R-project.org/package=broom)
+[![R-CMD-check](https://github.com/tidymodels/broom/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tidymodels/broom/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 ## Overview
@@ -40,7 +41,7 @@ If you aren't familiar with tidy data structures and want to know how they can m
 ## Installation
 
 ```{r, eval = FALSE}
-# we recommend installing the entire tidyverse 
+# we recommend installing the entire tidyverse
 # modeling set, which includes broom:
 install.packages("tidymodels")
 
@@ -48,8 +49,8 @@ install.packages("tidymodels")
 install.packages("broom")
 
 # to get the development version from GitHub:
-install.packages("devtools")
-devtools::install_github("tidymodels/broom")
+install.packages("pak")
+pak::pak("tidymodels/broom")
 ```
 
 If you find a bug, please file a minimal reproducible example in the [issues](https://github.com/tidymodels/broom/issues).
@@ -81,7 +82,7 @@ augment(fit, data = trees)
 
 We welcome contributions of all types!
 
-For questions and discussions about tidymodels packages, modeling, and machine learning, please [post on RStudio Community](https://community.rstudio.com/new-topic?category_id=15https://rstd.io/tidymodels-communitytags=tidymodels,question). If you think you have encountered a bug, please [submit an issue](https://github.com/tidymodels/broom/issues). Either way, learn how to create and share a [reprex](https://reprex.tidyverse.org/articles/articles/learn-reprex.html) (a minimal, reproducible example), to clearly communicate about your code. Check out further details on [contributing guidelines for tidymodels packages](https://www.tidymodels.org/contribute/) and [how to get help](https://www.tidymodels.org/help/).
+For questions and discussions about tidymodels packages, modeling, and machine learning, please [post on Posit Community](https://community.rstudio.com/new-topic?category_id=15https://rstd.io/tidymodels-communitytags=tidymodels,question). If you think you have encountered a bug, please [submit an issue](https://github.com/tidymodels/broom/issues). Either way, learn how to create and share a [reprex](https://reprex.tidyverse.org/articles/articles/learn-reprex.html) (a minimal, reproducible example), to clearly communicate about your code. Check out further details on [contributing guidelines for tidymodels packages](https://www.tidymodels.org/contribute/) and [how to get help](https://www.tidymodels.org/help/).
 
 If you have never directly contributed to an R package before, `broom` is an excellent place to start. Find an [issue](https://github.com/tidymodels/broom/issues/) with the **Beginner Friendly** tag and comment that you'd like to take it on and we'll help you get started.
 

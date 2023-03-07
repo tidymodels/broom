@@ -20,7 +20,7 @@
 #' # summarize model fit with tidiers
 #' tidy(s)
 #' glance(s)
-#' 
+#'
 #' @aliases survdiff_tidiers
 #' @export
 #' @seealso [tidy()], [survival::survdiff()]

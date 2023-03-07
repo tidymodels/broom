@@ -9,7 +9,7 @@
 #' @details Returns a data frame in long format with four columns. Use
 #'   \code{tidyr::pivot_wider(..., names_from = variable, values_from = value)}
 #'   on the output to return to a wide format.
-#' 
+#'
 #' @examplesIf rlang::is_installed(c("ks", "ggplot2"))
 #'
 #' # load libraries for models and data
@@ -42,7 +42,7 @@
 #'
 #' td3 <- tidy(k3)
 #' td3
-#' 
+#'
 #' @export
 #' @aliases kde_tidiers ks_tidiers
 #' @seealso [tidy()], [ks::kde()]

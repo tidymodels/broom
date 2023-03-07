@@ -8,9 +8,9 @@
 #'
 #' @evalRd return_tidy(
 #'   size = "Size of each cluster.",
-#'   max.diss = "Maximal dissimilarity between the observations in the 
+#'   max.diss = "Maximal dissimilarity between the observations in the
 #'     cluster and that cluster's medoid.",
-#'   avg.diss = "Average dissimilarity between the observations in the 
+#'   avg.diss = "Average dissimilarity between the observations in the
 #'     cluster and that cluster's medoid.",
 #'   diameter = "Diameter of the cluster.",
 #'   separation = "Separation of the cluster.",
@@ -33,7 +33,7 @@
 #' library(cluster)
 #' library(modeldata)
 #' data(hpc_data)
-#' 
+#'
 #' x <- hpc_data[, 2:5]
 #' p <- pam(x, k = 4)
 #'
@@ -46,7 +46,7 @@
 #'   ggplot(aes(compounds, input_fields)) +
 #'   geom_point(aes(color = .cluster)) +
 #'   geom_text(aes(label = cluster), data = tidy(p), size = 10)
-#'   
+#'
 tidy.pam <- function(x, col.names = paste0("x", 1:ncol(x$medoids)), ...) {
   as_tibble(x$clusinfo) %>%
     mutate(
@@ -74,7 +74,7 @@ tidy.pam <- function(x, col.names = paste0("x", 1:ncol(x$medoids)), ...) {
 #'
 augment.pam <- function(x, data = NULL, ...) {
   check_ellipses("newdata", "augment", "pam", ...)
-  
+
   if (is.null(data)) {
     data <- x$data
   }

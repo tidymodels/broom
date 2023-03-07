@@ -7,15 +7,15 @@
 #'
 #' @evalRd return_tidy(regression = TRUE)
 #'
-#' @details The tibble has four rows. The first two indicate the mediated 
-#'   effect in the control and treatment groups, respectively. And the last 
+#' @details The tibble has four rows. The first two indicate the mediated
+#'   effect in the control and treatment groups, respectively. And the last
 #'   two the direct effect in each group.
-#'   
+#'
 #' @examplesIf rlang::is_installed("mediation")
-#' 
+#'
 #' # load libraries for models and data
 #' library(mediation)
-#' 
+#'
 #' data(jobs)
 #'
 #' # fit models
@@ -27,21 +27,21 @@
 #' tidy(mod)
 #' tidy(mod, conf.int = TRUE)
 #' tidy(mod, conf.int = TRUE, conf.level = .99)
-#' 
+#'
 #' @export
 #' @seealso [tidy()], [mediation::mediate()]
 #' @family mediate tidiers
 #' @aliases mediate_tidiers
 tidy.mediate <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   check_ellipses("exponentiate", "tidy", "mediate", ...)
-  
+
   if (inherits(x, "psych")) {
     stop(
       "No tidy method for objects of class `mediate` from the `psych` package. ",
       "The `tidy.mediate` method is intended for `mediate` objects from the `mediation` package."
     )
   }
-  
+
   d0 <- d1 <- z0 <- z1 <- d0.sims <- d1.sims <- z0.sims <- NULL
   z1.sims <- d0.p <- d1.p <- z0.p <- z1.p <- NULL
   s <- base::summary(x)
@@ -93,9 +93,9 @@ tidy.mediate <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 
     co <- cbind(co, t(ci))
   }
-  
+
   as_tidy_tibble(
-    co, 
+    co,
     new_names = nn[1:ncol(co)]
   )
 }

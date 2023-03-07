@@ -30,14 +30,14 @@
 #' glance(mod)
 #'
 #' augment(mod, selenium)
-#' 
+#'
 #' @export
 #' @seealso [tidy()], [drc::drm()]
 #' @family drc tidiers
 #' @aliases drc_tidiers
 tidy.drc <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
   check_ellipses("exponentiate", "tidy", "drc", ...)
-  
+
   ret <- coef(summary(x))
   ret <- as_tibble(ret, rownames = "term")
   names(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")

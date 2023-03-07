@@ -28,7 +28,6 @@ rep_each <- function(x, times) {
 }
 
 test_that("tidy.mlm works", {
-
   # create data
   nob <- 100
   set.seed(1234)

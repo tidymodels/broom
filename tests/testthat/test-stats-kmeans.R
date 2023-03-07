@@ -33,7 +33,6 @@ test_that("tidy.kmeans", {
 })
 
 test_that("augment.kmeans", {
-
   # data argument cannot be empty
   expect_error(
     augment(fit),

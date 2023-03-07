@@ -15,12 +15,12 @@
 #'
 #' # fit model
 #' bw <- binWidth(100, .1)
-#' 
+#'
 #' bw
 #'
 #' # summarize model fit with tidiers
 #' tidy(bw)
-#' 
+#'
 #' @export
 #' @family bingroup tidiers
 #' @aliases binwidth_tidiers
@@ -57,8 +57,7 @@ tidy.binWidth <- function(x, ...) {
 #' library(ggplot2)
 #' ggplot(tidy(des), aes(n, power)) +
 #'   geom_line()
-#'   
-#' 
+#'
 #' @export
 #' @family bingroup tidiers
 #' @aliases bindesign_tidiers
@@ -83,10 +82,10 @@ tidy.binDesign <- function(x, ...) {
 #' )
 #'
 #' @examplesIf rlang::is_installed(c("binGroup", "ggplot2"))
-#' 
+#'
 #' # load libraries for models and data
 #' library(binGroup)
-#' 
+#'
 #' des <- binDesign(
 #'   nmax = 300, delta = 0.06,
 #'   p.hyp = 0.1, power = .8
@@ -96,17 +95,16 @@ tidy.binDesign <- function(x, ...) {
 #' tidy(des)
 #'
 #' library(ggplot2)
-#' 
+#'
 #' ggplot(tidy(des), aes(n, power)) +
 #'   geom_line()
-#' 
+#'
 #' @export
 #' @family bingroup tidiers
 #' @seealso [glance()], [binGroup::binDesign()]
 glance.binDesign <- function(x, ...) {
-  
   ux <- unclass(x)
-  
+
   as_glance_tibble(
     power = ux$powerout,
     n = ux$nout,

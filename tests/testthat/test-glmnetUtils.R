@@ -16,13 +16,13 @@ data(hpc_data)
 
 fit <- glmnet(formula = mpg ~ ., data = mtcars)
 fit2 <- glmnet(
-  formula = class ~ compounds + input_fields + iterations + num_pending, 
+  formula = class ~ compounds + input_fields + iterations + num_pending,
   data = hpc_data, family = "multinomial"
 )
 
 cv_fit <- cv.glmnet(formula = mpg ~ ., data = mtcars)
 cv_fit2 <- cv.glmnet(
-  formula = class ~ compounds + input_fields + iterations + num_pending, 
+  formula = class ~ compounds + input_fields + iterations + num_pending,
   data = hpc_data, family = "multinomial"
 )
 

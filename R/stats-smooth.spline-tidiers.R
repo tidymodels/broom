@@ -9,18 +9,18 @@
 #'
 #' # fit model
 #' spl <- smooth.spline(mtcars$wt, mtcars$mpg, df = 4)
-#' 
+#'
 #' # summarize model fit with tidiers
 #' augment(spl, mtcars)
-#' 
+#'
 #' # calls original columns x and y
-#' augment(spl) 
+#' augment(spl)
 #'
 #' library(ggplot2)
 #' ggplot(augment(spl, mtcars), aes(wt, mpg)) +
 #'   geom_point() +
 #'   geom_line(aes(y = .fitted))
-#'   
+#'
 #' @evalRd return_augment()
 #'
 #' @aliases smooth.spline_tidiers
@@ -30,7 +30,7 @@
 #'   [stats::predict.smooth.spline()]
 augment.smooth.spline <- function(x, data = x$data, ...) {
   check_ellipses("newdata", "augment", "smooth.spline", ...)
-  
+
   data <- as_tibble(data)
   data$.fitted <- stats::fitted(x)
   data$.resid <- stats::resid(x)

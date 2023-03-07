@@ -11,32 +11,32 @@
 #'
 #' # fit model
 #' n <- nls(mpg ~ k * e^wt, data = mtcars, start = list(k = 1, e = 2))
-#' 
+#'
 #' # summarize model fit with tidiers + visualization
 #' tidy(n)
 #' augment(n)
 #' glance(n)
 #'
 #' library(ggplot2)
-#' 
+#'
 #' ggplot(augment(n), aes(wt, mpg)) +
 #'   geom_point() +
 #'   geom_line(aes(y = .fitted))
 #'
 #' newdata <- head(mtcars)
 #' newdata$wt <- newdata$wt + 1
-#' 
+#'
 #' augment(n, newdata = newdata)
-#' 
+#'
 #' @aliases  nls_tidiers
 #' @export
 #' @seealso [tidy], [stats::nls()], [stats::summary.nls()]
 #' @family nls tidiers
 tidy.nls <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   check_ellipses("exponentiate", "tidy", "nls", ...)
-  
+
   ret <- as_tidy_tibble(
-    stats::coef(summary(x)), 
+    stats::coef(summary(x)),
     new_names = c("estimate", "std.error", "statistic", "p.value")
   )
 

@@ -19,10 +19,10 @@
 #'
 #' # fit model
 #' mod <- lm(cbind(mpg, disp) ~ wt, mtcars)
-#' 
+#'
 #' # summarize model fit with tidiers
 #' tidy(mod, conf.int = TRUE)
-#' 
+#'
 #' @export
 #' @seealso [tidy()]
 #' @family lm tidiers
@@ -45,13 +45,12 @@ tidy.mlm <- function(x,
     new_names = nn[1:ncol(co[[1]])],
     id_column = "response"
   )
-  
+
   ret$response <- stringr::str_replace(ret$response, "Response ", "")
 
   ret <- as_tibble(ret)
 
   if (conf.int) {
-
     # S3 method for computing confidence intervals for `mlm` objects was
     # introduced in R 3.5
     CI <- tryCatch(

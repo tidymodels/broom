@@ -31,7 +31,7 @@
 #'
 #' # summarize model fit with tidiers
 #' tidy(afit)
-#' 
+#'
 #' @aliases aareg_tidiers
 #' @export
 #' @seealso [tidy()], [survival::aareg()]
@@ -47,9 +47,9 @@ tidy.aareg <- function(x, ...) {
       "statistic.z", "p.value"
     )
   }
-  
+
   as_tidy_tibble(
-    summary(x)$table, 
+    summary(x)$table,
     new_names = nn
   )
 }

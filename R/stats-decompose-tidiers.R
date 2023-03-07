@@ -65,7 +65,7 @@
 #'     x = index, y = adjusted, colour = decomp,
 #'     group = decomp
 #'   ))
-#'   
+#'
 #' @aliases decompose_tidiers
 #' @export
 #' @family decompose tidiers
@@ -111,7 +111,7 @@ augment.decomposed.ts <- function(x, ...) {
 #' @seealso [augment()], [stats::stl()]
 augment.stl <- function(x, data = NULL, weights = TRUE, ...) {
   check_ellipses("newdata", "augment", "stl", ...)
-  
+
   ret <- as_tibble(x$time.series)
   ret$weight <- x$weights
   # Inspired by forecast::seasadj, this is the "deseasonalised" data:

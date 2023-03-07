@@ -10,7 +10,7 @@
 #' )
 #'
 #' @examplesIf (rlang::is_installed("muhaz") & rlang::is_installed("survival"))
-#' 
+#'
 #' # load libraries for models and data
 #' library(muhaz)
 #' library(survival)
@@ -21,7 +21,7 @@
 #' # summarize model fit with tidiers
 #' tidy(x)
 #' glance(x)
-#' 
+#'
 #' @aliases muhaz_tidiers
 #' @export
 #' @seealso [tidy()], [muhaz::muhaz()]

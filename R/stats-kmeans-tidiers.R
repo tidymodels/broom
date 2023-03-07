@@ -2,7 +2,7 @@
 #' @template title_desc_tidy
 #'
 #' @param x A `kmeans` object created by [stats::kmeans()].
-#' @param col.names Dimension names. Defaults to the names of the variables 
+#' @param col.names Dimension names. Defaults to the names of the variables
 #'   in x.  Set to NULL to get names `x1, x2, ...`.
 #' @template param_unused_dots
 #'
@@ -10,13 +10,13 @@
 #'
 # skip running examples - occasionally over CRAN check time limit
 #' @examplesIf (rlang::is_installed("cluster") & rlang::is_installed("modeldata") && identical(Sys.getenv("NOT_CRAN"), "true"))
-#'   
+#'
 #' library(cluster)
 #' library(modeldata)
 #' library(dplyr)
-#' 
+#'
 #' data(hpc_data)
-#' 
+#'
 #' x <- hpc_data[, 2:5]
 #'
 #' fit <- pam(x, k = 4)
@@ -58,15 +58,14 @@ tidy.kmeans <- function(x, col.names = colnames(x$centers), ...) {
 #' @seealso [augment()], [stats::kmeans()]
 #' @family kmeans tidiers
 augment.kmeans <- function(x, data, ...) {
-  
   check_ellipses("newdata", "augment", "kmeans", ...)
-  
+
   # kmeans allows for input matrices without column names,
   # so add them in the same way that fix_data_frame() would have
   if (inherits(data, "matrix") & is.null(colnames(data))) {
     colnames(data) <- paste0("X", 1:ncol(data))
   }
-  
+
   as_augment_tibble(data) %>%
     mutate(.cluster = as.factor(!!x$cluster))
 }

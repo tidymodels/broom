@@ -35,10 +35,11 @@ exponentiate <- function(data, col = "estimate") {
 #' @noRd
 #'
 as_augment_tibble <- function(data) {
-
   if (inherits(data, "matrix") & is.null(colnames(data))) {
-    stop("The supplied `data`/`newdata` argument was an unnamed matrix. ",
-         "Please supply a matrix or dataframe with column names.")
+    stop(
+      "The supplied `data`/`newdata` argument was an unnamed matrix. ",
+      "Please supply a matrix or dataframe with column names."
+    )
   }
 
   tryCatch(
@@ -52,15 +53,16 @@ as_augment_tibble <- function(data) {
   )
 
   if (has_rownames(data)) {
-    df <- tibble::add_column(df, 
-                             .rownames = rownames(data), 
-                             .before = TRUE)
+    df <- tibble::add_column(df,
+      .rownames = rownames(data),
+      .before = TRUE
+    )
   }
   df
 }
 
 #' Convert a data.frame or matrix to a tibble
-#' 
+#'
 #' This function is meant for use inside `tidy.*` methods.
 #'
 #' @param x a data.frame or matrix
@@ -71,13 +73,12 @@ as_augment_tibble <- function(data) {
 #' names assigned
 #' @noRd
 as_tidy_tibble <- function(x, new_names = NULL, new_column = "term") {
-  
   if (!is.null(new_names) && length(new_names) != ncol(x)) {
     stop("newnames must be NULL or have length equal to number of columns")
   }
 
   ret <- x
-  
+
   # matrices will take setNames by element, so rename conditionally
   if (!is.null(new_names)) {
     if (inherits(x, "data.frame")) {
@@ -86,31 +87,32 @@ as_tidy_tibble <- function(x, new_names = NULL, new_column = "term") {
       colnames(ret) <- new_names
     }
   }
-  
+
   if (all(rownames(x) == seq_len(nrow(x)))) {
     # don't need to move rownames into a new column
     tibble::as_tibble(ret)
   } else {
     # don't use tibble rownames to col because of name repairing
-    dplyr::bind_cols(!!new_column := rownames(x), 
-                     tibble::as_tibble(ret))
+    dplyr::bind_cols(
+      !!new_column := rownames(x),
+      tibble::as_tibble(ret)
+    )
   }
 }
 
 #' @param x A list of data.frames or matrices
 #' @param ... Extra arguments to pass to as_tidy_tibble
-#' @param id_column The name of the column giving the name of each 
+#' @param id_column The name of the column giving the name of each
 #' element in `x`
 #' @noRd
-map_as_tidy_tibble <- function(x, 
-                                     ..., 
-                                     id_column = "component") {
-  
-  purrr::map_df(x, 
-                as_tidy_tibble, 
-                ...,
-                .id = id_column)
-  
+map_as_tidy_tibble <- function(x,
+                               ...,
+                               id_column = "component") {
+  purrr::map_df(x,
+    as_tidy_tibble,
+    ...,
+    .id = id_column
+  )
 }
 
 # copied from modeltests. re-export if at some we Import modeltests rather
@@ -122,22 +124,23 @@ has_rownames <- function(df) {
   any(rownames(df) != as.character(1:nrow(df)))
 }
 
-na_types_dict <- list("r" = NA_real_,
-                      "i" = rlang::na_int,
-                      "c" = NA_character_,
-                      "l" = rlang::na_lgl)
+na_types_dict <- list(
+  "r" = NA_real_,
+  "i" = rlang::na_int,
+  "c" = NA_character_,
+  "l" = rlang::na_lgl
+)
 
 # a function that converts a string to a vector of NA types.
 # e.g. "rri" -> c(NA_real_, NA_real_, rlang::na_int)
 parse_na_types <- function(s) {
-  
   positions <- purrr::map(
-    stringr::str_split(s, pattern = ""), 
+    stringr::str_split(s, pattern = ""),
     match,
     table = names(na_types_dict)
   ) %>%
     unlist()
-  
+
   na_types_dict[positions] %>%
     unlist() %>%
     unname()
@@ -146,24 +149,26 @@ parse_na_types <- function(s) {
 # a function that, given named arguments, will make a one-row
 # tibble, switching out NULLs for the appropriate NA type.
 as_glance_tibble <- function(..., na_types) {
-  
   cols <- list(...)
-  
+
   if (length(cols) != stringr::str_length(na_types)) {
     stop(
       "The number of columns provided does not match the number of ",
       "column types provided."
     )
   }
-  
+
   na_types_long <- parse_na_types(na_types)
-  
-  entries <- purrr::map2(cols, 
-                         na_types_long, 
-                         function(.x, .y) {if (length(.x) == 0) .y else .x})
-  
+
+  entries <- purrr::map2(
+    cols,
+    na_types_long,
+    function(.x, .y) {
+      if (length(.x) == 0) .y else .x
+    }
+  )
+
   tibble::as_tibble_row(entries)
-  
 }
 
 # strip rownames from a data frame
@@ -176,11 +181,11 @@ unrowname <- function(x) {
 #' an augment call
 #'
 #' `augment_columns` is intended for use in the internals of `augment` methods
-#' only and is exported for developers extending the broom package. Please 
-#' instead use [augment()] to appropriately make use of the functionality 
+#' only and is exported for developers extending the broom package. Please
+#' instead use [augment()] to appropriately make use of the functionality
 #' in `augment_columns()`.
 #'
-#' Note that, in the case that a `residuals()` or `influence()` generic is 
+#' Note that, in the case that a `residuals()` or `influence()` generic is
 #' not implemented for the supplied model `x`, the function will fail quietly.
 #'
 #' @param x a model
@@ -328,17 +333,17 @@ response <- function(object, newdata = NULL, has_response) {
   if (!has_response) {
     return(NULL)
   }
-  
-  res <- 
+
+  res <-
     tryCatch(
       model.response(model.frame(terms(object), data = newdata, na.action = na.pass)),
       error = function(e) NULL
     )
-  
+
   if (is.null(res)) {
     res <- model.response(model.frame(object))
   }
-  
+
   res
 }
 
@@ -387,13 +392,13 @@ augment_newdata <- function(x, data, newdata, .se_fit, interval = NULL, ...) {
   # interval <- match.arg(interval)
   # check if response variable is in newdata, if relevant:
   if (!is.null(x$terms) & inherits(x$terms, "formula")) {
-    has_response <- 
-      # TRUE if response includes a function call and is in column names, 
-      # usually with no `data` or `newdata` supplied, 
+    has_response <-
+      # TRUE if response includes a function call and is in column names,
+      # usually with no `data` or `newdata` supplied,
       # and `data` defaults to `model_frame(x)`
       rlang::as_label(rlang::f_lhs(x$terms)) %in% names(df) ||
-      # TRUE if the response variable itself is in column names
-      all.vars(x$terms)[1] %in% names(df)
+        # TRUE if the response variable itself is in column names
+        all.vars(x$terms)[1] %in% names(df)
   } else {
     has_response <- FALSE
   }
@@ -412,31 +417,30 @@ augment_newdata <- function(x, data, newdata, .se_fit, interval = NULL, ...) {
 
   # This helper *should not* be used for predict methods that do not have
   # an na.pass argument
-  
+
   if (.se_fit) {
     pred_obj <- predict(x, newdata = newdata, na.action = na.pass, se.fit = .se_fit, interval = interval, ...)
-    if (is.null(interval) || interval=="none") {
+    if (is.null(interval) || interval == "none") {
       df$.fitted <- pred_obj$fit %>% unname()
     } else {
       df$.fitted <- pred_obj$fit[, "fit"]
       df$.lower <- pred_obj$fit[, "lwr"]
       df$.upper <- pred_obj$fit[, "upr"]
     }
-    
+
     # a couple possible names for the standard error element of the list
     # se.fit: lm, glm
     # se: loess
     se_idx <- which(names(pred_obj) %in% c("se.fit", "se"))
     df$.se.fit <- pred_obj[[se_idx]]
-    
-  } else if (!is.null(interval) && interval!="none") {
+  } else if (!is.null(interval) && interval != "none") {
     pred_obj <- predict(x, newdata = newdata, na.action = na.pass, se.fit = FALSE, interval = interval, ...)
     df$.fitted <- pred_obj[, "fit"]
     df$.lower <- pred_obj[, "lwr"]
     df$.upper <- pred_obj[, "upr"]
   } else if (passed_newdata) {
-    if (is.null(interval) || interval=="none") {
-      df$.fitted <- predict(x, newdata = newdata, na.action = na.pass, ...) %>% 
+    if (is.null(interval) || interval == "none") {
+      df$.fitted <- predict(x, newdata = newdata, na.action = na.pass, ...) %>%
         unname()
     } else {
       pred_obj <- predict(x, newdata = newdata, na.action = na.pass, interval = interval, ...)
@@ -445,8 +449,8 @@ augment_newdata <- function(x, data, newdata, .se_fit, interval = NULL, ...) {
       df$.upper <- pred_obj$fit[, "upr"]
     }
   } else {
-    if (is.null(interval) || interval=="none") {
-      df$.fitted <- predict(x, na.action = na.pass, ...) %>% 
+    if (is.null(interval) || interval == "none") {
+      df$.fitted <- predict(x, na.action = na.pass, ...) %>%
         unname()
     } else {
       pred_obj <- predict(x, newdata = newdata, na.action = na.pass, interval = interval, ...)
@@ -459,7 +463,7 @@ augment_newdata <- function(x, data, newdata, .se_fit, interval = NULL, ...) {
   resp <- safe_response(x, df, has_response)
 
   if (!is.null(resp) && is.numeric(resp)) {
-    df$.resid <- (resp - df$.fitted) %>% unname() 
+    df$.resid <- (resp - df$.fitted) %>% unname()
   }
 
   df
@@ -468,7 +472,6 @@ augment_newdata <- function(x, data, newdata, .se_fit, interval = NULL, ...) {
 # this exists to avoid the single predictor gotcha
 # this version adds a terms column
 broom_confint <- function(x, ...) {
-
   # warn on arguments silently being ignored
   ellipsis::check_dots_used()
   ci <- suppressMessages(confint(x, ...))
@@ -487,7 +490,6 @@ broom_confint <- function(x, ...) {
 
 # this version adds a terms column
 broom_confint_terms <- function(x, ...) {
-
   # warn on arguments silently being ignored
   ellipsis::check_dots_used()
   ci <- suppressMessages(confint(x, ...))
@@ -510,14 +512,14 @@ warn_on_subclass <- function(x, tidier) {
   if (length(class(x)) > 1 && class(x)[1] != "glm") {
     subclass <- class(x)[1]
     dispatched_method <- class(x)[class(x) %in% c("glm", "lm")][1]
-      
+
     rlang::warn(
       paste0(
-        "The `", tidier, "()` method for objects of class `", 
-        subclass, 
+        "The `", tidier, "()` method for objects of class `",
+        subclass,
         "` is not maintained by the broom team, and is only supported through ",
-        "the `", 
-        dispatched_method, 
+        "the `",
+        dispatched_method,
         "` tidier method. Please be cautious in interpreting and reporting ",
         "broom output.\n"
       ),
@@ -637,7 +639,7 @@ globalVariables(
   )
 )
 
-# a gentler version of dots checking that, given a dots entry to 
+# a gentler version of dots checking that, given a dots entry to
 # look for, will warn if that entry is in the dots.
 # in broom, this is used for exponentiate (in tidy) and newdata (in augment).
 check_ellipses <- function(arg, fn, cls, ...) {
@@ -645,7 +647,7 @@ check_ellipses <- function(arg, fn, cls, ...) {
 
   if (arg %in% names(dots)) {
     rlang::warn(paste0(
-      "The `", arg, "` argument is not supported in the `", fn, 
+      "The `", arg, "` argument is not supported in the `", fn,
       "()` method for `", cls, "` objects and will be ignored."
     ))
   }

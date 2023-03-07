@@ -15,18 +15,18 @@
 #'     component",
 #'   component = "Cluster id as a factor."
 #' )
-#' 
+#'
 #' @examplesIf rlang::is_installed("mclust")
-#' 
+#'
 #' # load library for models and data
 #' library(mclust)
-#' 
+#'
 #' # load data manipulation libraries
 #' library(dplyr)
 #' library(tibble)
 #' library(purrr)
 #' library(tidyr)
-#' 
+#'
 #' set.seed(27)
 #'
 #' centers <- tibble(
@@ -34,9 +34,9 @@
 #'   # number points in each cluster
 #'   num_points = c(100, 150, 50),
 #'   # x1 coordinate of cluster center
-#'   x1 = c(5, 0, -3), 
+#'   x1 = c(5, 0, -3),
 #'   # x2 coordinate of cluster center
-#'   x2 = c(-1, 1, -2) 
+#'   x2 = c(-1, 1, -2)
 #' )
 #'
 #' points <- centers %>%
@@ -54,8 +54,7 @@
 #' tidy(m)
 #' augment(m, points)
 #' glance(m)
-#' 
-#' 
+#'
 #' @export
 #' @aliases mclust_tidiers
 #' @seealso [tidy()], [mclust::Mclust()]
@@ -104,7 +103,7 @@ tidy.Mclust <- function(x, ...) {
 #'
 augment.Mclust <- function(x, data = NULL, ...) {
   check_ellipses("newdata", "augment", "Mclust", ...)
-  
+
   if (is.null(data)) {
     data <- x$data
   } else if (!(is.data.frame(data) || is.matrix(data))) {

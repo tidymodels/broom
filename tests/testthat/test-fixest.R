@@ -22,7 +22,7 @@ fit <- fixest::feols(v2 ~ v3, df)
 fit2 <- fixest::feols(v2 ~ v3 | id + v1, df)
 
 form <- v2 ~ v4
-fit_form <- fixest::feols(form, df)  # part of a regression test
+fit_form <- fixest::feols(form, df) # part of a regression test
 
 test_that("fixest tidier arguments", {
   check_arguments(tidy.fixest)
@@ -31,9 +31,9 @@ test_that("fixest tidier arguments", {
 })
 
 test_that("bug #1018: fixed effects but no regressors", {
-    mod <- fixest::feols(Sepal.Length ~ 1 | Species, data = iris)
-    check_tidy_output(tidy(mod))
-    check_glance_outputs(glance(mod))
+  mod <- fixest::feols(Sepal.Length ~ 1 | Species, data = iris)
+  check_tidy_output(tidy(mod))
+  check_glance_outputs(glance(mod))
 })
 
 test_that("tidy.fixest", {
@@ -59,7 +59,6 @@ test_that("glance.fixest", {
 })
 
 test_that("augment.fixest", {
-
   check_augment_function(
     aug = augment.fixest,
     model = fit,
@@ -88,13 +87,13 @@ test_that("augment.fixest", {
 test_that("all other fixest estimators run", {
   skip_on_cran()
   skip_on_ci()
-  
+
   form <- v2 ~ v4 | id
-  res_feglm    <- fixest::feglm(form,    data = df, family = "poisson")
+  res_feglm <- fixest::feglm(form, data = df, family = "poisson")
   res_fenegbin <- fixest::fenegbin(form, data = df)
-  res_feNmlm   <- fixest::feNmlm(form,   data = df)
-  res_femlm    <- fixest::femlm(form,    data = df)
-  res_fepois   <- fixest::fepois(form,   data = df)
+  res_feNmlm <- fixest::feNmlm(form, data = df)
+  res_femlm <- fixest::femlm(form, data = df)
+  res_fepois <- fixest::fepois(form, data = df)
 
   # Tidy
   check_tidy_output(tidy(res_feglm))
@@ -141,7 +140,7 @@ test_that("all other fixest estimators run", {
 test_that("tidiers work with model results or summary of model results", {
   skip_on_cran()
   skip_on_ci()
-  
+
   # Default standard errors are clustered by `id`. Test against non-default
   # independent, heteroskedastic ("hetero") standard errors.
   fit2_summ <- summary(fit2, se = "hetero")

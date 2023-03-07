@@ -33,7 +33,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Simon Couch \email{simonpatrickcouch@gmail.com} (\href{https://orcid.org/0000-0001-5676-5107}{ORCID})
+\strong{Maintainer}: Simon Couch \email{simon.couch@posit.co} (\href{https://orcid.org/0000-0001-5676-5107}{ORCID})
 
 Authors:
 \itemize{
@@ -43,7 +43,7 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item RStudio [copyright holder, funder]
+  \item Posit Software, PBC [copyright holder, funder]
   \item Indrajeet Patil \email{patilindrajeet.science@gmail.com} (\href{https://orcid.org/0000-0003-1995-6531}{ORCID}) [contributor]
   \item Derek Chiu \email{dchiu@bccrc.ca} [contributor]
   \item Matthieu Gomez \email{mattg@princeton.edu} [contributor]
@@ -59,7 +59,7 @@ Other contributors:
   \item Gavin Simpson \email{ucfagls@gmail.com} [contributor]
   \item Jens Preussner \email{ jens.preussner@mpi-bn.mpg.de} [contributor]
   \item Jay Hesselberth \email{jay.hesselberth@gmail.com} [contributor]
-  \item Hadley Wickham \email{hadley@rstudio.com} [contributor]
+  \item Hadley Wickham \email{hadley@posit.co} [contributor]
   \item Matthew Lincoln \email{matthew.d.lincoln@gmail.com} [contributor]
   \item Alessandro Gasparini \email{ag475@leicester.ac.uk} [contributor]
   \item Lukasz Komsta \email{lukasz.komsta@umlub.pl} [contributor]
@@ -115,16 +115,16 @@ Other contributors:
   \item James Martherus \email{james@martherus.com} (\href{https://orcid.org/0000-0002-8285-3300}{ORCID}) [contributor]
   \item Chuliang Xiao \email{cxiao@umich.edu} (\href{https://orcid.org/0000-0002-8466-9398}{ORCID}) [contributor]
   \item Joseph Larmarange \email{joseph@larmarange.net} [contributor]
-  \item Max Kuhn \email{max@rstudio.com} [contributor]
+  \item Max Kuhn \email{max@posit.co} [contributor]
   \item Michal Bojanowski \email{michal2992@gmail.com} [contributor]
   \item Hakon Malmedal \email{hmalmedal@gmail.com} [contributor]
   \item Clara Wang [contributor]
   \item Sergio Oller \email{sergioller@gmail.com} [contributor]
   \item Luke Sonnet \email{luke.sonnet@gmail.com} [contributor]
-  \item Jim Hester \email{jim.hester@rstudio.com} [contributor]
+  \item Jim Hester \email{jim.hester@posit.co} [contributor]
   \item Ben Schneider \email{benjamin.julius.schneider@gmail.com} [contributor]
   \item Bernie Gray \email{bfgray3@gmail.com} (\href{https://orcid.org/0000-0001-9190-6032}{ORCID}) [contributor]
-  \item Mara Averick \email{mara@rstudio.com} [contributor]
+  \item Mara Averick \email{mara@posit.co} [contributor]
   \item Aaron Jacobs \email{atheriel@gmail.com} [contributor]
   \item Andreas Bender \email{bender.at.R@gmail.com} [contributor]
   \item Sven Templer \email{sven.templer@gmail.com} [contributor]
@@ -147,7 +147,7 @@ Other contributors:
   \item Lisa Lendway \email{llendway@macalester.edu} [contributor]
   \item Karl Hailperin \email{khailper@gmail.com} [contributor]
   \item Josue Rodriguez \email{jerrodriguez@ucdavis.edu} [contributor]
-  \item Jenny Bryan \email{jenny@rstudio.com} [contributor]
+  \item Jenny Bryan \email{jenny@posit.co} [contributor]
   \item Chris Jarvis \email{Christopher1.jarvis@gmail.com} [contributor]
   \item Greg Macfarlane \email{gregmacfarlane@gmail.com} [contributor]
   \item Brian Mannakee \email{bmannakee@gmail.com} [contributor]

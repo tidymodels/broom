@@ -15,9 +15,9 @@ Authors@R:
       person(given = "Simon",
              family = "Couch",
              role = c("aut", "cre"),
-             email = "simonpatrickcouch@gmail.com",
+             email = "simon.couch@posit.co",
              comment = c(ORCID = "0000-0001-5676-5107")),
-      person("RStudio", role = c("cph", "fnd")),
+      person(given = "Posit Software, PBC", role = c("cph", "fnd")),
       person(given = "Indrajeet",
              family = "Patil",
              role = "ctb",
@@ -82,7 +82,7 @@ Authors@R:
       person(given = "Hadley",
              family = "Wickham",
              role = "ctb",
-             email = "hadley@rstudio.com"),
+             email = "hadley@posit.co"),
       person(given = "Matthew",
              family = "Lincoln",
              role = "ctb",
@@ -314,7 +314,7 @@ Authors@R:
       person(given = "Max",
              family = "Kuhn",
              role = "ctb",
-             email = "max@rstudio.com"),
+             email = "max@posit.co"),
       person(given = "Michal",
              family = "Bojanowski",
              role = "ctb",
@@ -337,7 +337,7 @@ Authors@R:
       person(given = "Jim",
              family = "Hester",
              role = "ctb",
-             email = "jim.hester@rstudio.com"),
+             email = "jim.hester@posit.co"),
       person(given = "Ben",
              family = "Schneider",
              role = "ctb",
@@ -350,7 +350,7 @@ Authors@R:
       person(given = "Mara",
              family = "Averick",
              role = "ctb",
-             email = "mara@rstudio.com"),
+             email = "mara@posit.co"),
       person(given = "Aaron",
              family = "Jacobs",
              role = "ctb",
@@ -440,7 +440,7 @@ Authors@R:
       person(given = "Jenny",
              family = "Bryan",
              role = "ctb",
-             email = "jenny@rstudio.com"),
+             email = "jenny@posit.co"),
       person(given = "Chris",
              family = "Jarvis",
              role = "ctb",
@@ -540,7 +540,7 @@ URL: https://broom.tidymodels.org/,
     https://github.com/tidymodels/broom
 BugReports: https://github.com/tidymodels/broom/issues
 Depends:
-    R (>= 3.1)
+    R (>= 3.5)
 Imports:
     backports,
     dplyr (>= 1.0.0),
@@ -644,7 +644,7 @@ Config/Needs/website:
     tidyverse/tidytemplate    
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 Language: en-US
 Collate:
     'aaa-documentation-helper.R'

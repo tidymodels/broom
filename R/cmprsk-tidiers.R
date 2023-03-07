@@ -18,16 +18,16 @@
 #' @examplesIf rlang::is_installed("cmprsk")
 #'
 #' library(cmprsk)
-#' 
+#'
 #' # time to loco-regional failure (lrf)
-#' lrf_time <- rexp(100) 
-#' lrf_event <- sample(0:2, 100, replace = TRUE) 
+#' lrf_time <- rexp(100)
+#' lrf_event <- sample(0:2, 100, replace = TRUE)
 #' trt <- sample(0:1, 100, replace = TRUE)
 #' strt <- sample(1:2, 100, replace = TRUE)
-#' 
+#'
 #' # fit model
 #' x <- crr(lrf_time, lrf_event, cbind(trt, strt))
-#' 
+#'
 #' # summarize model fit with tidiers
 #' tidy(x, conf.int = TRUE)
 #' glance(x)
@@ -37,17 +37,18 @@
 #' @seealso [tidy()], [cmprsk::crr()]
 #' @family cmprsk tidiers
 tidy.crr <- function(x, exponentiate = FALSE, conf.int = FALSE,
-                       conf.level = .95, ...) {
- 
+                     conf.level = .95, ...) {
   s <- summary(x, conf.int = conf.level)
   ret <- as_tidy_tibble(
     s$coef,
-    new_names = c("estimate", "estimate_exp", "std.error", "statistic", "p.value"))[, -3]
+    new_names = c("estimate", "estimate_exp", "std.error", "statistic", "p.value")
+  )[, -3]
 
   if (conf.int) {
     ci <- as_tidy_tibble(
       log(s$conf.int),
-      new_names = c("estimate_exp", "estimate_neg_exp", "conf.low", "conf.high"))[, -c(2, 3)]
+      new_names = c("estimate_exp", "estimate_neg_exp", "conf.low", "conf.high")
+    )[, -c(2, 3)]
     ret <- dplyr::left_join(ret, ci, by = "term")
   }
 

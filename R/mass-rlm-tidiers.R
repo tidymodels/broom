@@ -26,7 +26,7 @@
 #' tidy(r)
 #' augment(r)
 #' glance(r)
-#' 
+#'
 #' @export
 #' @aliases rlm_tidiers
 #' @family rlm tidiers
@@ -60,7 +60,7 @@ confint.rlm <- confint.default
 #' @include stats-lm-tidiers.R
 tidy.rlm <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   check_ellipses("exponentiate", "tidy", "rlm", ...)
-  
+
   ret <- as_tibble(summary(x)$coefficients, rownames = "term")
   colnames(ret) <- c("term", "estimate", "std.error", "statistic")
 
@@ -92,7 +92,8 @@ augment.rlm <- function(x, data = model.frame(x), newdata = NULL,
   df <- augment_newdata(x, data, newdata, se_fit)
 
   if (is.null(newdata)) {
-    tryCatch({
+    tryCatch(
+      {
         infl <- influence(x, do.coef = FALSE)
         df <- add_hat_sigma_cols(df, x, infl)
       },

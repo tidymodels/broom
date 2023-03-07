@@ -19,12 +19,12 @@
 #'   \item{std.error}{The standard error}
 #'   \item{mcmc.error}{The MCMC error}
 #'   \item{p.value}{The two-sided p-value}
-#' 
+#'
 #' @examplesIf rlang::is_installed("ergm")
 #'
 #' # load libraries for models and data
 #' library(ergm)
-#' 
+#'
 #' # load the Florentine marriage network data
 #' data(florentine)
 #'
@@ -43,7 +43,7 @@
 #' glance(gest)
 #' glance(gest, deviance = TRUE)
 #' glance(gest, mcmc = TRUE)
-#' 
+#'
 #' @references Hunter DR, Handcock MS, Butts CT, Goodreau SM, Morris M (2008b).
 #'   \pkg{ergm}: A Package to Fit, Simulate and Diagnose Exponential-Family
 #'   Models for Networks. *Journal of Statistical Software*, 24(3).
@@ -56,7 +56,6 @@
 #' @family ergm tidiers
 tidy.ergm <- function(x, conf.int = FALSE, conf.level = 0.95,
                       exponentiate = FALSE, ...) {
-
   # in ergm 3.9 summary(x, ...)$coefs has columns:
   #   Estimate, Std. Error, MCMC %, Pr(>|Z|)
 
@@ -87,7 +86,6 @@ tidy.ergm <- function(x, conf.int = FALSE, conf.level = 0.95,
     }
 
     ret <- exponentiate(ret)
-
   }
 
   as_tibble(ret)
@@ -131,7 +129,6 @@ glance.ergm <- function(x, deviance = FALSE, mcmc = FALSE, ...) {
   )
 
   if (deviance & !is.null(ret$logLik)) {
-
     # see #567 for details on the following
 
     if (utils::packageVersion("ergm") < "3.10") {
@@ -160,7 +157,7 @@ glance.ergm <- function(x, deviance = FALSE, mcmc = FALSE, ...) {
         "using MCMC, so the corresponding columns will be omitted."
       )
     }
-    
+
     ret$MCMC.interval <- x$control$MCMC.interval
     ret$MCMC.burnin <- x$control$MCMC.burnin
     ret$MCMC.samplesize <- x$control$MCMC.samplesize

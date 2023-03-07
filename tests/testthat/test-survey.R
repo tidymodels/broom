@@ -16,15 +16,17 @@ fit <- svyolr(Sat ~ Infl + Type + Cont, design = design)
 
 data("api", package = "survey")
 dstrat <- svydesign(
-    id = ~1,
-    strata = ~stype,
-    weights = ~pw,
-    data = apistrat,
-    fpc = ~fpc)
+  id = ~1,
+  strata = ~stype,
+  weights = ~pw,
+  data = apistrat,
+  fpc = ~fpc
+)
 fit_svyglm <- svyglm(
-    formula = sch.wide ~ ell + meals + mobility,
-    design = dstrat,
-    family = quasibinomial())
+  formula = sch.wide ~ ell + meals + mobility,
+  design = dstrat,
+  family = quasibinomial()
+)
 
 
 test_that("survey tidier arguments", {

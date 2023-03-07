@@ -50,7 +50,7 @@ tidy.glmrob <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #'   [tidy.rlm()].
 #'
 #' @inherit tidy.lmrob examples
-#' 
+#'
 #' @export
 #' @family robustbase tidiers
 #' @rdname augment.robustbase.glmrob

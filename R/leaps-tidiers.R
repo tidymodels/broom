@@ -20,10 +20,10 @@
 #'
 #' # fit model
 #' all_fits <- regsubsets(hp ~ ., mtcars)
-#' 
+#'
 #' # summarize model fit with tidiers
 #' tidy(all_fits)
-#' 
+#'
 #' @aliases leaps_tidiers
 #' @export
 #' @seealso [tidy()], [leaps::regsubsets()]

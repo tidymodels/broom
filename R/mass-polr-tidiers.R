@@ -4,7 +4,7 @@
 #' @param x A `polr` object returned from [MASS::polr()].
 #' @template param_confint
 #' @template param_exponentiate
-#' @param p.values Logical. Should p-values be returned, 
+#' @param p.values Logical. Should p-values be returned,
 #' based on chi-squared tests from [MASS::dropterm()]. Defaults to FALSE.
 #' @template param_unused_dots
 #'
@@ -23,21 +23,21 @@
 #' augment(fit, type.predict = "class")
 #'
 #' fit2 <- polr(factor(gear) ~ am + mpg + qsec, data = mtcars)
-#' 
+#'
 #' tidy(fit, p.values = TRUE)
-#' 
+#'
 #' @evalRd return_tidy(regression = TRUE)
 #'
 #' @details In `broom 0.7.0` the `coefficient_type` column was renamed to
 #'   `coef.type`, and the contents were changed as well. Now the contents
 #'   are `coefficient` and `scale`, rather than `coefficient` and `zeta`.
-#'   
+#'
 #'   Calculating p.values with the `dropterm()` function is the approach
 #'   suggested by the MASS package author. This
 #'   approach is computationally intensive so that p.values are only
-#'   returned if requested explicitly. Additionally, it only works for 
+#'   returned if requested explicitly. Additionally, it only works for
 #'   models containing no variables with more than two categories. If this
-#'   condition is not met, a message is shown and NA is returned instead of 
+#'   condition is not met, a message is shown and NA is returned instead of
 #'   p-values.
 #'
 #' @aliases polr_tidiers
@@ -57,21 +57,25 @@ tidy.polr <- function(x, conf.int = FALSE, conf.level = 0.95,
   if (exponentiate) {
     ret <- exponentiate(ret)
   }
-  
+
   if (p.values) {
     sig <- MASS::dropterm(x, test = "Chisq")
-    p <- sig %>% dplyr::select(`Pr(Chi)`) %>% dplyr::pull() %>% .[-1]
-    terms <- purrr::map(rownames(sig)[-1], function(x) 
-      ret$term[stringr::str_detect(ret$term, stringr::fixed(x))]) %>% unlist()
+    p <- sig %>%
+      dplyr::select(`Pr(Chi)`) %>%
+      dplyr::pull() %>%
+      .[-1]
+    terms <- purrr::map(rownames(sig)[-1], function(x) {
+      ret$term[stringr::str_detect(ret$term, stringr::fixed(x))]
+    }) %>% unlist()
     if (length(p) == length(terms)) {
       ret <- dplyr::left_join(ret, tibble::tibble(term = terms, p.value = p), by = "term")
     } else {
-      message("p-values can presently only be returned for models that contain 
+      message("p-values can presently only be returned for models that contain
               no categorical variables with more than two levels")
       ret$p.value <- NA
     }
   }
-  
+
   mutate(
     ret,
     coef.type = if_else(term %in% names(x$zeta), "scale", "coefficient")

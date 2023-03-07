@@ -20,14 +20,14 @@
 #'
 #' # load libraries for models and data
 #' library(gam)
-#' 
+#'
 #' # fit model
 #' g <- gam(mpg ~ s(hp, 4) + am + qsec, data = mtcars)
 #'
 #' # summarize model fit with tidiers
 #' tidy(g)
 #' glance(g)
-#' 
+#'
 #' @export
 #' @family gam tidiers
 #' @aliases Gam_tidiers
@@ -60,9 +60,8 @@ tidy.Gam <- function(x, ...) {
 #' @seealso [glance()], [gam::gam()]
 #' @rdname glance_gam_hastie
 glance.Gam <- function(x, ...) {
-  
   s <- summary(x)
-  
+
   as_glance_tibble(
     df = s$df[1],
     logLik = as.numeric(stats::logLik(x)),
@@ -73,5 +72,4 @@ glance.Gam <- function(x, ...) {
     nobs = stats::nobs(x),
     na_types = "irrrrii"
   )
-
 }

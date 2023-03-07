@@ -55,7 +55,7 @@
 #'   that SVD is only equivalent to PCA on centered data.
 #'
 #' @examplesIf rlang::is_installed(c("maps", "ggplot2"))
-#' 
+#'
 #' pc <- prcomp(USArrests, scale = TRUE)
 #'
 #' # information about rotation
@@ -83,7 +83,7 @@
 #'   ggtitle("Principal components of arrest data")
 #'
 #' au <- augment(pc, data = USArrests)
-#' 
+#'
 #' au
 #'
 #' ggplot(au, aes(.fittedPC1, .fittedPC2)) +
@@ -113,18 +113,22 @@ tidy.prcomp <- function(x, matrix = "u", ...) {
       new_column = "PC"
     )
   } else if (matrix %in% c("rotation", "variables", "v", "loadings")) {
-    ret <- x$rotation %>% 
-      tibble::as_tibble(rownames = "column") %>% 
-      tidyr::pivot_longer(cols = -"column", 
-                          names_to = "PC", 
-                          values_to = "value")
+    ret <- x$rotation %>%
+      tibble::as_tibble(rownames = "column") %>%
+      tidyr::pivot_longer(
+        cols = -"column",
+        names_to = "PC",
+        values_to = "value"
+      )
     if (is.null(rownames(x$rotation))) ret$column <- as.integer(ret$column)
   } else if (matrix %in% c("x", "samples", "u", "scores")) {
-    ret <- x$x %>% 
-      tibble::as_tibble(rownames = "row") %>% 
-      tidyr::pivot_longer(cols = -"row", 
-                          names_to = "PC", 
-                          values_to = "value")
+    ret <- x$x %>%
+      tibble::as_tibble(rownames = "row") %>%
+      tidyr::pivot_longer(
+        cols = -"row",
+        names_to = "PC",
+        values_to = "value"
+      )
     if (is.null(rownames(x$x))) ret$row <- as.integer(ret$row)
   }
 

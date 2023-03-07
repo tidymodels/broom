@@ -8,7 +8,7 @@ library(vars)
 library(modeltests)
 
 data("Canada", package = "vars")
-fit <- VAR(Canada, p=1, type="both")
+fit <- VAR(Canada, p = 1, type = "both")
 
 test_that("vars tidier arguments", {
   check_arguments(tidy.varest)

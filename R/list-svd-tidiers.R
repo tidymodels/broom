@@ -33,7 +33,7 @@
 #'   ggplot(aes(class, value)) +
 #'   geom_boxplot() +
 #'   facet_wrap(~PC, scale = "free_y")
-#'  
+#'
 #' @seealso [base::svd()]
 #' @aliases svd_tidiers
 #' @family svd tidiers
@@ -53,7 +53,7 @@ tidy_svd <- function(x, matrix = "u", ...) {
         values_to = "value"
       ) %>%
       dplyr::mutate(
-        PC = stringr::str_remove(PC, "...") %>% 
+        PC = stringr::str_remove(PC, "...") %>%
           as.numeric()
       ) %>%
       arrange(PC, row) %>%
@@ -74,7 +74,7 @@ tidy_svd <- function(x, matrix = "u", ...) {
         values_to = "value"
       ) %>%
       dplyr::mutate(
-        PC = stringr::str_remove(PC, "...") %>% 
+        PC = stringr::str_remove(PC, "...") %>%
           as.numeric()
       ) %>%
       arrange(PC, column) %>%

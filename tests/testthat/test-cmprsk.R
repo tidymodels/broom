@@ -11,7 +11,7 @@ set.seed(2)
 
 # simulate data
 lrf_time <- rexp(100) # time to loco-regional failure (lrf)
-lrf_event <- sample(0:2, 100, replace = TRUE) 
+lrf_event <- sample(0:2, 100, replace = TRUE)
 trt <- sample(0:1, 100, replace = TRUE)
 strt <- sample(1:2, 100, replace = TRUE)
 
@@ -35,18 +35,18 @@ test_that("tidy.cmprsk", {
   check_dims(td1, 2, 5)
   check_dims(td2, 2, 7)
   check_dims(td3, 2, 7)
-  
+
   # check the `conf.level=` argument matches the result in `summary(conf.int=)`
   expect_equal(
-    summary(fit, conf.int = 0.99)$conf.int %>% 
+    summary(fit, conf.int = 0.99)$conf.int %>%
       log() %>%
       unname() %>%
-      as.data.frame() %>% 
+      as.data.frame() %>%
       dplyr::select(., tail(names(.), 2)) %>%
       unclass() %>%
       unname(),
-    td3 %>% 
-      dplyr::select(conf.low, conf.high)  %>%
+    td3 %>%
+      dplyr::select(conf.low, conf.high) %>%
       unclass() %>%
       unname(),
   )

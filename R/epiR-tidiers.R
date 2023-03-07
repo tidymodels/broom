@@ -7,29 +7,29 @@
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy(
-#'   "term", 
-#'   estimate = "Estimated measure of association", 
-#'   "conf.low", 
-#'   "conf.high", 
-#'   "statistic", 
-#'   "df", 
+#'   "term",
+#'   estimate = "Estimated measure of association",
+#'   "conf.low",
+#'   "conf.high",
+#'   "statistic",
+#'   "df",
 #'   "p.value"
 #' )
 #'
-#' @details The tibble has a column for each of the measures of association 
+#' @details The tibble has a column for each of the measures of association
 #'   or tests contained in `massoc` or `massoc.detail` when [epiR::epi.2by2()] is called.
 #'
 #' @examplesIf rlang::is_installed("epiR")
-#' 
+#'
 #' # load libraries for models and data
 #' library(epiR)
-#' 
+#'
 #' # generate data
 #' dat <- matrix(c(13, 2163, 5, 3349), nrow = 2, byrow = TRUE)
-#' 
+#'
 #' rownames(dat) <- c("DF+", "DF-")
 #' colnames(dat) <- c("FUS+", "FUS-")
-#' 
+#'
 #' # fit model
 #' fit <- epi.2by2(
 #'   dat = as.table(dat), method = "cross.sectional",
@@ -39,7 +39,7 @@
 #' # summarize model fit with tidiers
 #' tidy(fit, parameters = "moa")
 #' tidy(fit, parameters = "stat")
-#' 
+#'
 #' @export
 #' @seealso [tidy()], [epiR::epi.2by2()]
 #' @family epiR tidiers
@@ -58,7 +58,7 @@ tidy.epi.2by2 <- function(x, parameters = c("moa", "stat"), ...) {
     colnames(out) <- c("term", "estimate", "conf.low", "conf.high")
     return(tibble::as_tibble(out))
   }
-  
+
   if (epiR_vs %in% c(0, -1)) {
     if ("p.value" %in% colnames(out)) {
       out$p.value <- with(out, dplyr::coalesce(p.value.2s, p.value))
@@ -66,7 +66,7 @@ tidy.epi.2by2 <- function(x, parameters = c("moa", "stat"), ...) {
       out$p.value <- out[["p.value.2s"]]
     }
   }
-  
+
   out <- subset(out, is.na(est), select = c("term", "test.statistic", "df", "p.value"))
   colnames(out) <- c("term", "statistic", "df", "p.value")
   tibble::as_tibble(out)

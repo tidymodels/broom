@@ -44,7 +44,7 @@
 #' logan2$case <- (logan2$occupation == logan2$tocc)
 #'
 #' cl <- clogit(case ~ tocc + tocc:education + strata(id), logan2)
-#' 
+#'
 #' tidy(cl)
 #' glance(cl)
 #'
@@ -58,7 +58,7 @@
 #'
 #' ggplot(expected, aes(time, .fitted, color = sex)) +
 #'   geom_point()
-#' 
+#'
 #' @aliases coxph_tidiers
 #' @export
 #' @seealso [tidy()], [survival::coxph()]
@@ -66,7 +66,6 @@
 #' @family survival tidiers
 tidy.coxph <- function(x, exponentiate = FALSE, conf.int = FALSE,
                        conf.level = .95, ...) {
- 
   s <- summary(x)
   co <- stats::coef(s)
 
