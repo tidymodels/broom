@@ -4,15 +4,19 @@ skip_if_not_installed("modeltests")
 library(modeltests)
 
 test_that("tidy.aov", {
-  check_arguments(tidy.aov)
 
   aovfit <- aov(mpg ~ wt + disp, mtcars)
   td <- tidy(aovfit)
+  td2 <- tidy(aovfit, intercept = TRUE)
 
   check_tidy_output(td)
+  check_tidy_output(td2)
   check_dims(td, 3, 6)
+  check_dims(td2, 4, 6)
 
   expect_true("Residuals" %in% td$term)
+  expect_true("Residuals" %in% td2$term)
+  expect_true("(Intercept)" %in% td2$term)
 })
 
 test_that("tidy.anova", {

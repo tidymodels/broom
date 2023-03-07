@@ -4,10 +4,13 @@
 \alias{tidy.aov}
 \title{Tidy a(n) aov object}
 \usage{
-\method{tidy}{aov}(x, ...)
+\method{tidy}{aov}(x, intercept = FALSE, ...)
 }
 \arguments{
 \item{x}{An \code{aov} object, such as those created by \code{\link[stats:aov]{stats::aov()}}.}
+
+\item{intercept}{A logical indicating whether information on the intercept
+ought to be included. Passed to \code{\link[stats:summary.aov]{stats::summary.aov()}}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
