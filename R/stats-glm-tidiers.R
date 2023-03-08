@@ -100,9 +100,9 @@ augment.glm <- function(x,
       {
         infl <- influence(x, do.coef = FALSE)
         df$.resid <- residuals(x, type = type.residuals) %>% unname()
+        df <- add_hat_sigma_cols(df, x, infl)
         df$.std.resid <- rstandard(x, infl = infl, type = type.residuals) %>%
           unname()
-        df <- add_hat_sigma_cols(df, x, infl)
         df$.cooksd <- cooks.distance(x, infl = infl) %>% unname()
       },
       error = data_error
