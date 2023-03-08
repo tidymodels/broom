@@ -7,8 +7,6 @@
 
 [![R build
 status](https://github.com/tidymodels/broom/workflows/R-CMD-check/badge.svg)](https://github.com/tidymodels/broom)
-[![Coverage
-status](https://codecov.io/gh/tidymodels/broom/branch/main/graph/badge.svg)](https://codecov.io/github/tidymodels/broom?branch=main)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/broom)](https://CRAN.R-project.org/package=broom)
 [![Downloads](https://cranlogs.r-pkg.org/badges/broom)](https://CRAN.R-project.org/package=broom)
