@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">broom</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.3.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.4.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,6 +60,9 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="broom-development-version">broom (development version)<a class="anchor" aria-label="anchor" href="#broom-development-version"></a></h2>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.0.4" id="broom-104">broom 1.0.4<a class="anchor" aria-label="anchor" href="#broom-104"></a></h2><p class="text-muted">CRAN release: 2023-03-10</p>
 <ul><li>Added an <code>intercept</code> argument to <code><a href="../reference/tidy.aov.html">tidy.aov()</a></code>, a logical indicating whether to include information on the intercept as the first row of results (<a href="https://github.com/tidymodels/broom/issues/1144" class="external-link">#1144</a> by <code>@victor-vscn</code>).</li>
 <li>Moved forward with soft-deprecation of tidiers for objects from the sp package ahead of the retirement of the rgeos and maptools packages later this year. sp tidiers will be removed from a future release of the package (<a href="https://github.com/tidymodels/broom/issues/1142" class="external-link">#1142</a>).</li>
 <li>Fixed bug in <code><a href="../reference/augment.glm.html">augment.glm()</a></code> where the <code>.std.resid</code> column always contained standardized deviance residuals regardless of the value passed to the <code>type.residuals</code> argument (<a href="https://github.com/tidymodels/broom/issues/1147" class="external-link">#1147</a>).</li>
