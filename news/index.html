@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">broom</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,6 +58,12 @@
       <small>Source: <a href="https://github.com/tidymodels/broom/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.0.4" id="broom-104">broom 1.0.4<a class="anchor" aria-label="anchor" href="#broom-104"></a></h2><p class="text-muted">CRAN release: 2023-03-10</p>
+<ul><li>Added an <code>intercept</code> argument to <code><a href="../reference/tidy.aov.html">tidy.aov()</a></code>, a logical indicating whether to include information on the intercept as the first row of results (<a href="https://github.com/tidymodels/broom/issues/1144" class="external-link">#1144</a> by <code>@victor-vscn</code>).</li>
+<li>Moved forward with soft-deprecation of tidiers for objects from the sp package ahead of the retirement of the rgeos and maptools packages later this year. sp tidiers will be removed from a future release of the package (<a href="https://github.com/tidymodels/broom/issues/1142" class="external-link">#1142</a>).</li>
+<li>Fixed bug in <code><a href="../reference/augment.glm.html">augment.glm()</a></code> where the <code>.std.resid</code> column always contained standardized deviance residuals regardless of the value passed to the <code>type.residuals</code> argument (<a href="https://github.com/tidymodels/broom/issues/1147" class="external-link">#1147</a>).</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.3" id="broom-103">broom 1.0.3<a class="anchor" aria-label="anchor" href="#broom-103"></a></h2><p class="text-muted">CRAN release: 2023-01-25</p>
 <ul><li>Addressed test failures on R-devel.</li>
@@ -649,7 +655,7 @@ deprecated <code><a href="../reference/data.frame_tidiers.html">glance.data.fram
    </div>
   <footer><div class="container">
   <div class="pkgdown-footer-left">
-  <p></p><p>Developed by David Robinson, Alex Hayes, Simon Couch, <a href="https://www.rstudio.com" class="external-link"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" width="72"></a>.</p>
+  <p></p><p>Developed by David Robinson, Alex Hayes, Simon Couch, <a href="https://www.posit.co" class="external-link"><img src="https://www.tidyverse.org/posit-logo.svg" alt="Posit" height="16" style="margin-bottom: 3px;"></a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
