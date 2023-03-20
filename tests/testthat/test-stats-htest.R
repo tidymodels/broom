@@ -118,6 +118,7 @@ test_that("augment.htest (chi squared test)", {
 })
 
 test_that("tidy.htest does not return matrix columns", {
+  skip_if_not_installed("survey")
   data(api, package = "survey")
   dclus1 <- survey::svydesign(id = ~dnum, weights = ~pw, data = apiclus1, fpc = ~fpc)
 
