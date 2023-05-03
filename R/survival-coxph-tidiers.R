@@ -66,7 +66,7 @@
 #' @family survival tidiers
 tidy.coxph <- function(x, exponentiate = FALSE, conf.int = FALSE,
                        conf.level = .95, ...) {
-  s <- summary(x)
+  s <- summary(x, ...)
   co <- stats::coef(s)
 
   if (!is.null(x$frail)) {
