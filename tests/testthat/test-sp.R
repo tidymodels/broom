@@ -6,12 +6,8 @@ skip_if_not_installed("modeltests")
 library(modeltests)
 
 skip_if_not_installed("sp")
-skip_if_not_installed("rgeos")
-skip_if_not_installed("maptools")
 
 library(sp)
-library(rgeos)
-library(maptools)
 
 # not cleaning these tests up because hoping to deprecate them soon
 
@@ -57,12 +53,10 @@ test_that("polygon tidiers work", {
   check_tidy_output(td, strict = FALSE)
   check_dims(td, 500, 7)
 
-  expect_warning(
+  expect_error(
     {td <- tidy(SpPDF, region = "x")},
     "deprecated"
   )
-  check_tidy_output(td, strict = FALSE)
-  check_dims(td, 230, 7)
 })
 
 test_that("line tidiers work", {
