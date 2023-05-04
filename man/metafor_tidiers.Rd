@@ -76,7 +76,6 @@ df <-
 meta_analysis <- rma(yi, vi, data = df, method = "EB")
 
 tidy(meta_analysis)
-
 \dontshow{\}) # examplesIf}
 }
 \value{

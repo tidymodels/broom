@@ -105,7 +105,6 @@ tidy_u \%>\%
   ggplot(aes(class, value)) +
   geom_boxplot() +
   facet_wrap(~PC, scale = "free_y")
- 
 \dontshow{\}) # examplesIf}
 }
 \seealso{

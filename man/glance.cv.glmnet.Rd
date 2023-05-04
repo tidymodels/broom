@@ -98,7 +98,6 @@ ggplot(tidied, aes(lambda, estimate, group = term)) +
   geom_line() +
   geom_vline(xintercept = glance_cv$lambda.min) +
   geom_vline(xintercept = glance_cv$lambda.1se, lty = 2)
-  
 \dontshow{\}) # examplesIf}
 }
 \seealso{

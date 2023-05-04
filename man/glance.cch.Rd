@@ -77,7 +77,6 @@ ggplot(tidy(fit.ccP), aes(x = estimate, y = term)) +
   geom_point() +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0) +
   geom_vline(xintercept = 0)
-  
 \dontshow{\}) # examplesIf}
 }
 \seealso{

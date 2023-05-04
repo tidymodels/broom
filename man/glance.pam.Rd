@@ -64,7 +64,6 @@ augment(p, x) \%>\%
   ggplot(aes(compounds, input_fields)) +
   geom_point(aes(color = .cluster)) +
   geom_text(aes(label = cluster), data = tidy(p), size = 10)
-  
 \dontshow{\}) # examplesIf}
 }
 \seealso{

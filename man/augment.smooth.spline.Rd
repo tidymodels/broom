@@ -49,13 +49,12 @@ spl <- smooth.spline(mtcars$wt, mtcars$mpg, df = 4)
 augment(spl, mtcars)
 
 # calls original columns x and y
-augment(spl) 
+augment(spl)
 
 library(ggplot2)
 ggplot(augment(spl, mtcars), aes(wt, mpg)) +
   geom_point() +
   geom_line(aes(y = .fitted))
-  
 \dontshow{\}) # examplesIf}
 }
 \seealso{

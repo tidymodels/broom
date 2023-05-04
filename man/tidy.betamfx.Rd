@@ -52,21 +52,21 @@ in the data, or ii) the average of the sample marginal effects. See
 }
 \examples{
 \dontshow{if (rlang::is_installed("mfx")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
- 
+
 library(mfx)
 
 # Simulate some data
 set.seed(12345)
-n = 1000
-x = rnorm(n)
+n <- 1000
+x <- rnorm(n)
 
 # Beta outcome
-y = rbeta(n, shape1 = plogis(1 + 0.5 * x), shape2 = (abs(0.2*x)))
+y <- rbeta(n, shape1 = plogis(1 + 0.5 * x), shape2 = (abs(0.2 * x)))
 # Use Smithson and Verkuilen correction
-y = (y*(n-1)+0.5)/n
+y <- (y * (n - 1) + 0.5) / n
 
-d = data.frame(y,x)
-mod_betamfx = betamfx(y ~ x | x, data = d)
+d <- data.frame(y, x)
+mod_betamfx <- betamfx(y ~ x | x, data = d)
 
 tidy(mod_betamfx, conf.int = TRUE)
 
@@ -97,8 +97,8 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
   \item{std.error}{The standard error of the regression term.}
   \item{term}{The name of the regression term.}
-  \item{atmean}{TRUE if the marginal effects were originally calculated as the 
-    partial effects for the average observation. If FALSE, then these were 
+  \item{atmean}{TRUE if the marginal effects were originally calculated as the
+    partial effects for the average observation. If FALSE, then these were
     instead calculated as average partial effects.}
 
 }

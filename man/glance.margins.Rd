@@ -48,7 +48,7 @@ of the appropriate type.
 # load libraries for models and data
 library(margins)
 
-# example 1: logit model 
+# example 1: logit model
 mod_log <- glm(am ~ cyl + hp + wt, data = mtcars, family = binomial)
 
 # get tidied "naive" model coefficients
@@ -62,11 +62,11 @@ tidy(marg_log)
 tidy(marg_log, conf.int = TRUE)
 
 # requires running the underlying model again. quick for this example
-glance(marg_log) 
+glance(marg_log)
 
 # augmenting `margins` outputs isn't supported, but
 # you can get the same info by running on the underlying model
-augment(mod_log) 
+augment(mod_log)
 
 # example 2: threeway interaction terms
 mod_ie <- lm(mpg ~ wt * cyl * disp, data = mtcars)
@@ -76,7 +76,7 @@ tidy(mod_ie)
 
 # convert to marginal effects with margins()
 marg_ie0 <- margins(mod_ie)
-# get tidied marginal effects 
+# get tidied marginal effects
 tidy(marg_ie0)
 glance(marg_ie0)
 
@@ -86,7 +86,7 @@ marg_ie1 <- margins(mod_ie, at = list(cyl = c(4,6,8)))
 # summarize model fit with tidiers
 tidy(marg_ie1)
 
-# marginal effects of one interaction variable (here: wt), modulated at 
+# marginal effects of one interaction variable (here: wt), modulated at
 # specific values of the two other interaction variables (here: cyl and drat)
 marg_ie2 <- margins(mod_ie,
                     variables = "wt",

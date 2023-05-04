@@ -62,7 +62,7 @@ library(lmtest)
 
 m <- lm(dist ~ speed, data = cars)
 
-coeftest(m) 
+coeftest(m)
 tidy(coeftest(m))
 tidy(coeftest(m, conf.int = TRUE))
 
@@ -73,15 +73,15 @@ tidy(coeftest(m, conf.int = TRUE))
 library(sandwich)
 
 # "HC3" (default) robust SEs
-tidy(coeftest(m, vcov = vcovHC))       
+tidy(coeftest(m, vcov = vcovHC))
 
-# "HC2" robust SEs               
-tidy(coeftest(m, vcov = vcovHC, type = "HC2")) 
+# "HC2" robust SEs
+tidy(coeftest(m, vcov = vcovHC, type = "HC2"))
 
 # N-W HAC robust SEs
-tidy(coeftest(m, vcov = NeweyWest))            
+tidy(coeftest(m, vcov = NeweyWest))
 
-# the columns of the returned tibble for glance.coeftest() will vary 
+# the columns of the returned tibble for glance.coeftest() will vary
 # depending on whether the coeftest object retains the underlying model.
 # Users can control this with the "save = TRUE" argument of coeftest().
 glance(coeftest(m))

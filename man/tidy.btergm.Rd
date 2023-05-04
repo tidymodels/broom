@@ -53,16 +53,16 @@ set.seed(5)
 
 # create 10 random networks with 10 actors
 networks <- list()
-for (i in 1:10) {              
+for (i in 1:10) {
   mat <- matrix(rbinom(100, 1, .25), nrow = 10, ncol = 10)
-  diag(mat) <- 0              
-  nw <- network(mat)  
-  networks[[i]] <- nw         
+  diag(mat) <- 0
+  nw <- network(mat)
+  networks[[i]] <- nw
 }
 
 # create 10 matrices as covariates
 covariates <- list()
-for (i in 1:10) {              
+for (i in 1:10) {
   mat <- matrix(rnorm(100), nrow = 10, ncol = 10)
   covariates[[i]] <- mat
 }

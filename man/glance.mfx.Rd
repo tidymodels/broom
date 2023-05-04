@@ -71,7 +71,8 @@ tidy(mod_logmfx, conf.int = TRUE)
 
 # compare with the naive model coefficients of the same logit call
 tidy(
-  glm(am ~ cyl + hp + wt, family = binomial, data = mtcars), conf.int = TRUE
+  glm(am ~ cyl + hp + wt, family = binomial, data = mtcars),
+  conf.int = TRUE
 )
 
 augment(mod_logmfx)

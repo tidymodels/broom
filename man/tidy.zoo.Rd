@@ -59,7 +59,6 @@ ggplot(tidy(Z), aes(index, value)) +
 Zrolled <- rollmean(Z, 5)
 ggplot(tidy(Zrolled), aes(index, value, color = series)) +
   geom_line()
-  
 \dontshow{\}) # examplesIf}
 }
 \seealso{

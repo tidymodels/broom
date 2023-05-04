@@ -67,9 +67,9 @@ ggplot(d, aes(estimate, term, xmin = conf.low, xmax = conf.high, height = 0)) +
   geom_point() +
   geom_vline(xintercept = 0, lty = 4) +
   geom_errorbarh()
-  
-# aside: There are tidy() and glance() methods for lm.summary objects too. 
-# this can be useful when you want to conserve memory by converting large lm 
+
+# aside: There are tidy() and glance() methods for lm.summary objects too.
+# this can be useful when you want to conserve memory by converting large lm
 # objects into their leaner summary.lm equivalents.
 s <- summary(mod)
 tidy(s, conf.int = TRUE)
@@ -87,19 +87,19 @@ augment(mod, newdata = newdata)
 # ggplot2 example where we also construct 95\% prediction interval
 
 # simpler bivariate model since we're plotting in 2D
-mod2 <- lm(mpg ~ wt, data = mtcars) 
+mod2 <- lm(mpg ~ wt, data = mtcars)
 
 au <- augment(mod2, newdata = newdata, interval = "prediction")
 
-ggplot(au, aes(wt, mpg)) + 
+ggplot(au, aes(wt, mpg)) +
   geom_point() +
-  geom_line(aes(y = .fitted)) + 
+  geom_line(aes(y = .fitted)) +
   geom_ribbon(aes(ymin = .lower, ymax = .upper), col = NA, alpha = 0.3)
 
 # predict on new data without outcome variable. Output does not include .resid
 newdata <- newdata \%>\%
   select(-mpg)
-  
+
 augment(mod, newdata = newdata)
 
 au <- augment(mod, data = mtcars)
@@ -151,9 +151,9 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{r.squared}{R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.}
   \item{sigma}{Estimated standard error of the residuals.}
   \item{statistic}{Test statistic.}
-  \item{df}{The degrees for freedom from the numerator of the overall 
-    F-statistic. This is new in broom 0.7.0. Previously, this reported 
-    the rank of the design matrix, which is one more than the numerator 
+  \item{df}{The degrees for freedom from the numerator of the overall
+    F-statistic. This is new in broom 0.7.0. Previously, this reported
+    the rank of the design matrix, which is one more than the numerator
     degrees of freedom of the overall F-statistic.}
 
 }

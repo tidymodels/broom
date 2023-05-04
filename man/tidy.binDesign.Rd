@@ -47,7 +47,6 @@ tidy(des)
 library(ggplot2)
 ggplot(tidy(des), aes(n, power)) +
   geom_line()
-  
 \dontshow{\}) # examplesIf}
 }
 \seealso{

@@ -1,16 +1,16 @@
 #' @templateVar class speedlm
 #' @template title_desc_tidy
 #'
-#' @param x A `speedlm` object returned from [speedglm::speedlm()].
+#' @param x A `speedlm` object returned from `speedglm::speedlm()`.
 #' @template param_confint
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy(regression = TRUE)
 #'
-#' @examplesIf rlang::is_installed("speedglm")
+#' @examplesIf FALSE
 #'
 #' # load modeling library
-#' library(speedglm)
+#' # dlibrary(speedglm)
 #'
 #' # fit model
 #' mod <- speedlm(mpg ~ wt + qsec, data = mtcars, fitted = TRUE)
@@ -23,7 +23,6 @@
 #' @aliases speedlm_tidiers
 #' @export
 #' @family speedlm tidiers
-#' @seealso [speedglm::speedlm()], [tidy.lm()]
 #' @include stats-lm-tidiers.R
 tidy.speedlm <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
   check_ellipses("exponentiate", "tidy", "speedlm", ...)
@@ -66,7 +65,6 @@ tidy.speedlm <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #'
 #' @export
 #' @family speedlm tidiers
-#' @seealso [speedglm::speedlm()]
 glance.speedlm <- function(x, ...) {
   s <- summary(x)
   as_glance_tibble(
@@ -98,7 +96,6 @@ glance.speedlm <- function(x, ...) {
 #' @importFrom rlang expr enexpr
 #' @export
 #' @family speedlm tidiers
-#' @seealso [speedglm::speedlm()]
 augment.speedlm <- function(x, data = model.frame(x), newdata = NULL, ...) {
   # this is a hacky way to prevent the following bug:
   #    speedglm::speedglm(hp ~ log(mpg), mtcars, fitted = TRUE)

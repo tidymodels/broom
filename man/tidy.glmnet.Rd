@@ -67,7 +67,7 @@ tidied <- tidy(fit1) \%>\% filter(term != "(Intercept)")
 
 ggplot(tidied, aes(step, estimate, group = term)) +
   geom_line()
-  
+
 ggplot(tidied, aes(lambda, estimate, group = term)) +
   geom_line() +
   scale_x_log10()
