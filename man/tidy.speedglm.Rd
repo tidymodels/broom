@@ -47,7 +47,7 @@ specify which components to return.
 \dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
-library(speedglm)
+# library(speedglm)
 
 # generate data
 clotting <- data.frame(

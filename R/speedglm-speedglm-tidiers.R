@@ -11,7 +11,7 @@
 #' @examplesIf FALSE
 #'
 #' # load libraries for models and data
-#' library(speedglm)
+#' # library(speedglm)
 #'
 #' # generate data
 #' clotting <- data.frame(

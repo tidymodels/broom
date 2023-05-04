@@ -2,15 +2,11 @@ context("test-speedglm-speedglm")
 
 skip_on_cran()
 
-test_that("restore speedglm testing if back on CRAN, remove tidiers if not", {
-  expect_false(Sys.Date() > "2023-07-01")
-})
-
 skip_if_not_installed("modeltests")
 library(modeltests)
 
 skip_if_not_installed("speedglm")
-library(speedglm)
+# library(speedglm)
 
 clotting <- data.frame(
   u = c(5, 10, 15, 20, 30, 40, 60, 80, 100),

@@ -7,10 +7,10 @@
 #'
 #' @evalRd return_tidy(regression = TRUE)
 #'
-#' @examplesIf rlang::is_installed("speedglm")
+#' @examplesIf FALSE
 #'
 #' # load modeling library
-#' library(speedglm)
+#' # dlibrary(speedglm)
 #'
 #' # fit model
 #' mod <- speedlm(mpg ~ wt + qsec, data = mtcars, fitted = TRUE)

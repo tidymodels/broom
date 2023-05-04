@@ -74,10 +74,10 @@ We are in the process of defining behaviors for models fit with various
 missing at this time.
 }
 \examples{
-\dontshow{if (rlang::is_installed("speedglm")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load modeling library
-library(speedglm)
+# dlibrary(speedglm)
 
 # fit model
 mod <- speedlm(mpg ~ wt + qsec, data = mtcars, fitted = TRUE)
