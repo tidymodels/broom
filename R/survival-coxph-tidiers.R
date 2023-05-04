@@ -4,7 +4,8 @@
 #' @param x A `coxph` object returned from [survival::coxph()].
 #' @template param_confint
 #' @template param_exponentiate
-#' @template param_unused_dots
+#' @param ... For `tidy()`, additional arguments passed to `summary(x, ...)`.
+#' Otherwise ignored.
 #'
 #' @evalRd return_tidy(
 #'   "estimate",

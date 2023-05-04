@@ -9,18 +9,8 @@
 \arguments{
 \item{x}{A \code{coxph} object returned from \code{\link[survival:coxph]{survival::coxph()}}.}
 
-\item{...}{Additional arguments. Not used. Needed to match generic
-signature only. \strong{Cautionary note:} Misspelled arguments will be
-absorbed in \code{...}, where they will be ignored. If the misspelled
-argument has a default value, the default value will be used.
-For example, if you pass \code{conf.lvel = 0.9}, all computation will
-proceed using \code{conf.level = 0.95}. Two exceptions here are:
-\itemize{
-\item \code{tidy()} methods will warn when supplied an \code{exponentiate} argument if
-it will be ignored.
-\item \code{augment()} methods will warn when supplied a \code{newdata} argument if it
-will be ignored.
-}}
+\item{...}{For \code{tidy()}, additional arguments passed to \code{summary(x, ...)}.
+Otherwise ignored.}
 }
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
