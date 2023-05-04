@@ -45,7 +45,7 @@ dw <- durbinWatsonTest(lm(mpg ~ wt, data = mtcars))
 tidy(dw)
 
 # same output for all durbinWatsonTests
-glance(dw) 
+glance(dw)
 \dontshow{\}) # examplesIf}
 }
 \seealso{

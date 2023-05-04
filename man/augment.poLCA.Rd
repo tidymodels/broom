@@ -106,7 +106,7 @@ library(ggplot2)
 ggplot(tidy(M1), aes(factor(class), estimate, fill = factor(outcome))) +
   geom_bar(stat = "identity", width = 1) +
   facet_wrap(~variable)
-  
+
 # three-class model with a single covariate.
 data(election)
 

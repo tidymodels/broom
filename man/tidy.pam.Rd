@@ -59,7 +59,6 @@ augment(p, x) \%>\%
   ggplot(aes(compounds, input_fields)) +
   geom_point(aes(color = .cluster)) +
   geom_text(aes(label = cluster), data = tidy(p), size = 10)
-  
 \dontshow{\}) # examplesIf}
 }
 \seealso{
@@ -73,9 +72,9 @@ Other pam tidiers:
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{size}{Size of each cluster.}
-  \item{max.diss}{Maximal dissimilarity between the observations in the 
+  \item{max.diss}{Maximal dissimilarity between the observations in the
     cluster and that cluster's medoid.}
-  \item{avg.diss}{Average dissimilarity between the observations in the 
+  \item{avg.diss}{Average dissimilarity between the observations in the
     cluster and that cluster's medoid.}
   \item{diameter}{Diameter of the cluster.}
   \item{separation}{Separation of the cluster.}

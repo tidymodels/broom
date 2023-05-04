@@ -36,7 +36,7 @@ specify which components to return.
 }
 \examples{
 \dontshow{if ((rlang::is_installed("cluster") & rlang::is_installed("modeldata") && identical(Sys.getenv("NOT_CRAN"), "true"))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-  
+
 library(cluster)
 library(modeldata)
 library(dplyr)

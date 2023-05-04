@@ -106,7 +106,7 @@ data(heart.valve)
 hvd <- heart.valve[!is.na(heart.valve$log.grad) &
   !is.na(heart.valve$log.lvmi) &
   heart.valve$num <= 50, ]
-  
+
 fit <- mjoint(
   formLongFixed = list(
     "grad" = log.grad ~ time + sex + hs,
@@ -141,7 +141,6 @@ hvd2 <- augment(fit)
 
 # extract model statistics
 glance(fit)
-
 }
 \dontshow{\}) # examplesIf}
 }

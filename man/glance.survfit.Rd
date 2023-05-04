@@ -64,7 +64,6 @@ td_multi
 ggplot(td_multi, aes(time, estimate, group = state)) +
   geom_line(aes(color = state)) +
   geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .25)
-  
 \dontshow{\}) # examplesIf}
 }
 \seealso{

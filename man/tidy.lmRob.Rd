@@ -38,16 +38,16 @@ For tidiers for robust models from the \pkg{MASS} package see
 \examples{
 \dontshow{if (rlang::is_installed("robust")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
- # load modeling library
- library(robust)
-  
- # fit model
- m <- lmRob(mpg ~ wt, data = mtcars)
+# load modeling library
+library(robust)
 
- # summarize model fit with tidiers
- tidy(m)
- augment(m)
- glance(m)
+# fit model
+m <- lmRob(mpg ~ wt, data = mtcars)
+
+# summarize model fit with tidiers
+tidy(m)
+augment(m)
+glance(m)
 \dontshow{\}) # examplesIf}
 }
 \seealso{

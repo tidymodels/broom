@@ -46,13 +46,14 @@ library(quantreg)
 
 # build artificial data with multiplicative error
 set.seed(1)
-dat <- NULL 
+dat <- NULL
 dat$x <- rep(1:25, 20)
 dat$y <- SSlogis(dat$x, 10, 12, 2) * rnorm(500, 1, 0.1)
 
 # fit the median using nlrq
-mod <- nlrq(y ~ SSlogis(x, Asym, mid, scal), 
-            data = dat, tau = 0.5, trace = TRUE)
+mod <- nlrq(y ~ SSlogis(x, Asym, mid, scal),
+  data = dat, tau = 0.5, trace = TRUE
+)
 
 # summarize model fit with tidiers
 tidy(mod)

@@ -82,7 +82,8 @@ tidy(mod_logmfx, conf.int = TRUE)
 
 # compare with the naive model coefficients of the same logit call
 tidy(
-  glm(am ~ cyl + hp + wt, family = binomial, data = mtcars), conf.int = TRUE
+  glm(am ~ cyl + hp + wt, family = binomial, data = mtcars),
+  conf.int = TRUE
 )
 
 augment(mod_logmfx)
@@ -116,8 +117,8 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
   \item{std.error}{The standard error of the regression term.}
   \item{term}{The name of the regression term.}
-  \item{atmean}{TRUE if the marginal effects were originally calculated as 
-  the partial effects for the average observation. If FALSE, then these 
+  \item{atmean}{TRUE if the marginal effects were originally calculated as
+  the partial effects for the average observation. If FALSE, then these
   were instead calculated as average partial effects.}
 
 }

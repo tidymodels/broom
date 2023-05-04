@@ -73,8 +73,8 @@ currently does not take in \code{data} or \code{newdata} arguments.
 \examples{
 \dontshow{if ((rlang::is_installed("spdep") & rlang::is_installed("spatialreg") && identical(Sys.getenv("NOT_CRAN"), "true"))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
-      
-# load libraries for models and data      
+
+# load libraries for models and data
 library(spatialreg)
 library(spdep)
 
@@ -84,12 +84,13 @@ data(oldcol, package = "spdep")
 listw <- nb2listw(COL.nb, style = "W")
 
 # fit model
-crime_sar <- 
-lagsarlm(CRIME ~ INC + HOVAL, 
-         data = COL.OLD,  
-         listw = listw, 
-         method = "eigen")
-  
+crime_sar <-
+  lagsarlm(CRIME ~ INC + HOVAL,
+    data = COL.OLD,
+    listw = listw,
+    method = "eigen"
+  )
+
 # summarize model fit with tidiers
 tidy(crime_sar)
 tidy(crime_sar, conf.int = TRUE)

@@ -46,7 +46,7 @@ depending on the type of model estimated. \code{sigma}, \code{r.squared},
 # load libraries for models and data
 library(fixest)
 
-gravity <- 
+gravity <-
   feols(
     log(Euros) ~ log(dist_km) | Origin + Destination + Product + Year, trade
   )
@@ -63,7 +63,7 @@ tidy(gravity, conf.int = TRUE, cluster = c("Product", "Year"))
 
 tidy(gravity, conf.int = TRUE, se = "threeway")
 
-# 2) or, feed tidy() a summary.fixest object that has already accepted 
+# 2) or, feed tidy() a summary.fixest object that has already accepted
 # these arguments
 
 gravity_summ <- summary(gravity, cluster = c("Product", "Year"))

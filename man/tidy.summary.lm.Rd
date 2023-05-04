@@ -52,12 +52,12 @@ modsumm <- summary(mod)
 tidy(mod, conf.int = TRUE)
 
 # equivalent to the above
-tidy(modsumm, conf.int = TRUE) 
+tidy(modsumm, conf.int = TRUE)
 
 glance(mod)
 
 # mostly the same, except for a few missing columns
-glance(modsumm) 
+glance(modsumm)
 
 }
 \seealso{

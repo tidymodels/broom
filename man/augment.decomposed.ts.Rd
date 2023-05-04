@@ -124,7 +124,6 @@ ggplot(decomps) +
     x = index, y = adjusted, colour = decomp,
     group = decomp
   ))
-  
 \dontshow{\}) # examplesIf}
 }
 \seealso{

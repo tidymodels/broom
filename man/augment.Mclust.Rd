@@ -87,9 +87,9 @@ centers <- tibble(
   # number points in each cluster
   num_points = c(100, 150, 50),
   # x1 coordinate of cluster center
-  x1 = c(5, 0, -3), 
+  x1 = c(5, 0, -3),
   # x2 coordinate of cluster center
-  x2 = c(-1, 1, -2) 
+  x2 = c(-1, 1, -2)
 )
 
 points <- centers \%>\%
@@ -107,7 +107,6 @@ m <- Mclust(points)
 tidy(m)
 augment(m, points)
 glance(m)
-
 \dontshow{\}) # examplesIf}
 }
 \seealso{

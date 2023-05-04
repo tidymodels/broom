@@ -44,12 +44,12 @@ specify which components to return.
 }
 \examples{
 \dontshow{if (rlang::is_installed("MASS")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
- 
+
 # load libraries for models and data
 library(MASS)
 
 # fit model
-r <- glm.nb(Days ~ Sex/(Age + Eth*Lrn), data = quine)
+r <- glm.nb(Days ~ Sex / (Age + Eth * Lrn), data = quine)
 
 # summarize model fit with tidiers
 tidy(r)
