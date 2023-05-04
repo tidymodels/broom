@@ -6,7 +6,7 @@ skip_if_not_installed("modeltests")
 library(modeltests)
 
 skip_if_not_installed("speedglm")
-library(speedglm)
+# library(speedglm)
 
 clotting <- data.frame(
   u = c(5, 10, 15, 20, 30, 40, 60, 80, 100),

@@ -7,7 +7,7 @@
 \method{glance}{speedglm}(x, ...)
 }
 \arguments{
-\item{x}{A \code{speedglm} object returned from \code{\link[speedglm:speedglm]{speedglm::speedglm()}}.}
+\item{x}{A \code{speedglm} object returned from \code{speedglm::speedglm()}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -43,10 +43,10 @@ that no longer have a well-defined value are filled in with an \code{NA}
 of the appropriate type.
 }
 \examples{
-\dontshow{if (rlang::is_installed("speedglm")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
-library(speedglm)
+# library(speedglm)
 
 # generate data
 clotting <- data.frame(
@@ -63,8 +63,6 @@ glance(fit)
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-\code{\link[speedglm:speedlm]{speedglm::speedlm()}}
-
 Other speedlm tidiers: 
 \code{\link{augment.speedlm}()},
 \code{\link{glance.speedlm}()},
