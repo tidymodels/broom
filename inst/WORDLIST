@@ -139,6 +139,7 @@ lsmeans
 lsmobj
 Lumley
 manova
+maptools
 Matteo
 mclust
 Mclust
@@ -205,6 +206,7 @@ Qhat
 quantreg
 quartile
 rcorr
+rgeos
 README
 reprex
 regsubsets

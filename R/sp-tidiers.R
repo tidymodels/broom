@@ -33,20 +33,10 @@ tidy.SpatialPolygonsDataFrame <- function(x, region = NULL, ...) {
     coords <- map_df(x@polygons, tidy)
     message("Regions defined for each Polygons")
   } else {
-    lifecycle::deprecate_warn(
-      when = "1.0.4",
-      what = "tidy.SpatialPolygonsDataFrame(region)",
-      details = c("Passing the `region` argument to this function will result in an error in a later version of broom."),
-      id = "sp_region",
-      always = TRUE
+    lifecycle::deprecate_stop(
+      when = "1.0.5",
+      what = "tidy.SpatialPolygonsDataFrame(region)"
     )
-    
-    cp <- sp::polygons(x)
-    
-    # Union together all polygons that make up a region
-    unioned <- maptools::unionSpatialPolygons(cp, attr[, region])
-    coords <- tidy(unioned)
-    coords$order <- 1:nrow(coords)
   }
   as_tibble(coords)
 }
