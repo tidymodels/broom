@@ -7,7 +7,7 @@
 \method{glance}{speedlm}(x, ...)
 }
 \arguments{
-\item{x}{A \code{speedlm} object returned from \code{\link[speedglm:speedlm]{speedglm::speedlm()}}.}
+\item{x}{A \code{speedlm} object returned from \code{speedglm::speedlm()}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -58,8 +58,6 @@ augment(mod)
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-\code{\link[speedglm:speedlm]{speedglm::speedlm()}}
-
 Other speedlm tidiers: 
 \code{\link{augment.speedlm}()},
 \code{\link{glance.speedglm}()},

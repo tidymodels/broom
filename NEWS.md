@@ -1,5 +1,7 @@
 # broom (development version)
 
+* Removed speedglm as a Suggested package following the package's removal from CRAN. If the package has not made it to CRAN by the next release, the tidiers for those objects will be hard-deprecated.
+
 # broom 1.0.4
 
 * Added an `intercept` argument to `tidy.aov()`, a logical indicating whether to include information on the intercept as the first row of results (#1144 by `@victor-vscn`).

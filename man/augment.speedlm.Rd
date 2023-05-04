@@ -7,7 +7,7 @@
 \method{augment}{speedlm}(x, data = model.frame(x), newdata = NULL, ...)
 }
 \arguments{
-\item{x}{A \code{speedlm} object returned from \code{\link[speedglm:speedlm]{speedglm::speedlm()}}.}
+\item{x}{A \code{speedlm} object returned from \code{speedglm::speedlm()}.}
 
 \item{data}{A \link[base:data.frame]{base::data.frame} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
 data that was used to produce the object \code{x}. Defaults to
@@ -89,8 +89,6 @@ augment(mod)
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-\code{\link[speedglm:speedlm]{speedglm::speedlm()}}
-
 Other speedlm tidiers: 
 \code{\link{glance.speedglm}()},
 \code{\link{glance.speedlm}()},
