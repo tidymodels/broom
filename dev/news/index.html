@@ -60,7 +60,8 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="broom-development-version">broom (development version)<a class="anchor" aria-label="anchor" href="#broom-development-version"></a></h2>
-<ul><li><p>Transitioned the deprecation of the <code>region</code> argument to <code>tidy.SpatialPolygonsDataFrame</code> from a warn- to a hard-deprecation. (<a href="https://github.com/tidymodels/broom/issues/1142" class="external-link">#1142</a>)</p></li>
+<ul><li><p><code><a href="../reference/tidy.coxph.html">tidy.coxph()</a></code> will now pass its ellipses <code>...</code> to <code><a href="https://rdrr.io/pkg/urca/man/summary-methods.html" class="external-link">summary()</a></code> internally (<a href="https://github.com/tidymodels/broom/issues/1151" class="external-link">#1151</a> by <code>@ste-tuf</code>).</p></li>
+<li><p>Transitioned the deprecation of the <code>region</code> argument to <code>tidy.SpatialPolygonsDataFrame</code> from a warn- to a hard-deprecation. (<a href="https://github.com/tidymodels/broom/issues/1142" class="external-link">#1142</a>)</p></li>
 <li><p>Removed maptools and rgeos as Suggested packages.</p></li>
 <li><p>Removed speedglm as a Suggested package following the package’s removal from CRAN. If the package has not made it to CRAN by the next release, the tidiers for those objects will be hard-deprecated.</p></li>
 </ul></div>
