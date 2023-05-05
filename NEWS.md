@@ -1,5 +1,7 @@
 # broom (development version)
 
+* `tidy.coxph()` will now pass its ellipses `...` to `summary()` internally (#1151 by `@ste-tuf`).
+
 * Transitioned the deprecation of the `region` argument to `tidy.SpatialPolygonsDataFrame` from a warn- to a hard-deprecation. (#1142)
 
 * Removed maptools and rgeos as Suggested packages.

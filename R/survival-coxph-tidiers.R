@@ -4,7 +4,8 @@
 #' @param x A `coxph` object returned from [survival::coxph()].
 #' @template param_confint
 #' @template param_exponentiate
-#' @template param_unused_dots
+#' @param ... For `tidy()`, additional arguments passed to `summary(x, ...)`.
+#' Otherwise ignored.
 #'
 #' @evalRd return_tidy(
 #'   "estimate",
@@ -66,7 +67,7 @@
 #' @family survival tidiers
 tidy.coxph <- function(x, exponentiate = FALSE, conf.int = FALSE,
                        conf.level = .95, ...) {
-  s <- summary(x)
+  s <- summary(x, ...)
   co <- stats::coef(s)
 
   if (!is.null(x$frail)) {
