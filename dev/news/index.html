@@ -63,6 +63,7 @@
 <ul><li><p><code><a href="../reference/tidy.coxph.html">tidy.coxph()</a></code> will now pass its ellipses <code>...</code> to <code><a href="https://rdrr.io/pkg/urca/man/summary-methods.html" class="external-link">summary()</a></code> internally (<a href="https://github.com/tidymodels/broom/issues/1151" class="external-link">#1151</a> by <code>@ste-tuf</code>).</p></li>
 <li><p>Transitioned the deprecation of the <code>region</code> argument to <code>tidy.SpatialPolygonsDataFrame</code> from a warn- to a hard-deprecation. (<a href="https://github.com/tidymodels/broom/issues/1142" class="external-link">#1142</a>)</p></li>
 <li><p>Removed maptools and rgeos as Suggested packages.</p></li>
+<li><p>Addressed bug in mlogit tidiers where <code><a href="../reference/augment.mlogit.html">augment.mlogit()</a></code> would fail if supplied a model fitted with a non-default <code><a href="https://rdrr.io/pkg/dfidx/man/dfidx.html" class="external-link">dfidx()</a></code>. (<a href="https://github.com/tidymodels/broom/issues/1156" class="external-link">#1156</a> by <code>@gregmacfarlane</code>)</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.4" id="broom-104">broom 1.0.4<a class="anchor" aria-label="anchor" href="#broom-104"></a></h2><p class="text-muted">CRAN release: 2023-03-10</p>
