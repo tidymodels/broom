@@ -54,6 +54,7 @@ tidy.anova <- function(x, ...) {
     "AIC" = "AIC", # merMod
     "BIC" = "BIC", # merMod
     "deviance" = "deviance", # merMod
+    "Deviance" = "deviance",
     "logLik" = "logLik", # merMod
     "Df" = "df",
     "Chi.Df" = "df",
@@ -61,6 +62,8 @@ tidy.anova <- function(x, ...) {
     "Mean Sq" = "meansq",
     "F value" = "statistic",
     "Pr(>F)" = "p.value",
+    "Resid..Dev" = "residual.deviance",
+    "Resid..Df" = "df.residual",
     "Res.Df" = "df.residual",
     "RSS" = "rss",
     "Sum of Sq" = "sumsq",

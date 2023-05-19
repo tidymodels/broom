@@ -10,6 +10,8 @@
 
 * Addressed bug in ANOVA tidiers where `tidy.anova()` would fail if passed a model with many predictors. (#1159 by `@jwilliman`)
 
+* Addressed warnings in ANOVA tidiers for unrecognized column names `Resid..Df`, `Resid..Dev`, and `Deviance`; those columns will be renamed `df.residual`, `residual.deviance`, and `deviance`, respectively. (#1159 by `@jwilliman`)
+
 # broom 1.0.4
 
 * Added an `intercept` argument to `tidy.aov()`, a logical indicating whether to include information on the intercept as the first row of results (#1144 by `@victor-vscn`).
