@@ -32,6 +32,14 @@ test_that("tidy.anova", {
 
   anovacomp <- stats::anova(m2, m1)
   td2 <- tidy(anovacomp)
+  
+  # see #1159
+  for (i in 1:20) {mtcars[[paste0("column", i)]] <- rnorm(nrow(mtcars))}
+  m3 <- glm(mpg ~ ., mtcars, family = "gaussian")
+  anovacomp2 <- stats::anova(m1, m3)
+  td3 <- tidy(anovacomp2)
+
+  expect_equal(nrow(td3), 2)
 
   expect_true("Residuals" %in% td$term)
 
