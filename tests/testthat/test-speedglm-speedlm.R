@@ -2,10 +2,6 @@ context("speedglm")
 
 skip_on_cran()
 
-test_that("restore speedglm testing if back on CRAN, remove tidiers if not", {
-  expect_false(Sys.Date() > "2023-07-01")
-})
-
 skip_if_not_installed("modeltests")
 library(modeltests)
 
