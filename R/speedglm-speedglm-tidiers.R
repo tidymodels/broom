@@ -1,17 +1,17 @@
 #' @templateVar class speedglm
 #' @template title_desc_tidy
 #'
-#' @param x A `speedglm` object returned from `speedglm::speedglm()`.
+#' @param x A `speedglm` object returned from [speedglm::speedglm()].
 #' @template param_confint
 #' @template param_exponentiate
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy(regression = TRUE)
 #'
-#' @examplesIf FALSE
+#' @examplesIf rlang::is_installed("speedglm")
 #'
 #' # load libraries for models and data
-#' # library(speedglm)
+#' library(speedglm)
 #'
 #' # generate data
 #' clotting <- data.frame(
@@ -29,6 +29,7 @@
 #' @aliases speedglm_tidiers
 #' @export
 #' @family speedlm tidiers
+#' @seealso [speedglm::speedglm()]
 tidy.speedglm <- function(x, conf.int = FALSE, conf.level = 0.95,
                           exponentiate = FALSE, ...) {
   ret <- as_tibble(coef(summary(x)), rownames = "term")
@@ -71,6 +72,7 @@ tidy.speedglm <- function(x, conf.int = FALSE, conf.level = 0.95,
 #'
 #' @export
 #' @family speedlm tidiers
+#' @seealso [speedglm::speedlm()]
 glance.speedglm <- function(x, ...) {
   as_glance_tibble(
     null.deviance = x$nulldev,

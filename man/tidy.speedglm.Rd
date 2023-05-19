@@ -8,7 +8,7 @@
 \method{tidy}{speedglm}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
 }
 \arguments{
-\item{x}{A \code{speedglm} object returned from \code{speedglm::speedglm()}.}
+\item{x}{A \code{speedglm} object returned from \code{\link[speedglm:speedglm]{speedglm::speedglm()}}.}
 
 \item{conf.int}{Logical indicating whether or not to include a confidence
 interval in the tidied output. Defaults to \code{FALSE}.}
@@ -44,10 +44,10 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
-\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("speedglm")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
-# library(speedglm)
+library(speedglm)
 
 # generate data
 clotting <- data.frame(
@@ -64,6 +64,8 @@ glance(fit)
 \dontshow{\}) # examplesIf}
 }
 \seealso{
+\code{\link[speedglm:speedglm]{speedglm::speedglm()}}
+
 Other speedlm tidiers: 
 \code{\link{augment.speedlm}()},
 \code{\link{glance.speedglm}()},

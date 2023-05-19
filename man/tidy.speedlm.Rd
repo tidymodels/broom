@@ -8,7 +8,7 @@
 \method{tidy}{speedlm}(x, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
-\item{x}{A \code{speedlm} object returned from \code{speedglm::speedlm()}.}
+\item{x}{A \code{speedlm} object returned from \code{\link[speedglm:speedlm]{speedglm::speedlm()}}.}
 
 \item{conf.int}{Logical indicating whether or not to include a confidence
 interval in the tidied output. Defaults to \code{FALSE}.}
@@ -39,10 +39,10 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
-\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("speedglm")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load modeling library
-# dlibrary(speedglm)
+library(speedglm)
 
 # fit model
 mod <- speedlm(mpg ~ wt + qsec, data = mtcars, fitted = TRUE)
@@ -54,6 +54,8 @@ augment(mod)
 \dontshow{\}) # examplesIf}
 }
 \seealso{
+\code{\link[speedglm:speedlm]{speedglm::speedlm()}}, \code{\link[=tidy.lm]{tidy.lm()}}
+
 Other speedlm tidiers: 
 \code{\link{augment.speedlm}()},
 \code{\link{glance.speedglm}()},

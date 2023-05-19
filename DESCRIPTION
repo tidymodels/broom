@@ -627,6 +627,7 @@ Suggests:
     sp,
     spdep (>= 1.1),
     spatialreg,
+    speedglm,
     spelling,
     survey,
     survival,
