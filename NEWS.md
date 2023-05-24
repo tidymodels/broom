@@ -2,15 +2,15 @@
 
 * `tidy.coxph()` will now pass its ellipses `...` to `summary()` internally (#1151 by `@ste-tuf`).
 
-* Transitioned the deprecation of the `region` argument to `tidy.SpatialPolygonsDataFrame` from a warn- to a hard-deprecation. (#1142)
+* Transitioned the deprecation of the `region` argument to `tidy.SpatialPolygonsDataFrame` from a warn- to a hard-deprecation (#1142). 
 
-* Removed maptools and rgeos as Suggested packages.
+* Removed maptools and rgeos as Suggested packages ahead of their retirement. sp tidiers will be removed from a future release of the package (#1142).
 
-* Addressed bug in mlogit tidiers where `augment.mlogit()` would fail if supplied a model fitted with a non-default `dfidx()`. (#1156 by `@gregmacfarlane`)
+* Addressed bug in mlogit tidiers where `augment.mlogit()` would fail if supplied a model fitted with a non-default `dfidx()` (#1156 by `@gregmacfarlane`). 
 
-* Addressed bug in ANOVA tidiers where `tidy.anova()` would fail if passed a model with many predictors. (#1159 by `@jwilliman`)
+* Addressed bug in ANOVA tidiers where `tidy.anova()` would fail if passed a model with many predictors (#1159 by `@jwilliman`). 
 
-* Addressed warnings in ANOVA tidiers for unrecognized column names `Resid..Df`, `Resid..Dev`, and `Deviance`; those columns will be renamed `df.residual`, `residual.deviance`, and `deviance`, respectively. (#1159 by `@jwilliman`)
+* Addressed warnings in ANOVA tidiers for unrecognized column names `Resid..Df`, `Resid..Dev`, and `Deviance`; those columns will be renamed `df.residual`, `residual.deviance`, and `deviance`, respectively (#1159 by `@jwilliman`).
 
 # broom 1.0.4
 
