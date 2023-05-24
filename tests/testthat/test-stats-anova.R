@@ -35,7 +35,7 @@ test_that("tidy.anova", {
   
   # see #1159
   for (i in 1:20) {mtcars[[paste0("column", i)]] <- rnorm(nrow(mtcars))}
-  m3 <- glm(mpg ~ ., mtcars, family = gaussian)
+  m3 <- stats::glm(mpg ~ ., mtcars, family = stats::gaussian)
   anovacomp2 <- stats::anova(m1, m3)
   td3 <- tidy(anovacomp2)
 
