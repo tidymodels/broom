@@ -58,6 +58,10 @@
 #'
 tidy.survfit <- function(x, ...) {
   if (inherits(x, "survfitms")) {
+    # A survfit object may contain std(log S) or std(S), tidy/summary should
+    # always be std(S).
+    if (!is.null(x$std.err) && x$logse) x$std.err <- x$std.err * x$pstate 
+    
     # c() coerces to vector
     ret <- data.frame(
       time = x$time,
@@ -65,7 +69,7 @@ tidy.survfit <- function(x, ...) {
       n.event = c(x$n.event),
       n.censor = c(x$n.censor),
       estimate = c(x$pstate),
-      std.error = c(summary(x)$std.err),
+      std.error = c(x$std.err),
       conf.high = c(x$upper),
       conf.low = c(x$lower),
       state = rep(x$states, each = nrow(x$pstate))
@@ -73,13 +77,17 @@ tidy.survfit <- function(x, ...) {
 
     ret <- ret[ret$state != "", ]
   } else {
+    # A survfit object may contain std(log S) or std(S), tidy/summary should
+    # always be std(S).
+    if (!is.null(x$std.err) && x$logse) x$std.err <- x$std.err * x$surv 
+    
     ret <- data.frame(
       time = x$time,
       n.risk = x$n.risk,
       n.event = x$n.event,
       n.censor = x$n.censor,
       estimate = x$surv,
-      std.error = summary(x)$std.err,
+      std.error = x$std.err,
       conf.high = x$upper,
       conf.low = x$lower
     )
