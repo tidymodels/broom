@@ -72,7 +72,8 @@ tidy.lmodel2 <- function(x, ...) {
     ) %>%
     tidyr::separate(key, c("level", "term"), "-") %>%
     mutate(level = ifelse(level == "2.5%", "conf.low", "conf.high")) %>%
-    tidyr::pivot_wider(c(Method, term),
+    tidyr::pivot_wider(
+      id_cols = c(Method, term),
       names_from = level,
       values_from = value
     ) %>%
