@@ -165,7 +165,7 @@ Models for Networks. <em>Journal of Statistical Software</em>, 24(3).
 <span class="r-in"><span><span class="co"># load libraries for models and data</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://statnet.org" class="external-link">ergm</a></span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ‘ergm’ 4.4.0 (2023-01-26), part of the Statnet Project</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ‘ergm’ 4.5.0 (2023-05-27), part of the Statnet Project</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> * ‘news(package="ergm")’ for changes since last version</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> * ‘citation("ergm")’ for citation information</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> * ‘https://statnet.org’ for help, support, and other information</span>
@@ -185,10 +185,10 @@ Models for Networks. <em>Journal of Statistical Software</em>, 24(3).
 <span class="r-in"><span><span class="co"># families depends on the absolute difference in wealth</span></span></span>
 <span class="r-in"><span><span class="va">gest</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ergm/man/ergm.html" class="external-link">ergm</a></span><span class="op">(</span><span class="va">flomarriage</span> <span class="op">~</span> <span class="va">edges</span> <span class="op">+</span> <span class="fu">absdiff</span><span class="op">(</span><span class="st">"wealth"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Starting maximum pseudolikelihood estimation (MPLE):</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Obtaining the responsible dyads.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Evaluating the predictor and response matrix.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Maximizing the pseudolikelihood.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Finished MPLE.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Stopping at the initial estimate.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Evaluating log-likelihood at the estimate. </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
