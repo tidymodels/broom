@@ -18,7 +18,9 @@ test_that("polygon tidiers work", {
   Sr3 <- Polygon(cbind(c(4, 4, 5, 10, 4), c(5, 3, 2, 5, 5)))
   Sr4 <- Polygon(cbind(c(5, 6, 6, 5, 5), c(4, 4, 3, 3, 4)), hole = TRUE)
 
-  td <- tidy(Sr1)
+  expect_warning({
+    td <- tidy(Sr1)
+  })
   check_tidy_output(td, strict = FALSE)
 
   # tidy.Polygons
