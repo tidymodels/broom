@@ -25,7 +25,7 @@
 #'   fixed effects, see \url{https://github.com/lrberge/fixest/issues/6} and
 #'   \url{https://github.com/sgaure/lfe/issues/1#issuecomment-530646990})
 #'
-#' @examplesIf rlang::is_installed("fixest")
+#' @examplesIf rlang::is_installed("fixest") & !broom:::is_cran_check()
 #'
 #' # load libraries for models and data
 #' library(fixest)
