@@ -1,4 +1,4 @@
-# broom (development version)
+# broom 1.0.5
 
 * `tidy.coxph()` will now pass its ellipses `...` to `summary()` internally (#1151 by `@ste-tuf`).
 
