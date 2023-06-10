@@ -34,6 +34,8 @@ exponentiate <- function(data, col = "estimate") {
 #' @return A `tibble` potentially with a `.rownames` column
 #' @noRd
 #'
+
+
 as_augment_tibble <- function(data) {
   if (inherits(data, "matrix") & is.null(colnames(data))) {
     stop(
@@ -59,6 +61,16 @@ as_augment_tibble <- function(data) {
     )
   }
   df
+}
+
+# adapted from ps:::is_cran_check()
+is_cran_check <- function() {
+  if (identical(Sys.getenv("NOT_CRAN"), "true")) {
+    FALSE
+  }
+  else {
+    Sys.getenv("_R_CHECK_PACKAGE_NAME_", "") != ""
+  }
 }
 
 #' Convert a data.frame or matrix to a tibble
