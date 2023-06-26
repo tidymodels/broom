@@ -1,5 +1,7 @@
 # broom (development version)
 
+* Moved forward with deprecation of tidiers for objects from the sp package. See resources linked in [tidymodels/broom#1142](https://github.com/tidymodels/broom/issues/1142) for more information on migration from retiring spatial packages.
+
 # broom 1.0.5
 
 * `tidy.coxph()` will now pass its ellipses `...` to `summary()` internally (#1151 by `@ste-tuf`).
