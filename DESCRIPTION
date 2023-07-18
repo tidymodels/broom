@@ -624,7 +624,6 @@ Suggests:
     robustbase,
     rsample,
     sandwich,
-    sp,
     spdep (>= 1.1),
     spatialreg,
     speedglm,
