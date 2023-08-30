@@ -74,11 +74,11 @@ tidy.gam <- function(x, parametric = FALSE, conf.int = FALSE,
     class(sx) <- c("anova", "data.frame")
     ret <- tidy(sx)
   }
-
+  
   if (exponentiate && parametric) {
     ret <- exponentiate(ret)
   }
-
+  
   ret
 }
 
@@ -94,7 +94,9 @@ tidy.gam <- function(x, parametric = FALSE, conf.int = FALSE,
 #'   "BIC",
 #'   "deviance",
 #'   "df.residual",
-#'   "nobs"
+#'   "nobs",
+#'   "adj.r.squared",
+#'   "npar"
 #' )
 #'
 #'
@@ -102,6 +104,8 @@ tidy.gam <- function(x, parametric = FALSE, conf.int = FALSE,
 #' @family mgcv tidiers
 #' @seealso [glance()], [mgcv::gam()]
 glance.gam <- function(x, ...) {
+  s <- summary(x)
+  
   as_glance_tibble(
     df = sum(x$edf),
     logLik = as.numeric(stats::logLik(x)),
@@ -110,7 +114,13 @@ glance.gam <- function(x, ...) {
     deviance = stats::deviance(x),
     df.residual = stats::df.residual(x),
     nobs = stats::nobs(x),
-    na_types = "irrrrii"
+    # m = s$m, # number of smooth terms (non-standard)
+    adj.r.squared = s$r.sq,
+    # dev.expl = s$dev.expl, # proportion deviance explained (non-standard)
+    # dispersion = s$dispersion, # scale parameter (non-standard)
+    # rank = s$rank, # apparent model rank (non-standard)
+    npar = s$np,
+    na_types = "irrrriiri"
   )
 }
 
