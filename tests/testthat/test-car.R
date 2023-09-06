@@ -84,3 +84,16 @@ test_that("tidy car::Anova coxph", {
   check_dims(td2, expected_rows = 2, expected_cols = 5)
   check_dims(td3, expected_rows = 2, expected_cols = 4)
 })
+
+test_that("tidy car::linearHypothesis with long formulas (#1171)", {
+  reg_long <- 
+    lm(
+      Fertility ~ Agriculture + Examination + Education + Catholic + Infant.Mortality, 
+      data = swiss
+    )
+  
+  test_long <- car::linearHypothesis(reg_long, hypothesis.matrix = c(0,1, 0, 0, 0, -1))
+  
+  td <- broom::tidy(test_long)
+  check_dims(td, expected_rows = 1, expected_cols = 10)
+})
