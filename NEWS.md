@@ -4,6 +4,8 @@
 
 * Added support for columns `adj.r.squared` and `npar` in `glance()` method for objects outputted from `mgcv::gam()` (#1172).
 
+* Corrected confidence interval values for precision components in `tidy.betareg()` output.
+
 # broom 1.0.5
 
 * `tidy.coxph()` will now pass its ellipses `...` to `summary()` internally (#1151 by `@ste-tuf`).

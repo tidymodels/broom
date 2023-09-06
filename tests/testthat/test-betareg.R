@@ -25,6 +25,11 @@ test_that("tidy.betareg", {
 
   check_tidy_output(td1)
   check_tidy_output(td2)
+  
+  expect_equal(
+    unname(confint(fit2)),
+    unname(as.matrix(td2[c("conf.low", "conf.high")]))
+  )
 
   check_dims(td1, 12, 8)
 })
