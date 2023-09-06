@@ -2,7 +2,7 @@
 
 * Moved forward with deprecation of tidiers for objects from the sp package. See resources linked in [tidymodels/broom#1142](https://github.com/tidymodels/broom/issues/1142) for more information on migration from retiring spatial packages.
 
-* Fixed bug in tidier for `car::linearHypothesis()` output with long formulas.
+* Fixed bug in tidier for `car::linearHypothesis()` output with long formulas (#1171).
 
 # broom 1.0.5
 
