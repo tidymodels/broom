@@ -57,7 +57,7 @@ ds <- data.frame(state.region, state.x77)
 # fit model
 geefit <- geeglm(Income ~ Frost + Murder,
   id = state.region,
-  data = ds, family = gaussian,
+  data = ds,
   corstr = "exchangeable"
 )
 
