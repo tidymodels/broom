@@ -114,11 +114,7 @@ glance.gam <- function(x, ...) {
     deviance = stats::deviance(x),
     df.residual = stats::df.residual(x),
     nobs = stats::nobs(x),
-    # m = s$m, # number of smooth terms (non-standard)
     adj.r.squared = s$r.sq,
-    # dev.expl = s$dev.expl, # proportion deviance explained (non-standard)
-    # dispersion = s$dispersion, # scale parameter (non-standard)
-    # rank = s$rank, # apparent model rank (non-standard)
     npar = s$np,
     na_types = "irrrriiri"
   )
