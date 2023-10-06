@@ -53,7 +53,7 @@ tidy.varest <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 
   for (v in names(s$varresult)) {
     ret[[v]] <- as_tidy_tibble(
-      s$varresult[[1]]$coefficients,
+      s$varresult[[v]]$coefficients,
       new_names = c("estimate", "std.error", "statistic", "p.value")
     )
     ret[[v]]$group <- v
