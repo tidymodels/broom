@@ -8,6 +8,8 @@
 
 * Added support for columns `adj.r.squared` and `npar` in `glance()` method for objects outputted from `mgcv::gam()` (#1172).
 
+* Corrected coefficients values in `tidy.varest()` output (#1174).
+
 
 # broom 1.0.5
 
