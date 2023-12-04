@@ -9,7 +9,7 @@
 #' @evalRd return_tidy("size", "withinss", "cluster")
 #'
 # skip running examples - occasionally over CRAN check time limit
-#' @examplesIf (rlang::is_installed("cluster") & rlang::is_installed("modeldata") && identical(Sys.getenv("NOT_CRAN"), "true"))
+#' @examplesIf rlang::is_installed(c("cluster", "modeldata")) && identical(Sys.getenv("NOT_CRAN"), "true")
 #'
 #' library(cluster)
 #' library(modeldata)
@@ -62,7 +62,7 @@ augment.kmeans <- function(x, data, ...) {
 
   # kmeans allows for input matrices without column names,
   # so add them in the same way that fix_data_frame() would have
-  if (inherits(data, "matrix") & is.null(colnames(data))) {
+  if (inherits(data, "matrix") && is.null(colnames(data))) {
     colnames(data) <- paste0("X", 1:ncol(data))
   }
 
