@@ -14,7 +14,7 @@
 #' model, so the `p.values` argument to `tidy.svyolr()` is currently ignored,
 #' and will raise a warning when passed.
 #'
-#' @examplesIf rlang::is_installed("survey") && rlang::is_installed("MASS")
+#' @examplesIf rlang::is_installed(c("survey", "MASS"))
 #' library(broom)
 #' library(survey)
 #'

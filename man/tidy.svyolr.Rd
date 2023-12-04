@@ -51,7 +51,7 @@ model, so the \code{p.values} argument to \code{tidy.svyolr()} is currently igno
 and will raise a warning when passed.
 }
 \examples{
-\dontshow{if (rlang::is_installed("survey") && rlang::is_installed("MASS")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed(c("survey", "MASS"))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 library(broom)
 library(survey)
 

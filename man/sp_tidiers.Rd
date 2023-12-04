@@ -43,5 +43,8 @@ specify which components to return.
 
 Note that the \code{sf} package now defines tidy spatial objects
 and is the recommended approach to spatial data. \code{sp} tidiers are now
-deprecated in favor of \code{sf::st_as_sf()}.
+deprecated in favor of \code{sf::st_as_sf()} and coercion methods found in
+other packages. See
+\url{https://r-spatial.org/r/2023/05/15/evolution4.html} for more on
+migration from retiring spatial packages.
 }

@@ -71,7 +71,7 @@ original data can be recovered from the fit object, this method
 currently does not take in \code{data} or \code{newdata} arguments.
 }
 \examples{
-\dontshow{if ((rlang::is_installed("spdep") & rlang::is_installed("spatialreg") && identical(Sys.getenv("NOT_CRAN"), "true"))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed(c("spdep", "spatialreg")) && identical(Sys.getenv("NOT_CRAN"), "true")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 
 # load libraries for models and data

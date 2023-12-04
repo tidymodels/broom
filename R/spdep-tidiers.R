@@ -11,7 +11,7 @@
 #' @evalRd return_tidy(regression = TRUE)
 #'
 # skip running examples - occasionally over CRAN check time limit
-#' @examplesIf (rlang::is_installed("spdep") & rlang::is_installed("spatialreg") && identical(Sys.getenv("NOT_CRAN"), "true"))
+#' @examplesIf rlang::is_installed(c("spdep", "spatialreg")) && identical(Sys.getenv("NOT_CRAN"), "true")
 #'
 #'
 #' # load libraries for models and data
