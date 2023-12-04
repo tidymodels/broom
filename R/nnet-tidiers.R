@@ -10,7 +10,7 @@
 #'
 #' @evalRd return_tidy("y.value", regression = TRUE)
 #'
-#' @examplesIf (rlang::is_installed("nnet") & rlang::is_installed("MASS"))
+#' @examplesIf rlang::is_installed(c("nnet", "MASS"))
 #'
 #' # load libraries for models and data
 #' library(nnet)
