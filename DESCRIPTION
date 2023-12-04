@@ -631,13 +631,11 @@ Suggests:
     survey,
     survival,
     systemfit,
-    testt
-    hat (>= 2.1.0),
+    testthat (>= 3.1.0),
     tseries,
     vars,
     withr,
-    zoo,
-    testthat (>= 3.0.0)
+    zoo
 VignetteBuilder:
     knitr
 Config/Needs/website: 
