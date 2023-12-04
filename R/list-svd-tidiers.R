@@ -45,7 +45,7 @@ tidy_svd <- function(x, matrix = "u", ...) {
 
   if (matrix == "u") {
     ret <- x$u %>%
-      as_tibble(.name_repair = "unique") %>%
+      as_tibble(.name_repair = "unique_quiet") %>%
       tibble::rowid_to_column("row") %>%
       pivot_longer(
         cols = c(dplyr::everything(), -row),
@@ -65,8 +65,9 @@ tidy_svd <- function(x, matrix = "u", ...) {
         cumulative = cumsum(percent)
       )
   } else if (matrix == "v") {
+    # use unique_quiet to silence test in tidy_svd
     ret <- x$v %>%
-      as_tibble(.name_repair = "unique") %>%
+      as_tibble(.name_repair = "unique_quiet") %>%
       tibble::rowid_to_column("column") %>%
       pivot_longer(
         cols = c(dplyr::everything(), -column),
