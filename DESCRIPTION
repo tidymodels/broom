@@ -631,10 +631,13 @@ Suggests:
     survey,
     survival,
     systemfit,
-    testthat (>= 2.1.0),
+    testt
+    hat (>= 2.1.0),
     tseries,
     vars,
-    zoo
+    withr,
+    zoo,
+    testthat (>= 3.0.0)
 VignetteBuilder:
     knitr
 Config/Needs/website: 
@@ -752,3 +755,4 @@ Collate:
     'vars-tidiers.R'
     'zoo-tidiers.R'
     'zzz.R'
+Config/testthat/edition: 3
