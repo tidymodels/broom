@@ -1,29 +1,25 @@
-context("glmnetUtils")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("glmnetUtils")
-library(glmnetUtils)
+skip_if_not_installed("modeldata")
+
+library(modeltests)
+library(glmnetUtils, warn.conflicts = FALSE)
 
 set.seed(27)
 
-skip_if_not_installed("modeldata")
-library(modeldata)
-data(hpc_data)
 
 fit <- glmnet(formula = mpg ~ ., data = mtcars)
 fit2 <- glmnet(
   formula = class ~ compounds + input_fields + iterations + num_pending,
-  data = hpc_data, family = "multinomial"
+  data = modeldata::hpc_data, family = "multinomial"
 )
 
 cv_fit <- cv.glmnet(formula = mpg ~ ., data = mtcars)
 cv_fit2 <- cv.glmnet(
   formula = class ~ compounds + input_fields + iterations + num_pending,
-  data = hpc_data, family = "multinomial"
+  data = modeldata::hpc_data, family = "multinomial"
 )
 
 
@@ -56,17 +52,17 @@ test_that("tidy.glmnet.formula", {
   check_tidy_output(td2)
   check_tidy_output(td2z)
 
-  expect_is(td2, "tbl_df")
-
-  expect_equal(dim(td2), c(983L, 6L))
-  expect_equal(dim(td2z), c(1240L, 6L))
+  expect_s3_class(td2, "tbl_df")
+  
+  check_dims(td2, 983L, 6L)
+  check_dims(td2z, 1240L, 6L)
 
   expect_true(all(td2$estimate != 0))
   expect_true(any(td2z$estimate == 0))
 
   # regression tests
-  expect_true(is.numeric(td$step) && !any(is.na(td$step)))
-  expect_true(is.numeric(td2$step) && !any(is.na(td2$step)))
+  expect_true(is.numeric(td$step) && !anyNA(td$step))
+  expect_true(is.numeric(td2$step) && !anyNA(td2$step))
 })
 
 test_that("glance.glmnet.formula", {
@@ -75,6 +71,6 @@ test_that("glance.glmnet.formula", {
 
   check_glance_outputs(gl, gl2)
 
-  expect_is(gl, "tbl_df")
-  expect_equal(dim(gl), c(1L, 3L))
+  expect_s3_class(gl, "tbl_df")
+  check_dims(gl, 1L, 3L)
 })

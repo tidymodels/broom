@@ -1,11 +1,8 @@
-context("cmprsk")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("cmprsk")
+library(modeltests)
 library(cmprsk)
 set.seed(2)
 

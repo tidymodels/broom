@@ -1,19 +1,16 @@
-context("stats-nls")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
+skip_if_not_installed("MASS")
 library(modeltests)
 
-skip_if_not_installed("MASS")
-
-fit <- nls(
+fit <- stats::nls(
   wt ~ a + b * mpg + c / disp,
   data = mtcars,
   start = list(a = 1, b = 2, c = 3)
 )
 
-fit2 <- nls(wt ~ b * mpg, data = mtcars, start = list(b = 2))
+fit2 <- stats::nls(wt ~ b * mpg, data = mtcars, start = list(b = 2))
 
 test_that("nls tidier arguments", {
   check_arguments(tidy.nls)

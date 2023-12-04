@@ -1,11 +1,8 @@
-context("lavaan")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("lavaan")
+library(modeltests)
 library(lavaan)
 
 fit <- sem("mpg ~ wt", data = mtcars)
@@ -34,7 +31,7 @@ test_that("tidy.lavaan", {
   expect_equal(td$term, c("mpg ~ wt", "mpg ~~ mpg", "wt ~~ wt"))
 
   op_counts <- dplyr::count(td2, op)$n
-  expect_true((all(9:10 %in% op_counts)))
+  expect_contains(op_counts, 9:10)
 
   # check conf level
   expect_true(all(td2$conf.high <= tdc$conf.high))

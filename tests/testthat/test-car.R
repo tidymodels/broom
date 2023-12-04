@@ -1,14 +1,10 @@
-context("car")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("survival")
-library(survival)
-
 skip_if_not_installed("car")
+library(modeltests)
+library(survival)
 
 test_that("tidy.durbinWatsonTest", {
   check_arguments(tidy.durbinWatsonTest)
@@ -25,7 +21,7 @@ test_that("tidy.durbinWatsonTest", {
 
 test_that("tidy.leveneTest", {
   skip_if_not_installed("carData")
-
+  library(car, quietly = TRUE, warn.conflicts = FALSE)
   mod1 <- with(carData::Moore, leveneTest(conformity, fcategory))
   mod2 <- with(carData::Moore, leveneTest(conformity, interaction(fcategory, partner.status)))
   mod3 <- leveneTest(conformity ~ fcategory * partner.status, data = Moore)

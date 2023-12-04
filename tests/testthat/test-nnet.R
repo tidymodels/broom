@@ -1,11 +1,8 @@
-context("nnet")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("nnet")
+library(modeltests)
 library(nnet)
 
 fit <- multinom(gear ~ mpg + factor(am), data = mtcars, trace = FALSE)

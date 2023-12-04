@@ -1,11 +1,9 @@
-context("fixest")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
+skip_if_not_installed("fixest")
 library(modeltests)
 
-skip_if_not_installed("fixest")
 fixest::setFixest_nthreads(1) # avoid warnings about requesting more threads
 
 set.seed(27)

@@ -1,11 +1,8 @@
-context("bbmle")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("bbmle")
+library(modeltests)
 
 test_that("tidy.mle2", {
   check_arguments(tidy.mle2)

@@ -1,11 +1,8 @@
-context("mgcv")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("mgcv")
+library(modeltests)
 
 fit <- mgcv::gam(weight ~ s(Time) + factor(Diet), data = ChickWeight)
 

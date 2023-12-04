@@ -1,9 +1,6 @@
-context("glmnet")
-
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("glmnet")
+library(modeltests)
 library(glmnet)
 
 set.seed(27)
@@ -51,8 +48,8 @@ test_that("tidy.glmnet", {
   expect_true(any(td2z$estimate == 0))
 
   # regression tests
-  expect_true(is.numeric(td$step) && !any(is.na(td$step)))
-  expect_true(is.numeric(td2$step) && !any(is.na(td2$step)))
+  expect_true(is.numeric(td$step) && !anyNA(td$step))
+  expect_true(is.numeric(td2$step) && !anyNA(td2$step))
 })
 
 test_that("glance.glmnet", {

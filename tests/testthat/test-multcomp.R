@@ -1,15 +1,12 @@
-context("multcomp")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("multcomp")
-library(multcomp)
+library(modeltests)
+library(multcomp, quietly = TRUE, warn.conflicts = FALSE)
 
 amod <- aov(breaks ~ wool + tension, data = warpbreaks)
-wht <- glht(amod, linfct = mcp(tension = "Tukey"))
+wht <- multcomp::glht(amod, linfct = multcomp::mcp(tension = "Tukey"))
 
 test_that("multcomp tidier arguments", {
   check_arguments(tidy.glht)
@@ -35,11 +32,11 @@ test_that("tidy.summary.glht works", {
   check_tidy_output(td, strict = FALSE)
   check_dims(td, 3, 7)
 
-  expect_true("adj.p.value" %in% colnames(td))
+  expect_contains(colnames(td), "adj.p.value")
   expect_identical(td, tidy(wht, test = adjusted("bonferroni")))
 
   td <- tidy(summary(wht, test = adjusted("none")))
-  expect_true("p.value" %in% colnames(td))
+  expect_contains(colnames(td), "p.value")
 })
 
 test_that("tidy.cld works", {
@@ -53,12 +50,12 @@ test_that("tidy.glht consistency with tidy.TukeyHSD", {
   td_hsd <- tidy(TukeyHSD(amod, "tension"))
   td_glht <- tidy(wht, conf.int = TRUE) %>%
     dplyr::select(-statistic) %>%
-    mutate(contrast = gsub(" ", "", contrast))
+    dplyr::mutate(contrast = gsub(" ", "", contrast))
 
   expect_equal(
     as.data.frame(td_hsd),
     as.data.frame(td_glht),
-    check.attributes = FALSE,
-    tolerance = 0.001
+    tolerance = 0.001,
+    ignore_attr = TRUE
   )
 })

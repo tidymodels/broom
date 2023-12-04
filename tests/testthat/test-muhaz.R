@@ -1,13 +1,9 @@
-context("muhaz")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("muhaz")
 skip_if_not_installed("survival") # does this skip with base R?
-
+library(modeltests)
 library(muhaz)
 
 # load the ovarian data

@@ -1,11 +1,8 @@
-context("mass-rlm")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("MASS")
+library(modeltests)
 library(MASS)
 
 fit <- rlm(stack.loss ~ ., stackloss)

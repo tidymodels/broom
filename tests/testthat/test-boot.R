@@ -1,12 +1,9 @@
-context("boot")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("boot")
-library(boot)
+library(modeltests)
+library(boot, quietly = TRUE, warn.conflicts = FALSE)
 
 test_that("boot tidier arguments", {
   check_arguments(tidy.boot)
@@ -29,7 +26,7 @@ test_that("tidy.boot for glms", {
   td <- tidy(bootres, conf.int = TRUE)
 
   tdnorm <- tidy(bootres, conf.int = TRUE, conf.method = "norm")
-  expect_false(any(is.na(tdnorm[[4]])))
+  expect_false(anyNA(tdnorm[[4]]))
 
   bootresw <- boot::boot(clotting, boot_fun, R = 100, weights = rep(1 / 9, 9))
   tdw <- tidy(bootresw, conf.int = TRUE)

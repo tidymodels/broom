@@ -1,14 +1,11 @@
-context("quantreg-rqs")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("quantreg")
+library(modeltests)
 library(quantreg)
 
-airquality <- na.omit(airquality)
+airquality <- stats::na.omit(airquality)
 
 fit <- rq(Ozone ~ ., data = airquality, tau = 1:19 / 20)
 fit2 <- rq(Ozone ~ Temp - 1, data = airquality, tau = 1:19 / 20)

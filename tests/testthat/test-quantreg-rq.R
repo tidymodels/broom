@@ -1,19 +1,16 @@
-context("quantreg-rq")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("quantreg")
-library(quantreg)
+library(modeltests)
+library(quantreg, warn.conflicts = FALSE)
 
-data(stackloss)
+data(stackloss, package = "datasets")
 
-df <- as_tibble(stack.x) %>%
-  mutate(stack.loss = stack.loss)
+df <- dplyr::as_tibble(stack.x) %>%
+  dplyr::mutate(stack.loss = stack.loss)
 
-dflarge_n <- df %>% slice(rep(row_number(), 500))
+dflarge_n <- df %>% dplyr::slice(rep(dplyr::row_number(), 500))
 
 fit <- rq(stack.loss ~ ., data = df, tau = .5)
 fit2 <- rq(stack.loss ~ 1, data = df, tau = .5)

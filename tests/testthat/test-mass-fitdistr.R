@@ -1,11 +1,8 @@
-context("mass-fitdistr")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("MASS")
+library(modeltests)
 
 set.seed(27)
 x <- rnorm(100, 5, 2)

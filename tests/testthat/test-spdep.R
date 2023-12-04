@@ -1,14 +1,11 @@
-context("spdep")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("spdep")
-library(spdep)
-
 skip_if_not_installed("spatialreg")
+
+library(modeltests)
+library(spdep)
 library(spatialreg)
 
 data(oldcol, package = "spdep")

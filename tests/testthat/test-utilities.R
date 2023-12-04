@@ -1,5 +1,3 @@
-context("utilities")
-
 skip_if_not_installed("modeltests")
 library(modeltests)
 
@@ -49,10 +47,10 @@ test_that("augment_newdata can handle function calls in response term (lm)", {
   aug_mt_lm_log_newdata <- augment(mt_lm_log, newdata = mtcars[1:20, ])
   aug_mt_lm_log_no_resp <- augment(mt_lm_log, newdata = mtcars[1:20, 2:ncol(mtcars)])
 
-  expect_true(inherits(aug_mt_lm_log_none, "tbl_df"))
-  expect_true(inherits(aug_mt_lm_log_data, "tbl_df"))
-  expect_true(inherits(aug_mt_lm_log_newdata, "tbl_df"))
-  expect_true(inherits(aug_mt_lm_log_no_resp, "tbl_df"))
+  expect_s3_class(aug_mt_lm_log_none, "tbl_df")
+  expect_s3_class(aug_mt_lm_log_data, "tbl_df")
+  expect_s3_class(aug_mt_lm_log_newdata, "tbl_df")
+  expect_s3_class(aug_mt_lm_log_no_resp, "tbl_df")
 
   expect_equal(".resid" %in% colnames(aug_mt_lm_log_none), ".resid" %in% colnames(aug_mt_lm_none))
   expect_equal(".resid" %in% colnames(aug_mt_lm_log_data), ".resid" %in% colnames(aug_mt_lm_data))
@@ -78,10 +76,10 @@ test_that("augment_newdata can handle function calls in response term (glm)", {
   aug_mt_glm_log_newdata <- augment(mt_glm_log, newdata = mtcars[1:20, ])
   aug_mt_glm_log_no_resp <- augment(mt_glm_log, newdata = mtcars[1:20, 2:ncol(mtcars)])
 
-  expect_true(inherits(aug_mt_glm_log_none, "tbl_df"))
-  expect_true(inherits(aug_mt_glm_log_data, "tbl_df"))
-  expect_true(inherits(aug_mt_glm_log_newdata, "tbl_df"))
-  expect_true(inherits(aug_mt_glm_log_no_resp, "tbl_df"))
+  expect_s3_class(aug_mt_glm_log_none, "tbl_df")
+  expect_s3_class(aug_mt_glm_log_data, "tbl_df")
+  expect_s3_class(aug_mt_glm_log_newdata, "tbl_df")
+  expect_s3_class(aug_mt_glm_log_no_resp, "tbl_df")
 
   expect_equal(".resid" %in% colnames(aug_mt_glm_log_none), ".resid" %in% colnames(aug_mt_glm_none))
   expect_equal(".resid" %in% colnames(aug_mt_glm_log_data), ".resid" %in% colnames(aug_mt_glm_data))
@@ -106,10 +104,10 @@ test_that("augment_newdata can handle function calls in response term (loess)", 
   aug_mt_loess_log_newdata <- augment(mt_loess_log, newdata = mtcars[1:20, ])
   aug_mt_loess_log_no_resp <- augment(mt_loess_log, newdata = mtcars[1:20, 2:ncol(mtcars)])
 
-  expect_true(inherits(aug_mt_loess_log_none, "tbl_df"))
-  expect_true(inherits(aug_mt_loess_log_data, "tbl_df"))
-  expect_true(inherits(aug_mt_loess_log_newdata, "tbl_df"))
-  expect_true(inherits(aug_mt_loess_log_no_resp, "tbl_df"))
+  expect_s3_class(aug_mt_loess_log_none, "tbl_df")
+  expect_s3_class(aug_mt_loess_log_data, "tbl_df")
+  expect_s3_class(aug_mt_loess_log_newdata, "tbl_df")
+  expect_s3_class(aug_mt_loess_log_no_resp, "tbl_df")
 
   expect_equal(".resid" %in% colnames(aug_mt_loess_log_none), ".resid" %in% colnames(aug_mt_loess_none))
   expect_equal(".resid" %in% colnames(aug_mt_loess_log_data), ".resid" %in% colnames(aug_mt_loess_data))
@@ -131,7 +129,7 @@ test_that("as_glance_tibble", {
     purrr::map(df3, class)
   )
 
-  expect_true(class(df1$y) == class(df3$y))
+  expect_equal(class(df1$y), class(df3$y))
 
   expect_false(class(df1$y) == class(df2$y))
 

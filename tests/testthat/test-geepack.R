@@ -1,11 +1,8 @@
-context("geepack")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("geepack")
+library(modeltests)
 library(geepack)
 
 dat <- data.frame(state.region, state.x77)

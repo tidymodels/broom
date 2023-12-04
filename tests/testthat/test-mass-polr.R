@@ -1,11 +1,8 @@
-context("mass-polr")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("MASS")
+library(modeltests)
 library(MASS)
 
 fit <- polr(
@@ -52,7 +49,7 @@ test_that("augment.polr", {
   )
 
   au <- augment(fit, type.predict = "class")
-  expect_is(au$.fitted, "factor")
+  expect_s3_class(au$.fitted, "factor")
   expect_equal(predict(fit, type = "class"), au$.fitted)
 })
 

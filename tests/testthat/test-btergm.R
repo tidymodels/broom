@@ -1,12 +1,9 @@
-context("btergm")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("network")
 skip_if_not_installed("btergm")
+library(modeltests)
 
 test_that("tidy.btergm", {
   check_arguments(tidy.btergm, strict = FALSE)

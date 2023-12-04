@@ -1,12 +1,9 @@
-context("quantreg-nlrq")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("quantreg")
-library(quantreg)
+library(modeltests)
+library(quantreg, quietly = TRUE, warn.conflicts = FALSE)
 
 set.seed(27)
 

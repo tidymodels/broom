@@ -1,11 +1,8 @@
-context("mfx")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("mfx")
+library(modeltests)
 library(mfx)
 
 # simulate data

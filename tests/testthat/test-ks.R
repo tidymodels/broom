@@ -1,11 +1,8 @@
-context("ks")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("ks")
+library(modeltests)
 
 test_that("tidy.kde", {
   check_arguments(tidy.kde)

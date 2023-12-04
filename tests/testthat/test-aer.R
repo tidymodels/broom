@@ -1,18 +1,13 @@
-context("aer")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("AER")
-library(AER)
-library(dplyr)
-library(modeltests)
+library(modeltests, quietly = TRUE, warn.conflicts = FALSE)
+library(AER, quietly = TRUE, warn.conflicts = FALSE, )
 
-data("CigarettesSW")
+data("CigarettesSW", package = "AER")
 df <- CigarettesSW %>%
-  mutate(
+  dplyr::mutate(
     rprice = price / cpi,
     rincome = income / population / cpi,
     tdiff = (taxs - tax) / cpi
@@ -67,5 +62,5 @@ test_that("augment.ivreg", {
   )
 
   au <- augment(fit)
-  expect_true(all(c(".resid", ".fitted") %in% names(au)))
+  expect_contains(names(au), c(".resid", ".fitted"))
 })

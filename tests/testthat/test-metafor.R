@@ -1,14 +1,11 @@
-context("rma")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("metafor")
-library(metafor)
-
 skip_if_not_installed("lme4")
+
+library(modeltests)
+library(metafor)
 library(lme4)
 
 # check arguments ---------------------------------------------------------
@@ -151,7 +148,7 @@ res.MH <-
   )
 
 check_augment_rma_output <- function(x) {
-  modeltests::check_tibble(x, "augment")
+  check_tibble(x, "augment")
 }
 
 # test rma tidiers output -------------------------------------------------
@@ -201,7 +198,7 @@ test_that(("glance.rma"), {
 
   # check that fit statistics are not being dropped
   fit.stats <- c("logLik", "deviance", "AIC", "BIC", "AICc")
-  expect_true(all(fit.stats %in% names(re.glance)))
+  expect_contains(names(re.glance), fit.stats)
 })
 
 test_that(("augment.rma"), {

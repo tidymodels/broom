@@ -1,11 +1,8 @@
-context("hmisc")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("Hmisc")
+library(modeltests)
 
 test_that("tidy.rcorr", {
   check_arguments(tidy.rcorr)

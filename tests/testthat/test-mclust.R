@@ -1,23 +1,14 @@
-context("mclust")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
-skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("mclust")
+skip_if_not_installed("modeldata")
+library(modeltests)
 library(mclust)
 
-skip_if_not_installed("modeldata")
-library(modeldata)
-data(hpc_data)
-
-dat <- hpc_data[, 2:5]
-dat3 <- hpc_data[, 2, drop = FALSE]
-dat4 <- hpc_data[, 2]
+dat <- modeldata::hpc_data[, 2:5]
+dat3 <- modeldata::hpc_data[, 2, drop = FALSE]
+dat4 <- modeldata::hpc_data[, 2]
 
 fit <- Mclust(dat, G = 7, modelNames = "EII", verbose = FALSE)
 fit2 <- Mclust(dat, G = 1, verbose = FALSE)
