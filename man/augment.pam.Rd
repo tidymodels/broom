@@ -69,7 +69,7 @@ We are in the process of defining behaviors for models fit with various
 missing at this time.
 }
 \examples{
-\dontshow{if ((rlang::is_installed(c("cluster", "modeldata", "ggplot2")) && identical(Sys.getenv("NOT_CRAN"), "true"))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed(c("cluster", "modeldata", "ggplot2")) && identical(Sys.getenv("NOT_CRAN"), "true")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # load libraries for models and data
 library(dplyr)
