@@ -37,7 +37,7 @@ exponentiate <- function(data, col = "estimate") {
 
 
 as_augment_tibble <- function(data) {
-  if (inherits(data, "matrix") && is.null(colnames(data))) {
+  if (inherits(data, "matrix") & is.null(colnames(data))) {
     stop(
       "The supplied `data`/`newdata` argument was an unnamed matrix. ",
       "Please supply a matrix or dataframe with column names."
@@ -403,7 +403,7 @@ augment_newdata <- function(x, data, newdata, .se_fit, interval = NULL, ...) {
   df <- as_augment_tibble(df)
   # interval <- match.arg(interval)
   # check if response variable is in newdata, if relevant:
-  if (!is.null(x$terms) && inherits(x$terms, "formula")) {
+  if (!is.null(x$terms) & inherits(x$terms, "formula")) {
     has_response <-
       # TRUE if response includes a function call and is in column names,
       # usually with no `data` or `newdata` supplied,
