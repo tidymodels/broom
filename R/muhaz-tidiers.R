@@ -9,7 +9,7 @@
 #'   estimate = "Estimated hazard rate."
 #' )
 #'
-#' @examplesIf (rlang::is_installed(c("muhaz", "survival"))
+#' @examplesIf rlang::is_installed(c("muhaz", "survival"))
 #'
 #' # load libraries for models and data
 #' library(muhaz)
