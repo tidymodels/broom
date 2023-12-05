@@ -485,7 +485,7 @@ augment_newdata <- function(x, data, newdata, .se_fit, interval = NULL, ...) {
 # this version adds a terms column
 broom_confint <- function(x, ...) {
   # warn on arguments silently being ignored
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   ci <- suppressMessages(confint(x, ...))
 
   # confint called on models with a single predictor
@@ -503,7 +503,7 @@ broom_confint <- function(x, ...) {
 # this version adds a terms column
 broom_confint_terms <- function(x, ...) {
   # warn on arguments silently being ignored
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   ci <- suppressMessages(confint(x, ...))
 
   # confint called on models with a single predictor

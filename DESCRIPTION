@@ -544,7 +544,6 @@ Depends:
 Imports:
     backports,
     dplyr (>= 1.0.0),
-    ellipsis,
     generics (>= 0.0.2),
     glue,
     lifecycle,
