@@ -16,7 +16,7 @@
 #' @export
 #' @aliases btergm_tidiers
 #' @seealso [tidy()], [btergm::btergm()]
-#' @examplesIf (rlang::is_installed("btergm") & rlang::is_installed("network"))
+#' @examplesIf (rlang::is_installed(c("btergm", "network"))
 #'
 #' library(btergm)
 #' library(network)
