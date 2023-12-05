@@ -3,7 +3,7 @@ skip_on_cran()
 skip_if_not_installed("modeltests")
 skip_if_not_installed("multcomp")
 library(modeltests)
-library(multcomp, quietly = TRUE, warn.conflicts = FALSE)
+library(multcomp, quietly = TRUE, warn.conflicts = FALSE, mask.ok = "MASS::geyser")
 
 amod <- aov(breaks ~ wool + tension, data = warpbreaks)
 wht <- multcomp::glht(amod, linfct = multcomp::mcp(tension = "Tukey"))

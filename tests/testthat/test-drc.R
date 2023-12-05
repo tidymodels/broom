@@ -3,7 +3,7 @@ skip_on_cran()
 skip_if_not_installed("modeltests")
 skip_if_not_installed("drc")
 library(modeltests)
-library(drc)
+library(drc, quietly = TRUE, warn.conflicts = FALSE)
 
 mod <- drm(dead / total ~ conc, type,
   weights = total, data = selenium, fct = LL.2(), type = "binomial"
@@ -67,6 +67,6 @@ test_that("augment.drc", {
 test_that("confidence merge issue regression test (#798)", {
   td <- tidy(mod, conf.int = TRUE)
 
-  expect_false(any(is.na(td$conf.low)))
-  expect_false(any(is.na(td$conf.high)))
+  expect_false(anyNA(td$conf.low))
+  expect_false(anyNA(td$conf.high))
 })

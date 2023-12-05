@@ -23,7 +23,8 @@ test_that("MASS::polr tidier arguments", {
 test_that("tidy.polr", {
   td <- tidy(fit)
   td2 <- tidy(fit, conf.int = TRUE, exponentiate = TRUE)
-  td3 <- tidy(fit2, conf.int = TRUE, exponentiate = TRUE)
+  # Re-fitting to get Hessian
+  expect_message(td3 <- tidy(fit2, conf.int = TRUE, exponentiate = TRUE))
 
   check_tidy_output(td, strict = FALSE)
   check_tidy_output(td2, strict = FALSE)

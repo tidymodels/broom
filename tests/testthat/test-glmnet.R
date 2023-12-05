@@ -1,7 +1,7 @@
 skip_if_not_installed("modeltests")
 skip_if_not_installed("glmnet")
 library(modeltests)
-library(glmnet)
+library(glmnet, warn.conflicts = FALSE, quietly = TRUE)
 
 set.seed(27)
 

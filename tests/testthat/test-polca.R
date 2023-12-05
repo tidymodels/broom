@@ -4,7 +4,7 @@ skip_if_not_installed("modeltests")
 skip_if_not_installed("poLCA")
 skip_if_not_installed("MASS")
 library(modeltests)
-library(poLCA)
+library(poLCA, warn.conflicts = FALSE, quietly = TRUE)
 
 data(values, package = "poLCA")
 fit <- poLCA(cbind(A, B, C, D) ~ 1, values, nclass = 2, verbose = FALSE)

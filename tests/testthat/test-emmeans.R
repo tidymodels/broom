@@ -4,8 +4,8 @@ skip_if_not_installed("modeltests")
 skip_if_not_installed("lsmeans")
 skip_if_not_installed("lme4")
 library(modeltests)
-library(lsmeans)
-library(lme4)
+suppressPackageStartupMessages(library(lsmeans, warn.conflicts = FALSE, quietly = TRUE))
+library(lme4, warn.conflicts = FALSE)
 
 fit <- lm(sales1 ~ price1 + price2 + day + store, data = oranges)
 rg <- ref.grid(fit)
@@ -94,7 +94,7 @@ test_that("tidy.ref.grid consistency with tidy.TukeyHSD", {
 
   expect_equal(
     as.data.frame(td_hsd),
-    as.data.frame(td_pairs),
+    as.data.frame(td_pairs)
   )
 })
 

@@ -3,9 +3,9 @@ skip_on_cran()
 skip_if_not_installed("modeltests")
 skip_if_not_installed("lmodel2")
 library(modeltests)
-library(lmodel2)
+library(lmodel2, quietly = TRUE, warn.conflicts = FALSE)
 
-data("mod2ex2")
+data("mod2ex2", package = "lmodel2")
 fit <- lmodel2(Prey ~ Predators, data = mod2ex2, "relative", "relative", 99)
 
 test_that("lmodel2 tidier arguments", {

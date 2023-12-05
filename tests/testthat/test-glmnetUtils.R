@@ -5,7 +5,7 @@ skip_if_not_installed("glmnetUtils")
 skip_if_not_installed("modeldata")
 
 library(modeltests)
-library(glmnetUtils, warn.conflicts = FALSE)
+library(glmnetUtils, warn.conflicts = FALSE, quietly = TRUE)
 
 set.seed(27)
 

@@ -3,7 +3,7 @@ skip_on_cran()
 skip_if_not_installed("modeltests")
 skip_if_not_installed("AER")
 library(modeltests, quietly = TRUE, warn.conflicts = FALSE)
-library(AER, quietly = TRUE, warn.conflicts = FALSE, )
+library(AER, quietly = TRUE, warn.conflicts = FALSE)
 
 data("CigarettesSW", package = "AER")
 df <- CigarettesSW %>%

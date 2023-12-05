@@ -84,18 +84,6 @@ test_that("augment.lm", {
     newdata = mtcars
   )
 
-  if (getRversion() <= "4.2.2") {
-    expect_warning(
-      check_augment_function(
-        aug = augment.lm,
-        model = fit_na_row,
-        data = na_row_data,
-        newdata = na_row_data
-      ),
-      "prediction from a rank-deficient fit may be misleading"
-    )
-  }
-
   check_augment_function(
     aug = augment.lm,
     model = fit_rd,
@@ -109,4 +97,15 @@ test_that("augment.lm", {
     data = mtcars,
     newdata = mtcars
   )
+  skip_if(getRversion() >= "4.2.3")
+  expect_warning(
+    check_augment_function(
+      aug = augment.lm,
+      model = fit_na_row,
+      data = na_row_data,
+      newdata = na_row_data
+    ),
+    "prediction from a rank-deficient fit may be misleading"
+  )
+  
 })

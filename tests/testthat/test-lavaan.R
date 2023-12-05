@@ -3,7 +3,7 @@ skip_on_cran()
 skip_if_not_installed("modeltests")
 skip_if_not_installed("lavaan")
 library(modeltests)
-library(lavaan)
+library(lavaan, quietly = TRUE, warn.conflicts = FALSE)
 
 fit <- sem("mpg ~ wt", data = mtcars)
 form <- paste("F =~", paste0("x", 1:9, collapse = " + "))

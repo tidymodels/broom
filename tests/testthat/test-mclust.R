@@ -4,7 +4,7 @@ skip_if_not_installed("modeltests")
 skip_if_not_installed("mclust")
 skip_if_not_installed("modeldata")
 library(modeltests)
-library(mclust)
+library(mclust, quietly = TRUE, warn.conflicts = FALSE)
 
 dat <- modeldata::hpc_data[, 2:5]
 dat3 <- modeldata::hpc_data[, 2, drop = FALSE]

@@ -4,7 +4,7 @@ skip_if_not_installed("modeltests")
 skip_if_not_installed("systemfit")
 
 library(modeltests)
-library(systemfit)
+library(systemfit, quietly = TRUE, warn.conflicts = FALSE)
 
 # Testing using systemfit examples ----------------------------------------
 

@@ -5,7 +5,7 @@ skip_if_not_installed("metafor")
 skip_if_not_installed("lme4")
 
 library(modeltests)
-library(metafor)
+library(metafor, warn.conflicts = FALSE, quietly = TRUE)
 library(lme4)
 
 # check arguments ---------------------------------------------------------

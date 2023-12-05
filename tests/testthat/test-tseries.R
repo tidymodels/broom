@@ -2,7 +2,7 @@ skip_if_not_installed("modeltests")
 skip_if_not_installed("tseries")
 
 library(modeltests)
-library(tseries, quietly = TRUE)
+library(tseries, quietly = TRUE, warn.conflicts = FALSE)
 
 dax <- diff(log(EuStockMarkets))[, "DAX"]
 fit <- garch(dax, control = garch.control(trace = FALSE))
