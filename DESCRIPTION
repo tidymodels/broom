@@ -1,4 +1,4 @@
-Type: package
+Type: Package
 Package: broom
 Title: Convert Statistical Objects into Tidy Tibbles
 Version: 1.0.5.9000
