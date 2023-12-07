@@ -1,4 +1,5 @@
 # Custom package description for the package help file.
+#' @name broom
 #' @description
 #' Convert statistical analysis objects from R into tidy tibbles,
 #' so that they can more easily be combined, reshaped and otherwise processed

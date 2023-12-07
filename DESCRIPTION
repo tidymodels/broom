@@ -1,3 +1,4 @@
+Type: package
 Package: broom
 Title: Convert Statistical Objects into Tidy Tibbles
 Version: 1.0.5.9000
@@ -535,7 +536,7 @@ Description: Summarizes key information about statistical
     observations to a dataset, such as fitted values or influence
     measures.
 License: MIT + file LICENSE
-URL: https://broom.tidymodels.org,
+URL: https://broom.tidymodels.org/,
     https://github.com/tidymodels/broom
 BugReports: https://github.com/tidymodels/broom/issues
 Depends:
