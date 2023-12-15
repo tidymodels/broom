@@ -1,5 +1,3 @@
-context("stats-anova")
-
 skip_if_not_installed("modeltests")
 library(modeltests)
 
@@ -80,9 +78,9 @@ test_that("tidy.aovlist", {
   check_dims(td, 4, 7)
   check_dims(td2, 7, 7)
 
-  expect_true("Residuals" %in% td$term)
-  expect_true("Residuals" %in% td2$term)
-  expect_true(length(unique(td2$stratum)) == 5)
+  expect_contains(td$term, "Residuals")
+  expect_contains(td2$term, "Residuals")
+  expect_length(unique(td2$stratum), 5)
 })
 
 
@@ -121,11 +119,11 @@ test_that("tidy.linearHypothesis", {
   check_tidy_output(td_lht, strict = FALSE)
   check_dims(td_lht, 1, 10)
 
-  expect_true("null.value" %in% colnames(td_lht))
+  expect_contains(colnames(td_lht), "null.value")
 
   expect_equal(td_lht$term, "disp - hp")
   expect_equal(td_lht$null.value, 0)
-  expect_equal(td_lht$estimate, -0.00551, tolerance = .00001)
+  expect_equal(td_lht$estimate, -0.005506, tolerance = 0.0001)
 })
 
 skip_if_not_installed("lme4")

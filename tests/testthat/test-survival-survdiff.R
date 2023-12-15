@@ -1,11 +1,9 @@
-context("survival-survdiff")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("survival")
+
+library(modeltests)
 library(survival)
 
 fit <- survdiff(Surv(futime, fustat) ~ rx, data = ovarian)

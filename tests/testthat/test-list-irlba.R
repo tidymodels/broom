@@ -1,11 +1,8 @@
-context("list-irlba")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("irlba")
+library(modeltests)
 
 mat <- scale(as.matrix(USJudgeRatings))
 s <- svd(mat)

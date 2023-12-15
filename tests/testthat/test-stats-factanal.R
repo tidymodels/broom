@@ -1,5 +1,3 @@
-context("stats-factanal")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
@@ -21,8 +19,8 @@ test_that("tidy.factanal", {
   td <- tidy(fit)
   td2 <- tidy(fit2)
 
-  modeltests::check_tidy_output(td, strict = FALSE)
-  modeltests::check_tidy_output(td2, strict = FALSE)
+  check_tidy_output(td, strict = FALSE)
+  check_tidy_output(td2, strict = FALSE)
   check_dims(td, ncol(mtcars), 2 + n_factors)
 
   expect_equal(td$variable, colnames(mtcars))
@@ -66,7 +64,6 @@ test_that("augment.factanal works", {
 })
 
 test_that("augment.factanal works with matrix", {
-  library(broom)
   set.seed(123)
 
   # data
@@ -107,9 +104,9 @@ test_that("augment.factanal works with matrix", {
   modeltests::check_dims(df2, 18L, 4L)
   modeltests::check_dims(df3, 18L, 10L)
   modeltests::check_dims(df4, 18L, 10L)
-  expect_identical(names(df1), c(".rownames", ".fs1", ".fs2", ".fs3"))
-  expect_identical(
-    names(df3),
+  expect_named(df1, c(".rownames", ".fs1", ".fs2", ".fs3"))
+  expect_named(
+    df3,
     c(
       ".rownames",
       "x1",

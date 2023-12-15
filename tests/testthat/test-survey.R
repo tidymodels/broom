@@ -1,14 +1,11 @@
-context("survey")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("survey")
-library(survey)
-
 skip_if_not_installed("MASS")
+
+library(modeltests)
+library(survey, warn.conflicts = FALSE)
 
 data("housing", package = "MASS")
 design <- svydesign(ids = ~1, weights = ~Freq, data = housing)
@@ -49,12 +46,9 @@ test_that("glance.svyglm: make sure `nobs` is there", {
   gl <- glance(fit_svyglm)
   check_glance_outputs(gl)
   check_dims(gl, 1, 7)
-  expect_true("nobs" %in% colnames(glance(fit_svyglm)))
+  expect_contains(colnames(glance(fit_svyglm)), "nobs")
 })
 
 test_that("conf.int merging regression test (#804)", {
-  expect_error(
-    tidy(fit_svyglm, conf.int = TRUE),
-    NA
-  )
+  expect_no_error(tidy(fit_svyglm, conf.int = TRUE))
 })

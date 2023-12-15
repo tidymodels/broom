@@ -1,11 +1,8 @@
-context("robust")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("robust")
+library(modeltests)
 library(robust)
 
 fit <- lmRob(mpg ~ wt, data = mtcars)

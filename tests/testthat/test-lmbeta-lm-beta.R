@@ -1,11 +1,8 @@
-context("lmbeta-lm-beta")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("lm.beta")
+library(modeltests)
 library(lm.beta)
 
 test_that("lm.beta tidier arguments", {
@@ -42,7 +39,7 @@ test_that("tidy.lm.beta works", {
   expect_equal(td$term, c("(Intercept)", "wt"))
   expect_equal(td2$term, c("(Intercept)", "wt", "log(disp)"))
 
-  # shouldn't error. regression test for issues 166, 241
+  # shouldn't error. regression test for issues #166, #241
   # rows for confidence intervals of undefined terms should be dropped
-  expect_error(tidy(fit_na_row, conf.int = TRUE), NA)
+  expect_no_error(tidy(fit_na_row, conf.int = TRUE))
 })

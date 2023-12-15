@@ -1,11 +1,8 @@
-context("lfe")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("lfe")
+library(modeltests)
 
 set.seed(27)
 n <- 100

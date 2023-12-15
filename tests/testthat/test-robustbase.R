@@ -1,12 +1,9 @@
-context("robustbase")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("robustbase")
-library(robustbase)
+library(modeltests)
+library(robustbase, warn.conflicts = FALSE)
 
 fit <- lmrob(mpg ~ wt, data = mtcars)
 fit2 <- glmrob(am ~ wt, data = mtcars, family = "binomial")

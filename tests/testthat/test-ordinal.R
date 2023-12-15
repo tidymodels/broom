@@ -1,11 +1,8 @@
-context("ordinal")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("ordinal")
+library(modeltests)
 library(ordinal)
 
 fit <- clm(rating ~ temp * contact, data = wine)

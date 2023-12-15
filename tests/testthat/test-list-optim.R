@@ -1,5 +1,3 @@
-context("list-optim")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
@@ -36,5 +34,5 @@ test_that("optim std.error inclusion works", {
   td <- tidy(o)
   check_tidy_output(td)
   check_dims(td, 3, 3)
-  expect_true("std.error" %in% names(td))
+  expect_contains(names(td), "std.error")
 })

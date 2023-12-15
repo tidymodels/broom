@@ -1,9 +1,6 @@
-context("survival-coxph")
-
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("survival")
+library(modeltests)
 library(survival)
 
 fit <- coxph(Surv(time, status) ~ age + sex, lung)

@@ -1,11 +1,8 @@
-context("mass-ridgelm")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("MASS")
+library(modeltests)
 
 names(longley)[1] <- "y"
 fit2 <- MASS::lm.ridge(y ~ ., longley)

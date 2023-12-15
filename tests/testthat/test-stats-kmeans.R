@@ -1,5 +1,3 @@
-context("stats-kmeans")
-
 skip_if_not_installed("modeltests")
 library(modeltests)
 
@@ -33,6 +31,7 @@ test_that("tidy.kmeans", {
 })
 
 test_that("augment.kmeans", {
+  withr::local_language("EN")
   # data argument cannot be empty
   expect_error(
     augment(fit),

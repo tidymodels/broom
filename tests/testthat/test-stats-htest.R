@@ -1,11 +1,6 @@
-context("stats-htest")
-
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("modeldata")
-library(modeldata)
-data(hpc_data)
+library(modeltests)
 
 test_that("htest tidier arguments", {
   check_arguments(tidy.htest)
@@ -20,23 +15,23 @@ test_that("tidy.htest same as glance.htest", {
 test_that("tidy.htest/oneway.test", {
   mtcars$cyl <- as.factor(mtcars$cyl)
   ot <- oneway.test(mpg ~ cyl, mtcars)
+  expect_message(gl <- glance(ot))
+  check_glance_outputs(gl)
+  
   expect_message(td <- tidy(ot))
-  gl <- glance(ot)
-
   check_tidy_output(td)
   check_dims(td, expected_cols = 5)
-  check_glance_outputs(gl)
 })
 
 test_that("tidy.htest/cor.test", {
-  pco <- cor.test(mtcars$mpg, mtcars$wt)
+  pco <- stats::cor.test(mtcars$mpg, mtcars$wt)
   td <- tidy(pco)
   gl <- glance(pco)
 
   check_tidy_output(td)
   check_glance_outputs(gl, strict = FALSE)
 
-  sco <- suppressWarnings(cor.test(mtcars$mpg, mtcars$wt, method = "spearman"))
+  sco <- suppressWarnings(stats::cor.test(mtcars$mpg, mtcars$wt, method = "spearman"))
   td2 <- tidy(sco)
   gl2 <- glance(sco)
 
@@ -45,7 +40,7 @@ test_that("tidy.htest/cor.test", {
 })
 
 test_that("tidy.htest/t.test", {
-  tt <- t.test(mpg ~ am, mtcars)
+  tt <- stats::t.test(mpg ~ am, mtcars)
   td <- tidy(tt)
   gl <- glance(tt)
 
@@ -54,7 +49,7 @@ test_that("tidy.htest/t.test", {
 })
 
 test_that("tidy.htest/wilcox.test", {
-  wt <- suppressWarnings(wilcox.test(mpg ~ am, mtcars))
+  wt <- suppressWarnings(stats::wilcox.test(mpg ~ am, mtcars))
   td <- tidy(wt)
   gl <- glance(wt)
 
@@ -63,7 +58,7 @@ test_that("tidy.htest/wilcox.test", {
 })
 
 test_that("tidy.pairwise.htest", {
-  pht <- with(hpc_data, pairwise.t.test(compounds, class))
+  pht <- with(modeldata::hpc_data, stats::pairwise.t.test(compounds, class))
   td <- tidy(pht)
   # gl <- glance(pht)
 
@@ -122,9 +117,10 @@ test_that("tidy.htest does not return matrix columns", {
   data(api, package = "survey")
   dclus1 <- survey::svydesign(id = ~dnum, weights = ~pw, data = apiclus1, fpc = ~fpc)
 
+  expect_message(
+    res <- tidy(survey::svychisq(~ sch.wide + stype, design = dclus1, statistic = "Wald"))
+  )
   expect_true(
-    survey::svychisq(~ sch.wide + stype, design = dclus1, statistic = "Wald") %>%
-      tidy() %>%
-      purrr::none(~ inherits(., "matrix"))
+    purrr::none(res, ~ inherits(., "matrix"))
   )
 })

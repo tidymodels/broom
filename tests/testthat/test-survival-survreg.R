@@ -1,11 +1,9 @@
-context("survival-survreg")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("survival")
+
+library(modeltests)
 library(survival)
 
 sr <- survreg(Surv(futime, fustat) ~ ecog.ps + rx, ovarian,

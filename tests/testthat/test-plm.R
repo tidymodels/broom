@@ -1,11 +1,8 @@
-context("plm tidiers")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("plm")
+library(modeltests)
 library(plm)
 
 data(Produc, package = "plm")

@@ -1,21 +1,22 @@
-context("ergm")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("ergm")
-library(ergm)
+library(modeltests)
+suppressPackageStartupMessages(library(ergm, quietly = TRUE))
 
-data(florentine)
-data(faux.mesa.high)
+data(florentine, package = "ergm")
+data(faux.mesa.high, package = "ergm")
 
-gest <- ergm(flomarriage ~ edges + absdiff("wealth"))
-gest2 <- ergm(flomarriage ~ edges + absdiff("wealth"), family = "gaussian")
-suppressWarnings({
+suppressMessages(
+  gest <- ergm(flomarriage ~ edges + absdiff("wealth"))
+)
+suppressMessages(
+  gest2 <- ergm(flomarriage ~ edges + absdiff("wealth"), family = "gaussian")
+)
+suppressMessages(suppressWarnings({
   gest3 <- ergm(faux.mesa.high ~ edges + degree(1:3))
-})
+}))
 
 test_that("ergm tidier arguments", {
   check_arguments(tidy.ergm)
@@ -30,7 +31,7 @@ test_that("tidy.ergm", {
   check_tidy_output(tde)
 
   # regression test for #688
-  expect_true("term" %in% colnames(tde))
+  expect_contains(colnames(tde), "term")
 
   # number of columns in output varies with ergm version
   # so this test is temporarily deactivated
@@ -57,3 +58,4 @@ test_that("glance.ergm", {
   check_dims(gl2, expected_cols = 12)
   check_dims(gl, expected_cols = 9)
 })
+

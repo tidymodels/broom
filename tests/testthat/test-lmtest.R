@@ -1,14 +1,10 @@
-context("lmtest")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("lmtest")
-library(lmtest)
-
 skip_if_not_installed("sandwich")
+library(modeltests)
+library(lmtest, warn.conflicts = FALSE, quietly = TRUE)
 library(sandwich)
 
 m <- lm(dist ~ speed, data = cars)
@@ -44,9 +40,9 @@ test_that("tidy.coeftest", {
 })
 
 test_that("glance.coeftest", {
-  gl <- glance(ct)
+  gl <- suppressMessages(glance(ct)) # glance_coeftest_inform message
   gl2 <- glance(ct2)
-  gl3 <- glance(ct3)
+  gl3 <- suppressMessages(glance(ct3)) # glance_coeftest_inform message
 
   check_glance_outputs(gl, gl3)
   check_glance_outputs(gl2) # separately because save = TRUE adds cols

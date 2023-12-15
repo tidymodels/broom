@@ -1,11 +1,8 @@
-context("caret")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("caret")
+library(modeltests)
 
 test_that("tidy.confusionMatrix", {
   check_arguments(tidy.confusionMatrix)

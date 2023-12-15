@@ -1,15 +1,11 @@
-context("mlogit")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("mlogit")
 skip_if_not_installed("AER")
+library(modeltests)
 library(mlogit)
 library(AER)
-library(dplyr)
 
 data("Fishing", package = "mlogit")
 Fish <- dfidx(Fishing, varying = 2:9, shape = "wide", choice = "mode")
@@ -56,6 +52,6 @@ test_that("augment.mlogit", {
   au1 <- augment(fit1)
   au2 <- augment(fit2)
   
-  expect_true(all(c("id", "alternative", "chosen", ".resid", ".fitted") %in% names(au1)))
-  expect_true(all(c("id", "alternative", "chosen", ".resid", ".fitted") %in% names(au2)))
+  expect_contains(names(au1), c("id", "alternative", "chosen", ".resid", ".fitted"))
+  expect_contains(names(au2), c("id", "alternative", "chosen", ".resid", ".fitted"))
 })

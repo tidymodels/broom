@@ -1,7 +1,3 @@
-context("aov")
-
-library(broom)
-
 d <- data.frame(
   y = c(3, 4, 3.5, 4.1, 6, 7),
   group = c("a", "b", "a", "b", "c", "c")

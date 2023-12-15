@@ -1,15 +1,11 @@
-context("emmeans")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("lsmeans")
-library(lsmeans)
-
 skip_if_not_installed("lme4")
-library(lme4)
+library(modeltests)
+suppressPackageStartupMessages(library(lsmeans, warn.conflicts = FALSE, quietly = TRUE))
+library(lme4, warn.conflicts = FALSE)
 
 fit <- lm(sales1 ~ price1 + price2 + day + store, data = oranges)
 rg <- ref.grid(fit)
@@ -94,11 +90,11 @@ test_that("tidy.ref.grid consistency with tidy.TukeyHSD", {
     pairs(reverse = TRUE) %>%
     tidy(conf.int = TRUE) %>%
     dplyr::select(-statistic, -df, -std.error) %>%
-    mutate(contrast = gsub(" ", "", contrast))
+    dplyr::mutate(contrast = gsub(" ", "", contrast))
 
   expect_equal(
     as.data.frame(td_hsd),
-    as.data.frame(td_pairs),
+    as.data.frame(td_pairs)
   )
 })
 
@@ -126,7 +122,7 @@ test_that("tidy.ref.grid consistency with tidy.glht", {
 
   aov_glht <- multcomp::glht(pigs.aov, linfct = multcomp::mcp(source = K), rhs = c(7, -1))
   tidy_glht <- tidy(aov_glht, test = multcomp::adjusted("none")) %>%
-    mutate(
+    dplyr::mutate(
       estimate = estimate - null.value,
       null.value = -null.value
     )

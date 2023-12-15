@@ -1,11 +1,9 @@
-context("maps tidiers")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
+skip_if_not_installed("maps")
 library(modeltests)
 
-skip_if_not_installed("maps")
 ca <- maps::map("county", "ca", plot = FALSE, fill = TRUE)
 
 test_that("tidy.map", {

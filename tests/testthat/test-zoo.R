@@ -1,11 +1,9 @@
-context("zoo")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("zoo")
+
+library(modeltests)
 
 test_that("tidy.zoo", {
   set.seed(1071)
@@ -24,7 +22,7 @@ test_that("tidy.zoo", {
   colnames(z.data) <- c("Not dataframe", "(compatible", "names -")
   z <- zoo::zoo(z.data, z.index)
   td <- tidy(z)
-  expect_true(all(unique(td$series) %in% colnames(z.data)))
+  expect_contains(colnames(z.data), unique(td$series))
 
   # test for univariate functionality
   z2 <- zoo::zoo(rnorm(30), z.index)

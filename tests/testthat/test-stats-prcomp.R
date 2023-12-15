@@ -1,5 +1,3 @@
-context("stats-prcomp")
-
 skip_if_not_installed("modeltests")
 library(modeltests)
 
@@ -48,7 +46,7 @@ test_that("tidy.prcomp", {
 
   no_row_nm <- as.data.frame(matrix(1:9, ncol = 3) + rnorm(n = 9, sd = 0.25))
   pca <- prcomp(no_row_nm)
-  expect_error(tidy(pca, matrix = "u"), NA)
+  expect_no_error(tidy(pca, matrix = "u"))
 })
 
 test_that("augment.prcomp", {
@@ -62,7 +60,6 @@ test_that("augment.prcomp", {
 })
 
 test_that("augment.prcomp works with matrix objects", {
-  library(broom)
   set.seed(17)
 
   # data
@@ -83,8 +80,8 @@ test_that("augment.prcomp works with matrix objects", {
   # without data
   df2 <- broom::augment(pZ, data = Z)
 
-  expect_equal(dim(df1), c(1000L, 15L))
-  expect_equal(dim(df2), c(1000L, 47L))
-  testthat::expect_equal(tibble::as_tibble(pred), df1[, -1])
-  expect_is(df1, "tbl_df")
+  check_dims(df1, 1000L, 15L)
+  check_dims(df2, 1000L, 47L)
+  expect_equal(tibble::as_tibble(pred), df1[, -1])
+  expect_s3_class(df1, "tbl_df")
 })

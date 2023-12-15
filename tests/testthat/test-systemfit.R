@@ -1,16 +1,14 @@
-context("systemfit")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("systemfit")
-library(systemfit)
+
+library(modeltests)
+library(systemfit, quietly = TRUE, warn.conflicts = FALSE)
 
 # Testing using systemfit examples ----------------------------------------
 
-data("Kmenta")
+data("Kmenta", package = "systemfit")
 eqDemand <- consump ~ price + income
 eqSupply <- consump ~ price + farmPrice + trend
 system <- list(demand = eqDemand, supply = eqSupply)

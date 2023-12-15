@@ -1,11 +1,8 @@
-context("speedglm")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("speedglm")
+library(modeltests)
 library(speedglm)
 
 fit <- speedlm(mpg ~ wt, mtcars, fitted = TRUE)

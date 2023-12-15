@@ -1,11 +1,8 @@
-context("psych")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("psych")
+library(modeltests)
 
 test_that("tidy.kappa works", {
   check_arguments(tidy.kappa)

@@ -1,14 +1,11 @@
-context("gmm")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
-library(modeltests)
-
 skip_if_not_installed("gmm")
+library(modeltests)
 library(gmm)
 
-data(Finance)
+data(Finance, package = "gmm")
 
 r <- Finance[1:300, 1:10]
 rm <- Finance[1:300, "rm"]

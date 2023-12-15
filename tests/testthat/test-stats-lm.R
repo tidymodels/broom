@@ -1,5 +1,3 @@
-context("stats-lm")
-
 skip_if_not_installed("modeltests")
 library(modeltests)
 
@@ -52,7 +50,7 @@ test_that("tidy.lm works", {
 
   # shouldn't error. regression test for issues 166, 241
   # rows for confidence intervals of undefined terms should be dropped
-  expect_error(tidy(fit_na_row, conf.int = TRUE), NA)
+  expect_no_error(tidy(fit_na_row, conf.int = TRUE))
 })
 
 test_that("glance.lm", {
@@ -86,18 +84,6 @@ test_that("augment.lm", {
     newdata = mtcars
   )
 
-  if (paste(R.version$major, R.version$minor, sep = ".") <= "4.2.2") {
-    expect_warning(
-      check_augment_function(
-        aug = augment.lm,
-        model = fit_na_row,
-        data = na_row_data,
-        newdata = na_row_data
-      ),
-      "prediction from a rank-deficient fit may be misleading"
-    )
-  }
-
   check_augment_function(
     aug = augment.lm,
     model = fit_rd,
@@ -111,4 +97,15 @@ test_that("augment.lm", {
     data = mtcars,
     newdata = mtcars
   )
+  skip_if(getRversion() >= "4.2.3")
+  expect_warning(
+    check_augment_function(
+      aug = augment.lm,
+      model = fit_na_row,
+      data = na_row_data,
+      newdata = na_row_data
+    ),
+    "prediction from a rank-deficient fit may be misleading"
+  )
+  
 })
