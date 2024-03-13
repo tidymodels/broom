@@ -397,7 +397,7 @@ add_hat_sigma_cols <- function(df, x, infl) {
 # deal with rownames and convert to tibble as necessary
 # add .se.fit column if present
 # be *incredibly* careful that the ... are passed correctly
-augment_newdata <- function(x, data, newdata, .se_fit, interval = NULL, conf.level = NULL, ...) {
+augment_newdata <- function(x, data, newdata, .se_fit, interval = NULL, ...) {
   passed_newdata <- !is.null(newdata)
   df <- if (passed_newdata) newdata else data
   df <- as_augment_tibble(df)
@@ -431,11 +431,7 @@ augment_newdata <- function(x, data, newdata, .se_fit, interval = NULL, conf.lev
   # an na.pass argument
 
   if (.se_fit) {
-    if (is.null(conf.level)) {
-      pred_obj <- predict(x, newdata = newdata, na.action = na.pass, se.fit = .se_fit, interval = interval, ...)
-    } else {
-      pred_obj <- predict(x, newdata = newdata, na.action = na.pass, se.fit = .se_fit, interval = interval, level = conf.level, ...)
-    }
+    pred_obj <- predict(x, newdata = newdata, na.action = na.pass, se.fit = .se_fit, interval = interval, ...)
     if (is.null(interval) || interval == "none") {
       df$.fitted <- pred_obj$fit %>% unname()
     } else {
@@ -450,11 +446,7 @@ augment_newdata <- function(x, data, newdata, .se_fit, interval = NULL, conf.lev
     se_idx <- which(names(pred_obj) %in% c("se.fit", "se"))
     df$.se.fit <- pred_obj[[se_idx]]
   } else if (!is.null(interval) && interval != "none") {
-    if (is.null(conf.level)) {
-      pred_obj <- predict(x, newdata = newdata, na.action = na.pass, se.fit = FALSE, interval = interval, ...)
-    } else {
-      pred_obj <- predict(x, newdata = newdata, na.action = na.pass, se.fit = FALSE, interval = interval, level = conf.level, ...)
-    }
+    pred_obj <- predict(x, newdata = newdata, na.action = na.pass, se.fit = FALSE, interval = interval, ...)
     df$.fitted <- pred_obj[, "fit"]
     df$.lower <- pred_obj[, "lwr"]
     df$.upper <- pred_obj[, "upr"]
