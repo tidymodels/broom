@@ -178,7 +178,7 @@ augment.lm <- function(x, data = model.frame(x), newdata = NULL,
 
   if (se_fit) {
     pred_obj <- predict(x, newdata = newdata, na.action = na.pass, se.fit = se_fit,
-                        interval = interval, level = conf.level, ...)
+                        interval = interval, level = conf.level)
     if (is.null(interval) || interval == "none") {
       df$.fitted <- pred_obj$fit %>% unname()
     } else {
@@ -191,28 +191,28 @@ augment.lm <- function(x, data = model.frame(x), newdata = NULL,
     df$.se.fit <- pred_obj[[se_idx]]
   } else if (!is.null(interval) && interval != "none") {
     pred_obj <- predict(x, newdata = newdata, na.action = na.pass, se.fit = FALSE,
-                        interval = interval, level = conf.level, ...)
+                        interval = interval, level = conf.level)
     df$.fitted <- pred_obj[, "fit"]
     df$.lower <- pred_obj[, "lwr"]
     df$.upper <- pred_obj[, "upr"]
   } else if (passed_newdata) {
     if (is.null(interval) || interval == "none") {
-      df$.fitted <- predict(x, newdata = newdata, na.action = na.pass, ...) %>%
+      df$.fitted <- predict(x, newdata = newdata, na.action = na.pass) %>%
         unname()
     } else {
       pred_obj <- predict(x, newdata = newdata, na.action = na.pass,
-                          interval = interval, level = conf.level, ...)
+                          interval = interval, level = conf.level)
       df$.fitted <- pred_obj$fit[, "fit"]
       df$.lower <- pred_obj$fit[, "lwr"]
       df$.upper <- pred_obj$fit[, "upr"]
     }
   } else {
     if (is.null(interval) || interval == "none") {
-      df$.fitted <- predict(x, na.action = na.pass, ...) %>%
+      df$.fitted <- predict(x, na.action = na.pass) %>%
         unname()
     } else {
       pred_obj <- predict(x, newdata = newdata, na.action = na.pass,
-                          interval = interval, level = conf.level, ...)
+                          interval = interval, level = conf.level)
       df$.fitted <- pred_obj$fit[, "fit"]
       df$.lower <- pred_obj$fit[, "lwr"]
       df$.upper <- pred_obj$fit[, "upr"]
