@@ -158,7 +158,6 @@ augment.lm <- function(x, data = model.frame(x), newdata = NULL,
   passed_newdata <- !is.null(newdata)
   df <- if (passed_newdata) newdata else data
   df <- as_augment_tibble(df)
-  # interval <- match.arg(interval)
   # check if response variable is in newdata, if relevant:
   if (!is.null(x$terms) & inherits(x$terms, "formula")) {
     has_response <-
@@ -172,21 +171,6 @@ augment.lm <- function(x, data = model.frame(x), newdata = NULL,
     has_response <- FALSE
   }
 
-  # NOTE: It is important use predict(x, newdata = newdata) rather than
-  # predict(x, newdata = df). This is to avoid an edge case breakage
-  # when augment is called with no data argument, so that data is
-  # model.frame(x). When data = model.frame(x) and the model formula
-  # contains a term like `log(x)`, the predict method will break. Luckily,
-  # predict(x, newdata = NULL) works perfectly well in this case.
-  #
-  # The current code relies on predict(x, newdata = NULL) functioning
-  # equivalently to predict(x, newdata = data). An alternative would be to use
-  # fitted(x) instead, although this may not play well with missing data,
-  # and may behave like na.action = na.omit rather than na.action = na.pass.
-
-  # This helper *should not* be used for predict methods that do not have
-  # an na.pass argument
-
   if (se_fit) {
     pred_obj <- predict(x, newdata = newdata, na.action = na.pass, se.fit = se_fit, interval = interval, ...)
     if (is.null(interval) || interval == "none") {
@@ -197,10 +181,7 @@ augment.lm <- function(x, data = model.frame(x), newdata = NULL,
       df$.upper <- pred_obj$fit[, "upr"]
     }
 
-    # a couple possible names for the standard error element of the list
-    # se.fit: lm, glm
-    # se: loess
-    se_idx <- which(names(pred_obj) %in% c("se.fit", "se"))
+    se_idx <- which(names(pred_obj) == "se.fit")
     df$.se.fit <- pred_obj[[se_idx]]
   } else if (!is.null(interval) && interval != "none") {
     pred_obj <- predict(x, newdata = newdata, na.action = na.pass, se.fit = FALSE, interval = interval, ...)
@@ -234,8 +215,6 @@ augment.lm <- function(x, data = model.frame(x), newdata = NULL,
   if (!is.null(resp) && is.numeric(resp)) {
     df$.resid <- (resp - df$.fitted) %>% unname()
   }
-
-  df
 
   if (is.null(newdata)) {
     tryCatch(
