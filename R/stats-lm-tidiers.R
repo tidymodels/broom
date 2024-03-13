@@ -130,6 +130,10 @@ tidy.lm <- function(x, conf.int = FALSE, conf.level = 0.95,
 #' @template param_newdata
 #' @template param_se_fit
 #' @template param_interval
+#' @param conf.level The confidence level to use for the interval created if
+#'   `interval` is `"confidence"` or `"prediction"`. Must be strictly greater
+#'   than 0 and less than 1. Defaults to 0.95, which corresponds to a 95
+#'   percent confidence interval.
 #'
 #' @evalRd return_augment(
 #'   ".hat",
@@ -151,7 +155,8 @@ tidy.lm <- function(x, conf.int = FALSE, conf.level = 0.95,
 #' @seealso [augment()], [stats::predict.lm()]
 #' @family lm tidiers
 augment.lm <- function(x, data = model.frame(x), newdata = NULL,
-                       se_fit = FALSE, interval = c("none", "confidence", "prediction"), ...) {
+                       se_fit = FALSE, interval = c("none", "confidence", "prediction"),
+                       conf.level = 0.95, ...) {
   warn_on_subclass(x, "augment")
 
   interval <- match.arg(interval)
@@ -172,7 +177,8 @@ augment.lm <- function(x, data = model.frame(x), newdata = NULL,
   }
 
   if (se_fit) {
-    pred_obj <- predict(x, newdata = newdata, na.action = na.pass, se.fit = se_fit, interval = interval, ...)
+    pred_obj <- predict(x, newdata = newdata, na.action = na.pass, se.fit = se_fit,
+                        interval = interval, level = conf.level, ...)
     if (is.null(interval) || interval == "none") {
       df$.fitted <- pred_obj$fit %>% unname()
     } else {
@@ -184,7 +190,8 @@ augment.lm <- function(x, data = model.frame(x), newdata = NULL,
     se_idx <- which(names(pred_obj) == "se.fit")
     df$.se.fit <- pred_obj[[se_idx]]
   } else if (!is.null(interval) && interval != "none") {
-    pred_obj <- predict(x, newdata = newdata, na.action = na.pass, se.fit = FALSE, interval = interval, ...)
+    pred_obj <- predict(x, newdata = newdata, na.action = na.pass, se.fit = FALSE,
+                        interval = interval, level = conf.level, ...)
     df$.fitted <- pred_obj[, "fit"]
     df$.lower <- pred_obj[, "lwr"]
     df$.upper <- pred_obj[, "upr"]
@@ -193,7 +200,8 @@ augment.lm <- function(x, data = model.frame(x), newdata = NULL,
       df$.fitted <- predict(x, newdata = newdata, na.action = na.pass, ...) %>%
         unname()
     } else {
-      pred_obj <- predict(x, newdata = newdata, na.action = na.pass, interval = interval, ...)
+      pred_obj <- predict(x, newdata = newdata, na.action = na.pass,
+                          interval = interval, level = conf.level, ...)
       df$.fitted <- pred_obj$fit[, "fit"]
       df$.lower <- pred_obj$fit[, "lwr"]
       df$.upper <- pred_obj$fit[, "upr"]
@@ -203,7 +211,8 @@ augment.lm <- function(x, data = model.frame(x), newdata = NULL,
       df$.fitted <- predict(x, na.action = na.pass, ...) %>%
         unname()
     } else {
-      pred_obj <- predict(x, newdata = newdata, na.action = na.pass, interval = interval, ...)
+      pred_obj <- predict(x, newdata = newdata, na.action = na.pass,
+                          interval = interval, level = conf.level, ...)
       df$.fitted <- pred_obj$fit[, "fit"]
       df$.lower <- pred_obj$fit[, "lwr"]
       df$.upper <- pred_obj$fit[, "upr"]
