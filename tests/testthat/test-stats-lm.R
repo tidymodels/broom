@@ -119,20 +119,18 @@ test_that("augment.lm", {
   expect_equal(aug$.upper, pred[, "upr"])
 
   # conf.level is respected
-  aug <- augment(fit, newdata = mtcars,
-                 interval = "confidence", conf.level = 0.75)
+  aug <- augment(fit, newdata = mtcars, interval = "confidence", level = 0.75)
   pred <- predict(fit, newdata = mtcars, interval = "confidence", level = 0.75)
   expect_equal(aug$.lower, pred[, "lwr"])
   expect_equal(aug$.upper, pred[, "upr"])
 
   # conf.level works for prediction intervals as well
-  aug <- augment(fit, newdata = mtcars,
-                 interval = "prediction", conf.level = 0.25)
+  aug <- augment(fit, newdata = mtcars, interval = "prediction", level = 0.25)
   pred <- predict(fit, newdata = mtcars, interval = "prediction", level = 0.25)
   expect_equal(aug$.lower, pred[, "lwr"])
   expect_equal(aug$.upper, pred[, "upr"])
 
   # conf.level is ignored when interval = "none"
-  aug <- augment(fit, newdata = mtcars, interval = "none", conf.level = 0.25)
+  aug <- augment(fit, newdata = mtcars, interval = "none", level = 0.25)
   expect_false(any(names(aug) %in% c(".lower", ".upper")))
 })

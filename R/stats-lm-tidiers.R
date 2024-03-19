@@ -130,10 +130,6 @@ tidy.lm <- function(x, conf.int = FALSE, conf.level = 0.95,
 #' @template param_newdata
 #' @template param_se_fit
 #' @template param_interval
-#' @param conf.level The confidence level to use for the interval created if
-#'   `interval` is `"confidence"` or `"prediction"`. Must be strictly greater
-#'   than 0 and less than 1. Defaults to 0.95, which corresponds to a 95
-#'   percent confidence interval.
 #'
 #' @evalRd return_augment(
 #'   ".hat",
@@ -155,75 +151,11 @@ tidy.lm <- function(x, conf.int = FALSE, conf.level = 0.95,
 #' @seealso [augment()], [stats::predict.lm()]
 #' @family lm tidiers
 augment.lm <- function(x, data = model.frame(x), newdata = NULL,
-                       se_fit = FALSE, interval = c("none", "confidence", "prediction"),
-                       conf.level = 0.95, ...) {
+                       se_fit = FALSE, interval = c("none", "confidence", "prediction"), ...) {
   warn_on_subclass(x, "augment")
 
   interval <- match.arg(interval)
-  passed_newdata <- !is.null(newdata)
-  df <- if (passed_newdata) newdata else data
-  df <- as_augment_tibble(df)
-  # check if response variable is in newdata, if relevant:
-  if (!is.null(x$terms) & inherits(x$terms, "formula")) {
-    has_response <-
-      # TRUE if response includes a function call and is in column names,
-      # usually with no `data` or `newdata` supplied,
-      # and `data` defaults to `model_frame(x)`
-      rlang::as_label(rlang::f_lhs(x$terms)) %in% names(df) ||
-        # TRUE if the response variable itself is in column names
-        all.vars(x$terms)[1] %in% names(df)
-  } else {
-    has_response <- FALSE
-  }
-
-  if (se_fit) {
-    pred_obj <- predict(x, newdata = newdata, na.action = na.pass, se.fit = se_fit,
-                        interval = interval, level = conf.level)
-    if (is.null(interval) || interval == "none") {
-      df$.fitted <- pred_obj$fit %>% unname()
-    } else {
-      df$.fitted <- pred_obj$fit[, "fit"]
-      df$.lower <- pred_obj$fit[, "lwr"]
-      df$.upper <- pred_obj$fit[, "upr"]
-    }
-
-    se_idx <- which(names(pred_obj) == "se.fit")
-    df$.se.fit <- pred_obj[[se_idx]]
-  } else if (!is.null(interval) && interval != "none") {
-    pred_obj <- predict(x, newdata = newdata, na.action = na.pass, se.fit = FALSE,
-                        interval = interval, level = conf.level)
-    df$.fitted <- pred_obj[, "fit"]
-    df$.lower <- pred_obj[, "lwr"]
-    df$.upper <- pred_obj[, "upr"]
-  } else if (passed_newdata) {
-    if (is.null(interval) || interval == "none") {
-      df$.fitted <- predict(x, newdata = newdata, na.action = na.pass) %>%
-        unname()
-    } else {
-      pred_obj <- predict(x, newdata = newdata, na.action = na.pass,
-                          interval = interval, level = conf.level)
-      df$.fitted <- pred_obj$fit[, "fit"]
-      df$.lower <- pred_obj$fit[, "lwr"]
-      df$.upper <- pred_obj$fit[, "upr"]
-    }
-  } else {
-    if (is.null(interval) || interval == "none") {
-      df$.fitted <- predict(x, na.action = na.pass) %>%
-        unname()
-    } else {
-      pred_obj <- predict(x, newdata = newdata, na.action = na.pass,
-                          interval = interval, level = conf.level)
-      df$.fitted <- pred_obj$fit[, "fit"]
-      df$.lower <- pred_obj$fit[, "lwr"]
-      df$.upper <- pred_obj$fit[, "upr"]
-    }
-  }
-
-  resp <- safe_response(x, df, has_response)
-
-  if (!is.null(resp) && is.numeric(resp)) {
-    df$.resid <- (resp - df$.fitted) %>% unname()
-  }
+  df <- augment_newdata(x, data, newdata, se_fit, interval, ...)
 
   if (is.null(newdata)) {
     tryCatch(
