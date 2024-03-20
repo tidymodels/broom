@@ -130,6 +130,7 @@ tidy.lm <- function(x, conf.int = FALSE, conf.level = 0.95,
 #' @template param_newdata
 #' @template param_se_fit
 #' @template param_interval
+#' @param ... Additional arguments passed to [stats::predict.lm()].
 #'
 #' @evalRd return_augment(
 #'   ".hat",

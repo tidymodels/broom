@@ -37,18 +37,7 @@ somewhat time-consuming. Defaults to \code{FALSE}.}
 to be added to the augmented output. Passed on to \code{predict()} and defaults
 to "none".}
 
-\item{...}{Additional arguments. Not used. Needed to match generic
-signature only. \strong{Cautionary note:} Misspelled arguments will be
-absorbed in \code{...}, where they will be ignored. If the misspelled
-argument has a default value, the default value will be used.
-For example, if you pass \code{conf.lvel = 0.9}, all computation will
-proceed using \code{conf.level = 0.95}. Two exceptions here are:
-\itemize{
-\item \code{tidy()} methods will warn when supplied an \code{exponentiate} argument if
-it will be ignored.
-\item \code{augment()} methods will warn when supplied a \code{newdata} argument if it
-will be ignored.
-}}
+\item{...}{Additional arguments passed to \code{\link[stats:predict.lm]{stats::predict.lm()}}.}
 }
 \description{
 Augment accepts a model object and a dataset and adds
