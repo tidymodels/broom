@@ -1,5 +1,7 @@
 # broom (development version)
 
+* Removed lsmeans and emmeans as Suggested packages as the packages have a dependency requiring R 4.3.0 or higher. To maintain compatibility with at least 4 previous minor versions of R, broom won't test support for these packages until the release of R 4.7.x (or until lsmeans and emmeans are compatible with the R version 4 minor releases previous, #1193).
+
 * Moved forward with deprecation of tidiers for objects from the sp package. See resources linked in [tidymodels/broom#1142](https://github.com/tidymodels/broom/issues/1142) for more information on migration from retiring spatial packages.
 
 * Corrected confidence interval values for precision components in `tidy.betareg()` output (#1169).
