@@ -16,8 +16,8 @@ interval in the tidied output. Defaults to \code{FALSE}.}
 if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 
-\item{...}{Additional arguments passed to \code{\link[emmeans:summary.emmGrid]{emmeans::summary.emmGrid()}} or
-\code{\link[lsmeans:ref.grid]{lsmeans::summary.ref.grid()}}. \strong{Cautionary note}: misspecified arguments
+\item{...}{Additional arguments passed to \code{emmeans::summary.emmGrid()} or
+\code{lsmeans::summary.ref.grid()}. \strong{Cautionary note}: misspecified arguments
 may be silently ignored!}
 }
 \description{
@@ -34,61 +34,11 @@ mean, and one column for each combination of factors. When the input is a
 contrast, each row will contain one estimated contrast.
 
 There are a large number of arguments that can be
-passed on to \code{\link[emmeans:summary.emmGrid]{emmeans::summary.emmGrid()}} or \code{\link[lsmeans:ref.grid]{lsmeans::summary.ref.grid()}}.
-}
-\examples{
-\dontshow{if (rlang::is_installed(c("emmeans", "ggplot2"))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-
-# load libraries for models and data
-library(emmeans)
-
-# linear model for sales of oranges per day
-oranges_lm1 <- lm(sales1 ~ price1 + price2 + day + store, data = oranges)
-
-# reference grid; see vignette("basics", package = "emmeans")
-oranges_rg1 <- ref_grid(oranges_lm1)
-td <- tidy(oranges_rg1)
-td
-
-# marginal averages
-marginal <- emmeans(oranges_rg1, "day")
-tidy(marginal)
-
-# contrasts
-tidy(contrast(marginal))
-tidy(contrast(marginal, method = "pairwise"))
-
-# plot confidence intervals
-library(ggplot2)
-
-ggplot(tidy(marginal, conf.int = TRUE), aes(day, estimate)) +
-  geom_point() +
-  geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
-
-# by multiple prices
-by_price <- emmeans(oranges_lm1, "day",
-  by = "price2",
-  at = list(
-    price1 = 50, price2 = c(40, 60, 80),
-    day = c("2", "3", "4")
-  )
-)
-
-by_price
-
-tidy(by_price)
-
-ggplot(tidy(by_price, conf.int = TRUE), aes(price2, estimate, color = day)) +
-  geom_line() +
-  geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
-
-# joint_tests
-tidy(joint_tests(oranges_lm1))
-\dontshow{\}) # examplesIf}
+passed on to \code{emmeans::summary.emmGrid()} or \code{lsmeans::summary.ref.grid()}.
 }
 \seealso{
-\code{\link[=tidy]{tidy()}}, \code{\link[emmeans:ref_grid]{emmeans::ref_grid()}}, \code{\link[emmeans:emmeans]{emmeans::emmeans()}},
-\code{\link[emmeans:contrast]{emmeans::contrast()}}
+\code{\link[=tidy]{tidy()}}, \code{emmeans::ref_grid()}, \code{emmeans::emmeans()},
+\code{emmeans::contrast()}
 
 Other emmeans tidiers: 
 \code{\link{tidy.lsmobj}()},
