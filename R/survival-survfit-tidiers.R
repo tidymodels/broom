@@ -58,6 +58,10 @@
 #'
 tidy.survfit <- function(x, ...) {
   if (inherits(x, "survfitms")) {
+    # A survfit object may contain std(log S) or std(S), tidy/summary should
+    # always be std(S).
+    if (!is.null(x$std.err) && x$logse) x$std.err <- x$std.err * x$pstate 
+    
     # c() coerces to vector
     ret <- data.frame(
       time = x$time,
@@ -73,6 +77,10 @@ tidy.survfit <- function(x, ...) {
 
     ret <- ret[ret$state != "", ]
   } else {
+    # A survfit object may contain std(log S) or std(S), tidy/summary should
+    # always be std(S).
+    if (!is.null(x$std.err) && x$logse) x$std.err <- x$std.err * x$surv 
+    
     ret <- data.frame(
       time = x$time,
       n.risk = x$n.risk,
