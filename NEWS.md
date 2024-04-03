@@ -12,7 +12,7 @@
 
 * Corrected coefficients values in `tidy.varest()` output (#1174).
 
-* Passed dots from `augment.lm()` to `stats::predict.lm()` (#1191 by `@zietzm`).
+* Added support for `conf.level` in `augment.lm()` (#1191 by `@zietzm`).
 
 # broom 1.0.5
 
