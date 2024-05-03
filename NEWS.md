@@ -6,6 +6,8 @@
 
 * Corrected confidence interval values for precision components in `tidy.betareg()` output (#1169).
 
+* `tidy.betareg()` will now pass its ellipses `...` to `summary()` internally (#1198 by `@DanChaltiel`). Among other things, this allows choosing the type of residuals.
+
 * Fixed bug in tidier for `car::linearHypothesis()` output with long formulas (#1171).
 
 * Added support for columns `adj.r.squared` and `npar` in `glance()` method for objects outputted from `mgcv::gam()` (#1172).
