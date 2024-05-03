@@ -3,7 +3,8 @@
 #'
 #' @param x A `betareg` object produced by a call to [betareg::betareg()].
 #' @template param_confint
-#' @template param_unused_dots
+#' @param ... For `tidy()`, additional arguments passed to `summary(x, ...)`.
+#' Otherwise ignored.
 #'
 #' @evalRd return_tidy(regression = TRUE,
 #'   component = "Whether a particular term was used to model the mean or the
@@ -46,7 +47,7 @@ tidy.betareg <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   check_ellipses("exponentiate", "tidy", "betareg", ...)
 
   ret <- map_as_tidy_tibble(
-    purrr::map(coef(summary(x)), as.matrix),
+    purrr::map(coef(summary(x, ...)), as.matrix),
     new_names = c("estimate", "std.error", "statistic", "p.value")
   )
 
