@@ -10,6 +10,7 @@
   newdata = NULL,
   se_fit = FALSE,
   interval = c("none", "confidence", "prediction"),
+  conf.level = 0.95,
   ...
 )
 }
@@ -36,6 +37,11 @@ somewhat time-consuming. Defaults to \code{FALSE}.}
 \item{interval}{Character indicating the type of confidence interval columns
 to be added to the augmented output. Passed on to \code{predict()} and defaults
 to "none".}
+
+\item{conf.level}{The confidence level to use for the interval created if
+\code{interval} is \code{"confidence"} or \code{"prediction"}. Must be strictly greater
+than 0 and less than 1. Defaults to 0.95, which corresponds to a 95
+percent confidence/prediction interval.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be

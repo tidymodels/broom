@@ -605,7 +605,7 @@ Suggests:
     mgcv,
     mlogit,
     modeldata,
-    modeltests,
+    modeltests (>= 0.1.6),
     muhaz,
     multcomp,
     network,

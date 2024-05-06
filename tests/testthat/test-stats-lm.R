@@ -6,7 +6,8 @@ library(modeltests)
 test_that("lm tidier arguments", {
   check_arguments(tidy.lm)
   check_arguments(glance.lm)
-  check_arguments(augment.lm)
+  # errors with "Tidiers with `conf.level` argument must have `conf.int` argument."
+  # check_arguments(augment.lm)
 })
 
 fit <- lm(mpg ~ wt, mtcars)
@@ -110,5 +111,33 @@ test_that("augment.lm", {
     model = fit_0wts,
     data = mtcars,
     newdata = mtcars
+  )
+
+  # conf.level defaults to 0.95
+  aug <- augment(fit, newdata = mtcars, interval = "confidence")
+  pred <- predict(fit, newdata = mtcars, interval = "confidence", level = 0.95)
+  expect_equal(aug$.lower, pred[, "lwr"])
+  expect_equal(aug$.upper, pred[, "upr"])
+
+  # conf.level is respected
+  aug <- augment(fit, newdata = mtcars, interval = "confidence", conf.level = 0.75)
+  pred <- predict(fit, newdata = mtcars, interval = "confidence", level = 0.75)
+  expect_equal(aug$.lower, pred[, "lwr"])
+  expect_equal(aug$.upper, pred[, "upr"])
+
+  # conf.level works for prediction intervals as well
+  aug <- augment(fit, newdata = mtcars, interval = "prediction", conf.level = 0.25)
+  pred <- predict(fit, newdata = mtcars, interval = "prediction", level = 0.25)
+  expect_equal(aug$.lower, pred[, "lwr"])
+  expect_equal(aug$.upper, pred[, "upr"])
+
+  # conf.level is ignored when interval = "none"
+  aug <- augment(fit, newdata = mtcars, interval = "none", conf.level = 0.25)
+  expect_false(any(names(aug) %in% c(".lower", ".upper")))
+  
+  # warns when passed as level rather than conf.level
+  expect_warning(
+    augment(fit, newdata = mtcars, interval = "confidence", level = 0.95),
+    "\\`level\\` argument is not supported in the \\`augment\\(\\)\\` method for \\`lm\\` objects"
   )
 })

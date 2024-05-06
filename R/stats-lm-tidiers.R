@@ -130,6 +130,11 @@ tidy.lm <- function(x, conf.int = FALSE, conf.level = 0.95,
 #' @template param_newdata
 #' @template param_se_fit
 #' @template param_interval
+#' @param conf.level The confidence level to use for the interval created if
+#'   `interval` is `"confidence"` or `"prediction"`. Must be strictly greater
+#'   than 0 and less than 1. Defaults to 0.95, which corresponds to a 95
+#'   percent confidence/prediction interval.
+#' @template param_unused_dots
 #'
 #' @evalRd return_augment(
 #'   ".hat",
@@ -151,11 +156,13 @@ tidy.lm <- function(x, conf.int = FALSE, conf.level = 0.95,
 #' @seealso [augment()], [stats::predict.lm()]
 #' @family lm tidiers
 augment.lm <- function(x, data = model.frame(x), newdata = NULL,
-                       se_fit = FALSE, interval = c("none", "confidence", "prediction"), ...) {
+                       se_fit = FALSE, interval = c("none", "confidence", "prediction"), 
+                       conf.level = 0.95, ...) {
   warn_on_subclass(x, "augment")
+  check_ellipses("level", "augment", "lm", ...)
 
   interval <- match.arg(interval)
-  df <- augment_newdata(x, data, newdata, se_fit, interval)
+  df <- augment_newdata(x, data, newdata, se_fit, interval, level = conf.level)
 
   if (is.null(newdata)) {
     tryCatch(
