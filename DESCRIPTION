@@ -626,7 +626,7 @@ Suggests:
     speedglm,
     spelling,
     survey,
-    survival,
+    survival (>= 3.6-4),
     systemfit,
     testthat (>= 2.1.0),
     tseries,
