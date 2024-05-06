@@ -605,7 +605,7 @@ Suggests:
     mgcv,
     mlogit,
     modeldata,
-    modeltests,
+    modeltests (>= 0.1.6),
     muhaz,
     multcomp,
     network,
@@ -636,8 +636,6 @@ VignetteBuilder:
     knitr
 Config/Needs/website: 
     tidyverse/tidytemplate    
-Remotes:
-    alexpghayes/modeltests
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
