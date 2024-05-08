@@ -75,7 +75,10 @@ tidy.margins <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
   lifecycle::deprecate_soft(
     "1.0.6", 
     I("tidying a `margins` object"), 
-    details = "margins was removed from CRAN in April 2024 and its tidiers are thus untested."
+    details = c(
+      "i" = "margins was removed from CRAN in April 2024 and its tidiers are thus untested.",
+      "!" = "Please interpret output with caution."
+    )
   )
   
   check_ellipses("exponentiate", "tidy", "margins", ...)
@@ -147,7 +150,10 @@ glance.margins <- function(x, ...) {
   lifecycle::deprecate_soft(
     "1.0.6", 
     I("tidying a `margins` object"), 
-    details = "margins was removed from CRAN in April 2024 and its tidiers are thus untested."
+    details = c(
+      "i" = "margins was removed from CRAN in April 2024 and its tidiers are thus untested.",
+      "!" = "Please interpret output with caution."
+    )
   )
   
   orig_mod_call <- attributes(x)$call
