@@ -596,7 +596,6 @@ Suggests:
     lmodel2,
     lmtest (>= 0.9.38),
     maps,
-    margins,
     MASS,
     mclust,
     mediation,

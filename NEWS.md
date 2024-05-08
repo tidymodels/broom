@@ -1,8 +1,10 @@
 # broom (development version)
 
-* While this broom release contains no changes to the `tidy.survfit()` method for objects from the survival package, the package has bumped the minimum required version for survival. Before survival 3.6-4, `tidy.survfit()` propagated "inconsistent" `n.censor` values from survival for multi-state models (#1195). 
+* Soft-deprecated tidiers for margins, lsmeans, and emmeans. Each package has been removed from Suggests and is no longer tested---their tidiers will raise a deprecation warning but return the same results as before.
+     - margins was archived from CRAN. In the case that the package is back on CRAN before the next package release, broom will once again Suggest and test support for the package (#1200).
+     - lsmeans and emmeans have a dependency requiring R 4.3.0 or higher. To maintain compatibility with at least 4 previous minor versions of R, broom won't test support for these packages until the release of R 4.7.x (or until lsmeans and emmeans are compatible with the R version 4 minor releases previous, #1193).
 
-* Removed lsmeans and emmeans as Suggested packages as the packages have a dependency requiring R 4.3.0 or higher. To maintain compatibility with at least 4 previous minor versions of R, broom won't test support for these packages until the release of R 4.7.x (or until lsmeans and emmeans are compatible with the R version 4 minor releases previous, #1193).
+* While this broom release contains no changes to the `tidy.survfit()` method for objects from the survival package, the package has bumped the minimum required version for survival. Before survival 3.6-4, `tidy.survfit()` propagated "inconsistent" `n.censor` values from survival for multi-state models (#1195). 
 
 * Moved forward with deprecation of tidiers for objects from the sp package. See resources linked in [tidymodels/broom#1142](https://github.com/tidymodels/broom/issues/1142) for more information on migration from retiring spatial packages.
 
