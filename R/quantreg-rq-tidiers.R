@@ -79,7 +79,7 @@ tidy.rq <- function(x, se.type = NULL, conf.int = FALSE,
 
   # summary.rq often issues warnings when computing standard error
   rq_summary <- suppressWarnings(
-    quantreg::summary.rq(x, se = se.type, alpha = alpha, ...)
+    summary(x, se = se.type, alpha = alpha, ...)
   )
 
   process_rq(
@@ -142,7 +142,7 @@ glance.rq <- function(x, ...) {
 #' @templateVar class rq
 #' @template title_desc_augment
 #'
-#' @param x An `rq` object returned from [quantreg::rq()].
+#' @param x An `rq` object returned from `quantreg::rq()`.
 #' @template param_data
 #' @template param_newdata
 #' @inheritDotParams quantreg::predict.rq
@@ -157,7 +157,7 @@ glance.rq <- function(x, ...) {
 #'   intervals when data is specified via the `newdata` argument.
 #'
 #' @export
-#' @seealso [augment], [quantreg::rq()], [quantreg::predict.rq()]
+#' @seealso [augment], `quantreg::rq()`, `quantreg::predict.rq()`
 #' @family quantreg tidiers
 augment.rq <- function(x, data = model.frame(x), newdata = NULL, ...) {
   lifecycle::deprecate_soft(

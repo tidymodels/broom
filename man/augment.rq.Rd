@@ -7,7 +7,7 @@
 \method{augment}{rq}(x, data = model.frame(x), newdata = NULL, ...)
 }
 \arguments{
-\item{x}{An \code{rq} object returned from \code{\link[quantreg:rq]{quantreg::rq()}}.}
+\item{x}{An \code{rq} object returned from \code{quantreg::rq()}.}
 
 \item{data}{A \link[base:data.frame]{base::data.frame} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
 data that was used to produce the object \code{x}. Defaults to
@@ -92,7 +92,7 @@ columns \code{.lower} and \code{.upper}. Does not provide confidence
 intervals when data is specified via the \code{newdata} argument.
 }
 \seealso{
-\link{augment}, \code{\link[quantreg:rq]{quantreg::rq()}}, \code{\link[quantreg:predict.rq]{quantreg::predict.rq()}}
+\link{augment}, \code{quantreg::rq()}, \code{quantreg::predict.rq()}
 
 Other quantreg tidiers: 
 \code{\link{augment.nlrq}()},

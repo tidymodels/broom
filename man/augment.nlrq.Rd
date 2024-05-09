@@ -7,7 +7,7 @@
 \method{augment}{nlrq}(x, data = NULL, newdata = NULL, ...)
 }
 \arguments{
-\item{x}{A \code{nlrq} object returned from \code{\link[quantreg:nlrq]{quantreg::nlrq()}}.}
+\item{x}{A \code{nlrq} object returned from \code{quantreg::nlrq()}.}
 
 \item{data}{A \link[base:data.frame]{base::data.frame} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
 data that was used to produce the object \code{x}. Defaults to
@@ -67,7 +67,7 @@ augment(n, newdata = newdata)
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-\code{\link[=augment]{augment()}}, \code{\link[quantreg:nlrq]{quantreg::nlrq()}}
+\code{\link[=augment]{augment()}}, \code{quantreg::nlrq()}
 
 Other quantreg tidiers: 
 \code{\link{augment.rqs}()},

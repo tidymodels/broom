@@ -75,7 +75,7 @@ tidy.nlrq <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #' )
 #'
 #' @export
-#' @seealso [glance()], [quantreg::nlrq()]
+#' @seealso [glance()], `quantreg::nlrq()`
 #' @family quantreg tidiers
 #' @inherit tidy.nlrq examples
 glance.nlrq <- function(x, ...) {
@@ -105,11 +105,11 @@ glance.nlrq <- function(x, ...) {
 #' @templateVar class nlrq
 #' @template title_desc_tidy
 #'
-#' @param x A `nlrq` object returned from [quantreg::nlrq()].
+#' @param x A `nlrq` object returned from `quantreg::nlrq()`.
 #' @inherit augment.nls params examples return
 #'
 #' @export
-#' @seealso [augment()], [quantreg::nlrq()]
+#' @seealso [augment()], `quantreg::nlrq()`
 #' @family quantreg tidiers
 #' @include stats-nls-tidiers.R
 #'

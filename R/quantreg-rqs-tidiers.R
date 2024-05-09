@@ -37,7 +37,7 @@ tidy.rqs <- function(x, se.type = "rank", conf.int = FALSE,
   check_ellipses("exponentiate", "tidy", "rqs", ...)
 
   rq_summary <- suppressWarnings(
-    quantreg::summary.rqs(x, se = se.type, alpha = 1 - conf.level, ...)
+    summary(x, se = se.type, alpha = 1 - conf.level, ...)
   )
 
   purrr::map_df(
@@ -64,13 +64,13 @@ glance.rqs <- function(x, ...) {
 #' @inherit tidy.rqs examples
 #' @inherit augment.rq return details
 #'
-#' @param x An `rqs` object returned from [quantreg::rq()].
+#' @param x An `rqs` object returned from `quantreg::rq()`.
 #' @template param_data
 #' @template param_newdata
 #' @inheritDotParams quantreg::predict.rq
 #'
 #' @export
-#' @seealso [augment], [quantreg::rq()], [quantreg::predict.rqs()]
+#' @seealso [augment], `quantreg::rq()`, `quantreg::predict.rqs()`
 #' @family quantreg tidiers
 #' @inherit tidy.rq examples
 augment.rqs <- function(x, data = model.frame(x), newdata, ...) {

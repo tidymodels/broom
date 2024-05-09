@@ -43,7 +43,7 @@ that no longer have a well-defined value are filled in with an \code{NA}
 of the appropriate type.
 }
 \seealso{
-\code{\link[=glance]{glance()}}, \code{\link[quantreg:nlrq]{quantreg::nlrq()}}
+\code{\link[=glance]{glance()}}, \code{quantreg::nlrq()}
 
 Other quantreg tidiers: 
 \code{\link{augment.nlrq}()},
