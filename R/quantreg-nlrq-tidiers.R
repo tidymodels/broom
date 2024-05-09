@@ -1,7 +1,7 @@
 #' @templateVar class nlrq
 #' @template title_desc_tidy
 #'
-#' @param x A `nlrq` object returned from [quantreg::nlrq()].
+#' @param x A `nlrq` object returned from `quantreg::nlrq()`.
 #' @template param_confint
 #' @template param_unused_dots
 #'
@@ -9,30 +9,41 @@
 #'
 #' @aliases nlrq_tidiers
 #' @export
-#' @seealso [tidy()], [quantreg::nlrq()]
+#' @seealso [tidy()], `quantreg::nlrq()`
 #' @family quantreg tidiers
-#' @examplesIf rlang::is_installed("quantreg")
-#'
-#' # load modeling library
-#' library(quantreg)
-#'
-#' # build artificial data with multiplicative error
-#' set.seed(1)
-#' dat <- NULL
-#' dat$x <- rep(1:25, 20)
-#' dat$y <- SSlogis(dat$x, 10, 12, 2) * rnorm(500, 1, 0.1)
-#'
-#' # fit the median using nlrq
-#' mod <- nlrq(y ~ SSlogis(x, Asym, mid, scal),
-#'   data = dat, tau = 0.5, trace = TRUE
-#' )
-#'
-#' # summarize model fit with tidiers
-#' tidy(mod)
-#' glance(mod)
-#' augment(mod)
-#'
+# qunatreg not available (#1201)
+# @examplesIf rlang::is_installed("quantreg")
+#
+# # load modeling library
+# library(quantreg)
+#
+# # build artificial data with multiplicative error
+# set.seed(1)
+# dat <- NULL
+# dat$x <- rep(1:25, 20)
+# dat$y <- SSlogis(dat$x, 10, 12, 2) * rnorm(500, 1, 0.1)
+#
+# # fit the median using nlrq
+# mod <- nlrq(y ~ SSlogis(x, Asym, mid, scal),
+#   data = dat, tau = 0.5, trace = TRUE
+# )
+#
+# # summarize model fit with tidiers
+# tidy(mod)
+# glance(mod)
+# augment(mod)
+#
 tidy.nlrq <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
+  lifecycle::deprecate_soft(
+    "1.0.6", 
+    I("tidying an `nlrq` object"), 
+    details = c(
+      "i" = "broom no longer tests support for quantreg output as the package 
+             requires an incompatibly recent R version.",
+      "!" = "Please interpret output with caution."
+    )
+  )
+  
   check_ellipses("exponentiate", "tidy", "nlrq", ...)
 
   ret <- as_tidy_tibble(
@@ -68,6 +79,16 @@ tidy.nlrq <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #' @family quantreg tidiers
 #' @inherit tidy.nlrq examples
 glance.nlrq <- function(x, ...) {
+  lifecycle::deprecate_soft(
+    "1.0.6", 
+    I("tidying an `nlrq` object"), 
+    details = c(
+      "i" = "broom no longer tests support for quantreg output as the package 
+             requires an incompatibly recent R version.",
+      "!" = "Please interpret output with caution."
+    )
+  )
+  
   n <- length(x[["m"]]$fitted())
   s <- summary(x)
 

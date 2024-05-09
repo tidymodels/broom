@@ -7,7 +7,7 @@
 \method{glance}{nlrq}(x, ...)
 }
 \arguments{
-\item{x}{A \code{nlrq} object returned from \code{\link[quantreg:nlrq]{quantreg::nlrq()}}.}
+\item{x}{A \code{nlrq} object returned from \code{quantreg::nlrq()}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -41,29 +41,6 @@ Glance returns the same number of columns regardless of whether the
 model matrix is rank-deficient or not. If so, entries in columns
 that no longer have a well-defined value are filled in with an \code{NA}
 of the appropriate type.
-}
-\examples{
-\dontshow{if (rlang::is_installed("quantreg")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-
-# load modeling library
-library(quantreg)
-
-# build artificial data with multiplicative error
-set.seed(1)
-dat <- NULL
-dat$x <- rep(1:25, 20)
-dat$y <- SSlogis(dat$x, 10, 12, 2) * rnorm(500, 1, 0.1)
-
-# fit the median using nlrq
-mod <- nlrq(y ~ SSlogis(x, Asym, mid, scal),
-  data = dat, tau = 0.5, trace = TRUE
-)
-
-# summarize model fit with tidiers
-tidy(mod)
-glance(mod)
-augment(mod)
-\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[quantreg:nlrq]{quantreg::nlrq()}}

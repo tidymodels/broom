@@ -8,7 +8,7 @@
 \method{tidy}{nlrq}(x, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
-\item{x}{A \code{nlrq} object returned from \code{\link[quantreg:nlrq]{quantreg::nlrq()}}.}
+\item{x}{A \code{nlrq} object returned from \code{quantreg::nlrq()}.}
 
 \item{conf.int}{Logical indicating whether or not to include a confidence
 interval in the tidied output. Defaults to \code{FALSE}.}
@@ -38,31 +38,8 @@ model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
-\examples{
-\dontshow{if (rlang::is_installed("quantreg")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-
-# load modeling library
-library(quantreg)
-
-# build artificial data with multiplicative error
-set.seed(1)
-dat <- NULL
-dat$x <- rep(1:25, 20)
-dat$y <- SSlogis(dat$x, 10, 12, 2) * rnorm(500, 1, 0.1)
-
-# fit the median using nlrq
-mod <- nlrq(y ~ SSlogis(x, Asym, mid, scal),
-  data = dat, tau = 0.5, trace = TRUE
-)
-
-# summarize model fit with tidiers
-tidy(mod)
-glance(mod)
-augment(mod)
-\dontshow{\}) # examplesIf}
-}
 \seealso{
-\code{\link[=tidy]{tidy()}}, \code{\link[quantreg:nlrq]{quantreg::nlrq()}}
+\code{\link[=tidy]{tidy()}}, \code{quantreg::nlrq()}
 
 Other quantreg tidiers: 
 \code{\link{augment.nlrq}()},
