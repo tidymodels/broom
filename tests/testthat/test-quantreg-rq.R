@@ -5,8 +5,9 @@ skip_on_cran()
 skip_if_not_installed("modeltests")
 library(modeltests)
 
-skip_if_not_installed("quantreg")
-library(quantreg)
+skip("quantreg not available (#1201)")
+# skip_if_not_installed("quantreg")
+# library(quantreg)
 
 data(stackloss)
 

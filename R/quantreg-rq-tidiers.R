@@ -1,13 +1,13 @@
 #' @templateVar class rq
 #' @template title_desc_tidy
 #'
-#' @param x An `rq` object returned from [quantreg::rq()].
+#' @param x An `rq` object returned from `quantreg::rq()`.
 #' @param se.type Character specifying the method to use to calculate
-#'   standard errors. Passed to [quantreg::summary.rq()] `se` argument.
+#'   standard errors. Passed to `quantreg::summary.rq()` `se` argument.
 #'   Defaults to `"rank"` if the sample size is less than 1000,
 #'   otherwise defaults to `"nid"`.
 #' @template param_confint
-#' @param ... Additional arguments passed to [quantreg::summary.rq()].
+#' @param ... Additional arguments passed to `quantreg::summary.rq()`.
 #'
 #' @details If `se.type = "rank"` confidence intervals are calculated by
 #'   `summary.rq` and `statistic` and `p.value` values are not returned.
@@ -19,42 +19,53 @@
 #'
 #' @aliases rq_tidiers quantreg_tidiers
 #' @export
-#' @seealso [tidy()], [quantreg::rq()]
+#' @seealso [tidy()], `quantreg::rq()`
 #' @family quantreg tidiers
 #'
-#' @examplesIf rlang::is_installed("quantreg")
-#'
-#' # load modeling library and data
-#' library(quantreg)
-#'
-#' data(stackloss)
-#'
-#' # median (l1) regression fit for the stackloss data.
-#' mod1 <- rq(stack.loss ~ stack.x, .5)
-#'
-#' # weighted sample median
-#' mod2 <- rq(rnorm(50) ~ 1, weights = runif(50))
-#'
-#' # summarize model fit with tidiers
-#' tidy(mod1)
-#' glance(mod1)
-#' augment(mod1)
-#'
-#' tidy(mod2)
-#' glance(mod2)
-#' augment(mod2)
-#'
-#' # varying tau to generate an rqs object
-#' mod3 <- rq(stack.loss ~ stack.x, tau = c(.25, .5))
-#'
-#' tidy(mod3)
-#' augment(mod3)
-#'
-#' # glance cannot handle rqs objects like `mod3`--use a purrr
-#' # `map`-based workflow instead
-#'
+# quantreg not available (#1201)
+# @examplesIf rlang::is_installed("quantreg")
+#
+# # load modeling library and data
+# library(quantreg)
+#
+# data(stackloss)
+#
+# # median (l1) regression fit for the stackloss data.
+# mod1 <- rq(stack.loss ~ stack.x, .5)
+#
+# # weighted sample median
+# mod2 <- rq(rnorm(50) ~ 1, weights = runif(50))
+#
+# # summarize model fit with tidiers
+# tidy(mod1)
+# glance(mod1)
+# augment(mod1)
+#
+# tidy(mod2)
+# glance(mod2)
+# augment(mod2)
+#
+# # varying tau to generate an rqs object
+# mod3 <- rq(stack.loss ~ stack.x, tau = c(.25, .5))
+#
+# tidy(mod3)
+# augment(mod3)
+#
+# # glance cannot handle rqs objects like `mod3`--use a purrr
+# # `map`-based workflow instead
+#
 tidy.rq <- function(x, se.type = NULL, conf.int = FALSE,
                     conf.level = 0.95, ...) {
+  lifecycle::deprecate_soft(
+    "1.0.6", 
+    I("tidying an `rq` object"), 
+    details = c(
+      "i" = "broom no longer tests support for quantreg output as the package 
+             requires an incompatibly recent R version.",
+      "!" = "Please interpret output with caution."
+    )
+  )
+  
   check_ellipses("exponentiate", "tidy", "rq", ...)
 
   # specification for confidence level inverted for summary.rq
@@ -105,6 +116,16 @@ tidy.rq <- function(x, se.type = NULL, conf.int = FALSE,
 #' @seealso [glance()], [quantreg::rq()]
 #' @family quantreg tidiers
 glance.rq <- function(x, ...) {
+  lifecycle::deprecate_soft(
+    "1.0.6", 
+    I("tidying an `rq` object"), 
+    details = c(
+      "i" = "broom no longer tests support for quantreg output as the package 
+             requires an incompatibly recent R version.",
+      "!" = "Please interpret output with caution."
+    )
+  )
+  
   n <- length(fitted(x))
   s <- summary(x)
 
@@ -139,6 +160,16 @@ glance.rq <- function(x, ...) {
 #' @seealso [augment], [quantreg::rq()], [quantreg::predict.rq()]
 #' @family quantreg tidiers
 augment.rq <- function(x, data = model.frame(x), newdata = NULL, ...) {
+  lifecycle::deprecate_soft(
+    "1.0.6", 
+    I("tidying an `rq` object"), 
+    details = c(
+      "i" = "broom no longer tests support for quantreg output as the package 
+             requires an incompatibly recent R version.",
+      "!" = "Please interpret output with caution."
+    )
+  )
+  
   args <- list(...)
   force_newdata <- FALSE
   if ("interval" %in% names(args) && args[["interval"]] != "none") {
