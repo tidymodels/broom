@@ -614,7 +614,6 @@ Suggests:
     plm,
     poLCA,
     psych,
-    quantreg,
     rmarkdown,
     robust,
     robustbase,

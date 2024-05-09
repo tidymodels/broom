@@ -1,8 +1,9 @@
 # broom (development version)
 
-* Soft-deprecated tidiers for margins, lsmeans, and emmeans. Each package has been removed from Suggests and is no longer tested---their tidiers will raise a deprecation warning but return the same results as before.
+* Soft-deprecated tidiers for margins, lsmeans, emmeans, and quantreg (rq, rqs, nlrq) objects. Each package has been removed from Suggests and is no longer tested---their tidiers will raise a deprecation warning but return the same results as before.
      - margins was archived from CRAN. In the case that the package is back on CRAN before the next package release, broom will once again Suggest and test support for the package (#1200).
      - lsmeans and emmeans have a dependency requiring R 4.3.0 or higher. To maintain compatibility with at least 4 previous minor versions of R, broom won't test support for these packages until the release of R 4.7.x (or until lsmeans and emmeans are compatible with the R version 4 minor releases previous, #1193).
+     - Through its dependency on MatrixModels, and due to CRAN not hosting metadata for Matrix 1.6-x on R 4.1, quantreg requires R 4.4.0 or higher. broom will reintroduce testing (and un-deprecate) for these tidiers when they're once again compatible with R versions through 4 previous minor releases (#1201).
 
 * While this broom release contains no changes to the `tidy.survfit()` method for objects from the survival package, the package has bumped the minimum required version for survival. Before survival 3.6-4, `tidy.survfit()` propagated "inconsistent" `n.censor` values from survival for multi-state models (#1195). 
 
