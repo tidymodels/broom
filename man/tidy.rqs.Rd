@@ -8,10 +8,10 @@
 \method{tidy}{rqs}(x, se.type = "rank", conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
-\item{x}{An \code{rqs} object returned from \code{\link[quantreg:rq]{quantreg::rq()}}.}
+\item{x}{An \code{rqs} object returned from \code{quantreg::rq()}.}
 
 \item{se.type}{Character specifying the method to use to calculate
-standard errors. Passed to \code{\link[quantreg:summary.rq]{quantreg::summary.rq()}} \code{se} argument.
+standard errors. Passed to \code{quantreg::summary.rq()} \code{se} argument.
 Defaults to \code{"rank"}.}
 
 \item{conf.int}{Logical indicating whether or not to include a confidence
@@ -21,7 +21,7 @@ interval in the tidied output. Defaults to \code{FALSE}.}
 if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 
-\item{...}{Additional arguments passed to \code{\link[quantreg:summary.rq]{quantreg::summary.rqs()}}}
+\item{...}{Additional arguments passed to \code{quantreg::summary.rqs()}}
 }
 \description{
 Tidy summarizes information about the components of a model.
@@ -37,41 +37,8 @@ If \code{se.type = "rank"} confidence intervals are calculated by
 no confidence intervals are calculated and the confidence limits are
 set to NA.
 }
-\examples{
-\dontshow{if (rlang::is_installed("quantreg")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-
-# load modeling library and data
-library(quantreg)
-
-data(stackloss)
-
-# median (l1) regression fit for the stackloss data.
-mod1 <- rq(stack.loss ~ stack.x, .5)
-
-# weighted sample median
-mod2 <- rq(rnorm(50) ~ 1, weights = runif(50))
-
-# summarize model fit with tidiers
-tidy(mod1)
-glance(mod1)
-augment(mod1)
-
-tidy(mod2)
-glance(mod2)
-augment(mod2)
-
-# varying tau to generate an rqs object
-mod3 <- rq(stack.loss ~ stack.x, tau = c(.25, .5))
-
-tidy(mod3)
-augment(mod3)
-
-# glance cannot handle rqs objects like `mod3`--use a purrr
-# `map`-based workflow instead
-\dontshow{\}) # examplesIf}
-}
 \seealso{
-\code{\link[=tidy]{tidy()}}, \code{\link[quantreg:rq]{quantreg::rq()}}
+\code{\link[=tidy]{tidy()}}, \code{quantreg::rq()}
 
 Other quantreg tidiers: 
 \code{\link{augment.nlrq}()},

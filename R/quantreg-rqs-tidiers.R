@@ -1,12 +1,12 @@
 #' @templateVar class rqs
 #' @template title_desc_tidy
 #'
-#' @param x An `rqs` object returned from [quantreg::rq()].
+#' @param x An `rqs` object returned from `quantreg::rq()`.
 #' @param se.type Character specifying the method to use to calculate
-#'   standard errors. Passed to [quantreg::summary.rq()] `se` argument.
+#'   standard errors. Passed to `quantreg::summary.rq()` `se` argument.
 #'   Defaults to `"rank"`.
 #' @template param_confint
-#' @param ... Additional arguments passed to [quantreg::summary.rqs()]
+#' @param ... Additional arguments passed to `quantreg::summary.rqs()`
 #'
 #' @evalRd return_tidy(regression = TRUE,
 #'   quantile = "Linear conditional quantile.")
@@ -18,12 +18,22 @@
 #'
 #' @aliases rqs_tidiers
 #' @export
-#' @seealso [tidy()], [quantreg::rq()]
+#' @seealso [tidy()], `quantreg::rq()`
 #' @family quantreg tidiers
 #' @inherit tidy.rq examples
 #'
 tidy.rqs <- function(x, se.type = "rank", conf.int = FALSE,
                      conf.level = 0.95, ...) {
+  lifecycle::deprecate_soft(
+    "1.0.6", 
+    I("tidying an `rqs` object"), 
+    details = c(
+      "i" = "broom no longer tests support for quantreg output as the package 
+             requires an incompatibly recent R version.",
+      "!" = "Please interpret output with caution."
+    )
+  )
+  
   check_ellipses("exponentiate", "tidy", "rqs", ...)
 
   rq_summary <- suppressWarnings(
@@ -64,6 +74,16 @@ glance.rqs <- function(x, ...) {
 #' @family quantreg tidiers
 #' @inherit tidy.rq examples
 augment.rqs <- function(x, data = model.frame(x), newdata, ...) {
+  lifecycle::deprecate_soft(
+    "1.0.6", 
+    I("tidying an `rqs` object"), 
+    details = c(
+      "i" = "broom no longer tests support for quantreg output as the package 
+             requires an incompatibly recent R version.",
+      "!" = "Please interpret output with caution."
+    )
+  )
+  
   n_tau <- length(x[["tau"]])
   if (missing(newdata) || is.null(newdata)) {
     original <- data[rep(seq_len(nrow(data)), each = n_tau), , drop = FALSE]
