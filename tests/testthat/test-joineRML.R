@@ -5,8 +5,17 @@ skip_on_cran()
 skip_if_not_installed("modeltests")
 library(modeltests)
 
-skip_if_not_installed("joineRML")
-library(joineRML)
+# lme4 raises a warning about Matrix ABI version when
+# incompatible with the compiled version (#1204)
+withCallingHandlers(
+  {
+    skip_if_not_installed("joineRML")
+    library(joineRML)
+  },
+  warning = function(w) {
+    skip("Incompatible Matrix ABI version.")
+  }
+)
 
 # NOTE: the models used in these tests are created in
 # `data-raw/fit_and_save_long_running_models.R`, and then are saved to

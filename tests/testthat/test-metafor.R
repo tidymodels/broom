@@ -8,8 +8,17 @@ library(modeltests)
 skip_if_not_installed("metafor")
 library(metafor)
 
-skip_if_not_installed("lme4")
-library(lme4)
+# lme4 raises a warning about Matrix ABI version when
+# incompatible with the compiled version (#1204)
+withCallingHandlers(
+  {
+    skip_if_not_installed("lme4")
+    library(lme4)
+  },
+  warning = function(w) {
+    skip("Incompatible Matrix ABI version.")
+  }
+)
 
 # check arguments ---------------------------------------------------------
 
