@@ -8,17 +8,8 @@ library(modeltests)
 skip_if_not_installed("lsmeans")
 library(lsmeans)
 
-# lme4 raises a warning about Matrix ABI version when
-# incompatible with the compiled version (#1204)
-withCallingHandlers(
-  {
-    skip_if_not_installed("lme4")
-    library(lme4)
-  },
-  warning = function(w) {
-    skip("Incompatible Matrix ABI version.")
-  }
-)
+skip_if_not_installed("lme4")
+library(lme4)
 
 fit <- lm(sales1 ~ price1 + price2 + day + store, data = oranges)
 rg <- ref.grid(fit)
