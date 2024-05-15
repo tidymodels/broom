@@ -49,7 +49,12 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::rcmdcheck
+          extra-packages: 
+            any::rcmdcheck,
+            car=?ignore-before-r=4.3.0,
+            emmeans=?ignore-before-r=4.3.0,
+            lsmeans=?ignore-before-r=4.3.0,
+            quantreg=?ignore-before-r=4.3.0
           needs: check
 
       - uses: r-lib/actions/check-r-package@v2
