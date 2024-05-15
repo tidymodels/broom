@@ -5,9 +5,8 @@ skip_on_cran()
 skip_if_not_installed("modeltests")
 library(modeltests)
 
-skip("lsmeans not available, requires R 4.3.0+ (#1193)")
-# skip_if_not_installed("lsmeans")
-# library(lsmeans)
+skip_if_not_installed("lsmeans")
+library(lsmeans)
 
 skip_if_not_installed("lme4")
 library(lme4)
@@ -26,8 +25,8 @@ marginal_dashes <- tibble(
   x = rep(c("Single", "Double-Barrelled"), 50)
 ) %>%
   lm(y ~ x, data = .) %>%
-  lsmeans(., ~x) %>%
-  contrast(., "pairwise")
+  lsmeans::lsmeans(., ~x) %>%
+  lsmeans::contrast(., "pairwise")
 
 test_that("lsmeans tidier arguments", {
   check_arguments(tidy.lsmobj, strict = FALSE)
