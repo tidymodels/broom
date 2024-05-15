@@ -80,15 +80,6 @@
 #' @seealso [tidy()], [emmeans::ref_grid()], [emmeans::emmeans()],
 #'   [emmeans::contrast()]
 tidy.lsmobj <- function(x, conf.int = FALSE, conf.level = .95, ...) {
-  lifecycle::deprecate_soft(
-    "1.0.6", 
-    I("tidying a `lsmobj` object"), 
-    details = c(
-      "i" = "broom no longer tests support for emmeans output as the package 
-             requires an incompatibly recent R version.",
-      "!" = "Please interpret output with caution."
-    )
-  )
   check_ellipses("exponentiate", "tidy", "lsmobj", ...)
 
   tidy_emmeans(x, infer = c(conf.int, TRUE), level = conf.level, ...)
@@ -115,15 +106,6 @@ tidy.lsmobj <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #' @seealso [tidy()], [emmeans::ref_grid()], [emmeans::emmeans()],
 #'   [emmeans::contrast()]
 tidy.ref.grid <- function(x, conf.int = FALSE, conf.level = .95, ...) {
-  lifecycle::deprecate_soft(
-    "1.0.6", 
-    I("tidying a `ref.grid` object"), 
-    details = c(
-      "i" = "broom no longer tests support for emmeans output as the package 
-             requires an incompatibly recent R version.",
-      "!" = "Please interpret output with caution."
-    )
-  )
   check_ellipses("exponentiate", "tidy", "ref.grid", ...)
 
   tidy_emmeans(x, infer = c(conf.int, TRUE), level = conf.level, ...)
@@ -150,15 +132,6 @@ tidy.ref.grid <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #' @seealso [tidy()], [emmeans::ref_grid()], [emmeans::emmeans()],
 #'   [emmeans::contrast()]
 tidy.emmGrid <- function(x, conf.int = FALSE, conf.level = .95, ...) {
-  lifecycle::deprecate_soft(
-    "1.0.6", 
-    I("tidying a `emmGrid` object"), 
-    details = c(
-      "i" = "broom no longer tests support for emmeans output as the package 
-             requires an incompatibly recent R version.",
-      "!" = "Please interpret output with caution."
-    )
-  )
   check_ellipses("exponentiate", "tidy", "emmGrid", ...)
 
   tidy_emmeans(x, infer = c(conf.int, TRUE), level = conf.level, ...)
@@ -194,15 +167,6 @@ tidy.emmGrid <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #'   [emmeans::contrast()]
 
 tidy.summary_emm <- function(x, null.value = NULL, ...) {
-  lifecycle::deprecate_soft(
-    "1.0.6", 
-    I("tidying a `summary_emm` object"), 
-    details = c(
-      "i" = "broom no longer tests support for emmeans output as the package 
-             requires an incompatibly recent R version.",
-      "!" = "Please interpret output with caution."
-    )
-  )
   check_ellipses("exponentiate", "tidy", "summary_emm", ...)
 
   tidy_emmeans_summary(x, null.value = null.value)
