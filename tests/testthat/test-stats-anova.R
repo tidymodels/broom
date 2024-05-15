@@ -128,6 +128,9 @@ test_that("tidy.linearHypothesis", {
   expect_equal(td_lht$estimate, -0.00551, tolerance = .00001)
 })
 
+# Matrix ABI version may differ (#1204)
+skip_if(paste0(R.Version()[c("major", "minor")], collapse = ".") < "4.4.0")
+
 skip_if_not_installed("lme4")
 test_that("tidy.anova for merMod objects", {
   m1_mer <- lme4::lmer(mpg ~ wt + (1 | cyl), data = mtcars)
