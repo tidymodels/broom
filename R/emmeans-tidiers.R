@@ -3,8 +3,8 @@
 #'
 #' @param x An `lsmobj` object.
 #' @template param_confint
-#' @param ... Additional arguments passed to `emmeans::summary.emmGrid()` or
-#'   `lsmeans::summary.ref.grid()`. **Cautionary note**: misspecified arguments
+#' @param ... Additional arguments passed to [emmeans::summary.emmGrid()] or
+#'   [lsmeans::summary.ref.grid()]. **Cautionary note**: misspecified arguments
 #'   may be silently ignored!
 #'
 #' @evalRd return_tidy(
@@ -24,72 +24,62 @@
 #'   contrast, each row will contain one estimated contrast.
 #'
 #'   There are a large number of arguments that can be
-#'   passed on to `emmeans::summary.emmGrid()` or `lsmeans::summary.ref.grid()`.
+#'   passed on to [emmeans::summary.emmGrid()] or [lsmeans::summary.ref.grid()].
 #'
-# examples no longer supplied, see #1193
-# @examplesIf rlang::is_installed(c("emmeans", "ggplot2"))
-#
-# # load libraries for models and data
-# library(emmeans)
-#
-# # linear model for sales of oranges per day
-# oranges_lm1 <- lm(sales1 ~ price1 + price2 + day + store, data = oranges)
-#
-# # reference grid; see vignette("basics", package = "emmeans")
-# oranges_rg1 <- ref_grid(oranges_lm1)
-# td <- tidy(oranges_rg1)
-# td
-#
-# # marginal averages
-# marginal <- emmeans(oranges_rg1, "day")
-# tidy(marginal)
-#
-# # contrasts
-# tidy(contrast(marginal))
-# tidy(contrast(marginal, method = "pairwise"))
-#
-# # plot confidence intervals
-# library(ggplot2)
-#
-# ggplot(tidy(marginal, conf.int = TRUE), aes(day, estimate)) +
-#   geom_point() +
-#   geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
-#
-# # by multiple prices
-# by_price <- emmeans(oranges_lm1, "day",
-#   by = "price2",
-#   at = list(
-#     price1 = 50, price2 = c(40, 60, 80),
-#     day = c("2", "3", "4")
-#   )
-# )
-#
-# by_price
-#
-# tidy(by_price)
-#
-# ggplot(tidy(by_price, conf.int = TRUE), aes(price2, estimate, color = day)) +
-#   geom_line() +
-#   geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
-#
-# # joint_tests
-# tidy(joint_tests(oranges_lm1))
-#
+#' @examplesIf rlang::is_installed(c("emmeans", "ggplot2"))
+#'
+#' # load libraries for models and data
+#' library(emmeans)
+#'
+#' # linear model for sales of oranges per day
+#' oranges_lm1 <- lm(sales1 ~ price1 + price2 + day + store, data = oranges)
+#'
+#' # reference grid; see vignette("basics", package = "emmeans")
+#' oranges_rg1 <- ref_grid(oranges_lm1)
+#' td <- tidy(oranges_rg1)
+#' td
+#'
+#' # marginal averages
+#' marginal <- emmeans(oranges_rg1, "day")
+#' tidy(marginal)
+#'
+#' # contrasts
+#' tidy(contrast(marginal))
+#' tidy(contrast(marginal, method = "pairwise"))
+#'
+#' # plot confidence intervals
+#' library(ggplot2)
+#'
+#' ggplot(tidy(marginal, conf.int = TRUE), aes(day, estimate)) +
+#'   geom_point() +
+#'   geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
+#'
+#' # by multiple prices
+#' by_price <- emmeans(oranges_lm1, "day",
+#'   by = "price2",
+#'   at = list(
+#'     price1 = 50, price2 = c(40, 60, 80),
+#'     day = c("2", "3", "4")
+#'   )
+#' )
+#'
+#' by_price
+#'
+#' tidy(by_price)
+#'
+#' ggplot(tidy(by_price, conf.int = TRUE), aes(price2, estimate, color = day)) +
+#'   geom_line() +
+#'   geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
+#'
+#' # joint_tests
+#' tidy(joint_tests(oranges_lm1))
+#'
 #' @aliases emmeans_tidiers
 #' @export
 #' @family emmeans tidiers
-#' @seealso [tidy()], `emmeans::ref_grid()`, `emmeans::emmeans()`,
-#'   `emmeans::contrast()`
+#' @seealso [tidy()], [emmeans::ref_grid()], [emmeans::emmeans()],
+#'   [emmeans::contrast()]
 tidy.lsmobj <- function(x, conf.int = FALSE, conf.level = .95, ...) {
-  lifecycle::deprecate_soft(
-    "1.0.6", 
-    I("tidying a `lsmobj` object"), 
-    details = c(
-      "i" = "broom no longer tests support for emmeans output as the package 
-             requires an incompatibly recent R version.",
-      "!" = "Please interpret output with caution."
-    )
-  )
   check_ellipses("exponentiate", "tidy", "lsmobj", ...)
 
   tidy_emmeans(x, infer = c(conf.int, TRUE), level = conf.level, ...)
@@ -113,18 +103,9 @@ tidy.lsmobj <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #'
 #' @export
 #' @family emmeans tidiers
-#' @seealso [tidy()], `emmeans::ref_grid()`, `emmeans::emmeans()`,
-#'   `emmeans::contrast()`
+#' @seealso [tidy()], [emmeans::ref_grid()], [emmeans::emmeans()],
+#'   [emmeans::contrast()]
 tidy.ref.grid <- function(x, conf.int = FALSE, conf.level = .95, ...) {
-  lifecycle::deprecate_soft(
-    "1.0.6", 
-    I("tidying a `ref.grid` object"), 
-    details = c(
-      "i" = "broom no longer tests support for emmeans output as the package 
-             requires an incompatibly recent R version.",
-      "!" = "Please interpret output with caution."
-    )
-  )
   check_ellipses("exponentiate", "tidy", "ref.grid", ...)
 
   tidy_emmeans(x, infer = c(conf.int, TRUE), level = conf.level, ...)
@@ -148,18 +129,9 @@ tidy.ref.grid <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #'
 #' @export
 #' @family emmeans tidiers
-#' @seealso [tidy()], `emmeans::ref_grid()`, `emmeans::emmeans()`,
-#'   `emmeans::contrast()`
+#' @seealso [tidy()], [emmeans::ref_grid()], [emmeans::emmeans()],
+#'   [emmeans::contrast()]
 tidy.emmGrid <- function(x, conf.int = FALSE, conf.level = .95, ...) {
-  lifecycle::deprecate_soft(
-    "1.0.6", 
-    I("tidying a `emmGrid` object"), 
-    details = c(
-      "i" = "broom no longer tests support for emmeans output as the package 
-             requires an incompatibly recent R version.",
-      "!" = "Please interpret output with caution."
-    )
-  )
   check_ellipses("exponentiate", "tidy", "emmGrid", ...)
 
   tidy_emmeans(x, infer = c(conf.int, TRUE), level = conf.level, ...)
@@ -191,19 +163,10 @@ tidy.emmGrid <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #'
 #' @export
 #' @family emmeans tidiers
-#' @seealso [tidy()], `emmeans::ref_grid()`, `emmeans::emmeans()`,
-#'   `emmeans::contrast()`
+#' @seealso [tidy()], [emmeans::ref_grid()], [emmeans::emmeans()],
+#'   [emmeans::contrast()]
 
 tidy.summary_emm <- function(x, null.value = NULL, ...) {
-  lifecycle::deprecate_soft(
-    "1.0.6", 
-    I("tidying a `summary_emm` object"), 
-    details = c(
-      "i" = "broom no longer tests support for emmeans output as the package 
-             requires an incompatibly recent R version.",
-      "!" = "Please interpret output with caution."
-    )
-  )
   check_ellipses("exponentiate", "tidy", "summary_emm", ...)
 
   tidy_emmeans_summary(x, null.value = null.value)

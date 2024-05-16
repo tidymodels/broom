@@ -2,6 +2,9 @@ context("rma")
 
 skip_on_cran()
 
+# Matrix ABI version may differ (#1204)
+skip_if(paste0(R.Version()[c("major", "minor")], collapse = ".") < "4.4.0")
+
 skip_if_not_installed("modeltests")
 library(modeltests)
 
