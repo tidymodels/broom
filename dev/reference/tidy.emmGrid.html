@@ -102,8 +102,8 @@ Defaults to 0.95, which corresponds to a 95 percent confidence interval.</p></dd
 
 
 <dt>...</dt>
-<dd><p>Additional arguments passed to <code>emmeans::summary.emmGrid()</code> or
-<code>lsmeans::summary.ref.grid()</code>. <strong>Cautionary note</strong>: misspecified arguments
+<dd><p>Additional arguments passed to <code><a href="https://rdrr.io/pkg/emmeans/man/summary.emmGrid.html" class="external-link">emmeans::summary.emmGrid()</a></code> or
+<code><a href="https://rdrr.io/pkg/lsmeans/man/ref.grid.html" class="external-link">lsmeans::summary.ref.grid()</a></code>. <strong>Cautionary note</strong>: misspecified arguments
 may be silently ignored!</p></dd>
 
 </dl></div>
@@ -113,12 +113,12 @@ may be silently ignored!</p></dd>
 mean, and one column for each combination of factors. When the input is a
 contrast, each row will contain one estimated contrast.</p>
 <p>There are a large number of arguments that can be
-passed on to <code>emmeans::summary.emmGrid()</code> or <code>lsmeans::summary.ref.grid()</code>.</p>
+passed on to <code><a href="https://rdrr.io/pkg/emmeans/man/summary.emmGrid.html" class="external-link">emmeans::summary.emmGrid()</a></code> or <code><a href="https://rdrr.io/pkg/lsmeans/man/ref.grid.html" class="external-link">lsmeans::summary.ref.grid()</a></code>.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy()</a></code>, <code>emmeans::ref_grid()</code>, <code>emmeans::emmeans()</code>,
-<code>emmeans::contrast()</code></p>
+    <div class="dont-index"><p><code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy()</a></code>, <code><a href="https://rdrr.io/pkg/emmeans/man/ref_grid.html" class="external-link">emmeans::ref_grid()</a></code>, <code><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html" class="external-link">emmeans::emmeans()</a></code>,
+<code><a href="https://rdrr.io/pkg/emmeans/man/contrast.html" class="external-link">emmeans::contrast()</a></code></p>
 <p>Other emmeans tidiers: 
 <code><a href="tidy.lsmobj.html">tidy.lsmobj</a>()</code>,
 <code><a href="tidy.ref.grid.html">tidy.ref.grid</a>()</code>,
@@ -153,6 +153,148 @@ passed on to <code>emmeans::summary.emmGrid()</code> or <code>lsmeans::summary.r
 
 </dl></div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># load libraries for models and data</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rvlenth/emmeans" class="external-link">emmeans</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># linear model for sales of oranges per day</span></span></span>
+<span class="r-in"><span><span class="va">oranges_lm1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">sales1</span> <span class="op">~</span> <span class="va">price1</span> <span class="op">+</span> <span class="va">price2</span> <span class="op">+</span> <span class="va">day</span> <span class="op">+</span> <span class="va">store</span>, data <span class="op">=</span> <span class="va">oranges</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># reference grid; see vignette("basics", package = "emmeans")</span></span></span>
+<span class="r-in"><span><span class="va">oranges_rg1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/ref_grid.html" class="external-link">ref_grid</a></span><span class="op">(</span><span class="va">oranges_lm1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">td</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">oranges_rg1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">td</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 36 × 9</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    price1 price2 day   store estimate std.error    df statistic   p.value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>   51.2   48.6 1     1         2.92      2.72    23      1.07 0.294    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>   51.2   48.6 2     1         3.85      2.70    23      1.42 0.168    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>   51.2   48.6 3     1        11.0       2.53    23      4.35 0.000<span style="text-decoration: underline;">237</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>   51.2   48.6 4     1         6.10      2.65    23      2.30 0.030<span style="text-decoration: underline;">9</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>   51.2   48.6 5     1        12.8       2.44    23      5.23 0.000<span style="text-decoration: underline;">026</span>1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>   51.2   48.6 6     1         8.75      2.79    23      3.14 0.004<span style="text-decoration: underline;">59</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>   51.2   48.6 1     2         4.96      2.38    23      2.09 0.048<span style="text-decoration: underline;">2</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>   51.2   48.6 2     2         5.89      2.34    23      2.52 0.019<span style="text-decoration: underline;">0</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>   51.2   48.6 3     2        13.1       2.42    23      5.41 0.000<span style="text-decoration: underline;">017</span>2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>   51.2   48.6 4     2         8.14      2.35    23      3.46 0.002<span style="text-decoration: underline;">12</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 26 more rows</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># marginal averages</span></span></span>
+<span class="r-in"><span><span class="va">marginal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html" class="external-link">emmeans</a></span><span class="op">(</span><span class="va">oranges_rg1</span>, <span class="st">"day"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">marginal</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   day   estimate std.error    df statistic      p.value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1         5.56      1.77    23      3.15 0.004<span style="text-decoration: underline;">51</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2         6.49      1.73    23      3.76 0.001<span style="text-decoration: underline;">03</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 3        13.7       1.75    23      7.80 0.000<span style="text-decoration: underline;">000</span>065<span style="text-decoration: underline;">8</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 4         8.74      1.73    23      5.04 0.000<span style="text-decoration: underline;">042</span>0   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 5        15.4       1.79    23      8.65 0.000<span style="text-decoration: underline;">000</span>011<span style="text-decoration: underline;">0</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> 6        11.4       1.77    23      6.45 0.000<span style="text-decoration: underline;">001</span>40  </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># contrasts</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/contrast.html" class="external-link">contrast</a></span><span class="op">(</span><span class="va">marginal</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 8</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   term  contrast null.value estimate std.error    df statistic adj.p.value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> day   day1 ef…          0    -<span style="color: #BB0000;">4.65</span>      1.62    23    -<span style="color: #BB0000;">2.87</span>       0.026<span style="text-decoration: underline;">1</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> day   day2 ef…          0    -<span style="color: #BB0000;">3.72</span>      1.58    23    -<span style="color: #BB0000;">2.36</span>       0.054<span style="text-decoration: underline;">7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> day   day3 ef…          0     3.45      1.60    23     2.15       0.063<span style="text-decoration: underline;">7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> day   day4 ef…          0    -<span style="color: #BB0000;">1.47</span>      1.59    23    -<span style="color: #BB0000;">0.930</span>      0.434 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> day   day5 ef…          0     5.22      1.64    23     3.18       0.024<span style="text-decoration: underline;">9</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> day   day6 ef…          0     1.18      1.62    23     0.726      0.475 </span>
+<span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/contrast.html" class="external-link">contrast</a></span><span class="op">(</span><span class="va">marginal</span>, method <span class="op">=</span> <span class="st">"pairwise"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 15 × 8</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    term  contrast    null.value estimate std.error    df statistic</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> day   day1 - day2          0   -<span style="color: #BB0000;">0.930</span>      2.47    23    -<span style="color: #BB0000;">0.377</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> day   day1 - day3          0   -<span style="color: #BB0000;">8.10</span>       2.47    23    -<span style="color: #BB0000;">3.29</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> day   day1 - day4          0   -<span style="color: #BB0000;">3.18</span>       2.51    23    -<span style="color: #BB0000;">1.27</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> day   day1 - day5          0   -<span style="color: #BB0000;">9.88</span>       2.56    23    -<span style="color: #BB0000;">3.86</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> day   day1 - day6          0   -<span style="color: #BB0000;">5.83</span>       2.52    23    -<span style="color: #BB0000;">2.31</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> day   day2 - day3          0   -<span style="color: #BB0000;">7.17</span>       2.48    23    -<span style="color: #BB0000;">2.89</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> day   day2 - day4          0   -<span style="color: #BB0000;">2.25</span>       2.44    23    -<span style="color: #BB0000;">0.920</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> day   day2 - day5          0   -<span style="color: #BB0000;">8.95</span>       2.52    23    -<span style="color: #BB0000;">3.56</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> day   day2 - day6          0   -<span style="color: #BB0000;">4.90</span>       2.45    23    -<span style="color: #BB0000;">2.00</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> day   day3 - day4          0    4.92       2.49    23     1.98 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> day   day3 - day5          0   -<span style="color: #BB0000;">1.78</span>       2.47    23    -<span style="color: #BB0000;">0.719</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> day   day3 - day6          0    2.27       2.54    23     0.894</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> day   day4 - day5          0   -<span style="color: #BB0000;">6.70</span>       2.49    23    -<span style="color: #BB0000;">2.69</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> day   day4 - day6          0   -<span style="color: #BB0000;">2.65</span>       2.45    23    -<span style="color: #BB0000;">1.08</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> day   day5 - day6          0    4.05       2.56    23     1.58 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: adj.p.value &lt;dbl&gt;</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># plot confidence intervals</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">marginal</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">day</span>, <span class="va">estimate</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html" class="external-link">geom_errorbar</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>ymin <span class="op">=</span> <span class="va">conf.low</span>, ymax <span class="op">=</span> <span class="va">conf.high</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="tidy.emmGrid-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># by multiple prices</span></span></span>
+<span class="r-in"><span><span class="va">by_price</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html" class="external-link">emmeans</a></span><span class="op">(</span><span class="va">oranges_lm1</span>, <span class="st">"day"</span>,</span></span>
+<span class="r-in"><span>  by <span class="op">=</span> <span class="st">"price2"</span>,</span></span>
+<span class="r-in"><span>  at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    price1 <span class="op">=</span> <span class="fl">50</span>, price2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">60</span>, <span class="fl">80</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    day <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">by_price</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> price2 = 40:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  day emmean   SE df lower.CL upper.CL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2     6.24 1.89 23     2.33     10.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3    13.41 2.12 23     9.02     17.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4     8.48 1.87 23     4.62     12.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> price2 = 60:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  day emmean   SE df lower.CL upper.CL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2     9.21 2.11 23     4.85     13.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3    16.38 1.91 23    12.44     20.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4    11.46 2.18 23     6.96     16.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> price2 = 80:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  day emmean   SE df lower.CL upper.CL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2    12.19 3.65 23     4.65     19.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3    19.36 3.27 23    12.59     26.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4    14.44 3.74 23     6.71     22.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Results are averaged over the levels of: store </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Confidence level used: 0.95 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">by_price</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 9 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   day   price2 estimate std.error    df statistic      p.value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 2         40     6.24      1.89    23      3.30 0.003<span style="text-decoration: underline;">10</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 3         40    13.4       2.12    23      6.33 0.000<span style="text-decoration: underline;">001</span>87  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 4         40     8.48      1.87    23      4.55 0.000<span style="text-decoration: underline;">145</span>    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 2         60     9.21      2.11    23      4.37 0.000<span style="text-decoration: underline;">225</span>    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 3         60    16.4       1.91    23      8.60 0.000<span style="text-decoration: underline;">000</span>012<span style="text-decoration: underline;">2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> 4         60    11.5       2.18    23      5.26 0.000<span style="text-decoration: underline;">024</span>4   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> 2         80    12.2       3.65    23      3.34 0.002<span style="text-decoration: underline;">82</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> 3         80    19.4       3.27    23      5.91 0.000<span style="text-decoration: underline;">005</span>02  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">9</span> 4         80    14.4       3.74    23      3.86 0.000<span style="text-decoration: underline;">788</span>    </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">by_price</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">price2</span>, <span class="va">estimate</span>, color <span class="op">=</span> <span class="va">day</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html" class="external-link">geom_errorbar</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>ymin <span class="op">=</span> <span class="va">conf.low</span>, ymax <span class="op">=</span> <span class="va">conf.high</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="tidy.emmGrid-2.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># joint_tests</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/joint_tests.html" class="external-link">joint_tests</a></span><span class="op">(</span><span class="va">oranges_lm1</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   term   num.df den.df statistic   p.value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> price1      1     23     30.3  0.000<span style="text-decoration: underline;">013</span>4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> price2      1     23      2.23 0.149    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> day         5     23      4.88 0.003<span style="text-decoration: underline;">46</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> store       5     23      2.52 0.058<span style="text-decoration: underline;">3</span>   </span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 
