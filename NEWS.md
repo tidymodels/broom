@@ -1,5 +1,7 @@
 # broom (development version)
 
+# broom 1.0.6
+
 ## New Features
 
 * Added support for `conf.level` in `augment.lm()` (#1191 by `@zietzm`).
