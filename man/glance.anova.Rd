@@ -53,7 +53,7 @@ components that could reasonably be interpreted as goodness-of-fit summaries
 too.
 }
 \examples{
-\dontshow{if (rlang::is_installed("car")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # fit models
 a <- lm(mpg ~ wt + qsec + disp, mtcars)

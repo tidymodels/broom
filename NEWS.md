@@ -1,20 +1,26 @@
 # broom (development version)
 
+## New Features
+
+* Added support for `conf.level` in `augment.lm()` (#1191 by `@zietzm`).
+
+* Added support for columns `adj.r.squared` and `npar` in `glance()` method for objects outputted from `mgcv::gam()` (#1172).
+
+## Deprecations
+
 * Soft-deprecated tidiers for margins objects, as the package was archived from CRAN in April 2024. In the case that the package is back on CRAN before the next package release, broom will once again Suggest and test support for the package (#1200).
 
-* While this broom release contains no changes to the `tidy.survfit()` method for objects from the survival package, the package has bumped the minimum required version for survival. Before survival 3.6-4, `tidy.survfit()` propagated "inconsistent" `n.censor` values from survival for multi-state models (#1195). 
-
 * Moved forward with deprecation of tidiers for objects from the sp package. See resources linked in [tidymodels/broom#1142](https://github.com/tidymodels/broom/issues/1142) for more information on migration from retiring spatial packages.
+
+## Bug Fixes
+
+* While this broom release contains no changes to the `tidy.survfit()` method for objects from the survival package, the package has bumped the minimum required version for survival. Before survival 3.6-4, `tidy.survfit()` propagated "inconsistent" `n.censor` values from survival for multi-state models (#1195). 
 
 * Corrected confidence interval values for precision components in `tidy.betareg()` output (#1169).
 
 * Fixed bug in tidier for `car::linearHypothesis()` output with long formulas (#1171).
 
-* Added support for columns `adj.r.squared` and `npar` in `glance()` method for objects outputted from `mgcv::gam()` (#1172).
-
-* Corrected coefficients values in `tidy.varest()` output (#1174).
-
-* Added support for `conf.level` in `augment.lm()` (#1191 by `@zietzm`).
+* Corrected coefficient values in `tidy.varest()` output (#1174).
 
 # broom 1.0.5
 
@@ -728,42 +734,46 @@ Many many thanks to all the following for their thoughtful comments on design,
 bug reports and PRs! The community of broom contributors has been kind,
 supportive and insightful and I look forward to working you all again!
 
-[@atyre2](https://github.com/atyre2),
-[@batpigandme](https://github.com/batpigandme),
-[@bfgray3](https://github.com/bfgray3),
-[@bmannakee](https://github.com/bmannakee),
-[@briatte](https://github.com/briatte),
-[@cawoodjm](https://github.com/cawoodjm),
-[@cimentadaj](https://github.com/cimentadaj),
-[@dan87134](https://github.com/dan87134), [@dgrtwo](https://github.com/dgrtwo),
-[@dmenne](https://github.com/dmenne), [@ekatko1](https://github.com/ekatko1),
-[@ellessenne](https://github.com/ellessenne),
-[@erleholgersen](https://github.com/erleholgersen),
-[@ethchr](https://github.com/ethchr),
-[@huftis](https://github.com/huftis),
-[@IndrajeetPatil](https://github.com/IndrajeetPatil),
-[@jacob-long](https://github.com/jacob-long),
-[@jarvisc1](https://github.com/jarvisc1),
-[@jenzopr](https://github.com/jenzopr), [@jgabry](https://github.com/jgabry),
-[@jimhester](https://github.com/jimhester),
-[@josue-rodriguez](https://github.com/josue-rodriguez),
-[@karldw](https://github.com/karldw), [@kfeilich](https://github.com/kfeilich),
-[@larmarange](https://github.com/larmarange),
-[@lboller](https://github.com/lboller),
-[@mariusbarth](https://github.com/mariusbarth),
-[@michaelweylandt](https://github.com/michaelweylandt),
-[@mine-cetinkaya-rundel](https://github.com/mine-cetinkaya-rundel),
-[@mkuehn10](https://github.com/mkuehn10),
-[@mvevans89](https://github.com/mvevans89),
-[@nutterb](https://github.com/nutterb),
-[@ShreyasSingh](https://github.com/ShreyasSingh),
-[@stephlocke](https://github.com/stephlocke),
-[@strengejacke](https://github.com/strengejacke),
-[@topepo](https://github.com/topepo),
-[@willbowditch](https://github.com/willbowditch),
-[@WillemSleegers](https://github.com/WillemSleegers),
-[@wilsonfreitas](https://github.com/wilsonfreitas), and
-[@MatthieuStigler](https://github.com/MatthieuStigler)
+`@atyre2`,
+`@batpigandme`,
+`@bfgray3`,
+`@bmannakee`,
+`@briatte`,
+`@cawoodjm`,
+`@cimentadaj`,
+`@dan87134`,
+`@dgrtwo`,
+`@dmenne`,
+`@ekatko1`,
+`@ellessenne`,
+`@erleholgersen`,
+`@ethchr`,
+`@huftis`,
+`@IndrajeetPatil`,
+`@jacob-long`,
+`@jarvisc1`,
+`@jenzopr`,
+`@jgabry`,
+`@jimhester`,
+`@josue-rodriguez`,
+`@karldw`,
+`@kfeilich`,
+`@larmarange`,
+`@lboller`,
+`@mariusbarth`,
+`@michaelweylandt`,
+`@mine-cetinkaya-rundel`,
+`@mkuehn10`,
+`@mvevans89`,
+`@nutterb`,
+`@ShreyasSingh`,
+`@stephlocke`,
+`@strengejacke`,
+`@topepo`,
+`@willbowditch`,
+`@WillemSleegers`,
+`@wilsonfreitas`, and
+`@MatthieuStigler`.
 
 # broom 0.4.4
 
