@@ -9,7 +9,7 @@ articles:
   broom: broom.html
   kmeans: kmeans.html
   maintenance: maintenance.html
-last_built: 2024-05-16T12:48Z
+last_built: 2024-05-17T14:27Z
 urls:
   reference: https://broom.tidymodels.org/reference
   article: https://broom.tidymodels.org/articles
