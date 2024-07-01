@@ -210,7 +210,7 @@ glance.lm <- function(x, ...) {
 
   # check whether the model was fitted with only an intercept, in which
   # case drop the fstatistic related columns
-  int_only <- nrow(summary(x)$coefficients) == 1
+  int_only <- nrow(summary(x)$coefficients) == 1  & "(Intercept)" %in% row.names(summary(x)$coefficients)
 
   with(
     summary(x),
