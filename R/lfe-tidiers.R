@@ -169,7 +169,7 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, se.type
       rename(estimate = effect, std.error = se) %>%
       select(contains("response"), dplyr::everything()) %>%
       mutate(statistic = estimate / std.error) %>%
-      mutate(p.value = 2 * (1 - stats::pt(statistic, df = N)))
+      mutate(p.value = 2 * (stats::pt(abs(statistic), df = N, lower.tail = FALSE)))
 
     if (conf.int) {
       crit_val_low <- stats::qnorm(1 - (1 - conf.level) / 2)

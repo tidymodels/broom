@@ -116,7 +116,7 @@ glance.survreg <- function(x, ...) {
     BIC = stats::BIC(x),
     df.residual = stats::df.residual(x),
     nobs = stats::nobs(x),
-    p.value = 1 - stats::pchisq(2 * diff(x$loglik), sum(x$df) - x$idf),
+    p.value = stats::pchisq(2 * diff(x$loglik), sum(x$df) - x$idf, lower.tail = FALSE),
     na_types = "iirrrriir"
   )
 }

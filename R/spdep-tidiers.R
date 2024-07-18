@@ -77,7 +77,7 @@ tidy.sarlm <- function(x, conf.int = FALSE, conf.level = .95, ...) {
       estimate = as.numeric(s$rho),
       std.error = as.numeric(s$rho.se),
       statistic = as.numeric(estimate / std.error),
-      p.value = as.numeric(2 * (1 - pnorm(abs(statistic))))
+      p.value = as.numeric(2 * (stats::pnorm(abs(statistic), lower.tail = FALSE)))
     )
     ret <- bind_rows(rho, ret)
   }
@@ -89,7 +89,7 @@ tidy.sarlm <- function(x, conf.int = FALSE, conf.level = .95, ...) {
       estimate = as.numeric(s$lambda),
       std.error = as.numeric(s$lambda.se),
       statistic = as.numeric(estimate / std.error),
-      p.value = as.numeric(2 * (1 - pnorm(abs(statistic))))
+      p.value = as.numeric(2 * (stats::pnorm(abs(statistic), lower.tail = FALSE)))
     )
     ret <- bind_rows(ret, lambda)
   }
