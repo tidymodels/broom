@@ -82,10 +82,10 @@ tidy.mfx <-
       x_tidy <-
         x_tidy %>%
         dplyr::mutate(
-          conf.low = estimate - qt(1 - (1 - conf.level) / 2,
+          conf.low = estimate - stats::qt(1 - (1 - conf.level) / 2,
             df = x$fit$df.residual
           ) * std.error,
-          conf.high = estimate + qt(1 - (1 - conf.level) / 2,
+          conf.high = estimate + stats::qt(1 - (1 - conf.level) / 2,
             df = x$fit$df.residual
           ) * std.error
         )

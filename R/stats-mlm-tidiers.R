@@ -76,7 +76,7 @@ tidy.mlm <- function(x,
 confint_mlm <- function(object, level = 0.95, ...) {
   coef <- as.numeric(coef(object))
   alpha <- (1 - level) / 2
-  crit_val <- qt(c(alpha, 1 - alpha), object$df.residual)
+  crit_val <- stats::qt(c(alpha, 1 - alpha), object$df.residual)
   se <- sqrt(diag(stats::vcov(object)))
   ci <- as.data.frame(coef + se %o% crit_val)
   colnames(ci) <- c("conf.low", "conf.high")

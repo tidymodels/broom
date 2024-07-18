@@ -43,7 +43,7 @@ tidy.nlrq <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
   if (conf.int) {
     x_summary <- summary(x)
     a <- (1 - conf.level) / 2
-    cv <- qt(c(a, 1 - a), df = x_summary[["rdf"]])
+    cv <- stats::qt(c(a, 1 - a), df = x_summary[["rdf"]])
     ret[["conf.low"]] <- ret[["estimate"]] + (cv[1] * ret[["std.error"]])
     ret[["conf.high"]] <- ret[["estimate"]] + (cv[2] * ret[["std.error"]])
   }
