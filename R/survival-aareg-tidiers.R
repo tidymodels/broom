@@ -72,7 +72,7 @@ glance.aareg <- function(x, ...) {
 
   as_glance_tibble(
     statistic = chi,
-    p.value = as.numeric(1 - stats::pchisq(chi, df)),
+    p.value = as.numeric(stats::pchisq(chi, df, lower.tail = FALSE)),
     df = df,
     nobs = stats::nobs(x),
     na_types = "rrii"

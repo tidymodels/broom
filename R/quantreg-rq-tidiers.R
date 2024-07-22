@@ -186,7 +186,7 @@ process_rq <- function(rq_obj, se.type = NULL,
   }
   if (conf.int) {
     a <- (1 - conf.level) / 2
-    cv <- qt(c(a, 1 - a), df = rq_obj[["rdf"]])
+    cv <- stats::qt(c(a, 1 - a), df = rq_obj[["rdf"]])
     co[["conf.low"]] <- co[["estimate"]] + (cv[1] * co[["std.error"]])
     co[["conf.high"]] <- co[["estimate"]] + (cv[2] * co[["std.error"]])
   }

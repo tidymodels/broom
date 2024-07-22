@@ -78,6 +78,6 @@ glance.survdiff <- function(x, ...) {
     statistic = x$chisq,
     df = (sum(1 * (tmp > 0))) - 1
   )
-  rval$p.value <- 1 - stats::pchisq(rval$statistic, rval$df)
+  rval$p.value <- stats::pchisq(rval$statistic, rval$df, lower.tail = FALSE)
   rval
 }

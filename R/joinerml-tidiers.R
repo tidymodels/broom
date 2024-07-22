@@ -102,7 +102,7 @@ tidy.mjoint <- function(x, component = "survival", conf.int = FALSE,
   out <- out[, c(5, 1:4)]
 
   if (conf.int) {
-    cv <- qnorm(1 - (1 - conf.level) / 2)
+    cv <- stats::qnorm(1 - (1 - conf.level) / 2)
     out$conf.low <- out$estimate - cv * out$std.error
     out$conf.high <- out$estimate + cv * out$std.error
   }

@@ -71,10 +71,10 @@ tidy.mediate <- function(x, conf.int = FALSE, conf.level = .95, ...) {
         3 / 2
       }
       a <- top / under
-      lower.inv <- pnorm(z + (z + qnorm(low)) / (1 - a * (z + qnorm(low))))
-      lower2 <- lower <- quantile(theta, lower.inv)
-      upper.inv <- pnorm(z + (z + qnorm(high)) / (1 - a * (z + qnorm(high))))
-      upper2 <- upper <- quantile(theta, upper.inv)
+      lower.inv <- stats::pnorm(z + (z + stats::qnorm(low)) / (1 - a * (z + stats::qnorm(low))))
+      lower2 <- lower <- stats::quantile(theta, lower.inv)
+      upper.inv <- stats::pnorm(z + (z + stats::qnorm(high)) / (1 - a * (z + stats::qnorm(high))))
+      upper2 <- upper <- stats::quantile(theta, upper.inv)
       return(c(lower, upper))
     }
     ci <- with(
@@ -83,7 +83,7 @@ tidy.mediate <- function(x, conf.int = FALSE, conf.level = .95, ...) {
     )
     if (s$boot.ci.type != "bca") {
       CI <- function(theta) {
-        return(quantile(theta, c(low, high), na.rm = TRUE))
+        return(stats::quantile(theta, c(low, high), na.rm = TRUE))
       }
       ci <- with(
         x,
