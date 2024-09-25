@@ -1,5 +1,8 @@
 # broom (development version)
 
+* `glance.lm()` now returns non-`NA` values for `statistic`, `p.value`, and `df` 
+  for models fitted with a single predictor and no intercept (@jrob95, #1209).
+
 # broom 1.0.6
 
 ## New Features
