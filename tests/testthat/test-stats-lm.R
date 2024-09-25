@@ -143,3 +143,11 @@ test_that("augment.lm", {
     "\\`level\\` argument is not supported in the \\`augment\\(\\)\\` method for \\`lm\\` objects"
   )
 })
+
+test_that("glance.lm returns non-NA entries with 0-intercept model (#1209)", {
+  fit <- lm(mpg ~ 0 + cyl, mtcars)
+  fit_glance <- glance(fit)
+  expect_false(is.na(fit_glance[["statistic"]]))
+  expect_false(is.na(fit_glance[["p.value"]]))
+  expect_false(is.na(fit_glance[["df"]]))
+})
