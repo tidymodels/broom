@@ -1,5 +1,8 @@
 # broom (development version)
 
+* Addressed failure in `tidy.anova()` ahead of upcoming car
+  release (#1215).
+
 * Clarified documentation for a number of cases where dots were
   documented as unused but actually passed to internal functions 
   (#1214).

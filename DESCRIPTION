@@ -561,7 +561,7 @@ Suggests:
     binGroup,
     boot,
     btergm (>= 1.10.6),
-    car,
+    car (>= 3.1-2),
     carData,
     caret,
     cluster,

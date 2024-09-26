@@ -111,7 +111,7 @@ tidy.anova <- function(x, ...) {
   modstr <- "[Mm]od.*[0-9]+:"
   mod_lines <- grep(modstr, x_attr$heading, value = TRUE)
   if (!is.null(x_attr$value)) {
-    if (isTRUE(grepl("^Linear hypothesis", x_attr$heading[[1]]))) {
+    if (isTRUE(grepl("Linear hypothesis", x_attr$heading[[1]]))) {
       # Drop unrestricted model (not interesting in linear hypothesis tests)
       # Use formula to subset if available (e.g. with car::linearHypothesis)
       if (length(mod_lines) != 0) {
