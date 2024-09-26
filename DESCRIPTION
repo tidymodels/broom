@@ -598,6 +598,7 @@ Suggests:
     lmtest (>= 0.9.38),
     lsmeans,
     maps,
+    margins,
     MASS,
     mclust,
     mediation,

@@ -7,7 +7,7 @@
 \method{glance}{margins}(x, ...)
 }
 \arguments{
-\item{x}{A \code{margins} object returned from \code{margins::margins()}.}
+\item{x}{A \code{margins} object returned from \code{\link[margins:margins]{margins::margins()}}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -41,6 +41,60 @@ Glance returns the same number of columns regardless of whether the
 model matrix is rank-deficient or not. If so, entries in columns
 that no longer have a well-defined value are filled in with an \code{NA}
 of the appropriate type.
+}
+\examples{
+\dontshow{if (rlang::is_installed("margins")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+
+# load libraries for models and data
+library(margins)
+
+# example 1: logit model
+mod_log <- glm(am ~ cyl + hp + wt, data = mtcars, family = binomial)
+
+# get tidied "naive" model coefficients
+tidy(mod_log)
+
+# convert to marginal effects with margins()
+marg_log <- margins(mod_log)
+
+# get tidied marginal effects
+tidy(marg_log)
+tidy(marg_log, conf.int = TRUE)
+
+# requires running the underlying model again. quick for this example
+glance(marg_log)
+
+# augmenting `margins` outputs isn't supported, but
+# you can get the same info by running on the underlying model
+augment(mod_log)
+
+# example 2: threeway interaction terms
+mod_ie <- lm(mpg ~ wt * cyl * disp, data = mtcars)
+
+# get tidied "naive" model coefficients
+tidy(mod_ie)
+
+# convert to marginal effects with margins()
+marg_ie0 <- margins(mod_ie)
+# get tidied marginal effects
+tidy(marg_ie0)
+glance(marg_ie0)
+
+# marginal effects evaluated at specific values of a variable (here: cyl)
+marg_ie1 <- margins(mod_ie, at = list(cyl = c(4,6,8)))
+
+# summarize model fit with tidiers
+tidy(marg_ie1)
+
+# marginal effects of one interaction variable (here: wt), modulated at
+# specific values of the two other interaction variables (here: cyl and drat)
+marg_ie2 <- margins(mod_ie,
+                    variables = "wt",
+                    at = list(cyl = c(4,6,8), drat = c(3, 3.5, 4)))
+
+# summarize model fit with tidiers
+tidy(marg_ie2)
+\dontshow{\}) # examplesIf}
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:

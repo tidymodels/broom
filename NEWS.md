@@ -1,5 +1,8 @@
 # broom (development version)
 
+* Reverted deprecation of tidiers for objects from the margins package
+  now that the package is back on CRAN (#1220).
+
 * Addressed failure in `tidy.anova()` ahead of upcoming car
   release (#1215).
 
