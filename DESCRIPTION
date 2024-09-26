@@ -556,7 +556,7 @@ Suggests:
     AER,
     AUC,
     bbmle,
-    betareg,
+    betareg (>= 3.2-1),
     biglm,
     binGroup,
     boot,
