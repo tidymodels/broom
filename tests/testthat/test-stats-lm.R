@@ -13,6 +13,7 @@ test_that("lm tidier arguments", {
 fit <- lm(mpg ~ wt, mtcars)
 fit2 <- lm(mpg ~ wt + log(disp), mtcars)
 fit3 <- lm(mpg ~ 1, mtcars)
+fit4 <- lm(mpg ~ 0 + cyl, mtcars)
 
 # zero weights used to break influence columns in augment.lm
 wts <- c(0, rep(1, nrow(mtcars) - 1))
@@ -60,8 +61,9 @@ test_that("glance.lm", {
   gl <- glance(fit)
   gl2 <- glance(fit2)
   gl3 <- glance(fit3)
+  gl4 <- glance(fit4)
 
-  check_glance_outputs(gl, gl2, gl3)
+  check_glance_outputs(gl, gl2, gl3, gl4)
 })
 
 test_that("augment.lm", {
@@ -140,4 +142,12 @@ test_that("augment.lm", {
     augment(fit, newdata = mtcars, interval = "confidence", level = 0.95),
     "\\`level\\` argument is not supported in the \\`augment\\(\\)\\` method for \\`lm\\` objects"
   )
+})
+
+test_that("glance.lm returns non-NA entries with 0-intercept model (#1209)", {
+  fit <- lm(mpg ~ 0 + cyl, mtcars)
+  fit_glance <- glance(fit)
+  expect_false(is.na(fit_glance[["statistic"]]))
+  expect_false(is.na(fit_glance[["p.value"]]))
+  expect_false(is.na(fit_glance[["df"]]))
 })
