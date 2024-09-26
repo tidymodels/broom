@@ -2,7 +2,8 @@
 #' @template title_desc_tidy
 #'
 #' @param x An `survfit` object returned from [survival::survfit()].
-#' @template param_unused_dots
+#' @param ... For `glance.survfit()`, additional arguments passed 
+#' to [summary()]. Otherwise ignored.
 #'
 #' @evalRd return_tidy(
 #'   "time",

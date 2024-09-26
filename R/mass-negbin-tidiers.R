@@ -58,7 +58,8 @@ glance.negbin <- function(x, ...) {
 #'
 #' @param x A `glm.nb` object returned by [MASS::glm.nb()].
 #' @template param_confint
-#' @template param_unused_dots
+#' @param ... For `tidy()`, additional arguments passed to [summary()].
+#' Otherwise ignored.
 #'
 #' @family glm.nb tidiers
 #' @seealso [MASS::glm.nb()]

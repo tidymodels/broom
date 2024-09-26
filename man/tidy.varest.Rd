@@ -17,18 +17,8 @@ interval in the tidied output. Defaults to \code{FALSE}.}
 if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 
-\item{...}{Additional arguments. Not used. Needed to match generic
-signature only. \strong{Cautionary note:} Misspelled arguments will be
-absorbed in \code{...}, where they will be ignored. If the misspelled
-argument has a default value, the default value will be used.
-For example, if you pass \code{conf.lvel = 0.9}, all computation will
-proceed using \code{conf.level = 0.95}. Two exceptions here are:
-\itemize{
-\item \code{tidy()} methods will warn when supplied an \code{exponentiate} argument if
-it will be ignored.
-\item \code{augment()} methods will warn when supplied a \code{newdata} argument if it
-will be ignored.
-}}
+\item{...}{For \code{glance()}, additional arguments passed to \code{\link[=summary]{summary()}}.
+Otherwise ignored.}
 }
 \description{
 Tidy summarizes information about the components of a model.

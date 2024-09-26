@@ -3,7 +3,8 @@
 #'
 #' @param x A `varest` object produced by a call to [vars::VAR()].
 #' @template param_confint
-#' @template param_unused_dots
+#' @param ... For `glance()`, additional arguments passed to [summary()].
+#' Otherwise ignored.
 #'
 #' @evalRd return_tidy(regression = TRUE,
 #'   component = "Whether a particular term was used to model the mean or the

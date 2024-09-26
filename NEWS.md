@@ -1,5 +1,9 @@
 # broom (development version)
 
+* Clarified documentation for a number of cases where dots were
+  documented as unused but actually passed to internal functions 
+  (#1214).
+
 * Addressed error in `augment.betareg()` and `augment.betamfx()` 
   with `data = NULL` and non-null `newdata` (#1216, #1218).
 
