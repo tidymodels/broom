@@ -232,7 +232,7 @@ augment_columns <- function(x, data, newdata = NULL, type, type.predict = type,
     args$newdata <- newdata
   }
   if (!missing(type.predict)) {
-    args$type <- type.predict
+    args$type <- type.predict[1]
   }
   if (!inherits(x, "betareg")) {
     args$se.fit <- se.fit
