@@ -66,12 +66,12 @@ augment(mod)
 
 Other quantreg tidiers: 
 \code{\link{augment.nlrq}()},
-\code{\link{augment.rqs}()},
 \code{\link{augment.rq}()},
+\code{\link{augment.rqs}()},
 \code{\link{glance.nlrq}()},
 \code{\link{glance.rq}()},
-\code{\link{tidy.rqs}()},
-\code{\link{tidy.rq}()}
+\code{\link{tidy.rq}()},
+\code{\link{tidy.rqs}()}
 }
 \concept{quantreg tidiers}
 \value{

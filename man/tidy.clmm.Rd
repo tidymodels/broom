@@ -80,8 +80,8 @@ glance(fit2)
 Other ordinal tidiers: 
 \code{\link{augment.clm}()},
 \code{\link{augment.polr}()},
-\code{\link{glance.clmm}()},
 \code{\link{glance.clm}()},
+\code{\link{glance.clmm}()},
 \code{\link{glance.polr}()},
 \code{\link{glance.svyolr}()},
 \code{\link{tidy.clm}()},

@@ -45,6 +45,7 @@ glance.rlm <- function(x, ...) {
 }
 
 # confint.lm gets called on rlm objects. should use the default instead.
+#' @export
 confint.rlm <- confint.default
 
 #' @templateVar class rlm

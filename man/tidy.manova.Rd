@@ -50,8 +50,8 @@ Other anova tidiers:
 \code{\link{glance.aov}()},
 \code{\link{tidy.TukeyHSD}()},
 \code{\link{tidy.anova}()},
-\code{\link{tidy.aovlist}()},
-\code{\link{tidy.aov}()}
+\code{\link{tidy.aov}()},
+\code{\link{tidy.aovlist}()}
 }
 \concept{anova tidiers}
 \value{

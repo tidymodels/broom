@@ -92,12 +92,12 @@ tidy(fit, p.values = TRUE)
 Other ordinal tidiers: 
 \code{\link{augment.clm}()},
 \code{\link{augment.polr}()},
-\code{\link{glance.clmm}()},
 \code{\link{glance.clm}()},
+\code{\link{glance.clmm}()},
 \code{\link{glance.polr}()},
 \code{\link{glance.svyolr}()},
-\code{\link{tidy.clmm}()},
 \code{\link{tidy.clm}()},
+\code{\link{tidy.clmm}()},
 \code{\link{tidy.svyolr}()}
 }
 \concept{ordinal tidiers}

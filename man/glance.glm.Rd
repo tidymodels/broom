@@ -57,8 +57,8 @@ Other lm tidiers:
 \code{\link{glance.summary.lm}()},
 \code{\link{glance.svyglm}()},
 \code{\link{tidy.glm}()},
-\code{\link{tidy.lm.beta}()},
 \code{\link{tidy.lm}()},
+\code{\link{tidy.lm.beta}()},
 \code{\link{tidy.mlm}()},
 \code{\link{tidy.summary.lm}()}
 }

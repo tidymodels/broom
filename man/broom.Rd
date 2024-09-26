@@ -2,8 +2,8 @@
 % Please edit documentation in R/broom-package.R
 \docType{package}
 \name{broom}
-\alias{broom}
 \alias{broom-package}
+\alias{broom}
 \title{broom: Convert Statistical Objects into Tidy Tibbles}
 \description{
 Convert statistical analysis objects from R into tidy tibbles,
@@ -48,7 +48,7 @@ Other contributors:
   \item Jonah Gabry \email{jsg2201@columbia.edu} [contributor]
   \item Luciano Selzer \email{luciano.selzer@gmail.com} [contributor]
   \item Gavin Simpson \email{ucfagls@gmail.com} [contributor]
-  \item Jens Preussner \email{ jens.preussner@mpi-bn.mpg.de} [contributor]
+  \item Jens Preussner \email{jens.preussner@mpi-bn.mpg.de} [contributor]
   \item Jay Hesselberth \email{jay.hesselberth@gmail.com} [contributor]
   \item Hadley Wickham \email{hadley@posit.co} [contributor]
   \item Matthew Lincoln \email{matthew.d.lincoln@gmail.com} [contributor]

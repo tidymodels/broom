@@ -70,12 +70,12 @@ augment(n, newdata = newdata)
 \code{\link[=augment]{augment()}}, \code{\link[quantreg:nlrq]{quantreg::nlrq()}}
 
 Other quantreg tidiers: 
-\code{\link{augment.rqs}()},
 \code{\link{augment.rq}()},
+\code{\link{augment.rqs}()},
 \code{\link{glance.nlrq}()},
 \code{\link{glance.rq}()},
 \code{\link{tidy.nlrq}()},
-\code{\link{tidy.rqs}()},
-\code{\link{tidy.rq}()}
+\code{\link{tidy.rq}()},
+\code{\link{tidy.rqs}()}
 }
 \concept{quantreg tidiers}

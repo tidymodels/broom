@@ -76,8 +76,8 @@ Other ordinal tidiers:
 \code{\link{glance.clmm}()},
 \code{\link{glance.polr}()},
 \code{\link{glance.svyolr}()},
-\code{\link{tidy.clmm}()},
 \code{\link{tidy.clm}()},
+\code{\link{tidy.clmm}()},
 \code{\link{tidy.polr}()},
 \code{\link{tidy.svyolr}()}
 }
