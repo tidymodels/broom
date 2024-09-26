@@ -43,7 +43,8 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="broom-development-version">broom (development version)<a class="anchor" aria-label="anchor" href="#broom-development-version"></a></h2>
-<ul><li><p>Reverted deprecation of tidiers for objects from the margins package now that the package is back on CRAN (<a href="https://github.com/tidymodels/broom/issues/1220" class="external-link">#1220</a>).</p></li>
+<ul><li><p>Corrected confidence interval values in <code><a href="../reference/tidy.boot.html">tidy.boot()</a></code> and addressed errors when bootstrapping confidence intervals for multiple terms (<a href="https://github.com/tidymodels/broom/issues/1212" class="external-link">#1212</a>).</p></li>
+<li><p>Reverted deprecation of tidiers for objects from the margins package now that the package is back on CRAN (<a href="https://github.com/tidymodels/broom/issues/1220" class="external-link">#1220</a>).</p></li>
 <li><p>Addressed failure in <code><a href="../reference/tidy.anova.html">tidy.anova()</a></code> ahead of upcoming car release (<a href="https://github.com/tidymodels/broom/issues/1215" class="external-link">#1215</a>).</p></li>
 <li><p>Clarified documentation for a number of cases where dots were documented as unused but actually passed to internal functions (<a href="https://github.com/tidymodels/broom/issues/1214" class="external-link">#1214</a>).</p></li>
 <li><p>Addressed error in <code><a href="../reference/augment.betareg.html">augment.betareg()</a></code> and <code><a href="../reference/augment.betamfx.html">augment.betamfx()</a></code> with <code>data = NULL</code> and non-null <code>newdata</code> (<a href="https://github.com/tidymodels/broom/issues/1216" class="external-link">#1216</a>, <a href="https://github.com/tidymodels/broom/issues/1218" class="external-link">#1218</a>).</p></li>
