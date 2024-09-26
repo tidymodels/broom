@@ -589,7 +589,7 @@ Suggests:
     knitr,
     ks,
     Lahman,
-    lavaan,
+    lavaan (>= 0.6.18),
     leaps,
     lfe,
     lm.beta,

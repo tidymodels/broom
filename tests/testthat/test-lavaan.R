@@ -29,7 +29,8 @@ test_that("tidy.lavaan", {
   check_tidy_output(tdr)
 
   check_dims(td, 3, 11)
-  check_dims(td2, 19, 11)
+  # std.nox not available without fixed exogenous predictors (#1217)
+  check_dims(td2, 19, 10)
 
   expect_equal(td$term, c("mpg ~ wt", "mpg ~~ mpg", "wt ~~ wt"))
 
