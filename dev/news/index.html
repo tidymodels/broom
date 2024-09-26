@@ -43,7 +43,8 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="broom-development-version">broom (development version)<a class="anchor" aria-label="anchor" href="#broom-development-version"></a></h2>
-<ul><li><p>Corrected confidence interval values in <code><a href="../reference/tidy.boot.html">tidy.boot()</a></code> and addressed errors when bootstrapping confidence intervals for multiple terms (<a href="https://github.com/tidymodels/broom/issues/1212" class="external-link">#1212</a>).</p></li>
+<ul><li><p>Corrected <code>nobs</code> entries in <code><a href="../reference/glance.coxph.html">glance.coxph()</a></code> output: the package used to return <code>length(object$linear.predictors)</code> (equal to <code>n</code> rather than <code>nevent</code>) and now uses survival’s method (<a href="https://github.com/tidymodels/broom/issues/1224" class="external-link">#1224</a>).</p></li>
+<li><p>Corrected confidence interval values in <code><a href="../reference/tidy.boot.html">tidy.boot()</a></code> and addressed errors when bootstrapping confidence intervals for multiple terms (<a href="https://github.com/tidymodels/broom/issues/1212" class="external-link">#1212</a>).</p></li>
 <li><p>Reverted deprecation of tidiers for objects from the margins package now that the package is back on CRAN (<a href="https://github.com/tidymodels/broom/issues/1220" class="external-link">#1220</a>).</p></li>
 <li><p>Addressed failure in <code><a href="../reference/tidy.anova.html">tidy.anova()</a></code> ahead of upcoming car release (<a href="https://github.com/tidymodels/broom/issues/1215" class="external-link">#1215</a>).</p></li>
 <li><p>Clarified documentation for a number of cases where dots were documented as unused but actually passed to internal functions (<a href="https://github.com/tidymodels/broom/issues/1214" class="external-link">#1214</a>).</p></li>
