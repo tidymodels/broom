@@ -59,3 +59,32 @@ test_that("tidy.boot for time series", {
   check_tidy_output(td)
   check_dims(td, expected_cols = 2)
 })
+
+test_that("dimensionality of CIs is correct (#1212)", {
+  set.seed(123)
+  d = data.frame(v1 = rnorm(100), v2=rnorm(100))
+  boot1 <- function(d, i) {
+    d = d[i,]
+    c(mean(d$v1), mean(d$v2), cor(d$v1, d$v2))
+  }
+  boot2 <- function(d, i) {
+    d = d[i,]
+    c(mean(d$v1), mean(d$v2))
+  }
+  boot3 <- function(d, i) {
+    d = d[i,]
+    c(mean(d$v1))
+  }
+  
+  r1 <- boot(d, boot1, 100)
+  r2 <- boot(d, boot2, 100)
+  r3 <- boot(d, boot3, 100)
+  
+  td1 <- tidy(r1, conf.int = T, conf.method = "norm")
+  td2 <- tidy(r2, conf.int = T, conf.method = "norm")
+  td3 <- tidy(r3, conf.int = T, conf.method = "norm")
+  
+  check_tidy_output(td1)
+  check_tidy_output(td2)
+  check_tidy_output(td3)
+})

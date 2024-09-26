@@ -116,7 +116,8 @@ tidy.boot <- function(x,
     ci.pos <- pmatch(conf.method, names(ci.list[[1]]))
 
     if (conf.method == "norm") {
-      ci.tab <- cbind(ci.list[[1]][ci.pos][[1]][2:3], ci.list[[2]][ci.pos][[1]][2:3])
+      extract_ci <- function(res) {res[["normal"]][2:3]}
+      ci.tab <- t(vapply(ci.list, extract_ci, numeric(2)))
     } else {
       ci.tab <- t(sapply(ci.list, function(x) x[[ci.pos]][4:5]))
     }

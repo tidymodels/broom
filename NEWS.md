@@ -1,5 +1,8 @@
 # broom (development version)
 
+* Corrected confidence interval values in `tidy.boot()` and addressed errors
+  when bootstrapping confidence intervals for multiple terms (#1212).
+
 * Reverted deprecation of tidiers for objects from the margins package
   now that the package is back on CRAN (#1220).
 
