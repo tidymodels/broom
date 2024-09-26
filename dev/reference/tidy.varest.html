@@ -87,16 +87,8 @@ Defaults to 0.95, which corresponds to a 95 percent confidence interval.</p></dd
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Additional arguments. Not used. Needed to match generic
-signature only. <strong>Cautionary note:</strong> Misspelled arguments will be
-absorbed in <code>...</code>, where they will be ignored. If the misspelled
-argument has a default value, the default value will be used.
-For example, if you pass <code>conf.lvel = 0.9</code>, all computation will
-proceed using <code>conf.level = 0.95</code>. Two exceptions here are:</p><ul><li><p><code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy()</a></code> methods will warn when supplied an <code>exponentiate</code> argument if
-it will be ignored.</p></li>
-<li><p><code><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment()</a></code> methods will warn when supplied a <code>newdata</code> argument if it
-will be ignored.</p></li>
-</ul></dd>
+<dd><p>For <code><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance()</a></code>, additional arguments passed to <code><a href="https://rdrr.io/pkg/vars/man/summary.html" class="external-link">summary()</a></code>.
+Otherwise ignored.</p></dd>
 
 </dl></div>
     <div class="section level2">
