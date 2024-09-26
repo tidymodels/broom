@@ -79,7 +79,7 @@ augment.betareg <- function(x, data = model.frame(x), newdata = NULL,
                             type.predict, type.residuals, ...) {
   augment_columns(
     x, data, newdata,
-    type.predict = type.predict,
+    type.predict = type.predict[1],
     type.residuals = type.residuals
   )
 }

@@ -1,7 +1,7 @@
 # broom (development version)
 
-* Addressed "arguments imply differing number of rows" error in 
-  `augment.betareg()` with `data = NULL` and non-null `newdata` (#1216).
+* Addressed error in `augment.betareg()` and `augment.betamfx()` 
+  with `data = NULL` and non-null `newdata` (#1216, #1218).
 
 * `glance.lm()` now returns non-`NA` values for `statistic`, `p.value`, and `df` 
   for models fitted with a single predictor and no intercept (@jrob95, #1209).
