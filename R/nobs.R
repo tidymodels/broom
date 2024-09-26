@@ -123,12 +123,6 @@ nobs.aareg <- function(object, ...) {
   object$n[1] # obs / event times / event times in computation
 }
 
-# survival-survreg
-#' @export
-nobs.survreg <- function(object, ...) {
-  length(object$linear.predictors)
-}
-
 # survival-survfit
 #' @export
 nobs.survfit <- function(object, ...) {
@@ -139,12 +133,6 @@ nobs.survfit <- function(object, ...) {
 #' @export
 nobs.survfit.cox <- function(object, ...) {
   object$n
-}
-
-# survival-coxph
-#' @export
-nobs.coxph <- function(object, ...) {
-  length(object$linear.predictors)
 }
 
 # survival-pyears

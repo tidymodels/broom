@@ -1,5 +1,9 @@
 # broom (development version)
 
+* Corrected `nobs` entries in `glance.coxph()` output: the package used to 
+  return `length(object$linear.predictors)` (equal to `n` rather than `nevent`) 
+  and now uses survival's method (#1224).
+
 * Corrected confidence interval values in `tidy.boot()` and addressed errors
   when bootstrapping confidence intervals for multiple terms (#1212).
 
