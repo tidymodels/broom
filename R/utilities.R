@@ -209,7 +209,8 @@ unrowname <- function(x) {
 #' @param type.residuals Type of residuals to compute; by default
 #' same as `type`
 #' @param se.fit Value to pass to predict's `se.fit`, or NULL for
-#' no value
+#' no value. Ignored for model types that do not accept an `se.fit`
+#' argument
 #' @param ... extra arguments (not used)
 #'
 #' @export
@@ -233,7 +234,9 @@ augment_columns <- function(x, data, newdata = NULL, type, type.predict = type,
   if (!missing(type.predict)) {
     args$type <- type.predict
   }
-  args$se.fit <- se.fit
+  if (!inherits(x, "betareg")) {
+    args$se.fit <- se.fit
+  }
   args <- c(args, list(...))
 
 

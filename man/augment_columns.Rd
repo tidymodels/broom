@@ -32,7 +32,8 @@ same as \code{type}}
 same as \code{type}}
 
 \item{se.fit}{Value to pass to predict's \code{se.fit}, or NULL for
-no value}
+no value. Ignored for model types that do not accept an \code{se.fit}
+argument}
 
 \item{...}{extra arguments (not used)}
 }
