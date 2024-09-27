@@ -148,7 +148,7 @@ test_that("tidy.emmGrid for combined contrasts", {
     method = "consec",
     simple = "each",
     combine = TRUE,
-    adjust = "mvt"
+    adjust = "dunnettx"
   )
   td_noise <- tidy(noise_c.s)
 

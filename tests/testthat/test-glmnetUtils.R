@@ -14,6 +14,8 @@ skip_if_not_installed("modeldata")
 library(modeldata)
 data(hpc_data)
 
+hpc_data <- hpc_data[1:300, ]
+
 fit <- glmnet(formula = mpg ~ ., data = mtcars)
 fit2 <- glmnet(
   formula = class ~ compounds + input_fields + iterations + num_pending,
@@ -58,8 +60,8 @@ test_that("tidy.glmnet.formula", {
 
   expect_is(td2, "tbl_df")
 
-  expect_equal(dim(td2), c(983L, 6L))
-  expect_equal(dim(td2z), c(1240L, 6L))
+  expect_equal(dim(td2), c(1511L, 6L))
+  expect_equal(dim(td2z), c(2000L, 6L))
 
   expect_true(all(td2$estimate != 0))
   expect_true(any(td2z$estimate == 0))

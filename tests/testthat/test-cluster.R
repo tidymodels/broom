@@ -12,7 +12,7 @@ skip_if_not_installed("modeldata")
 library(modeldata)
 data(hpc_data)
 
-x <- hpc_data[, 2:5]
+x <- hpc_data[1:300, 2:5]
 fit <- pam(x, k = 3)
 
 test_that("pam tidier arguments", {

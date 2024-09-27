@@ -11,10 +11,13 @@ library(ergm)
 data(florentine)
 data(faux.mesa.high)
 
+# cut down on elapsed time at the expense of model performance
+ctrl <- control.ergm(MCMLE.maxit = 2)
+
 gest <- ergm(flomarriage ~ edges + absdiff("wealth"))
 gest2 <- ergm(flomarriage ~ edges + absdiff("wealth"), family = "gaussian")
 suppressWarnings({
-  gest3 <- ergm(faux.mesa.high ~ edges + degree(1:3))
+  gest3 <- ergm(faux.mesa.high ~ edges + degree(1:3), control = ctrl)
 })
 
 test_that("ergm tidier arguments", {
