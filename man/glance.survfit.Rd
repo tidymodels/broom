@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{An \code{survfit} object returned from \code{\link[survival:survfit]{survival::survfit()}}.}
 
-\item{...}{Additional arguments passed to \code{\link[=summary.survfit]{summary.survfit()}}. Important
+\item{...}{Additional arguments passed to \code{\link[survival:summary.survfit]{survival::summary.survfit()}}. Important
 arguments include \code{rmean}.}
 }
 \description{
