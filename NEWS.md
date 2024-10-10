@@ -25,6 +25,10 @@
 * `glance.lm()` now returns non-`NA` values for `statistic`, `p.value`, and `df` 
   for models fitted with a single predictor and no intercept (@jrob95, #1209).
 
+* `tidy` now return non-`NA` values for `conf.lower` and `conf.upper` for
+  a model fitted with only a constant term and cluster robust std errors
+  computed using `vcovCL` from `sandwich` (#1227).
+
 # broom 1.0.6
 
 ## New Features
