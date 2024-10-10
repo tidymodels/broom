@@ -67,7 +67,7 @@ as_augment_tibble <- function(data) {
 is_cran_check <- function() {
   if (identical(Sys.getenv("NOT_CRAN"), "true")) {
     FALSE
-  }
+  } 
   else {
     Sys.getenv("_R_CHECK_PACKAGE_NAME_", "") != ""
   }
@@ -515,6 +515,12 @@ broom_confint_terms <- function(x, ...) {
   if (is.null(dim(ci))) {
     ci <- matrix(ci, nrow = 1)
     rownames(ci) <- names(coef(x))[1]
+  }
+
+  # Handle `coeftest` one-dimensional case
+  if (all(dim(ci) == c(1, 2)) && (class(x) == "coeftest")) {
+    ci <- matrix(ci, nrow = 1)
+    rownames(ci) <- rownames(x)
   }
 
   ci <- as_tibble(ci, rownames = "term", .name_repair = "minimal")
