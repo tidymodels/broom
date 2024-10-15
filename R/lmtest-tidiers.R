@@ -54,6 +54,12 @@ tidy.coeftest <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 
   if (conf.int) {
     ci <- broom_confint_terms(x, level = conf.level)
+
+    # handle one-dimensional case (#1227)
+    if (identical(dim(ci), c(1L, 3L))) {
+      ci[["term"]] <- rownames(x)
+    }
+
     ret <- dplyr::left_join(ret, ci, by = "term")
   }
   ret

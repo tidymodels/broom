@@ -1,5 +1,9 @@
 # broom (development version)
 
+* `tidy.coeftest` now returns non-`NA` values for `conf.low` and `conf.high` for
+  a model fitted with only a constant term and cluster robust std errors
+  computed using `vcovCL` from `sandwich` (#1227).
+
 # broom 1.0.7
 
 * Corrected `nobs` entries in `glance.coxph()` output: the package used to 
