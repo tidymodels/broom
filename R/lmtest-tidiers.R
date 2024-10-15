@@ -55,8 +55,8 @@ tidy.coeftest <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   if (conf.int) {
     ci <- broom_confint_terms(x, level = conf.level)
 
-    # Handle `coeftest` one-dimensional case
-    if (all(dim(ci) == c(1, 3)) && (class(x) == "coeftest")) {
+    # handle one-dimensional case (#1227)
+    if (identical(dim(ci), c(1L, 3L))) {
       ci[["term"]] <- rownames(x)
     }
 
