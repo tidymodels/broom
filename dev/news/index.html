@@ -43,7 +43,9 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="broom-development-version">broom (development version)<a class="anchor" aria-label="anchor" href="#broom-development-version"></a></h2>
-</div>
+<ul><li>
+<code>tidy.coeftest</code> now returns non-<code>NA</code> values for <code>conf.low</code> and <code>conf.high</code> for a model fitted with only a constant term and cluster robust std errors computed using <code>vcovCL</code> from <code>sandwich</code> (<a href="https://github.com/tidymodels/broom/issues/1227" class="external-link">#1227</a>).</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.7" id="broom-107">broom 1.0.7<a class="anchor" aria-label="anchor" href="#broom-107"></a></h2><p class="text-muted">CRAN release: 2024-09-26</p>
 <ul><li><p>Corrected <code>nobs</code> entries in <code><a href="../reference/glance.coxph.html">glance.coxph()</a></code> output: the package used to return <code>length(object$linear.predictors)</code> (equal to <code>n</code> rather than <code>nevent</code>) and now uses survival’s method (<a href="https://github.com/tidymodels/broom/issues/1224" class="external-link">#1224</a>).</p></li>
