@@ -52,15 +52,13 @@ test_that("glance.coeftest", {
   check_glance_outputs(gl2) # separately because save = TRUE adds cols
 })
 
-test_that("vcovCL.coeftest", {
+test_that("vcovCL.coeftest (#1227)", {
   m <- lm(Wind ~ 1, data = airquality)
-  output <- tidy(coeftest(m, vcovCL(m, cluster = ~Month)), conf.int = TRUE)
-  expect_equal(
-    output[["conf.low"]], 8.927703,
-    tolerance = 1e-5
-  )
-  expect_equal(
-    output[["conf.high"]], 10.98733,
-    tolerance = 1e-5
+  ct <- coeftest(m, vcovCL(m, cluster = ~Month))
+  ct_confint <- confint(ct, level = .9)
+  output <- tidy(ct, conf.int = TRUE, conf.level = .9)
+  expect_equivalent(
+    output[c("conf.low", "conf.high")],
+    as.data.frame(ct_confint)
   )
 })
