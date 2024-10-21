@@ -58,7 +58,7 @@ confint.rlm <- confint.default
 #' @family rlm tidiers
 #' @seealso [MASS::rlm()]
 #' @export
-#' @include stats-lm-tidiers.R
+#' @include stats-lm.R
 tidy.rlm <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   check_ellipses("exponentiate", "tidy", "rlm", ...)
 

@@ -24,7 +24,7 @@
 #' @export
 #' @family speedlm tidiers
 #' @seealso [speedglm::speedlm()], [tidy.lm()]
-#' @include stats-lm-tidiers.R
+#' @include stats-lm.R
 tidy.speedlm <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
   check_ellipses("exponentiate", "tidy", "speedlm", ...)
 

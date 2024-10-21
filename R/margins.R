@@ -142,6 +142,6 @@ glance.margins <- function(x, ...) {
   return(ret)
 }
 
-#' @include null-and-default-tidiers.R
+#' @include null-and-default.R
 #' @export
 augment.margins <- augment.default
