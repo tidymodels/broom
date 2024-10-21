@@ -34,8 +34,6 @@ exponentiate <- function(data, col = "estimate") {
 #' @return A `tibble` potentially with a `.rownames` column
 #' @noRd
 #'
-
-
 as_augment_tibble <- function(data, arg = caller_arg(data), call = caller_env()) {
   if (inherits(data, "matrix") & is.null(colnames(data))) {
     cli::cli_abort(c(

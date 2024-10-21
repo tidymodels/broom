@@ -19,7 +19,7 @@ test_that("tidy.htest/oneway.test", {
   mtcars$cyl <- as.factor(mtcars$cyl)
   ot <- oneway.test(mpg ~ cyl, mtcars)
   expect_snapshot(td <- tidy(ot))
-  gl <- glance(ot)
+  expect_snapshot(gl <- glance(ot))
 
   check_tidy_output(td)
   check_dims(td, expected_cols = 5)
@@ -116,4 +116,11 @@ test_that("tidy.htest does not return matrix columns", {
       tidy() %>%
       purrr::none(~ inherits(., "matrix"))
   )
+})
+
+test_that("tidy.htest handles various test types", {
+  tt <- t.test(rnorm(10))
+  tt$parameter <- c(9, 10)
+  
+  expect_snapshot(.res <- tidy(tt))
 })

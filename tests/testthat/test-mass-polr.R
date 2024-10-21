@@ -57,3 +57,16 @@ test_that("augment.polr", {
 test_that("suppress Waiting for profiling to be done... message", {
   expect_silent(tidy(fit, conf.int = TRUE))
 })
+
+test_that("tidy.polr messages informatively", {
+  mtcars$cyl <- as.factor(mtcars$cyl)
+  mtcars$gear <- as.factor(mtcars$gear)
+  
+  fit <- polr(
+    gear ~ cyl,
+    data = mtcars,
+    Hess = TRUE
+  )
+  
+  expect_snapshot(.res <- tidy(fit, p.values = TRUE))
+})

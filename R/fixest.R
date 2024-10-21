@@ -119,9 +119,7 @@ augment.fixest <- function(
     df <- newdata
   }
   if (is.null(df)) {
-    cli::cli_abort(
-      "Must specify either a {.arg data} or {.arg newdata} argument."
-    )
+    data_error()
   }
   df <- as_augment_tibble(df)
   if (is.null(newdata)) {

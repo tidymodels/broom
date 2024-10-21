@@ -24,3 +24,9 @@ test_that("tidy.mediation", {
 
   check_dims(td1, 4, 6)
 })
+
+test_that("tidy.mediate errors informatively", {
+  # Test error for psych package mediate object
+  psych_mediate <- structure(list(), class = c("mediate", "psych"))
+  expect_snapshot(error = TRUE, tidy(psych_mediate))
+})

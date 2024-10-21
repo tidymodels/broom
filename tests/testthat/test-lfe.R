@@ -143,3 +143,11 @@ test_that("augment.felm", {
   expect_false(inherits(aug$.fitted, "matrix"))
   expect_null(c(colnames(aug$.resid), colnames(aug$.fitted)))
 })
+
+test_that("tidy.felm errors informatively", {
+  fit <- lfe::felm(v2 ~ v3, df)
+  
+  expect_snapshot(
+    .res <- tidy.felm(fit, se.type = "cluster")
+  )
+})

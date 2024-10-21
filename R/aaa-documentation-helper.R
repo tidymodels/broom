@@ -1,3 +1,5 @@
+# nocov start
+
 # TODO:
 #  - catch errors and throw a warning visible to the user
 #  - warn when custom arg is taking precedence over something well-defined
@@ -140,3 +142,5 @@ return_augment <- function(...,
 
   do.call("return_evalrd", args)
 }
+
+# nocov end

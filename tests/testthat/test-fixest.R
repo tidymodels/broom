@@ -128,6 +128,8 @@ test_that("all other fixest estimators run", {
     strict = FALSE
   )
 
+  expect_snapshot(error = TRUE, augment(res_fenegbin))
+  
   expect_snapshot(error = TRUE, augment(res_fenegbin, df))
   expect_snapshot(error = TRUE, augment(res_feNmlm, df))
   expect_snapshot(error = TRUE, augment(res_fepois, df))

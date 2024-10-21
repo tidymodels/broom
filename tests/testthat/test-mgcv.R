@@ -43,3 +43,10 @@ test_that("augment.gam", {
     )
   )
 })
+
+test_that("tidy.gam handles messages informatively", {
+  x <- fit <- mgcv::gam(weight ~ s(Time) + factor(Diet), data = ChickWeight)
+  expect_snapshot(.res <- tidy(x, conf.int = TRUE))
+  expect_snapshot(.res <- tidy(x, exponentiate = TRUE))
+  expect_snapshot(.res <- tidy(x, conf.int = TRUE, exponentiate = TRUE))
+})

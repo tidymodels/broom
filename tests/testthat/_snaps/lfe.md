@@ -23,3 +23,12 @@
       Error in `augment()`:
       ! `felm()` models with multiple responses are not supported.
 
+# tidy.felm errors informatively
+
+    Code
+      .res <- tidy.felm(fit, se.type = "cluster")
+    Condition
+      Warning:
+      Clustered SEs requested, but weren't calculated in underlying model object.
+      i Reverting to default SEs.
+

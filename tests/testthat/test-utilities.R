@@ -148,3 +148,8 @@ test_that("appropriate warning on (g)lm-subclassed models", {
     warn_on_subclass(x, "tidy")
   )
 })
+
+test_that("as_augment_tibble errors informatively", {
+  m <- matrix(1:4, ncol = 2)
+  expect_snapshot(error = TRUE, as_augment_tibble(m))
+})

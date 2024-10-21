@@ -7,6 +7,7 @@ test_that("glm tidier arguments", {
   check_arguments(augment.glm)
 })
 
+data("mtcars")
 nrow_mtcars <- nrow(mtcars)
 glm_weights <- rep(c(0, 1), each = nrow_mtcars / 2)
 gfit <- glm(am ~ wt, mtcars, family = "binomial")
@@ -72,4 +73,18 @@ test_that("augment.glm", {
     augment(gfit2, type.residuals = "deviance") %>% dplyr::pull(.std.resid),
     rstandard(gfit2, type = "deviance") %>% unname()
   )
+})
+
+test_that("glm tidiers warn informatively with glm.fit2 input", {
+  gfit <- glm(am ~ wt, mtcars, family = "binomial")
+  gfit$method <- "glm.fit2"
+  
+  expect_snapshot(.res <- tidy(gfit))
+})
+
+test_that("glm tidiers warn informatively with stanreg input", {
+  gfit <- glm(am ~ wt, mtcars, family = "binomial")
+  gfit$stan_function <- "howdy"
+  
+  expect_snapshot(error = TRUE, .res <- tidy(gfit))
 })

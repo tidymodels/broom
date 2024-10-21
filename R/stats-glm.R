@@ -155,9 +155,9 @@ glance.glm <- function(x, ...) {
   )
 }
 
-warn_on_appropriated_glm_class <- function(x) {
+warn_on_appropriated_glm_class <- function(x, call = caller_env()) {
   warn_on_glm2(x)
-  warn_on_stanreg(x)
+  warn_on_stanreg(x, call = call)
 
   invisible(TRUE)
 }

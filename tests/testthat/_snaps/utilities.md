@@ -64,3 +64,12 @@
       
       This warning is displayed once per session.
 
+# as_augment_tibble errors informatively
+
+    Code
+      as_augment_tibble(m)
+    Condition
+      Error in `as_augment_tibble()`:
+      ! `m` is an unnamed matrix.
+      i Please supply a matrix or data frame with column names.
+
