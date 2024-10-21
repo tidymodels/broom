@@ -99,7 +99,7 @@ test_that("tidy.ref.grid consistency with tidy.TukeyHSD", {
 
   expect_equal(
     as.data.frame(td_hsd),
-    as.data.frame(td_pairs),
+    as.data.frame(td_pairs)
   )
 })
 

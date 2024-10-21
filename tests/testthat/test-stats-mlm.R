@@ -8,7 +8,7 @@ df_tidy <- tidy(fit_mlm, conf.int = TRUE)
 
 test_that("tidy.mlm works", {
   expect_equal(dim(df_tidy), c(4L, 8L))
-  expect_is(df_tidy, "tbl_df")
+  expect_s3_class(df_tidy, "tbl_df")
 })
 
 #' helper function: replicate each element of x

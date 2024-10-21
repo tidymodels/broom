@@ -81,5 +81,5 @@ test_that("augment.prcomp works with matrix objects", {
   expect_equal(dim(df1), c(1000L, 15L))
   expect_equal(dim(df2), c(1000L, 47L))
   testthat::expect_equal(tibble::as_tibble(pred), df1[, -1])
-  expect_is(df1, "tbl_df")
+  expect_s3_class(df1, "tbl_df")
 })

@@ -46,6 +46,6 @@ test_that("tidy.cmprsk", {
     td3 %>%
       dplyr::select(conf.low, conf.high) %>%
       unclass() %>%
-      unname(),
+      unname()
   )
 })
