@@ -1,5 +1,3 @@
-context("vars")
-
 skip_on_cran()
 skip_if_not_installed("modeltests")
 skip_if_not_installed("vars")
@@ -20,7 +18,7 @@ test_that("tidy.vars", {
   check_tidy_output(td)
   check_dims(td, 24, 6)
   # vars does not produce confidence intervals
-  expect_warning(tidy(fit, conf.int = TRUE))
+  expect_snapshot(.res <- tidy(fit, conf.int = TRUE))
 })
 
 

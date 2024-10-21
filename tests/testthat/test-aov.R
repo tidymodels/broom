@@ -1,5 +1,3 @@
-context("aov")
-
 library(broom)
 
 d <- data.frame(

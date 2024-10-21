@@ -1,5 +1,3 @@
-context("list-xyz")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
@@ -39,23 +37,7 @@ test_that("tidy_xyz", {
   expect_true(is.numeric(td$y))
   expect_true(is.numeric(td$z))
 
-  expect_error(
-    tidy(b),
-    regexp = paste(
-      "To tidy an xyz list, the length of element `x` must equal the number",
-      "the number of rows of element `z`, and the length of element `y` must",
-      "equal the number of columns of element `z`."
-    )
-  )
-
-  expect_error(
-    tidy(c),
-    regexp = paste(
-      "To tidy an xyz list, the length of element `x` must equal the number",
-      "the number of rows of element `z`, and the length of element `y` must",
-      "equal the number of columns of element `z`."
-    )
-  )
-
-  expect_error(tidy(d), "To tidy an xyz list, `z` must be a matrix.")
+  expect_snapshot(error = TRUE, tidy(b))
+  expect_snapshot(error = TRUE, tidy(c))
+  expect_snapshot(error = TRUE, tidy(d))
 })

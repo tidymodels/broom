@@ -1,5 +1,3 @@
-context("lmbeta-lm-beta")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
@@ -28,9 +26,10 @@ test_that("tidy.lm.beta works", {
   td2 <- tidy(fit2)
 
   # conf.int = TRUE works for rank deficient fits
-  # should get a "NaNs produced" warning
+  # should get a "NaNs produced" warning.
+  # not snapshotting as we don't own the error message.
   expect_warning(td_rd <- tidy(fit_rd, conf.int = TRUE))
-
+  
   check_tidy_output(td)
   check_tidy_output(td2)
 
@@ -44,5 +43,5 @@ test_that("tidy.lm.beta works", {
 
   # shouldn't error. regression test for issues 166, 241
   # rows for confidence intervals of undefined terms should be dropped
-  expect_error(tidy(fit_na_row, conf.int = TRUE), NA)
+  expect_no_error(tidy(fit_na_row, conf.int = TRUE))
 })

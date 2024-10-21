@@ -1,5 +1,3 @@
-context("null-and-default")
-
 skip_if_not_installed("modeltests")
 library(modeltests)
 
@@ -8,12 +6,12 @@ test_that("tidy.NULL", {
 })
 
 test_that("tidy.default", {
-  expect_error(td <- tidy(raw(1)))
-
+  expect_snapshot(error = TRUE, td <- tidy(raw(1)))
+  
   x <- 5
   class(x) <- c("foo", "bar")
-  expect_error(glance(x), regexp = "foo")
-  expect_error(glance(x), regexp = "[^bar]")
+  expect_snapshot(error = TRUE, glance(x))
+  expect_snapshot(error = TRUE, glance(x))
 })
 
 
@@ -22,15 +20,15 @@ test_that("glance.NULL", {
 })
 
 test_that("glance.default", {
-  expect_error(glance(TRUE))
-  expect_error(glance(1))
-  expect_error(glance(1L))
-  expect_error(glance("a"))
+  expect_snapshot(error = TRUE, glance(TRUE))
+  expect_snapshot(error = TRUE, glance(1))
+  expect_snapshot(error = TRUE, glance(1L))
+  expect_snapshot(error = TRUE, glance("a"))
 
   x <- 5
   class(x) <- c("foo", "bar")
-  expect_error(glance(x), regexp = "foo")
-  expect_error(glance(x), regexp = "[^bar]")
+  expect_snapshot(error = TRUE, glance(x))
+  expect_snapshot(error = TRUE, glance(x))
 })
 
 test_that("augment.NULL", {
@@ -38,13 +36,13 @@ test_that("augment.NULL", {
 })
 
 test_that("augment.default", {
-  expect_error(augment(TRUE))
-  expect_error(augment(1))
-  expect_error(augment(1L))
-  expect_error(augment("a"))
+  expect_snapshot(error = TRUE, augment(TRUE))
+  expect_snapshot(error = TRUE, augment(1))
+  expect_snapshot(error = TRUE, augment(1L))
+  expect_snapshot(error = TRUE, augment("a"))
 
   x <- 5
   class(x) <- c("foo", "bar")
-  expect_error(augment(x), regexp = "foo")
-  expect_error(augment(x), regexp = "[^bar]")
+  expect_snapshot(error = TRUE, augment(x))
+  expect_snapshot(error = TRUE, augment(x))
 })

@@ -1,5 +1,3 @@
-context("fixest")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
@@ -130,10 +128,9 @@ test_that("all other fixest estimators run", {
     strict = FALSE
   )
 
-  augment_error <- "augment is only supported for fixest models estimated with feols, feglm, or femlm"
-  expect_error(augment(res_fenegbin, df), augment_error)
-  expect_error(augment(res_feNmlm, df), augment_error)
-  expect_error(augment(res_fepois, df), augment_error)
+  expect_snapshot(error = TRUE, augment(res_fenegbin, df))
+  expect_snapshot(error = TRUE, augment(res_feNmlm, df))
+  expect_snapshot(error = TRUE, augment(res_fepois, df))
 })
 
 

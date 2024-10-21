@@ -630,7 +630,7 @@ Suggests:
     survey,
     survival (>= 3.6-4),
     systemfit,
-    testthat (>= 2.1.0),
+    testthat (>= 3.0.0),
     tseries,
     vars,
     zoo
@@ -673,6 +673,8 @@ Collate:
     'glmnet-glmnet-tidiers.R'
     'gmm-tidiers.R'
     'hmisc-tidiers.R'
+    'import-standalone-obj-type.R'
+    'import-standalone-types-check.R'
     'joinerml-tidiers.R'
     'kendall-tidiers.R'
     'ks-tidiers.R'
@@ -751,3 +753,4 @@ Collate:
     'vars-tidiers.R'
     'zoo-tidiers.R'
     'zzz.R'
+Config/testthat/edition: 3

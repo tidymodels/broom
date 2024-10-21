@@ -1,5 +1,3 @@
-context("stats-kmeans")
-
 skip_if_not_installed("modeltests")
 library(modeltests)
 
@@ -33,12 +31,6 @@ test_that("tidy.kmeans", {
 })
 
 test_that("augment.kmeans", {
-  # data argument cannot be empty
-  expect_error(
-    augment(fit),
-    regexp = "argument \"data\" is missing, with no default"
-  )
-
   check_augment_function(
     aug = augment.kmeans,
     model = fit,

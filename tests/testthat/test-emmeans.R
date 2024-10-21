@@ -1,5 +1,3 @@
-context("emmeans")
-
 skip_on_cran()
 
 # Matrix ABI version may differ (#1204)

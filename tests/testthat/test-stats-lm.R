@@ -1,5 +1,3 @@
-context("stats-lm")
-
 skip_if_not_installed("modeltests")
 library(modeltests)
 
@@ -35,8 +33,8 @@ test_that("tidy.lm works", {
 
   # conf.int = TRUE works for rank deficient fits
   # should get a "NaNs produced" warning
-  expect_warning(td_rd <- tidy(fit_rd, conf.int = TRUE))
-
+  expect_snapshot(td_rd <- tidy(fit_rd, conf.int = TRUE))
+  
   check_tidy_output(td)
   check_tidy_output(td2)
   check_tidy_output(td3)
@@ -52,9 +50,9 @@ test_that("tidy.lm works", {
   expect_equal(td2$term, c("(Intercept)", "wt", "log(disp)"))
   expect_equal(td3$term, c("(Intercept)"))
 
-  # shouldn't error. regression test for issues 166, 241
+  # shouldn't error. regression test for issues #166 and #241.
   # rows for confidence intervals of undefined terms should be dropped
-  expect_error(tidy(fit_na_row, conf.int = TRUE), NA)
+  expect_no_error(tidy(fit_na_row, conf.int = TRUE))
 })
 
 test_that("glance.lm", {
@@ -138,9 +136,8 @@ test_that("augment.lm", {
   expect_false(any(names(aug) %in% c(".lower", ".upper")))
   
   # warns when passed as level rather than conf.level
-  expect_warning(
-    augment(fit, newdata = mtcars, interval = "confidence", level = 0.95),
-    "\\`level\\` argument is not supported in the \\`augment\\(\\)\\` method for \\`lm\\` objects"
+  expect_snapshot(
+    augment(fit, newdata = mtcars, interval = "confidence", level = 0.95)
   )
 })
 

@@ -1,5 +1,3 @@
-context("epiR")
-
 skip_on_cran()
 
 skip_if_not_installed("epiR")

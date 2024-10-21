@@ -1,5 +1,3 @@
-context("lfe")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
@@ -99,10 +97,7 @@ test_that("tidy.felm", {
   )
 
   # check for deprecation warning from 0.7.0.9001
-  expect_warning(
-    tidy(fit, robust = TRUE),
-    '"robust" argument has been deprecated'
-  )
+  expect_snapshot(.res <- tidy(fit, robust = TRUE))
 })
 
 test_that("glance.felm", {
@@ -112,7 +107,7 @@ test_that("glance.felm", {
   check_glance_outputs(gl, gl2)
   check_dims(gl, expected_cols = 8)
 
-  expect_error(glance(fit_multi), "Glance does not support linear models with multiple responses.")
+  expect_snapshot(error = TRUE, glance(fit_multi))
 })
 
 test_that("augment.felm", {
@@ -140,11 +135,8 @@ test_that("augment.felm", {
     )
   )
 
-  expect_error(
-    augment(fit_multi),
-    "Augment does not support linear models with multiple responses."
-  )
-
+  expect_snapshot(error = TRUE, augment(fit_multi))
+  
   # Ensure that the .resid and .fitted columns are basic columns, not matrix
   aug <- augment(fit)
   expect_false(inherits(aug$.resid, "matrix"))

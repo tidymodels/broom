@@ -1,5 +1,3 @@
-context("mclust")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
@@ -91,8 +89,5 @@ test_that("augment.Mclust", {
   #   augment(fit_on_vector)
   # )
 
-  expect_error(
-    augment(fit, 1:10),
-    "`data` must be a data frame or matrix."
-  )
+  expect_snapshot(error = TRUE, augment(fit, 1:10))
 })

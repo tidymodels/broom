@@ -1,5 +1,3 @@
-context("geepack")
-
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
@@ -22,14 +20,10 @@ test_that("tidy.geeglm", {
 
   td <- tidy(fit, conf.int = TRUE)
 
-  expect_warning(
-    td2 <- tidy(fit, conf.int = FALSE, exponentiate = TRUE),
-    regexp = paste(
-      "Exponentiating coefficients, but model did not use a log",
-      "or logit link function"
-    )
-  )
-
+  expect_snapshot({
+    td2 <- tidy(fit, conf.int = FALSE, exponentiate = TRUE)
+  })
+  
   check_tidy_output(td)
   check_tidy_output(td2)
 })
