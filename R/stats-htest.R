@@ -68,7 +68,7 @@ tidy.htest <- function(x, ...) {
   if (length(x$parameter) > 1) {
     ret$parameter <- NULL
     if (is.null(names(x$parameter))) {
-      warning("Multiple unnamed parameters in hypothesis test; dropping them")
+      cli::cli_warn("Multiple unnamed parameters in hypothesis test; dropping them.")
     } else {
       # rename num df to num.df and denom df to denom.df
       np <- names(x$parameter)

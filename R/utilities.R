@@ -312,10 +312,12 @@ augment_columns <- function(x, data, newdata = NULL, type, type.predict = type,
     if (inherits(na_action, "exclude")) {
       # check if values are missing
       if (length(stats::residuals(x)) > nrow(data)) {
-        warning(
-          "When fitting with na.exclude, rows with NA in ",
-          "original data will be dropped unless those rows are provided ",
-          "in 'data' argument"
+        cli::cli_warn(
+          c(
+            "When fitting with {.code na.exclude}, rows with {.code NA}s in
+             original data will be dropped unless those rows are provided
+             in the {.arg data} argument."
+          )
         )
       }
     }

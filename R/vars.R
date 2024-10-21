@@ -45,7 +45,10 @@ tidy.varest <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 
   # `vars` does not define a `confint` method and does not calculate CIs
   if (isTRUE(conf.int)) {
-    warning("Confidence intervals are not supported for `varest` objects. The `conf.level` argument will be ignored.")
+    cli::cli_warn(c(
+      "Confidence intervals are not supported for {.cls varest} objects.",
+      "i" = "The {.arg conf.level} argument will be ignored."
+    ))
   }
 
   s <- summary(x)

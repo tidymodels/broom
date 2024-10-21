@@ -82,7 +82,10 @@ tidy.ergm <- function(x, conf.int = FALSE, conf.level = 0.95,
   if (exponentiate) {
     if (is.null(x$glm) ||
       (x$glm$family$link != "logit" && x$glm$family$link != "log")) {
-      warning("Exponentiating but model didn't use log or logit link.")
+      cli::cli_warn(
+        "Coefficients will be exponentiated, but the model didn't 
+         use a {.code log} or {.code logit} link."
+      )
     }
 
     ret <- exponentiate(ret)

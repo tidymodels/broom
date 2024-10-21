@@ -94,10 +94,9 @@ tidy.anova <- function(x, ...) {
 
   unknown_cols <- setdiff(colnames(ret), c("term", names(renamers)))
   if (length(unknown_cols) > 0) {
-    warning(
-      "The following column names in ANOVA output were not ",
-      "recognized or transformed: ",
-      paste(unknown_cols, collapse = ", ")
+    cli::cli_warn(
+      "The column name{?s} {.field {unknown_cols}} in ANOVA output {?was/were} 
+       not recognized or transformed."
     )
   }
 
