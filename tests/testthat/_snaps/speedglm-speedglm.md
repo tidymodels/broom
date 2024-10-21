@@ -3,6 +3,6 @@
     Code
       augment(fit)
     Condition
-      Error:
-      ! No augment method for objects of class speedglm
+      Error in `augment()`:
+      ! No `augment()` method for objects of class <speedglm/speedlm>.
 

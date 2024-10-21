@@ -36,20 +36,24 @@ exponentiate <- function(data, col = "estimate") {
 #'
 
 
-as_augment_tibble <- function(data) {
+as_augment_tibble <- function(data, arg = caller_arg(data), call = caller_env()) {
   if (inherits(data, "matrix") & is.null(colnames(data))) {
-    stop(
-      "The supplied `data`/`newdata` argument was an unnamed matrix. ",
-      "Please supply a matrix or dataframe with column names."
-    )
+    cli::cli_abort(c(
+      "{.arg {arg}} is an unnamed matrix.",
+      "i" = "Please supply a matrix or data frame with column names."
+    ))
   }
 
   tryCatch(
     df <- as_tibble(data),
     error = function(cnd) {
-      stop("Could not coerce data to `tibble`. Try explicitly passing a",
-        "dataset to either the `data` or `newdata` argument.",
-        call. = FALSE
+      cli::cli_abort(
+        c(
+          "Could not coerce {.arg {arg}} to a tibble.",
+          "i" = "Try explicitly passing a data frame to either the {.arg data} or
+                 {.arg newdata} argument."
+        ),
+        call = call
       )
     }
   )
@@ -86,7 +90,10 @@ is_cran_check <- function() {
 #' @noRd
 as_tidy_tibble <- function(x, new_names = NULL, new_column = "term") {
   if (!is.null(new_names) && length(new_names) != ncol(x)) {
-    stop("newnames must be NULL or have length equal to number of columns")
+    cli::cli_abort(
+      "{.arg new names} must be {.code NULL} or have length equal to
+       number of columns ({ncol(data)})."
+    )
   }
 
   ret <- x
@@ -164,9 +171,9 @@ as_glance_tibble <- function(..., na_types) {
   cols <- list(...)
 
   if (length(cols) != stringr::str_length(na_types)) {
-    stop(
-      "The number of columns provided does not match the number of ",
-      "column types provided."
+    cli::cli_abort(
+      "The number of columns provided does not match the number of 
+       column {.emph types} provided."
     )
   }
 
@@ -362,10 +369,10 @@ response <- function(object, newdata = NULL, has_response) {
   res
 }
 
-data_error <- function(cnd) {
-  stop(
-    "Must specify either `data` or `newdata` argument.",
-    call. = FALSE
+data_error <- function(cnd, call = caller_env()) {
+  cli::cli_abort(
+    "Must specify either {.arg data} or {.arg newdata} argument.",
+    call = call
   )
 }
 

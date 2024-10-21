@@ -37,15 +37,13 @@ tidy.glmRob <- function(x, ...) {
 #'
 #' @export
 augment.glmRob <- function(x, ...) {
-  stop(
-    paste0(
-      "`augment.glmRob` has been deprecated as the robust package",
-      "doesn't provide the functionality necessary to implement ",
-      "an augment method. Please see the augment method for ",
-      "glmrob objects from robustbase."
-    ),
-    call. = FALSE
-  )
+  cli::cli_abort(c(
+    "{.fn augment.glmRob} has been deprecated as the {.pkg robust} package
+     doesn't provide the functionality necessary to implement
+     an augment method.",
+    "i" = "Please see the augment method for {.cls glmrob} objects from
+           {.pkg robustbase}."
+  ))
   invisible(TRUE)
 }
 

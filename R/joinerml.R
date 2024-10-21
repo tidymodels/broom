@@ -79,7 +79,7 @@ tidy.mjoint <- function(x, component = "survival", conf.int = FALSE,
   component <- rlang::arg_match(component, c("survival", "longitudinal"))
   if (!is.null(boot_se)) {
     if (!inherits(x = boot_se, "bootSE")) {
-      stop("`boot_se` argument must be a `bootSE` object.", call. = FALSE)
+      cli::cli_abort("{.arg boot_se} must be a {.cls bootSE} object.")
     }
   }
 
@@ -141,17 +141,21 @@ augment.mjoint <- function(x, data = x$data, ...) {
   check_ellipses("newdata", "augment", "mjoint", ...)
 
   if (is.null(data)) {
-    stop(
-      "`data` argument is NULL. Try specifying `data` manually.",
-      call. = FALSE
+    cli::cli_abort(
+      c(
+        "{.arg data} argument is {.code NULL}.",
+        "i" = "Try specifying {.arg data} manually."
+      )
     )
   }
 
   if (length(data) > 1) {
     if (!do.call(all.equal, data)) {
-      stop(
-        "List of 'data' extracted from 'x' does not",
-        "include equal data frames."
+      cli::cli_abort(
+        c(
+          "List of {.arg data} extracted from {.arg x} does not include equal
+           data frames."
+        )
       )
     }
     data <- data[[1]]

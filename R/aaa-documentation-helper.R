@@ -26,11 +26,10 @@ return_evalrd <- function(..., .method, .pre = NULL, .post = NULL) {
     not_found <- setdiff(pull_from_modeltests, glos_env$column_glossary$column)
 
     if (length(not_found) > 0) {
-      not_found <- paste(not_found, collapse = ", ")
-      stop(
-        glue(
-          "Tried to use modeltests documentation for: {not_found} column(s) ",
-          "but could not find any."
+      cli::cli_abort(
+        c(
+          "Tried to use modeltests documentation for: {not_found} column{?s}.",
+          "i" = "No documentation could be found."
         )
       )
     }

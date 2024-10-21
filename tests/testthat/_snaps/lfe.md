@@ -12,14 +12,14 @@
     Code
       glance(fit_multi)
     Condition
-      Error:
-      ! Glance does not support linear models with multiple responses.
+      Error in `glance()`:
+      ! `felm()` models with multiple responses are not supported.
 
 # augment.felm
 
     Code
       augment(fit_multi)
     Condition
-      Error:
-      ! Augment does not support linear models with multiple responses.
+      Error in `augment()`:
+      ! `felm()` models with multiple responses are not supported.
 

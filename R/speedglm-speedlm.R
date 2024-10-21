@@ -111,9 +111,9 @@ augment.speedlm <- function(x, data = model.frame(x), newdata = NULL, ...) {
   no_fitted <- is.null(x$linear.predictors) && is.null(x$fitted.values)
 
   if (default_data_arg && no_fitted) {
-    stop(
-      "Must specify `data` argument or refit speedglm with `fitted = TRUE`.",
-      call. = FALSE
+    cli::cli_abort(
+      "Must specify {.arg data} argument or refit with
+       {.code fitted = TRUE}."
     )
   }
 

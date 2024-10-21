@@ -96,7 +96,7 @@
 #' @family svd tidiers
 tidy.prcomp <- function(x, matrix = "u", ...) {
   if (length(matrix) > 1) {
-    stop("Must select a single matrix to tidy.", call. = FALSE)
+    cli::cli_abort("Must select a single matrix to tidy.")
   }
 
   MATRIX <- c(

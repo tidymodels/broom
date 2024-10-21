@@ -3,6 +3,6 @@
     Code
       tidy(pc, matrix = c("d", "u"))
     Condition
-      Error:
+      Error in `tidy()`:
       ! Must select a single matrix to tidy.
 

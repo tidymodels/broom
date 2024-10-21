@@ -3,118 +3,118 @@
     Code
       td <- tidy(raw(1))
     Condition
-      Error:
-      ! No tidy method for objects of class raw
+      Error in `tidy()`:
+      ! No `tidy()` method for objects of class <raw>.
 
 ---
 
     Code
       glance(x)
     Condition
-      Error:
-      ! No glance method for objects of class foo
+      Error in `glance()`:
+      ! No `glance()` method for objects of class <foo/bar>.
 
 ---
 
     Code
       glance(x)
     Condition
-      Error:
-      ! No glance method for objects of class foo
+      Error in `glance()`:
+      ! No `glance()` method for objects of class <foo/bar>.
 
 # glance.default
 
     Code
       glance(TRUE)
     Condition
-      Error:
-      ! No glance method for objects of class logical
+      Error in `glance()`:
+      ! No `glance()` method for objects of class <logical>.
 
 ---
 
     Code
       glance(1)
     Condition
-      Error:
-      ! No glance method for objects of class numeric
+      Error in `glance()`:
+      ! No `glance()` method for objects of class <numeric>.
 
 ---
 
     Code
       glance(1L)
     Condition
-      Error:
-      ! No glance method for objects of class integer
+      Error in `glance()`:
+      ! No `glance()` method for objects of class <integer>.
 
 ---
 
     Code
       glance("a")
     Condition
-      Error:
-      ! No glance method for objects of class character
+      Error in `glance()`:
+      ! No `glance()` method for objects of class <character>.
 
 ---
 
     Code
       glance(x)
     Condition
-      Error:
-      ! No glance method for objects of class foo
+      Error in `glance()`:
+      ! No `glance()` method for objects of class <foo/bar>.
 
 ---
 
     Code
       glance(x)
     Condition
-      Error:
-      ! No glance method for objects of class foo
+      Error in `glance()`:
+      ! No `glance()` method for objects of class <foo/bar>.
 
 # augment.default
 
     Code
       augment(TRUE)
     Condition
-      Error:
-      ! No augment method for objects of class logical
+      Error in `augment()`:
+      ! No `augment()` method for objects of class <logical>.
 
 ---
 
     Code
       augment(1)
     Condition
-      Error:
-      ! No augment method for objects of class numeric
+      Error in `augment()`:
+      ! No `augment()` method for objects of class <numeric>.
 
 ---
 
     Code
       augment(1L)
     Condition
-      Error:
-      ! No augment method for objects of class integer
+      Error in `augment()`:
+      ! No `augment()` method for objects of class <integer>.
 
 ---
 
     Code
       augment("a")
     Condition
-      Error:
-      ! No augment method for objects of class character
+      Error in `augment()`:
+      ! No `augment()` method for objects of class <character>.
 
 ---
 
     Code
       augment(x)
     Condition
-      Error:
-      ! No augment method for objects of class foo
+      Error in `augment()`:
+      ! No `augment()` method for objects of class <foo/bar>.
 
 ---
 
     Code
       augment(x)
     Condition
-      Error:
-      ! No augment method for objects of class foo
+      Error in `augment()`:
+      ! No `augment()` method for objects of class <foo/bar>.
 

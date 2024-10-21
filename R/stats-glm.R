@@ -181,11 +181,14 @@ warn_on_glm2 <- function(x) {
 
 # stanreg objects subclass glm, glm tidiers error out (uninformatively),
 # and the maintained stanreg tidiers live in broom.mixed.
-warn_on_stanreg <- function(x) {
+warn_on_stanreg <- function(x, call = caller_env()) {
   if (!is.null(x$stan_function)) {
-    stop(
-      "The supplied model object seems to be outputted from the rstanarm ",
-      "package. Tidiers for mixed model output now live in the broom.mixed package."
+    cli::cli_abort(
+      c(
+        "{.arg x} seems to be outputted from the {.pkg rstanarm} package.",
+        "i" = "Tidiers for mixed model output now live in {.pkg broom.mixed}."
+      ),
+      call = call
     )
   }
 

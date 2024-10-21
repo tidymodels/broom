@@ -107,7 +107,7 @@ augment.Mclust <- function(x, data = NULL, ...) {
   if (is.null(data)) {
     data <- x$data
   } else if (!(is.data.frame(data) || is.matrix(data))) {
-    stop("`data` must be a data frame or matrix.", call. = FALSE)
+    cli::cli_abort("{.arg data} must be a data frame or matrix.")
   }
 
   as_augment_tibble(data) %>%

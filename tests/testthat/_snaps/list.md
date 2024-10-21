@@ -3,14 +3,14 @@
     Code
       tidy(nl)
     Condition
-      Error:
-      ! No tidy method recognized for this list.
+      Error in `tidy()`:
+      ! No `tidy()` method recognized for this list.
 
 ---
 
     Code
       glance(nl)
     Condition
-      Error:
-      ! No glance method recognized for this list.
+      Error in `glance()`:
+      ! No `glance()` method recognized for this list.
 

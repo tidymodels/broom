@@ -36,10 +36,11 @@ tidy.mediate <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   check_ellipses("exponentiate", "tidy", "mediate", ...)
 
   if (inherits(x, "psych")) {
-    stop(
-      "No tidy method for objects of class `mediate` from the `psych` package. ",
-      "The `tidy.mediate` method is intended for `mediate` objects from the `mediation` package."
-    )
+    cli::cli_abort(c(
+      "No tidy method for objects of class {.cls mediate} from the {.pkg psych} package.",
+      "i" = "The {.fn tidy.mediate} method is intended for {.cls mediate} objects 
+             from the {.pkg mediation} package."
+    ))
   }
 
   d0 <- d1 <- z0 <- z1 <- d0.sims <- d1.sims <- z0.sims <- NULL

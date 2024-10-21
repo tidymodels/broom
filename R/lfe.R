@@ -203,10 +203,7 @@ augment.felm <- function(x, data = model.frame(x), ...) {
   has_multi_response <- length(x$lhs) > 1
 
   if (has_multi_response) {
-    stop(
-      "Augment does not support linear models with multiple responses.",
-      call. = FALSE
-    )
+    cli::cli_abort("{.fn felm} models with multiple responses are not supported.")
   }
   df <- as_augment_tibble(data)
   mutate(df, .fitted = as.vector(x$fitted.values), .resid = as.vector(x$residuals))
@@ -233,12 +230,9 @@ glance.felm <- function(x, ...) {
   has_multi_response <- length(x$lhs) > 1
 
   if (has_multi_response) {
-    stop(
-      "Glance does not support linear models with multiple responses.",
-      call. = FALSE
-    )
+    cli::cli_abort("{.fn felm} models with multiple responses are not supported.")
   }
-
+  
   s <- summary(x)
 
   as_glance_tibble(

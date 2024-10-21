@@ -120,10 +120,10 @@ tidy.survfit <- function(x, ...) {
 #'
 glance.survfit <- function(x, ...) {
   if (inherits(x, "survfitms")) {
-    stop("Cannot construct a glance of a multi-state survfit object.")
+    cli::cli_abort("Cannot {.fn glance} a multi-state {.cls survfit} object.")
   }
   if (!is.null(x$strata)) {
-    stop("Cannot construct a glance of a multi-strata survfit object.")
+    cli::cli_abort("Cannot {.fn glance} a multi-strata {.cls survfit} object.")
   }
 
   s <- summary(x, ...)

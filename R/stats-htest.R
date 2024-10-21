@@ -133,9 +133,8 @@ augment.htest <- function(x, ...) {
     return(augment_chisq_test(x, ...))
   }
 
-  stop(
-    "Augment is only defined for chi squared hypothesis tests.",
-    call. = FALSE
+  cli::cli_abort(
+    "{.fn augment.htest} is only defined for chi squared hypothesis tests."
   )
 }
 
