@@ -28,9 +28,10 @@ test_that("tidy.lm.beta works", {
   td2 <- tidy(fit2)
 
   # conf.int = TRUE works for rank deficient fits
-  # should get a "NaNs produced" warning
+  # should get a "NaNs produced" warning.
+  # not snapshotting as we don't own the error message.
   expect_warning(td_rd <- tidy(fit_rd, conf.int = TRUE))
-
+  
   check_tidy_output(td)
   check_tidy_output(td2)
 

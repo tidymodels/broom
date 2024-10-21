@@ -4,34 +4,28 @@ skip_if_not_installed("modeltests")
 library(modeltests)
 
 test_that("ellipsis checking works", {
-  expect_warning(
-    check_ellipses("exponentiate", "tidy", "boop", exponentiate = TRUE),
-    "\\`exponentiate\\` argument is not supported in the \\`tidy\\(\\)\\` method for \\`boop\\` objects"
+  expect_snapshot(
+    check_ellipses("exponentiate", "tidy", "boop", exponentiate = TRUE)
   )
-
-  expect_warning(
-    check_ellipses("exponentiate", "tidy", "boop", exponentiate = TRUE, quick = FALSE),
-    "\\`exponentiate\\` argument is not supported in the \\`tidy\\(\\)\\` method for \\`boop\\` objects"
+  
+  expect_snapshot(
+    check_ellipses("exponentiate", "tidy", "boop", exponentiate = TRUE, quick = FALSE)
   )
-
+  
   expect_silent(check_ellipses("exponentiate", "tidy", "boop", hi = "pal"))
 })
 
 test_that("ellipsis checking works (whole game, tidy)", {
   mod <- nls(mpg ~ k * e^wt, data = mtcars, start = list(k = 1, e = 2))
 
-  expect_warning(
-    tidy(mod, exponentiate = TRUE),
-    "\\`exponentiate\\` argument is not supported in the \\`tidy\\(\\)\\` method for \\`nls\\` objects"
-  )
+  expect_snapshot(tidy(mod, exponentiate = TRUE))
 })
 
 test_that("ellipsis checking works (whole game, augment)", {
   mod <- kmeans(mtcars, centers = 4)
 
-  expect_warning(
-    augment(mod, data = mtcars, newdata = mtcars),
-    "\\`newdata\\` argument is not supported in the \\`augment\\(\\)\\` method for \\`kmeans\\` objects"
+  expect_snapshot(
+    .res <- augment(mod, data = mtcars, newdata = mtcars)
   )
 })
 
@@ -142,23 +136,15 @@ test_that("appropriate warning on (g)lm-subclassed models", {
   x <- 1
   class(x) <- c("boop", "glm")
 
-  expect_warning(
-    warn_on_subclass(x, "tidy"),
-    "class \\`boop\\`.*only supported through the \\`glm\\` tidier method."
-  )
-
+  expect_snapshot(warn_on_subclass(x, "tidy"))
+  
   # only displayed once per session, per unique dispatch
-  expect_silent(
-    warn_on_subclass(x, "tidy")
-  )
+  expect_silent(warn_on_subclass(x, "tidy"))
 
   class(x) <- c("bop", "glm", "lm")
 
-  expect_warning(
-    warn_on_subclass(x, "tidy"),
-    "class \\`bop\\`.*only supported through the `glm` tidier method."
-  )
-
+  expect_snapshot(warn_on_subclass(x, "tidy"))
+  
   # only displayed once per session, per unique dispatch
   expect_silent(
     warn_on_subclass(x, "tidy")

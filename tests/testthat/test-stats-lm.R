@@ -35,8 +35,8 @@ test_that("tidy.lm works", {
 
   # conf.int = TRUE works for rank deficient fits
   # should get a "NaNs produced" warning
-  expect_warning(td_rd <- tidy(fit_rd, conf.int = TRUE))
-
+  expect_snapshot(td_rd <- tidy(fit_rd, conf.int = TRUE))
+  
   check_tidy_output(td)
   check_tidy_output(td2)
   check_tidy_output(td3)
@@ -138,9 +138,8 @@ test_that("augment.lm", {
   expect_false(any(names(aug) %in% c(".lower", ".upper")))
   
   # warns when passed as level rather than conf.level
-  expect_warning(
-    augment(fit, newdata = mtcars, interval = "confidence", level = 0.95),
-    "\\`level\\` argument is not supported in the \\`augment\\(\\)\\` method for \\`lm\\` objects"
+  expect_snapshot(
+    augment(fit, newdata = mtcars, interval = "confidence", level = 0.95)
   )
 })
 

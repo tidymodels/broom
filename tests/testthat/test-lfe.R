@@ -99,10 +99,7 @@ test_that("tidy.felm", {
   )
 
   # check for deprecation warning from 0.7.0.9001
-  expect_warning(
-    tidy(fit, robust = TRUE),
-    '"robust" argument has been deprecated'
-  )
+  expect_snapshot(.res <- tidy(fit, robust = TRUE))
 })
 
 test_that("glance.felm", {

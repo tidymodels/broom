@@ -48,7 +48,7 @@ test_that("tidy.anova", {
     loess(dist ~ speed, cars, control = loess.control(surface = "direct"))
   )
 
-  expect_warning(tidy(loess_anova))
+  expect_snapshot(.res <- tidy(loess_anova))
 })
 
 test_that("glance.anova", {

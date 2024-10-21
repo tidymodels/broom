@@ -26,8 +26,8 @@ test_that("ergm tidier arguments", {
 })
 
 test_that("tidy.ergm", {
-  expect_warning({
-  tde <- tidy(gest, conf.int = TRUE, exponentiate = TRUE)
+  expect_snapshot({
+    tde <- tidy(gest, conf.int = TRUE, exponentiate = TRUE)
   })
   
   check_tidy_output(tde)
@@ -40,8 +40,8 @@ test_that("tidy.ergm", {
   # check_dims(tde, 2, 7)
 
   # tidy.ergm warns when exponentiating w/o link
-  expect_warning(td2 <- tidy(gest2, conf.int = TRUE, exponentiate = TRUE))
-
+  expect_snapshot(td2 <- tidy(gest2, conf.int = TRUE, exponentiate = TRUE))
+  
   check_tidy_output(td2)
 
   # see comment above:

@@ -1,3 +1,12 @@
+# tidy.felm
+
+    Code
+      .res <- tidy(fit, robust = TRUE)
+    Condition
+      Warning in `tidy.felm()`:
+      
+      The "robust" argument has been deprecated in tidy.felm and will be ignored. Please use the "se.type" argument instead.
+
 # glance.felm
 
     Code
