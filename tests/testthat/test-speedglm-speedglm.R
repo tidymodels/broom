@@ -38,6 +38,5 @@ test_that("glance.speedglm", {
 test_that("augment.speedglm errors", {
   # speedglm sub-classes speedlm, and there's an augment.speedlm()
   # method we want to make sure isn't accidentally invoked
-
-  expect_error(augment(fit))
+  expect_snapshot(error = TRUE, augment(fit))
 })

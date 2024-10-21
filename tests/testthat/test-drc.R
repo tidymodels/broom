@@ -42,11 +42,8 @@ test_that("glance.drc", {
 })
 
 test_that("augment.drc", {
-  expect_error(
-    augment(mod),
-    regexp = "Must specify either `data` or `newdata` argument."
-  )
-
+  expect_snapshot(error = TRUE, augment(mod))
+  
   check_augment_function(
     augment.drc,
     mod,
@@ -54,11 +51,8 @@ test_that("augment.drc", {
     newdata = selenium
   )
 
-  expect_error(
-    augment(mod2),
-    regexp = "Must specify either `data` or `newdata` argument."
-  )
-
+  expect_snapshot(error = TRUE, augment(mod2))
+  
   check_augment_function(
     augment.drc,
     mod2,

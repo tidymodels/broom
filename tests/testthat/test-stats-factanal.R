@@ -59,10 +59,7 @@ test_that("augment.factanal works", {
 
   # errors for `scores = "none"`
   fit_none <- factanal(mtcars, n_factors, scores = "none")
-  expect_error(
-    augment(fit_none),
-    regexp = "Cannot augment factanal objects fit with `scores = 'none'`."
-  )
+  expect_snapshot(error = TRUE, augment(fit_none))
 })
 
 test_that("augment.factanal works with matrix", {

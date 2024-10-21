@@ -53,8 +53,5 @@ test_that("glance.svyglm: make sure `nobs` is there", {
 })
 
 test_that("conf.int merging regression test (#804)", {
-  expect_error(
-    tidy(fit_svyglm, conf.int = TRUE),
-    NA
-  )
+  expect_no_error(tidy(fit_svyglm, conf.int = TRUE))
 })

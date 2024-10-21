@@ -52,8 +52,5 @@ test_that("augment.speedlm", {
     newdata = mtcars
   )
 
-  expect_error(
-    augment(fit3),
-    "Must specify `data` argument or refit speedglm with `fitted = TRUE`."
-  )
+  expect_snapshot(error = TRUE, augment(fit3))
 })

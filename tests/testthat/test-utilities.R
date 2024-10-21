@@ -135,9 +135,7 @@ test_that("as_glance_tibble", {
 
   expect_false(class(df1$y) == class(df2$y))
 
-  expect_error(
-    as_glance_tibble(x = 1, y = 1, na_types = "rrr")
-  )
+  expect_snapshot(error = TRUE, as_glance_tibble(x = 1, y = 1, na_types = "rrr"))
 })
 
 test_that("appropriate warning on (g)lm-subclassed models", {

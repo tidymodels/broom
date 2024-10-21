@@ -99,22 +99,13 @@ test_that("augment.htest (chi squared test)", {
   check_tibble(au2, method = "augment", strict = FALSE)
 
   tt <- t.test(rnorm(10))
-  expect_error(
-    augment(tt),
-    regexp = "Augment is only defined for chi squared hypothesis tests."
-  )
-
+  expect_snapshot(error = TRUE, augment(tt))
+  
   wt <- wilcox.test(mpg ~ am, data = mtcars, conf.int = TRUE, exact = FALSE)
-  expect_error(
-    augment(wt),
-    regexp = "Augment is only defined for chi squared hypothesis tests."
-  )
-
+  expect_snapshot(error = TRUE, augment(wt))
+  
   ct <- cor.test(mtcars$wt, mtcars$mpg)
-  expect_error(
-    augment(ct),
-    regexp = "Augment is only defined for chi squared hypothesis tests."
-  )
+  expect_snapshot(error = TRUE, augment(ct))
 })
 
 test_that("tidy.htest does not return matrix columns", {

@@ -30,14 +30,7 @@ test_that("tidy.rqs", {
 })
 
 test_that("glance.rqs", {
-  expect_error(
-    glance(fit),
-    regexp = paste(
-      "`glance` cannot handle objects of class 'rqs',",
-      "i.e. models with more than one tau value. Please",
-      "use a purrr `map`-based workflow with 'rq' models instead."
-    )
-  )
+  expect_snapshot(error = TRUE, glance(fit))
 })
 
 test_that("augment.rqs", {
