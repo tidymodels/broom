@@ -19,5 +19,6 @@
     Code
       gl3 <- glance(gest, deviance = TRUE, mcmc = TRUE)
     Message
-      Though `glance` was supplied `mcmc = TRUE`, the model was not fittedusing MCMC, so the corresponding columns will be omitted.
+      Though `glance()` was supplied `mcmc = TRUE`, the model was not fitted using MCMC,
+      i The corresponding columns will be omitted.
 

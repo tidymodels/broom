@@ -155,9 +155,12 @@ glance.ergm <- function(x, deviance = FALSE, mcmc = FALSE, ...) {
 
   if (mcmc) {
     if (isTRUE(x$MPLE_is_MLE)) {
-      message(
-        "Though `glance` was supplied `mcmc = TRUE`, the model was not fitted",
-        "using MCMC, so the corresponding columns will be omitted."
+      cli::cli_inform(
+        c(
+          "Though {.fn glance} was supplied {.code mcmc = TRUE}, the model was not
+           fitted using MCMC,",
+          "i" = "The corresponding columns will be omitted."
+        )
       )
     }
 

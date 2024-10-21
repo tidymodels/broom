@@ -76,11 +76,8 @@ tidy.htest <- function(x, ...) {
       np <- stringr::str_replace(np, "denom df", "den.df")
       names(x$parameter) <- np
 
-      message(
-        "Multiple parameters; naming those columns ",
-        paste(np, collapse = ", ")
-      )
-
+      cli::cli_inform("Multiple parameters; naming those columns {np}.")
+      
       ret <- append(ret, x$parameter, after = 1)
     }
   }

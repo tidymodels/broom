@@ -46,10 +46,10 @@
 tidy.gam <- function(x, parametric = FALSE, conf.int = FALSE,
                      conf.level = 0.95, exponentiate = FALSE, ...) {
   if (!parametric && conf.int) {
-    message("Confidence intervals only available for parametric terms.")
+    cli::cli_inform("Confidence intervals only available for parametric terms.")
   }
   if (!parametric && exponentiate) {
-    message("Exponentiating coefficients only available for parametric terms.")
+    cli::cli_inform("Exponentiating coefficients only available for parametric terms.")
   }
   if (parametric) {
     px <- summary(x)$p.table

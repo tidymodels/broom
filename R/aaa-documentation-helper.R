@@ -66,11 +66,10 @@ return_evalrd <- function(..., .method, .pre = NULL, .post = NULL) {
   written <- purrr::map_lgl(cols_exps, stringr::str_detect, string = result)
   missing_cols <- standard_cols[!written]
   if (length(missing_cols) != 0) {
-    cols_message <- glue(
-      'The return_{.method} input "{missing_cols}" did not ',
-      "result in any documentation being written. \n"
+    cli::cli_inform(
+      "The {.code return_{.method}} input {.val {missing_cols}} did not 
+       result in any documentation being written."
     )
-    message(cols_message)
   }
 
   result

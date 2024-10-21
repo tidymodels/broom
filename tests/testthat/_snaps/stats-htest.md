@@ -3,7 +3,7 @@
     Code
       td <- tidy(ot)
     Message
-      Multiple parameters; naming those columns num.df, den.df
+      Multiple parameters; naming those columns num.df and den.df.
 
 # augment.htest (chi squared test)
 
