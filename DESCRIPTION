@@ -630,7 +630,7 @@ Suggests:
     survey,
     survival (>= 3.6-4),
     systemfit,
-    testthat (>= 2.1.0),
+    testthat (>= 3.0.0),
     tseries,
     vars,
     zoo
@@ -751,3 +751,4 @@ Collate:
     'vars-tidiers.R'
     'zoo-tidiers.R'
     'zzz.R'
+Config/testthat/edition: 3
