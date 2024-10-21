@@ -43,7 +43,12 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="broom-development-version">broom (development version)<a class="anchor" aria-label="anchor" href="#broom-development-version"></a></h2>
-<ul><li>
+<ul><li>Various improvements to infrastructure and testing:
+<ul><li>Migrated all messages, warnings, and errors to use the cli package (<a href="https://github.com/tidymodels/broom/issues/1230" class="external-link">#1230</a>).</li>
+<li>Aligned names of source and test files (<a href="https://github.com/tidymodels/broom/issues/1229" class="external-link">#1229</a>).</li>
+<li>Transitioned to the third edition of testthat (<a href="https://github.com/tidymodels/broom/issues/1228" class="external-link">#1228</a>).</li>
+</ul></li>
+<li>
 <code>tidy.coeftest</code> now returns non-<code>NA</code> values for <code>conf.low</code> and <code>conf.high</code> for a model fitted with only a constant term and cluster robust std errors computed using <code>vcovCL</code> from <code>sandwich</code> (<a href="https://github.com/tidymodels/broom/issues/1227" class="external-link">#1227</a>).</li>
 </ul></div>
     <div class="section level2">
