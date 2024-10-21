@@ -171,6 +171,6 @@ glance.ivreg <- function(x, diagnostics = FALSE, ...) {
   ret
 }
 
-#' @include null-and-default-tidiers.R
+#' @include null-and-default.R
 #' @export
 tidy.tobit <- tidy.default

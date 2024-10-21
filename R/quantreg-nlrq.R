@@ -90,6 +90,6 @@ glance.nlrq <- function(x, ...) {
 #' @export
 #' @seealso [augment()], [quantreg::nlrq()]
 #' @family quantreg tidiers
-#' @include stats-nls-tidiers.R
+#' @include stats-nls.R
 #'
 augment.nlrq <- augment.nls

@@ -70,7 +70,7 @@ tidy.glm <- function(x, conf.int = FALSE, conf.level = .95,
 #' @export
 #' @family lm tidiers
 #' @seealso [stats::glm()]
-#' @include stats-lm-tidiers.R
+#' @include stats-lm.R
 augment.glm <- function(x,
                         data = model.frame(x),
                         newdata = NULL,
