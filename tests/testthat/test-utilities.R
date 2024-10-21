@@ -1,5 +1,3 @@
-context("utilities")
-
 skip_if_not_installed("modeltests")
 library(modeltests)
 
