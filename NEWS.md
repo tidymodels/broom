@@ -1,5 +1,10 @@
 # broom (development version)
 
+* Various improvements to infrastructure and testing:
+     - Migrated all messages, warnings, and errors to use the cli package (#1230).
+     - Aligned names of source and test files (#1229).
+     - Transitioned to the third edition of testthat (#1228).
+
 * `tidy.coeftest` now returns non-`NA` values for `conf.low` and `conf.high` for
   a model fitted with only a constant term and cluster robust std errors
   computed using `vcovCL` from `sandwich` (#1227).
