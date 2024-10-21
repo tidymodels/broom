@@ -548,7 +548,7 @@ Imports:
     glue,
     lifecycle,
     purrr,
-    rlang,
+    rlang (>= 1.1.0),
     stringr,
     tibble (>= 3.0.0),
     tidyr (>= 1.0.0)
