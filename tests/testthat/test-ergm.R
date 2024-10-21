@@ -51,10 +51,8 @@ test_that("tidy.ergm", {
 test_that("glance.ergm", {
   gl <- glance(gest, deviance = TRUE)
   gl2 <- glance(gest3, deviance = TRUE, mcmc = TRUE)
-  expect_message(
-    gl3 <- glance(gest, deviance = TRUE, mcmc = TRUE)
-  )
-
+  expect_snapshot(gl3 <- glance(gest, deviance = TRUE, mcmc = TRUE))
+  
   check_glance_outputs(gl)
   check_dims(gl, expected_cols = 9)
   check_dims(gl2, expected_cols = 12)
