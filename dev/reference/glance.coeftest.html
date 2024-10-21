@@ -243,7 +243,10 @@ modern approach.</cite> (6th edition). Nelson Education.</p>
 <span class="r-in"><span><span class="co"># depending on whether the coeftest object retains the underlying model.</span></span></span>
 <span class="r-in"><span><span class="co"># Users can control this with the "save = TRUE" argument of coeftest().</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/coeftest.html" class="external-link">coeftest</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Original model not retained as part of coeftest object. For additional model summary information (r.squared, df, etc.), consider passing `glance.coeftest()` an object where the underlying model has been saved, i.e.`lmtest::coeftest(..., save = TRUE)`.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Original model not retained as part of coeftest object.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> For additional model summary information (r.squared, df, etc.),</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   consider passing `glance.coeftest()` an object where the underlying</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   model has been saved, i.e.  `lmtest::coeftest(..., save = TRUE)`.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">This message is displayed once per session.</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   logLik     AIC   BIC  nobs</span>
