@@ -7,10 +7,10 @@ skip_if_not_installed("modeltests")
 library(modeltests)
 
 skip_if_not_installed("lsmeans")
-library(lsmeans)
+suppressPackageStartupMessages(library(lsmeans))
 
 skip_if_not_installed("lme4")
-library(lme4)
+suppressPackageStartupMessages(library(lme4))
 
 fit <- lm(sales1 ~ price1 + price2 + day + store, data = oranges)
 rg <- ref.grid(fit)

@@ -4,10 +4,10 @@ skip_if_not_installed("modeltests")
 library(modeltests)
 
 skip_if_not_installed("spdep")
-library(spdep)
+suppressPackageStartupMessages(library(spdep))
 
 skip_if_not_installed("spatialreg")
-library(spatialreg)
+suppressPackageStartupMessages(library(spatialreg))
 
 data(oldcol, package = "spdep")
 listw <- spdep::nb2listw(COL.nb, style = "W")

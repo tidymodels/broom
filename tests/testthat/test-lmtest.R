@@ -4,10 +4,10 @@ skip_if_not_installed("modeltests")
 library(modeltests)
 
 skip_if_not_installed("lmtest")
-library(lmtest)
+suppressPackageStartupMessages(library(lmtest))
 
 skip_if_not_installed("sandwich")
-library(sandwich)
+suppressPackageStartupMessages(library(sandwich))
 
 m <- lm(dist ~ speed, data = cars)
 ct <- lmtest::coeftest(m)

@@ -4,7 +4,7 @@ skip_if_not_installed("modeltests")
 library(modeltests)
 
 skip_if_not_installed("survival")
-library(survival)
+suppressPackageStartupMessages(library(survival))
 
 fit <- survdiff(Surv(futime, fustat) ~ rx, data = ovarian)
 fit2 <- survdiff(Surv(time, status) ~ pat.karno + strata(inst), data = lung)

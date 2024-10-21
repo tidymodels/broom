@@ -4,7 +4,7 @@ skip_if_not_installed("modeltests")
 library(modeltests)
 
 skip_if_not_installed("Kendall")
-library(Kendall)
+suppressPackageStartupMessages(library(Kendall))
 
 a <- c(2.5, 2.5, 2.5, 2.5, 5, 6.5, 6.5, 10, 10, 10, 10, 10, 14, 14, 14, 16, 17)
 b <- c(1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2)

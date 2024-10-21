@@ -4,7 +4,7 @@ skip_if_not_installed("modeltests")
 library(modeltests)
 
 skip_if_not_installed("plm")
-library(plm)
+suppressPackageStartupMessages(library(plm))
 
 data(Produc, package = "plm")
 fit <- plm(

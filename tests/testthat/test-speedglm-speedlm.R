@@ -4,7 +4,7 @@ skip_if_not_installed("modeltests")
 library(modeltests)
 
 skip_if_not_installed("speedglm")
-library(speedglm)
+suppressPackageStartupMessages(library(speedglm))
 
 fit <- speedlm(mpg ~ wt, mtcars, fitted = TRUE)
 fit2 <- speedlm(mpg ~ wt + disp, mtcars, fitted = TRUE)

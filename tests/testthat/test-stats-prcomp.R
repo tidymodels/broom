@@ -57,7 +57,7 @@ test_that("augment.prcomp", {
 })
 
 test_that("augment.prcomp works with matrix objects", {
-  library(broom)
+suppressPackageStartupMessages(  library(broom))
   set.seed(17)
 
   # data

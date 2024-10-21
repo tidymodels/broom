@@ -5,7 +5,7 @@ library(modeltests)
 
 skip_if_not_installed("betareg")
 
-library(betareg)
+suppressPackageStartupMessages(library(betareg))
 data("GasolineYield")
 
 fit1 <- betareg(yield ~ batch + temp, data = GasolineYield)

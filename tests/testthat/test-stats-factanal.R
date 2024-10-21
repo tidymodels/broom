@@ -61,7 +61,7 @@ test_that("augment.factanal works", {
 })
 
 test_that("augment.factanal works with matrix", {
-  library(broom)
+suppressPackageStartupMessages(  library(broom))
   set.seed(123)
 
   # data

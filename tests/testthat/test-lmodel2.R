@@ -4,7 +4,7 @@ skip_if_not_installed("modeltests")
 library(modeltests)
 
 skip_if_not_installed("lmodel2")
-library(lmodel2)
+suppressPackageStartupMessages(library(lmodel2))
 
 data("mod2ex2")
 fit <- lmodel2(Prey ~ Predators, data = mod2ex2, "relative", "relative", 99)

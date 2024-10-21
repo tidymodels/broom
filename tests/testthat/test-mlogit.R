@@ -5,8 +5,8 @@ library(modeltests)
 
 skip_if_not_installed("mlogit")
 skip_if_not_installed("AER")
-library(mlogit)
-library(AER)
+suppressPackageStartupMessages(library(mlogit))
+suppressPackageStartupMessages(library(AER))
 library(dplyr)
 
 data("Fishing", package = "mlogit")

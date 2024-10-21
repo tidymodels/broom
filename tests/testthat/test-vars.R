@@ -2,7 +2,7 @@ skip_on_cran()
 skip_if_not_installed("modeltests")
 skip_if_not_installed("vars")
 
-library(vars)
+suppressPackageStartupMessages(library(vars))
 library(modeltests)
 
 data("Canada", package = "vars")

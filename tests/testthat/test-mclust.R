@@ -7,7 +7,7 @@ skip_if_not_installed("modeltests")
 library(modeltests)
 
 skip_if_not_installed("mclust")
-library(mclust)
+suppressPackageStartupMessages(library(mclust))
 
 skip_if_not_installed("modeldata")
 library(modeldata)

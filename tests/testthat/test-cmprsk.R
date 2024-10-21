@@ -4,7 +4,7 @@ skip_if_not_installed("modeltests")
 library(modeltests)
 
 skip_if_not_installed("cmprsk")
-library(cmprsk)
+suppressPackageStartupMessages(library(cmprsk))
 set.seed(2)
 
 # simulate data

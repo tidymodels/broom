@@ -4,7 +4,7 @@ skip_if_not_installed("modeltests")
 library(modeltests)
 
 skip_if_not_installed("mediation")
-library(mediation)
+suppressPackageStartupMessages(library(mediation))
 
 data(jobs)
 b <- lm(job_seek ~ treat + econ_hard + sex + age, data = jobs)

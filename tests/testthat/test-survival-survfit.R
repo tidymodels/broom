@@ -4,7 +4,7 @@ skip_if_not_installed("modeltests")
 library(modeltests)
 
 skip_if_not_installed("survival")
-library(survival)
+suppressPackageStartupMessages(library(survival))
 
 cfit <- coxph(Surv(time, status) ~ age + strata(sex), lung)
 sfit <- survfit(cfit)

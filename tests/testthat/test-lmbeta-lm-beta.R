@@ -4,7 +4,7 @@ skip_if_not_installed("modeltests")
 library(modeltests)
 
 skip_if_not_installed("lm.beta")
-library(lm.beta)
+suppressPackageStartupMessages(library(lm.beta))
 
 test_that("lm.beta tidier arguments", {
   check_arguments(tidy.lm.beta)

@@ -7,7 +7,7 @@ skip_if_not_installed("modeltests")
 library(modeltests)
 
 skip_if_not_installed("joineRML")
-library(joineRML)
+suppressPackageStartupMessages(library(joineRML))
 
 # NOTE: the models used in these tests are created in
 # `data-raw/fit_and_save_long_running_models.R`, and then are saved to

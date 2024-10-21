@@ -1,8 +1,8 @@
 skip_if_not_installed("modeltests")
-library(modeltests)
+suppressPackageStartupMessages(library(modeltests))
 
-skip_if_not_installed("tseries")
-library(tseries)
+suppressMessages(skip_if_not_installed("tseries"))
+suppressPackageStartupMessages(library(tseries))
 
 dax <- diff(log(EuStockMarkets))[, "DAX"]
 fit <- garch(dax, control = garch.control(trace = FALSE))

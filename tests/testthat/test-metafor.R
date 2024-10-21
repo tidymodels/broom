@@ -7,10 +7,10 @@ skip_if_not_installed("modeltests")
 library(modeltests)
 
 skip_if_not_installed("metafor")
-library(metafor)
+suppressPackageStartupMessages(library(metafor))
 
 skip_if_not_installed("lme4")
-library(lme4)
+suppressPackageStartupMessages(library(lme4))
 
 # check arguments ---------------------------------------------------------
 

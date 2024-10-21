@@ -7,7 +7,7 @@ rownames(dat) <- c("DF+", "DF-")
 colnames(dat) <- c("FUS+", "FUS-")
 
 skip_if_not_installed("MASS")
-library(MASS)
+suppressPackageStartupMessages(library(MASS))
 birthwt <- MASS::birthwt
 
 birthwt$low <- factor(birthwt$low, levels = c(1, 0))
@@ -18,7 +18,7 @@ tab2 <- table(birthwt$smoke, birthwt$low, birthwt$race,
   dnn = c("Smoke", "Low BW", "Race")
 )
 
-library(epiR)
+suppressPackageStartupMessages(library(epiR))
 fit1 <- epi.2by2(
   dat = as.table(dat), method = "cross.sectional",
   conf.level = 0.95, units = 100, outcome = "as.columns"

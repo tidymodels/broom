@@ -4,7 +4,7 @@ skip_if_not_installed("modeltests")
 library(modeltests)
 
 skip_if_not_installed("nnet")
-library(nnet)
+suppressPackageStartupMessages(library(nnet))
 
 fit <- multinom(gear ~ mpg + factor(am), data = mtcars, trace = FALSE)
 

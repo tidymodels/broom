@@ -4,7 +4,7 @@ skip_if_not_installed("modeltests")
 library(modeltests)
 
 skip_if_not_installed("mfx")
-library(mfx)
+suppressPackageStartupMessages(library(mfx))
 
 # simulate data
 set.seed(12345)

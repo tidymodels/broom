@@ -2,7 +2,7 @@ skip_if_not_installed("modeltests")
 library(modeltests)
 
 skip_if_not_installed("glmnet")
-library(glmnet)
+suppressPackageStartupMessages(library(glmnet))
 
 set.seed(27)
 

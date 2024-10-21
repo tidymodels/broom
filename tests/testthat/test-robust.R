@@ -4,7 +4,7 @@ skip_if_not_installed("modeltests")
 library(modeltests)
 
 skip_if_not_installed("robust")
-library(robust)
+suppressPackageStartupMessages(library(robust))
 
 fit <- lmRob(mpg ~ wt, data = mtcars)
 fit2 <- glmRob(am ~ wt, data = mtcars, family = "binomial")

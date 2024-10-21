@@ -4,7 +4,7 @@ skip_if_not_installed("modeltests")
 library(modeltests)
 
 skip_if_not_installed("biglm")
-library(biglm)
+suppressPackageStartupMessages(library(biglm))
 
 fit <- biglm(mpg ~ wt + disp, mtcars)
 fit2 <- bigglm(am ~ mpg, mtcars, family = binomial())

@@ -6,7 +6,7 @@ library(modeltests)
 skip_if_not_installed("muhaz")
 skip_if_not_installed("survival") # does this skip with base R?
 
-library(muhaz)
+suppressPackageStartupMessages(library(muhaz))
 
 # load the ovarian data
 data(cancer, package = "survival")
