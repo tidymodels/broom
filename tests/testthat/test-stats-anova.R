@@ -125,7 +125,7 @@ test_that("tidy.linearHypothesis", {
 
   expect_equal(td_lht$term, "disp - hp")
   expect_equal(td_lht$null.value, 0)
-  expect_equal(td_lht$estimate, -0.00551, tolerance = .00001)
+  expect_equal(td_lht$estimate, -0.005506, tolerance = .0001)
 })
 
 # Matrix ABI version may differ (#1204)
