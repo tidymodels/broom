@@ -20,6 +20,8 @@
 #' @importFrom purrr map_df set_names possibly
 #' @importFrom tibble tibble as_tibble
 #' @importFrom tidyr pivot_longer pivot_wider
+#' 
+#' @import rlang
 #'
 #' @importFrom utils head
 #' @importFrom glue glue

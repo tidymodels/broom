@@ -104,11 +104,11 @@ augment.fixest <- function(
     type.residuals = c("response", "deviance", "pearson", "working"),
     ...) {
   if (!x$method %in% c("feols", "feglm", "femlm")) {
-    stop(
-      "augment is only supported for fixest models estimated with ",
-      "feols, feglm, or femlm\n",
-      "  (supplied model used ", x$method, ")"
-    )
+    cli::cli_abort(c(
+      "augment is only supported for fixest models estimated with
+       {.fn feols}, {.fn feglm}, or {.fn femlm}.",
+      "i" = "Supplied model used {.fn {x$method}}."
+    ))
   }
   type.predict <- match.arg(type.predict)
   type.residuals <- match.arg(type.residuals)
@@ -119,7 +119,9 @@ augment.fixest <- function(
     df <- newdata
   }
   if (is.null(df)) {
-    stop("Must specify either `data` or `newdata` argument.", call. = FALSE)
+    cli::cli_abort(
+      "Must specify either a {.arg data} or {.arg newdata} argument."
+    )
   }
   df <- as_augment_tibble(df)
   if (is.null(newdata)) {

@@ -68,7 +68,7 @@ tidy.htest <- function(x, ...) {
   if (length(x$parameter) > 1) {
     ret$parameter <- NULL
     if (is.null(names(x$parameter))) {
-      warning("Multiple unnamed parameters in hypothesis test; dropping them")
+      cli::cli_warn("Multiple unnamed parameters in hypothesis test; dropping them.")
     } else {
       # rename num df to num.df and denom df to denom.df
       np <- names(x$parameter)
@@ -76,11 +76,8 @@ tidy.htest <- function(x, ...) {
       np <- stringr::str_replace(np, "denom df", "den.df")
       names(x$parameter) <- np
 
-      message(
-        "Multiple parameters; naming those columns ",
-        paste(np, collapse = ", ")
-      )
-
+      cli::cli_inform("Multiple parameters; naming those columns {np}.")
+      
       ret <- append(ret, x$parameter, after = 1)
     }
   }
@@ -133,9 +130,8 @@ augment.htest <- function(x, ...) {
     return(augment_chisq_test(x, ...))
   }
 
-  stop(
-    "Augment is only defined for chi squared hypothesis tests.",
-    call. = FALSE
+  cli::cli_abort(
+    "{.fn augment.htest} is only defined for chi squared hypothesis tests."
   )
 }
 

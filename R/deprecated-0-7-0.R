@@ -154,7 +154,9 @@ tidy.data.frame <- function(x, ..., na.rm = TRUE, trim = 0.1) {
 #' @export
 #' @family deprecated
 augment.data.frame <- function(x, data, ...) {
-  stop(paste("augment's first argument should be a model, not a data.frame"))
+  cli::cli_abort(
+    "{.arg x} should be a model, not a {.cls data.frame}."
+  )
 }
 
 
@@ -275,7 +277,10 @@ fix_data_frame <- function(x, newnames = NULL, newcol = "term") {
   )
   
   if (!is.null(newnames) && length(newnames) != ncol(x)) {
-    stop("newnames must be NULL or have length equal to number of columns")
+    cli::cli_abort(
+      "{.arg newnames} must be {.code NULL} or have length
+       equal to the number of columns."
+    )
   }
   
   if (all(rownames(x) == seq_len(nrow(x)))) {

@@ -26,11 +26,10 @@ return_evalrd <- function(..., .method, .pre = NULL, .post = NULL) {
     not_found <- setdiff(pull_from_modeltests, glos_env$column_glossary$column)
 
     if (length(not_found) > 0) {
-      not_found <- paste(not_found, collapse = ", ")
-      stop(
-        glue(
-          "Tried to use modeltests documentation for: {not_found} column(s) ",
-          "but could not find any."
+      cli::cli_abort(
+        c(
+          "Tried to use modeltests documentation for: {not_found} column{?s}.",
+          "i" = "No documentation could be found."
         )
       )
     }
@@ -67,11 +66,10 @@ return_evalrd <- function(..., .method, .pre = NULL, .post = NULL) {
   written <- purrr::map_lgl(cols_exps, stringr::str_detect, string = result)
   missing_cols <- standard_cols[!written]
   if (length(missing_cols) != 0) {
-    cols_message <- glue(
-      'The return_{.method} input "{missing_cols}" did not ',
-      "result in any documentation being written. \n"
+    cli::cli_inform(
+      "The {.code return_{.method}} input {.val {missing_cols}} did not 
+       result in any documentation being written."
     )
-    message(cols_message)
   }
 
   result

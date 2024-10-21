@@ -102,7 +102,7 @@ glance.drc <- function(x, ...) {
 augment.drc <- function(x, data = NULL, newdata = NULL,
                         se_fit = FALSE, conf.int = FALSE, conf.level = 0.95, ...) {
   if (is.null(data) && is.null(newdata)) {
-    stop("Must specify either `data` or `newdata` argument.", call. = FALSE)
+    cli::cli_abort("Must specify either {.arg data} or {.arg newdata} argument.")
   }
 
   # drc doesn't like tibbles

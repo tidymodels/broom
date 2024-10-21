@@ -3,7 +3,7 @@
     Code
       augment(mod)
     Condition
-      Error:
+      Error in `augment()`:
       ! Must specify either `data` or `newdata` argument.
 
 ---
@@ -11,6 +11,6 @@
     Code
       augment(mod2)
     Condition
-      Error:
+      Error in `augment()`:
       ! Must specify either `data` or `newdata` argument.
 

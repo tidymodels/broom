@@ -96,12 +96,11 @@ augment.factanal <- function(x, data, ...) {
 
   # Check scores were computed
   if (is.null(scores)) {
-    stop(
-      "Cannot augment factanal objects fit with `scores = 'none'`.",
-      call. = FALSE
+    cli::cli_abort(
+      'Cannot augment {.cls factanal} objects fit with {.code scores = "none"}.'
     )
   }
-
+  
   # Place relevant values into a tidy data frame
   if (has_rownames(scores)) {
     tidy_df <- data.frame(.rownames = rownames(scores), data.frame(scores)) %>%

@@ -168,10 +168,13 @@ warn_on_appropriated_glm_class <- function(x) {
 warn_on_glm2 <- function(x) {
   if (!is.null(x$method) & is.character(x$method)) {
     if (x$method == "glm.fit2") {
-      warning(
-        "The supplied model object seems to be outputted from the glm2 ",
-        "package. Tidiers for glm2 output are currently not ",
-        "maintained; please use caution in interpreting broom output."
+      cli::cli_warn(
+        c(
+          "{.arg x} seems to be outputted from the {.pkg glm2} package.",
+          "i" = "Tidiers for {.pkg glm2} output are currently not maintained;
+                 please use caution in interpreting {.pkg broom} output."
+        ), 
+        call = NULL
       )
     }
   }
@@ -181,11 +184,14 @@ warn_on_glm2 <- function(x) {
 
 # stanreg objects subclass glm, glm tidiers error out (uninformatively),
 # and the maintained stanreg tidiers live in broom.mixed.
-warn_on_stanreg <- function(x) {
+warn_on_stanreg <- function(x, call = caller_env()) {
   if (!is.null(x$stan_function)) {
-    stop(
-      "The supplied model object seems to be outputted from the rstanarm ",
-      "package. Tidiers for mixed model output now live in the broom.mixed package."
+    cli::cli_abort(
+      c(
+        "{.arg x} seems to be outputted from the {.pkg rstanarm} package.",
+        "i" = "Tidiers for mixed model output now live in {.pkg broom.mixed}."
+      ),
+      call = call
     )
   }
 

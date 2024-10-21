@@ -3,6 +3,6 @@
     Code
       augment(fit_none)
     Condition
-      Error:
-      ! Cannot augment factanal objects fit with `scores = 'none'`.
+      Error in `augment()`:
+      ! Cannot augment <factanal> objects fit with `scores = "none"`.
 

@@ -33,7 +33,7 @@ tidy.list <- function(x, ...) {
   } else if (all(svd_elems %in% names(x))) {
     tidy_svd(x, ...)
   } else {
-    stop("No tidy method recognized for this list.", call. = FALSE)
+    cli::cli_abort("No {.fn tidy} method recognized for this list.")
   }
 }
 
@@ -45,6 +45,6 @@ glance.list <- function(x, ...) {
   if (all(optim_elems %in% names(x))) {
     glance_optim(x, ...)
   } else {
-    stop("No glance method recognized for this list.", call. = FALSE)
+    cli::cli_abort("No {.fn glance} method recognized for this list.")
   }
 }

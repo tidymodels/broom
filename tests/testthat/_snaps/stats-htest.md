@@ -3,29 +3,29 @@
     Code
       td <- tidy(ot)
     Message
-      Multiple parameters; naming those columns num.df, den.df
+      Multiple parameters; naming those columns num.df and den.df.
 
 # augment.htest (chi squared test)
 
     Code
       augment(tt)
     Condition
-      Error:
-      ! Augment is only defined for chi squared hypothesis tests.
+      Error in `augment()`:
+      ! `augment.htest()` is only defined for chi squared hypothesis tests.
 
 ---
 
     Code
       augment(wt)
     Condition
-      Error:
-      ! Augment is only defined for chi squared hypothesis tests.
+      Error in `augment()`:
+      ! `augment.htest()` is only defined for chi squared hypothesis tests.
 
 ---
 
     Code
       augment(ct)
     Condition
-      Error:
-      ! Augment is only defined for chi squared hypothesis tests.
+      Error in `augment()`:
+      ! `augment.htest()` is only defined for chi squared hypothesis tests.
 

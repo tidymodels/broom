@@ -41,10 +41,13 @@ tidy.rqs <- function(x, se.type = "rank", conf.int = FALSE,
 
 #' @export
 glance.rqs <- function(x, ...) {
-  stop("`glance` cannot handle objects of class 'rqs',",
-    " i.e. models with more than one tau value. Please",
-    " use a purrr `map`-based workflow with 'rq' models instead.",
-    call. = FALSE
+  cli::cli_abort(
+    c(
+      "{.fn glance} cannot handle objects of class {.cls rqs},
+       i.e. models with more than one tau value.",
+      "i" = "Please use a {.pkg purrr} {.fn map}-based workflow with
+             {.cls rq} models instead."
+    )
   )
 }
 

@@ -3,6 +3,6 @@
     Code
       .res <- tidy(loess_anova)
     Condition
-      Warning in `tidy.anova()`:
-      The following column names in ANOVA output were not recognized or transformed: ENP
+      Warning:
+      The column name ENP in ANOVA output was not recognized or transformed.
 

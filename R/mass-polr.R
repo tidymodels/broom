@@ -70,8 +70,10 @@ tidy.polr <- function(x, conf.int = FALSE, conf.level = 0.95,
     if (length(p) == length(terms)) {
       ret <- dplyr::left_join(ret, tibble::tibble(term = terms, p.value = p), by = "term")
     } else {
-      message("p-values can presently only be returned for models that contain
-              no categorical variables with more than two levels")
+      cli::cli_inform(
+        "p-values can presently only be returned for models that contain
+         no categorical variables with more than two levels."
+      )
       ret$p.value <- NA
     }
   }

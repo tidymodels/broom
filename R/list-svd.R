@@ -40,7 +40,7 @@
 #' @family list tidiers
 tidy_svd <- function(x, matrix = "u", ...) {
   if (length(matrix) > 1) {
-    stop("Must specify a single matrix to tidy.")
+    cli::cli_abort("Must specify a single matrix to tidy.")
   }
 
   if (matrix == "u") {

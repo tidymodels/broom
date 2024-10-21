@@ -66,7 +66,11 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, se.type
   # warn users about deprecated "robust" argument
   dots <- list(...)
   if (!is.null(dots$robust)) {
-    warning('\nThe "robust" argument has been deprecated in tidy.felm and will be ignored. Please use the "se.type" argument instead.\n')
+    cli::cli_warn(c(
+      "The {.arg robust} argument has been deprecated in {.fn tidy.felm} and 
+       will be ignored.",
+      "i" = "Please use the {.arg se.type} argument instead."
+    ))
   }
 
   # match SE args
@@ -83,7 +87,10 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, se.type
   } else {
     # catch potential user error, asking for clusters where none exist
     if (se.type == "cluster" && is.null(x$clustervar)) {
-      warning("Clustered SEs requested, but weren't calculated in underlying model object. Reverting to default SEs.\n")
+      cli::cli_warn(c(
+        "Clustered SEs requested, but weren't calculated in underlying model object.",
+        "i" = "Reverting to default SEs."
+      ))
       se.type <- NULL
     }
 
@@ -203,10 +210,7 @@ augment.felm <- function(x, data = model.frame(x), ...) {
   has_multi_response <- length(x$lhs) > 1
 
   if (has_multi_response) {
-    stop(
-      "Augment does not support linear models with multiple responses.",
-      call. = FALSE
-    )
+    cli::cli_abort("{.fn felm} models with multiple responses are not supported.")
   }
   df <- as_augment_tibble(data)
   mutate(df, .fitted = as.vector(x$fitted.values), .resid = as.vector(x$residuals))
@@ -233,12 +237,9 @@ glance.felm <- function(x, ...) {
   has_multi_response <- length(x$lhs) > 1
 
   if (has_multi_response) {
-    stop(
-      "Glance does not support linear models with multiple responses.",
-      call. = FALSE
-    )
+    cli::cli_abort("{.fn felm} models with multiple responses are not supported.")
   }
-
+  
   s <- summary(x)
 
   as_glance_tibble(

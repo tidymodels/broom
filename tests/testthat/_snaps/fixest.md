@@ -3,25 +3,25 @@
     Code
       augment(res_fenegbin, df)
     Condition
-      Error in `augment.fixest()`:
-      ! augment is only supported for fixest models estimated with feols, feglm, or femlm
-        (supplied model used fenegbin)
+      Error in `augment()`:
+      ! augment is only supported for fixest models estimated with `feols()`, `feglm()`, or `femlm()`.
+      i Supplied model used `fenegbin()`.
 
 ---
 
     Code
       augment(res_feNmlm, df)
     Condition
-      Error in `augment.fixest()`:
-      ! augment is only supported for fixest models estimated with feols, feglm, or femlm
-        (supplied model used feNmlm)
+      Error in `augment()`:
+      ! augment is only supported for fixest models estimated with `feols()`, `feglm()`, or `femlm()`.
+      i Supplied model used `feNmlm()`.
 
 ---
 
     Code
       augment(res_fepois, df)
     Condition
-      Error in `augment.fixest()`:
-      ! augment is only supported for fixest models estimated with feols, feglm, or femlm
-        (supplied model used fepois)
+      Error in `augment()`:
+      ! augment is only supported for fixest models estimated with `feols()`, `feglm()`, or `femlm()`.
+      i Supplied model used `fepois()`.
 

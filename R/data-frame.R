@@ -1,17 +1,15 @@
 #' @export
 glance.data.frame <- function(x, ...) {
-  stop(
-    "There is no glance method for data frames. ",
-    "Did you mean `tibble::glimpse()`?",
-    call. = FALSE
-  )
+  cli::cli_abort(c(
+      "There is no {.fn glance} method for data frames.",
+      "i" = "Did you mean {.fn tibble::glimpse}?"
+  ))
 }
 
 #' @export
 glance.tbl_df <- function(x, ...) {
-  stop(
-    "There is no glance method for tibbles. ",
-    "Did you mean `tibble::glimpse()`?",
-    call. = FALSE
-  )
+  cli::cli_abort(c(
+      "There is no glance method for tibbles.",
+      "i" = "Did you mean {.fn tibble::glimpse}?"
+  ))
 }

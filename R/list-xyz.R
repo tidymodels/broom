@@ -25,16 +25,15 @@
 #'
 tidy_xyz <- function(x, ...) {
   if (!is.matrix(x$z)) {
-    stop("To tidy an xyz list, `z` must be a matrix.", call. = FALSE)
+    cli::cli_abort("{.arg z} must be a matrix.")
   }
 
   if (length(x$x) != nrow(x$z) || length(x$y) != ncol(x$z)) {
-    stop(
-      "To tidy an xyz list, the length of element `x` must equal the number ",
-      "the number of rows of element `z`, and the length of element `y` must ",
-      "equal the number of columns of element `z`.",
-      call. = FALSE
-    )
+    cli::cli_abort(c(
+      "To tidy an xyz list, the length of element {.code x} must equal the
+       number of rows of element {.code z}, and the length of element
+       {.code y} must equal the number of columns of element {.code z}."
+    ))
   }
 
   as_tibble(data.frame(

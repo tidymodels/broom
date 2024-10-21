@@ -82,7 +82,10 @@ tidy.ergm <- function(x, conf.int = FALSE, conf.level = 0.95,
   if (exponentiate) {
     if (is.null(x$glm) ||
       (x$glm$family$link != "logit" && x$glm$family$link != "log")) {
-      warning("Exponentiating but model didn't use log or logit link.")
+      cli::cli_warn(
+        "Coefficients will be exponentiated, but the model didn't 
+         use a {.code log} or {.code logit} link."
+      )
     }
 
     ret <- exponentiate(ret)
@@ -152,9 +155,12 @@ glance.ergm <- function(x, deviance = FALSE, mcmc = FALSE, ...) {
 
   if (mcmc) {
     if (isTRUE(x$MPLE_is_MLE)) {
-      message(
-        "Though `glance` was supplied `mcmc = TRUE`, the model was not fitted",
-        "using MCMC, so the corresponding columns will be omitted."
+      cli::cli_inform(
+        c(
+          "Though {.fn glance} was supplied {.code mcmc = TRUE}, the model was not
+           fitted using MCMC,",
+          "i" = "The corresponding columns will be omitted."
+        )
       )
     }
 

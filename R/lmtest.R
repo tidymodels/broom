@@ -114,8 +114,16 @@ glance.coeftest <- function(x, ...) {
       logLik = sprintf("%.3f", logLik(x)), AIC = AIC(x),
       BIC = BIC(x), nobs = nobs(x)
     )
-    rlang::inform("Original model not retained as part of coeftest object. For additional model summary information (r.squared, df, etc.), consider passing `glance.coeftest()` an object where the underlying model has been saved, i.e.`lmtest::coeftest(..., save = TRUE)`.",
-      .frequency = "once", .frequency_id = "glance_coeftest_inform"
+    cli::cli_inform(
+      c(
+        "Original model not retained as part of coeftest object.",
+        "i" = "For additional model summary information (r.squared, df, etc.),
+           consider passing {.fn glance.coeftest} an object where the 
+           underlying model has been saved, i.e. 
+           {.code lmtest::coeftest(..., save = TRUE)}."
+      ),
+      .frequency = "once",
+      .frequency_id = "glance_coeftest_inform"
     )
   }
 

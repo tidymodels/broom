@@ -543,6 +543,7 @@ Depends:
     R (>= 3.5)
 Imports:
     backports,
+    cli,
     dplyr (>= 1.0.0),
     generics (>= 0.0.2),
     glue,
