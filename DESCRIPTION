@@ -673,6 +673,8 @@ Collate:
     'glmnet-glmnet-tidiers.R'
     'gmm-tidiers.R'
     'hmisc-tidiers.R'
+    'import-standalone-obj-type.R'
+    'import-standalone-types-check.R'
     'joinerml-tidiers.R'
     'kendall-tidiers.R'
     'ks-tidiers.R'
