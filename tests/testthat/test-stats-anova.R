@@ -127,7 +127,7 @@ test_that("tidy.linearHypothesis", {
 })
 
 # Matrix ABI version may differ (#1204)
-skip_if(paste0(R.Version()[c("major", "minor")], collapse = ".") < "4.4.0")
+skip_if_not_r_version("4.4.0")
 
 skip_if_not_installed("lme4")
 test_that("tidy.anova for merMod objects", {
