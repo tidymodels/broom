@@ -139,22 +139,22 @@ augment.INLA <- function(x, data = NULL, response = NULL, ...) {
 
 ### test that it all works ###
 
-library(tidyverse)
-library(INLA)
-
-data <- data.frame(
-  y = rnorm(100),
-  x1 = runif(100),
-  x2 = sample(letters[1:3], 100, replace = TRUE)
-)
-
-fit <- inla(
-  y ~ x1 + x2 + f(x2, model = "iid"),
-    data = data,
-  family = "gaussian", control.compute = list(dic = TRUE)
-)
-
-tidy.INLA(fit)
-glance.INLA(fit)
-augment.INLA(fit, data, response = "y") |> head()
+# library(tidyverse)
+# library(INLA)
+# 
+# data <- data.frame(
+#   y = rnorm(100),
+#   x1 = runif(100),
+#   x2 = sample(letters[1:3], 100, replace = TRUE)
+# )
+# 
+# fit <- inla(
+#   y ~ x1 + x2 + f(x2, model = "iid"),
+#     data = data,
+#   family = "gaussian", control.compute = list(dic = TRUE)
+# )
+# 
+# tidy.INLA(fit)
+# glance.INLA(fit)
+# augment.INLA(fit, data, response = "y") |> head()
 
