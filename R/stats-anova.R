@@ -84,7 +84,9 @@ tidy.anova <- function(x, ...) {
     "edf" = "edf",
     "Ref.df" = "ref.df",
     "loglik" = "logLik",
-    ".rownames" = "term"
+    ".rownames" = "term",
+    "-2*log(L)" = "minus2logL",
+    "X.2.log.L." = "minus2logL"
   )
 
   names(renamers) <- make.names(names(renamers))
