@@ -1,20 +1,30 @@
 # broom (development version)
 
+## Deprecations
+
 * Tidiers deprecated in version 0.7.0 of the package, released in July 2020,
-  have been fully removed. This includes data frame tidiers, `summaryDefault`
+  have been removed. This includes data frame tidiers, `summaryDefault`
   tidiers, and tidiers for various atomic objects (#1221).
 
 * Removed tidiers for objects from the orcutt package as it was archived from
   CRAN 4 months prior to the package release.
 
-* Various improvements to infrastructure and testing:
-     - Migrated all messages, warnings, and errors to use the cli package (#1230).
-     - Aligned names of source and test files (#1229).
-     - Transitioned to the third edition of testthat (#1228).
+## Minor Improvements
 
 * `tidy.coeftest` now returns non-`NA` values for `conf.low` and `conf.high` for
   a model fitted with only a constant term and cluster robust std errors
   computed using `vcovCL` from `sandwich` (#1227).
+
+* Added support for new column name in lme4 ANOVA output. (lme4 tidiers are
+  technically supplied by broom.mixed, but intermediate output is routed through 
+  broom's `tidy.anova()` method) (#1239).
+
+## Miscellaneous
+
+* Various improvements to infrastructure and testing:
+     - Migrated all messages, warnings, and errors to use the cli package (#1230).
+     - Aligned names of source and test files (#1229).
+     - Transitioned to the third edition of testthat (#1228).
 
 # broom 1.0.7
 
