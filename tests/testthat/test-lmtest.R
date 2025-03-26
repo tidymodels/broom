@@ -55,8 +55,9 @@ test_that("vcovCL.coeftest (#1227)", {
   ct <- coeftest(m, vcovCL(m, cluster = ~Month))
   ct_confint <- confint(ct, level = .9)
   output <- tidy(ct, conf.int = TRUE, conf.level = .9)
-  expect_equivalent(
+  expect_equal(
     output[c("conf.low", "conf.high")],
-    as.data.frame(ct_confint)
+    as.data.frame(ct_confint),
+    ignore_attr = TRUE
   )
 })
