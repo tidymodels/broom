@@ -613,7 +613,6 @@ Suggests:
     multcomp,
     network,
     nnet,
-    orcutt (>= 2.2),
     ordinal,
     plm,
     poLCA,
@@ -708,7 +707,6 @@ Collate:
     'multcomp.R'
     'nnet.R'
     'nobs.R'
-    'orcutt.R'
     'ordinal-clm.R'
     'ordinal-clmm.R'
     'plm.R'

@@ -23,12 +23,6 @@ nobs.multinom <- function(object, ...) {
   nrow(object$residuals)
 }
 
-# orcutt
-#' @export
-nobs.orcutt <- function(object, ...) {
-  nrow(object$residuals)
-}
-
 # mass-fitdistr
 #' @export
 nobs.fitdistr <- function(object, ...) {
