@@ -2,10 +2,6 @@
 
 ## Deprecations
 
-* Tidiers deprecated in version 0.7.0 of the package, released in July 2020,
-  have been removed. This includes data frame tidiers, `summaryDefault`
-  tidiers, and tidiers for various atomic objects (#1221).
-
 * Removed tidiers for objects from the orcutt package as it was archived from
   CRAN 4 months prior to the package release.
 
