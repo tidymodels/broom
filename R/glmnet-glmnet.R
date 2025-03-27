@@ -24,7 +24,8 @@
 #'   logical. Furthermore, predictions make sense only with a specific
 #'   choice of lambda.
 #'
-#' @examplesIf rlang::is_installed(c("glmnet", "ggplot2"))
+# sometimes triggers CRAN NOTE `elapsed time > 10s`
+#' @examplesIf FALSE
 #'
 #' # load libraries for models and data
 #' library(glmnet)
