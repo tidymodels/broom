@@ -55,8 +55,13 @@
 <url><loc>https://broom.tidymodels.org/dev/reference/augment.stl.html</loc></url>
 <url><loc>https://broom.tidymodels.org/dev/reference/augment.survreg.html</loc></url>
 <url><loc>https://broom.tidymodels.org/dev/reference/augment_columns.html</loc></url>
+<url><loc>https://broom.tidymodels.org/dev/reference/bootstrap.html</loc></url>
 <url><loc>https://broom.tidymodels.org/dev/reference/broom.html</loc></url>
+<url><loc>https://broom.tidymodels.org/dev/reference/confint_tidy.html</loc></url>
+<url><loc>https://broom.tidymodels.org/dev/reference/data.frame_tidiers.html</loc></url>
 <url><loc>https://broom.tidymodels.org/dev/reference/durbinWatsonTest_tidiers.html</loc></url>
+<url><loc>https://broom.tidymodels.org/dev/reference/finish_glance.html</loc></url>
+<url><loc>https://broom.tidymodels.org/dev/reference/fix_data_frame.html</loc></url>
 <url><loc>https://broom.tidymodels.org/dev/reference/glance.Arima.html</loc></url>
 <url><loc>https://broom.tidymodels.org/dev/reference/glance.Mclust.html</loc></url>
 <url><loc>https://broom.tidymodels.org/dev/reference/glance.aareg.html</loc></url>
@@ -132,6 +137,7 @@
 <url><loc>https://broom.tidymodels.org/dev/reference/null_tidiers.html</loc></url>
 <url><loc>https://broom.tidymodels.org/dev/reference/reexports.html</loc></url>
 <url><loc>https://broom.tidymodels.org/dev/reference/sp_tidiers.html</loc></url>
+<url><loc>https://broom.tidymodels.org/dev/reference/summary_tidiers.html</loc></url>
 <url><loc>https://broom.tidymodels.org/dev/reference/tidy.Arima.html</loc></url>
 <url><loc>https://broom.tidymodels.org/dev/reference/tidy.Kendall.html</loc></url>
 <url><loc>https://broom.tidymodels.org/dev/reference/tidy.Mclust.html</loc></url>
@@ -158,6 +164,8 @@
 <url><loc>https://broom.tidymodels.org/dev/reference/tidy.coxph.html</loc></url>
 <url><loc>https://broom.tidymodels.org/dev/reference/tidy.crr.html</loc></url>
 <url><loc>https://broom.tidymodels.org/dev/reference/tidy.cv.glmnet.html</loc></url>
+<url><loc>https://broom.tidymodels.org/dev/reference/tidy.density.html</loc></url>
+<url><loc>https://broom.tidymodels.org/dev/reference/tidy.dist.html</loc></url>
 <url><loc>https://broom.tidymodels.org/dev/reference/tidy.drc.html</loc></url>
 <url><loc>https://broom.tidymodels.org/dev/reference/tidy.emmGrid.html</loc></url>
 <url><loc>https://broom.tidymodels.org/dev/reference/tidy.epi.2by2.html</loc></url>
@@ -166,6 +174,7 @@
 <url><loc>https://broom.tidymodels.org/dev/reference/tidy.felm.html</loc></url>
 <url><loc>https://broom.tidymodels.org/dev/reference/tidy.fitdistr.html</loc></url>
 <url><loc>https://broom.tidymodels.org/dev/reference/tidy.fixest.html</loc></url>
+<url><loc>https://broom.tidymodels.org/dev/reference/tidy.ftable.html</loc></url>
 <url><loc>https://broom.tidymodels.org/dev/reference/tidy.gam.html</loc></url>
 <url><loc>https://broom.tidymodels.org/dev/reference/tidy.garch.html</loc></url>
 <url><loc>https://broom.tidymodels.org/dev/reference/tidy.geeglm.html</loc></url>
@@ -240,5 +249,6 @@
 <url><loc>https://broom.tidymodels.org/dev/reference/tidy_optim.html</loc></url>
 <url><loc>https://broom.tidymodels.org/dev/reference/tidy_svd.html</loc></url>
 <url><loc>https://broom.tidymodels.org/dev/reference/tidy_xyz.html</loc></url>
+<url><loc>https://broom.tidymodels.org/dev/reference/vector_tidiers.html</loc></url>
 </urlset>
 
