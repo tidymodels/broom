@@ -1,5 +1,3 @@
-# broom (development version)
-
 # broom 1.0.8
 
 ## Deprecations
