@@ -22,6 +22,6 @@ packages that supply themed tidiers are:
 - Tidiers for objects from BioConductor belong in [`biobroom`](https://bioconductor.org/packages/release/bioc/html/biobroom.html)
 
 To aid in the process of writing new tidiers, we have provided 
-[learning resources](https://www.tidymodels.org/learn/develop/broom) as well 
+[learning resources](https://www.tidymodels.org/learn/develop/broom/) as well 
 as lightweight dependencies to re-export tidier generics on the {tidymodels} 
 website.

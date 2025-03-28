@@ -1,7 +1,7 @@
 Type: Package
 Package: broom
 Title: Convert Statistical Objects into Tidy Tibbles
-Version: 1.0.7.9000
+Version: 1.0.8
 Authors@R:
     c(person(given = "David",
              family = "Robinson",
@@ -661,6 +661,7 @@ Collate:
     'cluster.R'
     'cmprsk.R'
     'data-frame.R'
+    'deprecated-0-7-0.R'
     'drc.R'
     'emmeans.R'
     'epiR.R'

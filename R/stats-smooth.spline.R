@@ -5,7 +5,8 @@
 #' @template param_data
 #' @template param_unused_dots
 #'
-#' @examplesIf rlang::is_installed("ggplot2")
+# sometimes triggers CRAN NOTE `elapsed time > 10s`
+#' @examplesIf FALSE
 #'
 #' # fit model
 #' spl <- smooth.spline(mtcars$wt, mtcars$mpg, df = 4)
