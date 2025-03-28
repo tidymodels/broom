@@ -107,7 +107,6 @@
 <url><loc>https://broom.tidymodels.org/reference/glance.negbin.html</loc></url>
 <url><loc>https://broom.tidymodels.org/reference/glance.nlrq.html</loc></url>
 <url><loc>https://broom.tidymodels.org/reference/glance.nls.html</loc></url>
-<url><loc>https://broom.tidymodels.org/reference/glance.orcutt.html</loc></url>
 <url><loc>https://broom.tidymodels.org/reference/glance.pam.html</loc></url>
 <url><loc>https://broom.tidymodels.org/reference/glance.plm.html</loc></url>
 <url><loc>https://broom.tidymodels.org/reference/glance.poLCA.html</loc></url>
@@ -210,7 +209,6 @@
 <url><loc>https://broom.tidymodels.org/reference/tidy.negbin.html</loc></url>
 <url><loc>https://broom.tidymodels.org/reference/tidy.nlrq.html</loc></url>
 <url><loc>https://broom.tidymodels.org/reference/tidy.nls.html</loc></url>
-<url><loc>https://broom.tidymodels.org/reference/tidy.orcutt.html</loc></url>
 <url><loc>https://broom.tidymodels.org/reference/tidy.pairwise.htest.html</loc></url>
 <url><loc>https://broom.tidymodels.org/reference/tidy.pam.html</loc></url>
 <url><loc>https://broom.tidymodels.org/reference/tidy.plm.html</loc></url>

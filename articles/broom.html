@@ -16,8 +16,8 @@
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.9/font.css" rel="stylesheet">
 <link href="../deps/Source_Code_Pro-0.4.9/font.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Introduction to broom">
 <script defer data-domain="broom.tidymodels.org,all.tidymodels.org" src="https://plausible.io/js/plausible.js"></script>
 </head>
@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">broom</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.8</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,7 +72,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Introduction to broom</h1>
             
-            <h4 data-toc-skip class="date">2024-09-27</h4>
+            <h4 data-toc-skip class="date">2025-03-28</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/tidymodels/broom/blob/main/vignettes/broom.Rmd" class="external-link"><code>vignettes/broom.Rmd</code></a></small>
       <div class="d-none name"><code>broom.Rmd</code></div>
@@ -211,19 +211,20 @@ original data with information from the model:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment</a></span><span class="op">(</span><span class="va">lmfit</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 32 × 9</span></span></span>
-<span><span class="co">##    .rownames     mpg    wt .fitted .resid   .hat .sigma .cooksd .std.resid</span></span>
-<span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> Mazda RX4    21    2.62    23.3 -<span style="color: #BB0000;">2.28</span>  0.043<span style="text-decoration: underline;">3</span>   3.07 1.33<span style="color: #949494;">e</span><span style="color: #BB0000;">-2</span>    -<span style="color: #BB0000;">0.766</span> </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> Mazda RX4 …  21    2.88    21.9 -<span style="color: #BB0000;">0.920</span> 0.035<span style="text-decoration: underline;">2</span>   3.09 1.72<span style="color: #949494;">e</span><span style="color: #BB0000;">-3</span>    -<span style="color: #BB0000;">0.307</span> </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> Datsun 710   22.8  2.32    24.9 -<span style="color: #BB0000;">2.09</span>  0.058<span style="text-decoration: underline;">4</span>   3.07 1.54<span style="color: #949494;">e</span><span style="color: #BB0000;">-2</span>    -<span style="color: #BB0000;">0.706</span> </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> Hornet 4 D…  21.4  3.22    20.1  1.30  0.031<span style="text-decoration: underline;">3</span>   3.09 3.02<span style="color: #949494;">e</span><span style="color: #BB0000;">-3</span>     0.433 </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> Hornet Spo…  18.7  3.44    18.9 -<span style="color: #BB0000;">0.200</span> 0.032<span style="text-decoration: underline;">9</span>   3.10 7.60<span style="color: #949494;">e</span><span style="color: #BB0000;">-5</span>    -<span style="color: #BB0000;">0.066</span><span style="color: #BB0000; text-decoration: underline;">8</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> Valiant      18.1  3.46    18.8 -<span style="color: #BB0000;">0.693</span> 0.033<span style="text-decoration: underline;">2</span>   3.10 9.21<span style="color: #949494;">e</span><span style="color: #BB0000;">-4</span>    -<span style="color: #BB0000;">0.231</span> </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> Duster 360   14.3  3.57    18.2 -<span style="color: #BB0000;">3.91</span>  0.035<span style="text-decoration: underline;">4</span>   3.01 3.13<span style="color: #949494;">e</span><span style="color: #BB0000;">-2</span>    -<span style="color: #BB0000;">1.31</span>  </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> Merc 240D    24.4  3.19    20.2  4.16  0.031<span style="text-decoration: underline;">3</span>   3.00 3.11<span style="color: #949494;">e</span><span style="color: #BB0000;">-2</span>     1.39  </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> Merc 230     22.8  3.15    20.5  2.35  0.031<span style="text-decoration: underline;">4</span>   3.07 9.96<span style="color: #949494;">e</span><span style="color: #BB0000;">-3</span>     0.784 </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">10</span> Merc 280     19.2  3.44    18.9  0.300 0.032<span style="text-decoration: underline;">9</span>   3.10 1.71<span style="color: #949494;">e</span><span style="color: #BB0000;">-4</span>     0.100 </span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 22 more rows</span></span></span></code></pre>
+<span><span class="co">##    .rownames           mpg    wt .fitted .resid   .hat .sigma   .cooksd</span></span>
+<span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> Mazda RX4          21    2.62    23.3 -<span style="color: #BB0000;">2.28</span>  0.043<span style="text-decoration: underline;">3</span>   3.07 0.013<span style="text-decoration: underline;">3</span>   </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> Mazda RX4 Wag      21    2.88    21.9 -<span style="color: #BB0000;">0.920</span> 0.035<span style="text-decoration: underline;">2</span>   3.09 0.001<span style="text-decoration: underline;">72</span>  </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> Datsun 710         22.8  2.32    24.9 -<span style="color: #BB0000;">2.09</span>  0.058<span style="text-decoration: underline;">4</span>   3.07 0.015<span style="text-decoration: underline;">4</span>   </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> Hornet 4 Drive     21.4  3.22    20.1  1.30  0.031<span style="text-decoration: underline;">3</span>   3.09 0.003<span style="text-decoration: underline;">02</span>  </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> Hornet Sportabout  18.7  3.44    18.9 -<span style="color: #BB0000;">0.200</span> 0.032<span style="text-decoration: underline;">9</span>   3.10 0.000<span style="text-decoration: underline;">076</span>0</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> Valiant            18.1  3.46    18.8 -<span style="color: #BB0000;">0.693</span> 0.033<span style="text-decoration: underline;">2</span>   3.10 0.000<span style="text-decoration: underline;">921</span> </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> Duster 360         14.3  3.57    18.2 -<span style="color: #BB0000;">3.91</span>  0.035<span style="text-decoration: underline;">4</span>   3.01 0.031<span style="text-decoration: underline;">3</span>   </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> Merc 240D          24.4  3.19    20.2  4.16  0.031<span style="text-decoration: underline;">3</span>   3.00 0.031<span style="text-decoration: underline;">1</span>   </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> Merc 230           22.8  3.15    20.5  2.35  0.031<span style="text-decoration: underline;">4</span>   3.07 0.009<span style="text-decoration: underline;">96</span>  </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">10</span> Merc 280           19.2  3.44    18.9  0.300 0.032<span style="text-decoration: underline;">9</span>   3.10 0.000<span style="text-decoration: underline;">171</span> </span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 22 more rows</span></span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 1 more variable: .std.resid &lt;dbl&gt;</span></span></span></code></pre>
 <p>Note that each of the new columns begins with a <code>.</code> (to
 avoid overwriting any of the original columns).</p>
 <p>Finally, several summary statistics are computed for the entire
@@ -261,19 +262,20 @@ vignette</a>.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment</a></span><span class="op">(</span><span class="va">glmfit</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 32 × 9</span></span></span>
-<span><span class="co">##    .rownames      am    wt .fitted .resid   .hat .sigma .cooksd .std.resid</span></span>
-<span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> Mazda RX4       1  2.62   1.50   0.635 0.126   0.803 0.018<span style="text-decoration: underline;">4</span>       0.680</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> Mazda RX4 …     1  2.88   0.471  0.985 0.108   0.790 0.042<span style="text-decoration: underline;">4</span>       1.04 </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> Datsun 710      1  2.32   2.70   0.360 0.096<span style="text-decoration: underline;">3</span>  0.810 0.003<span style="text-decoration: underline;">94</span>      0.379</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> Hornet 4 D…     0  3.22  -<span style="color: #BB0000;">0.897</span> -<span style="color: #BB0000;">0.827</span> 0.074<span style="text-decoration: underline;">4</span>  0.797 0.017<span style="text-decoration: underline;">7</span>      -<span style="color: #BB0000;">0.860</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> Hornet Spo…     0  3.44  -<span style="color: #BB0000;">1.80</span>  -<span style="color: #BB0000;">0.553</span> 0.068<span style="text-decoration: underline;">1</span>  0.806 0.006<span style="text-decoration: underline;">47</span>     -<span style="color: #BB0000;">0.572</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> Valiant         0  3.46  -<span style="color: #BB0000;">1.88</span>  -<span style="color: #BB0000;">0.532</span> 0.067<span style="text-decoration: underline;">4</span>  0.807 0.005<span style="text-decoration: underline;">90</span>     -<span style="color: #BB0000;">0.551</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> Duster 360      0  3.57  -<span style="color: #BB0000;">2.33</span>  -<span style="color: #BB0000;">0.432</span> 0.062<span style="text-decoration: underline;">5</span>  0.809 0.003<span style="text-decoration: underline;">48</span>     -<span style="color: #BB0000;">0.446</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> Merc 240D       0  3.19  -<span style="color: #BB0000;">0.796</span> -<span style="color: #BB0000;">0.863</span> 0.075<span style="text-decoration: underline;">5</span>  0.796 0.019<span style="text-decoration: underline;">9</span>      -<span style="color: #BB0000;">0.897</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> Merc 230        0  3.15  -<span style="color: #BB0000;">0.635</span> -<span style="color: #BB0000;">0.922</span> 0.077<span style="text-decoration: underline;">6</span>  0.793 0.024<span style="text-decoration: underline;">2</span>      -<span style="color: #BB0000;">0.960</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">10</span> Merc 280        0  3.44  -<span style="color: #BB0000;">1.80</span>  -<span style="color: #BB0000;">0.553</span> 0.068<span style="text-decoration: underline;">1</span>  0.806 0.006<span style="text-decoration: underline;">47</span>     -<span style="color: #BB0000;">0.572</span></span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 22 more rows</span></span></span></code></pre>
+<span><span class="co">##    .rownames            am    wt .fitted .resid   .hat .sigma .cooksd</span></span>
+<span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> Mazda RX4             1  2.62   1.50   0.635 0.126   0.803 0.018<span style="text-decoration: underline;">4</span> </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> Mazda RX4 Wag         1  2.88   0.471  0.985 0.108   0.790 0.042<span style="text-decoration: underline;">4</span> </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> Datsun 710            1  2.32   2.70   0.360 0.096<span style="text-decoration: underline;">3</span>  0.810 0.003<span style="text-decoration: underline;">94</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> Hornet 4 Drive        0  3.22  -<span style="color: #BB0000;">0.897</span> -<span style="color: #BB0000;">0.827</span> 0.074<span style="text-decoration: underline;">4</span>  0.797 0.017<span style="text-decoration: underline;">7</span> </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> Hornet Sportabout     0  3.44  -<span style="color: #BB0000;">1.80</span>  -<span style="color: #BB0000;">0.553</span> 0.068<span style="text-decoration: underline;">1</span>  0.806 0.006<span style="text-decoration: underline;">47</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> Valiant               0  3.46  -<span style="color: #BB0000;">1.88</span>  -<span style="color: #BB0000;">0.532</span> 0.067<span style="text-decoration: underline;">4</span>  0.807 0.005<span style="text-decoration: underline;">90</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> Duster 360            0  3.57  -<span style="color: #BB0000;">2.33</span>  -<span style="color: #BB0000;">0.432</span> 0.062<span style="text-decoration: underline;">5</span>  0.809 0.003<span style="text-decoration: underline;">48</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> Merc 240D             0  3.19  -<span style="color: #BB0000;">0.796</span> -<span style="color: #BB0000;">0.863</span> 0.075<span style="text-decoration: underline;">5</span>  0.796 0.019<span style="text-decoration: underline;">9</span> </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> Merc 230              0  3.15  -<span style="color: #BB0000;">0.635</span> -<span style="color: #BB0000;">0.922</span> 0.077<span style="text-decoration: underline;">6</span>  0.793 0.024<span style="text-decoration: underline;">2</span> </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">10</span> Merc 280              0  3.44  -<span style="color: #BB0000;">1.80</span>  -<span style="color: #BB0000;">0.553</span> 0.068<span style="text-decoration: underline;">1</span>  0.806 0.006<span style="text-decoration: underline;">47</span></span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 22 more rows</span></span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 1 more variable: .std.resid &lt;dbl&gt;</span></span></span></code></pre>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">glmfit</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 1 × 8</span></span></span>
@@ -296,26 +298,27 @@ different for <code>glm</code> objects than for <code>lm</code>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment</a></span><span class="op">(</span><span class="va">nlsfit</span>, <span class="va">mtcars</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 32 × 14</span></span></span>
-<span><span class="co">##    .rownames     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear</span></span>
-<span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> Mazda RX4    21       6  160    110  3.9   2.62  16.5     0     1     4</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> Mazda RX4 …  21       6  160    110  3.9   2.88  17.0     0     1     4</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> Datsun 710   22.8     4  108     93  3.85  2.32  18.6     1     1     4</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> Hornet 4 D…  21.4     6  258    110  3.08  3.22  19.4     1     0     3</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> Hornet Spo…  18.7     8  360    175  3.15  3.44  17.0     0     0     3</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> Valiant      18.1     6  225    105  2.76  3.46  20.2     1     0     3</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> Duster 360   14.3     8  360    245  3.21  3.57  15.8     0     0     3</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> Merc 240D    24.4     4  147.    62  3.69  3.19  20       1     0     4</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> Merc 230     22.8     4  141.    95  3.92  3.15  22.9     1     0     4</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">10</span> Merc 280     19.2     6  168.   123  3.92  3.44  18.3     1     0     4</span></span>
+<span><span class="co">##    .rownames        mpg   cyl  disp    hp  drat    wt  qsec    vs    am</span></span>
+<span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> Mazda RX4       21       6  160    110  3.9   2.62  16.5     0     1</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> Mazda RX4 Wag   21       6  160    110  3.9   2.88  17.0     0     1</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> Datsun 710      22.8     4  108     93  3.85  2.32  18.6     1     1</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> Hornet 4 Drive  21.4     6  258    110  3.08  3.22  19.4     1     0</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> Hornet Sporta…  18.7     8  360    175  3.15  3.44  17.0     0     0</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> Valiant         18.1     6  225    105  2.76  3.46  20.2     1     0</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> Duster 360      14.3     8  360    245  3.21  3.57  15.8     0     0</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> Merc 240D       24.4     4  147.    62  3.69  3.19  20       1     0</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> Merc 230        22.8     4  141.    95  3.92  3.15  22.9     1     0</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">10</span> Merc 280        19.2     6  168.   123  3.92  3.44  18.3     1     0</span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 22 more rows</span></span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 3 more variables: carb &lt;dbl&gt;, .fitted &lt;dbl&gt;, .resid &lt;dbl&gt;</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;"># ℹ 4 more variables: gear &lt;dbl&gt;, carb &lt;dbl&gt;, .fitted &lt;dbl&gt;,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   .resid &lt;dbl&gt;</span></span></span></code></pre>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">nlsfit</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 1 × 9</span></span></span>
-<span><span class="co">##   sigma isConv       finTol logLik   AIC   BIC deviance df.residual  nobs</span></span>
-<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span>  2.77 TRUE   0.000<span style="text-decoration: underline;">000</span>019<span style="text-decoration: underline;">7</span>  -<span style="color: #BB0000;">77.0</span>  160.  164.     231.          30    32</span></span></code></pre>
+<span><span class="co">##   sigma isConv     finTol logLik   AIC   BIC deviance df.residual  nobs</span></span>
+<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span>  2.77 TRUE      1.97<span style="color: #949494;">e</span><span style="color: #BB0000;">-8</span>  -<span style="color: #BB0000;">77.0</span>  160.  164.     231.          30    32</span></span></code></pre>
 </div>
 <div class="section level4">
 <h4 id="hypothesis-testing">Hypothesis testing<a class="anchor" aria-label="anchor" href="#hypothesis-testing"></a>
@@ -338,9 +341,9 @@ interval):</p>
 <code class="sourceCode R"><span><span class="va">wt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html" class="external-link">wilcox.test</a></span><span class="op">(</span><span class="va">wt</span> <span class="op">~</span> <span class="va">am</span>, <span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">wt</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 1 × 4</span></span></span>
-<span><span class="co">##   statistic   p.value method                                   alternative</span></span>
-<span><span class="co">##       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span>      230. 0.000<span style="text-decoration: underline;">043</span>5 Wilcoxon rank sum test with continuity … two.sided</span></span></code></pre>
+<span><span class="co">##   statistic   p.value method                                alternative</span></span>
+<span><span class="co">##       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span>      230. 0.000<span style="text-decoration: underline;">043</span>5 Wilcoxon rank sum test with continui… two.sided</span></span></code></pre>
 <p>Since the <code>tidy</code> output is already only one row,
 <code>glance</code> returns the same output:</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
@@ -353,9 +356,9 @@ interval):</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">wt</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 1 × 4</span></span></span>
-<span><span class="co">##   statistic   p.value method                                   alternative</span></span>
-<span><span class="co">##       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span>      230. 0.000<span style="text-decoration: underline;">043</span>5 Wilcoxon rank sum test with continuity … two.sided</span></span></code></pre>
+<span><span class="co">##   statistic   p.value method                                alternative</span></span>
+<span><span class="co">##       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span>      230. 0.000<span style="text-decoration: underline;">043</span>5 Wilcoxon rank sum test with continui… two.sided</span></span></code></pre>
 <p><code>augment</code> method is defined only for chi-squared tests,
 since there is no meaningful sense, for other tests, in which a
 hypothesis test produces output about each initial data point.</p>
