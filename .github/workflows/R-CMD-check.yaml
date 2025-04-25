@@ -61,6 +61,7 @@ jobs:
             drc=?ignore-before-r=4.3.0,
             emmeans=?ignore-before-r=4.3.0,
             Hmisc=?ignore-before-r=4.3.0,
+            igraph=?ignore-before-r=4.3.0,
             joineRML=?ignore-before-r=4.3.0,
             lme4=?ignore-before-r=4.3.0,
             lsmeans=?ignore-before-r=4.3.0,
