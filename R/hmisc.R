@@ -53,14 +53,15 @@
 #' @aliases rcorr_tidiers Hmisc_tidiers
 #' @seealso [tidy()], [Hmisc::rcorr()]
 tidy.rcorr <- function(x, diagonal = FALSE, ...) {
-  ret <- x$r %>%
-    as.data.frame() %>%
-    tibble::rownames_to_column("column1") %>%
-    pivot_longer(c(dplyr::everything(), -column1),
+  ret <- x$r |>
+    as.data.frame() |>
+    tibble::rownames_to_column("column1") |>
+    pivot_longer(
+      c(dplyr::everything(), -column1),
       names_to = "column2",
       values_to = "estimate"
-    ) %>%
-    as.data.frame() %>%
+    ) |>
+    as.data.frame() |>
     mutate(n = as.vector(x$n), p.value = as.vector(x$P))
 
   # include only half the symmetric matrix.

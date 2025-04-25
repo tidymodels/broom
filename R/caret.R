@@ -57,15 +57,14 @@ tidy.confusionMatrix <- function(x, by_class = TRUE, ...) {
   cm <- as.list(x$overall)
   nms_cm <- stringr::str_to_lower(c(names(cm)[1:2], "McNemar"))
 
-
   if (by_class) {
     # case when only 2 classes
     if (!inherits(x$byClass, "matrix")) {
       classes <-
-        x$byClass %>%
-        as.data.frame() %>%
-        rename_at(1, ~"value") %>%
-        tibble::rownames_to_column("var") %>%
+        x$byClass |>
+        as.data.frame() |>
+        rename_at(1, ~"value") |>
+        tibble::rownames_to_column("var") |>
         mutate(var = stringr::str_to_lower(gsub(" ", "_", var)))
 
       terms <- c(nms_cm, classes$var)
@@ -74,20 +73,22 @@ tidy.confusionMatrix <- function(x, by_class = TRUE, ...) {
       conf.low <- c(cm$AccuracyLower, rep(NA, length(terms) - 1))
       conf.high <- c(cm$AccuracyUpper, rep(NA, length(terms) - 1))
       p.value <- c(
-        cm$AccuracyPValue, NA, cm$McnemarPValue,
+        cm$AccuracyPValue,
+        NA,
+        cm$McnemarPValue,
         rep(NA, length(terms) - 3)
       )
     } else {
       # case when there are more than 2 classes
       classes <-
-        x$byClass %>%
-        as.data.frame() %>%
-        tibble::rownames_to_column("class") %>%
+        x$byClass |>
+        as.data.frame() |>
+        tibble::rownames_to_column("class") |>
         pivot_longer(
           cols = c(dplyr::everything(), -class),
           names_to = "var",
           values_to = "value"
-        ) %>%
+        ) |>
         mutate(
           var = stringr::str_to_lower(gsub(" ", "_", var)),
           class = gsub("Class: ", "", class)
@@ -99,7 +100,9 @@ tidy.confusionMatrix <- function(x, by_class = TRUE, ...) {
       conf.low <- c(cm$AccuracyLower, rep(NA, length(terms) - 1))
       conf.high <- c(cm$AccuracyUpper, rep(NA, length(terms) - 1))
       p.value <- c(
-        cm$AccuracyPValue, NA, cm$McnemarPValue,
+        cm$AccuracyPValue,
+        NA,
+        cm$McnemarPValue,
         rep(NA, length(terms) - 3)
       )
     }

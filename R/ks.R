@@ -27,11 +27,11 @@
 #' library(dplyr)
 #' library(tidyr)
 #'
-#' td %>%
+#' td |>
 #'   pivot_wider(c(obs, estimate),
 #'     names_from = variable,
 #'     values_from = value
-#'   ) %>%
+#'   ) |>
 #'   ggplot(aes(x1, x2, fill = estimate)) +
 #'   geom_tile() +
 #'   theme_void()
@@ -47,8 +47,8 @@
 #' @aliases kde_tidiers ks_tidiers
 #' @seealso [tidy()], [ks::kde()]
 tidy.kde <- function(x, ...) {
-  estimate <- x$estimate %>%
-    as.data.frame.table(responseName = "value") %>%
+  estimate <- x$estimate |>
+    as.data.frame.table(responseName = "value") |>
     dplyr::mutate_if(is.factor, as.integer)
 
   dims <- seq_len(length(x$eval.points))
@@ -57,18 +57,18 @@ tidy.kde <- function(x, ...) {
     x$eval.points,
     estimate[dims],
     function(e, d) e[d]
-  ) %>%
-    purrr::set_names(paste0("x", dims)) %>%
-    as_tibble() %>%
+  ) |>
+    purrr::set_names(paste0("x", dims)) |>
+    as_tibble() |>
     mutate(
       estimate = estimate$value,
       obs = row_number()
-    ) %>%
+    ) |>
     pivot_longer(
       cols = c(dplyr::everything(), -estimate, -obs),
       names_to = "variable",
       values_to = "value"
-    ) %>%
-    arrange(variable, obs) %>%
+    ) |>
+    arrange(variable, obs) |>
     select(obs, variable, value, estimate)
 }

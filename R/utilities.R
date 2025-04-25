@@ -13,10 +13,10 @@ rename2 <- function(.data, ...) {
 }
 
 exponentiate <- function(data, col = "estimate") {
-  data <- data %>% mutate(across(all_of(col), exp))
+  data <- data |> mutate(across(all_of(col), exp))
 
   if ("conf.low" %in% colnames(data)) {
-    data <- data %>% mutate(across(c(conf.low, conf.high), exp))
+    data <- data |> mutate(across(c(conf.low, conf.high), exp))
   }
 
   data
@@ -34,7 +34,11 @@ exponentiate <- function(data, col = "estimate") {
 #' @return A `tibble` potentially with a `.rownames` column
 #' @noRd
 #'
-as_augment_tibble <- function(data, arg = caller_arg(data), call = caller_env()) {
+as_augment_tibble <- function(
+  data,
+  arg = caller_arg(data),
+  call = caller_env()
+) {
   if (inherits(data, "matrix") & is.null(colnames(data))) {
     cli::cli_abort(c(
       "{.arg {arg}} is an unnamed matrix.",
@@ -57,10 +61,7 @@ as_augment_tibble <- function(data, arg = caller_arg(data), call = caller_env())
   )
 
   if (has_rownames(data)) {
-    df <- tibble::add_column(df,
-      .rownames = rownames(data),
-      .before = TRUE
-    )
+    df <- tibble::add_column(df, .rownames = rownames(data), .before = TRUE)
   }
   df
 }
@@ -69,8 +70,7 @@ as_augment_tibble <- function(data, arg = caller_arg(data), call = caller_env())
 is_cran_check <- function() {
   if (identical(Sys.getenv("NOT_CRAN"), "true")) {
     FALSE
-  } 
-  else {
+  } else {
     Sys.getenv("_R_CHECK_PACKAGE_NAME_", "") != ""
   }
 }
@@ -122,14 +122,8 @@ as_tidy_tibble <- function(x, new_names = NULL, new_column = "term") {
 #' @param id_column The name of the column giving the name of each
 #' element in `x`
 #' @noRd
-map_as_tidy_tibble <- function(x,
-                               ...,
-                               id_column = "component") {
-  purrr::map_df(x,
-    as_tidy_tibble,
-    ...,
-    .id = id_column
-  )
+map_as_tidy_tibble <- function(x, ..., id_column = "component") {
+  purrr::map_df(x, as_tidy_tibble, ..., .id = id_column)
 }
 
 # copied from modeltests. re-export if at some we Import modeltests rather
@@ -155,11 +149,11 @@ parse_na_types <- function(s) {
     stringr::str_split(s, pattern = ""),
     match,
     table = names(na_types_dict)
-  ) %>%
+  ) |>
     unlist()
 
-  na_types_dict[positions] %>%
-    unlist() %>%
+  na_types_dict[positions] |>
+    unlist() |>
     unname()
 }
 
@@ -219,8 +213,16 @@ unrowname <- function(x) {
 #' @param ... extra arguments (not used)
 #'
 #' @export
-augment_columns <- function(x, data, newdata = NULL, type, type.predict = type,
-                            type.residuals = type, se.fit = TRUE, ...) {
+augment_columns <- function(
+  x,
+  data,
+  newdata = NULL,
+  type,
+  type.predict = type,
+  type.residuals = type,
+  se.fit = TRUE,
+  ...
+) {
   notNAs <- function(o) {
     if (is.null(o) || all(is.na(o))) NULL else o
   }
@@ -243,7 +245,6 @@ augment_columns <- function(x, data, newdata = NULL, type, type.predict = type,
     args$se.fit <- se.fit
   }
   args <- c(args, list(...))
-
 
   if ("panelmodel" %in% class(x)) {
     # work around for panel models (plm)
@@ -287,7 +288,8 @@ augment_columns <- function(x, data, newdata = NULL, type, type.predict = type,
         ret$.hat <- infl
         ret$.sigma <- NA
       } else {
-        zero_weights <- "weights" %in% names(x) &&
+        zero_weights <- "weights" %in%
+          names(x) &&
           any(zero_weight_inds <- abs(x$weights) < .Machine$double.eps^0.5)
         if (zero_weights) {
           ret[c(".hat", ".sigma")] <- 0
@@ -358,7 +360,11 @@ response <- function(object, newdata = NULL, has_response) {
 
   res <-
     tryCatch(
-      model.response(model.frame(terms(object), data = newdata, na.action = na.pass)),
+      model.response(model.frame(
+        terms(object),
+        data = newdata,
+        na.action = na.pass
+      )),
       error = function(e) NULL
     )
 
@@ -391,10 +397,10 @@ add_hat_sigma_cols <- function(df, x, infl) {
   w <- x$weights
   nonzero_idx <- if (is.null(w)) seq_along(df$.hat) else which(w != 0)
 
-  df$.hat[nonzero_idx] <- infl$hat %>% unname()
-  df$.sigma[nonzero_idx] <- infl$sigma %>% unname()
-  df$.std.resid[nonzero_idx] <- rstandard(x, infl = infl) %>% unname()
-  df$.cooksd[nonzero_idx] <- cooks.distance(x, infl = infl) %>% unname()
+  df$.hat[nonzero_idx] <- infl$hat |> unname()
+  df$.sigma[nonzero_idx] <- infl$sigma |> unname()
+  df$.std.resid[nonzero_idx] <- rstandard(x, infl = infl) |> unname()
+  df$.cooksd[nonzero_idx] <- cooks.distance(x, infl = infl) |> unname()
   df
 }
 
@@ -418,9 +424,10 @@ augment_newdata <- function(x, data, newdata, .se_fit, interval = NULL, ...) {
       # TRUE if response includes a function call and is in column names,
       # usually with no `data` or `newdata` supplied,
       # and `data` defaults to `model_frame(x)`
-      rlang::as_label(rlang::f_lhs(x$terms)) %in% names(df) ||
-        # TRUE if the response variable itself is in column names
-        all.vars(x$terms)[1] %in% names(df)
+      rlang::as_label(rlang::f_lhs(x$terms)) %in%
+      names(df) ||
+      # TRUE if the response variable itself is in column names
+      all.vars(x$terms)[1] %in% names(df)
   } else {
     has_response <- FALSE
   }
@@ -441,9 +448,16 @@ augment_newdata <- function(x, data, newdata, .se_fit, interval = NULL, ...) {
   # an na.pass argument
 
   if (.se_fit) {
-    pred_obj <- predict(x, newdata = newdata, na.action = na.pass, se.fit = .se_fit, interval = interval, ...)
+    pred_obj <- predict(
+      x,
+      newdata = newdata,
+      na.action = na.pass,
+      se.fit = .se_fit,
+      interval = interval,
+      ...
+    )
     if (is.null(interval) || interval == "none") {
-      df$.fitted <- pred_obj$fit %>% unname()
+      df$.fitted <- pred_obj$fit |> unname()
     } else {
       df$.fitted <- pred_obj$fit[, "fit"]
       df$.lower <- pred_obj$fit[, "lwr"]
@@ -456,26 +470,45 @@ augment_newdata <- function(x, data, newdata, .se_fit, interval = NULL, ...) {
     se_idx <- which(names(pred_obj) %in% c("se.fit", "se"))
     df$.se.fit <- pred_obj[[se_idx]]
   } else if (!is.null(interval) && interval != "none") {
-    pred_obj <- predict(x, newdata = newdata, na.action = na.pass, se.fit = FALSE, interval = interval, ...)
+    pred_obj <- predict(
+      x,
+      newdata = newdata,
+      na.action = na.pass,
+      se.fit = FALSE,
+      interval = interval,
+      ...
+    )
     df$.fitted <- pred_obj[, "fit"]
     df$.lower <- pred_obj[, "lwr"]
     df$.upper <- pred_obj[, "upr"]
   } else if (passed_newdata) {
     if (is.null(interval) || interval == "none") {
-      df$.fitted <- predict(x, newdata = newdata, na.action = na.pass, ...) %>%
+      df$.fitted <- predict(x, newdata = newdata, na.action = na.pass, ...) |>
         unname()
     } else {
-      pred_obj <- predict(x, newdata = newdata, na.action = na.pass, interval = interval, ...)
+      pred_obj <- predict(
+        x,
+        newdata = newdata,
+        na.action = na.pass,
+        interval = interval,
+        ...
+      )
       df$.fitted <- pred_obj$fit[, "fit"]
       df$.lower <- pred_obj$fit[, "lwr"]
       df$.upper <- pred_obj$fit[, "upr"]
     }
   } else {
     if (is.null(interval) || interval == "none") {
-      df$.fitted <- predict(x, na.action = na.pass, ...) %>%
+      df$.fitted <- predict(x, na.action = na.pass, ...) |>
         unname()
     } else {
-      pred_obj <- predict(x, newdata = newdata, na.action = na.pass, interval = interval, ...)
+      pred_obj <- predict(
+        x,
+        newdata = newdata,
+        na.action = na.pass,
+        interval = interval,
+        ...
+      )
       df$.fitted <- pred_obj$fit[, "fit"]
       df$.lower <- pred_obj$fit[, "lwr"]
       df$.upper <- pred_obj$fit[, "upr"]
@@ -485,7 +518,7 @@ augment_newdata <- function(x, data, newdata, .se_fit, interval = NULL, ...) {
   resp <- safe_response(x, df, has_response)
 
   if (!is.null(resp) && is.numeric(resp)) {
-    df$.resid <- (resp - df$.fitted) %>% unname()
+    df$.resid <- (resp - df$.fitted) |> unname()
   }
 
   df
@@ -537,7 +570,9 @@ warn_on_subclass <- function(x, tidier) {
 
     rlang::warn(
       paste0(
-        "The `", tidier, "()` method for objects of class `",
+        "The `",
+        tidier,
+        "()` method for objects of class `",
         subclass,
         "` is not maintained by the broom team, and is only supported through ",
         "the `",
@@ -669,8 +704,13 @@ check_ellipses <- function(arg, fn, cls, ...) {
 
   if (arg %in% names(dots)) {
     rlang::warn(paste0(
-      "The `", arg, "` argument is not supported in the `", fn,
-      "()` method for `", cls, "` objects and will be ignored."
+      "The `",
+      arg,
+      "` argument is not supported in the `",
+      fn,
+      "()` method for `",
+      cls,
+      "` objects and will be ignored."
     ))
   }
 

@@ -34,7 +34,7 @@ test_that("tidy.lm works", {
   # conf.int = TRUE works for rank deficient fits
   # should get a "NaNs produced" warning
   expect_snapshot(td_rd <- tidy(fit_rd, conf.int = TRUE))
-  
+
   check_tidy_output(td)
   check_tidy_output(td2)
   check_tidy_output(td3)
@@ -71,7 +71,6 @@ test_that("augment.lm", {
     data = mtcars,
     newdata = mtcars
   )
-
 
   check_augment_function(
     aug = augment.lm,
@@ -120,13 +119,23 @@ test_that("augment.lm", {
   expect_equal(aug$.upper, pred[, "upr"])
 
   # conf.level is respected
-  aug <- augment(fit, newdata = mtcars, interval = "confidence", conf.level = 0.75)
+  aug <- augment(
+    fit,
+    newdata = mtcars,
+    interval = "confidence",
+    conf.level = 0.75
+  )
   pred <- predict(fit, newdata = mtcars, interval = "confidence", level = 0.75)
   expect_equal(aug$.lower, pred[, "lwr"])
   expect_equal(aug$.upper, pred[, "upr"])
 
   # conf.level works for prediction intervals as well
-  aug <- augment(fit, newdata = mtcars, interval = "prediction", conf.level = 0.25)
+  aug <- augment(
+    fit,
+    newdata = mtcars,
+    interval = "prediction",
+    conf.level = 0.25
+  )
   pred <- predict(fit, newdata = mtcars, interval = "prediction", level = 0.25)
   expect_equal(aug$.lower, pred[, "lwr"])
   expect_equal(aug$.upper, pred[, "upr"])
@@ -134,7 +143,7 @@ test_that("augment.lm", {
   # conf.level is ignored when interval = "none"
   aug <- augment(fit, newdata = mtcars, interval = "none", conf.level = 0.25)
   expect_false(any(names(aug) %in% c(".lower", ".upper")))
-  
+
   # warns when passed as level rather than conf.level
   expect_snapshot(
     augment(fit, newdata = mtcars, interval = "confidence", level = 0.95)

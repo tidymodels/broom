@@ -24,10 +24,10 @@ joint_tests_summary <- joint_tests(fit)
 marginal_dashes <- tibble(
   y = rnorm(100),
   x = rep(c("Single", "Double-Barrelled"), 50)
-) %>%
-  lm(y ~ x, data = .) %>%
-  lsmeans::lsmeans(., ~x) %>%
-  lsmeans::contrast(., "pairwise")
+)
+marginal_dashes <- lm(y ~ x, data = marginal_dashes)
+marginal_dashes <- lsmeans::lsmeans(marginal_dashes, ~x)
+marginal_dashes <- lsmeans::contrast(marginal_dashes, "pairwise")
 
 test_that("lsmeans tidier arguments", {
   check_arguments(tidy.lsmobj, strict = FALSE)
@@ -76,10 +76,10 @@ test_that("summary_emm tidiers work", {
   check_tidy_output(tdjt)
   check_dims(tdjt, 4, 5)
 
-
   glmm <- glmer(
     cbind(incidence, size - incidence) ~ period + (1 | herd),
-    data = cbpp, family = binomial
+    data = cbpp,
+    family = binomial
   )
   emm_glmm <- emmeans(glmm, ~period)
   tdm <- tidy(emm_glmm, conf.int = TRUE)
@@ -91,10 +91,10 @@ test_that("tidy.ref.grid consistency with tidy.TukeyHSD", {
   amod <- aov(breaks ~ wool + tension, data = warpbreaks)
   td_hsd <- tidy(TukeyHSD(amod, "tension"))
 
-  td_pairs <- lsmeans(amod, ~tension) %>%
-    pairs(reverse = TRUE) %>%
-    tidy(conf.int = TRUE) %>%
-    dplyr::select(-statistic, -df, -std.error) %>%
+  td_pairs <- lsmeans(amod, ~tension) |>
+    pairs(reverse = TRUE) |>
+    tidy(conf.int = TRUE) |>
+    dplyr::select(-statistic, -df, -std.error) |>
     mutate(contrast = gsub(" ", "", contrast))
 
   expect_equal(
@@ -114,7 +114,7 @@ test_that("tidy.ref.grid consistency with tidy.glht", {
     adjust = "none"
   )
 
-  td_emm <- tidy(pigs.emm_c) %>%
+  td_emm <- tidy(pigs.emm_c) |>
     dplyr::select(-df)
 
   pigs.aov <- aov(log(conc) ~ 0 + source, data = pigs)
@@ -125,8 +125,12 @@ test_that("tidy.ref.grid consistency with tidy.glht", {
   rownames(K) <- c("lambda1", "lambda2")
   colnames(K) <- names(coef(pigs.aov))
 
-  aov_glht <- multcomp::glht(pigs.aov, linfct = multcomp::mcp(source = K), rhs = c(7, -1))
-  tidy_glht <- tidy(aov_glht, test = multcomp::adjusted("none")) %>%
+  aov_glht <- multcomp::glht(
+    pigs.aov,
+    linfct = multcomp::mcp(source = K),
+    rhs = c(7, -1)
+  )
+  tidy_glht <- tidy(aov_glht, test = multcomp::adjusted("none")) |>
     mutate(
       estimate = estimate - null.value,
       null.value = -null.value
@@ -142,7 +146,8 @@ test_that("tidy.ref.grid consistency with tidy.glht", {
 test_that("tidy.emmGrid for combined contrasts", {
   noise.lm <- lm(noise ~ size * type * side, data = auto.noise)
   noise.emm <- emmeans(noise.lm, ~ size * side * type)
-  noise_c.s <- contrast(noise.emm,
+  noise_c.s <- contrast(
+    noise.emm,
     method = "consec",
     simple = "each",
     combine = TRUE,

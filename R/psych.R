@@ -46,8 +46,8 @@ tidy.kappa <- function(x, ...) {
     x$confid,
     new_names = c("conf.low", "estimate", "conf.high"),
     new_column = "type"
-  ) %>%
-    dplyr::select(type, estimate, conf.low, conf.high) %>%
+  ) |>
+    dplyr::select(type, estimate, conf.low, conf.high) |>
     mutate(type = gsub(" kappa", "", type))
 
   ret

@@ -20,7 +20,7 @@ return_evalrd <- function(..., .method, .pre = NULL, .post = NULL) {
   pull_from_modeltests <- as.character(cols)
 
   if (use_custom_doc) {
-    idx <- purrr::map_lgl(names(cols), ~ .x != "")
+    idx <- purrr::map_lgl(names(cols), \(x) x != "")
     custom_doc <- cols[idx]
     pull_from_modeltests <- pull_from_modeltests[!idx]
     pull_from_modeltests <- setdiff(pull_from_modeltests, names(custom_doc))
@@ -42,9 +42,9 @@ return_evalrd <- function(..., .method, .pre = NULL, .post = NULL) {
     )
   }
 
-  glos <- glos_env$column_glossary %>%
-    filter(purrr::map_lgl(column, ~ .x %in% pull_from_modeltests)) %>%
-    filter(method == !!.method) %>%
+  glos <- glos_env$column_glossary |>
+    filter(purrr::map_lgl(column, \(x) x %in% pull_from_modeltests)) |>
+    filter(method == !!.method) |>
     bind_rows(custom_cols)
 
   row_to_item <- function(column, description) {
@@ -54,8 +54,14 @@ return_evalrd <- function(..., .method, .pre = NULL, .post = NULL) {
   items <- with(glos, purrr::map2_chr(column, description, row_to_item))
   items <- paste(items, collapse = "\n")
 
-  result <- paste("\\value{", .pre, items, .post, "}",
-    sep = "\n", collapse = "\n"
+  result <- paste(
+    "\\value{",
+    .pre,
+    items,
+    .post,
+    "}",
+    sep = "\n",
+    collapse = "\n"
   )
 
   # check that all arguments resulted in some form of documentation
@@ -116,11 +122,13 @@ return_tidy <- function(..., .pre = NULL, .post = NULL, regression = FALSE) {
   do.call("return_evalrd", args)
 }
 
-return_augment <- function(...,
-                           .pre = NULL,
-                           .post = NULL,
-                           .fitted = TRUE,
-                           .resid = TRUE) {
+return_augment <- function(
+  ...,
+  .pre = NULL,
+  .post = NULL,
+  .fitted = TRUE,
+  .resid = TRUE
+) {
   if (is.null(.pre)) {
     .pre <- "A \\code{\\link[tibble:tibble]{tibble::tibble()}} with columns:"
   }

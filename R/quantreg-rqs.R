@@ -22,8 +22,13 @@
 #' @family quantreg tidiers
 #' @inherit tidy.rq examples
 #'
-tidy.rqs <- function(x, se.type = "rank", conf.int = FALSE,
-                     conf.level = 0.95, ...) {
+tidy.rqs <- function(
+  x,
+  se.type = "rank",
+  conf.int = FALSE,
+  conf.level = 0.95,
+  ...
+) {
   check_ellipses("exponentiate", "tidy", "rqs", ...)
 
   rq_summary <- suppressWarnings(
@@ -73,30 +78,37 @@ augment.rqs <- function(x, data = model.frame(x), newdata, ...) {
     pred <- predict(x, stepfun = FALSE, ...)
     resid <- residuals(x)
     resid <- setNames(as.data.frame(resid), x[["tau"]])
-    resid <- pivot_longer(resid,
+    resid <- pivot_longer(
+      resid,
       cols = dplyr::everything(),
       names_to = ".tau",
       values_to = ".resid"
-    ) %>%
+    ) |>
       as.data.frame()
     original <- cbind(original, resid)
     pred <- setNames(as.data.frame(pred), x[["tau"]])
-    pred <- pivot_longer(pred,
+    pred <- pivot_longer(
+      pred,
       cols = dplyr::everything(),
       names_to = ".tau",
       values_to = ".fitted"
-    ) %>%
+    ) |>
       as.data.frame()
     ret <- unrowname(cbind(original, pred[, -1, drop = FALSE]))
   } else {
-    original <- newdata[rep(seq_len(nrow(newdata)), each = n_tau), , drop = FALSE]
+    original <- newdata[
+      rep(seq_len(nrow(newdata)), each = n_tau),
+      ,
+      drop = FALSE
+    ]
     pred <- predict(x, newdata = newdata, stepfun = FALSE, ...)
     pred <- setNames(as.data.frame(pred), x[["tau"]])
-    pred <- pivot_longer(pred,
+    pred <- pivot_longer(
+      pred,
       cols = dplyr::everything(),
       names_to = ".tau",
       values_to = ".fitted"
-    ) %>%
+    ) |>
       as.data.frame()
     ret <- unrowname(cbind(original, pred))
   }

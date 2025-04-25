@@ -129,7 +129,7 @@ test_that("all other fixest estimators run", {
   )
 
   expect_snapshot(error = TRUE, augment(res_fenegbin))
-  
+
   expect_snapshot(error = TRUE, augment(res_fenegbin, df))
   expect_snapshot(error = TRUE, augment(res_feNmlm, df))
   expect_snapshot(error = TRUE, augment(res_fepois, df))
@@ -153,7 +153,10 @@ test_that("tidiers work with model results or summary of model results", {
 
   # Repeat for feglm
   res_glm <- fixest::feglm(v2 ~ v4 | id, data = df, family = "poisson")
-  res_glm_summ <- summary(fixest::feglm(v2 ~ v4 | id, data = df, family = "poisson"), se = "hetero")
+  res_glm_summ <- summary(
+    fixest::feglm(v2 ~ v4 | id, data = df, family = "poisson"),
+    se = "hetero"
+  )
   expect_equal(tidy(res_glm, se = "hetero"), tidy(res_glm_summ))
   expect_equal(
     as.data.frame(tidy(res_glm, se = "hetero", conf.int = TRUE)),

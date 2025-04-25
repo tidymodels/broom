@@ -40,8 +40,8 @@
 #' augment(mod, mtcars, interval = "confidence")
 #'
 #' # predict on new data
-#' newdata <- mtcars %>%
-#'   head(6) %>%
+#' newdata <- mtcars |>
+#'   head(6) |>
 #'   mutate(wt = wt + 1)
 #' augment(mod, newdata = newdata)
 #'
@@ -58,7 +58,7 @@
 #'   geom_ribbon(aes(ymin = .lower, ymax = .upper), col = NA, alpha = 0.3)
 #'
 #' # predict on new data without outcome variable. Output does not include .resid
-#' newdata <- newdata %>%
+#' newdata <- newdata |>
 #'   select(-mpg)
 #'
 #' augment(mod, newdata = newdata)
@@ -90,8 +90,13 @@
 #' @export
 #' @seealso [tidy()], [stats::summary.lm()]
 #' @family lm tidiers
-tidy.lm <- function(x, conf.int = FALSE, conf.level = 0.95,
-                    exponentiate = FALSE, ...) {
+tidy.lm <- function(
+  x,
+  conf.int = FALSE,
+  conf.level = 0.95,
+  exponentiate = FALSE,
+  ...
+) {
   warn_on_subclass(x, "tidy")
 
   ret <- as_tibble(summary(x)$coefficients, rownames = "term")
@@ -155,9 +160,15 @@ tidy.lm <- function(x, conf.int = FALSE, conf.level = 0.95,
 #' @export
 #' @seealso [augment()], [stats::predict.lm()]
 #' @family lm tidiers
-augment.lm <- function(x, data = model.frame(x), newdata = NULL,
-                       se_fit = FALSE, interval = c("none", "confidence", "prediction"), 
-                       conf.level = 0.95, ...) {
+augment.lm <- function(
+  x,
+  data = model.frame(x),
+  newdata = NULL,
+  se_fit = FALSE,
+  interval = c("none", "confidence", "prediction"),
+  conf.level = 0.95,
+  ...
+) {
   warn_on_subclass(x, "augment")
   check_ellipses("level", "augment", "lm", ...)
 
@@ -210,7 +221,8 @@ glance.lm <- function(x, ...) {
 
   # check whether the model was fitted with only an intercept, in which
   # case drop the fstatistic related columns
-  int_only <- nrow(summary(x)$coefficients) == 1  & "(Intercept)" %in% row.names(summary(x)$coefficients)
+  int_only <- nrow(summary(x)$coefficients) == 1 &
+    "(Intercept)" %in% row.names(summary(x)$coefficients)
 
   with(
     summary(x),

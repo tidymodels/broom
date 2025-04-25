@@ -70,8 +70,8 @@ tidy(res, conf.int = TRUE, conf.level = .99)
 library(ggplot2)
 library(dplyr)
 
-tidy(res, conf.int = TRUE) \%>\%
-  mutate(variable = reorder(term, estimate)) \%>\%
+tidy(res, conf.int = TRUE) |>
+  mutate(variable = reorder(term, estimate)) |>
   ggplot(aes(estimate, variable)) +
   geom_point() +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
@@ -102,8 +102,8 @@ td2 <- tidy(res2, conf.int = TRUE)
 td2
 
 # coefficient plot
-td2 \%>\%
-  mutate(variable = reorder(term, estimate)) \%>\%
+td2 |>
+  mutate(variable = reorder(term, estimate)) |>
   ggplot(aes(estimate, variable)) +
   geom_point() +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +

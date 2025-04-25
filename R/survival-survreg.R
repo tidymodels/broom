@@ -75,10 +75,18 @@ tidy.survreg <- function(x, conf.level = .95, conf.int = FALSE, ...) {
 #' @seealso [augment()], [survival::survreg()]
 #' @family survreg tidiers
 #' @family survival tidiers
-augment.survreg <- function(x, data = model.frame(x), newdata = NULL,
-                            type.predict = "response",
-                            type.residuals = "response", ...) {
-  augment_columns(x, data, newdata,
+augment.survreg <- function(
+  x,
+  data = model.frame(x),
+  newdata = NULL,
+  type.predict = "response",
+  type.residuals = "response",
+  ...
+) {
+  augment_columns(
+    x,
+    data,
+    newdata,
     type.predict = type.predict,
     type.residuals = type.residuals
   )

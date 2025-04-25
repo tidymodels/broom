@@ -27,10 +27,7 @@
 #' @seealso [tidy()]
 #' @family lm tidiers
 #' @export
-tidy.mlm <- function(x,
-                     conf.int = FALSE,
-                     conf.level = 0.95,
-                     ...) {
+tidy.mlm <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
   check_ellipses("exponentiate", "tidy", "mlm", ...)
 
   # adding other details from summary object

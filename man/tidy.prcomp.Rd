@@ -101,10 +101,10 @@ library(dplyr)
 library(ggplot2)
 library(maps)
 
-pc \%>\%
-  tidy(matrix = "samples") \%>\%
-  mutate(region = tolower(row)) \%>\%
-  inner_join(map_data("state"), by = "region") \%>\%
+pc |>
+  tidy(matrix = "samples") |>
+  mutate(region = tolower(row)) |>
+  inner_join(map_data("state"), by = "region") |>
   ggplot(aes(long, lat, group = group, fill = value)) +
   geom_polygon() +
   facet_wrap(~PC) +

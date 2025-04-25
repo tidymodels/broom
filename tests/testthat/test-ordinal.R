@@ -8,10 +8,7 @@ suppressPackageStartupMessages(library(ordinal))
 
 fit <- clm(rating ~ temp * contact, data = wine)
 
-fit_sc <- clm(rating ~ temp + contact,
-  scale = ~ temp + contact,
-  data = wine
-)
+fit_sc <- clm(rating ~ temp + contact, scale = ~ temp + contact, data = wine)
 
 mfit <- clmm(rating ~ temp + contact + (1 | judge), data = wine)
 

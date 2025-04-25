@@ -41,8 +41,13 @@
 #' @aliases geeglm_tidiers geepack_tidiers
 #' @seealso [tidy()], [geepack::geeglm()]
 #'
-tidy.geeglm <- function(x, conf.int = FALSE, conf.level = .95,
-                        exponentiate = FALSE, ...) {
+tidy.geeglm <- function(
+  x,
+  conf.int = FALSE,
+  conf.level = .95,
+  exponentiate = FALSE,
+  ...
+) {
   co <- stats::coef(summary(x))
 
   ret <- as_tidy_tibble(
@@ -56,8 +61,10 @@ tidy.geeglm <- function(x, conf.int = FALSE, conf.level = .95,
   }
 
   if (exponentiate) {
-    if (is.null(x$family) ||
-      (x$family$link != "logit" && x$family$link != "log")) {
+    if (
+      is.null(x$family) ||
+        (x$family$link != "logit" && x$family$link != "log")
+    ) {
       cli::cli_warn(
         "Coefficients will be exponentiated, but the model didn't 
          use a {.code log} or {.code logit} link."

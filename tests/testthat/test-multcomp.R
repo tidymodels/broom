@@ -49,8 +49,8 @@ test_that("tidy.cld works", {
 test_that("tidy.glht consistency with tidy.TukeyHSD", {
   set.seed(13986)
   td_hsd <- tidy(TukeyHSD(amod, "tension"))
-  td_glht <- tidy(wht, conf.int = TRUE) %>%
-    dplyr::select(-statistic) %>%
+  td_glht <- tidy(wht, conf.int = TRUE) |>
+    dplyr::select(-statistic) |>
     mutate(contrast = gsub(" ", "", contrast))
 
   expect_equal(

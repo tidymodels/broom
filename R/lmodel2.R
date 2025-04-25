@@ -49,42 +49,42 @@
 #' @aliases lmodel2_tidiers
 #' @family lmodel2 tidiers
 tidy.lmodel2 <- function(x, ...) {
-  ret <- x$regression.results[c(1:3, 5)] %>%
+  ret <- x$regression.results[c(1:3, 5)] |>
     select(
       method = Method,
       Intercept,
       Slope,
       p.value = `P-perm (1-tailed)`
-    ) %>%
+    ) |>
     pivot_longer(
       cols = c(dplyr::everything(), -method, -p.value),
       names_to = "term",
       values_to = "estimate"
-    ) %>%
+    ) |>
     arrange(method, term)
 
   # add confidence intervals
-  confints <- x$confidence.intervals %>%
+  confints <- x$confidence.intervals |>
     pivot_longer(
       cols = c(dplyr::everything(), -Method),
       names_to = "key",
       values_to = "value"
-    ) %>%
-    tidyr::separate(key, c("level", "term"), "-") %>%
-    mutate(level = ifelse(level == "2.5%", "conf.low", "conf.high")) %>%
+    ) |>
+    tidyr::separate(key, c("level", "term"), "-") |>
+    mutate(level = ifelse(level == "2.5%", "conf.low", "conf.high")) |>
     tidyr::pivot_wider(
       id_cols = c(Method, term),
       names_from = level,
       values_from = value
-    ) %>%
-    dplyr::arrange(Method) %>%
-    as.data.frame() %>%
+    ) |>
+    dplyr::arrange(Method) |>
+    as.data.frame() |>
     select(method = Method, term, conf.low, conf.high)
 
-  ret %>%
-    inner_join(confints, by = c("method", "term")) %>%
+  ret |>
+    inner_join(confints, by = c("method", "term")) |>
     # change column order so `p.value` is at the end
-    select(-p.value, dplyr::everything()) %>%
+    select(-p.value, dplyr::everything()) |>
     as_tibble()
 }
 

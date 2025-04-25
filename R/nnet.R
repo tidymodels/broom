@@ -32,8 +32,13 @@
 #' @export
 #' @family multinom tidiers
 #' @seealso [tidy()], [nnet::multinom()]
-tidy.multinom <- function(x, conf.int = FALSE, conf.level = .95,
-                          exponentiate = FALSE, ...) {
+tidy.multinom <- function(
+  x,
+  conf.int = FALSE,
+  conf.level = .95,
+  exponentiate = FALSE,
+  ...
+) {
   # when the response is a matrix, x$lev is null
   if (is.null(x$lev)) {
     n_lev <- ncol(x$residuals)
@@ -55,7 +60,8 @@ tidy.multinom <- function(x, conf.int = FALSE, conf.level = .95,
   s <- summary(x)
 
   co <- coef(s)
-  coef <- matrix(co,
+  coef <- matrix(
+    co,
     byrow = FALSE,
     nrow = n_lev - 1,
     dimnames = list(
@@ -65,7 +71,8 @@ tidy.multinom <- function(x, conf.int = FALSE, conf.level = .95,
   )
 
   se <- s$standard.errors
-  se <- matrix(se,
+  se <- matrix(
+    se,
     byrow = FALSE,
     nrow = n_lev - 1,
     dimnames = list(
@@ -91,7 +98,11 @@ tidy.multinom <- function(x, conf.int = FALSE, conf.level = .95,
   ret$p.value <- stats::pnorm(abs(ret$statistic), 0, 1, lower.tail = FALSE) * 2
 
   if (conf.int) {
-    ci <- apply(stats::confint(x, level = conf.level), 2, function(a) unlist(as.data.frame(a)))
+    ci <- apply(
+      stats::confint(x, level = conf.level),
+      2,
+      function(a) unlist(as.data.frame(a))
+    )
     ci <- as.data.frame(ci)
     names(ci) <- c("conf.low", "conf.high")
     ret <- cbind(ret, ci)

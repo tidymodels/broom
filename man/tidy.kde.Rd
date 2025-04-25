@@ -55,11 +55,11 @@ library(ggplot2)
 library(dplyr)
 library(tidyr)
 
-td \%>\%
+td |>
   pivot_wider(c(obs, estimate),
     names_from = variable,
     values_from = value
-  ) \%>\%
+  ) |>
   ggplot(aes(x1, x2, fill = estimate)) +
   geom_tile() +
   theme_void()

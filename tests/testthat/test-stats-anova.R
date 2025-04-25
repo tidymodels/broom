@@ -2,7 +2,6 @@ skip_if_not_installed("modeltests")
 library(modeltests)
 
 test_that("tidy.aov", {
-
   aovfit <- aov(mpg ~ wt + disp, mtcars)
   td <- tidy(aovfit)
   td2 <- tidy(aovfit, intercept = TRUE)
@@ -30,9 +29,11 @@ test_that("tidy.anova", {
 
   anovacomp <- stats::anova(m2, m1)
   td2 <- tidy(anovacomp)
-  
+
   # see #1159
-  for (i in 1:20) {mtcars[[paste0("column", i)]] <- rnorm(nrow(mtcars))}
+  for (i in 1:20) {
+    mtcars[[paste0("column", i)]] <- rnorm(nrow(mtcars))
+  }
   m3 <- stats::glm(mpg ~ ., mtcars, family = stats::gaussian)
   anovacomp2 <- stats::anova(m1, m3)
   td3 <- tidy(anovacomp2)

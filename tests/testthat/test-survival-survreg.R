@@ -6,7 +6,9 @@ library(modeltests)
 skip_if_not_installed("survival")
 suppressPackageStartupMessages(library(survival))
 
-sr <- survreg(Surv(futime, fustat) ~ ecog.ps + rx, ovarian,
+sr <- survreg(
+  Surv(futime, fustat) ~ ecog.ps + rx,
+  ovarian,
   dist = "exponential"
 )
 
@@ -45,8 +47,11 @@ test_that("augment.survreg", {
 })
 
 test_that("tidy.survreg with robust std err", {
-  sr <- survreg(Surv(futime, fustat) ~ ecog.ps + rx, ovarian,
-    dist = "exponential", robust = TRUE
+  sr <- survreg(
+    Surv(futime, fustat) ~ ecog.ps + rx,
+    ovarian,
+    dist = "exponential",
+    robust = TRUE
   )
   td <- tidy(sr)
   td2 <- tidy(sr, conf.int = TRUE)

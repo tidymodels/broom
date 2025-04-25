@@ -57,8 +57,8 @@ augment.lmRob <- function(x, data = model.frame(x), newdata = NULL, ...) {
 
   # this is a really ugly way to recover NA predictions
   rows <- split(df, 1:nrow(df))
-  preds <- purrr::map(rows, ~ predict(x, newdata = .x))
-  no_pred <- purrr::map_lgl(preds, ~ length(.x) == 0)
+  preds <- purrr::map(rows, \(.x) predict(x, newdata = .x))
+  no_pred <- purrr::map_lgl(preds, \(x) length(x) == 0)
   preds[no_pred] <- NA
 
   df$.fitted <- as.numeric(preds)

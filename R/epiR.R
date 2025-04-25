@@ -52,7 +52,10 @@ tidy.epi.2by2 <- function(x, parameters = c("moa", "stat"), ...) {
     massoc <- x$massoc
   }
 
-  out <- dplyr::bind_rows(massoc[names(massoc) != "chi2.correction"], .id = "term")
+  out <- dplyr::bind_rows(
+    massoc[names(massoc) != "chi2.correction"],
+    .id = "term"
+  )
   if (rlang::arg_match(parameters) == "moa") {
     out <- subset(out, !is.na(est), select = c("term", "est", "lower", "upper"))
     colnames(out) <- c("term", "estimate", "conf.low", "conf.high")
@@ -67,7 +70,11 @@ tidy.epi.2by2 <- function(x, parameters = c("moa", "stat"), ...) {
     }
   }
 
-  out <- subset(out, is.na(est), select = c("term", "test.statistic", "df", "p.value"))
+  out <- subset(
+    out,
+    is.na(est),
+    select = c("term", "test.statistic", "df", "p.value")
+  )
   colnames(out) <- c("term", "statistic", "df", "p.value")
   tibble::as_tibble(out)
 }

@@ -5,11 +5,17 @@ test_that("ellipsis checking works", {
   expect_snapshot(
     check_ellipses("exponentiate", "tidy", "boop", exponentiate = TRUE)
   )
-  
+
   expect_snapshot(
-    check_ellipses("exponentiate", "tidy", "boop", exponentiate = TRUE, quick = FALSE)
+    check_ellipses(
+      "exponentiate",
+      "tidy",
+      "boop",
+      exponentiate = TRUE,
+      quick = FALSE
+    )
   )
-  
+
   expect_silent(check_ellipses("exponentiate", "tidy", "boop", hi = "pal"))
 })
 
@@ -39,21 +45,45 @@ test_that("augment_newdata can handle function calls in response term (lm)", {
   aug_mt_lm_log_none <- augment(mt_lm_log)
   aug_mt_lm_log_data <- augment(mt_lm_log, data = mtcars)
   aug_mt_lm_log_newdata <- augment(mt_lm_log, newdata = mtcars[1:20, ])
-  aug_mt_lm_log_no_resp <- augment(mt_lm_log, newdata = mtcars[1:20, 2:ncol(mtcars)])
+  aug_mt_lm_log_no_resp <- augment(
+    mt_lm_log,
+    newdata = mtcars[1:20, 2:ncol(mtcars)]
+  )
 
   expect_true(inherits(aug_mt_lm_log_none, "tbl_df"))
   expect_true(inherits(aug_mt_lm_log_data, "tbl_df"))
   expect_true(inherits(aug_mt_lm_log_newdata, "tbl_df"))
   expect_true(inherits(aug_mt_lm_log_no_resp, "tbl_df"))
 
-  expect_equal(".resid" %in% colnames(aug_mt_lm_log_none), ".resid" %in% colnames(aug_mt_lm_none))
-  expect_equal(".resid" %in% colnames(aug_mt_lm_log_data), ".resid" %in% colnames(aug_mt_lm_data))
-  expect_equal(".resid" %in% colnames(aug_mt_lm_log_newdata), ".resid" %in% colnames(aug_mt_lm_newdata))
-  expect_equal(".resid" %in% colnames(aug_mt_lm_log_no_resp), ".resid" %in% colnames(aug_mt_lm_no_resp))
+  expect_equal(
+    ".resid" %in% colnames(aug_mt_lm_log_none),
+    ".resid" %in% colnames(aug_mt_lm_none)
+  )
+  expect_equal(
+    ".resid" %in% colnames(aug_mt_lm_log_data),
+    ".resid" %in% colnames(aug_mt_lm_data)
+  )
+  expect_equal(
+    ".resid" %in% colnames(aug_mt_lm_log_newdata),
+    ".resid" %in% colnames(aug_mt_lm_newdata)
+  )
+  expect_equal(
+    ".resid" %in% colnames(aug_mt_lm_log_no_resp),
+    ".resid" %in% colnames(aug_mt_lm_no_resp)
+  )
 
-  expect_equal(aug_mt_lm_log_none$.resid, log(mtcars$mpg) - unname(fitted(mt_lm_log, mtcars)))
-  expect_equal(aug_mt_lm_log_data$.resid, log(mtcars$mpg) - unname(fitted(mt_lm_log, mtcars)))
-  expect_equal(aug_mt_lm_log_newdata$.resid, log(mtcars$mpg[1:20]) - unname(predict(mt_lm_log, mtcars[1:20, ])))
+  expect_equal(
+    aug_mt_lm_log_none$.resid,
+    log(mtcars$mpg) - unname(fitted(mt_lm_log, mtcars))
+  )
+  expect_equal(
+    aug_mt_lm_log_data$.resid,
+    log(mtcars$mpg) - unname(fitted(mt_lm_log, mtcars))
+  )
+  expect_equal(
+    aug_mt_lm_log_newdata$.resid,
+    log(mtcars$mpg[1:20]) - unname(predict(mt_lm_log, mtcars[1:20, ]))
+  )
 })
 
 test_that("augment_newdata can handle function calls in response term (glm)", {
@@ -68,20 +98,41 @@ test_that("augment_newdata can handle function calls in response term (glm)", {
   aug_mt_glm_log_none <- augment(mt_glm_log)
   aug_mt_glm_log_data <- augment(mt_glm_log, data = mtcars)
   aug_mt_glm_log_newdata <- augment(mt_glm_log, newdata = mtcars[1:20, ])
-  aug_mt_glm_log_no_resp <- augment(mt_glm_log, newdata = mtcars[1:20, 2:ncol(mtcars)])
+  aug_mt_glm_log_no_resp <- augment(
+    mt_glm_log,
+    newdata = mtcars[1:20, 2:ncol(mtcars)]
+  )
 
   expect_true(inherits(aug_mt_glm_log_none, "tbl_df"))
   expect_true(inherits(aug_mt_glm_log_data, "tbl_df"))
   expect_true(inherits(aug_mt_glm_log_newdata, "tbl_df"))
   expect_true(inherits(aug_mt_glm_log_no_resp, "tbl_df"))
 
-  expect_equal(".resid" %in% colnames(aug_mt_glm_log_none), ".resid" %in% colnames(aug_mt_glm_none))
-  expect_equal(".resid" %in% colnames(aug_mt_glm_log_data), ".resid" %in% colnames(aug_mt_glm_data))
-  expect_equal(".resid" %in% colnames(aug_mt_glm_log_newdata), ".resid" %in% colnames(aug_mt_glm_newdata))
-  expect_equal(".resid" %in% colnames(aug_mt_glm_log_no_resp), ".resid" %in% colnames(aug_mt_glm_no_resp))
+  expect_equal(
+    ".resid" %in% colnames(aug_mt_glm_log_none),
+    ".resid" %in% colnames(aug_mt_glm_none)
+  )
+  expect_equal(
+    ".resid" %in% colnames(aug_mt_glm_log_data),
+    ".resid" %in% colnames(aug_mt_glm_data)
+  )
+  expect_equal(
+    ".resid" %in% colnames(aug_mt_glm_log_newdata),
+    ".resid" %in% colnames(aug_mt_glm_newdata)
+  )
+  expect_equal(
+    ".resid" %in% colnames(aug_mt_glm_log_no_resp),
+    ".resid" %in% colnames(aug_mt_glm_no_resp)
+  )
 
-  expect_equal(aug_mt_glm_log_none$.resid, log(mtcars$mpg) - unname(fitted(mt_glm_log, mtcars)))
-  expect_equal(aug_mt_glm_log_data$.resid, log(mtcars$mpg) - unname(fitted(mt_glm_log, mtcars)))
+  expect_equal(
+    aug_mt_glm_log_none$.resid,
+    log(mtcars$mpg) - unname(fitted(mt_glm_log, mtcars))
+  )
+  expect_equal(
+    aug_mt_glm_log_data$.resid,
+    log(mtcars$mpg) - unname(fitted(mt_glm_log, mtcars))
+  )
 })
 
 test_that("augment_newdata can handle function calls in response term (loess)", {
@@ -91,26 +142,53 @@ test_that("augment_newdata can handle function calls in response term (loess)", 
   aug_mt_loess_none <- augment(mt_loess)
   aug_mt_loess_data <- augment(mt_loess, data = mtcars)
   aug_mt_loess_newdata <- augment(mt_loess, newdata = mtcars[1:20, ])
-  aug_mt_loess_no_resp <- augment(mt_loess, newdata = mtcars[1:20, 2:ncol(mtcars)])
+  aug_mt_loess_no_resp <- augment(
+    mt_loess,
+    newdata = mtcars[1:20, 2:ncol(mtcars)]
+  )
 
   aug_mt_loess_log_none <- augment(mt_loess_log)
   aug_mt_loess_log_data <- augment(mt_loess_log, data = mtcars)
   aug_mt_loess_log_newdata <- augment(mt_loess_log, newdata = mtcars[1:20, ])
-  aug_mt_loess_log_no_resp <- augment(mt_loess_log, newdata = mtcars[1:20, 2:ncol(mtcars)])
+  aug_mt_loess_log_no_resp <- augment(
+    mt_loess_log,
+    newdata = mtcars[1:20, 2:ncol(mtcars)]
+  )
 
   expect_true(inherits(aug_mt_loess_log_none, "tbl_df"))
   expect_true(inherits(aug_mt_loess_log_data, "tbl_df"))
   expect_true(inherits(aug_mt_loess_log_newdata, "tbl_df"))
   expect_true(inherits(aug_mt_loess_log_no_resp, "tbl_df"))
 
-  expect_equal(".resid" %in% colnames(aug_mt_loess_log_none), ".resid" %in% colnames(aug_mt_loess_none))
-  expect_equal(".resid" %in% colnames(aug_mt_loess_log_data), ".resid" %in% colnames(aug_mt_loess_data))
-  expect_equal(".resid" %in% colnames(aug_mt_loess_log_newdata), ".resid" %in% colnames(aug_mt_loess_newdata))
-  expect_equal(".resid" %in% colnames(aug_mt_loess_log_no_resp), ".resid" %in% colnames(aug_mt_loess_no_resp))
+  expect_equal(
+    ".resid" %in% colnames(aug_mt_loess_log_none),
+    ".resid" %in% colnames(aug_mt_loess_none)
+  )
+  expect_equal(
+    ".resid" %in% colnames(aug_mt_loess_log_data),
+    ".resid" %in% colnames(aug_mt_loess_data)
+  )
+  expect_equal(
+    ".resid" %in% colnames(aug_mt_loess_log_newdata),
+    ".resid" %in% colnames(aug_mt_loess_newdata)
+  )
+  expect_equal(
+    ".resid" %in% colnames(aug_mt_loess_log_no_resp),
+    ".resid" %in% colnames(aug_mt_loess_no_resp)
+  )
 
-  expect_equal(aug_mt_loess_log_none$.resid, log(mtcars$mpg) - unname(fitted(mt_loess_log, mtcars)))
-  expect_equal(aug_mt_loess_log_data$.resid, log(mtcars$mpg) - unname(fitted(mt_loess_log, mtcars)))
-  expect_equal(aug_mt_loess_log_newdata$.resid, log(mtcars$mpg[1:20]) - unname(predict(mt_loess_log, mtcars[1:20, ])))
+  expect_equal(
+    aug_mt_loess_log_none$.resid,
+    log(mtcars$mpg) - unname(fitted(mt_loess_log, mtcars))
+  )
+  expect_equal(
+    aug_mt_loess_log_data$.resid,
+    log(mtcars$mpg) - unname(fitted(mt_loess_log, mtcars))
+  )
+  expect_equal(
+    aug_mt_loess_log_newdata$.resid,
+    log(mtcars$mpg[1:20]) - unname(predict(mt_loess_log, mtcars[1:20, ]))
+  )
 })
 
 test_that("as_glance_tibble", {
@@ -127,7 +205,10 @@ test_that("as_glance_tibble", {
 
   expect_false(class(df1$y) == class(df2$y))
 
-  expect_snapshot(error = TRUE, as_glance_tibble(x = 1, y = 1, na_types = "rrr"))
+  expect_snapshot(
+    error = TRUE,
+    as_glance_tibble(x = 1, y = 1, na_types = "rrr")
+  )
 })
 
 test_that("appropriate warning on (g)lm-subclassed models", {
@@ -135,14 +216,14 @@ test_that("appropriate warning on (g)lm-subclassed models", {
   class(x) <- c("boop", "glm")
 
   expect_snapshot(warn_on_subclass(x, "tidy"))
-  
+
   # only displayed once per session, per unique dispatch
   expect_silent(warn_on_subclass(x, "tidy"))
 
   class(x) <- c("bop", "glm", "lm")
 
   expect_snapshot(warn_on_subclass(x, "tidy"))
-  
+
   # only displayed once per session, per unique dispatch
   expect_silent(
     warn_on_subclass(x, "tidy")

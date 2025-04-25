@@ -43,13 +43,21 @@
 #' @aliases mgcv_tidiers gam_tidiers tidy.gam
 #' @family mgcv tidiers
 #' @seealso [tidy()], [mgcv::gam()]
-tidy.gam <- function(x, parametric = FALSE, conf.int = FALSE,
-                     conf.level = 0.95, exponentiate = FALSE, ...) {
+tidy.gam <- function(
+  x,
+  parametric = FALSE,
+  conf.int = FALSE,
+  conf.level = 0.95,
+  exponentiate = FALSE,
+  ...
+) {
   if (!parametric && conf.int) {
     cli::cli_inform("Confidence intervals only available for parametric terms.")
   }
   if (!parametric && exponentiate) {
-    cli::cli_inform("Exponentiating coefficients only available for parametric terms.")
+    cli::cli_inform(
+      "Exponentiating coefficients only available for parametric terms."
+    )
   }
   if (parametric) {
     px <- summary(x)$p.table
@@ -61,7 +69,11 @@ tidy.gam <- function(x, parametric = FALSE, conf.int = FALSE,
       # avoid "Waiting for profiling to be done..." message
       # This message doesn't seem to happen with confint.default
       CI <- suppressMessages(
-        stats::confint.default(x, level = conf.level)[rownames(px), , drop = FALSE]
+        stats::confint.default(x, level = conf.level)[
+          rownames(px),
+          ,
+          drop = FALSE
+        ]
       )
       # Think about rank deficiency
       colnames(CI) <- c("conf.low", "conf.high")
@@ -74,11 +86,11 @@ tidy.gam <- function(x, parametric = FALSE, conf.int = FALSE,
     class(sx) <- c("anova", "data.frame")
     ret <- tidy(sx)
   }
-  
+
   if (exponentiate && parametric) {
     ret <- exponentiate(ret)
   }
-  
+
   ret
 }
 
@@ -105,7 +117,7 @@ tidy.gam <- function(x, parametric = FALSE, conf.int = FALSE,
 #' @seealso [glance()], [mgcv::gam()]
 glance.gam <- function(x, ...) {
   s <- summary(x)
-  
+
   as_glance_tibble(
     df = sum(x$edf),
     logLik = as.numeric(stats::logLik(x)),
@@ -143,10 +155,18 @@ glance.gam <- function(x, ...) {
 #'
 #' @seealso [augment()], [mgcv::gam()]
 #' @export
-augment.gam <- function(x, data = model.frame(x), newdata = NULL,
-                        type.predict, type.residuals, ...) {
+augment.gam <- function(
+  x,
+  data = model.frame(x),
+  newdata = NULL,
+  type.predict,
+  type.residuals,
+  ...
+) {
   augment_columns(
-    x, data, newdata,
+    x,
+    data,
+    newdata,
     type.predict = type.predict,
     type.residuals = type.residuals
   )

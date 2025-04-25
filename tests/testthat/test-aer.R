@@ -9,7 +9,7 @@ library(dplyr)
 library(modeltests)
 
 data("CigarettesSW")
-df <- CigarettesSW %>%
+df <- CigarettesSW |>
   mutate(
     rprice = price / cpi,
     rincome = income / population / cpi,
@@ -18,7 +18,8 @@ df <- CigarettesSW %>%
 
 fit <- ivreg(
   log(packs) ~ log(rprice) + log(rincome) | log(rincome) + tdiff + I(tax / cpi),
-  data = df, subset = year == "1995"
+  data = df,
+  subset = year == "1995"
 )
 
 ivfit1 <- ivreg(mpg ~ hp | qsec + am, data = mtcars)

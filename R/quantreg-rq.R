@@ -53,8 +53,13 @@
 #' # glance cannot handle rqs objects like `mod3`--use a purrr
 #' # `map`-based workflow instead
 #'
-tidy.rq <- function(x, se.type = NULL, conf.int = FALSE,
-                    conf.level = 0.95, ...) {
+tidy.rq <- function(
+  x,
+  se.type = NULL,
+  conf.int = FALSE,
+  conf.level = 0.95,
+  ...
+) {
   check_ellipses("exponentiate", "tidy", "rq", ...)
 
   # specification for confidence level inverted for summary.rq
@@ -96,8 +101,8 @@ tidy.rq <- function(x, se.type = NULL, conf.int = FALSE,
 #' @details Only models with a single `tau` value may be passed.
 #'  For multiple values, please use a [purrr::map()] workflow instead, e.g.
 #'  ```
-#'  taus %>%
-#'    map(function(tau_val) rq(y ~ x, tau = tau_val)) %>%
+#'  taus |>
+#'    map(function(tau_val) rq(y ~ x, tau = tau_val)) |>
 #'    map_dfr(glance)
 #'  ```
 #'
@@ -168,9 +173,12 @@ augment.rq <- function(x, data = model.frame(x), newdata = NULL, ...) {
   }
 }
 
-process_rq <- function(rq_obj, se.type = NULL,
-                       conf.int = TRUE,
-                       conf.level = 0.95) {
+process_rq <- function(
+  rq_obj,
+  se.type = NULL,
+  conf.int = TRUE,
+  conf.level = 0.95
+) {
   nn <- c("estimate", "std.error", "statistic", "p.value")
   co <- as.data.frame(rq_obj[["coefficients"]])
   if (se.type == "rank") {

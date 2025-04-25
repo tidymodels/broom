@@ -173,7 +173,6 @@ tidy.summary_emm <- function(x, null.value = NULL, ...) {
 }
 
 
-
 tidy_emmeans <- function(x, ...) {
   s <- summary(x, ...)
 
@@ -227,30 +226,40 @@ tidy_emmeans_summary <- function(x, null.value = NULL, term_names = NULL) {
 
   # If contrast column exists, add null.value column
   if ("contrast" %in% colnames(ret)) {
-    if (length(null.value) < nrow(ret)) null.value <- rep_len(null.value, nrow(ret))
-    ret <- bind_cols(contrast = ret[, "contrast"], null.value = null.value, select(ret, -contrast))
+    if (length(null.value) < nrow(ret))
+      null.value <- rep_len(null.value, nrow(ret))
+    ret <- bind_cols(
+      contrast = ret[, "contrast"],
+      null.value = null.value,
+      select(ret, -contrast)
+    )
   }
 
   # add term column, if appropriate, unless it exists
   if ("term" %in% colnames(ret)) {
-    ret <- ret %>%
+    ret <- ret |>
       mutate(term = stringr::str_trim(term))
   } else if (!is.null(term_names)) {
     term <- term_names[!term_names %in% colnames(ret)]
 
     if (length(term) != 0) {
-      term <- paste(term_names[!term_names %in% colnames(ret)], collapse = "*") %>%
+      term <- paste(
+        term_names[!term_names %in% colnames(ret)],
+        collapse = "*"
+      ) |>
         rep_len(nrow(ret))
-    } else { # No missing term names, because combine = TRUE?
+    } else {
+      # No missing term names, because combine = TRUE?
       term <- apply(ret, 1, function(x) colnames(ret)[which(x == ".")])
     }
 
-    ret <- bind_cols(ret[, colnames(ret) %in% term_names, drop = FALSE],
+    ret <- bind_cols(
+      ret[, colnames(ret) %in% term_names, drop = FALSE],
       term = term,
       ret[, !colnames(ret) %in% term_names, drop = FALSE]
     )
   }
 
-  as_tibble(ret) %>%
+  as_tibble(ret) |>
     mutate_if(is.factor, as.character)
 }

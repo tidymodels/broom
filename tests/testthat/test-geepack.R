@@ -23,7 +23,7 @@ test_that("tidy.geeglm", {
   expect_snapshot({
     td2 <- tidy(fit, conf.int = FALSE, exponentiate = TRUE)
   })
-  
+
   check_tidy_output(td)
   check_tidy_output(td2)
 })

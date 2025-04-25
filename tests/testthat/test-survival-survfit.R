@@ -34,7 +34,7 @@ test_that("tidy.survfit", {
 test_that("glance.survfit", {
   expect_snapshot(error = TRUE, glance(sfit))
   expect_snapshot(error = TRUE, glance(fit2))
-  
+
   gl <- glance(sfit2)
   check_glance_outputs(gl)
 })

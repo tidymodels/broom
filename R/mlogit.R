@@ -73,21 +73,21 @@ augment.mlogit <- function(x, data = x$model, ...) {
   # what we want to do with the results.
   idx <- x$model$idx
 
-  reg <- x$model %>%
-    as_augment_tibble() %>%
-    dplyr::select(-idx) %>%
+  reg <- x$model |>
+    as_augment_tibble() |>
+    dplyr::select(-idx) |>
     # rename the column indicating the chosen alternative
     dplyr::rename(
       chosen = 1,
       .probability = probabilities,
       .fitted = linpred
-    ) %>%
+    ) |>
     # reappend the id columns
     dplyr::mutate(
       id = idx[, 1],
       alternative = idx[, 2],
       .resid = as.vector(x$residuals)
-    ) %>%
+    ) |>
     dplyr::select(id, alternative, chosen, everything())
 
   reg
@@ -120,7 +120,6 @@ glance.mlogit <- function(x, ...) {
   ll0 <- sum(x$freq * log(1 / n_alts))
   # market shares model: odds equal to chosen proportions
   llC <- sum(x$freq * log(prop.table(x$freq)))
-
 
   res <- as_glance_tibble(
     logLik = llM,

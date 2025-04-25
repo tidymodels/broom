@@ -76,7 +76,11 @@ tidy.garch <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #' @export
 #' @family garch tidiers
 #' @seealso [glance()], [tseries::garch()], []
-glance.garch <- function(x, test = c("box-ljung-test", "jarque-bera-test"), ...) {
+glance.garch <- function(
+  x,
+  test = c("box-ljung-test", "jarque-bera-test"),
+  ...
+) {
   test <- rlang::arg_match(test)
   s <- summary(x)
   ret <- garch_glance_helper(s, test, ...)

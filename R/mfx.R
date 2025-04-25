@@ -67,7 +67,13 @@ tidy.mfx <-
     check_ellipses("exponentiate", "tidy", "mfx", ...)
 
     x_tidy <- as_tibble(x$mfxest, rownames = "term")
-    colnames(x_tidy) <- c("term", "estimate", "std.error", "statistic", "p.value")
+    colnames(x_tidy) <- c(
+      "term",
+      "estimate",
+      "std.error",
+      "statistic",
+      "p.value"
+    )
 
     # Optional: Add "atmean" column
     # If no "atmean" argument is specified in the model call, then will default to TRUE
@@ -75,19 +81,21 @@ tidy.mfx <-
       x_tidy$atmean <- TRUE
       # Else, extract the user-specified "atmean" argument from the model call
     } else {
-      x_tidy$atmean <- as.logical(gsub(".*atmean = |,.*|).*", "", format(c(x$call))))
+      x_tidy$atmean <- as.logical(gsub(
+        ".*atmean = |,.*|).*",
+        "",
+        format(c(x$call))
+      ))
     }
 
     if (conf.int) {
       x_tidy <-
-        x_tidy %>%
+        x_tidy |>
         dplyr::mutate(
-          conf.low = estimate - qt(1 - (1 - conf.level) / 2,
-            df = x$fit$df.residual
-          ) * std.error,
-          conf.high = estimate + qt(1 - (1 - conf.level) / 2,
-            df = x$fit$df.residual
-          ) * std.error
+          conf.low = estimate -
+            qt(1 - (1 - conf.level) / 2, df = x$fit$df.residual) * std.error,
+          conf.high = estimate +
+            qt(1 - (1 - conf.level) / 2, df = x$fit$df.residual) * std.error
         )
     }
 
@@ -140,19 +148,24 @@ tidy.probitmfx <- tidy.mfx
 #' @seealso [augment.glm()], [mfx::logitmfx()], [mfx::negbinmfx()],
 #'   [mfx::poissonmfx()], [mfx::probitmfx()]
 #' @export
-augment.mfx <- function(x,
-                        data = model.frame(x$fit),
-                        newdata = NULL,
-                        type.predict = c("link", "response", "terms"),
-                        type.residuals = c("deviance", "pearson"),
-                        se_fit = FALSE, ...) {
+augment.mfx <- function(
+  x,
+  data = model.frame(x$fit),
+  newdata = NULL,
+  type.predict = c("link", "response", "terms"),
+  type.residuals = c("deviance", "pearson"),
+  se_fit = FALSE,
+  ...
+) {
   # Use augment.glm() method on internal fit object
-  augment.glm(x$fit,
+  augment.glm(
+    x$fit,
     data = data,
     newdata = newdata,
     type.predict = type.predict,
     type.residuals = type.residuals,
-    se_fit = se_fit, ...
+    se_fit = se_fit,
+    ...
   )
 }
 #' @rdname augment.mfx
@@ -290,14 +303,24 @@ tidy.betamfx <- tidy.mfx
 #' @family mfx tidiers
 #' @seealso [augment.betareg()], [mfx::betamfx()]
 #' @export
-augment.betamfx <- function(x,
-                            data = model.frame(x$fit),
-                            newdata = NULL,
-                            type.predict = c("response", "link", "precision", "variance", "quantile"),
-                            type.residuals = c("sweighted2", "deviance", "pearson", "response", "weighted", "sweighted"),
-                            ...) {
+augment.betamfx <- function(
+  x,
+  data = model.frame(x$fit),
+  newdata = NULL,
+  type.predict = c("response", "link", "precision", "variance", "quantile"),
+  type.residuals = c(
+    "sweighted2",
+    "deviance",
+    "pearson",
+    "response",
+    "weighted",
+    "sweighted"
+  ),
+  ...
+) {
   # Use augment.betareg() method on internal fit object
-  augment.betareg(x$fit,
+  augment.betareg(
+    x$fit,
     data = data,
     newdata = newdata,
     type.predict = type.predict,

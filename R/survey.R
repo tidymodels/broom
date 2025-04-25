@@ -36,8 +36,13 @@
 #' @export
 #' @seealso [tidy], [survey::svyolr()]
 #' @family ordinal tidiers
-tidy.svyolr <- function(x, conf.int = FALSE, conf.level = 0.95,
-                        exponentiate = FALSE, ...) {
+tidy.svyolr <- function(
+  x,
+  conf.int = FALSE,
+  conf.level = 0.95,
+  exponentiate = FALSE,
+  ...
+) {
   check_ellipses("p.values", "tidy", "svyolr", ...)
 
   return(
@@ -83,8 +88,13 @@ glance.svyolr <- function(x, ...) {
 #' @export
 #' @family survey tidiers
 #' @seealso [survey::svyglm()], [stats::glm()]
-tidy.svyglm <- function(x, conf.int = FALSE, conf.level = 0.95,
-                        exponentiate = FALSE, ...) {
+tidy.svyglm <- function(
+  x,
+  conf.int = FALSE,
+  conf.level = 0.95,
+  exponentiate = FALSE,
+  ...
+) {
   ret <- as_tibble(summary(x)$coefficients, rownames = "term")
   colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
 

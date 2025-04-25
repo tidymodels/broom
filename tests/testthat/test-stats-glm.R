@@ -62,29 +62,29 @@ test_that("augment.glm", {
     data = mtcars,
     newdata = mtcars
   )
-  
+
   # check that `type.residuals` argument is passed correctly (#1147)
   expect_equal(
-    augment(gfit2, type.residuals = "pearson") %>% dplyr::pull(.std.resid),
-    rstandard(gfit2, type = "pearson") %>% unname()
+    augment(gfit2, type.residuals = "pearson") |> dplyr::pull(.std.resid),
+    rstandard(gfit2, type = "pearson") |> unname()
   )
-  
+
   expect_equal(
-    augment(gfit2, type.residuals = "deviance") %>% dplyr::pull(.std.resid),
-    rstandard(gfit2, type = "deviance") %>% unname()
+    augment(gfit2, type.residuals = "deviance") |> dplyr::pull(.std.resid),
+    rstandard(gfit2, type = "deviance") |> unname()
   )
 })
 
 test_that("glm tidiers warn informatively with glm.fit2 input", {
   gfit <- glm(am ~ wt, mtcars, family = "binomial")
   gfit$method <- "glm.fit2"
-  
+
   expect_snapshot(.res <- tidy(gfit))
 })
 
 test_that("glm tidiers warn informatively with stanreg input", {
   gfit <- glm(am ~ wt, mtcars, family = "binomial")
   gfit$stan_function <- "howdy"
-  
+
   expect_snapshot(error = TRUE, .res <- tidy(gfit))
 })

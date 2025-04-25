@@ -44,8 +44,14 @@
 #' @export
 #' @seealso [tidy], [MASS::polr()]
 #' @family ordinal tidiers
-tidy.polr <- function(x, conf.int = FALSE, conf.level = 0.95,
-                      exponentiate = FALSE, p.values = FALSE, ...) {
+tidy.polr <- function(
+  x,
+  conf.int = FALSE,
+  conf.level = 0.95,
+  exponentiate = FALSE,
+  p.values = FALSE,
+  ...
+) {
   ret <- as_tibble(coef(summary(x)), rownames = "term")
   colnames(ret) <- c("term", "estimate", "std.error", "statistic")
 
@@ -59,16 +65,24 @@ tidy.polr <- function(x, conf.int = FALSE, conf.level = 0.95,
   }
 
   if (p.values) {
+    all_but_last <- function(x) {
+      x[-1]
+    }
     sig <- MASS::dropterm(x, test = "Chisq")
-    p <- sig %>%
-      dplyr::select(`Pr(Chi)`) %>%
-      dplyr::pull() %>%
-      .[-1]
+    p <- sig |>
+      dplyr::select(`Pr(Chi)`) |>
+      dplyr::pull() |>
+      all_but_last()
     terms <- purrr::map(rownames(sig)[-1], function(x) {
       ret$term[stringr::str_detect(ret$term, stringr::fixed(x))]
-    }) %>% unlist()
+    }) |>
+      unlist()
     if (length(p) == length(terms)) {
-      ret <- dplyr::left_join(ret, tibble::tibble(term = terms, p.value = p), by = "term")
+      ret <- dplyr::left_join(
+        ret,
+        tibble::tibble(term = terms, p.value = p),
+        by = "term"
+      )
     } else {
       cli::cli_inform(
         "p-values can presently only be returned for models that contain
@@ -130,8 +144,13 @@ glance.polr <- function(x, ...) {
 #' @seealso [tidy()], [MASS::polr()]
 #' @family ordinal tidiers
 #'
-augment.polr <- function(x, data = model.frame(x), newdata = NULL,
-                         type.predict = c("class"), ...) {
+augment.polr <- function(
+  x,
+  data = model.frame(x),
+  newdata = NULL,
+  type.predict = c("class"),
+  ...
+) {
   type <- rlang::arg_match(type.predict)
 
   df <- if (is.null(newdata)) data else newdata

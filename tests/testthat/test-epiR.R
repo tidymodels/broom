@@ -14,22 +14,34 @@ birthwt$low <- factor(birthwt$low, levels = c(1, 0))
 birthwt$smoke <- factor(birthwt$smoke, levels = c(1, 0))
 birthwt$race <- factor(birthwt$race, levels = c(1, 2, 3))
 tab1 <- table(birthwt$smoke, birthwt$low, dnn = c("Smoke", "Low BW"))
-tab2 <- table(birthwt$smoke, birthwt$low, birthwt$race,
+tab2 <- table(
+  birthwt$smoke,
+  birthwt$low,
+  birthwt$race,
   dnn = c("Smoke", "Low BW", "Race")
 )
 
 suppressPackageStartupMessages(library(epiR))
 fit1 <- epi.2by2(
-  dat = as.table(dat), method = "cross.sectional",
-  conf.level = 0.95, units = 100, outcome = "as.columns"
+  dat = as.table(dat),
+  method = "cross.sectional",
+  conf.level = 0.95,
+  units = 100,
+  outcome = "as.columns"
 )
 fit2 <- epi.2by2(
-  dat = tab1, method = "cohort.count",
-  conf.level = 0.95, units = 100, outcome = "as.columns"
+  dat = tab1,
+  method = "cohort.count",
+  conf.level = 0.95,
+  units = 100,
+  outcome = "as.columns"
 )
 fit3 <- epi.2by2(
-  dat = tab2, method = "cohort.count",
-  conf.level = 0.95, units = 100, outcome = "as.columns"
+  dat = tab2,
+  method = "cohort.count",
+  conf.level = 0.95,
+  units = 100,
+  outcome = "as.columns"
 )
 
 test_that("epi2by2 arguments", {

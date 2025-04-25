@@ -56,17 +56,18 @@ tidy.ridgelm <- function(x, ...) {
   }
 
   # otherwise, multiple lambdas/coefs/etc, have to tidy
-  cotidy <- data.frame(unrowname(t(x$coef)),
+  cotidy <- data.frame(
+    unrowname(t(x$coef)),
     lambda = x$lambda,
     GCV = unname(x$GCV)
-  ) %>%
+  ) |>
     pivot_longer(
       cols = c(dplyr::everything(), -lambda, -GCV),
       names_to = "term",
       values_to = "estimate"
-    ) %>%
-    as.data.frame() %>%
-    mutate(term = as.character(term)) %>%
+    ) |>
+    as.data.frame() |>
+    mutate(term = as.character(term)) |>
     mutate(scale = x$scales[term])
 
   as_tibble(cotidy)

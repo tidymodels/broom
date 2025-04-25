@@ -16,7 +16,8 @@ test_that("tidy.mlm works", {
 rep_each <- function(x, times) {
   retv <- outer(rep(1, times), x, function(x, y) y)
   dim(retv) <- c(prod(dim(retv)), 1)
-  retv <- switch(class(x),
+  retv <- switch(
+    class(x),
     character = as.character(retv),
     numeric = as.numeric(retv),
     integer = as.integer(retv),
@@ -35,7 +36,7 @@ test_that("tidy.mlm works", {
       x2 = runif(nob),
       z1 = rnorm(nob),
       z2 = rnorm(nob)
-    ) %>%
+    ) |>
     dplyr::mutate(
       y1 = 0.5 * x1 + x2 + z1 - z2,
       y2 = -2 * x1 + 0.25 * x2 + 3 * z1 + z2

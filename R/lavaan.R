@@ -49,15 +49,16 @@
 tidy.lavaan <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
   check_ellipses("exponentiate", "tidy", "lavaan", ...)
 
-  lavaan::parameterEstimates(x,
+  lavaan::parameterEstimates(
+    x,
     ci = conf.int,
     level = conf.level,
     standardized = TRUE,
     ...
-  ) %>%
-    as_tibble() %>%
-    tibble::rownames_to_column() %>%
-    mutate(term = paste(lhs, op, rhs)) %>%
+  ) |>
+    as_tibble() |>
+    tibble::rownames_to_column() |>
+    mutate(term = paste(lhs, op, rhs)) |>
     rename2(
       estimate = est,
       std.error = se,
@@ -65,8 +66,8 @@ tidy.lavaan <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
       statistic = z,
       conf.low = ci.lower,
       conf.high = ci.upper
-    ) %>%
-    select(term, op, dplyr::everything(), -rowname, -lhs, -rhs) %>%
+    ) |>
+    select(term, op, dplyr::everything(), -rowname, -lhs, -rhs) |>
     as_tibble()
 }
 
@@ -121,26 +122,26 @@ tidy.lavaan <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #'   [lavaan::fitmeasures()]
 #'
 glance.lavaan <- function(x, ...) {
-  x %>%
+  res <- x |>
     lavaan::fitmeasures(
-      fit.measures =
-        c(
-          "npar",
-          "chisq",
-          "rmsea",
-          "rmsea.ci.upper",
-          "srmr",
-          "aic",
-          "bic",
-          "tli",
-          "agfi",
-          "cfi"
-        )
-    ) %>%
-    tibble::enframe(name = "term") %>%
-    pivot_wider(names_from = term, values_from = value) %>%
-    select(order(colnames(.))) %>%
-    map_df(as.numeric) %>%
+      fit.measures = c(
+        "npar",
+        "chisq",
+        "rmsea",
+        "rmsea.ci.upper",
+        "srmr",
+        "aic",
+        "bic",
+        "tli",
+        "agfi",
+        "cfi"
+      )
+    ) |>
+    tibble::enframe(name = "term") |>
+    pivot_wider(names_from = term, values_from = value)
+  res |>
+    select(order(colnames(res))) |>
+    map_df(as.numeric) |>
     bind_cols(
       tibble(
         converged = lavaan::lavInspect(x, "converged"),
@@ -151,6 +152,6 @@ glance.lavaan <- function(x, ...) {
         norig = sum(lavaan::lavInspect(x, "norig")),
         nexcluded = norig - nobs
       )
-    ) %>%
+    ) |>
     rename(rmsea.conf.high = rmsea.ci.upper, AIC = aic, BIC = bic)
 }

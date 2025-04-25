@@ -98,10 +98,10 @@ test_that("augment.htest (chi squared test)", {
 
   tt <- t.test(rnorm(10))
   expect_snapshot(error = TRUE, augment(tt))
-  
+
   wt <- wilcox.test(mpg ~ am, data = mtcars, conf.int = TRUE, exact = FALSE)
   expect_snapshot(error = TRUE, augment(wt))
-  
+
   ct <- cor.test(mtcars$wt, mtcars$mpg)
   expect_snapshot(error = TRUE, augment(ct))
 })
@@ -109,11 +109,20 @@ test_that("augment.htest (chi squared test)", {
 test_that("tidy.htest does not return matrix columns", {
   skip_if_not_installed("survey")
   data(api, package = "survey")
-  dclus1 <- survey::svydesign(id = ~dnum, weights = ~pw, data = apiclus1, fpc = ~fpc)
+  dclus1 <- survey::svydesign(
+    id = ~dnum,
+    weights = ~pw,
+    data = apiclus1,
+    fpc = ~fpc
+  )
 
   expect_true(
-    survey::svychisq(~ sch.wide + stype, design = dclus1, statistic = "Wald") %>%
-      tidy() %>%
+    survey::svychisq(
+      ~ sch.wide + stype,
+      design = dclus1,
+      statistic = "Wald"
+    ) |>
+      tidy() |>
       purrr::none(~ inherits(., "matrix"))
   )
 })
@@ -121,6 +130,6 @@ test_that("tidy.htest does not return matrix columns", {
 test_that("tidy.htest handles various test types", {
   tt <- t.test(rnorm(10))
   tt$parameter <- c(9, 10)
-  
+
   expect_snapshot(.res <- tidy(tt))
 })

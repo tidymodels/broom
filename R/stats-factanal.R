@@ -60,7 +60,7 @@ tidy.factanal <- function(x, ...) {
     variable = rownames(loadings),
     uniqueness = x$uniquenesses,
     data.frame(loadings)
-  ) %>%
+  ) |>
     as_tibble()
 
   tidy_df$variable <- as.character(tidy_df$variable)
@@ -100,15 +100,18 @@ augment.factanal <- function(x, data, ...) {
       'Cannot augment {.cls factanal} objects fit with {.code scores = "none"}.'
     )
   }
-  
+
   # Place relevant values into a tidy data frame
   if (has_rownames(scores)) {
-    tidy_df <- data.frame(.rownames = rownames(scores), data.frame(scores)) %>%
-      as_tibble() %>%
+    tidy_df <- data.frame(.rownames = rownames(scores), data.frame(scores)) |>
+      as_tibble() |>
       dplyr::mutate(.rownames = as.character(.rownames))
   } else {
-    tidy_df <- tibble::rownames_to_column(as.data.frame(scores), var = ".rownames") %>%
-      as_tibble() %>%
+    tidy_df <- tibble::rownames_to_column(
+      as.data.frame(scores),
+      var = ".rownames"
+    ) |>
+      as_tibble() |>
       dplyr::mutate(.rownames = as.character(.rownames))
   }
 
@@ -118,21 +121,25 @@ augment.factanal <- function(x, data, ...) {
   if (missing(data)) {
     return(tidy_df)
   } else {
-    data <- tibble::rownames_to_column(as.data.frame(data), var = ".rownames") %>%
-      as_tibble() %>%
+    data <- tibble::rownames_to_column(
+      as.data.frame(data),
+      var = ".rownames"
+    ) |>
+      as_tibble() |>
       dplyr::mutate(.rownames = as.character(.rownames))
   }
 
   # Bind to data
-  tidy_df <- tidy_df %>%
-    dplyr::right_join(x = ., y = data, by = ".rownames")
+  tidy_df <- dplyr::right_join(x = tidy_df, y = data, by = ".rownames")
 
   # select all columns with name pattern `.fs` and move them to the end of the
   # augmented dataframe
-  tidy_df %>%
+  tidy_df |>
     dplyr::select(
-      .rownames, dplyr::everything(),
-      -dplyr::matches("\\.fs[0-9]*"), dplyr::matches("\\.fs[0-9]*")
+      .rownames,
+      dplyr::everything(),
+      -dplyr::matches("\\.fs[0-9]*"),
+      dplyr::matches("\\.fs[0-9]*")
     )
 }
 

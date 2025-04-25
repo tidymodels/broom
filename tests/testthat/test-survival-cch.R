@@ -18,7 +18,9 @@ ccoh.data$age <- ccoh.data$age / 12
 fit <- cch(
   Surv(edrel, rel) ~ stage + histol + age,
   data = ccoh.data,
-  subcoh = ~subcohort, id = ~seqno, cohort.size = 4028
+  subcoh = ~subcohort,
+  id = ~seqno,
+  cohort.size = 4028
 )
 
 test_that("cch tidier arguments", {

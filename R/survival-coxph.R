@@ -65,8 +65,13 @@
 #' @seealso [tidy()], [survival::coxph()]
 #' @family coxph tidiers
 #' @family survival tidiers
-tidy.coxph <- function(x, exponentiate = FALSE, conf.int = FALSE,
-                       conf.level = .95, ...) {
+tidy.coxph <- function(
+  x,
+  exponentiate = FALSE,
+  conf.int = FALSE,
+  conf.level = .95,
+  ...
+) {
   s <- summary(x, ...)
   co <- stats::coef(s)
 
@@ -115,10 +120,18 @@ tidy.coxph <- function(x, exponentiate = FALSE, conf.int = FALSE,
 #' @seealso [augment()], [survival::coxph()]
 #' @family coxph tidiers
 #' @family survival tidiers
-augment.coxph <- function(x, data = model.frame(x), newdata = NULL,
-                          type.predict = "lp", type.residuals = "martingale",
-                          ...) {
-  augment_columns(x, data, newdata,
+augment.coxph <- function(
+  x,
+  data = model.frame(x),
+  newdata = NULL,
+  type.predict = "lp",
+  type.residuals = "martingale",
+  ...
+) {
+  augment_columns(
+    x,
+    data,
+    newdata,
     type.predict = type.predict,
     type.residuals = type.residuals
   )

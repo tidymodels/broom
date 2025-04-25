@@ -44,9 +44,15 @@
 #'
 #' @rdname metafor_tidiers
 #'
-tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95,
-                     exponentiate = FALSE, include_studies = FALSE,
-                     measure = "GEN", ...) {
+tidy.rma <- function(
+  x,
+  conf.int = FALSE,
+  conf.level = 0.95,
+  exponentiate = FALSE,
+  include_studies = FALSE,
+  measure = "GEN",
+  ...
+) {
   # tidy summary estimates
   betas <- x$beta
   if (!is.null(nrow(betas)) && nrow(betas) > 1) {
@@ -63,7 +69,8 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95,
   if (x$level != 1 - conf.level) {
     level <- 1 - conf.level
     if (is.element(x$test, c("knha", "adhoc", "t"))) {
-      crit <- if (all(x$ddf > 0)) qt(level / 2, df = x$ddf, lower.tail = FALSE) else NA
+      crit <- if (all(x$ddf > 0))
+        qt(level / 2, df = x$ddf, lower.tail = FALSE) else NA
     } else {
       crit <- qnorm(level / 2, lower.tail = FALSE)
     }
@@ -88,8 +95,12 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95,
   # tidy individual studies
   if (include_studies) {
     # use `metafor::escalc` to standardize estimates and confidence intervals
-    estimates <- metafor::escalc(yi = x$yi.f, vi = x$vi.f, measure = measure) %>%
-      summary(level = conf.level * 100) %>%
+    estimates <- metafor::escalc(
+      yi = x$yi.f,
+      vi = x$vi.f,
+      measure = measure
+    ) |>
+      summary(level = conf.level * 100) |>
       as.data.frame(stringsAsFactors = FALSE)
 
     n_studies <- length(x$slab)
@@ -104,8 +115,14 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95,
     )
 
     names(estimates) <- c(
-      "term", "type", "estimate", "std.error", "statistic",
-      "p.value", "conf.low", "conf.high"
+      "term",
+      "type",
+      "estimate",
+      "std.error",
+      "statistic",
+      "p.value",
+      "conf.low",
+      "conf.high"
     )
     estimates <- as_tibble(estimates)
     results <- dplyr::bind_rows(estimates, results)
@@ -164,8 +181,8 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95,
 glance.rma <- function(x, ...) {
   # reshape model fit statistics and clean names
   fit_stats <- metafor::fitstats(x)
-  fit_stats <- fit_stats %>%
-    t() %>%
+  fit_stats <- fit_stats |>
+    t() |>
     as.data.frame()
   names(fit_stats) <-
     stringr::str_replace(names(fit_stats), "\\:", "")
@@ -183,11 +200,11 @@ glance.rma <- function(x, ...) {
     cochran.qm = x$QM,
     p.value.cochran.qm = x$QMp,
     df.residual = df.residual(x)
-  ) %>%
-    purrr::discard(is.null) %>%
-    purrr::discard(purrr::is_empty) %>%
+  ) |>
+    purrr::discard(is.null) |>
+    purrr::discard(purrr::is_empty) |>
     # drop multivariate statistics
-    purrr::discard(~ length(.x) >= 2) %>%
+    purrr::discard(~ length(.x) >= 2) |>
     as_tibble()
 
   if (!purrr::is_empty(fit_stats) && nrow(fit_stats) == 1) {
@@ -262,12 +279,16 @@ augment.rma <- function(x, interval = c("prediction", "confidence"), ...) {
 
   # fix names
   interval <- match.arg(interval, c("prediction", "confidence"))
-  if (interval == "prediction" & any(names(pred) %in% c("cr.lb", "cr.ub", "pi.lb", "pi.ub"))) {
+  if (
+    interval == "prediction" &
+      any(names(pred) %in% c("cr.lb", "cr.ub", "pi.lb", "pi.ub"))
+  ) {
     confidence_intervals <- names(pred) %in% c("ci.lb", "ci.ub")
     pred <- pred[, !confidence_intervals]
     names(pred)[1:4] <- c(".fitted", ".se.fit", ".lower", ".upper")
   } else {
-    prediction_intervals <- names(pred) %in% c("cr.lb", "cr.ub", "pi.lb", "pi.ub")
+    prediction_intervals <- names(pred) %in%
+      c("cr.lb", "cr.ub", "pi.lb", "pi.ub")
     pred <- pred[, !prediction_intervals]
     names(pred)[1:4] <- c(".fitted", ".se.fit", ".lower", ".upper")
   }
@@ -309,7 +330,6 @@ augment.rma <- function(x, interval = c("prediction", "confidence"), ...) {
     pred
   )
 
-
   # join residuals, if they exist for the model
   if (!is.null(res)) {
     res <- tibble::enframe(res, name = ".rownames", value = ".resid")
@@ -320,7 +340,7 @@ augment.rma <- function(x, interval = c("prediction", "confidence"), ...) {
   no_study_names <- all(x$slab == as.character(seq_along(x$slab)))
   if (no_study_names) ret$.rownames <- NULL
 
-  ret <- ret %>% dplyr::select(-dplyr::contains("cr."))
+  ret <- ret |> dplyr::select(-dplyr::contains("cr."))
 
   tibble::as_tibble(ret)
 }

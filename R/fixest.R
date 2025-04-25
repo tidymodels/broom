@@ -99,10 +99,13 @@ tidy.fixest <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #' @family fixest tidiers
 #' @seealso [augment()], [fixest::feglm()], [fixest::femlm()], [fixest::feols()]
 augment.fixest <- function(
-    x, data = NULL, newdata = NULL,
-    type.predict = c("link", "response"),
-    type.residuals = c("response", "deviance", "pearson", "working"),
-    ...) {
+  x,
+  data = NULL,
+  newdata = NULL,
+  type.predict = c("link", "response"),
+  type.residuals = c("response", "deviance", "pearson", "working"),
+  ...
+) {
   if (!x$method %in% c("feols", "feglm", "femlm")) {
     cli::cli_abort(c(
       "augment is only supported for fixest models estimated with
@@ -167,7 +170,7 @@ glance.fixest <- function(x, ...) {
 
   if (identical(x$method, "feols")) {
     r2_types <- c("r2", "ar2", "wr2")
-    r2_vals <- purrr::map_dbl(r2_types, fixest::r2, x = x) %>%
+    r2_vals <- purrr::map_dbl(r2_types, fixest::r2, x = x) |>
       purrr::set_names(r2_types)
     r2_names <- c("r.squared", "adj.r.squared", "within.r.squared")
     # Pull the summary objects that are specific to OLS
@@ -202,10 +205,17 @@ glance.fixest <- function(x, ...) {
   names(r2_vals) <- r2_names
   res_r2 <- tibble(!!!r2_vals)
   col_order <- c(
-    "r.squared", "adj.r.squared", "within.r.squared",
-    "pseudo.r.squared", "sigma", "nobs", "AIC", "BIC", "logLik"
+    "r.squared",
+    "adj.r.squared",
+    "within.r.squared",
+    "pseudo.r.squared",
+    "sigma",
+    "nobs",
+    "AIC",
+    "BIC",
+    "logLik"
   )
-  res <- bind_cols(res_common, res_r2, res_specific) %>%
+  res <- bind_cols(res_common, res_r2, res_specific) |>
     select(dplyr::any_of(col_order))
   res
 }

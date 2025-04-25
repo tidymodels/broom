@@ -42,18 +42,18 @@
 #' glance(p)
 #' augment(p, x)
 #'
-#' augment(p, x) %>%
+#' augment(p, x) |>
 #'   ggplot(aes(compounds, input_fields)) +
 #'   geom_point(aes(color = .cluster)) +
 #'   geom_text(aes(label = cluster), data = tidy(p), size = 10)
 #'
 tidy.pam <- function(x, col.names = paste0("x", 1:ncol(x$medoids)), ...) {
-  as_tibble(x$clusinfo) %>%
+  as_tibble(x$clusinfo) |>
     mutate(
       avg.width = x$silinfo$clus.avg.widths,
       cluster = as.factor(row_number())
-    ) %>%
-    bind_cols(as_tibble(x$medoids)) %>%
+    ) |>
+    bind_cols(as_tibble(x$medoids)) |>
     rename(
       "max.diss" = "max_diss",
       "avg.diss" = "av_diss"
@@ -79,7 +79,7 @@ augment.pam <- function(x, data = NULL, ...) {
     data <- x$data
   }
 
-  as_augment_tibble(data) %>%
+  as_augment_tibble(data) |>
     mutate(.cluster = as.factor(!!x$clustering))
 }
 

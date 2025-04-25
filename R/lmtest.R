@@ -111,8 +111,10 @@ glance.coeftest <- function(x, ...) {
   } else {
     # If model has not been saved, extract from retained attributes and notify user.
     ret <- tibble::tibble(
-      logLik = sprintf("%.3f", logLik(x)), AIC = AIC(x),
-      BIC = BIC(x), nobs = nobs(x)
+      logLik = sprintf("%.3f", logLik(x)),
+      AIC = AIC(x),
+      BIC = BIC(x),
+      nobs = nobs(x)
     )
     cli::cli_inform(
       c(

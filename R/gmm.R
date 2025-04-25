@@ -35,8 +35,8 @@
 #' library(ggplot2)
 #' library(dplyr)
 #'
-#' tidy(res, conf.int = TRUE) %>%
-#'   mutate(variable = reorder(term, estimate)) %>%
+#' tidy(res, conf.int = TRUE) |>
+#'   mutate(variable = reorder(term, estimate)) |>
 #'   ggplot(aes(estimate, variable)) +
 #'   geom_point() +
 #'   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
@@ -67,8 +67,8 @@
 #' td2
 #'
 #' # coefficient plot
-#' td2 %>%
-#'   mutate(variable = reorder(term, estimate)) %>%
+#' td2 |>
+#'   mutate(variable = reorder(term, estimate)) |>
 #'   ggplot(aes(estimate, variable)) +
 #'   geom_point() +
 #'   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
@@ -78,8 +78,13 @@
 #' @aliases gmm_tidiers
 #' @family gmm tidiers
 #' @seealso [tidy()], [gmm::gmm()]
-tidy.gmm <- function(x, conf.int = FALSE, conf.level = .95,
-                     exponentiate = FALSE, ...) {
+tidy.gmm <- function(
+  x,
+  conf.int = FALSE,
+  conf.level = .95,
+  exponentiate = FALSE,
+  ...
+) {
   coef <- summary(x)$coefficients
   ret <- as_tibble(coef, rownames = "term")
   colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")

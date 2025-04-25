@@ -66,7 +66,7 @@ augment.kmeans <- function(x, data, ...) {
     colnames(data) <- paste0("X", 1:ncol(data))
   }
 
-  as_augment_tibble(data) %>%
+  as_augment_tibble(data) |>
     mutate(.cluster = as.factor(!!x$cluster))
 }
 

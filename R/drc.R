@@ -99,10 +99,19 @@ glance.drc <- function(x, ...) {
 #' @export
 #'
 #' @family drc tidiers
-augment.drc <- function(x, data = NULL, newdata = NULL,
-                        se_fit = FALSE, conf.int = FALSE, conf.level = 0.95, ...) {
+augment.drc <- function(
+  x,
+  data = NULL,
+  newdata = NULL,
+  se_fit = FALSE,
+  conf.int = FALSE,
+  conf.level = 0.95,
+  ...
+) {
   if (is.null(data) && is.null(newdata)) {
-    cli::cli_abort("Must specify either {.arg data} or {.arg newdata} argument.")
+    cli::cli_abort(
+      "Must specify either {.arg data} or {.arg newdata} argument."
+    )
   }
 
   # drc doesn't like tibbles
@@ -116,8 +125,11 @@ augment.drc <- function(x, data = NULL, newdata = NULL,
     original$.rownames <- rownames(original)
   }
 
-  if (!missing(newdata) && x$curveVarNam %in% names(newdata) &&
-    any(is.na(newdata[[x$curveVarNam]]))) {
+  if (
+    !missing(newdata) &&
+      x$curveVarNam %in% names(newdata) &&
+      any(is.na(newdata[[x$curveVarNam]]))
+  ) {
     newdata <- newdata[!is.na(newdata[[x$curveVarNam]]), ]
   }
 
@@ -125,8 +137,10 @@ augment.drc <- function(x, data = NULL, newdata = NULL,
 
   if (!is.null(newdata)) {
     if (conf.int) {
-      preds <- data.frame(predict(x,
-        newdata = newdata, interval = "confidence",
+      preds <- data.frame(predict(
+        x,
+        newdata = newdata,
+        interval = "confidence",
         level = conf.level
       ))
       ret[[".lower"]] <- preds[["Lower"]]
@@ -144,7 +158,7 @@ augment.drc <- function(x, data = NULL, newdata = NULL,
   }
 
   if (!is.null(original)) {
-    reto <- ret %>% select(starts_with("."))
+    reto <- ret |> select(starts_with("."))
     ret <- merge(reto, original, by = ".rownames", all.y = TRUE)
   }
 

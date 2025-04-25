@@ -27,8 +27,8 @@
 #' @seealso [tidy()], [muhaz::muhaz()]
 #' @family muhaz tidiers
 tidy.muhaz <- function(x, ...) {
-  bind_cols(x[c("est.grid", "haz.est")]) %>%
-    rename("time" = "est.grid", "estimate" = "haz.est") %>%
+  bind_cols(x[c("est.grid", "haz.est")]) |>
+    rename("time" = "est.grid", "estimate" = "haz.est") |>
     as_tibble()
 }
 
@@ -49,10 +49,10 @@ tidy.muhaz <- function(x, ...) {
 #' @seealso [glance()], [muhaz::muhaz()]
 #' @family muhaz tidiers
 glance.muhaz <- function(x, ...) {
-  bind_cols(x$pin[c("nobs", "min.time", "max.time")]) %>%
+  bind_cols(x$pin[c("nobs", "min.time", "max.time")]) |>
     mutate(
       min.hazard = min(x$haz.est),
       max.hazard = max(x$haz.est)
-    ) %>%
+    ) |>
     as_tibble()
 }

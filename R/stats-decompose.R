@@ -45,18 +45,18 @@
 #'   # add the models in, one for each row.
 #'   decomp = c("decompose", "stl"),
 #'   model = list(d1, d2)
-#' ) %>%
-#'   rowwise() %>%
+#' ) |>
+#'   rowwise() |>
 #'   # pull out the fitted data using broom::augment.
-#'   mutate(augment = list(broom::augment(model))) %>%
-#'   ungroup() %>%
+#'   mutate(augment = list(broom::augment(model))) |>
+#'   ungroup() |>
 #'   # unnest the data frames into a tidy arrangement of
 #'   # the series next to its seasonal decomposition, grouped
 #'   # by the method (stl or decompose).
-#'   group_by(decomp) %>%
-#'   unnest(c(series, augment)) %>%
-#'   mutate(index = 1:n()) %>%
-#'   ungroup() %>%
+#'   group_by(decomp) |>
+#'   unnest(c(series, augment)) |>
+#'   mutate(index = 1:n()) |>
+#'   ungroup() |>
 #'   select(decomp, index, x, adjusted = .seasadj)
 #'
 #' ggplot(decomps) +

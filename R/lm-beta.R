@@ -45,8 +45,12 @@ tidy.lm.beta <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 
   ret <- as_tibble(summary(x)$coefficients, rownames = "term")
   colnames(ret) <- c(
-    "term", "estimate", "std_estimate",
-    "std.error", "statistic", "p.value"
+    "term",
+    "estimate",
+    "std_estimate",
+    "std.error",
+    "statistic",
+    "p.value"
   )
 
   if (conf.int) {

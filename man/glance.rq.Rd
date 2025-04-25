@@ -46,8 +46,8 @@ of the appropriate type.
 Only models with a single \code{tau} value may be passed.
 For multiple values, please use a \code{\link[purrr:map]{purrr::map()}} workflow instead, e.g.
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{taus \%>\%
-  map(function(tau_val) rq(y ~ x, tau = tau_val)) \%>\%
+\if{html}{\out{<div class="sourceCode">}}\preformatted{taus |>
+  map(function(tau_val) rq(y ~ x, tau = tau_val)) |>
   map_dfr(glance)
 }\if{html}{\out{</div>}}
 }

@@ -28,8 +28,8 @@
 #'   geom_point() +
 #'   ylab("% of variance explained")
 #'
-#' tidy_u %>%
-#'   mutate(class = hpc_data$class[row]) %>%
+#' tidy_u |>
+#'   mutate(class = hpc_data$class[row]) |>
 #'   ggplot(aes(class, value)) +
 #'   geom_boxplot() +
 #'   facet_wrap(~PC, scale = "free_y")
@@ -44,41 +44,41 @@ tidy_svd <- function(x, matrix = "u", ...) {
   }
 
   if (matrix == "u") {
-    ret <- x$u %>%
-      as_tibble(.name_repair = "unique_quiet") %>%
-      tibble::rowid_to_column("row") %>%
+    ret <- x$u |>
+      as_tibble(.name_repair = "unique_quiet") |>
+      tibble::rowid_to_column("row") |>
       pivot_longer(
         cols = c(dplyr::everything(), -row),
         names_to = "PC",
         values_to = "value"
-      ) %>%
+      ) |>
       dplyr::mutate(
-        PC = stringr::str_remove(PC, "...") %>%
+        PC = stringr::str_remove(PC, "...") |>
           as.numeric()
-      ) %>%
-      arrange(PC, row) %>%
+      ) |>
+      arrange(PC, row) |>
       as.data.frame()
   } else if (matrix == "d") {
-    ret <- tibble(PC = seq_along(x$d), std.dev = x$d) %>%
+    ret <- tibble(PC = seq_along(x$d), std.dev = x$d) |>
       mutate(
         percent = std.dev^2 / sum(std.dev^2),
         cumulative = cumsum(percent)
       )
   } else if (matrix == "v") {
     # use unique_quiet to silence test in tidy_svd
-    ret <- x$v %>%
-      as_tibble(.name_repair = "unique_quiet") %>%
-      tibble::rowid_to_column("column") %>%
+    ret <- x$v |>
+      as_tibble(.name_repair = "unique_quiet") |>
+      tibble::rowid_to_column("column") |>
       pivot_longer(
         cols = c(dplyr::everything(), -column),
         names_to = "PC",
         values_to = "value"
-      ) %>%
+      ) |>
       dplyr::mutate(
-        PC = stringr::str_remove(PC, "...") %>%
+        PC = stringr::str_remove(PC, "...") |>
           as.numeric()
-      ) %>%
-      arrange(PC, column) %>%
+      ) |>
+      arrange(PC, column) |>
       as.data.frame()
   }
   as_tibble(ret)

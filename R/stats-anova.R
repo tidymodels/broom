@@ -46,8 +46,13 @@
 #' @seealso [tidy()], [stats::anova()], [car::Anova()], [car::leveneTest()]
 tidy.anova <- function(x, ...) {
   # car::leveneTest returns an object of class `anova`
-  if (!is.null(attr(x, "heading")) &&
-    isTRUE(grepl("Levene's Test for Homogeneity of Variance", attr(x, "heading")))) {
+  if (
+    !is.null(attr(x, "heading")) &&
+      isTRUE(grepl(
+        "Levene's Test for Homogeneity of Variance",
+        attr(x, "heading")
+      ))
+  ) {
     return(tidy(structure(x, class = c("leveneTest", class(x))), ...))
   }
 
@@ -116,7 +121,11 @@ tidy.anova <- function(x, ...) {
       # Drop unrestricted model (not interesting in linear hypothesis tests)
       # Use formula to subset if available (e.g. with car::linearHypothesis)
       if (length(mod_lines) != 0) {
-        idx <- sub("Model \\d*: ", "", strsplit(mod_lines, "\\nModel \\d*: ")[[1]])
+        idx <- sub(
+          "Model \\d*: ",
+          "",
+          strsplit(mod_lines, "\\nModel \\d*: ")[[1]]
+        )
         idx <- idx != "restricted model"
         ret <- ret[idx, , drop = FALSE]
       }
@@ -129,15 +138,24 @@ tidy.anova <- function(x, ...) {
       )
       row.names(ret_xtra) <- row.names(ret) <- NULL
       ret_xtra$term <- gsub("  ", " ", ret_xtra$term) ## Occasional, annoying extra space
-      ret <- cbind(ret_xtra, ret) %>%
+      ret <- cbind(ret_xtra, ret) |>
         dplyr::select(
-          term, null.value, estimate, std.error, statistic,
-          p.value, dplyr::everything()
+          term,
+          null.value,
+          estimate,
+          std.error,
+          statistic,
+          p.value,
+          dplyr::everything()
         )
     } else {
       ## If model formulas (e.g. from car::linearHypothesis) weren't available,
       ## just add the term and response columns
-      response <- sub(".*: ", "", strsplit(x_attr$heading[grep("Response", x_attr$heading)], "\n")[[1]])
+      response <- sub(
+        ".*: ",
+        "",
+        strsplit(x_attr$heading[grep("Response", x_attr$heading)], "\n")[[1]]
+      )
       term <- row.names(ret)
       ret < cbind(cbind(term, ret), response)
       row.names(ret) <- NULL
@@ -232,9 +250,9 @@ glance.anova <- function(x, ...) {
 #' ought to be included. Passed to [stats::summary.aov()].
 #' @seealso [tidy()], [stats::aov()]
 tidy.aov <- function(x, intercept = FALSE, ...) {
-  summary(x, intercept = intercept)[[1]] %>%
-    tibble::as_tibble(rownames = "term") %>%
-    dplyr::mutate("term" = stringr::str_trim(term)) %>%
+  summary(x, intercept = intercept)[[1]] |>
+    tibble::as_tibble(rownames = "term") |>
+    dplyr::mutate("term" = stringr::str_trim(term)) |>
     rename2(
       "df" = "Df",
       "sumsq" = "Sum Sq",
@@ -314,7 +332,7 @@ tidy.aovlist <- function(x, ...) {
   ret <- map_df(x, tidy, .id = "stratum")
 
   # get rid of leading and trailing whitespace in term and stratum columns
-  ret <- ret %>%
+  ret <- ret |>
     mutate(
       term = stringr::str_trim(term),
       stratum = stringr::str_trim(stratum)
@@ -358,10 +376,15 @@ tidy.aovlist <- function(x, ...) {
 #' @seealso [tidy()], [stats::summary.manova()]
 #' @family anova tidiers
 tidy.manova <- function(x, test = "Pillai", ...) {
-  test.pos <- pmatch(test, c(
-    "Pillai", "Wilks",
-    "Hotelling-Lawley", "Roy"
-  ))
+  test.pos <- pmatch(
+    test,
+    c(
+      "Pillai",
+      "Wilks",
+      "Hotelling-Lawley",
+      "Roy"
+    )
+  )
   test.name <- c("pillai", "wilks", "hl", "roy")[test.pos]
 
   as_tidy_tibble(
@@ -399,15 +422,19 @@ tidy.manova <- function(x, test = "Pillai", ...) {
 #' @seealso [tidy()], [stats::TukeyHSD()]
 #' @family anova tidiers
 tidy.TukeyHSD <- function(x, ...) {
-  purrr::map_df(x,
+  purrr::map_df(
+    x,
     function(e) {
       null.value <- rep(0, nrow(e))
       e <- cbind(null.value, e)
       as_tidy_tibble(
         e,
         new_names = c(
-          "null.value", "estimate", "conf.low",
-          "conf.high", "adj.p.value"
+          "null.value",
+          "estimate",
+          "conf.low",
+          "conf.high",
+          "adj.p.value"
         ),
         new_column = "contrast"
       )

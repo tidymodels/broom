@@ -30,8 +30,13 @@
 #' @export
 #' @family speedlm tidiers
 #' @seealso [speedglm::speedglm()]
-tidy.speedglm <- function(x, conf.int = FALSE, conf.level = 0.95,
-                          exponentiate = FALSE, ...) {
+tidy.speedglm <- function(
+  x,
+  conf.int = FALSE,
+  conf.level = 0.95,
+  exponentiate = FALSE,
+  ...
+) {
   ret <- as_tibble(coef(summary(x)), rownames = "term")
   colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
 

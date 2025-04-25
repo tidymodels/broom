@@ -8,7 +8,9 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include = FALSE}
+```{r}
+#| label: setup
+#| include: false
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -18,7 +20,9 @@ knitr::opts_chunk$set(
 The following methods are currently available in `broom`:
 
 
-```{R echo = FALSE, message = FALSE}
+```{R}
+#| echo: false
+#| message: false
 library(broom)
 library(dplyr)
 library(stringr)
@@ -31,10 +35,9 @@ method_df <- function(method_name) {
   )
 }
 
-method_df("tidy") %>%
-  left_join(method_df("glance")) %>%
-  left_join(method_df("augment")) %>%
-  mutate_all(tidyr::replace_na, "") %>%
+method_df("tidy") |>
+  left_join(method_df("glance")) |>
+  left_join(method_df("augment")) |>
+  mutate_all(tidyr::replace_na, "") |>
   knitr::kable()
 ```
-

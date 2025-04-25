@@ -52,11 +52,13 @@
 #' @seealso [tidy()], [AER::ivreg()]
 #' @family ivreg tidiers
 #' @aliases ivreg_tidiers aer_tidiers
-tidy.ivreg <- function(x,
-                       conf.int = FALSE,
-                       conf.level = 0.95,
-                       instruments = FALSE,
-                       ...) {
+tidy.ivreg <- function(
+  x,
+  conf.int = FALSE,
+  conf.level = 0.95,
+  instruments = FALSE,
+  ...
+) {
   check_ellipses("exponentiate", "tidy", "ivreg", ...)
 
   # TODO: documentation on when you get what needs to be updated !!!
@@ -83,7 +85,7 @@ tidy.ivreg <- function(x,
   # drop last two rows, the Wu-Hausman and Sargan diagnostics
   last_two_rows <- c(nrow(d) - 1, nrow(d))
   d <- as_tibble(d)[-last_two_rows, ]
-  tibble::add_column(d, term = end_vars, .before = TRUE) %>%
+  tibble::add_column(d, term = end_vars, .before = TRUE) |>
     rename2("p.value" = "p-value", "num.df" = "df1", "den.df" = "df2")
 }
 

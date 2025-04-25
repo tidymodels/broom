@@ -17,16 +17,16 @@
 #' @rdname tidy.robustbase.glmrob
 #' @seealso [robustbase::glmrob()]
 tidy.glmrob <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
-  ret <- coef(summary(x)) %>%
+  ret <- coef(summary(x)) |>
     as_tibble(rownames = "term")
   names(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
 
   if (conf.int) {
-    ci <- stats::confint.default(x, level = conf.level) %>%
+    ci <- stats::confint.default(x, level = conf.level) |>
       as_tibble()
 
     names(ci) <- c("conf.low", "conf.high")
-    ret <- ret %>%
+    ret <- ret |>
       cbind(ci)
   }
 
@@ -55,12 +55,19 @@ tidy.glmrob <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #' @family robustbase tidiers
 #' @rdname augment.robustbase.glmrob
 #' @seealso [robustbase::glmrob()]
-augment.glmrob <- function(x, data = model.frame(x), newdata = NULL,
-                           type.predict = c("link", "response"),
-                           type.residuals = c("deviance", "pearson"),
-                           se_fit = FALSE, ...) {
+augment.glmrob <- function(
+  x,
+  data = model.frame(x),
+  newdata = NULL,
+  type.predict = c("link", "response"),
+  type.residuals = c("deviance", "pearson"),
+  se_fit = FALSE,
+  ...
+) {
   augment_newdata(
-    x, data, newdata,
+    x,
+    data,
+    newdata,
     type.predict = type.predict,
     type.residuals = type.residuals,
     .se_fit = se_fit

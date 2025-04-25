@@ -63,7 +63,7 @@ tidy.varest <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
     ret[[v]]$group <- v
   }
 
-  ret <- dplyr::bind_rows(ret) %>%
+  ret <- dplyr::bind_rows(ret) |>
     dplyr::relocate(group, 1)
 
   ret

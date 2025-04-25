@@ -88,8 +88,13 @@ tidy.rlm <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #' @family rlm tidiers
 #' @seealso [MASS::rlm()]
 #' @export
-augment.rlm <- function(x, data = model.frame(x), newdata = NULL,
-                        se_fit = FALSE, ...) {
+augment.rlm <- function(
+  x,
+  data = model.frame(x),
+  newdata = NULL,
+  se_fit = FALSE,
+  ...
+) {
   df <- augment_newdata(x, data, newdata, se_fit)
 
   if (is.null(newdata)) {

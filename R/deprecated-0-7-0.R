@@ -1,4 +1,4 @@
-# This script contains all functions and methods that will be deprecated 
+# This script contains all functions and methods that will be deprecated
 # in 0.7.0 and removed in the next release.
 
 # data.frame tidiers -------------------------------------------------------
@@ -46,7 +46,6 @@
 #'      scale_x_log10() + scale_y_log10() + geom_abline()
 #'
 #' @name data.frame_tidiers
-
 
 #' @rdname data.frame_tidiers
 #'
@@ -142,9 +141,9 @@ tidy.data.frame <- function(x, ..., na.rm = TRUE, trim = 0.1) {
         na.rm = na.rm
       )
     )
-  
+
   ret$se <- ret$sd / sqrt(ret$n)
-  
+
   ret
 }
 
@@ -195,14 +194,13 @@ skewness <- function(x, na.rm = FALSE) {
 # Basic code inspired by moments::kurtosis
 kurtosis <- function(x, na.rm = FALSE) {
   n <- sum(!is.na(x))
-  n * sum((x - mean(x, na.rm = na.rm))^4) /
+  n *
+    sum((x - mean(x, na.rm = na.rm))^4) /
     (sum((x - mean(x, na.rm = na.rm))^2)^2)
 }
 
 median_abs_dev <- function(x, na.rm = FALSE) {
-  stats::median(abs(x - stats::median(x, na.rm = na.rm)),
-                na.rm = na.rm
-  )
+  stats::median(abs(x - stats::median(x, na.rm = na.rm)), na.rm = na.rm)
 }
 
 # bootstrap --------------------------------------------------------------
@@ -231,20 +229,27 @@ bootstrap <- function(df, m, by_group = FALSE) {
   n <- nrow(df)
   attr(df, "indices") <-
     if (by_group && !is.null(groups(df))) {
-      replicate(m,
-                unlist(lapply(
-                  attr(df, "indices"),
-                  function(x) {
-                    sample(x, replace = TRUE)
-                  }
-                ),
-                recursive = FALSE, use.names = FALSE
-                ),
-                simplify = FALSE
+      replicate(
+        m,
+        unlist(
+          lapply(
+            attr(df, "indices"),
+            function(x) {
+              sample(x, replace = TRUE)
+            }
+          ),
+          recursive = FALSE,
+          use.names = FALSE
+        ),
+        simplify = FALSE
       )
     } else {
-      replicate(m, sample(n, replace = TRUE) -
-                  1, simplify = FALSE)
+      replicate(
+        m,
+        sample(n, replace = TRUE) -
+          1,
+        simplify = FALSE
+      )
     }
   attr(df, "drop") <- TRUE
   attr(df, "group_sizes") <- rep(n, m)
@@ -271,26 +276,24 @@ bootstrap <- function(df, m, by_group = FALSE) {
 #' @family deprecated
 #' @export
 fix_data_frame <- function(x, newnames = NULL, newcol = "term") {
-  
   .Deprecated(
     msg = "This function is deprecated as of broom 0.7.0 and will be removed from a future release. Please see tibble::as_tibble()."
   )
-  
+
   if (!is.null(newnames) && length(newnames) != ncol(x)) {
     cli::cli_abort(
       "{.arg newnames} must be {.code NULL} or have length
        equal to the number of columns."
     )
   }
-  
+
   if (all(rownames(x) == seq_len(nrow(x)))) {
     # don't need to move rownames into a new column
     ret <- data.frame(x, stringsAsFactors = FALSE)
     if (!is.null(newnames)) {
       colnames(ret) <- newnames
     }
-  }
-  else {
+  } else {
     ret <- data.frame(
       ...new.col... = rownames(x),
       unrowname(x),
@@ -307,14 +310,14 @@ fix_data_frame <- function(x, newnames = NULL, newcol = "term") {
 # summary objects -----------------------------------------------------
 
 #' (Deprecated) Tidy summaryDefault objects
-#' 
+#'
 #' Tidiers for summaryDefault objects have been deprecated as of
 #' broom 0.7.0 in favor of \code{skimr::skim()}.
 #'
 #' @param x A `summaryDefault` object, created by calling [summary()] on a
 #'   vector.
 #' @template param_unused_dots
-#' 
+#'
 #' @return A one-row [tibble::tibble] with columns:
 #'   \item{minimum}{Minimum value in original vector.}
 #'   \item{q1}{First quartile of original vector.}
@@ -324,7 +327,7 @@ fix_data_frame <- function(x, newnames = NULL, newcol = "term") {
 #'   \item{maximum}{Maximum value in original vector.}
 #'   \item{na}{Number of `NA` values in original vector. Column present only
 #'     when original vector had at least one `NA` entry.}
-#' 
+#'
 #'
 #' @examples
 #'
@@ -342,7 +345,9 @@ fix_data_frame <- function(x, newnames = NULL, newcol = "term") {
 #' @export
 #' @family deprecated
 tidy.summaryDefault <- function(x, ...) {
-  .Deprecated(msg = "`tidy.summaryDefault()` is deprecated. Please use `skimr::skim()` instead.")
+  .Deprecated(
+    msg = "`tidy.summaryDefault()` is deprecated. Please use `skimr::skim()` instead."
+  )
   ret <- as.data.frame(t(as.matrix(x)))
   cnms <- c("minimum", "q1", "median", "mean", "q3", "maximum")
   if ("NA's" %in% names(x)) {
@@ -357,12 +362,12 @@ tidy.summaryDefault <- function(x, ...) {
 glance.summaryDefault <- tidy.summaryDefault
 
 #' (Deprecated) Tidy ftable objects
-#' 
+#'
 #' @description This function is deprecated. Please use [tibble::as_tibble()] instead.
 #'
 #' @param x An `ftable` object returned from [stats::ftable()].
 #' @template param_unused_dots
-#' 
+#'
 #' @return An ftable contains a "flat" contingency table. This melts it into a
 #'   [tibble::tibble] with one column for each variable, then a `Freq`
 #'   column.
@@ -378,21 +383,20 @@ tidy.ftable <- function(x, ...) {
 #'
 #' @param x A `density` object returned from [stats::density()].
 #' @template param_unused_dots
-#' 
+#'
 #' @return A [tibble::tibble] with two columns: points `x` where the density
 #'   is estimated, and estimated density `y`.
 #'
 #' @export
 #' @family deprecated
 tidy.density <- function(x, ...) {
-  
   as_tibble(x[c("x", "y")])
 }
 
 #' (Deprecated) Tidy dist objects
-#' 
+#'
 #' @param x A `dist` object returned from [stats::dist()].
-#' @param diagonal Logical indicating whether or not to tidy the diagonal 
+#' @param diagonal Logical indicating whether or not to tidy the diagonal
 #'   elements of the distance matrix. Defaults to whatever was based to the
 #'   `diag` argument of [stats::dist()].
 #' @param upper Logical indicating whether or not to tidy the upper half of
@@ -402,14 +406,14 @@ tidy.density <- function(x, ...) {
 #'
 #' @return A [tibble::tibble] with one row for each pair of items in the
 #'   distance matrix, with columns:
-#' 
+#'
 #'   \item{item1}{First item}
 #'   \item{item2}{Second item}
 #'   \item{distance}{Distance between items}
-#' 
+#'
 #' @details If the distance matrix does not include an upper triangle and/or
 #'   diagonal, the tidied version will not either.
-#' 
+#'
 #' @examples
 #'
 #' cars_dist <- dist(t(mtcars[, 1:4]))
@@ -421,19 +425,22 @@ tidy.density <- function(x, ...) {
 #'
 #' @export
 #' @family deprecated
-tidy.dist <- function(x, diagonal = attr(x, "Diag"),
-                      upper = attr(x, "Upper"), ...) {
-  
-  ret <- as.matrix(x) %>%
-    tibble::as_tibble(rownames = "item1") %>%
-    tidyr::pivot_longer(cols = c(dplyr::everything(), -1)) %>%
-    dplyr::rename(item2 = 2, distance = 3) %>%
+tidy.dist <- function(
+  x,
+  diagonal = attr(x, "Diag"),
+  upper = attr(x, "Upper"),
+  ...
+) {
+  ret <- as.matrix(x) |>
+    tibble::as_tibble(rownames = "item1") |>
+    tidyr::pivot_longer(cols = c(dplyr::everything(), -1)) |>
+    dplyr::rename(item2 = 2, distance = 3) |>
     dplyr::mutate(item1 = as.factor(item1), item2 = as.factor(item2))
-  
+
   if (!upper) {
     ret <- as.data.frame(ret)[!upper.tri(as.matrix(x)), ]
   }
-  
+
   if (!diagonal) {
     ret <- filter(ret, item1 != item2)
   }
@@ -460,7 +467,7 @@ tidy.dist <- function(x, diagonal = attr(x, "Diag"),
 #' names(x) <- letters[1:5]
 #' tidy(x)
 #' }
-#' 
+#'
 #' @export
 #' @rdname vector_tidiers
 #' @family deprecated
@@ -493,14 +500,14 @@ tidy.logical <- function(x, ...) {
 # confint_tidy ----------------------------------------------------------------
 
 #' (Deprecated) Calculate confidence interval as a tidy data frame
-#' 
+#'
 #' This function is now deprecated and will be removed from a future
 #' release of broom.
 #'
 #' Return a confidence interval as a tidy data frame. This directly wraps the
 #' [confint()] function, but ensures it follows broom conventions:
 #' column names of `conf.low` and `conf.high`, and no row names.
-#' 
+#'
 #' `confint_tidy`
 #'
 #' @param x a model object for which [confint()] can be calculated
@@ -519,15 +526,15 @@ confint_tidy <- function(x, conf.level = .95, func = stats::confint, ...) {
   .Deprecated(
     msg = "confint_tidy is now deprecated and will be removed from a future release of broom. Please use the applicable confint method."
   )
-  
+
   # avoid "Waiting for profiling to be done..." message for some models
   ci <- suppressMessages(func(x, level = conf.level, ...))
-  
+
   # protect against confidence intervals returned as named vectors
   if (is.null(dim(ci))) {
     ci <- matrix(ci, nrow = 1)
   }
-  
+
   # remove rows that are all NA. *not the same* as na.omit which checks
   # for any NA.
   all_na <- apply(ci, 1, function(x) all(is.na(x)))
@@ -537,9 +544,9 @@ confint_tidy <- function(x, conf.level = .95, func = stats::confint, ...) {
 }
 
 # finish_glance -------------------------------------------------------
-#' (Deprecated) Add logLik, AIC, BIC, and other common measurements to a 
+#' (Deprecated) Add logLik, AIC, BIC, and other common measurements to a
 #' glance of a prediction
-#' 
+#'
 #' This function is now deprecated in favor of using custom logic and
 #' the appropriate \code{nobs()} method.
 #'
@@ -563,16 +570,17 @@ finish_glance <- function(ret, x) {
   ret$logLik <- tryCatch(as.numeric(stats::logLik(x)), error = function(e) NULL)
   ret$AIC <- tryCatch(stats::AIC(x), error = function(e) NULL)
   ret$BIC <- tryCatch(stats::BIC(x), error = function(e) NULL)
-  
+
   # special case for REML objects (better way?)
   if (inherits(x, "lmerMod")) {
-    ret$deviance <- tryCatch(stats::deviance(x, REML = FALSE),
-                             error = function(e) NULL
+    ret$deviance <- tryCatch(
+      stats::deviance(x, REML = FALSE),
+      error = function(e) NULL
     )
   } else {
     ret$deviance <- tryCatch(stats::deviance(x), error = function(e) NULL)
   }
   ret$df.residual <- tryCatch(df.residual(x), error = function(e) NULL)
-  
+
   as_tibble(ret, rownames = NULL)
 }

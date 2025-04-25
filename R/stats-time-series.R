@@ -31,7 +31,7 @@ tidy.ts <- function(x, ...) {
   if (is.matrix(x)) {
     res <- as_tibble(as.data.frame(x))
     res <- tibble::add_column(res, index = index, .before = 1)
-    res %>%
+    res |>
       pivot_longer(
         cols = c(dplyr::everything(), -index),
         names_to = "series",

@@ -10,7 +10,7 @@ library(joineRML)
 library(survival)
 library(dplyr)
 
-hvd <- heart.valve %>%
+hvd <- heart.valve |>
   filter(!is.na(log.grad), !is.na(log.lvmi), num <= 50)
 
 mjoint_fit <- mjoint(
@@ -47,7 +47,10 @@ mjoint_fit_bs_se <- bootSE(mjoint_fit, nboot = 5, safe.boot = TRUE)
 mjoint_fit2_bs_se <- bootSE(mjoint_fit2, nboot = 5, safe.boot = TRUE)
 
 usethis::use_data(
-  mjoint_fit, mjoint_fit2,
-  mjoint_fit_bs_se, mjoint_fit2_bs_se,
-  internal = TRUE, overwrite = TRUE
+  mjoint_fit,
+  mjoint_fit2,
+  mjoint_fit_bs_se,
+  mjoint_fit2_bs_se,
+  internal = TRUE,
+  overwrite = TRUE
 )

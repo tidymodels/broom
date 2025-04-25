@@ -25,11 +25,23 @@ test_that("tidy.leveneTest", {
   skip_if_not_installed("carData")
 
   mod1 <- with(carData::Moore, leveneTest(conformity, fcategory))
-  mod2 <- with(carData::Moore, leveneTest(conformity, interaction(fcategory, partner.status)))
+  mod2 <- with(
+    carData::Moore,
+    leveneTest(conformity, interaction(fcategory, partner.status))
+  )
   mod3 <- leveneTest(conformity ~ fcategory * partner.status, data = Moore)
   mod4 <- leveneTest(lm(conformity ~ fcategory * partner.status, data = Moore))
-  mod5 <- leveneTest(conformity ~ fcategory * partner.status, data = Moore, center = mean)
-  mod6 <- leveneTest(conformity ~ fcategory * partner.status, data = Moore, center = mean, trim = 0.1)
+  mod5 <- leveneTest(
+    conformity ~ fcategory * partner.status,
+    data = Moore,
+    center = mean
+  )
+  mod6 <- leveneTest(
+    conformity ~ fcategory * partner.status,
+    data = Moore,
+    center = mean,
+    trim = 0.1
+  )
 
   # This is a tidy method, but the model object is very simple and the output
   # is a 1-row tibble with `df` and `df.residual` columns. `tidy.htest` and
@@ -84,14 +96,18 @@ test_that("tidy car::Anova coxph", {
 })
 
 test_that("tidy car::linearHypothesis with long formulas (#1171)", {
-  reg_long <- 
+  reg_long <-
     lm(
-      Fertility ~ Agriculture + Examination + Education + Catholic + Infant.Mortality, 
+      Fertility ~
+        Agriculture + Examination + Education + Catholic + Infant.Mortality,
       data = swiss
     )
-  
-  test_long <- car::linearHypothesis(reg_long, hypothesis.matrix = c(0,1, 0, 0, 0, -1))
-  
+
+  test_long <- car::linearHypothesis(
+    reg_long,
+    hypothesis.matrix = c(0, 1, 0, 0, 0, -1)
+  )
+
   td <- broom::tidy(test_long)
   check_dims(td, expected_rows = 1, expected_cols = 10)
 })

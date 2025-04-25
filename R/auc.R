@@ -30,13 +30,13 @@
 #' library(dplyr)
 #' library(tidyr)
 #'
-#' rocs <- churn %>%
+#' rocs <- churn |>
 #'   pivot_longer(contains("predictions"),
 #'     names_to = "algorithm",
 #'     values_to = "value"
-#'   ) %>%
-#'   nest(data = -algorithm) %>%
-#'   mutate(tidy_roc = purrr::map(data, ~ tidy(roc(.x$value, .x$labels)))) %>%
+#'   ) |>
+#'   nest(data = -algorithm) |>
+#'   mutate(tidy_roc = purrr::map(data, \(x) tidy(roc(x$value, x$labels)))) |>
 #'   unnest(tidy_roc)
 #'
 #' ggplot(rocs, aes(fpr, tpr, color = algorithm)) +

@@ -42,7 +42,7 @@
 #' library(dplyr)
 #' library(ggplot2)
 #'
-#' tidied <- tidy(fit1) %>% filter(term != "(Intercept)")
+#' tidied <- tidy(fit1) |> filter(term != "(Intercept)")
 #'
 #' ggplot(tidied, aes(step, estimate, group = term)) +
 #'   geom_line()
@@ -67,12 +67,14 @@ tidy.glmnet <- function(x, return_zeros = FALSE, ...) {
   beta <- coef(x)
 
   if (inherits(x, "multnet")) {
-    beta_d <- purrr::map_df(beta, function(b) {
-      as_tidy_tibble(as.matrix(b),
-        new_names = 1:ncol(b)
-      )
-    }, .id = "class")
-    ret <- beta_d %>%
+    beta_d <- purrr::map_df(
+      beta,
+      function(b) {
+        as_tidy_tibble(as.matrix(b), new_names = 1:ncol(b))
+      },
+      .id = "class"
+    )
+    ret <- beta_d |>
       pivot_longer(
         cols = c(everything(), -term, -class),
         names_to = "step",
@@ -84,14 +86,15 @@ tidy.glmnet <- function(x, return_zeros = FALSE, ...) {
       new_names = 1:ncol(beta)
     )
 
-    ret <- pivot_longer(beta_d,
+    ret <- pivot_longer(
+      beta_d,
       cols = c(dplyr::everything(), -term),
       names_to = "step",
       values_to = "estimate"
     )
   }
   # add values specific to each step
-  ret <- ret %>%
+  ret <- ret |>
     mutate(
       step = as.numeric(step),
       lambda = x$lambda[step],
