@@ -540,7 +540,7 @@ URL: https://broom.tidymodels.org/,
     https://github.com/tidymodels/broom
 BugReports: https://github.com/tidymodels/broom/issues
 Depends:
-    R (>= 3.5)
+    R (>= 4.1)
 Imports:
     backports,
     cli,
