@@ -13,7 +13,7 @@ suppressPackageStartupMessages(library(joineRML))
 # `data-raw/fit_and_save_long_running_models.R`, and then are saved to
 # `R/sysdata.rda`
 
-hvd <- heart.valve %>%
+hvd <- heart.valve |>
   dplyr::filter(!is.na(log.grad), !is.na(log.lvmi), num <= 50)
 
 test_that("mjoint tidier arguments", {

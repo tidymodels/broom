@@ -170,7 +170,7 @@ glance.fixest <- function(x, ...) {
 
   if (identical(x$method, "feols")) {
     r2_types <- c("r2", "ar2", "wr2")
-    r2_vals <- purrr::map_dbl(r2_types, fixest::r2, x = x) %>%
+    r2_vals <- purrr::map_dbl(r2_types, fixest::r2, x = x) |>
       purrr::set_names(r2_types)
     r2_names <- c("r.squared", "adj.r.squared", "within.r.squared")
     # Pull the summary objects that are specific to OLS
@@ -215,7 +215,7 @@ glance.fixest <- function(x, ...) {
     "BIC",
     "logLik"
   )
-  res <- bind_cols(res_common, res_r2, res_specific) %>%
+  res <- bind_cols(res_common, res_r2, res_specific) |>
     select(dplyr::any_of(col_order))
   res
 }

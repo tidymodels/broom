@@ -124,9 +124,9 @@ tidy.sarlm <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 augment.sarlm <- function(x, data = x$X, ...) {
   observed_name <- all.vars(x$call$formula)[1]
 
-  reg <- x$X %>%
-    as_augment_tibble() %>%
-    dplyr::select(-.rownames) %>%
+  reg <- x$X |>
+    as_augment_tibble() |>
+    dplyr::select(-.rownames) |>
     dplyr::mutate(
       !!observed_name := x$y,
       .fitted = x$fitted.values,

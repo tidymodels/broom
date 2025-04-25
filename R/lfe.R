@@ -107,10 +107,10 @@ tidy.felm <- function(
   nn <- c("estimate", "std.error", "statistic", "p.value")
   if (has_multi_response) {
     ret <- map_df(x$lhs, function(y) {
-      stats::coef(summary(x, lhs = y, robust = robust)) %>%
-        as_tidy_tibble(new_names = nn) %>%
+      stats::coef(summary(x, lhs = y, robust = robust)) |>
+        as_tidy_tibble(new_names = nn) |>
         mutate(response = y)
-    }) %>%
+    }) |>
       select(response, dplyr::everything())
   } else {
     ret <- as_tidy_tibble(
@@ -135,7 +135,7 @@ tidy.felm <- function(
   if (conf.int) {
     if (has_multi_response) {
       ci <- map_df(x$lhs, function(y) {
-        broom_confint_terms(x, level = conf.level, type = NULL, lhs = y) %>%
+        broom_confint_terms(x, level = conf.level, type = NULL, lhs = y) |>
           mutate(response = y)
       })
       ret <- dplyr::left_join(ret, ci, by = c("response", "term"))
@@ -149,14 +149,14 @@ tidy.felm <- function(
     ret <- mutate(ret, N = NA, comp = NA)
 
     nn <- c("estimate", "std.error", "N", "comp")
-    ret_fe_prep <- lfe::getfe(x, se = TRUE, bN = 100) %>%
-      tibble::rownames_to_column(var = "term") %>%
+    ret_fe_prep <- lfe::getfe(x, se = TRUE, bN = 100) |>
+      tibble::rownames_to_column(var = "term") |>
       # effect and se are multiple if multiple y
-      select(term, contains("effect"), contains("se"), obs, comp) %>%
+      select(term, contains("effect"), contains("se"), obs, comp) |>
       rename(N = obs)
 
     if (has_multi_response) {
-      ret_fe_prep <- ret_fe_prep %>%
+      ret_fe_prep <- ret_fe_prep |>
         tidyr::pivot_longer(
           cols = c(
             starts_with("effect."),
@@ -164,31 +164,31 @@ tidy.felm <- function(
           ),
           names_to = "stat_resp",
           values_to = "value"
-        ) %>%
+        ) |>
         tidyr::separate(
           col = "stat_resp",
           c("stat", "response"),
           sep = "\\."
-        ) %>%
+        ) |>
         tidyr::pivot_wider(
           id_cols = c(term, N, comp, response),
           names_from = stat,
           values_from = value
-        ) %>%
-        dplyr::arrange(term) %>%
+        ) |>
+        dplyr::arrange(term) |>
         as.data.frame()
     }
-    ret_fe <- ret_fe_prep %>%
-      rename(estimate = effect, std.error = se) %>%
-      select(contains("response"), dplyr::everything()) %>%
-      mutate(statistic = estimate / std.error) %>%
+    ret_fe <- ret_fe_prep |>
+      rename(estimate = effect, std.error = se) |>
+      select(contains("response"), dplyr::everything()) |>
+      mutate(statistic = estimate / std.error) |>
       mutate(p.value = 2 * (1 - stats::pt(statistic, df = N)))
 
     if (conf.int) {
       crit_val_low <- stats::qnorm(1 - (1 - conf.level) / 2)
       crit_val_high <- stats::qnorm(1 - (1 - conf.level) / 2)
 
-      ret_fe <- ret_fe %>%
+      ret_fe <- ret_fe |>
         mutate(
           conf.low = estimate - crit_val_low * std.error,
           conf.high = estimate + crit_val_high * std.error

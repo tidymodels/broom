@@ -72,8 +72,8 @@ augment(mod)
 augment(mod, mtcars, interval = "confidence")
 
 # predict on new data
-newdata <- mtcars \%>\%
-  head(6) \%>\%
+newdata <- mtcars |>
+  head(6) |>
   mutate(wt = wt + 1)
 augment(mod, newdata = newdata)
 
@@ -90,7 +90,7 @@ ggplot(au, aes(wt, mpg)) +
   geom_ribbon(aes(ymin = .lower, ymax = .upper), col = NA, alpha = 0.3)
 
 # predict on new data without outcome variable. Output does not include .resid
-newdata <- newdata \%>\%
+newdata <- newdata |>
   select(-mpg)
 
 augment(mod, newdata = newdata)

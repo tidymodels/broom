@@ -101,8 +101,8 @@ tidy.rq <- function(
 #' @details Only models with a single `tau` value may be passed.
 #'  For multiple values, please use a [purrr::map()] workflow instead, e.g.
 #'  ```
-#'  taus %>%
-#'    map(function(tau_val) rq(y ~ x, tau = tau_val)) %>%
+#'  taus |>
+#'    map(function(tau_val) rq(y ~ x, tau = tau_val)) |>
 #'    map_dfr(glance)
 #'  ```
 #'

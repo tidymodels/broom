@@ -10,7 +10,7 @@ library(joineRML)
 library(survival)
 library(dplyr)
 
-hvd <- heart.valve %>%
+hvd <- heart.valve |>
   filter(!is.na(log.grad), !is.na(log.lvmi), num <= 50)
 
 mjoint_fit <- mjoint(

@@ -121,8 +121,8 @@ test_that("tidy.htest does not return matrix columns", {
       ~ sch.wide + stype,
       design = dclus1,
       statistic = "Wald"
-    ) %>%
-      tidy() %>%
+    ) |>
+      tidy() |>
       purrr::none(~ inherits(., "matrix"))
   )
 })

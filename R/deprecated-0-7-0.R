@@ -431,10 +431,10 @@ tidy.dist <- function(
   upper = attr(x, "Upper"),
   ...
 ) {
-  ret <- as.matrix(x) %>%
-    tibble::as_tibble(rownames = "item1") %>%
-    tidyr::pivot_longer(cols = c(dplyr::everything(), -1)) %>%
-    dplyr::rename(item2 = 2, distance = 3) %>%
+  ret <- as.matrix(x) |>
+    tibble::as_tibble(rownames = "item1") |>
+    tidyr::pivot_longer(cols = c(dplyr::everything(), -1)) |>
+    dplyr::rename(item2 = 2, distance = 3) |>
     dplyr::mutate(item1 = as.factor(item1), item2 = as.factor(item2))
 
   if (!upper) {

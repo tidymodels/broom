@@ -99,8 +99,8 @@ tidy.rma <- function(
       yi = x$yi.f,
       vi = x$vi.f,
       measure = measure
-    ) %>%
-      summary(level = conf.level * 100) %>%
+    ) |>
+      summary(level = conf.level * 100) |>
       as.data.frame(stringsAsFactors = FALSE)
 
     n_studies <- length(x$slab)
@@ -181,8 +181,8 @@ tidy.rma <- function(
 glance.rma <- function(x, ...) {
   # reshape model fit statistics and clean names
   fit_stats <- metafor::fitstats(x)
-  fit_stats <- fit_stats %>%
-    t() %>%
+  fit_stats <- fit_stats |>
+    t() |>
     as.data.frame()
   names(fit_stats) <-
     stringr::str_replace(names(fit_stats), "\\:", "")
@@ -200,11 +200,11 @@ glance.rma <- function(x, ...) {
     cochran.qm = x$QM,
     p.value.cochran.qm = x$QMp,
     df.residual = df.residual(x)
-  ) %>%
-    purrr::discard(is.null) %>%
-    purrr::discard(purrr::is_empty) %>%
+  ) |>
+    purrr::discard(is.null) |>
+    purrr::discard(purrr::is_empty) |>
     # drop multivariate statistics
-    purrr::discard(~ length(.x) >= 2) %>%
+    purrr::discard(~ length(.x) >= 2) |>
     as_tibble()
 
   if (!purrr::is_empty(fit_stats) && nrow(fit_stats) == 1) {
@@ -340,7 +340,7 @@ augment.rma <- function(x, interval = c("prediction", "confidence"), ...) {
   no_study_names <- all(x$slab == as.character(seq_along(x$slab)))
   if (no_study_names) ret$.rownames <- NULL
 
-  ret <- ret %>% dplyr::select(-dplyr::contains("cr."))
+  ret <- ret |> dplyr::select(-dplyr::contains("cr."))
 
   tibble::as_tibble(ret)
 }

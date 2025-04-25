@@ -42,7 +42,7 @@
 #' library(dplyr)
 #' library(ggplot2)
 #'
-#' tidied <- tidy(fit1) %>% filter(term != "(Intercept)")
+#' tidied <- tidy(fit1) |> filter(term != "(Intercept)")
 #'
 #' ggplot(tidied, aes(step, estimate, group = term)) +
 #'   geom_line()
@@ -74,7 +74,7 @@ tidy.glmnet <- function(x, return_zeros = FALSE, ...) {
       },
       .id = "class"
     )
-    ret <- beta_d %>%
+    ret <- beta_d |>
       pivot_longer(
         cols = c(everything(), -term, -class),
         names_to = "step",
@@ -94,7 +94,7 @@ tidy.glmnet <- function(x, return_zeros = FALSE, ...) {
     )
   }
   # add values specific to each step
-  ret <- ret %>%
+  ret <- ret |>
     mutate(
       step = as.numeric(step),
       lambda = x$lambda[step],

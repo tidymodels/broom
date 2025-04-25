@@ -80,11 +80,10 @@ tidy.margins <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
     at_vars <- setdiff(names(attributes(x)$at), "index")
     std_cols <- c("factor", "AME", "SE", "z", "p", "lower", "upper")
     ret <-
-      ret %>%
       {
         tryCatch(
           tidyr::pivot_longer(
-            .,
+            ret,
             dplyr::all_of(at_vars),
             names_to = "at.variable",
             values_to = "at.value"
@@ -96,7 +95,7 @@ tidy.margins <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
               cli::cli_warn(
                 "The {.field at.value} column was coerced to character."
               )
-            ) %>%
+            ) |>
               tidyr::pivot_longer(
                 dplyr::all_of(at_vars),
                 names_to = "at.variable",
@@ -110,7 +109,7 @@ tidy.margins <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 
   # Rename and reorder variables
   ret <-
-    ret %>%
+    ret |>
     dplyr::select(
       term = factor,
       dplyr::contains("at."),

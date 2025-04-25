@@ -61,10 +61,10 @@ tidy.confusionMatrix <- function(x, by_class = TRUE, ...) {
     # case when only 2 classes
     if (!inherits(x$byClass, "matrix")) {
       classes <-
-        x$byClass %>%
-        as.data.frame() %>%
-        rename_at(1, ~"value") %>%
-        tibble::rownames_to_column("var") %>%
+        x$byClass |>
+        as.data.frame() |>
+        rename_at(1, ~"value") |>
+        tibble::rownames_to_column("var") |>
         mutate(var = stringr::str_to_lower(gsub(" ", "_", var)))
 
       terms <- c(nms_cm, classes$var)
@@ -81,14 +81,14 @@ tidy.confusionMatrix <- function(x, by_class = TRUE, ...) {
     } else {
       # case when there are more than 2 classes
       classes <-
-        x$byClass %>%
-        as.data.frame() %>%
-        tibble::rownames_to_column("class") %>%
+        x$byClass |>
+        as.data.frame() |>
+        tibble::rownames_to_column("class") |>
         pivot_longer(
           cols = c(dplyr::everything(), -class),
           names_to = "var",
           values_to = "value"
-        ) %>%
+        ) |>
         mutate(
           var = stringr::str_to_lower(gsub(" ", "_", var)),
           class = gsub("Class: ", "", class)

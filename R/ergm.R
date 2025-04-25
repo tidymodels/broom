@@ -67,8 +67,8 @@ tidy.ergm <- function(
   # in ergm 3.10 summary(x, ...)$coefs has columns:
   #   Estimate, Std. Error, MCMC %, z value, Pr(>|Z|)
 
-  ret <- summary(x, ...)$coefficients %>%
-    tibble::as_tibble(rownames = "term") %>%
+  ret <- summary(x, ...)$coefficients |>
+    tibble::as_tibble(rownames = "term") |>
     rename2(
       term = "term",
       estimate = "Estimate",

@@ -42,9 +42,9 @@ return_evalrd <- function(..., .method, .pre = NULL, .post = NULL) {
     )
   }
 
-  glos <- glos_env$column_glossary %>%
-    filter(purrr::map_lgl(column, ~ .x %in% pull_from_modeltests)) %>%
-    filter(method == !!.method) %>%
+  glos <- glos_env$column_glossary |>
+    filter(purrr::map_lgl(column, ~ .x %in% pull_from_modeltests)) |>
+    filter(method == !!.method) |>
     bind_rows(custom_cols)
 
   row_to_item <- function(column, description) {

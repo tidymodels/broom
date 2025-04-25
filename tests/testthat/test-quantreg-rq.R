@@ -8,10 +8,10 @@ suppressPackageStartupMessages(library(quantreg))
 
 data(stackloss)
 
-df <- as_tibble(stack.x) %>%
+df <- as_tibble(stack.x) |>
   mutate(stack.loss = stack.loss)
 
-dflarge_n <- df %>% slice(rep(row_number(), 500))
+dflarge_n <- df |> slice(rep(row_number(), 500))
 
 fit <- rq(stack.loss ~ ., data = df, tau = .5)
 fit2 <- rq(stack.loss ~ 1, data = df, tau = .5)

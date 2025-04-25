@@ -203,14 +203,14 @@ augment_chisq_test <- function(x, ...) {
 #' @family htest tidiers
 #'
 tidy.pairwise.htest <- function(x, ...) {
-  tibble(group1 = rownames(x$p.value)) %>%
-    cbind(x$p.value) %>%
+  tibble(group1 = rownames(x$p.value)) |>
+    cbind(x$p.value) |>
     pivot_longer(
       cols = c(dplyr::everything(), -group1),
       names_to = "group2",
       values_to = "p.value"
-    ) %>%
-    stats::na.omit() %>%
+    ) |>
+    stats::na.omit() |>
     as_tibble()
 }
 

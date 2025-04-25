@@ -72,10 +72,10 @@
 #' library(ggplot2)
 #' library(maps)
 #'
-#' pc %>%
-#'   tidy(matrix = "samples") %>%
-#'   mutate(region = tolower(row)) %>%
-#'   inner_join(map_data("state"), by = "region") %>%
+#' pc |>
+#'   tidy(matrix = "samples") |>
+#'   mutate(region = tolower(row)) |>
+#'   inner_join(map_data("state"), by = "region") |>
 #'   ggplot(aes(long, lat, group = group, fill = value)) +
 #'   geom_polygon() +
 #'   facet_wrap(~PC) +
@@ -122,8 +122,8 @@ tidy.prcomp <- function(x, matrix = "u", ...) {
       new_column = "PC"
     )
   } else if (matrix %in% c("rotation", "variables", "v", "loadings")) {
-    ret <- x$rotation %>%
-      tibble::as_tibble(rownames = "column") %>%
+    ret <- x$rotation |>
+      tibble::as_tibble(rownames = "column") |>
       tidyr::pivot_longer(
         cols = -"column",
         names_to = "PC",
@@ -131,8 +131,8 @@ tidy.prcomp <- function(x, matrix = "u", ...) {
       )
     if (is.null(rownames(x$rotation))) ret$column <- as.integer(ret$column)
   } else if (matrix %in% c("x", "samples", "u", "scores")) {
-    ret <- x$x %>%
-      tibble::as_tibble(rownames = "row") %>%
+    ret <- x$x |>
+      tibble::as_tibble(rownames = "row") |>
       tidyr::pivot_longer(
         cols = -"row",
         names_to = "PC",

@@ -83,7 +83,7 @@ augment.rqs <- function(x, data = model.frame(x), newdata, ...) {
       cols = dplyr::everything(),
       names_to = ".tau",
       values_to = ".resid"
-    ) %>%
+    ) |>
       as.data.frame()
     original <- cbind(original, resid)
     pred <- setNames(as.data.frame(pred), x[["tau"]])
@@ -92,7 +92,7 @@ augment.rqs <- function(x, data = model.frame(x), newdata, ...) {
       cols = dplyr::everything(),
       names_to = ".tau",
       values_to = ".fitted"
-    ) %>%
+    ) |>
       as.data.frame()
     ret <- unrowname(cbind(original, pred[, -1, drop = FALSE]))
   } else {
@@ -108,7 +108,7 @@ augment.rqs <- function(x, data = model.frame(x), newdata, ...) {
       cols = dplyr::everything(),
       names_to = ".tau",
       values_to = ".fitted"
-    ) %>%
+    ) |>
       as.data.frame()
     ret <- unrowname(cbind(original, pred))
   }

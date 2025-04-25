@@ -237,7 +237,7 @@ tidy_emmeans_summary <- function(x, null.value = NULL, term_names = NULL) {
 
   # add term column, if appropriate, unless it exists
   if ("term" %in% colnames(ret)) {
-    ret <- ret %>%
+    ret <- ret |>
       mutate(term = stringr::str_trim(term))
   } else if (!is.null(term_names)) {
     term <- term_names[!term_names %in% colnames(ret)]
@@ -246,7 +246,7 @@ tidy_emmeans_summary <- function(x, null.value = NULL, term_names = NULL) {
       term <- paste(
         term_names[!term_names %in% colnames(ret)],
         collapse = "*"
-      ) %>%
+      ) |>
         rep_len(nrow(ret))
     } else {
       # No missing term names, because combine = TRUE?
@@ -260,6 +260,6 @@ tidy_emmeans_summary <- function(x, null.value = NULL, term_names = NULL) {
     )
   }
 
-  as_tibble(ret) %>%
+  as_tibble(ret) |>
     mutate_if(is.factor, as.character)
 }

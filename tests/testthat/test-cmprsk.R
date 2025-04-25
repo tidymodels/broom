@@ -36,16 +36,18 @@ test_that("tidy.cmprsk", {
 
   # check the `conf.level=` argument matches the result in `summary(conf.int=)`
   expect_equal(
-    summary(fit, conf.int = 0.99)$conf.int %>%
-      log() %>%
-      unname() %>%
-      as.data.frame() %>%
-      dplyr::select(., tail(names(.), 2)) %>%
-      unclass() %>%
-      unname(),
-    td3 %>%
-      dplyr::select(conf.low, conf.high) %>%
-      unclass() %>%
+    {
+      res <- summary(fit, conf.int = 0.99)$conf.int |>
+        log() |>
+        unname() |>
+        as.data.frame()
+      dplyr::select(res, tail(names(res), 2)) |>
+        unclass() |>
+        unname()
+    },
+    td3 |>
+      dplyr::select(conf.low, conf.high) |>
+      unclass() |>
       unname()
   )
 })

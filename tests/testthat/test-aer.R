@@ -9,7 +9,7 @@ library(dplyr)
 library(modeltests)
 
 data("CigarettesSW")
-df <- CigarettesSW %>%
+df <- CigarettesSW |>
   mutate(
     rprice = price / cpi,
     rincome = income / population / cpi,

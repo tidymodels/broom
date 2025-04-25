@@ -17,16 +17,16 @@
 #' @rdname tidy.robustbase.glmrob
 #' @seealso [robustbase::glmrob()]
 tidy.glmrob <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
-  ret <- coef(summary(x)) %>%
+  ret <- coef(summary(x)) |>
     as_tibble(rownames = "term")
   names(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
 
   if (conf.int) {
-    ci <- stats::confint.default(x, level = conf.level) %>%
+    ci <- stats::confint.default(x, level = conf.level) |>
       as_tibble()
 
     names(ci) <- c("conf.low", "conf.high")
-    ret <- ret %>%
+    ret <- ret |>
       cbind(ci)
   }
 

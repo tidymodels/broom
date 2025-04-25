@@ -65,13 +65,13 @@ test_that("augment.glm", {
 
   # check that `type.residuals` argument is passed correctly (#1147)
   expect_equal(
-    augment(gfit2, type.residuals = "pearson") %>% dplyr::pull(.std.resid),
-    rstandard(gfit2, type = "pearson") %>% unname()
+    augment(gfit2, type.residuals = "pearson") |> dplyr::pull(.std.resid),
+    rstandard(gfit2, type = "pearson") |> unname()
   )
 
   expect_equal(
-    augment(gfit2, type.residuals = "deviance") %>% dplyr::pull(.std.resid),
-    rstandard(gfit2, type = "deviance") %>% unname()
+    augment(gfit2, type.residuals = "deviance") |> dplyr::pull(.std.resid),
+    rstandard(gfit2, type = "deviance") |> unname()
   )
 })
 

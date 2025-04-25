@@ -92,12 +92,12 @@ centers <- tibble(
   x2 = c(-1, 1, -2)
 )
 
-points <- centers \%>\%
+points <- centers |>
   mutate(
     x1 = map2(num_points, x1, rnorm),
     x2 = map2(num_points, x2, rnorm)
-  ) \%>\%
-  select(-num_points, -cluster) \%>\%
+  ) |>
+  select(-num_points, -cluster) |>
   unnest(c(x1, x2))
 
 # fit model

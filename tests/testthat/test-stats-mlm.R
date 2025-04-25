@@ -36,7 +36,7 @@ test_that("tidy.mlm works", {
       x2 = runif(nob),
       z1 = rnorm(nob),
       z2 = rnorm(nob)
-    ) %>%
+    ) |>
     dplyr::mutate(
       y1 = 0.5 * x1 + x2 + z1 - z2,
       y2 = -2 * x1 + 0.25 * x2 + 3 * z1 + z2

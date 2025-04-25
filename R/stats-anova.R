@@ -138,7 +138,7 @@ tidy.anova <- function(x, ...) {
       )
       row.names(ret_xtra) <- row.names(ret) <- NULL
       ret_xtra$term <- gsub("  ", " ", ret_xtra$term) ## Occasional, annoying extra space
-      ret <- cbind(ret_xtra, ret) %>%
+      ret <- cbind(ret_xtra, ret) |>
         dplyr::select(
           term,
           null.value,
@@ -250,9 +250,9 @@ glance.anova <- function(x, ...) {
 #' ought to be included. Passed to [stats::summary.aov()].
 #' @seealso [tidy()], [stats::aov()]
 tidy.aov <- function(x, intercept = FALSE, ...) {
-  summary(x, intercept = intercept)[[1]] %>%
-    tibble::as_tibble(rownames = "term") %>%
-    dplyr::mutate("term" = stringr::str_trim(term)) %>%
+  summary(x, intercept = intercept)[[1]] |>
+    tibble::as_tibble(rownames = "term") |>
+    dplyr::mutate("term" = stringr::str_trim(term)) |>
     rename2(
       "df" = "Df",
       "sumsq" = "Sum Sq",
@@ -332,7 +332,7 @@ tidy.aovlist <- function(x, ...) {
   ret <- map_df(x, tidy, .id = "stratum")
 
   # get rid of leading and trailing whitespace in term and stratum columns
-  ret <- ret %>%
+  ret <- ret |>
     mutate(
       term = stringr::str_trim(term),
       stratum = stringr::str_trim(stratum)

@@ -13,10 +13,10 @@ rename2 <- function(.data, ...) {
 }
 
 exponentiate <- function(data, col = "estimate") {
-  data <- data %>% mutate(across(all_of(col), exp))
+  data <- data |> mutate(across(all_of(col), exp))
 
   if ("conf.low" %in% colnames(data)) {
-    data <- data %>% mutate(across(c(conf.low, conf.high), exp))
+    data <- data |> mutate(across(c(conf.low, conf.high), exp))
   }
 
   data
@@ -149,11 +149,11 @@ parse_na_types <- function(s) {
     stringr::str_split(s, pattern = ""),
     match,
     table = names(na_types_dict)
-  ) %>%
+  ) |>
     unlist()
 
-  na_types_dict[positions] %>%
-    unlist() %>%
+  na_types_dict[positions] |>
+    unlist() |>
     unname()
 }
 
@@ -397,10 +397,10 @@ add_hat_sigma_cols <- function(df, x, infl) {
   w <- x$weights
   nonzero_idx <- if (is.null(w)) seq_along(df$.hat) else which(w != 0)
 
-  df$.hat[nonzero_idx] <- infl$hat %>% unname()
-  df$.sigma[nonzero_idx] <- infl$sigma %>% unname()
-  df$.std.resid[nonzero_idx] <- rstandard(x, infl = infl) %>% unname()
-  df$.cooksd[nonzero_idx] <- cooks.distance(x, infl = infl) %>% unname()
+  df$.hat[nonzero_idx] <- infl$hat |> unname()
+  df$.sigma[nonzero_idx] <- infl$sigma |> unname()
+  df$.std.resid[nonzero_idx] <- rstandard(x, infl = infl) |> unname()
+  df$.cooksd[nonzero_idx] <- cooks.distance(x, infl = infl) |> unname()
   df
 }
 
@@ -457,7 +457,7 @@ augment_newdata <- function(x, data, newdata, .se_fit, interval = NULL, ...) {
       ...
     )
     if (is.null(interval) || interval == "none") {
-      df$.fitted <- pred_obj$fit %>% unname()
+      df$.fitted <- pred_obj$fit |> unname()
     } else {
       df$.fitted <- pred_obj$fit[, "fit"]
       df$.lower <- pred_obj$fit[, "lwr"]
@@ -483,7 +483,7 @@ augment_newdata <- function(x, data, newdata, .se_fit, interval = NULL, ...) {
     df$.upper <- pred_obj[, "upr"]
   } else if (passed_newdata) {
     if (is.null(interval) || interval == "none") {
-      df$.fitted <- predict(x, newdata = newdata, na.action = na.pass, ...) %>%
+      df$.fitted <- predict(x, newdata = newdata, na.action = na.pass, ...) |>
         unname()
     } else {
       pred_obj <- predict(
@@ -499,7 +499,7 @@ augment_newdata <- function(x, data, newdata, .se_fit, interval = NULL, ...) {
     }
   } else {
     if (is.null(interval) || interval == "none") {
-      df$.fitted <- predict(x, na.action = na.pass, ...) %>%
+      df$.fitted <- predict(x, na.action = na.pass, ...) |>
         unname()
     } else {
       pred_obj <- predict(
@@ -518,7 +518,7 @@ augment_newdata <- function(x, data, newdata, .se_fit, interval = NULL, ...) {
   resp <- safe_response(x, df, has_response)
 
   if (!is.null(resp) && is.numeric(resp)) {
-    df$.resid <- (resp - df$.fitted) %>% unname()
+    df$.resid <- (resp - df$.fitted) |> unname()
   }
 
   df

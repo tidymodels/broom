@@ -65,14 +65,17 @@ tidy.polr <- function(
   }
 
   if (p.values) {
+    all_but_last <- function(x) {
+      x[-1]
+    }
     sig <- MASS::dropterm(x, test = "Chisq")
-    p <- sig %>%
-      dplyr::select(`Pr(Chi)`) %>%
-      dplyr::pull() %>%
-      .[-1]
+    p <- sig |>
+      dplyr::select(`Pr(Chi)`) |>
+      dplyr::pull() |>
+      all_but_last()
     terms <- purrr::map(rownames(sig)[-1], function(x) {
       ret$term[stringr::str_detect(ret$term, stringr::fixed(x))]
-    }) %>%
+    }) |>
       unlist()
     if (length(p) == length(terms)) {
       ret <- dplyr::left_join(

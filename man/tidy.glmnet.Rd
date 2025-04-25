@@ -63,7 +63,7 @@ glance(fit1)
 library(dplyr)
 library(ggplot2)
 
-tidied <- tidy(fit1) \%>\% filter(term != "(Intercept)")
+tidied <- tidy(fit1) |> filter(term != "(Intercept)")
 
 ggplot(tidied, aes(step, estimate, group = term)) +
   geom_line()

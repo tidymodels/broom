@@ -85,7 +85,7 @@ tidy.ivreg <- function(
   # drop last two rows, the Wu-Hausman and Sargan diagnostics
   last_two_rows <- c(nrow(d) - 1, nrow(d))
   d <- as_tibble(d)[-last_two_rows, ]
-  tibble::add_column(d, term = end_vars, .before = TRUE) %>%
+  tibble::add_column(d, term = end_vars, .before = TRUE) |>
     rename2("p.value" = "p-value", "num.df" = "df1", "den.df" = "df2")
 }
 

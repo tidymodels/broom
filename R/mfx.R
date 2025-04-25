@@ -90,7 +90,7 @@ tidy.mfx <-
 
     if (conf.int) {
       x_tidy <-
-        x_tidy %>%
+        x_tidy |>
         dplyr::mutate(
           conf.low = estimate -
             qt(1 - (1 - conf.level) / 2, df = x$fit$df.residual) * std.error,

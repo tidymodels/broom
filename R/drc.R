@@ -158,7 +158,7 @@ augment.drc <- function(
   }
 
   if (!is.null(original)) {
-    reto <- ret %>% select(starts_with("."))
+    reto <- ret |> select(starts_with("."))
     ret <- merge(reto, original, by = ".rownames", all.y = TRUE)
   }
 
