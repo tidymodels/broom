@@ -64,6 +64,7 @@ jobs:
             joineRML=?ignore-before-r=4.3.0,
             lme4=?ignore-before-r=4.3.0,
             lsmeans=?ignore-before-r=4.3.0,
+            mediation=?ignore-before-r=4.3.0,
             quantreg=?ignore-before-r=4.3.0,
             systemfit=?ignore-before-r=4.3.0
           needs: check
