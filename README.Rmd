@@ -17,7 +17,6 @@ knitr::opts_chunk$set(
 # broom  <img src="man/figures/logo.png" align="right" width="100" />
 
 <!-- badges: start -->
-[![R build status](https://github.com/tidymodels/broom/workflows/R-CMD-check/badge.svg)](https://github.com/tidymodels/broom)
 [![CRAN status](https://www.r-pkg.org/badges/version/broom)](https://CRAN.R-project.org/package=broom)
 [![Downloads](https://cranlogs.r-pkg.org/badges/broom)](https://CRAN.R-project.org/package=broom)
 [![R-CMD-check](https://github.com/tidymodels/broom/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tidymodels/broom/actions/workflows/R-CMD-check.yaml)
@@ -90,4 +89,3 @@ Generally, too, we encourage typo corrections, bug reports, bug fixes and featur
 If you are interested in adding tidier methods for new model objects, please read [this article](https://www.tidymodels.org/learn/develop/broom/) on the tidymodels website.
 
 We have a [Contributor Code of Conduct](https://github.com/tidymodels/broom/blob/main/.github/CODE_OF_CONDUCT.md). By participating in `broom` you agree to abide by its terms.
-
