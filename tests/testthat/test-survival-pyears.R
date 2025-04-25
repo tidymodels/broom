@@ -12,12 +12,14 @@ ptime <- ifelse(is.na(mgus$pctime), mgus$futime, mgus$pctime)
 pstat <- ifelse(is.na(mgus$pctime), 0, 1)
 
 fit <- pyears(
-  Surv(ptime / 365.25, pstat) ~ temp.yr + temp.age + sex, mgus,
+  Surv(ptime / 365.25, pstat) ~ temp.yr + temp.age + sex,
+  mgus,
   data.frame = TRUE
 )
 
 fit2 <- pyears(
-  Surv(ptime / 365.25, pstat) ~ temp.yr + temp.age + sex, mgus,
+  Surv(ptime / 365.25, pstat) ~ temp.yr + temp.age + sex,
+  mgus,
   data.frame = FALSE
 )
 

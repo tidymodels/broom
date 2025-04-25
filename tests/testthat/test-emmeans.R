@@ -76,10 +76,10 @@ test_that("summary_emm tidiers work", {
   check_tidy_output(tdjt)
   check_dims(tdjt, 4, 5)
 
-
   glmm <- glmer(
     cbind(incidence, size - incidence) ~ period + (1 | herd),
-    data = cbpp, family = binomial
+    data = cbpp,
+    family = binomial
   )
   emm_glmm <- emmeans(glmm, ~period)
   tdm <- tidy(emm_glmm, conf.int = TRUE)
@@ -125,7 +125,11 @@ test_that("tidy.ref.grid consistency with tidy.glht", {
   rownames(K) <- c("lambda1", "lambda2")
   colnames(K) <- names(coef(pigs.aov))
 
-  aov_glht <- multcomp::glht(pigs.aov, linfct = multcomp::mcp(source = K), rhs = c(7, -1))
+  aov_glht <- multcomp::glht(
+    pigs.aov,
+    linfct = multcomp::mcp(source = K),
+    rhs = c(7, -1)
+  )
   tidy_glht <- tidy(aov_glht, test = multcomp::adjusted("none")) %>%
     mutate(
       estimate = estimate - null.value,
@@ -142,7 +146,8 @@ test_that("tidy.ref.grid consistency with tidy.glht", {
 test_that("tidy.emmGrid for combined contrasts", {
   noise.lm <- lm(noise ~ size * type * side, data = auto.noise)
   noise.emm <- emmeans(noise.lm, ~ size * side * type)
-  noise_c.s <- contrast(noise.emm,
+  noise_c.s <- contrast(
+    noise.emm,
     method = "consec",
     simple = "each",
     combine = TRUE,

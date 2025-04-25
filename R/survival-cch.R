@@ -85,8 +85,12 @@ tidy.cch <- function(x, conf.level = .95, ...) {
 #' @family survival tidiers
 glance.cch <- function(x, ...) {
   ret <- purrr::compact(unclass(x)[c(
-    "score", "rscore", "wald.test", "iter",
-    "n", "nevent"
+    "score",
+    "rscore",
+    "wald.test",
+    "iter",
+    "n",
+    "nevent"
   )])
   ret <- as_tibble(ret)
   rename(ret, p.value = wald.test)

@@ -49,7 +49,6 @@ glance.negbin <- function(x, ...) {
 }
 
 
-
 #' @templateVar class negbin
 #' @template title_desc_tidy
 #' @template param_exponentiate
@@ -64,8 +63,13 @@ glance.negbin <- function(x, ...) {
 #' @family glm.nb tidiers
 #' @seealso [MASS::glm.nb()]
 #' @export
-tidy.negbin <- function(x, conf.int = FALSE, conf.level = 0.95,
-                        exponentiate = FALSE, ...) {
+tidy.negbin <- function(
+  x,
+  conf.int = FALSE,
+  conf.level = 0.95,
+  exponentiate = FALSE,
+  ...
+) {
   s <- summary(x, ...)
 
   ret <- tibble(

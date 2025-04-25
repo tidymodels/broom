@@ -8,7 +8,7 @@
 #' coefficients of a regression; augment, which adds columns to the original
 #' data such as predictions, residuals and cluster assignments; and glance,
 #' which provides a one-row summary of model-level statistics.
-#' 
+#'
 #' @keywords internal
 "_PACKAGE"
 
@@ -20,7 +20,7 @@
 #' @importFrom purrr map_df set_names possibly
 #' @importFrom tibble tibble as_tibble
 #' @importFrom tidyr pivot_longer pivot_wider
-#' 
+#'
 #' @import rlang
 #'
 #' @importFrom utils head

@@ -57,7 +57,6 @@ tidy.confusionMatrix <- function(x, by_class = TRUE, ...) {
   cm <- as.list(x$overall)
   nms_cm <- stringr::str_to_lower(c(names(cm)[1:2], "McNemar"))
 
-
   if (by_class) {
     # case when only 2 classes
     if (!inherits(x$byClass, "matrix")) {
@@ -74,7 +73,9 @@ tidy.confusionMatrix <- function(x, by_class = TRUE, ...) {
       conf.low <- c(cm$AccuracyLower, rep(NA, length(terms) - 1))
       conf.high <- c(cm$AccuracyUpper, rep(NA, length(terms) - 1))
       p.value <- c(
-        cm$AccuracyPValue, NA, cm$McnemarPValue,
+        cm$AccuracyPValue,
+        NA,
+        cm$McnemarPValue,
         rep(NA, length(terms) - 3)
       )
     } else {
@@ -99,7 +100,9 @@ tidy.confusionMatrix <- function(x, by_class = TRUE, ...) {
       conf.low <- c(cm$AccuracyLower, rep(NA, length(terms) - 1))
       conf.high <- c(cm$AccuracyUpper, rep(NA, length(terms) - 1))
       p.value <- c(
-        cm$AccuracyPValue, NA, cm$McnemarPValue,
+        cm$AccuracyPValue,
+        NA,
+        cm$McnemarPValue,
         rep(NA, length(terms) - 3)
       )
     }

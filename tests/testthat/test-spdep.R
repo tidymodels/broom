@@ -12,20 +12,15 @@ suppressPackageStartupMessages(library(spatialreg))
 data(oldcol, package = "spdep")
 listw <- spdep::nb2listw(COL.nb, style = "W")
 
-fit_lag <- lagsarlm(CRIME ~ INC + HOVAL,
+fit_lag <- lagsarlm(
+  CRIME ~ INC + HOVAL,
   data = COL.OLD,
   listw = listw,
   method = "eigen"
 )
-fit_error <- errorsarlm(CRIME ~ INC + HOVAL,
-  data = COL.OLD,
-  listw
-)
+fit_error <- errorsarlm(CRIME ~ INC + HOVAL, data = COL.OLD, listw)
 
-fit_sac <- sacsarlm(CRIME ~ INC + HOVAL,
-  data = COL.OLD,
-  listw
-)
+fit_sac <- sacsarlm(CRIME ~ INC + HOVAL, data = COL.OLD, listw)
 
 test_that("spdep tidier arguments", {
   check_arguments(tidy.sarlm)

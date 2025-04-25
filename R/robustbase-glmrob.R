@@ -55,12 +55,19 @@ tidy.glmrob <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #' @family robustbase tidiers
 #' @rdname augment.robustbase.glmrob
 #' @seealso [robustbase::glmrob()]
-augment.glmrob <- function(x, data = model.frame(x), newdata = NULL,
-                           type.predict = c("link", "response"),
-                           type.residuals = c("deviance", "pearson"),
-                           se_fit = FALSE, ...) {
+augment.glmrob <- function(
+  x,
+  data = model.frame(x),
+  newdata = NULL,
+  type.predict = c("link", "response"),
+  type.residuals = c("deviance", "pearson"),
+  se_fit = FALSE,
+  ...
+) {
   augment_newdata(
-    x, data, newdata,
+    x,
+    data,
+    newdata,
     type.predict = type.predict,
     type.residuals = type.residuals,
     .se_fit = se_fit

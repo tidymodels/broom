@@ -26,7 +26,6 @@ glance.NULL <- function(x, ...) tibble()
 augment.NULL <- function(x, ...) tibble()
 
 
-
 #' @export
 tidy.default <- function(x, ...) {
   cli::cli_abort("No {.fn tidy} method for objects of class {.cls {class(x)}}.")
@@ -34,10 +33,14 @@ tidy.default <- function(x, ...) {
 
 #' @export
 glance.default <- function(x, ...) {
-  cli::cli_abort("No {.fn glance} method for objects of class {.cls {class(x)}}.")
+  cli::cli_abort(
+    "No {.fn glance} method for objects of class {.cls {class(x)}}."
+  )
 }
 
 #' @export
 augment.default <- function(x, ...) {
-  cli::cli_abort("No {.fn augment} method for objects of class {.cls {class(x)}}.")
+  cli::cli_abort(
+    "No {.fn augment} method for objects of class {.cls {class(x)}}."
+  )
 }

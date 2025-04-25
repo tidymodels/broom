@@ -49,7 +49,8 @@
 tidy.lavaan <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
   check_ellipses("exponentiate", "tidy", "lavaan", ...)
 
-  lavaan::parameterEstimates(x,
+  lavaan::parameterEstimates(
+    x,
     ci = conf.int,
     level = conf.level,
     standardized = TRUE,
@@ -123,19 +124,18 @@ tidy.lavaan <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 glance.lavaan <- function(x, ...) {
   x %>%
     lavaan::fitmeasures(
-      fit.measures =
-        c(
-          "npar",
-          "chisq",
-          "rmsea",
-          "rmsea.ci.upper",
-          "srmr",
-          "aic",
-          "bic",
-          "tli",
-          "agfi",
-          "cfi"
-        )
+      fit.measures = c(
+        "npar",
+        "chisq",
+        "rmsea",
+        "rmsea.ci.upper",
+        "srmr",
+        "aic",
+        "bic",
+        "tli",
+        "agfi",
+        "cfi"
+      )
     ) %>%
     tibble::enframe(name = "term") %>%
     pivot_wider(names_from = term, values_from = value) %>%

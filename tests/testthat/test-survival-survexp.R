@@ -10,10 +10,12 @@ fit <- suppressWarnings(
   survexp(
     futime ~ 1,
     rmap = list(
-      sex = "male", year = accept.dt,
+      sex = "male",
+      year = accept.dt,
       age = accept.dt - birth.dt
     ),
-    method = "conditional", data = jasa
+    method = "conditional",
+    data = jasa
   )
 )
 

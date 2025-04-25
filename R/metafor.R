@@ -44,9 +44,15 @@
 #'
 #' @rdname metafor_tidiers
 #'
-tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95,
-                     exponentiate = FALSE, include_studies = FALSE,
-                     measure = "GEN", ...) {
+tidy.rma <- function(
+  x,
+  conf.int = FALSE,
+  conf.level = 0.95,
+  exponentiate = FALSE,
+  include_studies = FALSE,
+  measure = "GEN",
+  ...
+) {
   # tidy summary estimates
   betas <- x$beta
   if (!is.null(nrow(betas)) && nrow(betas) > 1) {
@@ -63,7 +69,8 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95,
   if (x$level != 1 - conf.level) {
     level <- 1 - conf.level
     if (is.element(x$test, c("knha", "adhoc", "t"))) {
-      crit <- if (all(x$ddf > 0)) qt(level / 2, df = x$ddf, lower.tail = FALSE) else NA
+      crit <- if (all(x$ddf > 0))
+        qt(level / 2, df = x$ddf, lower.tail = FALSE) else NA
     } else {
       crit <- qnorm(level / 2, lower.tail = FALSE)
     }
@@ -88,7 +95,11 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95,
   # tidy individual studies
   if (include_studies) {
     # use `metafor::escalc` to standardize estimates and confidence intervals
-    estimates <- metafor::escalc(yi = x$yi.f, vi = x$vi.f, measure = measure) %>%
+    estimates <- metafor::escalc(
+      yi = x$yi.f,
+      vi = x$vi.f,
+      measure = measure
+    ) %>%
       summary(level = conf.level * 100) %>%
       as.data.frame(stringsAsFactors = FALSE)
 
@@ -104,8 +115,14 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95,
     )
 
     names(estimates) <- c(
-      "term", "type", "estimate", "std.error", "statistic",
-      "p.value", "conf.low", "conf.high"
+      "term",
+      "type",
+      "estimate",
+      "std.error",
+      "statistic",
+      "p.value",
+      "conf.low",
+      "conf.high"
     )
     estimates <- as_tibble(estimates)
     results <- dplyr::bind_rows(estimates, results)
@@ -262,12 +279,16 @@ augment.rma <- function(x, interval = c("prediction", "confidence"), ...) {
 
   # fix names
   interval <- match.arg(interval, c("prediction", "confidence"))
-  if (interval == "prediction" & any(names(pred) %in% c("cr.lb", "cr.ub", "pi.lb", "pi.ub"))) {
+  if (
+    interval == "prediction" &
+      any(names(pred) %in% c("cr.lb", "cr.ub", "pi.lb", "pi.ub"))
+  ) {
     confidence_intervals <- names(pred) %in% c("ci.lb", "ci.ub")
     pred <- pred[, !confidence_intervals]
     names(pred)[1:4] <- c(".fitted", ".se.fit", ".lower", ".upper")
   } else {
-    prediction_intervals <- names(pred) %in% c("cr.lb", "cr.ub", "pi.lb", "pi.ub")
+    prediction_intervals <- names(pred) %in%
+      c("cr.lb", "cr.ub", "pi.lb", "pi.ub")
     pred <- pred[, !prediction_intervals]
     names(pred)[1:4] <- c(".fitted", ".se.fit", ".lower", ".upper")
   }
@@ -308,7 +329,6 @@ augment.rma <- function(x, interval = c("prediction", "confidence"), ...) {
     .observed = y,
     pred
   )
-
 
   # join residuals, if they exist for the model
   if (!is.null(res)) {

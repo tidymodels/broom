@@ -46,9 +46,14 @@
 #' @export
 #' @seealso [tidy], [ordinal::clm()], [ordinal::confint.clm()]
 #' @family ordinal tidiers
-tidy.clm <- function(x, conf.int = FALSE, conf.level = 0.95,
-                     conf.type = c("profile", "Wald"), exponentiate = FALSE,
-                     ...) {
+tidy.clm <- function(
+  x,
+  conf.int = FALSE,
+  conf.level = 0.95,
+  conf.type = c("profile", "Wald"),
+  exponentiate = FALSE,
+  ...
+) {
   conf.type <- rlang::arg_match(conf.type)
   ret <- as_tibble(coef(summary(x)), rownames = "term")
   colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
@@ -111,8 +116,13 @@ glance.clm <- function(x, ...) {
 #' @seealso [tidy], [ordinal::clm()], [ordinal::predict.clm()]
 #' @family ordinal tidiers
 #'
-augment.clm <- function(x, data = model.frame(x), newdata = NULL,
-                        type.predict = c("prob", "class"), ...) {
+augment.clm <- function(
+  x,
+  data = model.frame(x),
+  newdata = NULL,
+  type.predict = c("prob", "class"),
+  ...
+) {
   type.predict <- rlang::arg_match(type.predict)
 
   df <- if (is.null(newdata)) data else newdata

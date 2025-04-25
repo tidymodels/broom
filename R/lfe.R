@@ -58,7 +58,14 @@
 #' @aliases felm_tidiers lfe_tidiers
 #' @family felm tidiers
 #' @seealso [tidy()], [lfe::felm()]
-tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, se.type = c("default", "iid", "robust", "cluster"), ...) {
+tidy.felm <- function(
+  x,
+  conf.int = FALSE,
+  conf.level = .95,
+  fe = FALSE,
+  se.type = c("default", "iid", "robust", "cluster"),
+  ...
+) {
   check_ellipses("exponentiate", "tidy", "felm", ...)
 
   has_multi_response <- length(x$lhs) > 1
@@ -124,7 +131,6 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, se.type
       ret$p.value <- x$rpval
     }
   }
-
 
   if (conf.int) {
     if (has_multi_response) {
@@ -210,10 +216,16 @@ augment.felm <- function(x, data = model.frame(x), ...) {
   has_multi_response <- length(x$lhs) > 1
 
   if (has_multi_response) {
-    cli::cli_abort("{.fn felm} models with multiple responses are not supported.")
+    cli::cli_abort(
+      "{.fn felm} models with multiple responses are not supported."
+    )
   }
   df <- as_augment_tibble(data)
-  mutate(df, .fitted = as.vector(x$fitted.values), .resid = as.vector(x$residuals))
+  mutate(
+    df,
+    .fitted = as.vector(x$fitted.values),
+    .resid = as.vector(x$residuals)
+  )
 }
 
 #' @templateVar class felm
@@ -237,9 +249,11 @@ glance.felm <- function(x, ...) {
   has_multi_response <- length(x$lhs) > 1
 
   if (has_multi_response) {
-    cli::cli_abort("{.fn felm} models with multiple responses are not supported.")
+    cli::cli_abort(
+      "{.fn felm} models with multiple responses are not supported."
+    )
   }
-  
+
   s <- summary(x)
 
   as_glance_tibble(

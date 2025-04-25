@@ -47,7 +47,6 @@ test_that("tidy.felm", {
   td8 <- tidy(fit3)
   td9 <- tidy(fit3, se = "iid")
 
-
   td_multi <- tidy(fit_multi)
   td_multi_CI <- tidy(fit_multi, conf.int = TRUE)
 
@@ -136,7 +135,7 @@ test_that("augment.felm", {
   )
 
   expect_snapshot(error = TRUE, augment(fit_multi))
-  
+
   # Ensure that the .resid and .fitted columns are basic columns, not matrix
   aug <- augment(fit)
   expect_false(inherits(aug$.resid, "matrix"))
@@ -146,7 +145,7 @@ test_that("augment.felm", {
 
 test_that("tidy.felm errors informatively", {
   fit <- lfe::felm(v2 ~ v3, df)
-  
+
   expect_snapshot(
     .res <- tidy.felm(fit, se.type = "cluster")
   )

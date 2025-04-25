@@ -100,8 +100,17 @@ tidy.prcomp <- function(x, matrix = "u", ...) {
   }
 
   MATRIX <- c(
-    "rotation", "x", "variables", "samples", "v", "u", "pcs", "d",
-    "scores", "loadings", "eigenvalues"
+    "rotation",
+    "x",
+    "variables",
+    "samples",
+    "v",
+    "u",
+    "pcs",
+    "d",
+    "scores",
+    "loadings",
+    "eigenvalues"
   )
   matrix <- rlang::arg_match(matrix, MATRIX)
 

@@ -54,11 +54,15 @@ tidy.mediate <- function(x, conf.int = FALSE, conf.level = .95, ...) {
     tibble(
       c("acme_0", "acme_1", "ade_0", "ade_1"),
       c(d0, d1, z0, z1),
-      c(stats::sd(d0.sims), stats::sd(d1.sims), stats::sd(z0.sims), stats::sd(z1.sims)),
+      c(
+        stats::sd(d0.sims),
+        stats::sd(d1.sims),
+        stats::sd(z0.sims),
+        stats::sd(z1.sims)
+      ),
       c(d0.p, d1.p, z0.p, z1.p)
     )
   )
-
 
   if (conf.int) {
     low <- (1 - conf.level) / 2
@@ -68,9 +72,10 @@ tidy.mediate <- function(x, conf.int = FALSE, conf.level = .95, ...) {
       z <- qnorm(z.inv)
       U <- (sims - 1) * (mean(theta) - theta)
       top <- sum(U^3)
-      under <- 6 * (sum(U^2))^{
-        3 / 2
-      }
+      under <- 6 *
+        (sum(U^2))^{
+          3 / 2
+        }
       a <- top / under
       lower.inv <- pnorm(z + (z + qnorm(low)) / (1 - a * (z + qnorm(low))))
       lower2 <- lower <- quantile(theta, lower.inv)
@@ -80,7 +85,10 @@ tidy.mediate <- function(x, conf.int = FALSE, conf.level = .95, ...) {
     }
     ci <- with(
       x,
-      sapply(list(d0.sims, d1.sims, z0.sims, z1.sims), function(x) apply(x, 1, BC.CI))
+      sapply(
+        list(d0.sims, d1.sims, z0.sims, z1.sims),
+        function(x) apply(x, 1, BC.CI)
+      )
     )
     if (s$boot.ci.type != "bca") {
       CI <- function(theta) {
@@ -88,7 +96,10 @@ tidy.mediate <- function(x, conf.int = FALSE, conf.level = .95, ...) {
       }
       ci <- with(
         x,
-        sapply(list(d0.sims, d1.sims, z0.sims, z1.sims), function(x) apply(x, 1, CI))
+        sapply(
+          list(d0.sims, d1.sims, z0.sims, z1.sims),
+          function(x) apply(x, 1, CI)
+        )
       )
     }
 

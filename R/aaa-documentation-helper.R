@@ -54,8 +54,14 @@ return_evalrd <- function(..., .method, .pre = NULL, .post = NULL) {
   items <- with(glos, purrr::map2_chr(column, description, row_to_item))
   items <- paste(items, collapse = "\n")
 
-  result <- paste("\\value{", .pre, items, .post, "}",
-    sep = "\n", collapse = "\n"
+  result <- paste(
+    "\\value{",
+    .pre,
+    items,
+    .post,
+    "}",
+    sep = "\n",
+    collapse = "\n"
   )
 
   # check that all arguments resulted in some form of documentation
@@ -116,11 +122,13 @@ return_tidy <- function(..., .pre = NULL, .post = NULL, regression = FALSE) {
   do.call("return_evalrd", args)
 }
 
-return_augment <- function(...,
-                           .pre = NULL,
-                           .post = NULL,
-                           .fitted = TRUE,
-                           .resid = TRUE) {
+return_augment <- function(
+  ...,
+  .pre = NULL,
+  .post = NULL,
+  .fitted = TRUE,
+  .resid = TRUE
+) {
   if (is.null(.pre)) {
     .pre <- "A \\code{\\link[tibble:tibble]{tibble::tibble()}} with columns:"
   }

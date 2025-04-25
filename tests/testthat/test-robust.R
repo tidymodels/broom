@@ -53,7 +53,8 @@ test_that("glance.glmRob", {
   check_glance_outputs(gl)
 })
 
-test_that("no more rlang issues with model objects from robust", { # from issue 720
+test_that("no more rlang issues with model objects from robust", {
+  # from issue 720
 
   expect_equal(
     tidy(fit, conf.int = TRUE),

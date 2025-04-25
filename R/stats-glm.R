@@ -9,8 +9,13 @@
 #' @export
 #' @family lm tidiers
 #' @seealso [stats::glm()]
-tidy.glm <- function(x, conf.int = FALSE, conf.level = .95,
-                     exponentiate = FALSE, ...) {
+tidy.glm <- function(
+  x,
+  conf.int = FALSE,
+  conf.level = .95,
+  exponentiate = FALSE,
+  ...
+) {
   warn_on_appropriated_glm_class(x)
   warn_on_subclass(x, "tidy")
 
@@ -71,12 +76,15 @@ tidy.glm <- function(x, conf.int = FALSE, conf.level = .95,
 #' @family lm tidiers
 #' @seealso [stats::glm()]
 #' @include stats-lm.R
-augment.glm <- function(x,
-                        data = model.frame(x),
-                        newdata = NULL,
-                        type.predict = c("link", "response", "terms"),
-                        type.residuals = c("deviance", "pearson"),
-                        se_fit = FALSE, ...) {
+augment.glm <- function(
+  x,
+  data = model.frame(x),
+  newdata = NULL,
+  type.predict = c("link", "response", "terms"),
+  type.residuals = c("deviance", "pearson"),
+  se_fit = FALSE,
+  ...
+) {
   warn_on_appropriated_glm_class(x)
   warn_on_subclass(x, "augment")
 
@@ -111,7 +119,6 @@ augment.glm <- function(x,
 
   df
 }
-
 
 
 #' @templateVar class glm
@@ -173,7 +180,7 @@ warn_on_glm2 <- function(x) {
           "{.arg x} seems to be outputted from the {.pkg glm2} package.",
           "i" = "Tidiers for {.pkg glm2} output are currently not maintained;
                  please use caution in interpreting {.pkg broom} output."
-        ), 
+        ),
         call = NULL
       )
     }

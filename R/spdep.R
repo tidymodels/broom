@@ -94,8 +94,6 @@ tidy.sarlm <- function(x, conf.int = FALSE, conf.level = .95, ...) {
     ret <- bind_rows(ret, lambda)
   }
 
-
-
   # Calculate confidence interval
   if (conf.int) {
     ci <- broom_confint_terms(x, level = conf.level)

@@ -6,8 +6,13 @@ library(modeltests)
 skip_if_not_installed("drc")
 suppressPackageStartupMessages(library(drc))
 
-mod <- drm(dead / total ~ conc, type,
-  weights = total, data = selenium, fct = LL.2(), type = "binomial"
+mod <- drm(
+  dead / total ~ conc,
+  type,
+  weights = total,
+  data = selenium,
+  fct = LL.2(),
+  type = "binomial"
 )
 
 mod2 <- drm(rootl ~ conc, data = ryegrass, fct = W2.4())
@@ -41,7 +46,7 @@ test_that("glance.drc", {
 
 test_that("augment.drc", {
   expect_snapshot(error = TRUE, augment(mod))
-  
+
   check_augment_function(
     augment.drc,
     mod,
@@ -50,7 +55,7 @@ test_that("augment.drc", {
   )
 
   expect_snapshot(error = TRUE, augment(mod2))
-  
+
   check_augment_function(
     augment.drc,
     mod2,

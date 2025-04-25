@@ -16,7 +16,8 @@ test_that("tidy.mlm works", {
 rep_each <- function(x, times) {
   retv <- outer(rep(1, times), x, function(x, y) y)
   dim(retv) <- c(prod(dim(retv)), 1)
-  retv <- switch(class(x),
+  retv <- switch(
+    class(x),
     character = as.character(retv),
     numeric = as.numeric(retv),
     integer = as.integer(retv),

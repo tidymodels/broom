@@ -56,7 +56,8 @@ tidy.ridgelm <- function(x, ...) {
   }
 
   # otherwise, multiple lambdas/coefs/etc, have to tidy
-  cotidy <- data.frame(unrowname(t(x$coef)),
+  cotidy <- data.frame(
+    unrowname(t(x$coef)),
     lambda = x$lambda,
     GCV = unname(x$GCV)
   ) %>%

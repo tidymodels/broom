@@ -43,8 +43,10 @@ tidy.summary.lm <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
   if (conf.int) {
     ret <- ret %>%
       dplyr::mutate(
-        conf.low = estimate - stats::qt(1 - (1 - conf.level) / 2, df = x$df[2]) * std.error,
-        conf.high = estimate + stats::qt(1 - (1 - conf.level) / 2, df = x$df[2]) * std.error
+        conf.low = estimate -
+          stats::qt(1 - (1 - conf.level) / 2, df = x$df[2]) * std.error,
+        conf.high = estimate +
+          stats::qt(1 - (1 - conf.level) / 2, df = x$df[2]) * std.error
       )
   }
 

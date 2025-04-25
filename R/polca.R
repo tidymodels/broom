@@ -79,7 +79,8 @@
 tidy.poLCA <- function(x, ...) {
   probs <- purrr::map2_df(x$probs, names(x$probs), reshape_probs) %>%
     mutate(variable = as.character(variable)) %>%
-    transmute(variable,
+    transmute(
+      variable,
       class = stringr::str_match(Var1, "class (.*):")[, 2],
       outcome = Var2,
       estimate = value

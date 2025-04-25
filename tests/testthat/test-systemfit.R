@@ -35,9 +35,11 @@ Rrestr[2, 5] <- 1
 
 qrestr <- c(0, 0.5)
 
-fitols2 <- systemfit(system,
+fitols2 <- systemfit(
+  system,
   data = Kmenta,
-  restrict.matrix = Rrestr, restrict.rhs = qrestr
+  restrict.matrix = Rrestr,
+  restrict.rhs = qrestr
 )
 
 test_that("tidy.systemfit with OLS 2 restrictions", {
@@ -64,8 +66,12 @@ test_that("tidy.systemfit with OLS 2 restrictions", {
 # with argument restrict.regMat
 modReg <- matrix(0, 7, 6)
 colnames(modReg) <- c(
-  "demIntercept", "demPrice", "demIncome",
-  "supIntercept", "supPrice2", "supTrend"
+  "demIntercept",
+  "demPrice",
+  "demIncome",
+  "supIntercept",
+  "supPrice2",
+  "supTrend"
 )
 
 modReg[1, "demIntercept"] <- 1
@@ -121,8 +127,11 @@ test_that("tidy.systemfit with 2SLS with different instruments", {
 # 3SLS estimation with GMM-3SLS formula
 inst <- ~ income + farmPrice + trend
 
-fit3sls <- systemfit(system, "3SLS",
-  inst = inst, data = Kmenta,
+fit3sls <- systemfit(
+  system,
+  "3SLS",
+  inst = inst,
+  data = Kmenta,
   method3sls = "GMM"
 )
 

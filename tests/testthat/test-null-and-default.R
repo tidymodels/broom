@@ -7,7 +7,7 @@ test_that("tidy.NULL", {
 
 test_that("tidy.default", {
   expect_snapshot(error = TRUE, td <- tidy(raw(1)))
-  
+
   x <- 5
   class(x) <- c("foo", "bar")
   expect_snapshot(error = TRUE, glance(x))

@@ -13,7 +13,8 @@ fit3 <- survdiff(
   data = lung
 )
 
-expect <- survexp(futime ~ 1,
+expect <- survexp(
+  futime ~ 1,
   rmap = list(
     age = (accept.dt - birth.dt),
     sex = 1,
@@ -21,7 +22,8 @@ expect <- survexp(futime ~ 1,
     race = "white"
   ),
   jasa,
-  cohort = FALSE, ratetable = survexp.usr
+  cohort = FALSE,
+  ratetable = survexp.usr
 )
 
 fit4 <- survdiff(Surv(jasa$futime, jasa$fustat) ~ offset(expect))

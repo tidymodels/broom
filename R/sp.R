@@ -4,7 +4,7 @@
 #' @description Note that the `sf` package now defines tidy spatial objects
 #'   and is the recommended approach to spatial data. `sp` tidiers are now
 #'   deprecated in favor of `sf::st_as_sf()` and coercion methods found in
-#'   other packages. See 
+#'   other packages. See
 #'   \url{https://r-spatial.org/r/2023/05/15/evolution4.html} for more on
 #'   migration from retiring spatial packages.
 #'

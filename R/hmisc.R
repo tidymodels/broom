@@ -56,7 +56,8 @@ tidy.rcorr <- function(x, diagonal = FALSE, ...) {
   ret <- x$r %>%
     as.data.frame() %>%
     tibble::rownames_to_column("column1") %>%
-    pivot_longer(c(dplyr::everything(), -column1),
+    pivot_longer(
+      c(dplyr::everything(), -column1),
       names_to = "column2",
       values_to = "estimate"
     ) %>%

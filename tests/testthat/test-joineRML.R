@@ -87,7 +87,7 @@ test_that("augment.mjoint", {
   au2 <- augment(mjoint_fit2)
 
   expect_snapshot(error = TRUE, augment(mjoint_fit, data = NULL))
-  
+
   check_tibble(au, method = "augment", strict = FALSE)
   check_tibble(au, method = "augment", strict = FALSE)
 })

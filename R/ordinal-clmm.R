@@ -40,8 +40,13 @@
 #' @export
 #' @seealso [tidy], [ordinal::clmm()], [ordinal::confint.clm()]
 #' @family ordinal tidiers
-tidy.clmm <- function(x, conf.int = FALSE, conf.level = 0.95,
-                      exponentiate = FALSE, ...) {
+tidy.clmm <- function(
+  x,
+  conf.int = FALSE,
+  conf.level = 0.95,
+  exponentiate = FALSE,
+  ...
+) {
   # NOTE: pretty much the same as tidy.clm() except there is no
   # `type` argument to confint.clmm()
 

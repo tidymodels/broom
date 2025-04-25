@@ -9,8 +9,10 @@ fit2 <- coxph(Surv(time, status) ~ age + sex, lung, robust = TRUE)
 fit3 <- coxph(Surv(time, status) ~ age + sex + frailty(inst), lung)
 
 bladder1 <- bladder[bladder$enum < 5, ]
-fit4 <- coxph(Surv(stop, event) ~ (rx + size + number) * strata(enum) +
-  cluster(id), bladder1)
+fit4 <- coxph(
+  Surv(stop, event) ~ (rx + size + number) * strata(enum) + cluster(id),
+  bladder1
+)
 
 # this model does not have summary(x)$used.robust
 fit5 <- coxph(Surv(time, status) ~ age + pspline(nodes), data = colon)
@@ -18,9 +20,12 @@ fit5 <- coxph(Surv(time, status) ~ age + pspline(nodes), data = colon)
 colon$super_long_variable_name_that_would_be_truncated <- colon$nodes
 
 # see #1153
-fit6 <- coxph(Surv(time, status) ~ age + 
-                pspline(super_long_variable_name_that_would_be_truncated), 
-              data = colon)
+fit6 <- coxph(
+  Surv(time, status) ~
+    age +
+      pspline(super_long_variable_name_that_would_be_truncated),
+  data = colon
+)
 
 test_that("coxph tidier arguments", {
   check_arguments(tidy.coxph)
@@ -54,7 +59,7 @@ test_that("tidy.coxph", {
   check_tidy_output(td10)
   check_tidy_output(td11)
   check_tidy_output(td12)
-  
+
   expect_equal(
     td12$term[2],
     "pspline(super_long_variable_name_that_would_be_truncated), linear"

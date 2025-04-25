@@ -121,7 +121,6 @@ glance.mlogit <- function(x, ...) {
   # market shares model: odds equal to chosen proportions
   llC <- sum(x$freq * log(prop.table(x$freq)))
 
-
   res <- as_glance_tibble(
     logLik = llM,
     rho2 = 1 - llM / llC,

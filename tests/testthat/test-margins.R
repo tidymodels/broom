@@ -13,7 +13,11 @@ fit2 <- lm(mpg ~ wt * cyl * disp, data = mtcars)
 marg2a <- margins(fit2)
 marg2b <- margins(fit2, variable = "wt")
 marg2c <- margins(fit2, at = list(cyl = c(4, 6, 8)))
-marg2d <- margins(fit2, variables = "wt", at = list(cyl = c(4, 6, 8), drat = c(3, 3.5, 4)))
+marg2d <- margins(
+  fit2,
+  variables = "wt",
+  at = list(cyl = c(4, 6, 8), drat = c(3, 3.5, 4))
+)
 
 test_that("margins tidier arguments", {
   check_arguments(tidy.margins)

@@ -78,8 +78,13 @@
 #' @aliases gmm_tidiers
 #' @family gmm tidiers
 #' @seealso [tidy()], [gmm::gmm()]
-tidy.gmm <- function(x, conf.int = FALSE, conf.level = .95,
-                     exponentiate = FALSE, ...) {
+tidy.gmm <- function(
+  x,
+  conf.int = FALSE,
+  conf.level = .95,
+  exponentiate = FALSE,
+  ...
+) {
   coef <- summary(x)$coefficients
   ret <- as_tibble(coef, rownames = "term")
   colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")

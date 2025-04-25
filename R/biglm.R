@@ -39,12 +39,24 @@
 #' @export
 #' @family biglm tidiers
 #' @seealso [tidy()], [biglm::biglm()], [biglm::bigglm()]
-tidy.biglm <- function(x, conf.int = FALSE, conf.level = .95,
-                       exponentiate = FALSE, ...) {
+tidy.biglm <- function(
+  x,
+  conf.int = FALSE,
+  conf.level = .95,
+  exponentiate = FALSE,
+  ...
+) {
   # TODO: separate in biglm and bigglm tidiers
 
   ret <- as_tibble(summary(x)$mat, rownames = "term")
-  colnames(ret) <- c("term", "estimate", "conf.low", "conf.high", "std.error", "p.value")
+  colnames(ret) <- c(
+    "term",
+    "estimate",
+    "conf.low",
+    "conf.high",
+    "std.error",
+    "p.value"
+  )
 
   # remove the 95% confidence interval and replace:
   # it isn't exactly 95% (uses 2 rather than 1.96), and doesn't allow

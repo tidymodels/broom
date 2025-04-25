@@ -47,7 +47,8 @@ tidy.zoo <- function(x, ...) {
       colnames(ret)[1:ncol(x)] <- colnames(x)
     }
 
-    out <- pivot_longer(ret,
+    out <- pivot_longer(
+      ret,
       cols = c(dplyr::everything(), -index),
       names_to = "series",
       values_to = "value"

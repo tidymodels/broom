@@ -36,12 +36,23 @@
 #' @export
 #' @seealso [tidy()], [cmprsk::crr()]
 #' @family cmprsk tidiers
-tidy.crr <- function(x, exponentiate = FALSE, conf.int = FALSE,
-                     conf.level = .95, ...) {
+tidy.crr <- function(
+  x,
+  exponentiate = FALSE,
+  conf.int = FALSE,
+  conf.level = .95,
+  ...
+) {
   s <- summary(x, conf.int = conf.level)
   ret <- as_tidy_tibble(
     s$coef,
-    new_names = c("estimate", "estimate_exp", "std.error", "statistic", "p.value")
+    new_names = c(
+      "estimate",
+      "estimate_exp",
+      "std.error",
+      "statistic",
+      "p.value"
+    )
   )[, -3]
 
   if (conf.int) {

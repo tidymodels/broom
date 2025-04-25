@@ -100,14 +100,17 @@ augment.factanal <- function(x, data, ...) {
       'Cannot augment {.cls factanal} objects fit with {.code scores = "none"}.'
     )
   }
-  
+
   # Place relevant values into a tidy data frame
   if (has_rownames(scores)) {
     tidy_df <- data.frame(.rownames = rownames(scores), data.frame(scores)) %>%
       as_tibble() %>%
       dplyr::mutate(.rownames = as.character(.rownames))
   } else {
-    tidy_df <- tibble::rownames_to_column(as.data.frame(scores), var = ".rownames") %>%
+    tidy_df <- tibble::rownames_to_column(
+      as.data.frame(scores),
+      var = ".rownames"
+    ) %>%
       as_tibble() %>%
       dplyr::mutate(.rownames = as.character(.rownames))
   }
@@ -118,7 +121,10 @@ augment.factanal <- function(x, data, ...) {
   if (missing(data)) {
     return(tidy_df)
   } else {
-    data <- tibble::rownames_to_column(as.data.frame(data), var = ".rownames") %>%
+    data <- tibble::rownames_to_column(
+      as.data.frame(data),
+      var = ".rownames"
+    ) %>%
       as_tibble() %>%
       dplyr::mutate(.rownames = as.character(.rownames))
   }
@@ -131,8 +137,10 @@ augment.factanal <- function(x, data, ...) {
   # augmented dataframe
   tidy_df %>%
     dplyr::select(
-      .rownames, dplyr::everything(),
-      -dplyr::matches("\\.fs[0-9]*"), dplyr::matches("\\.fs[0-9]*")
+      .rownames,
+      dplyr::everything(),
+      -dplyr::matches("\\.fs[0-9]*"),
+      dplyr::matches("\\.fs[0-9]*")
     )
 }
 

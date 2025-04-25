@@ -50,12 +50,14 @@
 #' @aliases boot_tidiers
 #' @seealso [tidy()], [boot::boot()], [boot::tsboot()], [boot::boot.ci()],
 #'   [rsample::bootstraps()]
-tidy.boot <- function(x,
-                      conf.int = FALSE,
-                      conf.level = 0.95,
-                      conf.method = c("perc", "bca", "basic", "norm"),
-                      exponentiate = FALSE,
-                      ...) {
+tidy.boot <- function(
+  x,
+  conf.int = FALSE,
+  conf.level = 0.95,
+  conf.method = c("perc", "bca", "basic", "norm"),
+  exponentiate = FALSE,
+  ...
+) {
   conf.method <- rlang::arg_match(conf.method)
 
   # calculate the bias and standard error
@@ -76,27 +78,32 @@ tidy.boot <- function(x,
       )
     } else {
       op <- NULL
-      for (i in index) op <- rbind(op, boot::imp.moments(boot.out, index = i)$rat)
+      for (i in index)
+        op <- rbind(op, boot::imp.moments(boot.out, index = i)$rat)
       op[, 2L] <- sqrt(op[, 2])
     }
     colnames(op) <- c("estimate", "std.error")
   } else {
     t0 <- boot.out$t0[index]
     if (is.null(boot.out$call$weights)) {
-      op <- cbind(t0, apply(t, 2L, mean, na.rm = TRUE) -
-        t0, sqrt(apply(t, 2L, function(t.st) var(t.st[!is.na(t.st)]))))
+      op <- cbind(
+        t0,
+        apply(t, 2L, mean, na.rm = TRUE) -
+          t0,
+        sqrt(apply(t, 2L, function(t.st) var(t.st[!is.na(t.st)])))
+      )
       colnames(op) <- c("statistic", "bias", "std.error")
     } else {
       op <- NULL
       for (i in index) {
-        op <- rbind(op, boot::imp.moments(boot.out,
-          index = i
-        )$rat)
+        op <- rbind(op, boot::imp.moments(boot.out, index = i)$rat)
       }
-      op <- cbind(t0, op[, 1L] - t0, sqrt(op[, 2L]), apply(t,
-        2L, mean,
-        na.rm = TRUE
-      ))
+      op <- cbind(
+        t0,
+        op[, 1L] - t0,
+        sqrt(op[, 2L]),
+        apply(t, 2L, mean, na.rm = TRUE)
+      )
       colnames(op) <- c("statistic", "bias", "std.error", "estimate")
     }
   }
@@ -105,10 +112,12 @@ tidy.boot <- function(x,
   ret <- as_tidy_tibble(op)
 
   if (conf.int) {
-    ci.list <- lapply(seq_along(x$t0),
+    ci.list <- lapply(
+      seq_along(x$t0),
       boot::boot.ci,
       boot.out = x,
-      conf = conf.level, type = conf.method
+      conf = conf.level,
+      type = conf.method
     )
 
     # boot.ci uses c("norm", "basic", "perc", "stud") for types
@@ -116,7 +125,9 @@ tidy.boot <- function(x,
     ci.pos <- pmatch(conf.method, names(ci.list[[1]]))
 
     if (conf.method == "norm") {
-      extract_ci <- function(res) {res[["normal"]][2:3]}
+      extract_ci <- function(res) {
+        res[["normal"]][2:3]
+      }
       ci.tab <- t(vapply(ci.list, extract_ci, numeric(2)))
     } else {
       ci.tab <- t(sapply(ci.list, function(x) x[[ci.pos]][4:5]))

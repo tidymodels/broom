@@ -67,11 +67,13 @@ tidy.glmnet <- function(x, return_zeros = FALSE, ...) {
   beta <- coef(x)
 
   if (inherits(x, "multnet")) {
-    beta_d <- purrr::map_df(beta, function(b) {
-      as_tidy_tibble(as.matrix(b),
-        new_names = 1:ncol(b)
-      )
-    }, .id = "class")
+    beta_d <- purrr::map_df(
+      beta,
+      function(b) {
+        as_tidy_tibble(as.matrix(b), new_names = 1:ncol(b))
+      },
+      .id = "class"
+    )
     ret <- beta_d %>%
       pivot_longer(
         cols = c(everything(), -term, -class),
@@ -84,7 +86,8 @@ tidy.glmnet <- function(x, return_zeros = FALSE, ...) {
       new_names = 1:ncol(beta)
     )
 
-    ret <- pivot_longer(beta_d,
+    ret <- pivot_longer(
+      beta_d,
       cols = c(dplyr::everything(), -term),
       names_to = "step",
       values_to = "estimate"

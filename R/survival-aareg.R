@@ -43,8 +43,12 @@ tidy.aareg <- function(x, ...) {
     nn <- c("estimate", "statistic", "std.error", "statistic.z", "p.value")
   } else {
     nn <- c(
-      "estimate", "statistic", "std.error", "robust.se",
-      "statistic.z", "p.value"
+      "estimate",
+      "statistic",
+      "std.error",
+      "robust.se",
+      "statistic.z",
+      "p.value"
     )
   }
 

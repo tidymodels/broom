@@ -27,7 +27,7 @@ test_that("tidy.mlogit", {
   td2 <- tidy(fit1, conf.int = TRUE)
   td3 <- tidy(fit2)
   td4 <- tidy(fit2, conf.int = TRUE)
-  
+
   check_tidy_output(td1)
   check_tidy_output(td2)
   check_tidy_output(td3)
@@ -37,7 +37,7 @@ test_that("tidy.mlogit", {
 test_that("glance.mlogit", {
   gl1 <- glance(fit1)
   gl2 <- glance(fit2)
-  
+
   check_glance_outputs(gl1)
   check_glance_outputs(gl2)
 })
@@ -50,10 +50,14 @@ test_that("augment.mlogit", {
     newdata = Fish,
     strict = FALSE
   )
-  
+
   au1 <- augment(fit1)
   au2 <- augment(fit2)
-  
-  expect_true(all(c("id", "alternative", "chosen", ".resid", ".fitted") %in% names(au1)))
-  expect_true(all(c("id", "alternative", "chosen", ".resid", ".fitted") %in% names(au2)))
+
+  expect_true(all(
+    c("id", "alternative", "chosen", ".resid", ".fitted") %in% names(au1)
+  ))
+  expect_true(all(
+    c("id", "alternative", "chosen", ".resid", ".fitted") %in% names(au2)
+  ))
 })

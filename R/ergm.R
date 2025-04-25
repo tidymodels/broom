@@ -54,8 +54,13 @@
 #' @seealso [tidy()], [ergm::ergm()], [ergm::control.ergm()],
 #'   [ergm::summary()]
 #' @family ergm tidiers
-tidy.ergm <- function(x, conf.int = FALSE, conf.level = 0.95,
-                      exponentiate = FALSE, ...) {
+tidy.ergm <- function(
+  x,
+  conf.int = FALSE,
+  conf.level = 0.95,
+  exponentiate = FALSE,
+  ...
+) {
   # in ergm 3.9 summary(x, ...)$coefs has columns:
   #   Estimate, Std. Error, MCMC %, Pr(>|Z|)
 
@@ -80,8 +85,10 @@ tidy.ergm <- function(x, conf.int = FALSE, conf.level = 0.95,
   }
 
   if (exponentiate) {
-    if (is.null(x$glm) ||
-      (x$glm$family$link != "logit" && x$glm$family$link != "log")) {
+    if (
+      is.null(x$glm) ||
+        (x$glm$family$link != "logit" && x$glm$family$link != "log")
+    ) {
       cli::cli_warn(
         "Coefficients will be exponentiated, but the model didn't 
          use a {.code log} or {.code logit} link."

@@ -40,7 +40,7 @@ test_that("tidy.prcomp", {
   expect_identical(tidy(pc, matrix = "scores"), td3)
 
   expect_snapshot(error = TRUE, tidy(pc, matrix = c("d", "u")))
-  
+
   no_row_nm <- as.data.frame(matrix(1:9, ncol = 3) + rnorm(n = 9, sd = 0.25))
   pca <- prcomp(no_row_nm)
   expect_no_error(tidy(pca, matrix = "u"))
@@ -57,7 +57,7 @@ test_that("augment.prcomp", {
 })
 
 test_that("augment.prcomp works with matrix objects", {
-suppressPackageStartupMessages(  library(broom))
+  suppressPackageStartupMessages(library(broom))
   set.seed(17)
 
   # data

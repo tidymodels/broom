@@ -68,7 +68,9 @@ tidy.htest <- function(x, ...) {
   if (length(x$parameter) > 1) {
     ret$parameter <- NULL
     if (is.null(names(x$parameter))) {
-      cli::cli_warn("Multiple unnamed parameters in hypothesis test; dropping them.")
+      cli::cli_warn(
+        "Multiple unnamed parameters in hypothesis test; dropping them."
+      )
     } else {
       # rename num df to num.df and denom df to denom.df
       np <- names(x$parameter)
@@ -77,7 +79,7 @@ tidy.htest <- function(x, ...) {
       names(x$parameter) <- np
 
       cli::cli_inform("Multiple parameters; naming those columns {np}.")
-      
+
       ret <- append(ret, x$parameter, after = 1)
     }
   }
@@ -162,7 +164,6 @@ augment_chisq_test <- function(x, ...) {
 }
 
 
-
 #' @templateVar class pairwise.htest
 #' @template title_desc_tidy
 #'
@@ -235,6 +236,14 @@ tidy.pairwise.htest <- function(x, ...) {
 #' @family htest tidiers
 #' @seealso [stats::power.t.test()]
 tidy.power.htest <- function(x, ...) {
-  cols <- purrr::compact(x[c("n", "delta", "sd", "sig.level", "power", "p1", "p2")])
+  cols <- purrr::compact(x[c(
+    "n",
+    "delta",
+    "sd",
+    "sig.level",
+    "power",
+    "p1",
+    "p2"
+  )])
   as_tibble(cols)
 }
