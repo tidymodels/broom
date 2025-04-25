@@ -36,7 +36,7 @@
 #'     values_to = "value"
 #'   ) |>
 #'   nest(data = -algorithm) |>
-#'   mutate(tidy_roc = purrr::map(data, ~ tidy(roc(.x$value, .x$labels)))) |>
+#'   mutate(tidy_roc = purrr::map(data, \(x) tidy(roc(x$value, x$labels)))) |>
 #'   unnest(tidy_roc)
 #'
 #' ggplot(rocs, aes(fpr, tpr, color = algorithm)) +

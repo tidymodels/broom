@@ -20,7 +20,7 @@ return_evalrd <- function(..., .method, .pre = NULL, .post = NULL) {
   pull_from_modeltests <- as.character(cols)
 
   if (use_custom_doc) {
-    idx <- purrr::map_lgl(names(cols), ~ .x != "")
+    idx <- purrr::map_lgl(names(cols), \(x) x != "")
     custom_doc <- cols[idx]
     pull_from_modeltests <- pull_from_modeltests[!idx]
     pull_from_modeltests <- setdiff(pull_from_modeltests, names(custom_doc))
@@ -43,7 +43,7 @@ return_evalrd <- function(..., .method, .pre = NULL, .post = NULL) {
   }
 
   glos <- glos_env$column_glossary |>
-    filter(purrr::map_lgl(column, ~ .x %in% pull_from_modeltests)) |>
+    filter(purrr::map_lgl(column, \(x) x %in% pull_from_modeltests)) |>
     filter(method == !!.method) |>
     bind_rows(custom_cols)
 
