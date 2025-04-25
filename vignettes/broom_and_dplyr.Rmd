@@ -8,7 +8,9 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include = FALSE}
+```{r}
+#| label: setup
+#| include: false
 knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 
 if (rlang::is_installed("ggplot2")) {
@@ -57,7 +59,9 @@ ggplot(Orange, aes(age, circumference, color = Tree)) +
 
 Suppose you want to test for correlations individually *within* each tree. You can do this with dplyr's `group_by`:
 
-```{r, message = FALSE, warning = FALSE}
+```{r}
+#| message: false
+#| warning: false
 Orange |>
   group_by(Tree) |>
   summarize(correlation = cor(age, circumference))

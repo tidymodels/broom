@@ -8,7 +8,9 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, echo=FALSE}
+```{r}
+#| label: setup
+#| echo: false
 library(knitr)
 opts_chunk$set(warning = FALSE, message = FALSE)
 ```
@@ -41,7 +43,8 @@ Note that some classes may have only one or two of these methods defined.
 
 Consider as an illustrative example a linear fit on the built-in `mtcars` dataset.
 
-```{r lmfit}
+```{r}
+#| label: lmfit
 lmfit <- lm(mpg ~ wt, mtcars)
 lmfit
 summary(lmfit)
@@ -81,7 +84,8 @@ Other Examples
 
 These functions apply equally well to the output from `glm`:
 
-```{r glmfit}
+```{r}
+#| label: glmfit
 glmfit <- glm(am ~ wt, mtcars, family = "binomial")
 tidy(glmfit)
 augment(glmfit)
@@ -103,7 +107,8 @@ glance(nlsfit)
 
 The `tidy` function can also be applied to `htest` objects, such as those output by popular built-in functions like `t.test`, `cor.test`, and `wilcox.test`.
 
-```{r ttest}
+```{r}
+#| label: ttest
 tt <- t.test(wt ~ am, mtcars)
 tidy(tt)
 ```
