@@ -2,6 +2,8 @@
 
 * Increased minimum required R verison to 4.1.
 
+* Resolved errors with the 2.0.85 update of the epiR package.
+
 # broom 1.0.8
 
 ## Deprecations

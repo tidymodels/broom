@@ -2,6 +2,9 @@ skip_on_cran()
 
 skip_if_not_installed("epiR")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 dat <- matrix(c(13, 2163, 5, 3349), nrow = 2, byrow = TRUE)
 rownames(dat) <- c("DF+", "DF-")
 colnames(dat) <- c("FUS+", "FUS-")
