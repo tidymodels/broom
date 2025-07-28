@@ -54,10 +54,12 @@ jobs:
           extra-packages: 
             any::rcmdcheck,
             AER=?ignore-before-r=4.3.0,
+            btergm=?ignore-before-r=4.3.0,
             car=?ignore-before-r=4.3.0,
             cobs=?ignore-before-r=4.3.0,
             drc=?ignore-before-r=4.3.0,
             emmeans=?ignore-before-r=4.3.0,
+            ergm=?ignore-before-r=4.3.0,
             Hmisc=?ignore-before-r=4.3.0,
             igraph=?ignore-before-r=4.3.0,
             joineRML=?ignore-before-r=4.3.0,
