@@ -6,16 +6,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Convert Statistical Objects into Tidy Tibbles • broom</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" sizes="any" href="favicon.ico">
+<link rel="manifest" href="site.webmanifest">
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/Source_Sans_Pro-0.4.9/font.css" rel="stylesheet">
-<link href="deps/Source_Code_Pro-0.4.9/font.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/Source_Sans_Pro-0.4.10/font.css" rel="stylesheet">
+<link href="deps/Source_Code_Pro-0.4.10/font.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Convert Statistical Objects into Tidy Tibbles">
@@ -32,7 +31,7 @@
 
     <a class="navbar-brand me-2" href="index.html">broom</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.9</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -95,7 +94,7 @@
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># we recommend installing the entire tidyverse </span></span>
+<code class="sourceCode R"><span><span class="co"># we recommend installing the entire tidyverse</span></span>
 <span><span class="co"># modeling set, which includes broom:</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"tidymodels"</span><span class="op">)</span></span>
 <span></span>
@@ -116,7 +115,7 @@
 <span></span>
 <span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Volume</span> <span class="op">~</span> <span class="va">Girth</span> <span class="op">+</span> <span class="va">Height</span>, <span class="va">trees</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 3 x 5</span></span>
+<span><span class="co">#&gt; # A tibble: 3 × 5</span></span>
 <span><span class="co">#&gt;   term        estimate std.error statistic  p.value</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;</span></span>
 <span><span class="co">#&gt; 1 (Intercept)  -58.0       8.64      -6.71 2.75e- 7</span></span>
@@ -125,28 +124,28 @@
 <p><code><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance()</a></code> returns a tibble with exactly one row of goodness of fitness measures and related statistics. This is useful to check for model misspecification and to compare many models.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 1 x 12</span></span>
+<span><span class="co">#&gt; # A tibble: 1 × 12</span></span>
 <span><span class="co">#&gt;   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC</span></span>
 <span><span class="co">#&gt;       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
 <span><span class="co">#&gt; 1     0.948         0.944  3.88      255. 1.07e-18     2  -84.5  177.  183.</span></span>
-<span><span class="co">#&gt; # … with 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt; # ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</span></span></code></pre></div>
 <p><code>augment</code> adds columns to a dataset, containing information such as fitted values, residuals or cluster assignments. All columns added to a dataset have <code>.</code> prefix to prevent existing columns from being overwritten.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment</a></span><span class="op">(</span><span class="va">fit</span>, data <span class="op">=</span> <span class="va">trees</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 31 x 9</span></span>
-<span><span class="co">#&gt;    Girth Height Volume .fitted .resid .std.resid   .hat .sigma   .cooksd</span></span>
-<span><span class="co">#&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt;  1   8.3     70   10.3    4.84  5.46      1.50   0.116    3.79 0.0978   </span></span>
-<span><span class="co">#&gt;  2   8.6     65   10.3    4.55  5.75      1.60   0.147    3.77 0.148    </span></span>
-<span><span class="co">#&gt;  3   8.8     63   10.2    4.82  5.38      1.53   0.177    3.78 0.167    </span></span>
-<span><span class="co">#&gt;  4  10.5     72   16.4   15.9   0.526     0.140  0.0592   3.95 0.000409 </span></span>
-<span><span class="co">#&gt;  5  10.7     81   18.8   19.9  -1.07     -0.294  0.121    3.95 0.00394  </span></span>
-<span><span class="co">#&gt;  6  10.8     83   19.7   21.0  -1.32     -0.370  0.156    3.94 0.00840  </span></span>
-<span><span class="co">#&gt;  7  11       66   15.6   16.2  -0.593    -0.162  0.115    3.95 0.00114  </span></span>
-<span><span class="co">#&gt;  8  11       75   18.2   19.2  -1.05     -0.277  0.0515   3.95 0.00138  </span></span>
-<span><span class="co">#&gt;  9  11.1     80   22.6   21.4   1.19      0.321  0.0920   3.95 0.00348  </span></span>
-<span><span class="co">#&gt; 10  11.2     75   19.9   20.2  -0.288    -0.0759 0.0480   3.95 0.0000968</span></span>
-<span><span class="co">#&gt; # … with 21 more rows</span></span></code></pre></div>
+<span><span class="co">#&gt; # A tibble: 31 × 9</span></span>
+<span><span class="co">#&gt;    Girth Height Volume .fitted .resid   .hat .sigma   .cooksd .std.resid</span></span>
+<span><span class="co">#&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1   8.3     70   10.3    4.84  5.46  0.116    3.79 0.0978        1.50  </span></span>
+<span><span class="co">#&gt;  2   8.6     65   10.3    4.55  5.75  0.147    3.77 0.148         1.60  </span></span>
+<span><span class="co">#&gt;  3   8.8     63   10.2    4.82  5.38  0.177    3.78 0.167         1.53  </span></span>
+<span><span class="co">#&gt;  4  10.5     72   16.4   15.9   0.526 0.0592   3.95 0.000409      0.140 </span></span>
+<span><span class="co">#&gt;  5  10.7     81   18.8   19.9  -1.07  0.121    3.95 0.00394      -0.294 </span></span>
+<span><span class="co">#&gt;  6  10.8     83   19.7   21.0  -1.32  0.156    3.94 0.00840      -0.370 </span></span>
+<span><span class="co">#&gt;  7  11       66   15.6   16.2  -0.593 0.115    3.95 0.00114      -0.162 </span></span>
+<span><span class="co">#&gt;  8  11       75   18.2   19.2  -1.05  0.0515   3.95 0.00138      -0.277 </span></span>
+<span><span class="co">#&gt;  9  11.1     80   22.6   21.4   1.19  0.0920   3.95 0.00348       0.321 </span></span>
+<span><span class="co">#&gt; 10  11.2     75   19.9   20.2  -0.288 0.0480   3.95 0.0000968    -0.0759</span></span>
+<span><span class="co">#&gt; # ℹ 21 more rows</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="contributing">Contributing<a class="anchor" aria-label="anchor" href="#contributing"></a>
 </h3>
@@ -194,11 +193,11 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>David Robinson <br><small class="roles"> Author </small>  </li>
-<li>Alex Hayes <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-4985-5160" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Simon Couch <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-5676-5107" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>David Robinson <br><small class="roles"> Author </small>   </li>
+<li>Alex Hayes <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-4985-5160" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>Simon Couch <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-5676-5107" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 <li>
-<a href="https://www.posit.co" class="external-link"><img src="https://www.tidyverse.org/posit-logo.svg" alt="Posit" height="16" width="62" style="margin-bottom: 3px;"></a> <br><small class="roles"> Copyright holder, funder </small>  </li>
+<a href="https://www.posit.co" class="external-link"><img src="https://www.tidyverse.org/posit-logo.svg" alt="Posit" height="16" width="62" style="margin-bottom: 3px;"></a> <br><small class="roles"> Copyright holder, funder </small>  <a href="https://ror.org/03wc8by49" class="external-link"><img src="https://raw.githubusercontent.com/ror-community/ror-logos/main/ror-icon-rgb.svg" class="ror" alt="ROR"></a> </li>
 <li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
@@ -216,7 +215,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
   </div></footer>
