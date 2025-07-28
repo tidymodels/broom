@@ -1,4 +1,4 @@
-# broom (development version)
+# broom 1.0.9
 
 * Increased minimum required R verison to 4.1.
 

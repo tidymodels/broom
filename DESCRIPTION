@@ -1,8 +1,8 @@
 Type: Package
 Package: broom
 Title: Convert Statistical Objects into Tidy Tibbles
-Version: 1.0.8.9000
-Authors@R:c(
+Version: 1.0.9
+Authors@R: c(
     person("David", "Robinson", , "admiral.david@gmail.com", role = "aut"),
     person("Alex", "Hayes", , "alexpghayes@gmail.com", role = "aut",
            comment = c(ORCID = "0000-0002-4985-5160")),
