@@ -94,7 +94,7 @@ This augment method wraps \code{\link[=augment.betareg]{augment.betareg()}} for
 \code{\link[mfx:betamfx]{mfx::betamfx()}} objects.
 }
 \examples{
-\dontshow{if (rlang::is_installed("mfx")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("mfx")) withAutoprint(\{ # examplesIf}
 
 library(mfx)
 

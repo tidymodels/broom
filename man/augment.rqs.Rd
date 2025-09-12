@@ -92,7 +92,7 @@ columns \code{.lower} and \code{.upper}. Does not provide confidence
 intervals when data is specified via the \code{newdata} argument.
 }
 \examples{
-\dontshow{if (rlang::is_installed("quantreg")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("quantreg")) withAutoprint(\{ # examplesIf}
 
 # load modeling library and data
 library(quantreg)

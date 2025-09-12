@@ -47,7 +47,7 @@ the \pkg{ergm} class, such as those produced from weighted networks by the
 \pkg{ergm.count} package.
 }
 \examples{
-\dontshow{if (rlang::is_installed("ergm")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("ergm")) withAutoprint(\{ # examplesIf}
 
 # load libraries for models and data
 library(ergm)

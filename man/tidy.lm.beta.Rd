@@ -45,7 +45,7 @@ If you have missing values in your model data, you may need to refit
 the model with \code{na.action = na.exclude}.
 }
 \examples{
-\dontshow{if (rlang::is_installed("lm.beta")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("lm.beta")) withAutoprint(\{ # examplesIf}
 
 # load libraries for models and data
 library(lm.beta)

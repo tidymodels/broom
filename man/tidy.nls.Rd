@@ -39,7 +39,7 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
-\dontshow{if (rlang::is_installed("ggplot2")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("ggplot2")) withAutoprint(\{ # examplesIf}
 
 # fit model
 n <- nls(mpg ~ k * e^wt, data = mtcars, start = list(k = 1, e = 2))

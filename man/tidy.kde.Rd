@@ -38,7 +38,7 @@ Returns a data frame in long format with four columns. Use
 on the output to return to a wide format.
 }
 \examples{
-\dontshow{if (rlang::is_installed(c("ks", "ggplot2"))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed(c("ks", "ggplot2"))) withAutoprint(\{ # examplesIf}
 
 # load libraries for models and data
 library(ks)

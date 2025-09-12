@@ -80,7 +80,7 @@ modal class) can be found in the \code{posterior} element, these are not
 included in the augmented output.
 }
 \examples{
-\dontshow{if (rlang::is_installed(c("poLCA", "ggplot2"))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed(c("poLCA", "ggplot2"))) withAutoprint(\{ # examplesIf}
 
 # load libraries for models and data
 library(poLCA)

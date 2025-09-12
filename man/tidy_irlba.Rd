@@ -76,7 +76,7 @@ If no appropriate tidying method is found, they throw an error.
 A very thin wrapper around \code{\link[=tidy_svd]{tidy_svd()}}.
 }
 \examples{
-\dontshow{if (rlang::is_installed(c("modeldata", "ggplot2"))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed(c("modeldata", "ggplot2"))) withAutoprint(\{ # examplesIf}
 
 library(modeldata)
 data(hpc_data)

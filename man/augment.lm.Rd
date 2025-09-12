@@ -111,7 +111,7 @@ When \code{newdata} is supplied, only returns \code{.fitted}, \code{.resid} and
 \code{.se.fit} columns.
 }
 \examples{
-\dontshow{if (rlang::is_installed("ggplot2")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("ggplot2")) withAutoprint(\{ # examplesIf}
 
 library(ggplot2)
 library(dplyr)

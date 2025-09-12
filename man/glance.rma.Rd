@@ -45,7 +45,7 @@ that no longer have a well-defined value are filled in with an \code{NA}
 of the appropriate type.
 }
 \examples{
-\dontshow{if (rlang::is_installed("metafor")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("metafor")) withAutoprint(\{ # examplesIf}
 
 library(metafor)
 

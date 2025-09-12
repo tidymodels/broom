@@ -34,7 +34,7 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item Posit Software, PBC (03wc8by49) [copyright holder, funder]
+  \item Posit Software, PBC (\href{https://ror.org/03wc8by49}{ROR}) [copyright holder, funder]
   \item Indrajeet Patil \email{patilindrajeet.science@gmail.com} (\href{https://orcid.org/0000-0003-1995-6531}{ORCID}) [contributor]
   \item Derek Chiu \email{dchiu@bccrc.ca} [contributor]
   \item Matthieu Gomez \email{mattg@princeton.edu} [contributor]

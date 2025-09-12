@@ -65,7 +65,7 @@ and \code{statistic} columns are omitted, and only \code{estimate} and
 \code{std.error} columns shown.
 }
 \examples{
-\dontshow{if (rlang::is_installed("boot")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("boot")) withAutoprint(\{ # examplesIf}
 
 # load modeling library
 library(boot)

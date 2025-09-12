@@ -91,7 +91,7 @@ We are in the process of defining behaviors for models fit with various
 missing at this time.
 }
 \examples{
-\dontshow{if (rlang::is_installed(c("survival", "ggplot2"))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed(c("survival", "ggplot2"))) withAutoprint(\{ # examplesIf}
 
 # load libraries for models and data
 library(survival)

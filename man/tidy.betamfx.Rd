@@ -51,7 +51,7 @@ in the data, or ii) the average of the sample marginal effects. See
 \code{vignette("mfxarticle")} from the \code{mfx} package for more details.
 }
 \examples{
-\dontshow{if (rlang::is_installed("mfx")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("mfx")) withAutoprint(\{ # examplesIf}
 
 library(mfx)
 

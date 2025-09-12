@@ -83,7 +83,7 @@ for information on how to interpret the various tidied matrices. Note
 that SVD is only equivalent to PCA on centered data.
 }
 \examples{
-\dontshow{if (rlang::is_installed(c("maps", "ggplot2"))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed(c("maps", "ggplot2"))) withAutoprint(\{ # examplesIf}
 
 pc <- prcomp(USArrests, scale = TRUE)
 

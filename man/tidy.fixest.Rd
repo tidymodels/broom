@@ -47,7 +47,7 @@ fixed effects, see \url{https://github.com/lrberge/fixest/issues/6} and
 \url{https://github.com/sgaure/lfe/issues/1#issuecomment-530646990})
 }
 \examples{
-\dontshow{if (rlang::is_installed("fixest") & !broom:::is_cran_check()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("fixest") & !broom:::is_cran_check()) withAutoprint(\{ # examplesIf}
 
 # load libraries for models and data
 library(fixest)

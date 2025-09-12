@@ -83,7 +83,7 @@ We are in the process of defining behaviors for models fit with various
 missing at this time.
 }
 \examples{
-\dontshow{if (rlang::is_installed("ordinal")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("ordinal")) withAutoprint(\{ # examplesIf}
 
 # load libraries for models and data
 library(ordinal)

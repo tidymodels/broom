@@ -95,7 +95,7 @@ For additional details on Cook's distance, see
 \code{\link[stats:influence.measures]{stats::cooks.distance()}}.
 }
 \examples{
-\dontshow{if (rlang::is_installed("mgcv")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("mgcv")) withAutoprint(\{ # examplesIf}
 
 # load libraries for models and data
 library(mgcv)

@@ -40,7 +40,7 @@ confidence intervals for \code{varest} objects. Setting the \code{tidy} argument
 \code{conf.int = TRUE} will return a warning.
 }
 \examples{
-\dontshow{if (rlang::is_installed("vars")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("vars")) withAutoprint(\{ # examplesIf}
 
 # load libraries for models and data
 library(vars)

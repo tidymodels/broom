@@ -67,7 +67,7 @@ At the moment this only works on the estimation dataset. Need to set
 it up to predict on another dataset.
 }
 \examples{
-\dontshow{if (rlang::is_installed("mlogit")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("mlogit")) withAutoprint(\{ # examplesIf}
 
 # load libraries for models and data
 library(mlogit)

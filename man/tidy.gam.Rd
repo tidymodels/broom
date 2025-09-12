@@ -60,7 +60,7 @@ When \code{parametric = FALSE} return columns \code{edf} and \code{ref.df} rathe
 than \code{estimate} and \code{std.error}.
 }
 \examples{
-\dontshow{if (rlang::is_installed("mgcv")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("mgcv")) withAutoprint(\{ # examplesIf}
 
 # load libraries for models and data
 library(mgcv)

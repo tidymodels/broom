@@ -36,7 +36,7 @@ specify which components to return.
 \code{dfbeta = TRUE}.
 }
 \examples{
-\dontshow{if (rlang::is_installed("survival")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("survival")) withAutoprint(\{ # examplesIf}
 
 # load libraries for models and data
 library(survival)

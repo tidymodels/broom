@@ -35,7 +35,7 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
-\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 
 library(cluster)
 library(modeldata)

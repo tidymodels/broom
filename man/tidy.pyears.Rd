@@ -39,7 +39,7 @@ If the \code{data.frame = TRUE} argument is supplied to \code{pyears},
 this is simply the contents of \code{x$data}.
 }
 \examples{
-\dontshow{if (rlang::is_installed("survival")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("survival")) withAutoprint(\{ # examplesIf}
 
 # load libraries for models and data
 library(survival)

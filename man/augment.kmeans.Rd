@@ -69,7 +69,7 @@ We are in the process of defining behaviors for models fit with various
 missing at this time.
 }
 \examples{
-\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 
 library(cluster)
 library(modeldata)

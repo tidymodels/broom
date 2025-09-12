@@ -52,7 +52,7 @@ For multiple values, please use a \code{\link[purrr:map]{purrr::map()}} workflow
 }\if{html}{\out{</div>}}
 }
 \examples{
-\dontshow{if (rlang::is_installed("quantreg")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("quantreg")) withAutoprint(\{ # examplesIf}
 
 # load modeling library and data
 library(quantreg)

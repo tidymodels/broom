@@ -39,7 +39,7 @@ The tibble has a column for each of the measures of association
 or tests contained in \code{massoc} or \code{massoc.detail} when \code{\link[epiR:epi.2by2]{epiR::epi.2by2()}} is called.
 }
 \examples{
-\dontshow{if (rlang::is_installed("epiR")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("epiR")) withAutoprint(\{ # examplesIf}
 
 # load libraries for models and data
 library(epiR)

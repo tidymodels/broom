@@ -47,7 +47,7 @@ Similarly, an \code{augment.margins()} method is not currently supported, but
 users can simply run the underlying model to obtain the same information.
 }
 \examples{
-\dontshow{if (rlang::is_installed("margins")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("margins")) withAutoprint(\{ # examplesIf}
 
 # load libraries for models and data
 library(margins)

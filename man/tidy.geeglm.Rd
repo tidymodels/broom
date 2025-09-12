@@ -53,7 +53,7 @@ refit the model with \code{na.action = na.exclude} or deal with the
 missingness in the data beforehand.
 }
 \examples{
-\dontshow{if (rlang::is_installed("geepack")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("geepack")) withAutoprint(\{ # examplesIf}
 
 # load modeling library
 library(geepack)

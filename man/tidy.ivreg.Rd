@@ -49,7 +49,7 @@ outputted by the \code{AER} package. The \code{ivreg} package also outputs
 objects of class \code{ivreg}, and will be supported in a later release.
 }
 \examples{
-\dontshow{if (rlang::is_installed("AER")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("AER")) withAutoprint(\{ # examplesIf}
 
 # load libraries for models and data
 library(AER)

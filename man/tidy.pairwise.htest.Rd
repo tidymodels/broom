@@ -39,7 +39,7 @@ Note also that the columns of group1 and group2 will always be a factor,
 even if the original input is (e.g.) numeric.
 }
 \examples{
-\dontshow{if (rlang::is_installed("modeldata")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("modeldata")) withAutoprint(\{ # examplesIf}
 
 attach(airquality)
 Month <- factor(Month, labels = month.abb[5:9])

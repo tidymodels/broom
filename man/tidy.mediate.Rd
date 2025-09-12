@@ -44,7 +44,7 @@ effect in the control and treatment groups, respectively. And the last
 two the direct effect in each group.
 }
 \examples{
-\dontshow{if (rlang::is_installed("mediation")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("mediation")) withAutoprint(\{ # examplesIf}
 
 # load libraries for models and data
 library(mediation)

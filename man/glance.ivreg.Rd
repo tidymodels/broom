@@ -58,7 +58,7 @@ if the number of instruments is not greater than the number of
 endogenous regressors.
 }
 \examples{
-\dontshow{if (rlang::is_installed("AER")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("AER")) withAutoprint(\{ # examplesIf}
 
 # load libraries for models and data
 library(AER)

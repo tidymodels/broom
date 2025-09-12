@@ -43,7 +43,7 @@ The tibble has one row for each curve and term in the regression.
 The \code{curveid} column indicates the curve.
 }
 \examples{
-\dontshow{if (rlang::is_installed("drc")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("drc")) withAutoprint(\{ # examplesIf}
 
 # load libraries for models and data
 library(drc)

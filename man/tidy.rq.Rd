@@ -41,7 +41,7 @@ no confidence intervals are calculated and the confidence limits are
 set to NA.
 }
 \examples{
-\dontshow{if (rlang::is_installed("quantreg")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("quantreg")) withAutoprint(\{ # examplesIf}
 
 # load modeling library and data
 library(quantreg)

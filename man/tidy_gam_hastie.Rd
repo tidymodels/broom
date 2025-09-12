@@ -36,7 +36,7 @@ Tidy \code{gam} objects created by calls to \code{\link[mgcv:gam]{mgcv::gam()}} 
 \code{\link[=tidy.gam]{tidy.gam()}}.
 }
 \examples{
-\dontshow{if (rlang::is_installed("gam")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("gam")) withAutoprint(\{ # examplesIf}
 
 # load libraries for models and data
 library(gam)

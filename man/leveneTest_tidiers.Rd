@@ -30,7 +30,7 @@ For models that have only a single component, the \code{\link[=tidy]{tidy()}} an
 of those methods.
 }
 \examples{
-\dontshow{if (rlang::is_installed("car")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("car")) withAutoprint(\{ # examplesIf}
 
 # load libraries for models and data
 library(car)

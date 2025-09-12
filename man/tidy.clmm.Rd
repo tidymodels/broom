@@ -52,7 +52,7 @@ parameters, and \code{scale} type coefficients correspond to \code{zeta}
 parameters.
 }
 \examples{
-\dontshow{if (rlang::is_installed("ordinal")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("ordinal")) withAutoprint(\{ # examplesIf}
 
 # load libraries for models and data
 library(ordinal)

@@ -141,7 +141,7 @@ This generic augment method wraps \code{\link[=augment.glm]{augment.glm()}} for 
 objects from the \code{mfx} package.
 }
 \examples{
-\dontshow{if (rlang::is_installed("mfx")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("mfx")) withAutoprint(\{ # examplesIf}
 
 # load libraries for models and data
 library(mfx)

@@ -35,7 +35,7 @@ For tidiers for robust models from the \pkg{MASS} package see
 \code{\link[=tidy.rlm]{tidy.rlm()}}.
 }
 \examples{
-\dontshow{if (rlang::is_installed("robust")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("robust")) withAutoprint(\{ # examplesIf}
 
 # load libraries for models and data
 library(robust)

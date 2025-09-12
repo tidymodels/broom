@@ -48,7 +48,7 @@ If the linear model is an \code{mlm} object (multiple linear model),
 there is an additional column \code{response}. See \code{\link[=tidy.mlm]{tidy.mlm()}}.
 }
 \examples{
-\dontshow{if (rlang::is_installed("ggplot2")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("ggplot2")) withAutoprint(\{ # examplesIf}
 
 library(ggplot2)
 library(dplyr)

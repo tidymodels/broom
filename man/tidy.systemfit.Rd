@@ -43,7 +43,7 @@ This tidy method works with any model objects of class \code{systemfit}.
 Default returns a tibble of six columns.
 }
 \examples{
-\dontshow{if (rlang::is_installed("systemfit")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("systemfit")) withAutoprint(\{ # examplesIf}
 
 set.seed(27)
 

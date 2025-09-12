@@ -44,7 +44,7 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
-\dontshow{if (rlang::is_installed("speedglm")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("speedglm")) withAutoprint(\{ # examplesIf}
 
 # load libraries for models and data
 library(speedglm)

@@ -90,7 +90,7 @@ make sure you are using a named \code{list} to define the formula
 for the fixed and random effects of the longitudinal submodel.
 }
 \examples{
-\dontshow{if (rlang::is_installed("joineRML")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("joineRML")) withAutoprint(\{ # examplesIf}
 
 # broom only skips running these examples because the example models take a
 # while to generate—they should run just fine, though!

@@ -46,7 +46,7 @@ precision is the inverse of the variance, often referred to as \code{phi}.
 At least one term will have been used to model the precision \code{phi}.
 }
 \examples{
-\dontshow{if (rlang::is_installed("betareg")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("betareg")) withAutoprint(\{ # examplesIf}
 
 # load libraries for models and data
 library(betareg)

@@ -50,7 +50,7 @@ however, that this method does not return all of the columns of the
 non-summary method (e.g. AIC and BIC will be missing.)
 }
 \examples{
-\dontshow{if (rlang::is_installed("ggplot2")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("ggplot2")) withAutoprint(\{ # examplesIf}
 
 library(ggplot2)
 library(dplyr)

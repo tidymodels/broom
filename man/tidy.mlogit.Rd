@@ -35,7 +35,7 @@ These methods tidy the coefficients of mnl and nl models generated
 by the functions of the \code{mlogit} package.
 }
 \examples{
-\dontshow{if (rlang::is_installed("mlogit")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("mlogit")) withAutoprint(\{ # examplesIf}
 
 # load libraries for models and data
 library(mlogit)

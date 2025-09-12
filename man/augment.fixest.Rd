@@ -88,7 +88,7 @@ augment.fixest only works for \code{\link[fixest:feols]{fixest::feols()}}, \code
 \code{\link[fixest:femlm]{fixest::fenegbin()}}, \code{\link[fixest:feNmlm]{fixest::feNmlm()}}, or \code{\link[fixest:feglm]{fixest::fepois()}}.
 }
 \examples{
-\dontshow{if (rlang::is_installed("fixest") & !broom:::is_cran_check()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("fixest") & !broom:::is_cran_check()) withAutoprint(\{ # examplesIf}
 
 # load libraries for models and data
 library(fixest)
