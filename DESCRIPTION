@@ -260,6 +260,7 @@ Suggests:
     spdep (>= 1.1),
     speedglm,
     spelling,
+    stats4,
     survey,
     survival (>= 3.6-4),
     systemfit,
@@ -275,7 +276,7 @@ Config/usethis/last-upkeep: 2025-04-25
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Collate:
     'aaa-documentation-helper.R'
     'null-and-default.R'
