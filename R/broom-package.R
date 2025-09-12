@@ -29,3 +29,9 @@
 #' @import dplyr
 ## usethis namespace: end
 NULL
+
+# 4.6.0 r-devel triggers a dependency WARNING (#1254)
+# * https://github.com/wch/r-source/commit/81571366824cd02b8a660ae60c52f994b7bd9b7c
+quiet_stats4_warning <- function() {
+  stats4::confint
+}
