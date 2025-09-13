@@ -1,4 +1,4 @@
-# broom (development version)
+# broom 1.0.10
 
 * Resolves an R CMD check WARNING related to namespacing on 
   r-devel (pre-4.6.0, #1255).
