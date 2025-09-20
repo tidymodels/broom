@@ -50,10 +50,20 @@
 #'
 tidy.pyears <- function(x, ...) {
   if (is.null(x$data)) {
-    ret <- purrr::compact(unclass(x)[c("pyears", "n", "event", "expected")])
+    ret <- purrr::map(
+      c("pyears", "n", "event", "expected"), ~{
+        val <- x[[.x]]
+        if(is.null(val)){
+          return(NULL)
+        }
+        as.data.frame.table(val, responseName = .x)
+      }) %>% 
+      purrr::compact() %>% 
+      purrr::reduce(dplyr::left_join)
   } else {
     ret <- x$data
   }
+  
   as_tibble(as.data.frame(ret)) # allow vector recycling!
 }
 
