@@ -21,3 +21,4 @@
 ^LICENSE\.md$
 ^[\.]?air\.toml$
 ^\.vscode$
+MAINTENANCE.md
