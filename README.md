@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# broom <img src="man/figures/logo.png" align="right" width="100" />
+# broom <a href="https://broom.tidymodels.org"><img src="man/figures/logo.png" align="right" height="138" alt="broom website" /></a>
 
 <!-- badges: start -->
 
