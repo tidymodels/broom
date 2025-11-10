@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# broom  <img src="man/figures/logo.png" align="right" width="100" />
+# broom <a href="https://broom.tidymodels.org"><img src="man/figures/logo.png" align="right" height="138" alt="broom website" /></a>
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/broom)](https://CRAN.R-project.org/package=broom)
