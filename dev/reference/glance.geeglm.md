@@ -1,0 +1,119 @@
+# Glance at a(n) geeglm object
+
+Glance accepts a model object and returns a
+[`tibble::tibble()`](https://tibble.tidyverse.org/reference/tibble.html)
+with exactly one row of model summaries. The summaries are typically
+goodness of fit measures, p-values for hypothesis tests on residuals, or
+model convergence information.
+
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
+
+Glance does not calculate summary measures. Rather, it farms out these
+computations to appropriate methods and gathers the results together.
+Sometimes a goodness of fit measure will be undefined. In these cases
+the measure will be reported as `NA`.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns that no
+longer have a well-defined value are filled in with an `NA` of the
+appropriate type.
+
+## Usage
+
+``` r
+# S3 method for class 'geeglm'
+glance(x, ...)
+```
+
+## Arguments
+
+- x:
+
+  A `geeglm` object returned from a call to
+  [`geepack::geeglm()`](https://rdrr.io/pkg/geepack/man/geeglm.html).
+
+- ...:
+
+  Additional arguments. Not used. Needed to match generic signature
+  only. **Cautionary note:** Misspelled arguments will be absorbed in
+  `...`, where they will be ignored. If the misspelled argument has a
+  default value, the default value will be used. For example, if you
+  pass `conf.lvel = 0.9`, all computation will proceed using
+  `conf.level = 0.95`. Two exceptions here are:
+
+  - [`tidy()`](https://generics.r-lib.org/reference/tidy.html) methods
+    will warn when supplied an `exponentiate` argument if it will be
+    ignored.
+
+  - [`augment()`](https://generics.r-lib.org/reference/augment.html)
+    methods will warn when supplied a `newdata` argument if it will be
+    ignored.
+
+## See also
+
+[`glance()`](https://generics.r-lib.org/reference/glance.html),
+[`geepack::geeglm()`](https://rdrr.io/pkg/geepack/man/geeglm.html)
+
+## Value
+
+A
+[`tibble::tibble()`](https://tibble.tidyverse.org/reference/tibble.html)
+with exactly one row and columns:
+
+- alpha:
+
+  Estimated correlation parameter for geepack::geeglm.
+
+- df.residual:
+
+  Residual degrees of freedom.
+
+- gamma:
+
+  Estimated scale parameter for geepack::geeglm.
+
+- max.cluster.size:
+
+  Max number of elements in clusters.
+
+- n.clusters:
+
+  Number of clusters.
+
+## Examples
+
+``` r
+# load modeling library
+library(geepack)
+
+# load data
+data(state)
+
+
+ds <- data.frame(state.region, state.x77)
+
+# fit model
+geefit <- geeglm(Income ~ Frost + Murder,
+  id = state.region,
+  data = ds,
+  corstr = "exchangeable"
+)
+
+# summarize model fit with tidiers
+tidy(geefit)
+#> # A tibble: 3 × 5
+#>   term        estimate std.error statistic p.value
+#>   <chr>          <dbl>     <dbl>     <dbl>   <dbl>
+#> 1 (Intercept)  4406.      407.     117.      0    
+#> 2 Frost           1.69      2.25     0.562   0.453
+#> 3 Murder        -22.7      31.4      0.522   0.470
+tidy(geefit, conf.int = TRUE)
+#> # A tibble: 3 × 7
+#>   term        estimate std.error statistic p.value conf.low conf.high
+#>   <chr>          <dbl>     <dbl>     <dbl>   <dbl>    <dbl>     <dbl>
+#> 1 (Intercept)  4406.      407.     117.      0      3608.     5205.  
+#> 2 Frost           1.69      2.25     0.562   0.453    -2.72      6.10
+#> 3 Murder        -22.7      31.4      0.522   0.470   -84.2      38.8 
+```
