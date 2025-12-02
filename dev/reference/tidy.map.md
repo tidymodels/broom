@@ -102,7 +102,7 @@ tidy(ca)
 
 qplot(long, lat, data = ca, geom = "polygon", group = group)
 #> Warning: `qplot()` was deprecated in ggplot2 3.4.0.
-#> Warning: `fortify(<map>)` was deprecated in ggplot2 3.6.0.
+#> Warning: `fortify(<map>)` was deprecated in ggplot2 4.0.0.
 #> ℹ Please use `map_data()` instead.
 #> ℹ The deprecated feature was likely used in the ggplot2 package.
 #>   Please report the issue at

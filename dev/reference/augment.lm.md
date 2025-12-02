@@ -229,7 +229,7 @@ ggplot(d, aes(estimate, term, xmin = conf.low, xmax = conf.high, height = 0)) +
   geom_point() +
   geom_vline(xintercept = 0, lty = 4) +
   geom_errorbarh()
-#> Warning: `geom_errobarh()` was deprecated in ggplot2 4.0.0.
+#> Warning: `geom_errorbarh()` was deprecated in ggplot2 4.0.0.
 #> ℹ Please use the `orientation` argument of `geom_errorbar()` instead.
 
 

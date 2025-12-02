@@ -92,13 +92,13 @@ tidy(wht)
 #> # A tibble: 3 × 7
 #>   term    contrast null.value estimate std.error statistic adj.p.value
 #>   <chr>   <chr>         <dbl>    <dbl>     <dbl>     <dbl>       <dbl>
-#> 1 tension M - L             0   -10         3.87     -2.58     0.0336 
+#> 1 tension M - L             0   -10.0       3.87     -2.58     0.0336 
 #> 2 tension H - L             0   -14.7       3.87     -3.80     0.00110
 #> 3 tension H - M             0    -4.72      3.87     -1.22     0.447  
 
 ggplot(wht, aes(lhs, estimate)) +
   geom_point()
-#> Warning: `fortify(<glht>)` was deprecated in ggplot2 3.6.0.
+#> Warning: `fortify(<glht>)` was deprecated in ggplot2 4.0.0.
 #> ℹ Please use `broom::tidy(<glht>)` instead.
 #> ℹ The deprecated feature was likely used in the ggplot2 package.
 #>   Please report the issue at
@@ -111,13 +111,13 @@ tidy(CI)
 #> # A tibble: 3 × 5
 #>   term    contrast estimate conf.low conf.high
 #>   <chr>   <chr>       <dbl>    <dbl>     <dbl>
-#> 1 tension M - L      -10       -19.4    -0.645
+#> 1 tension M - L      -10.0     -19.4    -0.645
 #> 2 tension H - L      -14.7     -24.1    -5.37 
 #> 3 tension H - M       -4.72    -14.1     4.63 
 
 ggplot(CI, aes(lhs, estimate, ymin = lwr, ymax = upr)) +
   geom_pointrange()
-#> Warning: `fortify(<confint.glht>)` was deprecated in ggplot2 3.6.0.
+#> Warning: `fortify(<confint.glht>)` was deprecated in ggplot2 4.0.0.
 #> ℹ Please use `broom::tidy(<confint.glht>)` instead.
 #> ℹ The deprecated feature was likely used in the ggplot2 package.
 #>   Please report the issue at
@@ -128,14 +128,14 @@ tidy(summary(wht))
 #> # A tibble: 3 × 7
 #>   term    contrast null.value estimate std.error statistic adj.p.value
 #>   <chr>   <chr>         <dbl>    <dbl>     <dbl>     <dbl>       <dbl>
-#> 1 tension M - L             0   -10         3.87     -2.58     0.0336 
+#> 1 tension M - L             0   -10.0       3.87     -2.58     0.0336 
 #> 2 tension H - L             0   -14.7       3.87     -3.80     0.00111
 #> 3 tension H - M             0    -4.72      3.87     -1.22     0.447  
 ggplot(mapping = aes(lhs, estimate)) +
   geom_linerange(aes(ymin = lwr, ymax = upr), data = CI) +
   geom_point(aes(size = p), data = summary(wht)) +
   scale_size(trans = "reverse")
-#> Warning: `fortify(<summary.glht>)` was deprecated in ggplot2 3.6.0.
+#> Warning: `fortify(<summary.glht>)` was deprecated in ggplot2 4.0.0.
 #> ℹ Please use `broom::tidy(<summary.glht>)` instead.
 #> ℹ The deprecated feature was likely used in the ggplot2 package.
 #>   Please report the issue at
