@@ -1,4 +1,4 @@
-# broom (development version)
+# broom 1.0.11
 
 * Transfer maintainership to @EmilHvitfeldt. (#1260)
 
