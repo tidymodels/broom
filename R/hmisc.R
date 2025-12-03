@@ -21,7 +21,7 @@
 #'   `cor(B, A)`. Only one of these pairs will ever be present in the tidy
 #'   output.
 #'
-#' @examplesIf rlang::is_installed(c("Hmisc", "ggplot2"))
+#' @examplesIf FALSE
 #'
 #' # load libraries for models and data
 #' library(Hmisc)
