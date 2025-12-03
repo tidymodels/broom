@@ -49,7 +49,7 @@ two the direct effect in each group.
 # load libraries for models and data
 library(mediation)
 
-data(jobs)
+data("jobs", package = "mediation")
 
 # fit models
 b <- lm(job_seek ~ treat + econ_hard + sex + age, data = jobs)
