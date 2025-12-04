@@ -96,7 +96,7 @@ tidy(thsd)
 #>   <chr>   <chr>         <dbl>    <dbl>    <dbl>     <dbl>       <dbl>
 #> 1 tension M-H               0     4.72   -4.63       14.1     0.447  
 #> 2 tension L-H               0    14.7     5.37       24.1     0.00112
-#> 3 tension L-M               0    10       0.647      19.4     0.0336 
+#> 3 tension L-M               0    10.0     0.647      19.4     0.0336 
 
 # may include comparisons on multiple terms
 fm2 <- aov(mpg ~ as.factor(gear) * as.factor(cyl), data = mtcars)

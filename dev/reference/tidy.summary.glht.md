@@ -96,7 +96,7 @@ tidy(wht)
 #> # A tibble: 3 × 7
 #>   term    contrast null.value estimate std.error statistic adj.p.value
 #>   <chr>   <chr>         <dbl>    <dbl>     <dbl>     <dbl>       <dbl>
-#> 1 tension M - L             0   -10.0       3.87     -2.58     0.0335 
+#> 1 tension M - L             0   -10         3.87     -2.58     0.0335 
 #> 2 tension H - L             0   -14.7       3.87     -3.80     0.00111
 #> 3 tension H - M             0    -4.72      3.87     -1.22     0.447  
 
@@ -110,7 +110,7 @@ tidy(CI)
 #> # A tibble: 3 × 5
 #>   term    contrast estimate conf.low conf.high
 #>   <chr>   <chr>       <dbl>    <dbl>     <dbl>
-#> 1 tension M - L      -10.0     -19.4    -0.645
+#> 1 tension M - L      -10       -19.4    -0.645
 #> 2 tension H - L      -14.7     -24.1    -5.37 
 #> 3 tension H - M       -4.72    -14.1     4.63 
 
@@ -122,7 +122,7 @@ tidy(summary(wht))
 #> # A tibble: 3 × 7
 #>   term    contrast null.value estimate std.error statistic adj.p.value
 #>   <chr>   <chr>         <dbl>    <dbl>     <dbl>     <dbl>       <dbl>
-#> 1 tension M - L             0   -10.0       3.87     -2.58     0.0336 
+#> 1 tension M - L             0   -10         3.87     -2.58     0.0336 
 #> 2 tension H - L             0   -14.7       3.87     -3.80     0.00119
 #> 3 tension H - M             0    -4.72      3.87     -1.22     0.447  
 ggplot(mapping = aes(lhs, estimate)) +

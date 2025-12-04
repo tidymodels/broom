@@ -273,7 +273,7 @@ glance(nlsfit)
     ## # A tibble: 1 × 9
     ##   sigma isConv     finTol logLik   AIC   BIC deviance df.residual  nobs
     ##   <dbl> <lgl>       <dbl>  <dbl> <dbl> <dbl>    <dbl>       <int> <int>
-    ## 1  2.77 TRUE      1.94e-8  -77.0  160.  164.     231.          30    32
+    ## 1  2.77 TRUE      1.97e-8  -77.0  160.  164.     231.          30    32
 
 #### Hypothesis testing
 

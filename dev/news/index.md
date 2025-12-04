@@ -2,6 +2,12 @@
 
 ## broom (development version)
 
+## broom 1.0.11
+
+- Transfer maintainership to
+  [@EmilHvitfeldt](https://github.com/EmilHvitfeldt).
+  ([\#1260](https://github.com/tidymodels/broom/issues/1260))
+
 ## broom 1.0.10
 
 CRAN release: 2025-09-13

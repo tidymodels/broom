@@ -20,8 +20,8 @@ Useful links:
 
 ## Author
 
-**Maintainer**: Simon Couch <simon.couch@posit.co>
-([ORCID](https://orcid.org/0000-0001-5676-5107))
+**Maintainer**: Emil Hvitfeldt <emil.hvitfeldt@posit.co>
+([ORCID](https://orcid.org/0000-0002-0679-1945))
 
 Authors:
 
@@ -29,6 +29,9 @@ Authors:
 
 - Alex Hayes <alexpghayes@gmail.com>
   ([ORCID](https://orcid.org/0000-0002-4985-5160))
+
+- Simon Couch <simon.couch@posit.co>
+  ([ORCID](https://orcid.org/0000-0001-5676-5107))
 
 Other contributors:
 

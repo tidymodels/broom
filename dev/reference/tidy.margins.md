@@ -191,7 +191,7 @@ tidy(marg_ie0)
 #>   <chr>    <dbl>     <dbl>     <dbl>   <dbl>
 #> 1 cyl    -3.85      1.46       -2.65 0.00812
 #> 2 disp   -0.0295    0.0174     -1.70 0.0900 
-#> 3 wt     -2.01      1.17       -1.72 0.0859 
+#> 3 wt     -2.01      1.17       -1.72 0.0860 
 glance(marg_ie0)
 #> # A tibble: 1 × 12
 #>   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC
@@ -208,8 +208,8 @@ tidy(marg_ie1)
 #> # A tibble: 9 × 7
 #>   term  at.variable at.value  estimate std.error statistic p.value
 #>   <chr> <chr>          <dbl>     <dbl>     <dbl>     <dbl>   <dbl>
-#> 1 cyl   cyl                4 -3.85        1.46     -2.65   0.00812
-#> 2 cyl   cyl                6 -3.85        1.46     -2.65   0.00811
+#> 1 cyl   cyl                4 -3.85        1.46     -2.65   0.00808
+#> 2 cyl   cyl                6 -3.85        1.46     -2.65   0.00814
 #> 3 cyl   cyl                8 -3.85        1.46     -2.65   0.00812
 #> 4 disp  cyl                4  0.000978    0.0314    0.0312 0.975  
 #> 5 disp  cyl                6  0.00134     0.0182    0.0737 0.941  

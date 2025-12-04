@@ -9,6 +9,7 @@
 - **Simon Couch**. Author. [](https://orcid.org/0000-0001-5676-5107)
 
 - **Emil Hvitfeldt**. Author, maintainer.
+  [](https://orcid.org/0000-0002-0679-1945)
 
 - **[![Posit](https://www.tidyverse.org/posit-logo.svg)](https://www.posit.co)**.
   Copyright holder, funder.
@@ -292,13 +293,13 @@ Source:
 [`DESCRIPTION`](https://github.com/tidymodels/broom/blob/main/DESCRIPTION)
 
 Robinson D, Hayes A, Couch S, Hvitfeldt E (2025). *broom: Convert
-Statistical Objects into Tidy Tibbles*. R package version 1.0.10.9000,
+Statistical Objects into Tidy Tibbles*. R package version 1.0.11.9000,
 <https://broom.tidymodels.org/>.
 
     @Manual{,
       title = {broom: Convert Statistical Objects into Tidy Tibbles},
       author = {David Robinson and Alex Hayes and Simon Couch and Emil Hvitfeldt},
       year = {2025},
-      note = {R package version 1.0.10.9000},
+      note = {R package version 1.0.11.9000},
       url = {https://broom.tidymodels.org/},
     }
