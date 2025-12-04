@@ -1,5 +1,9 @@
 # broom (development version)
 
+# broom 1.0.11
+
+* Transfer maintainership to @EmilHvitfeldt. (#1260)
+
 # broom 1.0.10
 
 * Resolves an R CMD check WARNING related to namespacing on 

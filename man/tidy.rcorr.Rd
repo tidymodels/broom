@@ -44,7 +44,7 @@ matrix from \code{rcorr} there may be entries for both the \code{cor(A, B)} and
 output.
 }
 \examples{
-\dontshow{if (rlang::is_installed(c("Hmisc", "ggplot2"))) withAutoprint(\{ # examplesIf}
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 
 # load libraries for models and data
 library(Hmisc)

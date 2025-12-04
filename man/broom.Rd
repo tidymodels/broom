@@ -24,12 +24,13 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Simon Couch \email{simon.couch@posit.co} (\href{https://orcid.org/0000-0001-5676-5107}{ORCID})
+\strong{Maintainer}: Emil Hvitfeldt \email{emil.hvitfeldt@posit.co} (\href{https://orcid.org/0000-0002-0679-1945}{ORCID})
 
 Authors:
 \itemize{
   \item David Robinson \email{admiral.david@gmail.com}
   \item Alex Hayes \email{alexpghayes@gmail.com} (\href{https://orcid.org/0000-0002-4985-5160}{ORCID})
+  \item Simon Couch \email{simon.couch@posit.co} (\href{https://orcid.org/0000-0001-5676-5107}{ORCID})
 }
 
 Other contributors:
