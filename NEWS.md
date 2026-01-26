@@ -1,4 +1,4 @@
-# broom (development version)
+# broom 1.0.12
 
 * Resolves an R CMD check error related to new names of output of `summary()`. (#1266)
 
