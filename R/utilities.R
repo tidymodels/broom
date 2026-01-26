@@ -631,6 +631,7 @@ globalVariables(
     "group1",
     "group2",
     "hat",
+    "id",
     "idx",
     "index",
     "Intercept",
