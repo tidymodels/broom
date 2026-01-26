@@ -1,5 +1,7 @@
 # broom (development version)
 
+* Resolves an R CMD check error related to new names of output of `summary()`. (#1266)
+
 # broom 1.0.11
 
 * Transfer maintainership to @EmilHvitfeldt. (#1260)

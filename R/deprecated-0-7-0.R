@@ -350,7 +350,7 @@ tidy.summaryDefault <- function(x, ...) {
   )
   ret <- as.data.frame(t(as.matrix(x)))
   cnms <- c("minimum", "q1", "median", "mean", "q3", "maximum")
-  if ("NA's" %in% names(x)) {
+  if (any(c("NA's", "NAs") %in% names(x))) {
     cnms <- c(cnms, "na")
   }
   as_tibble(purrr::set_names(ret, cnms))
