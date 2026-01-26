@@ -2,6 +2,10 @@
 
 ## broom (development version)
 
+- Resolves an R CMD check error related to new names of output of
+  [`summary()`](https://rdrr.io/pkg/urca/man/summary-methods.html).
+  ([\#1266](https://github.com/tidymodels/broom/issues/1266))
+
 ## broom 1.0.11
 
 CRAN release: 2025-12-04
