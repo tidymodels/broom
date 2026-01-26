@@ -95,7 +95,7 @@ with columns:
 ``` r
 # load libraries for models and data
 library(epiR)
-#> Package epiR 2.0.88 is loaded
+#> Package epiR 2.0.89 is loaded
 #> Type help(epi.about) for summary information
 #> Type browseVignettes(package = 'epiR') to learn how to use epiR for applied epidemiological analyses
 #> 
@@ -120,7 +120,7 @@ tidy(fit, parameters = "moa")
 #>  1 PR.strata.wald         4.01    1.43      11.2  
 #>  2 PR.strata.taylor       4.01    1.43      11.2  
 #>  3 PR.strata.score        4.01    1.49      10.8  
-#>  4 PR.strata.koopman      4.01    1.49      10.8  
+#>  4 PR.strata.koopman      1.84    1.25       2.24 
 #>  5 OR.strata.wald         4.03    1.43      11.3  
 #>  6 OR.strata.cfield       4.03   NA         NA    
 #>  7 OR.strata.score        4.03    1.49      10.9  

@@ -98,7 +98,7 @@ library(gam)
 #> The following objects are masked from ‘package:purrr’:
 #> 
 #>     accumulate, when
-#> Loaded gam 1.22-6
+#> Loaded gam 1.22-7
 #> 
 #> Attaching package: ‘gam’
 #> The following objects are masked from ‘package:mgcv’:

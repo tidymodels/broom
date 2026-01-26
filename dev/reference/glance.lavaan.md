@@ -145,7 +145,7 @@ Other lavaan tidiers:
 
 ``` r
 library(lavaan)
-#> This is lavaan 0.6-20
+#> This is lavaan 0.6-21
 #> lavaan is FREE software! Please report any bugs.
 
 # fit model

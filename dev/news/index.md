@@ -4,6 +4,8 @@
 
 ## broom 1.0.11
 
+CRAN release: 2025-12-04
+
 - Transfer maintainership to
   [@EmilHvitfeldt](https://github.com/EmilHvitfeldt).
   ([\#1260](https://github.com/tidymodels/broom/issues/1260))
