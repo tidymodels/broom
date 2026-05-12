@@ -22,3 +22,4 @@
 ^[\.]?air\.toml$
 ^\.vscode$
 MAINTENANCE.md
+^CRAN-SUBMISSION$
