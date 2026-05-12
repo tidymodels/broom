@@ -19,7 +19,7 @@ tidy(x, ...)
 - x:
 
   A `kde` object returned from
-  [`ks::kde()`](https://rdrr.io/pkg/ks/man/kde.html).
+  [`ks::kde()`](https://mvstat.net/ks/reference/kde.html).
 
 - ...:
 
@@ -47,7 +47,7 @@ the output to return to a wide format.
 ## See also
 
 [`tidy()`](https://generics.r-lib.org/reference/tidy.html),
-[`ks::kde()`](https://rdrr.io/pkg/ks/man/kde.html)
+[`ks::kde()`](https://mvstat.net/ks/reference/kde.html)
 
 ## Value
 
@@ -74,6 +74,7 @@ with columns:
 ## Examples
 
 ``` r
+
 # load libraries for models and data
 library(ks)
 
@@ -125,15 +126,15 @@ td3
 #> # A tibble: 397,953 × 4
 #>      obs variable value estimate
 #>    <int> <chr>    <dbl>    <dbl>
-#>  1     1 x1       -3.92        0
-#>  2     2 x1       -3.76        0
-#>  3     3 x1       -3.60        0
-#>  4     4 x1       -3.45        0
-#>  5     5 x1       -3.29        0
-#>  6     6 x1       -3.13        0
-#>  7     7 x1       -2.98        0
-#>  8     8 x1       -2.82        0
-#>  9     9 x1       -2.66        0
-#> 10    10 x1       -2.51        0
+#>  1     1 x1       -3.94        0
+#>  2     2 x1       -3.78        0
+#>  3     3 x1       -3.62        0
+#>  4     4 x1       -3.46        0
+#>  5     5 x1       -3.31        0
+#>  6     6 x1       -3.15        0
+#>  7     7 x1       -2.99        0
+#>  8     8 x1       -2.83        0
+#>  9     9 x1       -2.67        0
+#> 10    10 x1       -2.52        0
 #> # ℹ 397,943 more rows
 ```

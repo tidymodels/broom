@@ -117,6 +117,7 @@ with columns:
 ## Examples
 
 ``` r
+
 library(ggplot2)
 library(dplyr)
 
@@ -275,10 +276,10 @@ tidy(result)
 #> # A tibble: 6 × 6
 #>   response term        estimate std.error statistic p.value
 #>   <chr>    <chr>          <dbl>     <dbl>     <dbl>   <dbl>
-#> 1 Y1       (Intercept)  -0.0554     0.340    -0.163 0.875  
-#> 2 Y1       a1            0.884      0.256     3.45  0.0106 
-#> 3 Y1       a2           -0.327      0.274    -1.19  0.271  
-#> 4 Y2       (Intercept)   0.545      0.354     1.54  0.167  
-#> 5 Y2       a1            0.0408     0.266     0.153 0.882  
-#> 6 Y2       a2            1.11       0.285     3.89  0.00598
+#> 1 Y1       (Intercept)   -0.719     0.599    -1.20  0.269  
+#> 2 Y1       a1             0.859     0.886     0.970 0.364  
+#> 3 Y1       a2            -0.156     0.379    -0.412 0.692  
+#> 4 Y2       (Intercept)    0.137     0.400     0.342 0.742  
+#> 5 Y2       a1            -0.459     0.592    -0.776 0.463  
+#> 6 Y2       a2             0.967     0.253     3.82  0.00657
 ```

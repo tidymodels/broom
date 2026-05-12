@@ -106,6 +106,7 @@ with exactly one row and columns:
 ## Examples
 
 ``` r
+
 set.seed(123)
 
 # generate data

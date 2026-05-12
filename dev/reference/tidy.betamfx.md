@@ -121,6 +121,7 @@ with columns:
 ## Examples
 
 ``` r
+
 library(mfx)
 
 # Simulate some data

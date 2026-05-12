@@ -93,6 +93,7 @@ with columns:
 ## Examples
 
 ``` r
+
 set.seed(27)
 
 # load libraries for models and data

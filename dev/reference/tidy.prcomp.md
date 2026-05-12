@@ -132,6 +132,7 @@ Other svd tidiers:
 ## Examples
 
 ``` r
+
 pc <- prcomp(USArrests, scale = TRUE)
 
 # information about rotation

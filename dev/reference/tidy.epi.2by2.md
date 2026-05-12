@@ -93,9 +93,10 @@ with columns:
 ## Examples
 
 ``` r
+
 # load libraries for models and data
 library(epiR)
-#> Package epiR 2.0.89 is loaded
+#> Package epiR 2.0.92 is loaded
 #> Type help(epi.about) for summary information
 #> Type browseVignettes(package = 'epiR') to learn how to use epiR for applied epidemiological analyses
 #> 
@@ -114,7 +115,7 @@ fit <- epi.2by2(
 
 # summarize model fit with tidiers
 tidy(fit, parameters = "moa")
-#> # A tibble: 16 × 4
+#> # A tibble: 17 × 4
 #>    term                estimate conf.low conf.high
 #>    <chr>                  <dbl>    <dbl>     <dbl>
 #>  1 PR.strata.wald         4.01    1.43      11.2  
@@ -133,6 +134,7 @@ tidy(fit, parameters = "moa")
 #> 14 PARisk.strata.wald     0.176  -0.0225     0.375
 #> 15 PARisk.strata.piri     0.176   0.0389     0.314
 #> 16 PAFRisk.strata.wald    0.542   0.324      0.749
+#> 17 E.strata.wald          7.48    2.22      NA    
 tidy(fit, parameters = "stat")
 #> # A tibble: 5 × 4
 #>   term               statistic    df p.value

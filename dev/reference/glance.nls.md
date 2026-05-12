@@ -106,6 +106,7 @@ with exactly one row and columns:
 ## Examples
 
 ``` r
+
 # fit model
 n <- nls(mpg ~ k * e^wt, data = mtcars, start = list(k = 1, e = 2))
 

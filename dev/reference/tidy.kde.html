@@ -9,7 +9,10 @@ A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
 model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
-specify which components to return."><meta property="og:image" content="https://broom.tidymodels.org/logo.png"><meta name="robots" content="noindex"><script src="https://cdn.jsdelivr.net/gh/posit-dev/supported-by-posit/js/badge.min.js" data-max-height="43" data-light-bg="#666f76" data-light-fg="#f9f9f9"></script><script defer data-domain="broom.tidymodels.org,all.tidymodels.org" src="https://plausible.io/js/plausible.js"></script></head><body>
+specify which components to return."><meta property="og:image" content="https://broom.tidymodels.org/logo.png"><meta name="robots" content="noindex"><script src="https://cdn.jsdelivr.net/gh/posit-dev/supported-by-posit/js/badge.min.js" data-max-height="43" data-light-bg="#666f76" data-light-fg="#f9f9f9"></script><!-- Privacy-friendly analytics by Plausible --><script async src="https://plausible.io/js/pa-9lH7s8RUnCrG8Rx5Mi_8F.js"></script><script>
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  plausible.init()
+</script></head><body>
     <a href="#container" class="visually-hidden-focusable">Skip to content</a>
 
 
@@ -17,7 +20,7 @@ specify which components to return."><meta property="og:image" content="https://
 
     <a class="navbar-brand me-2" href="../index.html">broom</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.11.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.12.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,7 +75,7 @@ specify which components to return.</p>
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>A <code>kde</code> object returned from <code><a href="https://rdrr.io/pkg/ks/man/kde.html" class="external-link">ks::kde()</a></code>.</p></dd>
+<dd><p>A <code>kde</code> object returned from <code><a href="https://mvstat.net/ks/reference/kde.html" class="external-link">ks::kde()</a></code>.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -96,7 +99,7 @@ on the output to return to a wide format.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy()</a></code>, <code><a href="https://rdrr.io/pkg/ks/man/kde.html" class="external-link">ks::kde()</a></code></p></div>
+    <div class="dont-index"><p><code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy()</a></code>, <code><a href="https://mvstat.net/ks/reference/kde.html" class="external-link">ks::kde()</a></code></p></div>
     </div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -120,11 +123,11 @@ on the output to return to a wide format.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># load libraries for models and data</span></span></span>
-<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.mvstat.net/mvksa/" class="external-link">ks</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://mvstat.net/ks/" class="external-link">ks</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># generate data</span></span></span>
 <span class="r-in"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">replicate</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">k</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ks/man/kde.html" class="external-link">kde</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">k</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mvstat.net/ks/reference/kde.html" class="external-link">kde</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># summarize model fit with tidiers + visualization</span></span></span>
 <span class="r-in"><span><span class="va">td</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">k</span><span class="op">)</span></span></span>
@@ -163,23 +166,23 @@ on the output to return to a wide format.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># also works with 3 dimensions</span></span></span>
 <span class="r-in"><span><span class="va">dat3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">replicate</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">k3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ks/man/kde.html" class="external-link">kde</a></span><span class="op">(</span><span class="va">dat3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">k3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mvstat.net/ks/reference/kde.html" class="external-link">kde</a></span><span class="op">(</span><span class="va">dat3</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">td3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">k3</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">td3</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 397,953 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      obs variable value estimate</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>     1 x1       -<span style="color: #BB0000;">3.92</span>        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>     2 x1       -<span style="color: #BB0000;">3.76</span>        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>     3 x1       -<span style="color: #BB0000;">3.60</span>        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>     4 x1       -<span style="color: #BB0000;">3.45</span>        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>     5 x1       -<span style="color: #BB0000;">3.29</span>        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>     6 x1       -<span style="color: #BB0000;">3.13</span>        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>     7 x1       -<span style="color: #BB0000;">2.98</span>        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>     8 x1       -<span style="color: #BB0000;">2.82</span>        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>     9 x1       -<span style="color: #BB0000;">2.66</span>        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>    10 x1       -<span style="color: #BB0000;">2.51</span>        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>     1 x1       -<span style="color: #BB0000;">3.94</span>        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>     2 x1       -<span style="color: #BB0000;">3.78</span>        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>     3 x1       -<span style="color: #BB0000;">3.62</span>        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>     4 x1       -<span style="color: #BB0000;">3.46</span>        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>     5 x1       -<span style="color: #BB0000;">3.31</span>        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>     6 x1       -<span style="color: #BB0000;">3.15</span>        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>     7 x1       -<span style="color: #BB0000;">2.99</span>        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>     8 x1       -<span style="color: #BB0000;">2.83</span>        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>     9 x1       -<span style="color: #BB0000;">2.67</span>        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>    10 x1       -<span style="color: #BB0000;">2.52</span>        0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 397,943 more rows</span></span>
 </code></pre></div>
     </div>

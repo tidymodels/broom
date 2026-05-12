@@ -86,6 +86,7 @@ with columns:
 ## Examples
 
 ``` r
+
 # fit model
 fit <- arima(lh, order = c(1, 0, 0))
 

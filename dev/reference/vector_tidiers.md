@@ -70,6 +70,7 @@ Other deprecated:
 ## Examples
 
 ``` r
+
 if (FALSE) { # \dontrun{
 x <- 1:5
 names(x) <- letters[1:5]

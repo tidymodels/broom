@@ -82,6 +82,7 @@ with columns:
 ## Examples
 
 ``` r
+
 library(btergm)
 #> Package:  btergm
 #> Version:  1.11.1
@@ -91,7 +92,7 @@ library(btergm)
 #>           Bruce A. Desmarais (Pennsylvania State University)
 library(network)
 #> 
-#> ‘network’ 1.19.0 (2024-12-08), part of the Statnet Project
+#> ‘network’ 1.20.0 (2026-02-06), part of the Statnet Project
 #> * ‘news(package="network")’ for changes since last version
 #> * ‘citation("network")’ for citation information
 #> * ‘https://statnet.org’ for help, support, and other information

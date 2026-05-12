@@ -110,6 +110,7 @@ with columns:
 ## Examples
 
 ``` r
+
 # load libraries for models and data
 library(fixest)
 
@@ -117,18 +118,27 @@ gravity <-
   feols(
     log(Euros) ~ log(dist_km) | Origin + Destination + Product + Year, trade
   )
+#> Warning: In fixest_env(fml = fml, data = data, weights = weig...:
+#>  Asked for 2 threads while the maximum is 1. Set to 1 threads
+#> instead.
 
 tidy(gravity)
+#> Warning: In vcov.fixest(object, vcov = vcov, ssc = ssc, force...:
+#>  Asked for 2 threads while the maximum is 1. Set to 1 threads
+#> instead.
 #> # A tibble: 1 × 5
 #>   term         estimate std.error statistic p.value
 #>   <chr>           <dbl>     <dbl>     <dbl>   <dbl>
 #> 1 log(dist_km)    -2.17    0.0209     -104.       0
 glance(gravity)
+#> Warning: In vcov.fixest(object, vcov = vcov, ssc = ssc, force...:
+#>  Asked for 2 threads while the maximum is 1. Set to 1 threads
+#> instead.
 #> # A tibble: 1 × 9
 #>   r.squared adj.r.squared within.r.squared pseudo.r.squared sigma  nobs
 #>       <dbl>         <dbl>            <dbl>            <dbl> <dbl> <int>
 #> 1     0.706         0.705            0.219               NA  1.74 38325
-#> # ℹ 3 more variables: AIC <dbl>, BIC <dbl>, logLik <dbl>
+#> # ℹ 3 more variables: AIC <dbl>, BIC <dbl>, logLik <logLik>
 augment(gravity, trade)
 #> # A tibble: 38,325 × 9
 #>    .rownames Destination Origin Product  Year dist_km    Euros .fitted
@@ -151,12 +161,24 @@ augment(gravity, trade)
 # 1) specify the arguments directly in the `tidy()` call
 
 tidy(gravity, conf.int = TRUE, cluster = c("Product", "Year"))
+#> Warning: In vcov.fixest(object, vcov = vcov, ssc = ssc, force...:
+#>  Asked for 2 threads while the maximum is 1. Set to 1 threads
+#> instead.
+#> Warning: In vcov.fixest(object, vcov = vcov, ssc = ssc, force...:
+#>  Asked for 2 threads while the maximum is 1. Set to 1 threads
+#> instead.
 #> # A tibble: 1 × 7
 #>   term         estimate std.error statistic  p.value conf.low conf.high
 #>   <chr>           <dbl>     <dbl>     <dbl>    <dbl>    <dbl>     <dbl>
 #> 1 log(dist_km)    -2.17    0.0760     -28.5 3.88e-10    -2.34     -2.00
 
 tidy(gravity, conf.int = TRUE, se = "threeway")
+#> Warning: In vcov.fixest(object, vcov = vcov, ssc = ssc, force...:
+#>  Asked for 2 threads while the maximum is 1. Set to 1 threads
+#> instead.
+#> Warning: In vcov.fixest(object, vcov = vcov, ssc = ssc, force...:
+#>  Asked for 2 threads while the maximum is 1. Set to 1 threads
+#> instead.
 #> # A tibble: 1 × 7
 #>   term         estimate std.error statistic  p.value conf.low conf.high
 #>   <chr>           <dbl>     <dbl>     <dbl>    <dbl>    <dbl>     <dbl>
@@ -166,6 +188,9 @@ tidy(gravity, conf.int = TRUE, se = "threeway")
 # these arguments
 
 gravity_summ <- summary(gravity, cluster = c("Product", "Year"))
+#> Warning: In vcov.fixest(object, vcov = vcov, ssc = ssc, force...:
+#>  Asked for 2 threads while the maximum is 1. Set to 1 threads
+#> instead.
 
 tidy(gravity_summ, conf.int = TRUE)
 #> # A tibble: 1 × 7

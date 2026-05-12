@@ -27,7 +27,10 @@ the measure will be reported as NA.
 Glance returns the same number of columns regardless of whether the
 model matrix is rank-deficient or not. If so, entries in columns
 that no longer have a well-defined value are filled in with an NA
-of the appropriate type."><meta property="og:image" content="https://broom.tidymodels.org/logo.png"><meta name="robots" content="noindex"><script src="https://cdn.jsdelivr.net/gh/posit-dev/supported-by-posit/js/badge.min.js" data-max-height="43" data-light-bg="#666f76" data-light-fg="#f9f9f9"></script><script defer data-domain="broom.tidymodels.org,all.tidymodels.org" src="https://plausible.io/js/plausible.js"></script></head><body>
+of the appropriate type."><meta property="og:image" content="https://broom.tidymodels.org/logo.png"><meta name="robots" content="noindex"><script src="https://cdn.jsdelivr.net/gh/posit-dev/supported-by-posit/js/badge.min.js" data-max-height="43" data-light-bg="#666f76" data-light-fg="#f9f9f9"></script><!-- Privacy-friendly analytics by Plausible --><script async src="https://plausible.io/js/pa-9lH7s8RUnCrG8Rx5Mi_8F.js"></script><script>
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  plausible.init()
+</script></head><body>
     <a href="#container" class="visually-hidden-focusable">Skip to content</a>
 
 
@@ -35,7 +38,7 @@ of the appropriate type."><meta property="og:image" content="https://broom.tidym
 
     <a class="navbar-brand me-2" href="../index.html">broom</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.11.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.12.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -164,7 +167,7 @@ too.</p>
 <span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># car::linearHypothesis() example</span></span></span>
-<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-forge.r-project.org/projects/car/" class="external-link">car</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bprice2652/car_repo" class="external-link">car</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">mod_lht</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/car/man/linearHypothesis.html" class="external-link">linearHypothesis</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">"wt - disp"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">mod_lht</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">mod_lht</span><span class="op">)</span></span></span>

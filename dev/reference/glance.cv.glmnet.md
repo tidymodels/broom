@@ -32,7 +32,7 @@ glance(x, ...)
 - x:
 
   A `cv.glmnet` object returned from
-  [`glmnet::cv.glmnet()`](https://glmnet.stanford.edu/reference/cv.glmnet.html).
+  [`glmnet::cv.glmnet()`](https://rdrr.io/pkg/glmnet/man/cv.glmnet.html).
 
 - ...:
 
@@ -54,7 +54,7 @@ glance(x, ...)
 ## See also
 
 [`glance()`](https://generics.r-lib.org/reference/glance.html),
-[`glmnet::cv.glmnet()`](https://glmnet.stanford.edu/reference/cv.glmnet.html)
+[`glmnet::cv.glmnet()`](https://rdrr.io/pkg/glmnet/man/cv.glmnet.html)
 
 Other glmnet tidiers:
 [`glance.glmnet()`](https://broom.tidymodels.org/dev/reference/glance.glmnet.md),
@@ -85,9 +85,10 @@ with exactly one row and columns:
 ## Examples
 
 ``` r
+
 # load libraries for models and data
 library(glmnet)
-#> Loaded glmnet 4.1-10
+#> Loaded glmnet 5.0
 
 set.seed(27)
 

@@ -120,6 +120,7 @@ with columns:
 ## Examples
 
 ``` r
+
 # load libraries for models and data
 library(poLCA)
 #> Loading required package: scatterplot3d
@@ -139,29 +140,29 @@ M1
 #>  
 #> $A
 #>            Pr(1)  Pr(2)
-#> class 1:  0.0068 0.9932
-#> class 2:  0.2864 0.7136
+#> class 1:  0.2864 0.7136
+#> class 2:  0.0068 0.9932
 #> 
 #> $B
 #>            Pr(1)  Pr(2)
-#> class 1:  0.0602 0.9398
-#> class 2:  0.6704 0.3296
+#> class 1:  0.6704 0.3296
+#> class 2:  0.0602 0.9398
 #> 
 #> $C
 #>            Pr(1)  Pr(2)
-#> class 1:  0.0735 0.9265
-#> class 2:  0.6460 0.3540
+#> class 1:  0.6460 0.3540
+#> class 2:  0.0735 0.9265
 #> 
 #> $D
 #>            Pr(1)  Pr(2)
-#> class 1:  0.2309 0.7691
-#> class 2:  0.8676 0.1324
+#> class 1:  0.8676 0.1324
+#> class 2:  0.2309 0.7691
 #> 
 #> Estimated class population shares 
-#>  0.2792 0.7208 
+#>  0.7208 0.2792 
 #>  
 #> Predicted class memberships (by modal posterior prob.) 
-#>  0.3287 0.6713 
+#>  0.6713 0.3287 
 #>  
 #> ========================================================= 
 #> Fit for 2 latent classes: 
@@ -182,36 +183,36 @@ tidy(M1)
 #> # A tibble: 16 × 5
 #>    variable class outcome estimate std.error
 #>    <chr>    <int>   <dbl>    <dbl>     <dbl>
-#>  1 A            1       1  0.00681    0.0254
-#>  2 A            2       1  0.286      0.0393
-#>  3 A            1       2  0.993      0.0254
-#>  4 A            2       2  0.714      0.0393
-#>  5 B            1       1  0.0602     0.0649
-#>  6 B            2       1  0.670      0.0489
-#>  7 B            1       2  0.940      0.0649
-#>  8 B            2       2  0.330      0.0489
-#>  9 C            1       1  0.0735     0.0642
-#> 10 C            2       1  0.646      0.0482
-#> 11 C            1       2  0.927      0.0642
-#> 12 C            2       2  0.354      0.0482
-#> 13 D            1       1  0.231      0.0929
-#> 14 D            2       1  0.868      0.0379
-#> 15 D            1       2  0.769      0.0929
-#> 16 D            2       2  0.132      0.0379
+#>  1 A            1       1  0.286      0.0393
+#>  2 A            2       1  0.00681    0.0254
+#>  3 A            1       2  0.714      0.0393
+#>  4 A            2       2  0.993      0.0254
+#>  5 B            1       1  0.670      0.0489
+#>  6 B            2       1  0.0602     0.0649
+#>  7 B            1       2  0.330      0.0489
+#>  8 B            2       2  0.940      0.0649
+#>  9 C            1       1  0.646      0.0482
+#> 10 C            2       1  0.0735     0.0642
+#> 11 C            1       2  0.354      0.0482
+#> 12 C            2       2  0.927      0.0642
+#> 13 D            1       1  0.868      0.0379
+#> 14 D            2       1  0.231      0.0929
+#> 15 D            1       2  0.132      0.0379
+#> 16 D            2       2  0.769      0.0929
 augment(M1)
 #> # A tibble: 216 × 7
 #>        A     B     C     D X.Intercept. .class .probability
 #>    <dbl> <dbl> <dbl> <dbl>        <dbl>  <int>        <dbl>
-#>  1     2     2     2     2            1      1        0.959
-#>  2     2     2     2     2            1      1        0.959
-#>  3     2     2     2     2            1      1        0.959
-#>  4     2     2     2     2            1      1        0.959
-#>  5     2     2     2     2            1      1        0.959
-#>  6     2     2     2     2            1      1        0.959
-#>  7     2     2     2     2            1      1        0.959
-#>  8     2     2     2     2            1      1        0.959
-#>  9     2     2     2     2            1      1        0.959
-#> 10     2     2     2     2            1      1        0.959
+#>  1     2     2     2     2            1      2        0.959
+#>  2     2     2     2     2            1      2        0.959
+#>  3     2     2     2     2            1      2        0.959
+#>  4     2     2     2     2            1      2        0.959
+#>  5     2     2     2     2            1      2        0.959
+#>  6     2     2     2     2            1      2        0.959
+#>  7     2     2     2     2            1      2        0.959
+#>  8     2     2     2     2            1      2        0.959
+#>  9     2     2     2     2            1      2        0.959
+#> 10     2     2     2     2            1      2        0.959
 #> # ℹ 206 more rows
 glance(M1)
 #> # A tibble: 1 × 8
@@ -241,16 +242,16 @@ td
 #> # A tibble: 144 × 5
 #>    variable class outcome           estimate std.error
 #>    <chr>    <int> <fct>                <dbl>     <dbl>
-#>  1 MORALG       1 1 Extremely well    0.622    0.0309 
-#>  2 MORALG       2 1 Extremely well    0.108    0.0175 
-#>  3 MORALG       3 1 Extremely well    0.137    0.0182 
-#>  4 MORALG       1 2 Quite well        0.335    0.0293 
-#>  5 MORALG       2 2 Quite well        0.383    0.0274 
-#>  6 MORALG       3 2 Quite well        0.668    0.0247 
-#>  7 MORALG       1 3 Not too well      0.0172   0.00841
-#>  8 MORALG       2 3 Not too well      0.304    0.0253 
-#>  9 MORALG       3 3 Not too well      0.180    0.0208 
-#> 10 MORALG       1 4 Not well at all   0.0258   0.0124 
+#>  1 MORALG       1 1 Extremely well    0.108    0.0175 
+#>  2 MORALG       2 1 Extremely well    0.137    0.0182 
+#>  3 MORALG       3 1 Extremely well    0.622    0.0309 
+#>  4 MORALG       1 2 Quite well        0.383    0.0274 
+#>  5 MORALG       2 2 Quite well        0.668    0.0247 
+#>  6 MORALG       3 2 Quite well        0.335    0.0293 
+#>  7 MORALG       1 3 Not too well      0.304    0.0253 
+#>  8 MORALG       2 3 Not too well      0.180    0.0208 
+#>  9 MORALG       3 3 Not too well      0.0172   0.00841
+#> 10 MORALG       1 4 Not well at all   0.205    0.0243 
 #> # ℹ 134 more rows
 
 ggplot(td, aes(outcome, estimate, color = factor(class), group = class)) +
@@ -283,9 +284,9 @@ count(au, .class)
 #> # A tibble: 3 × 2
 #>   .class     n
 #>    <int> <int>
-#> 1      1   360
-#> 2      2   444
-#> 3      3   496
+#> 1      1   444
+#> 2      2   496
+#> 3      3   360
 
 # if the original data is provided, it leads to NAs in new columns
 # for rows that weren't predicted

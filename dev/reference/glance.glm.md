@@ -109,6 +109,7 @@ with exactly one row and columns:
 ## Examples
 
 ``` r
+
 g <- glm(am ~ mpg, mtcars, family = "binomial")
 glance(g)
 #> # A tibble: 1 × 8

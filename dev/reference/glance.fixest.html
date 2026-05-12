@@ -27,7 +27,10 @@ the measure will be reported as NA.
 Glance returns the same number of columns regardless of whether the
 model matrix is rank-deficient or not. If so, entries in columns
 that no longer have a well-defined value are filled in with an NA
-of the appropriate type."><meta property="og:image" content="https://broom.tidymodels.org/logo.png"><meta name="robots" content="noindex"><script src="https://cdn.jsdelivr.net/gh/posit-dev/supported-by-posit/js/badge.min.js" data-max-height="43" data-light-bg="#666f76" data-light-fg="#f9f9f9"></script><script defer data-domain="broom.tidymodels.org,all.tidymodels.org" src="https://plausible.io/js/plausible.js"></script></head><body>
+of the appropriate type."><meta property="og:image" content="https://broom.tidymodels.org/logo.png"><meta name="robots" content="noindex"><script src="https://cdn.jsdelivr.net/gh/posit-dev/supported-by-posit/js/badge.min.js" data-max-height="43" data-light-bg="#666f76" data-light-fg="#f9f9f9"></script><!-- Privacy-friendly analytics by Plausible --><script async src="https://plausible.io/js/pa-9lH7s8RUnCrG8Rx5Mi_8F.js"></script><script>
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  plausible.init()
+</script></head><body>
     <a href="#container" class="visually-hidden-focusable">Skip to content</a>
 
 
@@ -35,7 +38,7 @@ of the appropriate type."><meta property="og:image" content="https://broom.tidym
 
     <a class="navbar-brand me-2" href="../index.html">broom</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.11.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.12.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -159,18 +162,27 @@ depending on the type of model estimated. <code>sigma</code>, <code>r.squared</c
 <span class="r-in"><span>  <span class="fu"><a href="https://lrberge.github.io/fixest/reference/feols.html" class="external-link">feols</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">Euros</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">dist_km</span><span class="op">)</span> <span class="op">|</span> <span class="va">Origin</span> <span class="op">+</span> <span class="va">Destination</span> <span class="op">+</span> <span class="va">Product</span> <span class="op">+</span> <span class="va">Year</span>, <span class="va">trade</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>In fixest_env(fml = fml, data = data, weights = weig...:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>  Asked for 2 threads while the maximum is 1. Set to 1 threads</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> instead.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">gravity</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>In vcov.fixest(object, vcov = vcov, ssc = ssc, force...:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>  Asked for 2 threads while the maximum is 1. Set to 1 threads</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> instead.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   term         estimate std.error statistic p.value</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> log(dist_km)    -<span style="color: #BB0000;">2.17</span>    0.020<span style="text-decoration: underline;">9</span>     -<span style="color: #BB0000;">104.</span>       0</span>
 <span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">gravity</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>In vcov.fixest(object, vcov = vcov, ssc = ssc, force...:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>  Asked for 2 threads while the maximum is 1. Set to 1 threads</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> instead.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 9</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   r.squared adj.r.squared within.r.squared pseudo.r.squared sigma  nobs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>     0.706         0.705            0.219               <span style="color: #BB0000;">NA</span>  1.74 <span style="text-decoration: underline;">38</span>325</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 3 more variables: AIC &lt;dbl&gt;, BIC &lt;dbl&gt;, logLik &lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 3 more variables: AIC &lt;dbl&gt;, BIC &lt;dbl&gt;, logLik &lt;logLik&gt;</span></span>
 <span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment</a></span><span class="op">(</span><span class="va">gravity</span>, <span class="va">trade</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 38,325 × 9</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    .rownames Destination Origin Product  Year dist_km    Euros .fitted</span>
@@ -193,12 +205,24 @@ depending on the type of model estimated. <code>sigma</code>, <code>r.squared</c
 <span class="r-in"><span><span class="co"># 1) specify the arguments directly in the `tidy()` call</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">gravity</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span>, cluster <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Product"</span>, <span class="st">"Year"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>In vcov.fixest(object, vcov = vcov, ssc = ssc, force...:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>  Asked for 2 threads while the maximum is 1. Set to 1 threads</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> instead.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>In vcov.fixest(object, vcov = vcov, ssc = ssc, force...:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>  Asked for 2 threads while the maximum is 1. Set to 1 threads</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> instead.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 7</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   term         estimate std.error statistic  p.value conf.low conf.high</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> log(dist_km)    -<span style="color: #BB0000;">2.17</span>    0.076<span style="text-decoration: underline;">0</span>     -<span style="color: #BB0000;">28.5</span> 3.88<span style="color: #949494;">e</span><span style="color: #BB0000;">-10</span>    -<span style="color: #BB0000;">2.34</span>     -<span style="color: #BB0000;">2.00</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">gravity</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span>, se <span class="op">=</span> <span class="st">"threeway"</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>In vcov.fixest(object, vcov = vcov, ssc = ssc, force...:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>  Asked for 2 threads while the maximum is 1. Set to 1 threads</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> instead.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>In vcov.fixest(object, vcov = vcov, ssc = ssc, force...:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>  Asked for 2 threads while the maximum is 1. Set to 1 threads</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> instead.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 7</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   term         estimate std.error statistic  p.value conf.low conf.high</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
@@ -208,6 +232,9 @@ depending on the type of model estimated. <code>sigma</code>, <code>r.squared</c
 <span class="r-in"><span><span class="co"># these arguments</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">gravity_summ</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">gravity</span>, cluster <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Product"</span>, <span class="st">"Year"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>In vcov.fixest(object, vcov = vcov, ssc = ssc, force...:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>  Asked for 2 threads while the maximum is 1. Set to 1 threads</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> instead.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">gravity_summ</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 7</span></span>

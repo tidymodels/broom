@@ -112,6 +112,7 @@ with columns:
 ## Examples
 
 ``` r
+
 # fit model
 mod <- lm(mpg ~ wt + qsec, data = mtcars)
 modsumm <- summary(mod)

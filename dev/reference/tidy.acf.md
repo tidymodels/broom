@@ -69,6 +69,7 @@ with columns:
 ## Examples
 
 ``` r
+
 tidy(acf(lh, plot = FALSE))
 #> # A tibble: 17 × 2
 #>      lag      acf

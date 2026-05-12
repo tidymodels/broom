@@ -88,6 +88,7 @@ with columns:
 ## Examples
 
 ``` r
+
 fm1 <- aov(breaks ~ wool + tension, data = warpbreaks)
 thsd <- TukeyHSD(fm1, "tension", ordered = TRUE)
 tidy(thsd)

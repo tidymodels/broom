@@ -157,6 +157,7 @@ with columns:
 ## Examples
 
 ``` r
+
 # load libraries for models and data
 library(mgcv)
 #> Loading required package: nlme
@@ -165,7 +166,7 @@ library(mgcv)
 #> The following object is masked from ‘package:dplyr’:
 #> 
 #>     collapse
-#> This is mgcv 1.9-3. For overview type 'help("mgcv-package")'.
+#> This is mgcv 1.9-4. For overview type '?mgcv'.
 #> 
 #> Attaching package: ‘mgcv’
 #> The following object is masked from ‘package:mclust’:

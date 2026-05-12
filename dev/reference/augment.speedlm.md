@@ -117,6 +117,7 @@ with columns:
 ## Examples
 
 ``` r
+
 # load modeling library
 library(speedglm)
 #> Loading required package: biglm

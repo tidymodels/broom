@@ -202,6 +202,7 @@ with columns:
 ## Examples
 
 ``` r
+
 library(ggplot2)
 library(dplyr)
 
@@ -362,12 +363,12 @@ result <- lm(b ~ a)
 
 tidy(result)
 #> # A tibble: 6 × 6
-#>   response term        estimate std.error statistic p.value
-#>   <chr>    <chr>          <dbl>     <dbl>     <dbl>   <dbl>
-#> 1 Y1       (Intercept)   0.133      0.241    0.551  0.599  
-#> 2 Y1       a1            0.867      0.244    3.55   0.00936
-#> 3 Y1       a2            0.0174     0.345    0.0506 0.961  
-#> 4 Y2       (Intercept)  -0.137      0.371   -0.370  0.723  
-#> 5 Y2       a1            0.133      0.376    0.353  0.735  
-#> 6 Y2       a2            0.921      0.531    1.74   0.126  
+#>   response term        estimate std.error statistic  p.value
+#>   <chr>    <chr>          <dbl>     <dbl>     <dbl>    <dbl>
+#> 1 Y1       (Intercept)  -0.292      0.280    -1.04  0.332   
+#> 2 Y1       a1            1.28       0.232     5.50  0.000903
+#> 3 Y1       a2           -0.519      0.187    -2.78  0.0274  
+#> 4 Y2       (Intercept)  -0.0923     0.259    -0.357 0.732   
+#> 5 Y2       a1           -0.231      0.214    -1.08  0.317   
+#> 6 Y2       a2            0.768      0.172     4.45  0.00296 
 ```

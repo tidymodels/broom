@@ -19,7 +19,7 @@ tidy(x, return_zeros = FALSE, ...)
 - x:
 
   A `glmnet` object returned from
-  [`glmnet::glmnet()`](https://glmnet.stanford.edu/reference/glmnet.html).
+  [`glmnet::glmnet()`](https://rdrr.io/pkg/glmnet/man/glmnet.html).
 
 - return_zeros:
 
@@ -58,7 +58,7 @@ of lambda.
 ## See also
 
 [`tidy()`](https://generics.r-lib.org/reference/tidy.html),
-[`glmnet::glmnet()`](https://glmnet.stanford.edu/reference/glmnet.html)
+[`glmnet::glmnet()`](https://rdrr.io/pkg/glmnet/man/glmnet.html)
 
 Other glmnet tidiers:
 [`glance.cv.glmnet()`](https://broom.tidymodels.org/dev/reference/glance.cv.glmnet.md),

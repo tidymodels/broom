@@ -105,6 +105,7 @@ Other lavaan tidiers:
 ## Examples
 
 ``` r
+
 # load libraries for models and data
 library(lavaan)
 

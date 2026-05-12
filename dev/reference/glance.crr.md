@@ -90,6 +90,7 @@ with exactly one row and columns:
 ## Examples
 
 ``` r
+
 library(cmprsk)
 
 # time to loco-regional failure (lrf)
@@ -106,11 +107,11 @@ tidy(x, conf.int = TRUE)
 #> # A tibble: 2 × 7
 #>   term  estimate std.error statistic p.value conf.low conf.high
 #>   <chr>    <dbl>     <dbl>     <dbl>   <dbl>    <dbl>     <dbl>
-#> 1 trt     -0.540     0.342    -1.58     0.11   -1.21      0.131
-#> 2 strt     0.125     0.326     0.382    0.7    -0.514     0.763
+#> 1 trt     -0.338     0.344    -0.983    0.33   -1.01      0.336
+#> 2 strt     0.374     0.354     1.06     0.29   -0.320     1.07 
 glance(x)
 #> # A tibble: 1 × 5
 #>   converged logLik  nobs    df statistic
 #>   <lgl>      <dbl> <int> <dbl>     <dbl>
-#> 1 TRUE       -144.   100     2      2.77
+#> 1 TRUE       -132.   100     2      2.12
 ```

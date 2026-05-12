@@ -95,6 +95,7 @@ with exactly one row and columns:
 ## Examples
 
 ``` r
+
 # load modeling library
 library(quantreg)
 

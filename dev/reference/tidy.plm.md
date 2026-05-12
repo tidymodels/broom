@@ -98,6 +98,7 @@ with columns:
 ## Examples
 
 ``` r
+
 # load libraries for models and data
 library(plm)
 
@@ -120,8 +121,8 @@ summary(zz)
 #> Balanced Panel: n = 48, T = 17, N = 816
 #> 
 #> Residuals:
-#>      Min.   1st Qu.    Median   3rd Qu.      Max. 
-#> -0.120456 -0.023741 -0.002041  0.018144  0.174718 
+#>     Min.  1st Qu.   Median  3rd Qu.     Max. 
+#> -0.12046 -0.02374 -0.00204  0.01814  0.17472 
 #> 
 #> Coefficients:
 #>              Estimate  Std. Error t-value  Pr(>|t|)    

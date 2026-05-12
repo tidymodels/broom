@@ -113,6 +113,7 @@ with columns:
 ## Examples
 
 ``` r
+
 # fit model
 mod <- lm(cbind(mpg, disp) ~ wt, mtcars)
 

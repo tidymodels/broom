@@ -73,6 +73,7 @@ with columns:
 ## Examples
 
 ``` r
+
 # load libraries
 library(binGroup)
 

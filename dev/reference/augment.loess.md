@@ -112,6 +112,7 @@ with columns:
 ## Examples
 
 ``` r
+
 lo <- loess(
   mpg ~ hp + wt,
   mtcars,

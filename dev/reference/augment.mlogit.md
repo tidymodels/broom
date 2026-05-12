@@ -109,6 +109,7 @@ with columns:
 ## Examples
 
 ``` r
+
 # load libraries for models and data
 library(mlogit)
 #> Loading required package: dfidx

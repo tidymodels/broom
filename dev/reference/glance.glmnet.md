@@ -32,7 +32,7 @@ glance(x, ...)
 - x:
 
   A `glmnet` object returned from
-  [`glmnet::glmnet()`](https://glmnet.stanford.edu/reference/glmnet.html).
+  [`glmnet::glmnet()`](https://rdrr.io/pkg/glmnet/man/glmnet.html).
 
 - ...:
 
@@ -54,7 +54,7 @@ glance(x, ...)
 ## See also
 
 [`glance()`](https://generics.r-lib.org/reference/glance.html),
-[`glmnet::glmnet()`](https://glmnet.stanford.edu/reference/glmnet.html)
+[`glmnet::glmnet()`](https://rdrr.io/pkg/glmnet/man/glmnet.html)
 
 Other glmnet tidiers:
 [`glance.cv.glmnet()`](https://broom.tidymodels.org/dev/reference/glance.cv.glmnet.md),

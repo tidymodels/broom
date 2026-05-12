@@ -82,6 +82,7 @@ with exactly one row and columns:
 ## Examples
 
 ``` r
+
 f <- function(x) (x[1] - 2)^2 + (x[2] - 3)^2 + (x[3] - 8)^2
 o <- optim(c(1, 1, 1), f)
 ```

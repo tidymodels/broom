@@ -89,6 +89,7 @@ with columns:
 ## Examples
 
 ``` r
+
 # load libraries for models and data
 library(gam)
 #> Loading required package: splines

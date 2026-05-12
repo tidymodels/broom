@@ -118,6 +118,7 @@ with exactly one row and columns:
 ## Examples
 
 ``` r
+
 library(metafor)
 
 df <-

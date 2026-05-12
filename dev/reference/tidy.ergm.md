@@ -94,10 +94,11 @@ Other ergm tidiers:
 ## Examples
 
 ``` r
+
 # load libraries for models and data
 library(ergm)
 #> 
-#> ‘ergm’ 4.11.0 (2025-12-22), part of the Statnet Project
+#> ‘ergm’ 4.12.0 (2026-02-17), part of the Statnet Project
 #> * ‘news(package="ergm")’ for changes since last version
 #> * ‘citation("ergm")’ for citation information
 #> * ‘https://statnet.org’ for help, support, and other information

@@ -76,6 +76,7 @@ with columns:
 ## Examples
 
 ``` r
+
 ptt <- power.t.test(n = 2:30, delta = 1)
 tidy(ptt)
 #> # A tibble: 29 × 5

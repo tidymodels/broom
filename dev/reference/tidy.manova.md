@@ -112,18 +112,19 @@ with columns:
 ## Examples
 
 ``` r
+
 npk2 <- within(npk, foo <- rnorm(24))
 m <- manova(cbind(yield, foo) ~ block + N * P * K, npk2)
 tidy(m)
 #> # A tibble: 8 × 7
-#>   term         df  pillai statistic num.df den.df p.value
-#>   <chr>     <dbl>   <dbl>     <dbl>  <dbl>  <dbl>   <dbl>
-#> 1 block         5  0.786      1.56      10     24  0.181 
-#> 2 N             1  0.506      5.64       2     11  0.0206
-#> 3 P             1  0.0623     0.366      2     11  0.702 
-#> 4 K             1  0.341      2.85       2     11  0.101 
-#> 5 N:P           1  0.112      0.694      2     11  0.520 
-#> 6 N:K           1  0.234      1.68       2     11  0.231 
-#> 7 P:K           1  0.0334     0.190      2     11  0.830 
-#> 8 Residuals    12 NA         NA         NA     NA NA     
+#>   term         df  pillai statistic num.df den.df  p.value
+#>   <chr>     <dbl>   <dbl>     <dbl>  <dbl>  <dbl>    <dbl>
+#> 1 block         5  0.909      2.00      10     24  0.0796 
+#> 2 N             1  0.601      8.29       2     11  0.00638
+#> 3 P             1  0.237      1.71       2     11  0.226  
+#> 4 K             1  0.343      2.87       2     11  0.0993 
+#> 5 N:P           1  0.104      0.642      2     11  0.545  
+#> 6 N:K           1  0.214      1.50       2     11  0.266  
+#> 7 P:K           1  0.0705     0.417      2     11  0.669  
+#> 8 Residuals    12 NA         NA         NA     NA NA      
 ```
