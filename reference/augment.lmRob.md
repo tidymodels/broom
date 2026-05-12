@@ -108,6 +108,7 @@ Other robust tidiers:
 ## Examples
 
 ``` r
+
 # load modeling library
 library(robust)
 #> Loading required package: fit.models

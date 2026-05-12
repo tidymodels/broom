@@ -99,6 +99,7 @@ with columns:
 ## Examples
 
 ``` r
+
 # load libraries for models and data
 library(mediation)
 #> mediation: Causal Mediation Analysis
@@ -121,24 +122,24 @@ tidy(mod)
 #> # A tibble: 4 × 4
 #>   term   estimate std.error p.value
 #>   <chr>     <dbl>     <dbl>   <dbl>
-#> 1 acme_0  -0.0152    0.0118    0.24
-#> 2 acme_1  -0.0152    0.0118    0.24
-#> 3 ade_0   -0.0305    0.0374    0.4 
-#> 4 ade_1   -0.0305    0.0374    0.4 
+#> 1 acme_0  -0.0185    0.0118    0.24
+#> 2 acme_1  -0.0185    0.0118    0.24
+#> 3 ade_0   -0.0408    0.0388    0.36
+#> 4 ade_1   -0.0408    0.0388    0.36
 tidy(mod, conf.int = TRUE)
 #> # A tibble: 4 × 6
 #>   term   estimate std.error p.value conf.low conf.high
 #>   <chr>     <dbl>     <dbl>   <dbl>    <dbl>     <dbl>
-#> 1 acme_0  -0.0152    0.0118    0.24  -0.0374   0.00808
-#> 2 acme_1  -0.0152    0.0118    0.24  -0.0374   0.00808
-#> 3 ade_0   -0.0305    0.0374    0.4   -0.104    0.0369 
-#> 4 ade_1   -0.0305    0.0374    0.4   -0.104    0.0369 
+#> 1 acme_0  -0.0185    0.0118    0.24  -0.0409   0.00220
+#> 2 acme_1  -0.0185    0.0118    0.24  -0.0409   0.00220
+#> 3 ade_0   -0.0408    0.0388    0.36  -0.0957   0.0472 
+#> 4 ade_1   -0.0408    0.0388    0.36  -0.0957   0.0472 
 tidy(mod, conf.int = TRUE, conf.level = .99)
 #> # A tibble: 4 × 6
 #>   term   estimate std.error p.value conf.low conf.high
 #>   <chr>     <dbl>     <dbl>   <dbl>    <dbl>     <dbl>
-#> 1 acme_0  -0.0152    0.0118    0.24  -0.0487    0.0103
-#> 2 acme_1  -0.0152    0.0118    0.24  -0.0487    0.0103
-#> 3 ade_0   -0.0305    0.0374    0.4   -0.122     0.0405
-#> 4 ade_1   -0.0305    0.0374    0.4   -0.122     0.0405
+#> 1 acme_0  -0.0185    0.0118    0.24  -0.0419   0.00458
+#> 2 acme_1  -0.0185    0.0118    0.24  -0.0419   0.00458
+#> 3 ade_0   -0.0408    0.0388    0.36  -0.101    0.0679 
+#> 4 ade_1   -0.0408    0.0388    0.36  -0.101    0.0679 
 ```

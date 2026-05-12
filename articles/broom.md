@@ -74,6 +74,7 @@ Consider as an illustrative example a linear fit on the built-in
 `mtcars` dataset.
 
 ``` r
+
 lmfit <- lm(mpg ~ wt, mtcars)
 lmfit
 ```
@@ -87,6 +88,7 @@ lmfit
     ##      37.285       -5.344
 
 ``` r
+
 summary(lmfit)
 ```
 
@@ -121,6 +123,7 @@ Instead, you can use the `tidy` function, from the broom package, on the
 fit:
 
 ``` r
+
 library(broom)
 tidy(lmfit)
 ```
@@ -141,6 +144,7 @@ regression. For this, use `augment`, which augments the original data
 with information from the model:
 
 ``` r
+
 augment(lmfit)
 ```
 
@@ -168,6 +172,7 @@ regression, such as R^2 and the F-statistic. These can be accessed with
 the `glance` function:
 
 ``` r
+
 glance(lmfit)
 ```
 
@@ -189,6 +194,7 @@ vignette](https://www.tidymodels.org/learn/statistics/k-means/).
 These functions apply equally well to the output from `glm`:
 
 ``` r
+
 glmfit <- glm(am ~ wt, mtcars, family = "binomial")
 tidy(glmfit)
 ```
@@ -200,26 +206,28 @@ tidy(glmfit)
     ## 2 wt             -4.02      1.44     -2.80 0.00509
 
 ``` r
+
 augment(glmfit)
 ```
 
     ## # A tibble: 32 × 9
     ##    .rownames            am    wt .fitted .resid   .hat .sigma .cooksd
     ##    <chr>             <dbl> <dbl>   <dbl>  <dbl>  <dbl>  <dbl>   <dbl>
-    ##  1 Mazda RX4             1  2.62   1.50   0.635 0.126   0.803 0.0184 
-    ##  2 Mazda RX4 Wag         1  2.88   0.471  0.985 0.108   0.790 0.0424 
-    ##  3 Datsun 710            1  2.32   2.70   0.360 0.0963  0.810 0.00394
-    ##  4 Hornet 4 Drive        0  3.22  -0.897 -0.827 0.0744  0.797 0.0177 
-    ##  5 Hornet Sportabout     0  3.44  -1.80  -0.553 0.0681  0.806 0.00647
-    ##  6 Valiant               0  3.46  -1.88  -0.532 0.0674  0.807 0.00590
-    ##  7 Duster 360            0  3.57  -2.33  -0.432 0.0625  0.809 0.00348
-    ##  8 Merc 240D             0  3.19  -0.796 -0.863 0.0755  0.796 0.0199 
-    ##  9 Merc 230              0  3.15  -0.635 -0.922 0.0776  0.793 0.0242 
-    ## 10 Merc 280              0  3.44  -1.80  -0.553 0.0681  0.806 0.00647
+    ##  1 Mazda RX4             1  2.62   1.50   0.635 0.126   0.925 0.0184 
+    ##  2 Mazda RX4 Wag         1  2.88   0.471  0.985 0.108   0.917 0.0424 
+    ##  3 Datsun 710            1  2.32   2.70   0.360 0.0963  0.928 0.00394
+    ##  4 Hornet 4 Drive        0  3.22  -0.897 -0.827 0.0744  0.921 0.0177 
+    ##  5 Hornet Sportabout     0  3.44  -1.80  -0.553 0.0681  0.926 0.00647
+    ##  6 Valiant               0  3.46  -1.88  -0.532 0.0674  0.927 0.00590
+    ##  7 Duster 360            0  3.57  -2.33  -0.432 0.0625  0.928 0.00348
+    ##  8 Merc 240D             0  3.19  -0.796 -0.863 0.0755  0.921 0.0199 
+    ##  9 Merc 230              0  3.15  -0.635 -0.922 0.0776  0.919 0.0242 
+    ## 10 Merc 280              0  3.44  -1.80  -0.553 0.0681  0.926 0.00647
     ## # ℹ 22 more rows
     ## # ℹ 1 more variable: .std.resid <dbl>
 
 ``` r
+
 glance(glmfit)
 ```
 
@@ -235,6 +243,7 @@ These functions also work on other fits, such as nonlinear models
 (`nls`):
 
 ``` r
+
 nlsfit <- nls(mpg ~ k / wt + b, mtcars, start = list(k = 1, b = 0))
 tidy(nlsfit)
 ```
@@ -246,6 +255,7 @@ tidy(nlsfit)
     ## 2 b         4.39      1.54      2.85 7.74e- 3
 
 ``` r
+
 augment(nlsfit, mtcars)
 ```
 
@@ -267,6 +277,7 @@ augment(nlsfit, mtcars)
     ## #   .resid <dbl>
 
 ``` r
+
 glance(nlsfit)
 ```
 
@@ -282,6 +293,7 @@ those output by popular built-in functions like `t.test`, `cor.test`,
 and `wilcox.test`.
 
 ``` r
+
 tt <- t.test(wt ~ am, mtcars)
 tidy(tt)
 ```
@@ -296,19 +308,21 @@ Some cases might have fewer columns (for example, no confidence
 interval):
 
 ``` r
+
 wt <- wilcox.test(wt ~ am, mtcars)
 tidy(wt)
 ```
 
     ## # A tibble: 1 × 4
-    ##   statistic   p.value method                                alternative
-    ##       <dbl>     <dbl> <chr>                                 <chr>      
-    ## 1      230. 0.0000435 Wilcoxon rank sum test with continui… two.sided
+    ##   statistic    p.value method                       alternative
+    ##       <dbl>      <dbl> <chr>                        <chr>      
+    ## 1      230. 0.00000522 Wilcoxon rank sum exact test two.sided
 
 Since the `tidy` output is already only one row, `glance` returns the
 same output:
 
 ``` r
+
 glance(tt)
 ```
 
@@ -319,19 +333,21 @@ glance(tt)
     ## # ℹ 3 more variables: conf.high <dbl>, method <chr>, alternative <chr>
 
 ``` r
+
 glance(wt)
 ```
 
     ## # A tibble: 1 × 4
-    ##   statistic   p.value method                                alternative
-    ##       <dbl>     <dbl> <chr>                                 <chr>      
-    ## 1      230. 0.0000435 Wilcoxon rank sum test with continui… two.sided
+    ##   statistic    p.value method                       alternative
+    ##       <dbl>      <dbl> <chr>                        <chr>      
+    ## 1      230. 0.00000522 Wilcoxon rank sum exact test two.sided
 
 `augment` method is defined only for chi-squared tests, since there is
 no meaningful sense, for other tests, in which a hypothesis test
 produces output about each initial data point.
 
 ``` r
+
 chit <- chisq.test(xtabs(Freq ~ Sex + Class,
   data = as.data.frame(Titanic)
 ))
@@ -344,6 +360,7 @@ tidy(chit)
     ## 1      350. 1.56e-75         3 Pearson's Chi-squared test
 
 ``` r
+
 augment(chit)
 ```
 
@@ -425,5 +442,5 @@ regarding the structure of returned data.
   rather than the modeling function itself.
 - Common column names include:
   - `r.squared` the fraction of variance explained by the model
-  - `adj.r.squared` $R^{2}$ adjusted based on the degrees of freedom
+  - `adj.r.squared` $`R^2`$ adjusted based on the degrees of freedom
   - `sigma` the square root of the estimated variance of the residuals

@@ -11,6 +11,7 @@ well with the `nest/unnest` functions in `tidyr` and the `map` function
 in `purrr`. First, loading necessary packages and setting some defaults:
 
 ``` r
+
 library(broom)
 library(tibble)
 library(ggplot2)
@@ -26,6 +27,7 @@ coercing `Orange` to a `tibble`. This gives a nicer print method that
 will especially useful later on when we start working with list-columns.
 
 ``` r
+
 data(Orange)
 
 Orange <- as_tibble(Orange)
@@ -52,12 +54,14 @@ This contains 35 observations of three variables: `Tree`, `age`, and
 trees. As might be expected, age and circumference are correlated:
 
 ``` r
+
 cor(Orange$age, Orange$circumference)
 ```
 
     ## [1] 0.9135189
 
 ``` r
+
 ggplot(Orange, aes(age, circumference, color = Tree)) +
   geom_line()
 ```
@@ -68,6 +72,7 @@ Suppose you want to test for correlations individually *within* each
 tree. You can do this with dplyr’s `group_by`:
 
 ``` r
+
 Orange |>
   group_by(Tree) |>
   summarize(correlation = cor(age, circumference))
@@ -89,6 +94,7 @@ Suppose that instead of simply estimating a correlation, we want to
 perform a hypothesis test with `cor.test`:
 
 ``` r
+
 ct <- cor.test(Orange$age, Orange$circumference)
 ct
 ```
@@ -111,6 +117,7 @@ longer, such as the confidence interval. We can get this into a nicely
 organized tibble using the `tidy` function:
 
 ``` r
+
 tidy(ct)
 ```
 
@@ -127,6 +134,7 @@ correlation tests for each different tree. We start by `nest`ing our
 data based on the group of interest:
 
 ``` r
+
 nested <- Orange |>
   nest(data = -Tree)
 ```
@@ -135,6 +143,7 @@ Then we run a correlation test for each nested tibble using
 [`purrr::map`](https://purrr.tidyverse.org/reference/map.html):
 
 ``` r
+
 nested |>
   mutate(test = map(data, ~ cor.test(.x$age, .x$circumference)))
 ```
@@ -152,6 +161,7 @@ This results in a list-column of S3 objects. We want to tidy each of the
 objects, which we can also do with `map`.
 
 ``` r
+
 nested |>
   mutate(
     test = map(data, ~ cor.test(.x$age, .x$circumference)), # S3 list-col
@@ -172,6 +182,7 @@ Finally, we want to unnest the tidied data frames so we can see the
 results in a flat tibble. All together, this looks like:
 
 ``` r
+
 Orange |>
   nest(data = -Tree) |>
   mutate(
@@ -195,6 +206,7 @@ This workflow becomes even more useful when applied to regressions.
 Untidy output for a regression looks like:
 
 ``` r
+
 lm_fit <- lm(age ~ circumference, data = Orange)
 summary(lm_fit)
 ```
@@ -222,6 +234,7 @@ where we tidy these results, we get multiple rows of output for each
 model:
 
 ``` r
+
 tidy(lm_fit)
 ```
 
@@ -235,6 +248,7 @@ Now we can handle multiple regressions at once using exactly the same
 workflow as before:
 
 ``` r
+
 Orange |>
   nest(data = -Tree) |>
   mutate(
@@ -264,6 +278,7 @@ manual cars (the `am` column), then perform the regression within each
 nested tibble.
 
 ``` r
+
 data(mtcars)
 mtcars <- as_tibble(mtcars) # to play nicely with list-cols
 mtcars
@@ -285,6 +300,7 @@ mtcars
     ## # ℹ 22 more rows
 
 ``` r
+
 mtcars |>
   nest(data = -am) |>
   mutate(
@@ -313,6 +329,7 @@ use multiple list-columns to store the tidied, glanced and augmented
 outputs.
 
 ``` r
+
 regressions <- mtcars |>
   nest(data = -am) |>
   mutate(
@@ -340,6 +357,7 @@ regressions |>
     ## # ℹ 2 more variables: glanced <list>, augmented <list>
 
 ``` r
+
 regressions |>
   unnest(glanced)
 ```
@@ -354,6 +372,7 @@ regressions |>
     ## #   nobs <int>, augmented <list>
 
 ``` r
+
 regressions |>
   unnest(augmented)
 ```

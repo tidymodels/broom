@@ -108,6 +108,7 @@ with exactly one row and columns:
 ## Examples
 
 ``` r
+
 library(mfx)
 
 # Simulate some data

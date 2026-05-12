@@ -17,7 +17,7 @@ specify which components to return."><meta property="og:image" content="https://
 
     <a class="navbar-brand me-2" href="../index.html">broom</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.11</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.12</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,7 +48,7 @@ specify which components to return."><meta property="og:image" content="https://
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Tidy a(n) rq object</h1>
-      <small class="dont-index">Source: <a href="https://github.com/tidymodels/broom/blob/v1.0.11/R/quantreg-rq.R" class="external-link"><code>R/quantreg-rq.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidymodels/broom/blob/v1.0.12/R/quantreg-rq.R" class="external-link"><code>R/quantreg-rq.R</code></a></small>
       <div class="d-none name"><code>tidy.rq.Rd</code></div>
     </div>
 
@@ -193,26 +193,26 @@ set to NA.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   term        estimate conf.low conf.high   tau</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> (Intercept)  0.007<span style="text-decoration: underline;">54</span> <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>          0.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> (Intercept)    0.124 <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>          0.5</span>
 <span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">mod2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     tau logLik      AIC   BIC df.residual</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;logLik&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>   0.5 -78.85523  160.  162.          49</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>   0.5 -78.76986  160.  161.          49</span>
 <span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment</a></span><span class="op">(</span><span class="va">mod2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 50 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    `rnorm(50)` `(weights)` .resid .fitted  .tau</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>    -<span style="color: #BB0000;">1.22</span>        0.005<span style="text-decoration: underline;">27</span> -<span style="color: #BB0000;">1.23</span>  0.007<span style="text-decoration: underline;">54</span>   0.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>    -<span style="color: #BB0000;">1.12</span>        0.103   -<span style="color: #BB0000;">1.13</span>  0.007<span style="text-decoration: underline;">54</span>   0.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>     0.993       0.287    0.986 0.007<span style="text-decoration: underline;">54</span>   0.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>    -<span style="color: #BB0000;">1.83</span>        0.444   -<span style="color: #BB0000;">1.84</span>  0.007<span style="text-decoration: underline;">54</span>   0.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>     0.124       0.693    0.116 0.007<span style="text-decoration: underline;">54</span>   0.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>     0.591       0.020<span style="text-decoration: underline;">9</span>   0.583 0.007<span style="text-decoration: underline;">54</span>   0.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>     0.805       0.956    0.797 0.007<span style="text-decoration: underline;">54</span>   0.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>     0.007<span style="text-decoration: underline;">54</span>     0.804    0     0.007<span style="text-decoration: underline;">54</span>   0.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>    -<span style="color: #BB0000;">1.82</span>        0.912   -<span style="color: #BB0000;">1.82</span>  0.007<span style="text-decoration: underline;">54</span>   0.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>    -<span style="color: #BB0000;">0.405</span>       0.309   -<span style="color: #BB0000;">0.412</span> 0.007<span style="text-decoration: underline;">54</span>   0.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>     0.393       0.696    0.269   0.124   0.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>     0.458       0.266    0.334   0.124   0.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>    -<span style="color: #BB0000;">1.22</span>        0.660   -<span style="color: #BB0000;">1.34</span>    0.124   0.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>    -<span style="color: #BB0000;">1.12</span>        0.212   -<span style="color: #BB0000;">1.25</span>    0.124   0.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>     0.993       0.005<span style="text-decoration: underline;">27</span>  0.869   0.124   0.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>    -<span style="color: #BB0000;">1.83</span>        0.103   -<span style="color: #BB0000;">1.96</span>    0.124   0.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>     0.124       0.287    0       0.124   0.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>     0.591       0.444    0.467   0.124   0.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>     0.805       0.693    0.681   0.124   0.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>     0.007<span style="text-decoration: underline;">54</span>     0.020<span style="text-decoration: underline;">9</span>  -<span style="color: #BB0000;">0.116</span>   0.124   0.5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 40 more rows</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># varying tau to generate an rqs object</span></span></span>

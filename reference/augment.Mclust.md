@@ -108,6 +108,7 @@ with columns:
 ## Examples
 
 ``` r
+
 # load library for models and data
 library(mclust)
 #> Package 'mclust' version 6.1.2

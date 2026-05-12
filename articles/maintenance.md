@@ -18,6 +18,7 @@ community members—and now supplies hundreds of methods for summarizing
 model objects:
 
 ``` r
+
 library(broom)
 
 length(methods("tidy"))
@@ -26,12 +27,14 @@ length(methods("tidy"))
     ## [1] 132
 
 ``` r
+
 length(methods("glance"))
 ```
 
     ## [1] 81
 
 ``` r
+
 length(methods("augment"))
 ```
 

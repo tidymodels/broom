@@ -97,6 +97,7 @@ with exactly one row and columns:
 ## Examples
 
 ``` r
+
 # load libraries for models and data
 library(ordinal)
 

@@ -1,6 +1,16 @@
 # Changelog
 
+## broom 1.0.12
+
+CRAN release: 2026-01-27
+
+- Resolves an R CMD check error related to new names of output of
+  [`summary()`](https://rdrr.io/pkg/urca/man/summary-methods.html).
+  ([\#1266](https://github.com/tidymodels/broom/issues/1266))
+
 ## broom 1.0.11
+
+CRAN release: 2025-12-04
 
 - Transfer maintainership to
   [@EmilHvitfeldt](https://github.com/EmilHvitfeldt).
@@ -1108,6 +1118,7 @@ situations where tibbles are stricter than data frames. For example,
 specifying model covariates as a matrix object will now error:
 
 ``` r
+
 library(broom)
 library(quantreg)
 
@@ -1370,9 +1381,7 @@ CRAN release: 2018-03-29
 
 CRAN release: 2017-11-20
 
-- Changed the deprecated
-  [`dplyr::failwith`](https://dplyr.tidyverse.org/reference/defunct.html)
-  to
+- Changed the deprecated `dplyr::failwith` to
   [`purrr::possibly`](https://purrr.tidyverse.org/reference/possibly.html)
 
 - `augment` and `glance` on NULLs now return an empty data frame

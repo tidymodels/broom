@@ -118,6 +118,7 @@ with columns:
 ## Examples
 
 ``` r
+
 # broom only skips running these examples because the example models take a
 # while to generate—they should run just fine, though!
 if (FALSE) { # \dontrun{

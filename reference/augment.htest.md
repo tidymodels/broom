@@ -126,13 +126,14 @@ with exactly one row and columns:
 ## Examples
 
 ``` r
+
 tt <- t.test(rnorm(10))
 
 tidy(tt)
 #> # A tibble: 1 × 8
 #>   estimate statistic p.value parameter conf.low conf.high method       
 #>      <dbl>     <dbl>   <dbl>     <dbl>    <dbl>     <dbl> <chr>        
-#> 1    0.698      2.18  0.0573         9  -0.0269      1.42 One Sample t…
+#> 1   -0.177    -0.539   0.603         9   -0.918     0.565 One Sample t…
 #> # ℹ 1 more variable: alternative <chr>
 
 # the glance output will be the same for each of the below tests
@@ -140,7 +141,7 @@ glance(tt)
 #> # A tibble: 1 × 8
 #>   estimate statistic p.value parameter conf.low conf.high method       
 #>      <dbl>     <dbl>   <dbl>     <dbl>    <dbl>     <dbl> <chr>        
-#> 1    0.698      2.18  0.0573         9  -0.0269      1.42 One Sample t…
+#> 1   -0.177    -0.539   0.603         9   -0.918     0.565 One Sample t…
 #> # ℹ 1 more variable: alternative <chr>
 
 tt <- t.test(mpg ~ am, data = mtcars)

@@ -112,6 +112,7 @@ with columns:
 ## Examples
 
 ``` r
+
 # load modeling library
 library(boot)
 #> 
@@ -155,6 +156,6 @@ tidy(bootres, conf.int = TRUE)
 #> # A tibble: 2 × 6
 #>   term        statistic      bias std.error conf.low conf.high
 #>   <chr>           <dbl>     <dbl>     <dbl>    <dbl>     <dbl>
-#> 1 (Intercept)   -0.0239 -0.00170    0.00336  -0.0328   -0.0222
-#> 2 log(u)         0.0236  0.000503   0.00107   0.0227    0.0265
+#> 1 (Intercept)   -0.0239 -0.00171    0.00336  -0.0328   -0.0222
+#> 2 log(u)         0.0236  0.000504   0.00107   0.0227    0.0265
 ```

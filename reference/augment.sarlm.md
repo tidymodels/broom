@@ -110,6 +110,7 @@ with columns:
 
 ``` r
 
+
 # load libraries for models and data
 library(spatialreg)
 #> Loading required package: spData

@@ -70,6 +70,7 @@ Other anova tidiers:
 ## Examples
 
 ``` r
+
 a <- aov(mpg ~ wt + qsec + disp, mtcars)
 tidy(a)
 #> # A tibble: 4 × 6

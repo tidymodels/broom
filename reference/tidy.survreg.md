@@ -116,6 +116,7 @@ with columns:
 ## Examples
 
 ``` r
+
 # load libraries for models and data
 library(survival)
 

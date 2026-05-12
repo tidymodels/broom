@@ -67,7 +67,7 @@ missing at this time."><meta property="og:image" content="https://broom.tidymode
 
     <a class="navbar-brand me-2" href="../index.html">broom</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.11</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.12</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -98,7 +98,7 @@ missing at this time."><meta property="og:image" content="https://broom.tidymode
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Augment data with information from a(n) lm object</h1>
-      <small class="dont-index">Source: <a href="https://github.com/tidymodels/broom/blob/v1.0.11/R/stats-lm.R" class="external-link"><code>R/stats-lm.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidymodels/broom/blob/v1.0.12/R/stats-lm.R" class="external-link"><code>R/stats-lm.R</code></a></small>
       <div class="d-none name"><code>augment.lm.Rd</code></div>
     </div>
 
@@ -434,14 +434,14 @@ warning is raised and the incomplete rows are dropped.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 6</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   response term        estimate std.error statistic p.value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Y1       (Intercept)   0.133      0.241    0.551  0.599  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Y1       a1            0.867      0.244    3.55   0.009<span style="text-decoration: underline;">36</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Y1       a2            0.017<span style="text-decoration: underline;">4</span>     0.345    0.050<span style="text-decoration: underline;">6</span> 0.961  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Y2       (Intercept)  -<span style="color: #BB0000;">0.137</span>      0.371   -<span style="color: #BB0000;">0.370</span>  0.723  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Y2       a1            0.133      0.376    0.353  0.735  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> Y2       a2            0.921      0.531    1.74   0.126  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   response term        estimate std.error statistic  p.value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Y1       (Intercept)  -<span style="color: #BB0000;">0.292</span>      0.280    -<span style="color: #BB0000;">1.04</span>  0.332   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Y1       a1            1.28       0.232     5.50  0.000<span style="text-decoration: underline;">903</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Y1       a2           -<span style="color: #BB0000;">0.519</span>      0.187    -<span style="color: #BB0000;">2.78</span>  0.027<span style="text-decoration: underline;">4</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Y2       (Intercept)  -<span style="color: #BB0000;">0.092</span><span style="color: #BB0000; text-decoration: underline;">3</span>     0.259    -<span style="color: #BB0000;">0.357</span> 0.732   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Y2       a1           -<span style="color: #BB0000;">0.231</span>      0.214    -<span style="color: #BB0000;">1.08</span>  0.317   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> Y2       a2            0.768      0.172     4.45  0.002<span style="text-decoration: underline;">96</span> </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

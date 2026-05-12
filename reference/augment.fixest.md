@@ -142,6 +142,7 @@ with columns:
 ## Examples
 
 ``` r
+
 # load libraries for models and data
 library(fixest)
 #> 
@@ -165,7 +166,7 @@ glance(gravity)
 #>   r.squared adj.r.squared within.r.squared pseudo.r.squared sigma  nobs
 #>       <dbl>         <dbl>            <dbl>            <dbl> <dbl> <int>
 #> 1     0.706         0.705            0.219               NA  1.74 38325
-#> # ℹ 3 more variables: AIC <dbl>, BIC <dbl>, logLik <dbl>
+#> # ℹ 3 more variables: AIC <dbl>, BIC <dbl>, logLik <logLik>
 augment(gravity, trade)
 #> # A tibble: 38,325 × 9
 #>    .rownames Destination Origin Product  Year dist_km    Euros .fitted

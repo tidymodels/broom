@@ -100,6 +100,7 @@ with columns:
 ## Examples
 
 ``` r
+
 a <- aov(mpg ~ wt + qsec + Error(disp / am), mtcars)
 tidy(a)
 #> # A tibble: 5 × 7

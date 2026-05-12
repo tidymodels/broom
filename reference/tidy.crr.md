@@ -98,6 +98,7 @@ with columns:
 ## Examples
 
 ``` r
+
 library(cmprsk)
 
 # time to loco-regional failure (lrf)
@@ -114,11 +115,11 @@ tidy(x, conf.int = TRUE)
 #> # A tibble: 2 × 7
 #>   term  estimate std.error statistic p.value conf.low conf.high
 #>   <chr>    <dbl>     <dbl>     <dbl>   <dbl>    <dbl>     <dbl>
-#> 1 trt     -0.350     0.371    -0.944    0.35   -1.08      0.377
-#> 2 strt     0.258     0.372     0.694    0.49   -0.471     0.986
+#> 1 trt     -0.467     0.362    -1.29     0.2    -1.18      0.242
+#> 2 strt     0.237     0.360     0.660    0.51   -0.468     0.943
 glance(x)
 #> # A tibble: 1 × 5
 #>   converged logLik  nobs    df statistic
 #>   <lgl>      <dbl> <int> <dbl>     <dbl>
-#> 1 TRUE       -116.   100     2      1.30
+#> 1 TRUE       -125.   100     2      2.03
 ```

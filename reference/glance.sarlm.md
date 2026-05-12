@@ -95,6 +95,7 @@ with exactly one row and columns:
 
 ``` r
 
+
 # load libraries for models and data
 library(spatialreg)
 library(spdep)

@@ -80,6 +80,7 @@ with columns:
 ## Examples
 
 ``` r
+
 attach(airquality)
 Month <- factor(Month, labels = month.abb[5:9])
 ptt <- pairwise.t.test(Ozone, Month)
@@ -136,12 +137,12 @@ tidy(pairwise.t.test(compounds, class, alternative = "less"))
 
 tidy(pairwise.wilcox.test(compounds, class))
 #> # A tibble: 6 × 3
-#>   group1 group2  p.value
-#>   <chr>  <chr>     <dbl>
-#> 1 F      VF     4.85e-32
-#> 2 M      VF     2.41e-66
-#> 3 M      F      1.45e-23
-#> 4 L      VF     1.90e-77
-#> 5 L      F      1.28e-42
-#> 6 L      M      6.84e- 9
+#>   group1 group2       p.value
+#>   <chr>  <chr>          <dbl>
+#> 1 F      VF     0            
+#> 2 M      VF     0            
+#> 3 M      F      0            
+#> 4 L      VF     0            
+#> 5 L      F      0            
+#> 6 L      M      0.00000000684
 ```

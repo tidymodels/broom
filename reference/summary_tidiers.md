@@ -100,30 +100,31 @@ Other deprecated:
 ## Examples
 
 ``` r
+
 v <- rnorm(1000)
 s <- summary(v)
 s
-#>      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
-#> -2.809775 -0.641421  0.002774  0.009750  0.661719  3.241040 
+#>     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+#> -2.80977 -0.62832  0.00921  0.01613  0.66460  3.24104 
 
 tidy(s)
 #> Warning: `tidy.summaryDefault()` is deprecated. Please use `skimr::skim()` instead.
 #> # A tibble: 1 × 6
-#>   minimum     q1  median    mean    q3 maximum
-#>     <dbl>  <dbl>   <dbl>   <dbl> <dbl>   <dbl>
-#> 1   -2.81 -0.641 0.00277 0.00975 0.662    3.24
+#>   minimum     q1  median   mean    q3 maximum
+#>     <dbl>  <dbl>   <dbl>  <dbl> <dbl>   <dbl>
+#> 1   -2.81 -0.628 0.00921 0.0161 0.665    3.24
 glance(s)
 #> Warning: `tidy.summaryDefault()` is deprecated. Please use `skimr::skim()` instead.
 #> # A tibble: 1 × 6
-#>   minimum     q1  median    mean    q3 maximum
-#>     <dbl>  <dbl>   <dbl>   <dbl> <dbl>   <dbl>
-#> 1   -2.81 -0.641 0.00277 0.00975 0.662    3.24
+#>   minimum     q1  median   mean    q3 maximum
+#>     <dbl>  <dbl>   <dbl>  <dbl> <dbl>   <dbl>
+#> 1   -2.81 -0.628 0.00921 0.0161 0.665    3.24
 
 v2 <- c(v,NA)
 tidy(summary(v2))
 #> Warning: `tidy.summaryDefault()` is deprecated. Please use `skimr::skim()` instead.
 #> # A tibble: 1 × 7
-#>   minimum     q1  median    mean    q3 maximum    na
-#>     <dbl>  <dbl>   <dbl>   <dbl> <dbl>   <dbl> <dbl>
-#> 1   -2.81 -0.641 0.00277 0.00975 0.662    3.24     1
+#>   minimum     q1  median   mean    q3 maximum    na
+#>     <dbl>  <dbl>   <dbl>  <dbl> <dbl>   <dbl> <dbl>
+#> 1   -2.81 -0.628 0.00921 0.0161 0.665    3.24     1
 ```

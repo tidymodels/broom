@@ -104,6 +104,7 @@ with columns:
 ## Examples
 
 ``` r
+
 # load modeling library
 library(biglm)
 

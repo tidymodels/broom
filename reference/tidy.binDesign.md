@@ -65,6 +65,7 @@ with columns:
 ## Examples
 
 ``` r
+
 library(binGroup)
 des <- binDesign(
   nmax = 300, delta = 0.06,

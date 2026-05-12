@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">broom</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.11</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.12</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,11 +38,15 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/tidymodels/broom/blob/v1.0.11/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/tidymodels/broom/blob/v1.0.12/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.0.11" id="broom-1011">broom 1.0.11<a class="anchor" aria-label="anchor" href="#broom-1011"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.0.12" id="broom-1012">broom 1.0.12<a class="anchor" aria-label="anchor" href="#broom-1012"></a></h2><p class="text-muted">CRAN release: 2026-01-27</p>
+<ul><li>Resolves an R CMD check error related to new names of output of <code><a href="https://rdrr.io/pkg/urca/man/summary-methods.html" class="external-link">summary()</a></code>. (<a href="https://github.com/tidymodels/broom/issues/1266" class="external-link">#1266</a>)</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.0.11" id="broom-1011">broom 1.0.11<a class="anchor" aria-label="anchor" href="#broom-1011"></a></h2><p class="text-muted">CRAN release: 2025-12-04</p>
 <ul><li>Transfer maintainership to <a href="https://github.com/EmilHvitfeldt" class="external-link">@EmilHvitfeldt</a>. (<a href="https://github.com/tidymodels/broom/issues/1260" class="external-link">#1260</a>)</li>
 </ul></div>
     <div class="section level2">
@@ -581,7 +585,7 @@ deprecated <code><a href="../reference/data.frame_tidiers.html">glance.data.fram
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.3" id="broom-043">broom 0.4.3<a class="anchor" aria-label="anchor" href="#broom-043"></a></h2><p class="text-muted">CRAN release: 2017-11-20</p>
-<ul><li><p>Changed the deprecated <code><a href="https://dplyr.tidyverse.org/reference/defunct.html" class="external-link">dplyr::failwith</a></code> to <code><a href="https://purrr.tidyverse.org/reference/possibly.html" class="external-link">purrr::possibly</a></code></p></li>
+<ul><li><p>Changed the deprecated <code>dplyr::failwith</code> to <code><a href="https://purrr.tidyverse.org/reference/possibly.html" class="external-link">purrr::possibly</a></code></p></li>
 <li><p><code>augment</code> and <code>glance</code> on NULLs now return an empty data frame</p></li>
 <li><p>Deprecated the <code>inflate()</code> function in favor of <code><a href="https://tidyr.tidyverse.org/reference/expand.html" class="external-link">tidyr::crossing</a></code></p></li>
 <li><p>Fixed confidence intervals in the gmm tidier (thanks to <a href="https://github.com/tidymodels/broom/issues/242" class="external-link">#242</a> from David Hugh-Jones)</p></li>

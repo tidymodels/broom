@@ -90,6 +90,7 @@ with exactly one row and columns:
 ## Examples
 
 ``` r
+
 # load library for models and data
 library(mclust)
 

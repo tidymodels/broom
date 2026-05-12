@@ -152,6 +152,7 @@ with columns:
 ## Examples
 
 ``` r
+
 if (requireNamespace("robustbase", quietly = TRUE)) {
   # load libraries for models and data
   library(robustbase)

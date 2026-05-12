@@ -28,6 +28,7 @@ Wickham’s [Tidy Data](https://www.jstatsoft.org/v59/i10).
 ## Installation
 
 ``` r
+
 # we recommend installing the entire tidyverse
 # modeling set, which includes broom:
 install.packages("tidymodels")
@@ -52,6 +53,7 @@ regression coefficients. This is can be useful if you want to inspect a
 model or create custom visualizations.
 
 ``` r
+
 library(broom)
 
 fit <- lm(Volume ~ Girth + Height, trees)
@@ -70,6 +72,7 @@ statistics. This is useful to check for model misspecification and to
 compare many models.
 
 ``` r
+
 glance(fit)
 #> # A tibble: 1 × 12
 #>   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
@@ -84,6 +87,7 @@ dataset have `.` prefix to prevent existing columns from being
 overwritten.
 
 ``` r
+
 augment(fit, data = trees)
 #> # A tibble: 31 × 9
 #>    Girth Height Volume .fitted .resid   .hat .sigma   .cooksd .std.resid

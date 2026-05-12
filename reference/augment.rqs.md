@@ -141,6 +141,7 @@ Other quantreg tidiers:
 ## Examples
 
 ``` r
+
 # load modeling library and data
 library(quantreg)
 
@@ -187,26 +188,26 @@ tidy(mod2)
 #> # A tibble: 1 × 5
 #>   term        estimate conf.low conf.high   tau
 #>   <chr>          <dbl> <lgl>    <lgl>     <dbl>
-#> 1 (Intercept)    0.593 NA       NA          0.5
+#> 1 (Intercept)   0.0744 NA       NA          0.5
 glance(mod2)
 #> # A tibble: 1 × 5
-#>     tau logLik      AIC   BIC df.residual
-#>   <dbl> <logLik>  <dbl> <dbl>       <int>
-#> 1   0.5 -79.28164  161.  162.          49
+#>     tau logLik     AIC   BIC df.residual
+#>   <dbl> <logLik> <dbl> <dbl>       <int>
+#> 1   0.5 -72.9869  148.  150.          49
 augment(mod2)
 #> # A tibble: 50 × 5
 #>    `rnorm(50)` `(weights)` .resid .fitted  .tau
 #>          <dbl>       <dbl>  <dbl>   <dbl> <dbl>
-#>  1       0.765      0.647   0.172   0.593   0.5
-#>  2       0.392      0.319  -0.201   0.593   0.5
-#>  3      -0.547      0.293  -1.14    0.593   0.5
-#>  4      -0.468      0.669  -1.06    0.593   0.5
-#>  5      -1.11       0.408  -1.70    0.593   0.5
-#>  6       0.786      0.664   0.192   0.593   0.5
-#>  7      -0.648      0.0497 -1.24    0.593   0.5
-#>  8       1.07       0.496   0.481   0.593   0.5
-#>  9       0.362      0.785  -0.231   0.593   0.5
-#> 10       1.92       0.906   1.32    0.593   0.5
+#>  1       1.25       0.192   1.18   0.0744   0.5
+#>  2       0.458      0.321   0.383  0.0744   0.5
+#>  3       0.765      0.0297  0.691  0.0744   0.5
+#>  4       0.392      0.870   0.317  0.0744   0.5
+#>  5      -0.547      0.647  -0.622  0.0744   0.5
+#>  6      -0.468      0.319  -0.542  0.0744   0.5
+#>  7      -1.11       0.293  -1.18   0.0744   0.5
+#>  8       0.786      0.669   0.711  0.0744   0.5
+#>  9      -0.648      0.408  -0.722  0.0744   0.5
+#> 10       1.07       0.664   1.000  0.0744   0.5
 #> # ℹ 40 more rows
 
 # varying tau to generate an rqs object

@@ -67,6 +67,7 @@ on the inputted map object. See ?maps::map for more information.
 ## Examples
 
 ``` r
+
 # load libraries for models and data
 library(maps)
 #> 

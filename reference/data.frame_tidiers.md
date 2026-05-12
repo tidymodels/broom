@@ -174,6 +174,7 @@ David Robinson, Benjamin Nutter
 ## Examples
 
 ``` r
+
 td <- tidy(mtcars)
 #> Warning: Data frame tidiers are deprecated and will be removed in an upcoming release of broom.
 td

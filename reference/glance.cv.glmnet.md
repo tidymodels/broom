@@ -85,9 +85,10 @@ with exactly one row and columns:
 ## Examples
 
 ``` r
+
 # load libraries for models and data
 library(glmnet)
-#> Loaded glmnet 4.1-10
+#> Loaded glmnet 5.0
 
 set.seed(27)
 

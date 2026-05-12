@@ -102,6 +102,7 @@ with exactly one row and columns:
 ## Examples
 
 ``` r
+
 # load libraries for models and data
 library(poLCA)
 library(dplyr)
@@ -223,14 +224,14 @@ td
 #>    variable class outcome           estimate std.error
 #>    <chr>    <int> <fct>                <dbl>     <dbl>
 #>  1 MORALG       1 1 Extremely well    0.108    0.0175 
-#>  2 MORALG       2 1 Extremely well    0.622    0.0309 
-#>  3 MORALG       3 1 Extremely well    0.137    0.0182 
+#>  2 MORALG       2 1 Extremely well    0.137    0.0182 
+#>  3 MORALG       3 1 Extremely well    0.622    0.0309 
 #>  4 MORALG       1 2 Quite well        0.383    0.0274 
-#>  5 MORALG       2 2 Quite well        0.335    0.0293 
-#>  6 MORALG       3 2 Quite well        0.668    0.0247 
+#>  5 MORALG       2 2 Quite well        0.668    0.0247 
+#>  6 MORALG       3 2 Quite well        0.335    0.0293 
 #>  7 MORALG       1 3 Not too well      0.304    0.0253 
-#>  8 MORALG       2 3 Not too well      0.0172   0.00841
-#>  9 MORALG       3 3 Not too well      0.180    0.0208 
+#>  8 MORALG       2 3 Not too well      0.180    0.0208 
+#>  9 MORALG       3 3 Not too well      0.0172   0.00841
 #> 10 MORALG       1 4 Not well at all   0.205    0.0243 
 #> # ℹ 134 more rows
 
@@ -265,8 +266,8 @@ count(au, .class)
 #>   .class     n
 #>    <int> <int>
 #> 1      1   444
-#> 2      2   360
-#> 3      3   496
+#> 2      2   496
+#> 3      3   360
 
 # if the original data is provided, it leads to NAs in new columns
 # for rows that weren't predicted

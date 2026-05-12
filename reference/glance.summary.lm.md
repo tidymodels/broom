@@ -123,6 +123,7 @@ with exactly one row and columns:
 ## Examples
 
 ``` r
+
 library(ggplot2)
 library(dplyr)
 
@@ -281,10 +282,10 @@ tidy(result)
 #> # A tibble: 6 × 6
 #>   response term        estimate std.error statistic p.value
 #>   <chr>    <chr>          <dbl>     <dbl>     <dbl>   <dbl>
-#> 1 Y1       (Intercept)    0.572     0.364     1.57   0.161 
-#> 2 Y1       a1             0.691     0.402     1.72   0.129 
-#> 3 Y1       a2            -0.290     0.399    -0.727  0.491 
-#> 4 Y2       (Intercept)    0.256     0.238     1.08   0.318 
-#> 5 Y2       a1             0.309     0.263     1.18   0.278 
-#> 6 Y2       a2             0.831     0.261     3.18   0.0155
+#> 1 Y1       (Intercept)    0.419     0.295     1.42   0.199 
+#> 2 Y1       a1             0.786     0.307     2.55   0.0378
+#> 3 Y1       a2             0.196     0.374     0.524  0.617 
+#> 4 Y2       (Intercept)    0.579     0.219     2.64   0.0335
+#> 5 Y2       a1             0.738     0.228     3.23   0.0144
+#> 6 Y2       a2             0.616     0.278     2.22   0.0622
 ```

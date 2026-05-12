@@ -72,6 +72,7 @@ with columns:
 ## Examples
 
 ``` r
+
 set.seed(678)
 
 tidy(ts(1:10, frequency = 4, start = c(1959, 2)))

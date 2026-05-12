@@ -151,6 +151,7 @@ with columns:
 ## Examples
 
 ``` r
+
 library(mfx)
 #> Loading required package: sandwich
 #> Loading required package: lmtest

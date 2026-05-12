@@ -84,6 +84,7 @@ Other deprecated:
 ## Examples
 
 ``` r
+
 cars_dist <- dist(t(mtcars[, 1:4]))
 cars_dist
 #>             mpg        cyl       disp

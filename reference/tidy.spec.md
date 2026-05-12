@@ -67,6 +67,7 @@ with columns:
 ## Examples
 
 ``` r
+
 spc <- spectrum(lh)
 
 tidy(spc)

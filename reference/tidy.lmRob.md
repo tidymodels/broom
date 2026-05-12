@@ -56,6 +56,7 @@ Other robust tidiers:
 ## Examples
 
 ``` r
+
 # load modeling library
 library(robust)
 

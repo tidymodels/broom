@@ -102,6 +102,7 @@ with columns:
 ## Examples
 
 ``` r
+
 # load libraries for models and data
 library(survival)
 
@@ -143,6 +144,7 @@ ggplot(tidy(sfit), aes(time, estimate)) +
 fitCI <- survfit(Surv(stop, status * as.numeric(event), type = "mstate") ~ 1,
   data = mgus1, subset = (start == 0)
 )
+#> Warning: type= 'mstate' is deprecated, use a factor variable as status
 
 td_multi <- tidy(fitCI)
 
@@ -166,6 +168,4 @@ td_multi
 ggplot(td_multi, aes(time, estimate, group = state)) +
   geom_line(aes(color = state)) +
   geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .25)
-#> Warning: Removed 13 rows containing missing values or values outside the scale
-#> range (`geom_ribbon()`).
 ```

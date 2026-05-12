@@ -77,6 +77,7 @@ with columns:
 ## Examples
 
 ``` r
+
 # load modeling library
 library(car)
 
@@ -88,12 +89,12 @@ tidy(dw)
 #> # A tibble: 1 × 5
 #>   statistic p.value autocorrelation method             alternative
 #>       <dbl>   <dbl>           <dbl> <chr>              <chr>      
-#> 1      1.25  0.0160           0.363 Durbin-Watson Test two.sided  
+#> 1      1.25  0.0200           0.363 Durbin-Watson Test two.sided  
 
 # same output for all durbinWatsonTests
 glance(dw)
 #> # A tibble: 1 × 5
 #>   statistic p.value autocorrelation method             alternative
 #>       <dbl>   <dbl>           <dbl> <chr>              <chr>      
-#> 1      1.25  0.0160           0.363 Durbin-Watson Test two.sided  
+#> 1      1.25  0.0200           0.363 Durbin-Watson Test two.sided  
 ```

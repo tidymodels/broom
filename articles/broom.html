@@ -28,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">broom</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.11</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.12</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,9 +71,9 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Introduction to broom</h1>
             
-            <h4 data-toc-skip class="date">2025-12-04</h4>
+            <h4 data-toc-skip class="date">2026-05-12</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/tidymodels/broom/blob/v1.0.11/vignettes/broom.Rmd" class="external-link"><code>vignettes/broom.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidymodels/broom/blob/v1.0.12/vignettes/broom.Rmd" class="external-link"><code>vignettes/broom.Rmd</code></a></small>
       <div class="d-none name"><code>broom.Rmd</code></div>
     </div>
 
@@ -263,16 +263,16 @@ vignette</a>.</p>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 32 × 9</span></span></span>
 <span><span class="co">##    .rownames            am    wt .fitted .resid   .hat .sigma .cooksd</span></span>
 <span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> Mazda RX4             1  2.62   1.50   0.635 0.126   0.803 0.018<span style="text-decoration: underline;">4</span> </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> Mazda RX4 Wag         1  2.88   0.471  0.985 0.108   0.790 0.042<span style="text-decoration: underline;">4</span> </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> Datsun 710            1  2.32   2.70   0.360 0.096<span style="text-decoration: underline;">3</span>  0.810 0.003<span style="text-decoration: underline;">94</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> Hornet 4 Drive        0  3.22  -<span style="color: #BB0000;">0.897</span> -<span style="color: #BB0000;">0.827</span> 0.074<span style="text-decoration: underline;">4</span>  0.797 0.017<span style="text-decoration: underline;">7</span> </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> Hornet Sportabout     0  3.44  -<span style="color: #BB0000;">1.80</span>  -<span style="color: #BB0000;">0.553</span> 0.068<span style="text-decoration: underline;">1</span>  0.806 0.006<span style="text-decoration: underline;">47</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> Valiant               0  3.46  -<span style="color: #BB0000;">1.88</span>  -<span style="color: #BB0000;">0.532</span> 0.067<span style="text-decoration: underline;">4</span>  0.807 0.005<span style="text-decoration: underline;">90</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> Duster 360            0  3.57  -<span style="color: #BB0000;">2.33</span>  -<span style="color: #BB0000;">0.432</span> 0.062<span style="text-decoration: underline;">5</span>  0.809 0.003<span style="text-decoration: underline;">48</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> Merc 240D             0  3.19  -<span style="color: #BB0000;">0.796</span> -<span style="color: #BB0000;">0.863</span> 0.075<span style="text-decoration: underline;">5</span>  0.796 0.019<span style="text-decoration: underline;">9</span> </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> Merc 230              0  3.15  -<span style="color: #BB0000;">0.635</span> -<span style="color: #BB0000;">0.922</span> 0.077<span style="text-decoration: underline;">6</span>  0.793 0.024<span style="text-decoration: underline;">2</span> </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">10</span> Merc 280              0  3.44  -<span style="color: #BB0000;">1.80</span>  -<span style="color: #BB0000;">0.553</span> 0.068<span style="text-decoration: underline;">1</span>  0.806 0.006<span style="text-decoration: underline;">47</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> Mazda RX4             1  2.62   1.50   0.635 0.126   0.925 0.018<span style="text-decoration: underline;">4</span> </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> Mazda RX4 Wag         1  2.88   0.471  0.985 0.108   0.917 0.042<span style="text-decoration: underline;">4</span> </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> Datsun 710            1  2.32   2.70   0.360 0.096<span style="text-decoration: underline;">3</span>  0.928 0.003<span style="text-decoration: underline;">94</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> Hornet 4 Drive        0  3.22  -<span style="color: #BB0000;">0.897</span> -<span style="color: #BB0000;">0.827</span> 0.074<span style="text-decoration: underline;">4</span>  0.921 0.017<span style="text-decoration: underline;">7</span> </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> Hornet Sportabout     0  3.44  -<span style="color: #BB0000;">1.80</span>  -<span style="color: #BB0000;">0.553</span> 0.068<span style="text-decoration: underline;">1</span>  0.926 0.006<span style="text-decoration: underline;">47</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> Valiant               0  3.46  -<span style="color: #BB0000;">1.88</span>  -<span style="color: #BB0000;">0.532</span> 0.067<span style="text-decoration: underline;">4</span>  0.927 0.005<span style="text-decoration: underline;">90</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> Duster 360            0  3.57  -<span style="color: #BB0000;">2.33</span>  -<span style="color: #BB0000;">0.432</span> 0.062<span style="text-decoration: underline;">5</span>  0.928 0.003<span style="text-decoration: underline;">48</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> Merc 240D             0  3.19  -<span style="color: #BB0000;">0.796</span> -<span style="color: #BB0000;">0.863</span> 0.075<span style="text-decoration: underline;">5</span>  0.921 0.019<span style="text-decoration: underline;">9</span> </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> Merc 230              0  3.15  -<span style="color: #BB0000;">0.635</span> -<span style="color: #BB0000;">0.922</span> 0.077<span style="text-decoration: underline;">6</span>  0.919 0.024<span style="text-decoration: underline;">2</span> </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">10</span> Merc 280              0  3.44  -<span style="color: #BB0000;">1.80</span>  -<span style="color: #BB0000;">0.553</span> 0.068<span style="text-decoration: underline;">1</span>  0.926 0.006<span style="text-decoration: underline;">47</span></span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 22 more rows</span></span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 1 more variable: .std.resid &lt;dbl&gt;</span></span></span></code></pre>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
@@ -340,9 +340,9 @@ interval):</p>
 <code class="sourceCode R"><span><span class="va">wt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html" class="external-link">wilcox.test</a></span><span class="op">(</span><span class="va">wt</span> <span class="op">~</span> <span class="va">am</span>, <span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">wt</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 1 × 4</span></span></span>
-<span><span class="co">##   statistic   p.value method                                alternative</span></span>
-<span><span class="co">##       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span>      230. 0.000<span style="text-decoration: underline;">043</span>5 Wilcoxon rank sum test with continui… two.sided</span></span></code></pre>
+<span><span class="co">##   statistic    p.value method                       alternative</span></span>
+<span><span class="co">##       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span>      230. 0.000<span style="text-decoration: underline;">005</span>22 Wilcoxon rank sum exact test two.sided</span></span></code></pre>
 <p>Since the <code>tidy</code> output is already only one row,
 <code>glance</code> returns the same output:</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
@@ -355,9 +355,9 @@ interval):</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">wt</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 1 × 4</span></span></span>
-<span><span class="co">##   statistic   p.value method                                alternative</span></span>
-<span><span class="co">##       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span>      230. 0.000<span style="text-decoration: underline;">043</span>5 Wilcoxon rank sum test with continui… two.sided</span></span></code></pre>
+<span><span class="co">##   statistic    p.value method                       alternative</span></span>
+<span><span class="co">##       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span>      230. 0.000<span style="text-decoration: underline;">005</span>22 Wilcoxon rank sum exact test two.sided</span></span></code></pre>
 <p><code>augment</code> method is defined only for chi-squared tests,
 since there is no meaningful sense, for other tests, in which a
 hypothesis test produces output about each initial data point.</p>
