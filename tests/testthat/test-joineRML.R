@@ -11,7 +11,8 @@ suppressPackageStartupMessages(library(joineRML))
 
 # NOTE: the models used in these tests are created in
 # `data-raw/fit_and_save_long_running_models.R`, and then are saved to
-# `R/sysdata.rda`
+# `tests/testthat/fixtures/mjoint_fits.rda`
+load(test_path("fixtures", "mjoint_fits.rda"))
 
 hvd <- heart.valve |>
   dplyr::filter(!is.na(log.grad), !is.na(log.lvmi), num <= 50)

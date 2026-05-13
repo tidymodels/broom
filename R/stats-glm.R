@@ -101,7 +101,7 @@ augment.glm <- function(
     df$.se.fit <- pred_obj$se.fit |> unname()
   } else {
     if (is.null(newdata)) {
-      df$.fitted <- predict(x, data, type = type.predict) |> unname()
+      df$.fitted <- predict(x, type = type.predict) |> unname()
     } else {
       df$.fitted <- predict(x, newdata, type = type.predict) |> unname()
     }

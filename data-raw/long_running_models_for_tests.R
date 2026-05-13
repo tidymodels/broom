@@ -1,10 +1,11 @@
 # some models take a long time to fit. instead of waiting for these models to
 # fit each time tests are run, we fit them once here and save the results
-# to `R/sysdata.rda`.
+# to `tests/testthat/fixtures/mjoint_fits.rda`.
 #
-# if you add an object `my_object` to `usethis::use_data` call at the end
-# of this file, you can directly reference `my_object` in your code
-#
+# the fixtures live under tests/ rather than R/sysdata.rda so that they aren't
+# subject to R CMD check's "namespace references in data files" check (the
+# fitted objects embed nlme classes via $lfit, which would otherwise require
+# adding nlme to Imports).
 
 library(joineRML)
 library(survival)
@@ -46,11 +47,11 @@ mjoint_fit2 <- mjoint(
 mjoint_fit_bs_se <- bootSE(mjoint_fit, nboot = 5, safe.boot = TRUE)
 mjoint_fit2_bs_se <- bootSE(mjoint_fit2, nboot = 5, safe.boot = TRUE)
 
-usethis::use_data(
+save(
   mjoint_fit,
   mjoint_fit2,
   mjoint_fit_bs_se,
   mjoint_fit2_bs_se,
-  internal = TRUE,
-  overwrite = TRUE
+  file = "tests/testthat/fixtures/mjoint_fits.rda",
+  compress = "xz"
 )
