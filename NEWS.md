@@ -1,5 +1,7 @@
 # broom (development version)
 
+* Resolved an R CMD check WARNING on r-devel about namespace references in `R/sysdata.rda` by moving the `joineRML` test fixture to `tests/testthat/fixtures/`.
+
 # broom 1.0.12
 
 * Resolves an R CMD check error related to new names of output of `summary()`. (#1266)
