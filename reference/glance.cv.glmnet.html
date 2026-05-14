@@ -27,7 +27,10 @@ the measure will be reported as NA.
 Glance returns the same number of columns regardless of whether the
 model matrix is rank-deficient or not. If so, entries in columns
 that no longer have a well-defined value are filled in with an NA
-of the appropriate type."><meta property="og:image" content="https://broom.tidymodels.org/logo.png"><script src="https://cdn.jsdelivr.net/gh/posit-dev/supported-by-posit/js/badge.min.js" data-max-height="43" data-light-bg="#666f76" data-light-fg="#f9f9f9"></script><script defer data-domain="broom.tidymodels.org,all.tidymodels.org" src="https://plausible.io/js/plausible.js"></script></head><body>
+of the appropriate type."><meta property="og:image" content="https://broom.tidymodels.org/logo.png"><script src="https://cdn.jsdelivr.net/gh/posit-dev/supported-by-posit/js/badge.min.js" data-max-height="43" data-light-bg="#666f76" data-light-fg="#f9f9f9"></script><!-- Privacy-friendly analytics by Plausible --><script async src="https://plausible.io/js/pa-9lH7s8RUnCrG8Rx5Mi_8F.js"></script><script>
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  plausible.init()
+</script></head><body>
     <a href="#container" class="visually-hidden-focusable">Skip to content</a>
 
 
@@ -35,7 +38,7 @@ of the appropriate type."><meta property="og:image" content="https://broom.tidym
 
     <a class="navbar-brand me-2" href="../index.html">broom</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.12</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.13</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,7 +69,7 @@ of the appropriate type."><meta property="og:image" content="https://broom.tidym
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Glance at a(n) cv.glmnet object</h1>
-      <small class="dont-index">Source: <a href="https://github.com/tidymodels/broom/blob/v1.0.12/R/glmnet-cv-glmnet.R" class="external-link"><code>R/glmnet-cv-glmnet.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidymodels/broom/blob/v1.0.13/R/glmnet-cv-glmnet.R" class="external-link"><code>R/glmnet-cv-glmnet.R</code></a></small>
       <div class="d-none name"><code>glance.cv.glmnet.Rd</code></div>
     </div>
 
@@ -99,7 +102,7 @@ of the appropriate type.</p>
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>A <code>cv.glmnet</code> object returned from <code><a href="https://glmnet.stanford.edu/reference/cv.glmnet.html" class="external-link">glmnet::cv.glmnet()</a></code>.</p></dd>
+<dd><p>A <code>cv.glmnet</code> object returned from <code><a href="https://rdrr.io/pkg/glmnet/man/cv.glmnet.html" class="external-link">glmnet::cv.glmnet()</a></code>.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -117,7 +120,7 @@ will be ignored.</p></li>
 </dl></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance()</a></code>, <code><a href="https://glmnet.stanford.edu/reference/cv.glmnet.html" class="external-link">glmnet::cv.glmnet()</a></code></p>
+    <div class="dont-index"><p><code><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance()</a></code>, <code><a href="https://rdrr.io/pkg/glmnet/man/cv.glmnet.html" class="external-link">glmnet::cv.glmnet()</a></code></p>
 <p>Other glmnet tidiers:
 <code><a href="glance.glmnet.html">glance.glmnet()</a></code>,
 <code><a href="tidy.cv.glmnet.html">tidy.cv.glmnet()</a></code>,
@@ -155,7 +158,7 @@ will be ignored.</p></li>
 <span class="r-in"><span><span class="va">beta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">real</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">nvar</span> <span class="op">-</span> <span class="va">real</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">beta</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">nvar</span>, sd <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">cvfit1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://glmnet.stanford.edu/reference/cv.glmnet.html" class="external-link">cv.glmnet</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">cvfit1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/glmnet/man/cv.glmnet.html" class="external-link">cv.glmnet</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">cvfit1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 74 × 6</span></span>

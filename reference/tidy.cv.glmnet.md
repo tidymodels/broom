@@ -19,7 +19,7 @@ tidy(x, ...)
 - x:
 
   A `cv.glmnet` object returned from
-  [`glmnet::cv.glmnet()`](https://glmnet.stanford.edu/reference/cv.glmnet.html).
+  [`glmnet::cv.glmnet()`](https://rdrr.io/pkg/glmnet/man/cv.glmnet.html).
 
 - ...:
 
@@ -41,7 +41,7 @@ tidy(x, ...)
 ## See also
 
 [`tidy()`](https://generics.r-lib.org/reference/tidy.html),
-[`glmnet::cv.glmnet()`](https://glmnet.stanford.edu/reference/cv.glmnet.html)
+[`glmnet::cv.glmnet()`](https://rdrr.io/pkg/glmnet/man/cv.glmnet.html)
 
 Other glmnet tidiers:
 [`glance.cv.glmnet()`](https://broom.tidymodels.org/reference/glance.cv.glmnet.md),
