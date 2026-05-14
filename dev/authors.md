@@ -293,13 +293,13 @@ Source:
 [`DESCRIPTION`](https://github.com/tidymodels/broom/blob/main/DESCRIPTION)
 
 Robinson D, Hayes A, Couch S, Hvitfeldt E (2026). *broom: Convert
-Statistical Objects into Tidy Tibbles*. R package version 1.0.12.9000,
+Statistical Objects into Tidy Tibbles*. R package version 1.0.13.9000,
 <https://broom.tidymodels.org/>.
 
     @Manual{,
       title = {broom: Convert Statistical Objects into Tidy Tibbles},
       author = {David Robinson and Alex Hayes and Simon Couch and Emil Hvitfeldt},
       year = {2026},
-      note = {R package version 1.0.12.9000},
+      note = {R package version 1.0.13.9000},
       url = {https://broom.tidymodels.org/},
     }
