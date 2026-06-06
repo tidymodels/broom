@@ -16,10 +16,14 @@ interval in the tidied output. Defaults to \code{FALSE}.}
 if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 
-\item{...}{Additional arguments passed to \code{summary} and \code{confint}. Important
-arguments are \code{se} and \code{cluster}. Other arguments are \code{dof}, \code{exact_dof},
-\code{forceCovariance}, and \code{keepBounded}.
-See \code{\link[fixest:summary.fixest]{summary.fixest}}.}
+\item{...}{Additional arguments passed to \code{\link[fixest:summary.fixest]{summary.fixest}}
+and \code{\link[fixest:confint.fixest]{confint.fixest}}. Important arguments are
+\code{vcov} (a VCOV type string like \code{"hetero"}, or a one-sided formula like
+\code{~Product + Year} for clustering), \code{cluster}, and \code{ssc} (small sample
+correction). The \code{se} argument is accepted but deprecated in recent
+\code{fixest} versions; use \code{vcov} instead. Other arguments include
+\code{forceCovariance} and \code{keepBounded}.
+See \code{\link[fixest:summary.fixest]{summary.fixest}} for details.}
 }
 \description{
 Tidy summarizes information about the components of a model.
@@ -67,7 +71,9 @@ augment(gravity, trade)
 
 tidy(gravity, conf.int = TRUE, cluster = c("Product", "Year"))
 
-tidy(gravity, conf.int = TRUE, se = "threeway")
+tidy(gravity, conf.int = TRUE, vcov = ~Product + Year)
+
+tidy(gravity, conf.int = TRUE, vcov = "hetero")
 
 # 2) or, feed tidy() a summary.fixest object that has already accepted
 # these arguments
@@ -80,11 +86,11 @@ tidy(gravity_summ, conf.int = TRUE)
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-\code{\link[=tidy]{tidy()}}, \code{\link[fixest:feglm]{fixest::feglm()}}, \code{\link[fixest:femlm]{fixest::fenegbin()}},
-\code{\link[fixest:feNmlm]{fixest::feNmlm()}}, \code{\link[fixest:femlm]{fixest::femlm()}}, \code{\link[fixest:feols]{fixest::feols()}}, \code{\link[fixest:feglm]{fixest::fepois()}}
+\code{\link[=tidy]{tidy()}}, \code{\link[fixest:feglm]{fixest::feglm()}}, \code{\link[fixest:fenegbin]{fixest::fenegbin()}},
+\code{\link[fixest:feNmlm]{fixest::feNmlm()}}, \code{\link[fixest:femlm]{fixest::femlm()}}, \code{\link[fixest:feols]{fixest::feols()}}, \code{\link[fixest:fepois]{fixest::fepois()}}
 
-Other fixest tidiers: 
-\code{\link{augment.fixest}()}
+Other fixest tidiers:
+\code{\link[=augment.fixest]{augment.fixest()}}
 }
 \concept{fixest tidiers}
 \value{

@@ -32,14 +32,18 @@ the \code{data} argument will be ignored.}
 \item{type.predict}{Passed to \code{\link[fixest:predict.fixest]{predict.fixest}}
 \code{type} argument. Defaults to \code{"link"} (like \code{predict.glm}).}
 
-\item{type.residuals}{Passed to \code{\link[fixest:resid.fixest]{predict.fixest}}
+\item{type.residuals}{Passed to \code{\link[fixest:residuals.fixest]{predict.fixest}}
 \code{type} argument. Defaults to \code{"response"} (like \code{residuals.lm}, but unlike
 \code{residuals.glm}).}
 
-\item{...}{Additional arguments passed to \code{summary} and \code{confint}. Important
-arguments are \code{se} and \code{cluster}. Other arguments are \code{dof}, \code{exact_dof},
-\code{forceCovariance}, and \code{keepBounded}.
-See \code{\link[fixest:summary.fixest]{summary.fixest}}.}
+\item{...}{Additional arguments passed to \code{\link[fixest:summary.fixest]{summary.fixest}}
+and \code{\link[fixest:confint.fixest]{confint.fixest}}. Important arguments are
+\code{vcov} (a VCOV type string like \code{"hetero"}, or a one-sided formula like
+\code{~Product + Year} for clustering), \code{cluster}, and \code{ssc} (small sample
+correction). The \code{se} argument is accepted but deprecated in recent
+\code{fixest} versions; use \code{vcov} instead. Other arguments include
+\code{forceCovariance} and \code{keepBounded}.
+See \code{\link[fixest:summary.fixest]{summary.fixest}} for details.}
 }
 \description{
 Augment accepts a model object and a dataset and adds
@@ -85,7 +89,7 @@ data, so you must provide it manually.
 
 augment.fixest only works for \code{\link[fixest:feols]{fixest::feols()}}, \code{\link[fixest:feglm]{fixest::feglm()}}, and
 \code{\link[fixest:femlm]{fixest::femlm()}} models. It does not work with results from
-\code{\link[fixest:femlm]{fixest::fenegbin()}}, \code{\link[fixest:feNmlm]{fixest::feNmlm()}}, or \code{\link[fixest:feglm]{fixest::fepois()}}.
+\code{\link[fixest:fenegbin]{fixest::fenegbin()}}, \code{\link[fixest:feNmlm]{fixest::feNmlm()}}, or \code{\link[fixest:fepois]{fixest::fepois()}}.
 }
 \examples{
 \dontshow{if (rlang::is_installed("fixest") & !broom:::is_cran_check()) withAutoprint(\{ # examplesIf}
@@ -108,7 +112,9 @@ augment(gravity, trade)
 
 tidy(gravity, conf.int = TRUE, cluster = c("Product", "Year"))
 
-tidy(gravity, conf.int = TRUE, se = "threeway")
+tidy(gravity, conf.int = TRUE, vcov = ~Product + Year)
+
+tidy(gravity, conf.int = TRUE, vcov = "hetero")
 
 # 2) or, feed tidy() a summary.fixest object that has already accepted
 # these arguments
@@ -123,8 +129,8 @@ tidy(gravity_summ, conf.int = TRUE)
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[fixest:feglm]{fixest::feglm()}}, \code{\link[fixest:femlm]{fixest::femlm()}}, \code{\link[fixest:feols]{fixest::feols()}}
 
-Other fixest tidiers: 
-\code{\link{tidy.fixest}()}
+Other fixest tidiers:
+\code{\link[=tidy.fixest]{tidy.fixest()}}
 }
 \concept{fixest tidiers}
 \value{
