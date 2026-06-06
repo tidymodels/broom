@@ -350,7 +350,9 @@ tidy.summaryDefault <- function(x, ...) {
   )
   ret <- as.data.frame(t(as.matrix(x)))
   cnms <- c("minimum", "q1", "median", "mean", "q3", "maximum")
-  if (any(c("NA's", "NAs") %in% names(x))) {
+  # R-devel changes the "NA's" label (PR#18948), so detect by length instead
+  # of by name. A summary of a vector with NAs has 7 elements; without NAs, 6.
+  if (ncol(ret) > length(cnms)) {
     cnms <- c(cnms, "na")
   }
   as_tibble(purrr::set_names(ret, cnms))
