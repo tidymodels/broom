@@ -16,6 +16,11 @@
 #'   \item{op}{The operator in the model syntax (e.g. `~~` for covariances, or
 #'     `~` for regression parameters)}
 #'   \item{group}{The group (if specified) in the lavaan model}
+#'   \item{block}{The block number for multilevel models. Present only when
+#'     the model uses multiple levels (e.g., `level: 1` and `level: 2` in
+#'     the model syntax).}
+#'   \item{level}{The level number for multilevel models. Present only when
+#'     the model uses multiple levels.}
 #'   \item{estimate}{The parameter estimate (may be standardized)}
 #'   \item{std.error}{}
 #'   \item{statistic}{The z value returned by [lavaan::parameterEstimates()]}
