@@ -151,6 +151,15 @@ test_that("tidiers work with model results or summary of model results", {
   expect_equal(glance(fit2, se = "hetero"), glance(fit2_summ))
   expect_equal(augment(fit2, df, se = "hetero"), augment(fit2_summ, df))
 
+  # Same equivalence holds for cluster argument
+  fit2_clust <- summary(fit2, cluster = c("id", "v1"))
+  expect_equal(tidy(fit2, cluster = c("id", "v1")), tidy(fit2_clust))
+  expect_equal(
+    tidy(fit2, cluster = c("id", "v1"), conf.int = TRUE),
+    tidy(fit2_clust, conf.int = TRUE)
+  )
+  expect_equal(glance(fit2, cluster = c("id", "v1")), glance(fit2_clust))
+
   # Repeat for feglm
   res_glm <- fixest::feglm(v2 ~ v4 | id, data = df, family = "poisson")
   res_glm_summ <- summary(
