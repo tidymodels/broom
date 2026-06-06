@@ -9,10 +9,14 @@
 \arguments{
 \item{x}{A \code{fixest} object returned from any of the \code{fixest} estimators}
 
-\item{...}{Additional arguments passed to \code{summary} and \code{confint}. Important
-arguments are \code{se} and \code{cluster}. Other arguments are \code{dof}, \code{exact_dof},
-\code{forceCovariance}, and \code{keepBounded}.
-See \code{\link[fixest:summary.fixest]{summary.fixest}}.}
+\item{...}{Additional arguments passed to \code{\link[fixest:summary.fixest]{summary.fixest}}
+and \code{\link[fixest:confint.fixest]{confint.fixest}}. Important arguments are
+\code{vcov} (a VCOV type string like \code{"hetero"}, or a one-sided formula like
+\code{~Product + Year} for clustering), \code{cluster}, and \code{ssc} (small sample
+correction). The \code{se} argument is accepted but deprecated in recent
+\code{fixest} versions; use \code{vcov} instead. Other arguments include
+\code{forceCovariance} and \code{keepBounded}.
+See \code{\link[fixest:summary.fixest]{summary.fixest}} for details.}
 }
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
@@ -61,7 +65,9 @@ augment(gravity, trade)
 
 tidy(gravity, conf.int = TRUE, cluster = c("Product", "Year"))
 
-tidy(gravity, conf.int = TRUE, se = "threeway")
+tidy(gravity, conf.int = TRUE, vcov = ~Product + Year)
+
+tidy(gravity, conf.int = TRUE, vcov = "hetero")
 
 # 2) or, feed tidy() a summary.fixest object that has already accepted
 # these arguments

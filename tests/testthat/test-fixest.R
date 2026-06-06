@@ -48,6 +48,63 @@ test_that("tidy.fixest", {
   check_dims(td, 2, 5)
 })
 
+test_that("tidy.fixest with cluster argument", {
+  # Explicit multi-way clustering changes SEs vs default
+  td_default <- tidy(fit2)
+  td_cluster <- tidy(fit2, cluster = c("id", "v1"))
+
+  expect_false(identical(td_default$std.error, td_cluster$std.error))
+  expect_false(identical(td_default$p.value, td_cluster$p.value))
+  check_tidy_output(td_cluster)
+
+  # cluster + conf.int works
+  td_ci <- tidy(fit2, cluster = c("id", "v1"), conf.int = TRUE)
+  check_tidy_output(td_ci)
+  check_dims(td_ci, 1, 7)
+  expect_true(all(c("conf.low", "conf.high") %in% names(td_ci)))
+
+  # Single cluster variable works
+  td_one <- tidy(fit2, cluster = "id")
+  check_tidy_output(td_one)
+  expect_false(identical(td_default$std.error, td_one$std.error))
+
+  # se = "threeway" documented in examples
+  td_threeway <- tidy(fit2, se = "threeway")
+  check_tidy_output(td_threeway)
+})
+
+test_that("tidy.fixest with vcov argument", {
+  # vcov = character scalar produces same result as deprecated se
+  td_vcov_hetero <- tidy(fit2, vcov = "hetero")
+  td_se_hetero <- tidy(fit2, se = "hetero")
+  check_tidy_output(td_vcov_hetero)
+  expect_identical(td_vcov_hetero$std.error, td_se_hetero$std.error)
+
+  # vcov = "threeway" matches se = "threeway"
+  td_vcov_threeway <- tidy(fit2, vcov = "threeway")
+  td_se_threeway <- tidy(fit2, se = "threeway")
+  check_tidy_output(td_vcov_threeway)
+  expect_identical(td_vcov_threeway$std.error, td_se_threeway$std.error)
+
+  # vcov formula syntax matches cluster argument
+  td_vcov_form <- tidy(fit2, vcov = ~id + v1)
+  td_cluster <- tidy(fit2, cluster = c("id", "v1"))
+  check_tidy_output(td_vcov_form)
+  expect_identical(td_vcov_form$std.error, td_cluster$std.error)
+
+  # vcov formula with conf.int
+  td_vcov_ci <- tidy(fit2, vcov = ~id + v1, conf.int = TRUE)
+  check_tidy_output(td_vcov_ci)
+  check_dims(td_vcov_ci, 1, 7)
+  expect_true(all(c("conf.low", "conf.high") %in% names(td_vcov_ci)))
+
+  # single-variable vcov formula
+  td_vcov_one <- tidy(fit2, vcov = ~id)
+  check_tidy_output(td_vcov_one)
+  td_default <- tidy(fit2)
+  expect_false(identical(td_default$std.error, td_vcov_one$std.error))
+})
+
 test_that("glance.fixest", {
   gl <- glance(fit)
   gl2 <- glance(fit2)
@@ -164,6 +221,14 @@ test_that("tidiers work with model results or summary of model results", {
   )
   expect_equal(glance(res_glm, se = "hetero"), glance(res_glm_summ))
   expect_equal(augment(res_glm, df, se = "hetero"), augment(res_glm_summ, df))
+
+  # Same equivalence holds for cluster argument
+  fit2_clust <- summary(fit2, cluster = c("id", "v1"))
+  expect_equal(tidy(fit2, cluster = c("id", "v1")), tidy(fit2_clust))
+  expect_equal(
+    tidy(fit2, cluster = c("id", "v1"), conf.int = TRUE),
+    tidy(fit2_clust, conf.int = TRUE)
+  )
 
   # We rely on behavior from fixest where summary.fixest() doesn't change the
   # `se` or `dof` arguments if they've already been set.

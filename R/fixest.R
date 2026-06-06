@@ -3,10 +3,14 @@
 #'
 #' @param x A `fixest` object returned from any of the `fixest` estimators
 #' @template param_confint
-#' @param ... Additional arguments passed to `summary` and `confint`. Important
-#'   arguments are `se` and `cluster`. Other arguments are `dof`, `exact_dof`,
-#'   `forceCovariance`, and `keepBounded`.
-#'   See [`summary.fixest`][fixest::summary.fixest()].
+#' @param ... Additional arguments passed to [`summary.fixest`][fixest::summary.fixest()]
+#'   and [`confint.fixest`][fixest::confint.fixest()]. Important arguments are
+#'   `vcov` (a VCOV type string like `"hetero"`, or a one-sided formula like
+#'   `~Product + Year` for clustering), `cluster`, and `ssc` (small sample
+#'   correction). The `se` argument is accepted but deprecated in recent
+#'   `fixest` versions; use `vcov` instead. Other arguments include
+#'   `forceCovariance` and `keepBounded`.
+#'   See [`summary.fixest`][fixest::summary.fixest()] for details.
 #' @evalRd return_tidy(regression = TRUE)
 #'
 #' @details The `fixest` package provides a family of functions for estimating
@@ -45,7 +49,9 @@
 #'
 #' tidy(gravity, conf.int = TRUE, cluster = c("Product", "Year"))
 #'
-#' tidy(gravity, conf.int = TRUE, se = "threeway")
+#' tidy(gravity, conf.int = TRUE, vcov = ~Product + Year)
+#'
+#' tidy(gravity, conf.int = TRUE, vcov = "hetero")
 #'
 #' # 2) or, feed tidy() a summary.fixest object that has already accepted
 #' # these arguments
