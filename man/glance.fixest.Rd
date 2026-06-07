@@ -73,6 +73,14 @@ tidy(gravity_summ, conf.int = TRUE)
 # approach (1) is preferred.
 \dontshow{\}) # examplesIf}
 }
+\seealso{
+\code{\link[=glance]{glance()}}, \code{\link[fixest:feglm]{fixest::feglm()}}, \code{\link[fixest:femlm]{fixest::femlm()}}, \code{\link[fixest:feols]{fixest::feols()}}
+
+Other fixest tidiers:
+\code{\link[=augment.fixest]{augment.fixest()}},
+\code{\link[=tidy.fixest]{tidy.fixest()}}
+}
+\concept{fixest tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{adj.r.squared}{Adjusted R squared statistic, which is like the R squared statistic except taking degrees of freedom into account.}

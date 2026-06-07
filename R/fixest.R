@@ -84,7 +84,7 @@ tidy.fixest <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #' @template param_newdata
 #' @param type.predict Passed to [`predict.fixest`][fixest::predict.fixest()]
 #'   `type` argument. Defaults to `"link"` (like `predict.glm`).
-#' @param type.residuals Passed to [`predict.fixest`][fixest::residuals.fixest()]
+#' @param type.residuals Passed to [`residuals.fixest`][fixest::residuals.fixest()]
 #'   `type` argument. Defaults to `"response"` (like `residuals.lm`, but unlike
 #'   `residuals.glm`).
 #' @evalRd return_augment()
@@ -157,6 +157,8 @@ augment.fixest <- function(
 #'   "logLik"
 #' )
 #' @export
+#' @family fixest tidiers
+#' @seealso [glance()], [fixest::feglm()], [fixest::femlm()], [fixest::feols()]
 glance.fixest <- function(x, ...) {
   stopifnot(length(x$method) == 1)
   # results that are common to all models:
