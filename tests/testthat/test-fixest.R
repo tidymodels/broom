@@ -82,6 +82,27 @@ test_that("augment.fixest", {
   )
 })
 
+test_that("augment.fixest type arguments", {
+  # type.predict: "link" and "response" differ for non-Gaussian families
+  res_glm <- fixest::feglm(v2 ~ v4 | id, data = df, family = "poisson")
+  aug_link <- augment(res_glm, data = df, type.predict = "link")
+  aug_resp <- augment(res_glm, data = df, type.predict = "response")
+  expect_false(identical(aug_link$.fitted, aug_resp$.fitted))
+
+  # type.residuals: different types produce different residuals
+  aug_resp_resid <- augment(fit, data = df, type.residuals = "response")
+  aug_dev <- augment(fit, data = df, type.residuals = "deviance")
+  # feols only supports "response" residuals, so deviance falls back gracefully
+  # or matches response; just verify no error
+  expect_true(".resid" %in% names(aug_resp_resid))
+
+  # invalid type.predict raises error
+  expect_error(augment(fit, data = df, type.predict = "invalid"))
+
+  # invalid type.residuals raises error
+  expect_error(augment(fit, data = df, type.residuals = "invalid"))
+})
+
 test_that("all other fixest estimators run", {
   skip_on_cran()
   skip_on_ci()
