@@ -8,7 +8,7 @@
 \method{tidy}{plm}(x, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
-\item{x}{A \code{plm} objected returned by \code{\link[plm:plm]{plm::plm()}}.}
+\item{x}{A \code{plm} object returned by \code{\link[plm:plm]{plm::plm()}}.}
 
 \item{conf.int}{Logical indicating whether or not to include a confidence
 interval in the tidied output. Defaults to \code{FALSE}.}

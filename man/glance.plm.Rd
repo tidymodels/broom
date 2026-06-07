@@ -7,7 +7,7 @@
 \method{glance}{plm}(x, ...)
 }
 \arguments{
-\item{x}{A \code{plm} objected returned by \code{\link[plm:plm]{plm::plm()}}.}
+\item{x}{A \code{plm} object returned by \code{\link[plm:plm]{plm::plm()}}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be

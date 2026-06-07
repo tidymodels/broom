@@ -7,7 +7,7 @@
 \method{augment}{plm}(x, data = model.frame(x), ...)
 }
 \arguments{
-\item{x}{A \code{plm} objected returned by \code{\link[plm:plm]{plm::plm()}}.}
+\item{x}{A \code{plm} object returned by \code{\link[plm:plm]{plm::plm()}}.}
 
 \item{data}{A \link[base:data.frame]{base::data.frame} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
 data that was used to produce the object \code{x}. Defaults to

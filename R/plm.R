@@ -1,7 +1,7 @@
 #' @templateVar class plm
 #' @template title_desc_tidy
 #'
-#' @param x A `plm` objected returned by [plm::plm()].
+#' @param x A `plm` object returned by [plm::plm()].
 #' @template param_confint
 #' @template param_unused_dots
 #'
@@ -73,7 +73,7 @@ tidy.summary.plm <- tidy.default
 #' @family plm tidiers
 augment.plm <- function(x, data = model.frame(x), ...) {
   # Random effects and fixed effect (within model) have individual intercepts,
-  # thus we cannot take the ususal procedure for augment().
+  # thus we cannot take the usual procedure for augment().
   # Also, there is currently no predict() method for plm objects.
   augment_columns(x, data, ...)
 }

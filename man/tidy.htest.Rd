@@ -11,7 +11,7 @@
 \method{glance}{htest}(x, ...)
 }
 \arguments{
-\item{x}{An \code{htest} objected, such as those created by \code{\link[stats:cor.test]{stats::cor.test()}},
+\item{x}{An \code{htest} object, such as those created by \code{\link[stats:cor.test]{stats::cor.test()}},
 \code{\link[stats:t.test]{stats::t.test()}}, \code{\link[stats:wilcox.test]{stats::wilcox.test()}}, \code{\link[stats:chisq.test]{stats::chisq.test()}}, etc.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic

@@ -1,7 +1,7 @@
 #' @templateVar class htest
 #' @template title_desc_tidy_glance
 #'
-#' @param x An `htest` objected, such as those created by [stats::cor.test()],
+#' @param x An `htest` object, such as those created by [stats::cor.test()],
 #'   [stats::t.test()], [stats::wilcox.test()], [stats::chisq.test()], etc.
 #' @template param_unused_dots
 #'
