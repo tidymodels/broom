@@ -55,6 +55,15 @@ test_that("tidy.lm works", {
   expect_no_error(tidy(fit_na_row, conf.int = TRUE))
 })
 
+test_that("tidy.lm intervals agree with confint for weighted, aliased fits", {
+  fit <- lm(mpg ~ wt + I(2 * wt), data = mtcars, weights = hp)
+  td <- tidy(fit, conf.int = TRUE, conf.level = 0.8, exponentiate = TRUE)
+  ci <- exp(stats::confint(fit, level = 0.8))
+  expect_equal(td$term, rownames(ci))
+  expect_equal(td$conf.low, unname(ci[, 1]))
+  expect_equal(td$conf.high, unname(ci[, 2]))
+})
+
 test_that("glance.lm", {
   gl <- glance(fit)
   gl2 <- glance(fit2)

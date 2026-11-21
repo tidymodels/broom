@@ -1,5 +1,7 @@
 # broom (development version)
 
+* `tidy()` reuses the fitted standard errors when computing confidence intervals for ordinary `lm` models (@soodoku).
+
 # broom 1.0.13
 
 * Resolved an R CMD check WARNING on r-devel about namespace references in `R/sysdata.rda` by moving the `joineRML` test fixture to `tests/testthat/fixtures/`.

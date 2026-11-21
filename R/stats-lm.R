@@ -113,8 +113,19 @@ tidy.lm <- function(
   }
 
   if (conf.int) {
-    ci <- broom_confint_terms(x, level = conf.level)
-    ret <- dplyr::left_join(ret, ci, by = "term")
+    if (
+      identical(class(x), "lm") && x$df.residual > 0 &&
+        length(conf.level) == 1L && !anyDuplicated(ret$term)
+    ) {
+      # confint.lm() uses these same standard errors and residual degrees of freedom.
+      tail <- (1 - conf.level) / 2
+      q <- stats::qt(c(tail, 1 - tail), df = x$df.residual)
+      ret$conf.low <- ret$estimate + ret$std.error * q[[1]]
+      ret$conf.high <- ret$estimate + ret$std.error * q[[2]]
+    } else {
+      ci <- broom_confint_terms(x, level = conf.level)
+      ret <- dplyr::left_join(ret, ci, by = "term")
+    }
   }
 
   if (exponentiate) {
