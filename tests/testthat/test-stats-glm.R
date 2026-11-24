@@ -75,6 +75,32 @@ test_that("augment.glm", {
   )
 })
 
+test_that("augment.glm aligns diagnostics with zero-weight observations", {
+  df <- data.frame(
+    x = rep(0:2, each = 4),
+    y = rep(c(0, 1, 1, 0), 3),
+    w = c(1, 1, 0, 1, 1, 1, 2, 1, 1, 0, 1, 1)
+  )
+  fit <- glm(y ~ x, df, family = binomial(), weights = w)
+  nonzero <- df$w != 0
+  infl <- influence(fit, do.coef = FALSE)
+
+  for (type in c("deviance", "pearson")) {
+    aug <- augment(fit, type.residuals = type)
+
+    expect_equal(nrow(aug), nrow(df))
+    expect_equal(aug$.fitted, unname(predict(fit)))
+    expect_equal(aug$.resid, unname(residuals(fit, type = type)))
+    expect_equal(
+      aug$.std.resid[nonzero],
+      unname(rstandard(fit, infl = infl, type = type))
+    )
+    expect_equal(aug$.std.resid[!nonzero], c(NA_real_, NA_real_))
+    expect_equal(aug$.cooksd[nonzero], unname(cooks.distance(fit, infl = infl)))
+    expect_equal(aug$.cooksd[!nonzero], c(0, 0))
+  }
+})
+
 test_that("glm tidiers warn informatively with glm.fit2 input", {
   gfit <- glm(am ~ wt, mtcars, family = "binomial")
   gfit$method <- "glm.fit2"
