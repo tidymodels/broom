@@ -89,7 +89,7 @@ glance.clmm <- function(x, ...) {
     edf = x$edf,
     AIC = stats::AIC(x),
     BIC = stats::BIC(x),
-    logLik = stats::logLik(x),
+    logLik = as.numeric(stats::logLik(x)),
     nobs = stats::nobs(x),
     na_types = "irrri"
   )

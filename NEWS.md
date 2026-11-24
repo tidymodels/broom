@@ -1,5 +1,7 @@
 # broom (development version)
 
+* `glance.clm()` and `glance.clmm()` now return numeric `logLik` values so their results can be combined with other model summaries (@M-Colley, #1245).
+
 # broom 1.0.13
 
 * Resolved an R CMD check WARNING on r-devel about namespace references in `R/sysdata.rda` by moving the `joineRML` test fixture to `tests/testthat/fixtures/`.

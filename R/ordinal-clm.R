@@ -95,7 +95,7 @@ glance.clm <- function(x, ...) {
     edf = x$edf,
     AIC = stats::AIC(x),
     BIC = stats::BIC(x),
-    logLik = stats::logLik(x),
+    logLik = as.numeric(stats::logLik(x)),
     df.residual = stats::df.residual(x),
     nobs = stats::nobs(x),
     na_types = "irrrii"
