@@ -87,3 +87,10 @@ test_that("glance.clmm", {
   check_glance_outputs(gl)
   check_dims(gl, 1, 5)
 })
+
+test_that("ordinal likelihoods combine with other model summaries", {
+  models <- list(fit, mfit, lm(mpg ~ wt, data = mtcars))
+  result <- dplyr::bind_rows(lapply(models, glance))
+  expected <- vapply(models, function(x) as.numeric(stats::logLik(x)), numeric(1))
+  expect_identical(result$logLik, expected)
+})
