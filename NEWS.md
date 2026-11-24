@@ -1,5 +1,8 @@
 # broom (development version)
 
+* `augment.glm()` now keeps zero-weight rows aligned with their influence
+  diagnostics (@M-Colley, #1250).
+
 # broom 1.0.13
 
 * Resolved an R CMD check WARNING on r-devel about namespace references in `R/sysdata.rda` by moving the `joineRML` test fixture to `tests/testthat/fixtures/`.
